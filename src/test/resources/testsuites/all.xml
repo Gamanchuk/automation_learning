@@ -1,0 +1,38 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Full Run Suite">
+    <test name="Paying via PayPal">
+        <classes>
+            <!--<class name="tests.OrdersTest"/>-->
+        </classes>
+    </test>
+    <!--<test name="Place Order As Guest">-->
+        <!--<classes>-->
+            <!--<class name="tests.OrdersTest.PlaceOrderAsGuest"/>-->
+        <!--</classes>-->
+    <!--</test>-->
+    <listeners>
+        <listener class-name="utils.TestListener" />
+        <listener class-name="utils.SuiteListener" />
+    </listeners>
+
+</suite>
+
+
+        <!--<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">-->
+        <!--<suite name="Full Run Suite">-->
+        <!--<test name="Paying via PayPal">-->
+        <!--<classes>-->
+        <!--<class name="tests.OrdersTest.PayPal"/>-->
+        <!--</classes>-->
+        <!--</test>-->
+        <!--&lt;!&ndash;<test name="Place Order As Guest">&ndash;&gt;-->
+        <!--&lt;!&ndash;<classes>&ndash;&gt;-->
+        <!--&lt;!&ndash;<class name="tests.OrdersTest.PlaceOrderAsGuest"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;</classes>&ndash;&gt;-->
+        <!--&lt;!&ndash;</test>&ndash;&gt;-->
+        <!--<listeners>-->
+        <!--<listener class-name="utils.TestListener" />-->
+        <!--<listener class-name="utils.SuiteListener" />-->
+        <!--</listeners>-->
+
+        <!--</suite>-->
