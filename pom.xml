@@ -11,7 +11,7 @@
     <properties>
         <selenium.version>3.0.1</selenium.version>
         <selendroid.version>0.17.0</selendroid.version>
-        <aspectj.version>1.8.9</aspectj.version>
+        <aspectj.version>1.8.4</aspectj.version>
         <allure.version>1.5.0</allure.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -65,12 +65,13 @@
             <version>1.2.17</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/ru.yandex.qatools.allure/allure-cucumber-jvm-adaptor -->
+        <!--https://mvnrepository.com/artifact/ru.yandex.qatools.allure/allure-cucumber-jvm-adaptor-->
         <dependency>
             <groupId>ru.yandex.qatools.allure</groupId>
             <artifactId>allure-cucumber-jvm-adaptor</artifactId>
             <version>1.6.1</version>
         </dependency>
+
         <dependency>
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-testng</artifactId>
@@ -84,11 +85,18 @@
             </exclusions>
         </dependency>
 
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.21</version>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/org.testng/testng -->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>6.9.13.6</version>
+            <version>6.10</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -114,22 +122,35 @@
         </dependency>
     </dependencies>
 
+
     <build>
         <!--<pluginManagement>-->
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.19.1</version>
                 <configuration>
                     <testFailureIgnore>false</testFailureIgnore>
-                    <suiteXmlFiles>
-                        <suiteXmlFile>${testng.suite}</suiteXmlFile>
-                    </suiteXmlFiles>
+
+                    <!--<suiteXmlFiles>-->
+                    <!--<suiteXmlFile>${testng.suite}</suiteXmlFile>-->
+                    <!--</suiteXmlFiles>-->
+
                     <argLine>
                         -javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar
-                        -Dcucumber.options="--plugin ru.yandex.qatools.allure.cucumberjvm.AllureReporter"
+                        -Dcucumber.options="--plugin AllureReporterExt"
                     </argLine>
+
                     <systemPropertyVariables>
                         <device.platform.name>${device.platform.name}</device.platform.name>
                         <device.platform.version>${device.platform.version}</device.platform.version>
@@ -164,24 +185,25 @@
             </plugin>
         </plugins>
     </build>
+    
+    <!-- separate test groups -->
+
+    <!--<profile>-->
+    <!--<id>cucumber-full</id>-->
+    <!--<properties>-->
+    <!--<testng.suite>${basedir}/src/test/resources/testsuites/cucumber.xml</testng.suite>-->
+    <!--</properties>-->
+    <!--</profile>-->
+
+    <!-- separate test groups -->
 
     <profiles>
         <profile>
-            <id>suite-full</id>
+            <id>Project-Tracking</id>
             <properties>
-                <testng.suite>${basedir}/src/test/resources/testsuites/all.xml</testng.suite>
+                <projectTracking>true</projectTracking>
             </properties>
         </profile>
-
-        <profile>
-            <id>cucumber-full</id>
-            <properties>
-                <testng.suite>${basedir}/src/test/resources/testsuites/cucumber.xml</testng.suite>
-            </properties>
-        </profile>
-
-        <!-- separate test groups -->
-
         <profile>
             <id>IPhone-Simulator</id>
             <properties>
