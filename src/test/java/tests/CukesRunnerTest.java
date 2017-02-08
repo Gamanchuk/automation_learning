@@ -1,16 +1,13 @@
 package tests;
 
 import cucumber.api.CucumberOptions;
-import cucumber.api.junit.Cucumber;
 import cucumber.api.testng.AbstractTestNGCucumberTests;
-import org.junit.runner.RunWith;
-import org.testng.annotations.Test;
 
 
-@CucumberOptions (
-        features = "src/test/resources/feature/ulta/",
+@CucumberOptions(
+        features = "src/test/resources/feature/",
         glue = "steps",
-        tags = "@testdiary")
+        tags = "@testdiary1")
 class CukesRunnerTest extends AbstractTestNGCucumberTests {
 
 }
