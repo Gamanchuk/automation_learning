@@ -52,7 +52,7 @@ public class BagWidget extends Component {
 
     @Override
     public boolean isPage() {
-        waitForElementVisible(this.searchBox);
+       // waitForElementVisible(this.searchBox);
         return true;
     }
 
