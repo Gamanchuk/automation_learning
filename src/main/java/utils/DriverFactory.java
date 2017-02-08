@@ -64,6 +64,7 @@ public class DriverFactory {
                         desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
                         desiredCapabilities.setCapability("wdaLocalPort", Integer.parseInt(iproxyPort));
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.LAUNCH_TIMEOUT, 500000);
+                        desiredCapabilities.setCapability(IOSMobileCapabilityType.TAKES_SCREENSHOT, "true");
                        // desiredCapabilities.setCapability("realDeviceLogger", "/usr/local/lib/node_modules/deviceconsole/deviceconsole");
                     }
 
@@ -78,14 +79,13 @@ public class DriverFactory {
                 }
             }
 
-            return driver;
+            return  driver;
         }
-
-
 
     private static void startAppiumService() {
         if (service == null) {
 
+            System.out.println(System.getProperty("appium.port"));
             int appiumPort = Integer.parseInt(System.getProperty("appium.port"));
             String proxyPort = System.getProperty("proxy.port");
 
@@ -99,7 +99,7 @@ public class DriverFactory {
             serviceBuilder.usingPort(appiumPort);
             if (System.getProperty("device.platform.name").equals("iOS")) {
                 serviceBuilder.withArgument(IOSServerFlag.WEBKIT_DEBUG_PROXY_PORT, proxyPort);
-                serviceBuilder.withArgument(GeneralServerFlag.LOG_LEVEL, "warn");
+               // serviceBuilder.withArgument(GeneralServerFlag.LOG_LEVEL, "warn");
                 serviceBuilder.withArgument(GeneralServerFlag.SESSION_OVERRIDE);
             }
 
@@ -132,17 +132,20 @@ public class DriverFactory {
         }
     }
 
-    private static void initChromeDriver() {
-        System.setProperty("tests.chrome.driver", "/../../resources/chromedriver");
-        Map<String, String> mobileEmulation = new HashMap<String, String>();
-        mobileEmulation.put("deviceName", "Google Nexus 5");
-
-        Map<String, Object> chromeOptions = new HashMap<String, Object>();
-        chromeOptions.put("mobileEmulation", mobileEmulation);
-        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-        capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-        eventListener = new MyWebDriverEventListener();
-
-        driver = new EventFiringWebDriver(new ChromeDriver(capabilities)).register(eventListener);
-    }
+//    private static WebDriver initChromeDriver() {
+//        if(driver == null) {
+//            System.setProperty("webdriver.chrome.driver", "/Users/eugene/Project/moovweb-automation/src/main/resources/chromedriver");
+//            Map<String, String> mobileEmulation = new HashMap<String, String>();
+//            mobileEmulation.put("deviceName", "Google Nexus 5");
+//
+//            Map<String, Object> chromeOptions = new HashMap<String, Object>();
+//            chromeOptions.put("mobileEmulation", mobileEmulation);
+//            DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+//            capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+//            eventListener = new MyWebDriverEventListener();
+//
+//            driver = new EventFiringWebDriver(new ChromeDriver(capabilities)).register(eventListener);
+//        }
+//        return driver;
+//    }
 }
