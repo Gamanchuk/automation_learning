@@ -160,6 +160,7 @@
                         <iproxy.port>${iproxy.port}</iproxy.port>
                         <appium.port>${appium.port}</appium.port>
                         <proxy.port>${proxy.port}</proxy.port>
+                        <projectTracking>${projectTracking}</projectTracking>
                     </systemPropertyVariables>
                 </configuration>
                 <dependencies>
