@@ -9,15 +9,13 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.StringWriter;
 
-/**
- * Created by vnaksimenko on 25.11.16.
- */
+
 public class JiraHelper {
     //TODO: Change OAuth access tokens, url, project key
-    private final static String AUTH_HEADER = "Z3JpbnZhbGQyMDE2QGdtYWlsLmNvbTpxMXExdzF3MQ==";
-    private final static String JIRA_BASE_URL = "https://auto2020.atlassian.net/";
+    private final static String AUTH_HEADER = "YWRtaW46YXV0b21hdGlvbjIwMjA=";
+    private final static String JIRA_BASE_URL = "https://automation2020.atlassian.net/";
     private final static String JIRA_URL = JIRA_BASE_URL + "rest/api/2";
-    private final static String PROJECT_KEY = "MOOV";
+    private final static String PROJECT_KEY = "AUT";
 
     private static final MediaType MEDIA_TYPE_MARKDOWN = MediaType.parse("application/json");
     private final static OkHttpClient client = new OkHttpClient();
