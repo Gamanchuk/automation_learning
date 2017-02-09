@@ -67,7 +67,7 @@ public class TestRailRunHelper {
         data.write(out);
 
         Request request = new Request.Builder()
-                .url(TESTRAIL_URL + "/add_result_for_case/" + testRunId + "/" + caseId)
+                .url(TESTRAIL_URL + "add_result_for_case/" + testRunId + "/" + caseId)
                 .header("Authorization", CREDENTIALS)
                 .post(RequestBody.create(MEDIA_TYPE_MARKDOWN, out.toString()))
                 .build();
