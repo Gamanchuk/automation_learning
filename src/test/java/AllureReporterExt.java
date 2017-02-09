@@ -1,22 +1,21 @@
-import gherkin.formatter.model.*;
+import gherkin.formatter.model.Result;
+import gherkin.formatter.model.Scenario;
+import gherkin.formatter.model.Tag;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import ru.yandex.qatools.allure.Allure;
-import ru.yandex.qatools.allure.annotations.Attachment;
 import ru.yandex.qatools.allure.cucumberjvm.AllureReporter;
 import utils.DriverFactory;
 import utils.JiraHelper;
+import utils.TestRailRunHelper;
+import utils.TestRailStatus;
 
 import java.io.IOException;
+
+import static utils.CommonFunctions.attachScreenshot;
 
 public class AllureReporterExt extends AllureReporter {
     private static Log log = LogFactory.getLog(DriverFactory.class);
     private Scenario scenario;
-    Allure allure = Allure.LIFECYCLE;
-
-
 
 
     @Override
@@ -24,47 +23,56 @@ public class AllureReporterExt extends AllureReporter {
         this.scenario = scenario;
     }
 
-
     @Override
     public void result(Result result) {
         if ("failed".equals(result.getStatus())) {
-
-            attachScreenshot("failure screenshot");
-            log.info("Sena: " + scenario.getName());
-
+            log.info("failed");
+            attachScreenshot("Failed screenshot: " + scenario.getName());
 
             if (Boolean.valueOf(System.getProperty("projectTracking"))) {
-
-                String ticketId = "";
-
-                try {
-                    ticketId = JiraHelper.publishJira(
-                            "Automation - \"" + scenario.getName() + "\" failed",
-                            "{noformat}" + result.getError()+ "\n" + scenario.getId() +  "{noformat}");
-
-                    log.info("ticketId: " + ticketId);
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-//                if (testMethod.isAnnotationPresent(TestCase.class)) {
-//                    int caseId = Integer.parseInt(testMethod.getAnnotation(TestCase.class).value());
-//                    try {
-//                        TestRailRunHelper.getInstance().setTestResult(caseId, TestRailStatus.FAILED, iTestResult.getThrowable().getMessage(), ticketId);
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
+                String ticketId = setJiraIssues(String.valueOf(result.getError()));
+                setTestResult(TestRailStatus.FAILED, String.valueOf(result.getError()), ticketId);
             }
 
+        } else if ("passed".equals(result.getStatus())) {
+            log.info("passed: " + scenario.getName());
+            if (Boolean.valueOf(System.getProperty("projectTracking")))
+                setTestResult(TestRailStatus.PASSED, "", "");
         }
+
         super.result(result);
     }
 
+    private int getTestCaseID() {
 
-    @Attachment(value = "{0}", type = "image/png")
-    public static byte[] attachScreenshot(String name) {
-        return ((TakesScreenshot) DriverFactory.getDriver()).getScreenshotAs(OutputType.BYTES);
+        String id = null;
+        for (Tag tag : scenario.getTags()) {
+            if (tag.getName().contains("@TestCaseId"))
+                id = tag.getName().split("\"")[1];
+        }
+        assert id != null;
+        return Integer.parseInt(id);
     }
+
+    private void setTestResult(TestRailStatus status, String error, String issuesLink) {
+        try {
+            TestRailRunHelper.getInstance().setTestResult(getTestCaseID(), status, error, issuesLink);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private String setJiraIssues(String result) {
+        String ticketId = null;
+        try {
+            ticketId = JiraHelper.publishJira(
+                    "Automation - \"" + scenario.getName() + "\" failed",
+                    "{noformat}" + result + "\n" + scenario.getId() + "{noformat}");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return ticketId;
+    }
+
 }
