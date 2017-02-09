@@ -8,8 +8,6 @@ import org.openqa.selenium.TakesScreenshot;
 import org.testng.Reporter;
 import ru.yandex.qatools.allure.annotations.Attachment;
 
-
-
 public class CommonFunctions {
     private static Log log = LogFactory.getLog(CommonFunctions.class);
 
