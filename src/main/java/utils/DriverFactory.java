@@ -33,13 +33,12 @@ public class DriverFactory {
             startAppiumService();
 
             if (driver == null) {
-                String browserName = System.getProperty("device.browser");
-                String platformVersion = System.getProperty("device.platform.version");
-                String platformName = System.getProperty("device.platform.name");
-                String deviceName = System.getProperty("device.name");
-                String deviceUdid = System.getProperty("device.uid");
-                String iproxyPort = System.getProperty("iproxy.port");
-
+                String browserName = Config.DEVICE_BROWSER;
+                String platformVersion = Config.PLATFORM_VERSION;
+                String platformName = Config.PLATFORM_NAME;
+                String deviceName = Config.DEVICE_NAME;
+                String deviceUdid = Config.DEVICE_UID;
+                String iproxyPort = Config.IPROXY_PORT;
                 try {
                     log.info("****************************** CREATE REMOTE WEB DRIVER ********************************");
                     log.info("PLATFORM NAME: " + platformName);
@@ -60,7 +59,7 @@ public class DriverFactory {
                     desiredCapabilities.setCapability(MobileCapabilityType.UDID, deviceUdid);
                     desiredCapabilities.setCapability(MobileCapabilityType.TAKES_SCREENSHOT, "true");
 
-                    if (System.getProperty("device.platform.name").equals("iOS")) {
+                    if (Config.PLATFORM_NAME.equals("iOS")) {
                         desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
                         desiredCapabilities.setCapability("wdaLocalPort", Integer.parseInt(iproxyPort));
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.LAUNCH_TIMEOUT, 500000);
@@ -86,8 +85,8 @@ public class DriverFactory {
     private static void startAppiumService() {
         if (service == null) {
 
-            int appiumPort = Integer.parseInt(System.getProperty("appium.port"));
-            String proxyPort = System.getProperty("proxy.port");
+            int appiumPort = Integer.parseInt(Config.APPIUM_PORT);
+            String proxyPort = Config.PROXY_PORT;
 
             log.info("");
             log.info("******************************* STARTING APPIUM SERVICE ********************************");
@@ -97,7 +96,7 @@ public class DriverFactory {
 
             AppiumServiceBuilder serviceBuilder = new AppiumServiceBuilder();
             serviceBuilder.usingPort(appiumPort);
-            if (System.getProperty("device.platform.name").equals("iOS")) {
+            if (Config.PLATFORM_NAME.equals("iOS")) {
                 serviceBuilder.withArgument(IOSServerFlag.WEBKIT_DEBUG_PROXY_PORT, proxyPort);
                 serviceBuilder.withArgument(GeneralServerFlag.LOG_LEVEL, "warn");
                 serviceBuilder.withArgument(GeneralServerFlag.SESSION_OVERRIDE);
@@ -132,17 +131,17 @@ public class DriverFactory {
         }
     }
 
-    private static void initChromeDriver() {
-        System.setProperty("tests.chrome.driver", "/../../resources/chromedriver");
-        Map<String, String> mobileEmulation = new HashMap<String, String>();
-        mobileEmulation.put("deviceName", "Google Nexus 5");
-
-        Map<String, Object> chromeOptions = new HashMap<String, Object>();
-        chromeOptions.put("mobileEmulation", mobileEmulation);
-        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-        capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-        eventListener = new MyWebDriverEventListener();
-
-        driver = new EventFiringWebDriver(new ChromeDriver(capabilities)).register(eventListener);
-    }
+//    private static void initChromeDriver() {
+//        System.setProperty("tests.chrome.driver", "/../../resources/chromedriver");
+//        Map<String, String> mobileEmulation = new HashMap<String, String>();
+//        mobileEmulation.put("deviceName", "Google Nexus 5");
+//
+//        Map<String, Object> chromeOptions = new HashMap<String, Object>();
+//        chromeOptions.put("mobileEmulation", mobileEmulation);
+//        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+//        capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+//        eventListener = new MyWebDriverEventListener();
+//
+//        driver = new EventFiringWebDriver(new ChromeDriver(capabilities)).register(eventListener);
+//    }
 }
