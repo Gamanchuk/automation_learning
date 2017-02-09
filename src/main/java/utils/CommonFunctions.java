@@ -6,11 +6,6 @@ import org.openqa.selenium.WebDriverException;
 import org.testng.Reporter;
 import ru.yandex.qatools.allure.annotations.Attachment;
 
-@Deprecated
-
-/**
- * Created by vnaksimenko on 28.11.16.
- */
 public class CommonFunctions {
     @Attachment("< {0} > message ")
     public static String log(Class clazz, String msg) {
