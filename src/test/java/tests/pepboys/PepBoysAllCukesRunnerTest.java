@@ -1,4 +1,4 @@
-package tests;
+package tests.pepboys;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
@@ -8,9 +8,8 @@ import org.testng.annotations.Test;
 
 
 @CucumberOptions (
-        features = "src/test/resources/feature/ulta/",
-        glue = "steps",
-        tags = "@testdiary")
-class CukesRunnerTest extends AbstractTestNGCucumberTests {
+        features = "src/test/resources/feature/pepboys/",
+        glue = "steps")
+class PepBoysAllCukesRunnerTest extends AbstractTestNGCucumberTests {
 
 }
