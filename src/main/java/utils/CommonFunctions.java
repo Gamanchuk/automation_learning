@@ -4,14 +4,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriverException;
 import org.testng.Reporter;
 import ru.yandex.qatools.allure.annotations.Attachment;
 
 
-/**
- * Created by vnaksimenko on 28.11.16.
- */
+
 public class CommonFunctions {
     private static Log log = LogFactory.getLog(CommonFunctions.class);
 
@@ -56,23 +53,15 @@ public class CommonFunctions {
         return msg;
     }
 
-    @Attachment(value = "{0}", type = "image/png")
-    public static byte[] takeScreenshot(String name) {
-        try {
-            return ((TakesScreenshot) DriverFactory.getDriver()).getScreenshotAs(OutputType.BYTES);
-        } catch (WebDriverException e) {
-            return ((TakesScreenshot) DriverFactory.getDriver()).getScreenshotAs(OutputType.BYTES);
-        }
+
+    @Attachment(value = "ISSUES: {0}", type = "text/html")
+    public static String attachIssuesLink(String id, String link) {
+        return "<script language=javascript> window.location.href ='" + link + "'</script>";
     }
 
-    @Attachment
-    public static byte[] takeScreenshot() {
-        try {
-            return ((TakesScreenshot) DriverFactory.getDriver()).getScreenshotAs(OutputType.BYTES);
-        } catch (WebDriverException e) {
-            return ((TakesScreenshot) DriverFactory.getDriver()).getScreenshotAs(OutputType.BYTES);
-        }
-
+    @Attachment(value = "{0}", type = "image/png")
+    public static byte[] attachScreenshot(String name) {
+        return ((TakesScreenshot) DriverFactory.getDriver()).getScreenshotAs(OutputType.BYTES);
     }
 
 }
