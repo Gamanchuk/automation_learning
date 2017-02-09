@@ -9,6 +9,8 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.StringWriter;
 
+import static utils.CommonFunctions.attachIssuesLink;
+
 
 public class JiraHelper {
     //TODO: Change OAuth access tokens, url, project key
@@ -61,8 +63,9 @@ public class JiraHelper {
                 + "Description: " + description + "\n"
                 + "Issues link: " + issuesLink;
 
-        CommonFunctions.log("Issues: " + resp.getString("key"), logString);
+        String issuesKey = resp.getString("key");
 
+        attachIssuesLink(issuesKey, issuesLink);
 
         return issuesLink;
     }
