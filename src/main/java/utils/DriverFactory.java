@@ -63,6 +63,7 @@ public class DriverFactory {
                         desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
                         desiredCapabilities.setCapability("wdaLocalPort", Integer.parseInt(iproxyPort));
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.LAUNCH_TIMEOUT, 500000);
+                        desiredCapabilities.setCapability(IOSMobileCapabilityType.TAKES_SCREENSHOT, "true");
                        // desiredCapabilities.setCapability("realDeviceLogger", "/usr/local/lib/node_modules/deviceconsole/deviceconsole");
                     }
 
@@ -80,8 +81,6 @@ public class DriverFactory {
             return driver;
         }
 
-
-
     private static void startAppiumService() {
         if (service == null) {
 
@@ -98,7 +97,7 @@ public class DriverFactory {
             serviceBuilder.usingPort(appiumPort);
             if (Config.PLATFORM_NAME.equals("iOS")) {
                 serviceBuilder.withArgument(IOSServerFlag.WEBKIT_DEBUG_PROXY_PORT, proxyPort);
-                serviceBuilder.withArgument(GeneralServerFlag.LOG_LEVEL, "warn");
+               // serviceBuilder.withArgument(GeneralServerFlag.LOG_LEVEL, "warn");
                 serviceBuilder.withArgument(GeneralServerFlag.SESSION_OVERRIDE);
             }
 

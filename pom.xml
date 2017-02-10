@@ -88,11 +88,18 @@
             </exclusions>
         </dependency>
 
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.21</version>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/org.testng/testng -->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>6.9.13.6</version>
+            <version>6.10</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -144,6 +151,15 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.19.1</version>
                 <configuration>
@@ -153,11 +169,12 @@
                     </suiteXmlFiles>
                     <argLine>
                         -javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar
-                        -Dcucumber.options="--plugin ru.yandex.qatools.allure.cucumberjvm.AllureReporter"
+                        -Dcucumber.options="--plugin AllureReporterExt"
                     </argLine>
                     <systemPropertyVariables>
                         <environment.name>${testing.env}</environment.name>
                         <properties.file.name>${props.file.name}</properties.file.name>
+                        <projectTracking>${projectTracking}</projectTracking>
                     </systemPropertyVariables>
                 </configuration>
                 <dependencies>
@@ -184,6 +201,12 @@
     </build>
 
     <profiles>
+        <profile>
+            <id>Project-Tracking</id>
+            <properties>
+                <projectTracking>true</projectTracking>
+            </properties>
+        </profile>
 
         <!--test suites-->
         <profile>
