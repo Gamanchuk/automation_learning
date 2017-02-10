@@ -44,7 +44,7 @@ public class TestListener implements ITestListener {
     public void onStart(ITestContext iTestContext) {
         if (Boolean.valueOf(System.getProperty("projectTracking"))) {
 
-            String runName = "Run on " + System.getProperty("device.name") + " - " + new Date().toString();
+            String runName = "Run on " + Config.DEVICE_NAME + " - " + new Date().toString();
             try {
                 TestRailRunHelper.getInstance().startRun(runName);
                 log.info("Create Run in TestRail with name: [" + runName +"]");
