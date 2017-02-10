@@ -175,6 +175,7 @@
                         <environment.name>${testing.env}</environment.name>
                         <properties.file.name>${props.file.name}</properties.file.name>
                         <projectTracking>${projectTracking}</projectTracking>
+                        <suite.id>${suite.id}</suite.id>
                     </systemPropertyVariables>
                 </configuration>
                 <dependencies>
@@ -213,18 +214,21 @@
             <id>suite-pepboys-full</id>
             <properties>
                 <testng.suite>${basedir}/src/test/resources/testsuites/pepboys/pepboys_full.xml</testng.suite>
+                <suite.id>93</suite.id>
             </properties>
         </profile>
         <profile>
             <id>suite-pepboys-smoke</id>
             <properties>
                 <testng.suite>${basedir}/src/test/resources/testsuites/pepboys/pepboys_smoke.xml</testng.suite>
+                <suite.id>94</suite.id>
             </properties>
         </profile>
         <profile>
             <id>suite-pepboys-regression</id>
             <properties>
                 <testng.suite>${basedir}/src/test/resources/testsuites/pepboys/pepboys_regression.xml</testng.suite>
+                <suite.id>95</suite.id>
             </properties>
         </profile>
 
