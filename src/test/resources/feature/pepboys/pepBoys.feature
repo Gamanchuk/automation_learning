@@ -5,7 +5,7 @@ Feature: Customer Search Product
   I want to search product
   and pay this product
 
-@TestCaseId("15860")
+@TestCaseId("15851")
   Scenario: PepBoys test
     #Given user go to page "https://mstage.pepboys.com/?moov_=237a6e27-ceac-41f5-aedc-8e90a6696efd"
     Given user go to page "https://mstage.pepboys.com/?_mwexperienceid=b337455a-a439-4ef9-a844-8c48ecde9c3b"
