@@ -42,17 +42,7 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onStart(ITestContext iTestContext) {
-        if (Boolean.valueOf(System.getProperty("projectTracking"))) {
 
-            String runName = "Run on " + Config.DEVICE_NAME + " - " + new Date().toString();
-            try {
-                TestRailRunHelper.getInstance().startRun(runName);
-                log.info("Create Run in TestRail with name: [" + runName +"]");
-            } catch (IOException e) {
-                e.printStackTrace();
-                log.error("Cannot create TestRail Run [" + runName + "]: " + e.getLocalizedMessage());
-            }
-        }
     }
 
     @Override
