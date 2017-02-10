@@ -26,8 +26,6 @@ public class JiraHelper {
 
     public static String publishJira(String title, String description) throws JSONException, IOException {
 
-        log.info("Create Jira Issues");
-
         JSONObject data = new JSONObject();
         JSONObject fields = new JSONObject();
         JSONObject project = new JSONObject();
@@ -64,6 +62,7 @@ public class JiraHelper {
                 + "Issues link: " + issuesLink;
 
         String issuesKey = resp.getString("key");
+        log.info("Create Jira Issues: " + issuesLink);
 
         attachIssuesLink(issuesKey, issuesLink);
 

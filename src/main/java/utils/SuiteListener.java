@@ -20,7 +20,6 @@ public class SuiteListener implements ISuiteListener {
             String runName = "Run on " + Config.DEVICE_NAME + " - " + new Date().toString();
             try {
                 TestRailRunHelper.getInstance().startRun(runName);
-                log.info("Create Run in TestRail with name: [" + runName + "]");
             } catch (IOException e) {
                 e.printStackTrace();
                 log.error("Cannot create TestRail Run [" + runName + "]: " + e.getLocalizedMessage());
