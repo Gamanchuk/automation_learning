@@ -67,7 +67,7 @@ public class TestRailRunHelper {
 
     public void setTestResult(int caseId, TestRailStatus status, String comment, String defects) throws JSONException, IOException {
 
-        log.info("Updating status TestCase: " + caseId + " on [" +status+ "]");
+        log.info("Updating TestCase: " + caseId + " on [" +status+ "]");
 
         JSONObject data = new JSONObject();
         data.put("status_id", status.statusId);
