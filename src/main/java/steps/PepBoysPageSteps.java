@@ -6,6 +6,8 @@ import pages.BagWidget;
 import pages.PepBoysPage;
 import ru.yandex.qatools.allure.annotations.Step;
 
+import static org.testng.Assert.assertTrue;
+
 public class PepBoysPageSteps {
 
 
@@ -16,6 +18,7 @@ public class PepBoysPageSteps {
     @Given("user go to page \"([^\"]*)\"")
     public void goToPage(String page) {
         pepBoysPage.goToPage(page);
+        assertTrue(false);
     }
 
 

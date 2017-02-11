@@ -1,21 +1,21 @@
 package utils;
 
 import okhttp3.*;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.StringWriter;
 
-/**
- * Created by vnaksimenko on 25.11.16.
- */
+
 public class TestRailRunHelper {
-    private final static String LOGIN = "grinvald2016@gmail.com";
-    private final static String PASSWORD = "q1q1w1w1";
+    private final static String LOGIN = "shapovalovei@softesis.com";
+    private final static String PASSWORD = "Tester1234";
     private final static String CREDENTIALS = Credentials.basic(LOGIN, PASSWORD);
-    private final static String TESTRAIL_URL = "https://auto2020.testrail.net/index.php?/api/v2/";
-    private final static int PROJECT_ID = 2;
+    private final static String TESTRAIL_URL = "https://moovweb.testrail.net/index.php?/api/v2/";
+    private final static int PROJECT_ID = 31;
 
     private final static MediaType MEDIA_TYPE_MARKDOWN = MediaType.parse("application/json");
     private final static OkHttpClient client = new OkHttpClient();
@@ -24,8 +24,10 @@ public class TestRailRunHelper {
 
     private static TestRailRunHelper ourInstance = null;
 
+    private static Log log = LogFactory.getLog(TestRailRunHelper.class);
+
     public static TestRailRunHelper getInstance() {
-        if(ourInstance == null) {
+        if (ourInstance == null) {
             ourInstance = new TestRailRunHelper();
         }
         return ourInstance;
@@ -65,7 +67,7 @@ public class TestRailRunHelper {
         data.write(out);
 
         Request request = new Request.Builder()
-                .url(TESTRAIL_URL + "/add_result_for_case/" + testRunId + "/" + caseId)
+                .url(TESTRAIL_URL + "add_result_for_case/" + testRunId + "/" + caseId)
                 .header("Authorization", CREDENTIALS)
                 .post(RequestBody.create(MEDIA_TYPE_MARKDOWN, out.toString()))
                 .build();
