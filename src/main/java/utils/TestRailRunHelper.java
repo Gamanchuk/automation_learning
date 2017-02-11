@@ -40,7 +40,6 @@ public class TestRailRunHelper {
     public void startRun(String title) throws JSONException, IOException {
 
         int suite_id = Integer.parseInt(System.getProperty("suite.id"));
-        log.info("Create run in TestRail: [ " + title + " ]");
 
         JSONObject data = new JSONObject();
         data.put("name", title);
@@ -59,13 +58,16 @@ public class TestRailRunHelper {
         Response response = client.newCall(request).execute();
         if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
 
+
         JSONObject resp = new JSONObject(response.body().string());
         testRunId = resp.getInt("id");
+
+        log.info("Created run in TestRail: [ " + title + " ]");
     }
 
     public void setTestResult(int caseId, TestRailStatus status, String comment, String defects) throws JSONException, IOException {
 
-        log.info("Update status TestCase: " + caseId + " on [" +status+ "]");
+        log.info("Updating status TestCase: " + caseId + " on [" +status+ "]");
 
         JSONObject data = new JSONObject();
         data.put("status_id", status.statusId);

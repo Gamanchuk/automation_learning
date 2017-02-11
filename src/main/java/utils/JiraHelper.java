@@ -56,6 +56,7 @@ public class JiraHelper {
         String issuesLink = JIRA_BASE_URL + "browse/" + resp.getString("key");      // URL to created Jira ticket
 
         String issuesKey = resp.getString("key");
+
         log.info("Created Jira Issues: " + issuesLink);
 
         attachIssuesLink(issuesKey, issuesLink);
