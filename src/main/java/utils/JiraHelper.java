@@ -55,14 +55,8 @@ public class JiraHelper {
         JSONObject resp = new JSONObject(response.body().string());
         String issuesLink = JIRA_BASE_URL + "browse/" + resp.getString("key");      // URL to created Jira ticket
 
-        String logString = "Project: " + project + "\n"
-                + "Title: " + title + "\n"
-                + "Issues Type: " + issueType + "\n"
-                + "Description: " + description + "\n"
-                + "Issues link: " + issuesLink;
-
         String issuesKey = resp.getString("key");
-        log.info("Create Jira Issues: " + issuesLink);
+        log.info("Created Jira Issues: " + issuesLink);
 
         attachIssuesLink(issuesKey, issuesLink);
 
