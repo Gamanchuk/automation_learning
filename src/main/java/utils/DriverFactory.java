@@ -40,7 +40,7 @@ public class DriverFactory {
                 String deviceUdid = Config.DEVICE_UID;
                 String iproxyPort = Config.IPROXY_PORT;
                 try {
-                    log.info("****************************** CREATE REMOTE WEB DRIVER ********************************");
+                    log.info("****************************** CREATING REMOTE WEB DRIVER ********************************");
                     log.info("PLATFORM NAME: " + platformName);
                     log.info("PLATFORM VERSION: " + platformVersion);
                     log.info("DEVICE NAME: " + deviceName);
