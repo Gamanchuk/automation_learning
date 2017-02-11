@@ -286,6 +286,12 @@
                 <props.file.name>galaxy_s6</props.file.name>
             </properties>
         </profile>
+        <profile>
+            <id>device-android-simulator</id>
+            <properties>
+                <props.file.name>android_simulator</props.file.name>
+            </properties>
+        </profile>
     </profiles>
 
     <reporting>
