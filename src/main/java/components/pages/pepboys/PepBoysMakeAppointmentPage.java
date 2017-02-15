@@ -8,7 +8,10 @@ public class PepBoysMakeAppointmentPage extends PepBoysMainPage {
 
     public void selectDifferentLocation(String locationZipCode) {
         By selectLocationBtn = By.cssSelector("button.locationBtn");
+        By img = By.cssSelector("img.storeButtonImage");
         By zipCodeField = By.id("zipCode");
+
+        waitForAttributeVisible(img,"src","https://static.pepboys.com/images/eServe2.0/Location-Selector-Button-Icon-14x20.gif");
         click(selectLocationBtn);
         waitForElementVisible(zipCodeField);
 

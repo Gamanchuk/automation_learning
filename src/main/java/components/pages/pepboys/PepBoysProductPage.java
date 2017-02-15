@@ -8,7 +8,7 @@ public class PepBoysProductPage extends PepBoysBasePage {
 
     public void setDeliveryOption(String deliveryOption) {
         By option = By.xpath("//label[contains(., '" + deliveryOption + "')]");
-        waitForElementClickable(option);
+//        waitForElementClickable(option);
         click(option);
     }
 

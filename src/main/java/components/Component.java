@@ -2,12 +2,17 @@ package components;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.DriverFactory;
+
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.fail;
 
@@ -70,6 +75,12 @@ public abstract class Component {
                 .until(ExpectedConditions.visibilityOfElementLocated(element));
     }
 
+    public void waitForAttributeVisible(By element, String attribute, String value) {
+        log.info("Waiting for attribute");
+        new WebDriverWait(driver, TIMEOUT_SECONDS)
+                .until(ExpectedConditions.attributeToBe(element, attribute, value));
+    }
+
     public void waitForElementVisible(By element) {
         this.waitForElementVisible(element, TIMEOUT_SECONDS);
     }
@@ -97,10 +108,14 @@ public abstract class Component {
 
     public void click(By el) {
         try {
+            driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
             WebDriverWait wait = new WebDriverWait(driver, 30, 200);
             wait.until(ExpectedConditions.presenceOfElementLocated(el));
-            wait.until(ExpectedConditions.elementToBeClickable(el)).click();
-        } catch(TimeoutException e){
+            wait.until(ExpectedConditions.visibilityOfElementLocated(el));
+            wait.until(ExpectedConditions.elementToBeClickable(el));
+            scrollToElement(driver.findElement(el));
+            driver.findElement(el).click();
+        } catch (Exception e) {
             WebElement element = driver.findElement(el);
             scrollToElement(element);
             element.click();
@@ -108,6 +123,7 @@ public abstract class Component {
     }
 
     private void scrollToElement(WebElement el) {
+        log.info("Scroll to element: " + el);
         Actions actions = new Actions(getDriver());
         actions.moveToElement(el);
         actions.perform();
