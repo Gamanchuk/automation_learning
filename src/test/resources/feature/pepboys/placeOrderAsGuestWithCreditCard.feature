@@ -8,6 +8,7 @@ Feature: Some feature
     When user selects "Cowles Products Style Guard Door Guard"
     And user adds it to the cart with "Ship to Home" delivery option
     And user views cart
+#    And user chooses
 #    And navigates to checkout as a Guest
 #    And enters all required fields
 #    And place an Order

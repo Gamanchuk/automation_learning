@@ -1,11 +1,8 @@
 package steps.pepboys;
 
-import components.pages.pepboys.PepBoysCategoriesPage;
-import components.pages.pepboys.PepBoysMainPage;
-import components.pages.pepboys.PepBoysProductPage;
-import components.pages.pepboys.PepBoysProductsInCategoryPage;
+import components.pages.pepboys.*;
 import components.widgets.CategoriesWidget;
-import cucumber.api.PendingException;
+import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
@@ -16,14 +13,22 @@ import static org.testng.Assert.assertTrue;
 public class PepBoysMainPageSteps {
 
     private PepBoysMainPage mainPage = new PepBoysMainPage();
+    private PepBoysMakeAppointmentPage makeAppointmentPage = new PepBoysMakeAppointmentPage();
     private PepBoysProductsInCategoryPage productsPage = new PepBoysProductsInCategoryPage();
     private PepBoysCategoriesPage categoriesPage = new PepBoysCategoriesPage();
     private PepBoysProductPage productPage = new PepBoysProductPage();
     private CategoriesWidget categoriesWidget = new CategoriesWidget();
 
+    @Before
+    public void makeAppointment() {
+        mainPage.navigateMainPage();
+        mainPage.openMakeAppointment();
+        makeAppointmentPage.selectDifferentLocation("94105");
+    }
+
     @Given("user is on main page")
     public void userIsOnMainPage() {
-        mainPage.openMainPage();
+        mainPage.navigateMainPage();
         assertTrue(mainPage.isPageLoaded(), "Main page was not loaded");
         CommonFunctions.attachScreenshot("Main page loaded");
     }

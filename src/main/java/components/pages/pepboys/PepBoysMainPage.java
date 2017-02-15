@@ -12,8 +12,19 @@ public class PepBoysMainPage extends PepBoysBasePage {
         return true;
     }
 
-    public void openMainPage() {
+    public void navigateMainPage() {
         getDriver().navigate().to(BASE_URL);
+        getDriver().navigate().to(BASE_URL);
+        waitForElementVisible(By.xpath("//h2[text()='Popular Categories']"));
+    }
+
+    public void openMainPage() {
+        waitAndClick(By.cssSelector("a.mw-logo"));
+    }
+
+    public void openMakeAppointment() {
+        getDriver().findElement(By.xpath("//a[text()='Make Appointment']")).click();
+        waitForElementPresence(By.cssSelector("button.locationBtn"));
     }
 
 //    private String itemId = null;
