@@ -7,6 +7,6 @@ public class PepBoysCategoriesPage extends Component {
     public void openCategory(String categoryName) {
         By category = By.xpath("//a[text()='" + categoryName + "']");
         waitForElementClickable(category);
-        getDriver().findElement(category).click();
+        click(category);
     }
 }

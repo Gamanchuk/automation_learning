@@ -9,14 +9,14 @@ public class PepBoysMakeAppointmentPage extends PepBoysMainPage {
     public void selectDifferentLocation(String locationZipCode) {
         By selectLocationBtn = By.cssSelector("button.locationBtn");
         By zipCodeField = By.id("zipCode");
-        waitAndClick(selectLocationBtn);
+        click(selectLocationBtn);
         waitForElementVisible(zipCodeField);
 
         getDriver().findElement(zipCodeField).sendKeys(locationZipCode);
-        getDriver().findElement(By.cssSelector("button.j-findStores")).click();
+        click(By.cssSelector("button.j-findStores"));
         waitForElementVisible(By.xpath("//div[contains(text(), 'store near " + locationZipCode + "')]"));
 
-        getDriver().findElement(By.cssSelector("button.j-chooseStore")).click();
+        click(By.cssSelector("button.j-chooseStore"));
         waitForElementVisible(selectLocationBtn);
 
         getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);

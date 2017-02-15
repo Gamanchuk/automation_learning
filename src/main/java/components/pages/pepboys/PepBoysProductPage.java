@@ -9,12 +9,12 @@ public class PepBoysProductPage extends PepBoysBasePage {
     public void setDeliveryOption(String deliveryOption) {
         By option = By.xpath("//label[contains(., '" + deliveryOption + "')]");
         waitForElementClickable(option);
-        getDriver().findElement(option).click();
+        click(option);
     }
 
 
     public void addToCart() {
-        waitAndClick(By.xpath("//button[text()='Add to cart']"));
+        click(By.xpath("//button[text()='Add to cart']"));
     }
 
     public boolean isInfoDialogOpened() {
@@ -22,7 +22,7 @@ public class PepBoysProductPage extends PepBoysBasePage {
     }
 
     public void clickViewCartInAddToCartDialog() {
-        getDriver().findElement(By.xpath("//button[text()='View Cart']")).click();
+        click(By.xpath("//button[text()='View Cart']"));
         assertTrue(isElementClickable(By.xpath("//a[text()='Pay Online']")));
     }
 }

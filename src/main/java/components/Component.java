@@ -3,6 +3,7 @@ package components;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -94,9 +95,9 @@ public abstract class Component {
         }
     }
 
-    public void waitAndClick(By el) {
+    public void click(By el) {
         try {
-            WebDriverWait wait = new WebDriverWait(driver, 5, 200);
+            WebDriverWait wait = new WebDriverWait(driver, 30, 200);
             wait.until(ExpectedConditions.presenceOfElementLocated(el));
             wait.until(ExpectedConditions.elementToBeClickable(el)).click();
         } catch(TimeoutException e){
@@ -107,9 +108,8 @@ public abstract class Component {
     }
 
     private void scrollToElement(WebElement el) {
-        if (driver instanceof JavascriptExecutor) {
-            ((JavascriptExecutor) driver)
-                    .executeScript("arguments[0].scrollIntoView(true);", el);
-        }
+        Actions actions = new Actions(getDriver());
+        actions.moveToElement(el);
+        actions.perform();
     }
 }

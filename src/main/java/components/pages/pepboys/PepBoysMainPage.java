@@ -1,7 +1,6 @@
 package components.pages.pepboys;
 
 import org.openqa.selenium.By;
-import utils.CommonFunctions;
 
 public class PepBoysMainPage extends PepBoysBasePage {
 
@@ -19,11 +18,11 @@ public class PepBoysMainPage extends PepBoysBasePage {
     }
 
     public void openMainPage() {
-        waitAndClick(By.cssSelector("a.mw-logo"));
+        click(By.cssSelector("a.mw-logo"));
     }
 
     public void openMakeAppointment() {
-        getDriver().findElement(By.xpath("//a[text()='Make Appointment']")).click();
+        click(By.xpath("//a[text()='Make Appointment']"));
         waitForElementPresence(By.cssSelector("button.locationBtn"));
     }
 
