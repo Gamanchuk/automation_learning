@@ -247,7 +247,7 @@
             <id>suite-debug</id>
             <properties>
                 <testng.suite>${basedir}/src/test/resources/testsuites/debug.xml</testng.suite>
-                <suite.id>0</suite.id>
+                <suite.id>93</suite.id>
             </properties>
         </profile>
 
