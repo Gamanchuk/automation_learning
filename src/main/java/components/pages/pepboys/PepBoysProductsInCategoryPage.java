@@ -6,9 +6,9 @@ public class PepBoysProductsInCategoryPage extends PepBoysBasePage {
 
     // opens first product with matching name
     public void openProductByName(String productName) {
-        By product = By.xpath("//a[text()='" + productName + "']");
+        By product = By.xpath("(//a[text()='" + productName + "'])[1]");
         waitForElementClickable(product);
-        getDriver().findElements(product).get(0).click();
+        click(product);
     }
 
     public void openProductByNameAndSku(String productName) {

@@ -12,6 +12,8 @@ public class PepBoysMakeAppointmentPage extends PepBoysMainPage {
         By zipCodeField = By.id("zipCode");
 
         waitForAttributeVisible(img,"src","https://static.pepboys.com/images/eServe2.0/Location-Selector-Button-Icon-14x20.gif");
+
+        waitForImageLoaded(By.cssSelector("img.storeButtonImage"));
         click(selectLocationBtn);
         waitForElementVisible(zipCodeField);
 

@@ -2,10 +2,7 @@ package components;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -18,7 +15,7 @@ import static org.junit.Assert.fail;
 
 public abstract class Component {
 
-    private final int TIMEOUT_SECONDS = 30;
+    private final int TIMEOUT_SECONDS = 40;
 
     private WebDriver driver = DriverFactory.getDriver();
     private Log log = LogFactory.getLog(this.getClass());
@@ -95,6 +92,18 @@ public abstract class Component {
         this.waitForElementVisible(element, TIMEOUT_SECONDS);
     }
 
+    public void waitForImageLoaded(By image) {
+        new WebDriverWait(driver, TIMEOUT_SECONDS)
+                .until(new ExpectedCondition<Boolean>() {
+                           @Override
+                           public Boolean apply(WebDriver webDriver) {
+                               Object result = ((JavascriptExecutor)driver).executeScript("return (typeof arguments[0].naturalWidth!=\"undefined\" && arguments[0].naturalWidth>0)", driver.findElement(image));
+                               return (Boolean) result;
+                           }
+                       }
+
+                );
+    }
 
     private boolean waitForCondition(ExpectedCondition<WebElement> webElementExpectedCondition, int timeout) {
         try {

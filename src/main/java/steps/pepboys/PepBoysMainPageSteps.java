@@ -66,7 +66,14 @@ public class PepBoysMainPageSteps {
     }
 
     @And("^types required billing info$")
-    public void tyoesAllBillingInfo() throws Throwable {
+    public void typesAllBillingInfo() throws Throwable {
         billingPage.inputBillingInfo();
+        CommonFunctions.attachScreenshot("Billing info");
+
+        billingPage.selectShippingMethod();
+        CommonFunctions.attachScreenshot("Shipping method");
+
+        billingPage.inputPaymentDetails();
+        CommonFunctions.attachScreenshot("Payment details");
     }
 }
