@@ -108,7 +108,6 @@ public abstract class Component {
 
     public void click(By el) {
         try {
-            driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
             WebDriverWait wait = new WebDriverWait(driver, 30, 200);
             wait.until(ExpectedConditions.presenceOfElementLocated(el));
             wait.until(ExpectedConditions.visibilityOfElementLocated(el));

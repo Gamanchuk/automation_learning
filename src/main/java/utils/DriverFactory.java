@@ -67,7 +67,6 @@ public class DriverFactory {
                     desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
                     desiredCapabilities.setCapability("wdaLocalPort", Integer.parseInt(iproxyPort));
                     desiredCapabilities.setCapability(IOSMobileCapabilityType.LAUNCH_TIMEOUT, 500000);
-                    desiredCapabilities.setCapability(IOSMobileCapabilityType.SAFARI_INITIAL_URL, "http://mstage.stage.pepboys.com/?_mwexperienceid=75b123b0-6444-4893-9825-1303473bc59f");
                     desiredCapabilities.setCapability(IOSMobileCapabilityType.TAKES_SCREENSHOT, "true");
                     // desiredCapabilities.setCapability("realDeviceLogger", "/usr/local/lib/node_modules/deviceconsole/deviceconsole");
                 }
