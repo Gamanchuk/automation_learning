@@ -62,6 +62,12 @@ public abstract class Component {
                 .until(ExpectedConditions.elementToBeClickable(element));
     }
 
+    public void waitForElementInvisibilityOfElementLocated(By element) {
+        log.info("Waiting " + TIMEOUT_SECONDS + "s for element: '" + element + "' hidden");
+        new WebDriverWait(driver, TIMEOUT_SECONDS)
+                .until(ExpectedConditions.invisibilityOfElementLocated(element));
+    }
+
     public void waitForElementClickable(By element) {
         this.waitForElementClickable(element, TIMEOUT_SECONDS);
     }
@@ -124,6 +130,8 @@ public abstract class Component {
             scrollToElement(driver.findElement(el));
             driver.findElement(el).click();
         } catch (Exception e) {
+            log.info(e.getMessage());
+            log.info(e.getStackTrace());
             WebElement element = driver.findElement(el);
             scrollToElement(element);
             element.click();

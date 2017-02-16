@@ -11,5 +11,5 @@ Feature: Some feature
     And user chooses "Pay Online" method
     And types required billing info
 
-#    And place an Order
+   # And place an Order
 #    Then user should be on thank you page

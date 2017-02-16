@@ -1,6 +1,7 @@
 package components.pages.pepboys;
 
 import org.openqa.selenium.By;
+import org.testng.Assert;
 
 import static org.testng.AssertJUnit.assertTrue;
 
@@ -23,19 +24,22 @@ public class PepBoysBillingPage extends PepBoysBasePage {
         getDriver().findElement(By.id("billing-email")).sendKeys("qa@moovweb.com");
         click(continueBtn);
 
+        waitForElementVisible(By.xpath("//div[@class='radio-list-option' and contains(., 'Use Recommended Address')]"));
         if (isElementVisible(By.xpath("//div[@class='radio-list-option' and contains(., 'Use Recommended Address')]"))) {
             click(By.xpath("//div[@class='radio-list-option' and contains(., 'Use Recommended Address')]"));
         }
 //        click(continueBtn);
-
+        waitForElementInvisibilityOfElementLocated(By.className("spinner-container"));
         assertTrue(isElementVisible(By.xpath("//div[@class='address-recipient' and text()='qa moovweb']")));
         // TODO: add checks for shipping address
     }
 
     public void selectShippingMethod() {
-        click(By.xpath("//div[contains(@class, 'radio-list') and contains(@class, 'radio-collapsed')]"));
-        click(By.xpath("//div[contains(., 'Ground')]/../input"));
-        waitForElementVisible(By.xpath("//div[contains(@class, 'radio-list') and contains(@class, 'radio-collapsed')]"));
+//        click(By.xpath("//div[contains(@class, 'radio-list') and contains(@class, 'radio-collapsed')]"));
+//        click(By.xpath("//div[contains(., 'Ground')]/../input"));
+        //waitForElementVisible(By.xpath("//div[contains(@class, 'radio-list') and contains(@class, 'radio-collapsed')]"));
+
+        waitForElementInvisibilityOfElementLocated(By.className("spinner-container"));
         click(continueBtn);
     }
 
@@ -48,5 +52,6 @@ public class PepBoysBillingPage extends PepBoysBasePage {
         getDriver().findElement(By.id("cc-csc")).sendKeys("111");
 
         click(By.xpath("(//button[text()='Place Order'])[1]"));
+        Assert.assertTrue(false,"Thanks page not found");
     }
 }
