@@ -2,6 +2,7 @@ package steps.pepboys;
 
 import components.pages.pepboys.*;
 import components.widgets.CategoriesWidget;
+import cucumber.api.PendingException;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -17,6 +18,9 @@ public class PepBoysMainPageSteps {
     private PepBoysProductsInCategoryPage productsPage = new PepBoysProductsInCategoryPage();
     private PepBoysCategoriesPage categoriesPage = new PepBoysCategoriesPage();
     private PepBoysProductPage productPage = new PepBoysProductPage();
+    private PepBoysCartPage cartPage = new PepBoysCartPage();
+    private PepBoysBillingPage billingPage = new PepBoysBillingPage();
+
     private CategoriesWidget categoriesWidget = new CategoriesWidget();
 
     @Before
@@ -54,5 +58,15 @@ public class PepBoysMainPageSteps {
     public void userViewsCart() {
         productPage.clickViewCartInAddToCartDialog();
         CommonFunctions.attachScreenshot("Cart opened");
+    }
+
+    @And("^user chooses \"([^\"]*)\" method$")
+    public void userChoosesMethod(String method) throws Throwable {
+        cartPage.payUsingPaymentMethod(method);
+    }
+
+    @And("^types required billing info$")
+    public void tyoesAllBillingInfo() throws Throwable {
+        billingPage.inputBillingInfo();
     }
 }
