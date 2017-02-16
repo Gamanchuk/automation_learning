@@ -55,7 +55,7 @@ public class MyWebDriverEventListener implements WebDriverEventListener {
 
     @Override
     public void afterClickOn(WebElement webElement, WebDriver webDriver) {
-        log.info("WebDriver click on element " + webElement.getText());
+
     }
 
 
@@ -71,7 +71,7 @@ public class MyWebDriverEventListener implements WebDriverEventListener {
 
     @Override
     public void beforeClickOn(WebElement webElement, WebDriver webDriver) {
-
+        log.info("Clicking element: " + webElement.toString());
     }
 
 

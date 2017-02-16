@@ -162,11 +162,7 @@ public class DriverFactory {
                 log.info("Port: " + port + " is free");
             }
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (TimeoutException e) {
+        } catch (IOException | InterruptedException | TimeoutException e) {
             e.printStackTrace();
         }
     }

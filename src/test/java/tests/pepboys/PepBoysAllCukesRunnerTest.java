@@ -6,7 +6,7 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 
 @CucumberOptions (
         features = "src/test/resources/feature/pepboys/",
-        glue = "steps")
+        glue = "steps.pepboys")
 class PepBoysAllCukesRunnerTest extends AbstractTestNGCucumberTests {
 
 }
