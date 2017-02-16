@@ -29,6 +29,8 @@ public class PepBoysBillingPage extends PepBoysBasePage {
             click(By.xpath("//div[@class='radio-list-option' and contains(., 'Use Recommended Address')]"));
         }
 //        click(continueBtn);
+
+        waitForElementVisible(By.className("spinner-container"));
         waitForElementInvisibilityOfElementLocated(By.className("spinner-container"));
         assertTrue(isElementVisible(By.xpath("//div[@class='address-recipient' and text()='qa moovweb']")));
         // TODO: add checks for shipping address
@@ -38,7 +40,7 @@ public class PepBoysBillingPage extends PepBoysBasePage {
 //        click(By.xpath("//div[contains(@class, 'radio-list') and contains(@class, 'radio-collapsed')]"));
 //        click(By.xpath("//div[contains(., 'Ground')]/../input"));
         //waitForElementVisible(By.xpath("//div[contains(@class, 'radio-list') and contains(@class, 'radio-collapsed')]"));
-
+        waitForElementVisible(By.className("spinner-container"));
         waitForElementInvisibilityOfElementLocated(By.className("spinner-container"));
         click(continueBtn);
     }
