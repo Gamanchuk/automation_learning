@@ -62,6 +62,7 @@ public class DriverFactory {
                 desiredCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, deviceName);
                 desiredCapabilities.setCapability(MobileCapabilityType.UDID, deviceUdid);
                 desiredCapabilities.setCapability(MobileCapabilityType.TAKES_SCREENSHOT, "true");
+                desiredCapabilities.setCapability("autoAcceptAlerts",true);
 
                 if (Config.PLATFORM_NAME.equals("iOS")) {
                     desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
