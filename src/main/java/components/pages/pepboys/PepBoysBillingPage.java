@@ -40,7 +40,7 @@ public class PepBoysBillingPage extends PepBoysBasePage {
 //        click(By.xpath("//div[contains(@class, 'radio-list') and contains(@class, 'radio-collapsed')]"));
 //        click(By.xpath("//div[contains(., 'Ground')]/../input"));
         //waitForElementVisible(By.xpath("//div[contains(@class, 'radio-list') and contains(@class, 'radio-collapsed')]"));
-        waitForElementVisible(By.className("spinner-container"));
+       // waitForElementVisible(By.className("spinner-container"));
         waitForElementInvisibilityOfElementLocated(By.className("spinner-container"));
         click(continueBtn);
     }
