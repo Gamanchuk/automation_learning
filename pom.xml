@@ -25,6 +25,18 @@
     <description>Allure Cucumber-JVM Usage Example</description>
 
     <dependencies>
+        <dependency>
+            <groupId>org.zeroturnaround</groupId>
+            <artifactId>zt-exec</artifactId>
+            <version>1.9</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.zeroturnaround</groupId>
+            <artifactId>zt-process-killer</artifactId>
+            <version>1.5</version>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
@@ -231,6 +243,14 @@
                 <suite.id>95</suite.id>
             </properties>
         </profile>
+        <profile>
+            <id>suite-debug</id>
+            <properties>
+                <testng.suite>${basedir}/src/test/resources/testsuites/debug.xml</testng.suite>
+                <suite.id>93</suite.id>
+            </properties>
+        </profile>
+
 
         <!--environments-->
         <profile>
