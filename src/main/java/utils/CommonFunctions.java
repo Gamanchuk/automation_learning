@@ -8,6 +8,9 @@ import org.openqa.selenium.TakesScreenshot;
 import org.testng.Reporter;
 import ru.yandex.qatools.allure.annotations.Attachment;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class CommonFunctions {
     private static Log log = LogFactory.getLog(CommonFunctions.class);
 
@@ -63,4 +66,16 @@ public class CommonFunctions {
         return ((TakesScreenshot) DriverFactory.getDriver()).getScreenshotAs(OutputType.BYTES);
     }
 
+    public static float getCurrency(String str) {
+        Pattern pattern = Pattern.compile("\\$(\\d+\\.?\\d{0,2})");
+        Matcher matcher = pattern.matcher(str);
+        if (matcher.find()) {
+            String currency = matcher.group(1);
+            return Float.parseFloat(currency);
+        } else {
+            throw new Error("Can't get currency from string \'" + str + "\"");
+        }
+
+
+    }
 }

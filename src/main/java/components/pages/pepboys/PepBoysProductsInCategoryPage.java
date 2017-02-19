@@ -1,6 +1,8 @@
 package components.pages.pepboys;
 
 import org.openqa.selenium.By;
+import utils.CommonFunctions;
+import utils.TestGlobalsManager;
 
 public class PepBoysProductsInCategoryPage extends PepBoysBasePage {
 
@@ -9,6 +11,12 @@ public class PepBoysProductsInCategoryPage extends PepBoysBasePage {
         By product = By.xpath("(//a[text()='" + productName + "'])[1]");
         waitForElementClickable(product);
         click(product);
+
+        // Getting product total price to check it in order
+        By totalPriceEl = By.xpath("//span[@class='mw-total-price']//span[@class='ftPrice']");
+        waitForElementVisible(totalPriceEl);
+        float totalPrice =  Float.parseFloat(getDriver().findElement(totalPriceEl).getText());
+        TestGlobalsManager.setTestGlobal("totalPrice", totalPrice);
     }
 
     public void openProductByNameAndSku(String productName) {

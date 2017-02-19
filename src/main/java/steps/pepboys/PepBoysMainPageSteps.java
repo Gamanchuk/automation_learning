@@ -9,6 +9,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import org.openqa.selenium.By;
 import utils.CommonFunctions;
+import utils.pepboys.DataProvider;
 
 import static org.testng.Assert.assertTrue;
 
@@ -47,7 +48,7 @@ public class PepBoysMainPageSteps {
         CommonFunctions.attachScreenshot("Opened '" + productName + "' page");
     }
 
-    @When("^user adds it to the cart with \"([^\"]*)\" delivery option$")
+    @And("^adds it to the cart with \"([^\"]*)\" delivery option$")
     public void userAddsItToTheCartWithDeliveryOption(String deliveryOPtion) {
         productPage.setDeliveryOption(deliveryOPtion);
         productPage.addToCart();
@@ -61,20 +62,21 @@ public class PepBoysMainPageSteps {
         CommonFunctions.attachScreenshot("Cart opened");
     }
 
-    @And("^user chooses \"([^\"]*)\" method$")
+    @And("^chooses \"([^\"]*)\" method$")
     public void userChoosesMethod(String method) throws Throwable {
         cartPage.payUsingPaymentMethod(method);
     }
 
     @And("^types required billing info$")
     public void typesAllBillingInfo() throws Throwable {
-        billingPage.inputBillingInfo();
-        CommonFunctions.attachScreenshot("Billing info");
 
-        billingPage.selectShippingMethod();
-        CommonFunctions.attachScreenshot("Shipping method");
+    }
 
-        billingPage.inputPaymentDetails();
-        CommonFunctions.attachScreenshot("Payment details");
+
+    @And("^types billing info for \"([^\"]*)\" with \"([^\"]*)\" shipping method and \"([^\"]*)\" card$")
+    public void typesBillingInfoForWithShippingMethodAndCard(String userName, String shippingMethod, String cardName) throws Throwable {
+        billingPage.inputBillingInfo(DataProvider.getUser(userName));
+        billingPage.selectShippingMethod(shippingMethod);
+        billingPage.inputPaymentDetails(DataProvider.getCard(cardName));
     }
 }

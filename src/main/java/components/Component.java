@@ -138,6 +138,12 @@ public abstract class Component {
         }
     }
 
+    public void sendKeysOneByOne(By el, String str) {
+        for(char ch : str.toCharArray()) {
+            getDriver().findElement(el).sendKeys(ch + "");
+        }
+    }
+
     private void scrollToElement(WebElement el) {
         log.info("Scroll to element: " + el);
         Actions actions = new Actions(getDriver());
