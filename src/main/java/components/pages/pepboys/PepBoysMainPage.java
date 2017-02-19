@@ -56,7 +56,7 @@ public class PepBoysMainPage extends PepBoysBasePage {
 //
 //    public PepBoysMainPage goToPage(String url) {
 //        driver.navigate().to(url);
-//        assertTrue(this.isPage(), "User is not on main page");
+//        assertTrue(this.isPage(), "BillingUser is not on main page");
 //        return this;
 //    }
 //

@@ -60,7 +60,7 @@ public class BagWidget extends Component {
 //
 //    public BagWidget goToPage(String url) {
 //        driver.navigate().to(url);
-//        assertTrue(this.isPage(), "User is not on main page");
+//        assertTrue(this.isPage(), "BillingUser is not on main page");
 //        return this;
 //    }
 //
