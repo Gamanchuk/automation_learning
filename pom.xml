@@ -210,6 +210,20 @@
                     <stopPort>1234</stopPort>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>com.bazaarvoice.maven.plugins</groupId>
+                <artifactId>s3-upload-maven-plugin</artifactId>
+                <version>1.4</version>
+                <configuration>
+                    <bucketName>automation-catalyst-logs</bucketName>
+                    <source>target/site/allure-maven-plugin</source>
+                    <destination>report_${maven.build.timestamp}_${props.file.name}</destination>
+                    <recursive>true</recursive>
+                    <accessKey>AKIAIZALPCPFYKO5LLMA</accessKey>
+                    <secretKey>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</secretKey>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
