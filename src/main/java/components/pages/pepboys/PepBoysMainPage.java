@@ -13,7 +13,7 @@ public class PepBoysMainPage extends PepBoysBasePage {
 
     public void navigateMainPage() {
         getDriver().navigate().to(BASE_URL);
-        getDriver().navigate().to(BASE_URL);
+           // getDriver().navigate().to(BASE_URL);
 
 //        waitForImageLoaded(By.xpath("//img[@alt='Shop Tires']"));
 
