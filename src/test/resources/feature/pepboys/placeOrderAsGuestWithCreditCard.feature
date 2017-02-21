@@ -9,7 +9,8 @@ Feature: Some feature
     And adds it to the cart with "Ship to Home" delivery option
     And user views cart
     And chooses "Pay Online" method
-    And types billing info for "qa user" with "Ground" shipping method and "visa" card
+    And types billing info for "qa user"
+    And chooses "Ground" shipping method
+    And uses "visa" card for payment
+    Then user should be on thank you page
 
-   # And place an Order
-#    Then user should be on thank you page
