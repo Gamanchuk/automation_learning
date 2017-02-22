@@ -40,7 +40,8 @@ public class PepBoysBillingPage extends PepBoysBasePage {
         waitForElementVisible(recommendedAddressRadio);
         click(recommendedAddressRadio);
 
-        waitForSpinner();
+       // waitForSpinner();
+        waitForElementClickable(continueBtn);
         assertTrue("Incorrect user in order", isElementVisible(By.xpath("//div[@class='address-recipient' and text()='" + user.getName() + "']")));
     }
 
