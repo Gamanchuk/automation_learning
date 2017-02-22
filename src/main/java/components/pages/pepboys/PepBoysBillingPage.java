@@ -38,7 +38,8 @@ public class PepBoysBillingPage extends PepBoysBasePage {
 
         By recommendedAddressRadio = By.xpath("//div[@class='radio-list-option' and contains(., 'Use Recommended Address')]");
         waitForElementVisible(recommendedAddressRadio);
-        click(recommendedAddressRadio);
+        getDriver().findElement(recommendedAddressRadio).click();
+       // click(recommendedAddressRadio);
     }
 
     public void selectShippingMethod(String shippingMethod) {
@@ -79,7 +80,7 @@ public class PepBoysBillingPage extends PepBoysBasePage {
 
     public void checkPaymentResult() {
         By thanksMsg = By.cssSelector("span.thankmsg");
-        waitForSpinner();
+        //waitForSpinner();
         waitForElementVisible(thanksMsg);
         assertEquals(getDriver().findElement(thanksMsg).getText(), "Thank You for Your Order");
         CommonFunctions.attachScreenshot("Thank You Page");
