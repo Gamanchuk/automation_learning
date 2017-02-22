@@ -1,14 +1,13 @@
 package components.pages.pepboys;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import utils.CommonFunctions;
 import utils.TestGlobalsManager;
 import utils.pepboys.BillingUser;
 import utils.pepboys.CreditCard;
 
 import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertTrue;
-
 
 public class PepBoysBillingPage extends PepBoysBasePage {
     private By continueBtn = By.xpath("//button[text()='Continue']");
@@ -31,6 +30,7 @@ public class PepBoysBillingPage extends PepBoysBasePage {
         // Disable focus from input field. ( Fix problem on iOS)
         getDriver().findElement(By.xpath("//div[@class='address-container well'][2]")).click();
 
+        ((JavascriptExecutor)getDriver()).executeScript("window.scrollBy(0,250)", "");
         getDriver().findElement(continueBtn).click();
 
         // if tou use wrapper click - System try scroll to element. After scroll test failed
@@ -39,13 +39,10 @@ public class PepBoysBillingPage extends PepBoysBasePage {
         By recommendedAddressRadio = By.xpath("//div[@class='radio-list-option' and contains(., 'Use Recommended Address')]");
         waitForElementVisible(recommendedAddressRadio);
         click(recommendedAddressRadio);
-
-       // waitForSpinner();
-        waitForElementClickable(continueBtn);
-        assertTrue("Incorrect user in order", isElementVisible(By.xpath("//div[@class='address-recipient' and text()='" + user.getName() + "']")));
     }
 
     public void selectShippingMethod(String shippingMethod) {
+        waitForElementVisible(By.xpath("//h2[text()='Shipping Address']"));
         By shippingMethodOptionEl = By.xpath("//div[contains(text(), '" + shippingMethod + "')]");
 
         click(By.xpath("//div[contains(@class, 'radio-list') and contains(@class, 'radio-collapsed')]"));
