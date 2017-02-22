@@ -1,8 +1,9 @@
 package components.pages.pepboys;
 
 import org.openqa.selenium.By;
-import utils.CommonFunctions;
 import utils.TestGlobalsManager;
+
+import java.util.concurrent.TimeUnit;
 
 public class PepBoysProductsInCategoryPage extends PepBoysBasePage {
 
@@ -14,8 +15,8 @@ public class PepBoysProductsInCategoryPage extends PepBoysBasePage {
 
         // Getting product total price to check it in order
         By totalPriceEl = By.xpath("//span[@class='mw-total-price']//span[@class='ftPrice']");
-        waitForElementVisible(totalPriceEl);
-        float totalPrice =  Float.parseFloat(getDriver().findElement(totalPriceEl).getText());
+        getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        float totalPrice = Float.parseFloat(getDriver().findElement(totalPriceEl).getText());
         TestGlobalsManager.setTestGlobal("totalPrice", totalPrice);
     }
 

@@ -1,14 +1,14 @@
 package components.pages.pepboys;
 
 import org.openqa.selenium.By;
-import org.testng.Assert;
 import utils.CommonFunctions;
 import utils.TestGlobalsManager;
 import utils.pepboys.BillingUser;
 import utils.pepboys.CreditCard;
-import utils.pepboys.DataProvider;
 
+import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertTrue;
+
 
 public class PepBoysBillingPage extends PepBoysBasePage {
     private By continueBtn = By.xpath("//button[text()='Continue']");
@@ -27,13 +27,21 @@ public class PepBoysBillingPage extends PepBoysBasePage {
         sendKeysOneByOne(By.id("billing-tel"), user.getPhone());
 
         CommonFunctions.attachScreenshot("Billing info");
-        click(continueBtn);
+
+        // Disable focus from input field. ( Fix problem on iOS)
+        getDriver().findElement(By.xpath("//div[@class='address-container well'][2]")).click();
+
+        getDriver().findElement(continueBtn).click();
+
+        // if tou use wrapper click - System try scroll to element. After scroll test failed
+        //click(continueBtn);
 
         By recommendedAddressRadio = By.xpath("//div[@class='radio-list-option' and contains(., 'Use Recommended Address')]");
         waitForElementVisible(recommendedAddressRadio);
         click(recommendedAddressRadio);
 
-        waitForSpinner();
+       // waitForSpinner();
+        waitForElementClickable(continueBtn);
         assertTrue("Incorrect user in order", isElementVisible(By.xpath("//div[@class='address-recipient' and text()='" + user.getName() + "']")));
     }
 
@@ -61,19 +69,29 @@ public class PepBoysBillingPage extends PepBoysBasePage {
 
         String orderTotalStr = getDriver().findElement(By.xpath("//div[contains(@class, 'total-cost')]")).getText();
         float orderTotal = CommonFunctions.getCurrency(orderTotalStr);
-        float productPrice = (float)TestGlobalsManager.getTestGlobal("totalPrice");
-        float shippingPrice = (float)TestGlobalsManager.getTestGlobal("shippingPrice");
+        float productPrice = (float) TestGlobalsManager.getTestGlobal("totalPrice");
+        float shippingPrice = (float) TestGlobalsManager.getTestGlobal("shippingPrice");
 
         // TODO: ask how order total is calculated
-//        assertTrue("Incorrect order total!", productPrice + shippingPrice == orderTotal);
+        // assertTrue("Incorrect order total!", productPrice + shippingPrice == orderTotal);
         CommonFunctions.attachScreenshot("Payment details");
 
+        //getDriver().findElement(By.xpath("//div[contains(@class, 'total-cost')]")).click();
+        click(By.xpath("(//button[text()='Place Order'])[1]"));
+    }
 
-//        click(By.xpath("(//button[text()='Place Order'])[1]"));
+    public void checkPaymentResult() {
+        By thanksMsg = By.cssSelector("span.thankmsg");
+        waitForSpinner();
+        waitForElementVisible(thanksMsg);
+        assertEquals(getDriver().findElement(thanksMsg).getText(), "Thank You for Your Order");
+        CommonFunctions.attachScreenshot("Thank You Page");
     }
 
     private void waitForSpinner() {
         waitForElementVisible(By.className("spinner-container"));
         waitForElementInvisibilityOfElementLocated(By.className("spinner-container"));
     }
+
+
 }

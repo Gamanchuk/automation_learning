@@ -144,7 +144,7 @@ public abstract class Component {
         }
     }
 
-    private void scrollToElement(WebElement el) {
+    public void scrollToElement(WebElement el) {
         log.info("Scroll to element: " + el);
         Actions actions = new Actions(getDriver());
         actions.moveToElement(el);

@@ -2,12 +2,11 @@ package steps.pepboys;
 
 import components.pages.pepboys.*;
 import components.widgets.CategoriesWidget;
-import cucumber.api.PendingException;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import org.openqa.selenium.By;
 import utils.CommonFunctions;
 import utils.pepboys.DataProvider;
 
@@ -67,16 +66,25 @@ public class PepBoysMainPageSteps {
         cartPage.payUsingPaymentMethod(method);
     }
 
-    @And("^types required billing info$")
-    public void typesAllBillingInfo() throws Throwable {
-
+    @And("^types billing info for \"([^\"]*)\"$")
+    public void typesBillingInfoFor(String userName) {
+        billingPage.inputBillingInfo(DataProvider.getUser(userName));
     }
 
-
-    @And("^types billing info for \"([^\"]*)\" with \"([^\"]*)\" shipping method and \"([^\"]*)\" card$")
-    public void typesBillingInfoForWithShippingMethodAndCard(String userName, String shippingMethod, String cardName) throws Throwable {
-        billingPage.inputBillingInfo(DataProvider.getUser(userName));
+    @And("^chooses \"([^\"]*)\" shipping method$")
+    public void choosesShippingMethod(String shippingMethod) {
         billingPage.selectShippingMethod(shippingMethod);
+    }
+
+    @And("^uses \"([^\"]*)\" card for payment$")
+    public void usesCardForPayment(String cardName) {
         billingPage.inputPaymentDetails(DataProvider.getCard(cardName));
     }
+
+    @Then("^user should be on thank you page$")
+    public void userShouldBeOnThankYouPage() {
+        billingPage.checkPaymentResult();
+    }
 }
+
+
