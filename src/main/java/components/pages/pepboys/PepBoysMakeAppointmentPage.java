@@ -24,7 +24,7 @@ public class PepBoysMakeAppointmentPage extends PepBoysMainPage {
         click(By.cssSelector("button.j-chooseStore"));
         waitForElementVisible(selectLocationBtn);
 
-        waitForImageLoaded(img);
+        getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
         try {
             Thread.sleep(10000);
