@@ -5,7 +5,7 @@ import utils.retries.AbstractAllureRetryAnalyzer;
 
 public class Retry extends AbstractAllureRetryAnalyzer {
     private int MAX_RETRY_COUNT = 3;   // RETRIES number
-    private int CURRENT_RETRY_COUNT = 1;
+    private int CURRENT_RETRY_COUNT = 0;
 
     @Override
     public boolean retry(ITestResult result, boolean getRetryAbilityOnly) {
