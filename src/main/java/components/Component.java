@@ -122,6 +122,11 @@ public abstract class Component {
     }
 
     public void click(By el) {
+        if(getDriver().getPageSource().contains("Your ideas make"))
+            getDriver().findElement(By.xpath("//a[@class='acsCloseButton--link acsCloseButton acsDeclineButton']")).click();
+
+
+
         try {
             WebDriverWait wait = new WebDriverWait(driver, 30, 200);
             wait.until(ExpectedConditions.presenceOfElementLocated(el));
