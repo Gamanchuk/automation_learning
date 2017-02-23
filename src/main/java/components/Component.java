@@ -146,8 +146,13 @@ public abstract class Component {
 
     public void scrollToElement(WebElement el) {
         log.info("Scroll to element: " + el);
+        el.getLocation();
         Actions actions = new Actions(getDriver());
         actions.moveToElement(el);
         actions.perform();
+    }
+
+    public void focusOut() {
+        getDriver().findElement(By.cssSelector("body")).click();
     }
 }
