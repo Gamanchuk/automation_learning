@@ -24,10 +24,10 @@ public class PepBoysMakeAppointmentPage extends PepBoysMainPage {
         click(By.cssSelector("button.j-chooseStore"));
         waitForElementVisible(selectLocationBtn);
 
-      //  waitForImageLoaded(img);
+        waitForImageLoaded(img);
 
         try {
-            Thread.sleep(15000);
+            Thread.sleep(10000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
