@@ -9,7 +9,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.DriverFactory;
 
-import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.fail;
 
@@ -122,10 +121,9 @@ public abstract class Component {
     }
 
     public void click(By el) {
+
         if(getDriver().getPageSource().contains("Your ideas make"))
             getDriver().findElement(By.xpath("//a[@class='acsCloseButton--link acsCloseButton acsDeclineButton']")).click();
-
-
 
         try {
             WebDriverWait wait = new WebDriverWait(driver, 30, 200);
