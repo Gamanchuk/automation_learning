@@ -49,10 +49,11 @@ public class PepBoysBillingPage extends PepBoysBasePage {
         click(shippingMethodOptionEl);
 
         // Getting shipping method price to recheck in order
-        String option = getDriver().findElement(shippingMethodOptionEl).getText();
-        float shippingPrice = CommonFunctions.getCurrency(option);
-        TestGlobalsManager.setTestGlobal("shippingPrice", shippingPrice);
+//        String option = getDriver().findElement(shippingMethodOptionEl).getText();
+//        float shippingPrice = CommonFunctions.getCurrency(option);
+//        TestGlobalsManager.setTestGlobal("shippingPrice", shippingPrice);
 
+        focusOut();
         CommonFunctions.attachScreenshot("Shipping method");
         click(continueBtn);
     }
@@ -64,16 +65,17 @@ public class PepBoysBillingPage extends PepBoysBasePage {
         getDriver().findElement(By.id("cc-exp")).sendKeys(card.getExpDate());
         getDriver().findElement(By.id("cc-csc")).sendKeys(card.getCvv());
 
-        String orderTotalStr = getDriver().findElement(By.xpath("//div[contains(@class, 'total-cost')]")).getText();
-        float orderTotal = CommonFunctions.getCurrency(orderTotalStr);
-        float productPrice = (float) TestGlobalsManager.getTestGlobal("totalPrice");
-        float shippingPrice = (float) TestGlobalsManager.getTestGlobal("shippingPrice");
+//        String orderTotalStr = getDriver().findElement(By.xpath("//div[contains(@class, 'total-cost')]")).getText();
+//        float orderTotal = CommonFunctions.getCurrency(orderTotalStr);
+//        float productPrice = (float) TestGlobalsManager.getTestGlobal("totalPrice");
+//        float shippingPrice = (float) TestGlobalsManager.getTestGlobal("shippingPrice");
 
         // TODO: ask how order total is calculated
         // assertTrue("Incorrect order total!", productPrice + shippingPrice == orderTotal);
         CommonFunctions.attachScreenshot("Payment details");
 
         //getDriver().findElement(By.xpath("//div[contains(@class, 'total-cost')]")).click();
+        focusOut();
         click(By.xpath("(//button[text()='Place Order'])[1]"));
     }
 

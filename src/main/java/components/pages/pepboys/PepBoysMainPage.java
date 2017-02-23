@@ -12,8 +12,8 @@ public class PepBoysMainPage extends PepBoysBasePage {
     }
 
     public void navigateMainPage() {
-        getDriver().navigate().to(BASE_URL);
-        getDriver().navigate().to(BASE_URL);
+        getDriver().navigate().to(START_URL);
+        getDriver().navigate().to(START_URL);
 
 //        waitForImageLoaded(By.xpath("//img[@alt='Shop Tires']"));
 
@@ -27,6 +27,11 @@ public class PepBoysMainPage extends PepBoysBasePage {
     public void openMakeAppointment() {
         click(By.xpath("//a[text()='Make Appointment']"));
         waitForElementPresence(By.cssSelector("button.locationBtn"));
+    }
+
+    public void openProductPage(String productId) {
+        getDriver().navigate().to(BASE_URL + "product/details/" + productId);
+        waitForElementVisible(By.xpath("//div[@class='mw-note-value' and text()='8536851']"));
     }
 
 //    private String itemId = null;

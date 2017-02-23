@@ -24,6 +24,15 @@ public class PepBoysMakeAppointmentPage extends PepBoysMainPage {
         click(By.cssSelector("button.j-chooseStore"));
         waitForElementVisible(selectLocationBtn);
 
-        getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        waitForImageLoaded(img);
+
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+//        getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+//        getDriver().manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+
     }
 }

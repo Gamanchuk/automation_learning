@@ -2,6 +2,7 @@ package steps.pepboys;
 
 import components.pages.pepboys.*;
 import components.widgets.CategoriesWidget;
+import cucumber.api.PendingException;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -24,14 +25,14 @@ public class PepBoysMainPageSteps {
 
     private CategoriesWidget categoriesWidget = new CategoriesWidget();
 
-    @Before
-    public void makeAppointment() {
+    @Given("^user makes appoint with zip-code \"([^\"]*)\"$")
+    public void makeAppointment(String zipCode) {
         mainPage.navigateMainPage();
         mainPage.openMakeAppointment();
-        makeAppointmentPage.selectDifferentLocation("94105");
+        makeAppointmentPage.selectDifferentLocation(zipCode);
     }
 
-    @Given("user is on main page")
+    @Given("^user is on main page$")
     public void userIsOnMainPage() {
         mainPage.navigateMainPage();
         assertTrue(mainPage.isPageLoaded(), "Main page was not loaded");
@@ -66,7 +67,7 @@ public class PepBoysMainPageSteps {
         cartPage.payUsingPaymentMethod(method);
     }
 
-    @And("^types billing info for \"([^\"]*)\"$")
+    @And("^user types billing info for \"([^\"]*)\"$")
     public void typesBillingInfoFor(String userName) {
         billingPage.inputBillingInfo(DataProvider.getUser(userName));
     }
@@ -84,6 +85,16 @@ public class PepBoysMainPageSteps {
     @Then("^user should be on thank you page$")
     public void userShouldBeOnThankYouPage() {
         billingPage.checkPaymentResult();
+    }
+
+
+    @And("^user add to cart product with id \"([^\"]*)\" with \"([^\"]*)\" delivery option$")
+    public void userAddToCartProductWithIdWithDeliveryOption(String id, String deliveryOption) throws Throwable {
+        mainPage.openProductPage(id);
+        productPage.setDeliveryOption(deliveryOption);
+        productPage.addToCart();
+        assertTrue(productPage.isInfoDialogOpened(), "Info dialog about adding item to cart was not displayed");
+        CommonFunctions.attachScreenshot("Info dialog about adding item to cart was opened");
     }
 }
 
