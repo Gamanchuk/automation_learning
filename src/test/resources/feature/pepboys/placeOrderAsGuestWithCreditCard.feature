@@ -8,7 +8,7 @@ Feature: Some feature
 #    And user views cart
 #    And chooses "Pay Online" method
 
-  @TestCaseId("15851")
+  @TestCaseId("59329")
   Scenario: Place Order as a "Guest" with Credit Card
     # TODO: move it to the background
     Given user makes appoint with zip-code "94105"
