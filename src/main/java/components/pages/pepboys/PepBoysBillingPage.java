@@ -74,8 +74,8 @@ public class PepBoysBillingPage extends PepBoysBasePage {
         // assertTrue("Incorrect order total!", productPrice + shippingPrice == orderTotal);
         CommonFunctions.attachScreenshot("Payment details");
 
-        //getDriver().findElement(By.xpath("//div[contains(@class, 'total-cost')]")).click();
-        click(By.xpath("(//button[text()='Place Order'])[1]"));
+        getDriver().findElement(By.xpath("//div[contains(@class, 'total-cost')]")).click();
+        getDriver().findElement(By.xpath("//button[text()='Place Order'])[1]")).click();
     }
 
     public void checkPaymentResult() {
