@@ -30,7 +30,7 @@ public class PepBoysBillingPage extends PepBoysBasePage {
         // Disable focus from input field. ( Fix problem on iOS)
         getDriver().findElement(By.xpath("//div[@class='address-container well'][2]")).click();
 
-        ((JavascriptExecutor)getDriver()).executeScript("window.scrollBy(0,250)", "");
+        ((JavascriptExecutor) getDriver()).executeScript("window.scrollBy(0,250)", "");
         getDriver().findElement(continueBtn).click();
 
         // if tou use wrapper click - System try scroll to element. After scroll test failed
@@ -39,7 +39,7 @@ public class PepBoysBillingPage extends PepBoysBasePage {
         By recommendedAddressRadio = By.xpath("//div[@class='radio-list-option' and contains(., 'Use Recommended Address')]");
         waitForElementVisible(recommendedAddressRadio);
         getDriver().findElement(recommendedAddressRadio).click();
-       // click(recommendedAddressRadio);
+        // click(recommendedAddressRadio);
     }
 
     public void selectShippingMethod(String shippingMethod) {
@@ -75,7 +75,12 @@ public class PepBoysBillingPage extends PepBoysBasePage {
         CommonFunctions.attachScreenshot("Payment details");
 
         getDriver().findElement(By.xpath("//div[contains(@class, 'total-cost')]")).click();
-        getDriver().findElement(By.xpath("//button[text()='Place Order'])[1]")).click();
+
+        // TODO: investigate problem with path 'Place Order' button
+        getDriver().findElement(By.xpath("//div[@class='order-review-container']/div[@class='place-order-button well']/div[@class='component submit-button']/button[@class='main-button']")).click();
+        //getDriver().findElement(By.xpath("//button[text()='Place Order'])[1]")).click();
+        //click(By.xpath("//button[text()='Place Order'])[1]"));
+
     }
 
     public void checkPaymentResult() {
