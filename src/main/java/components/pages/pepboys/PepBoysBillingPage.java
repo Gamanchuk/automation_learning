@@ -3,7 +3,6 @@ package components.pages.pepboys;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import utils.CommonFunctions;
-import utils.TestGlobalsManager;
 import utils.pepboys.BillingUser;
 import utils.pepboys.CreditCard;
 
@@ -80,11 +79,12 @@ public class PepBoysBillingPage extends PepBoysBasePage {
         // TODO: investigate problem with path 'Place Order' button
         focusOut();
         getDriver().findElement(By.xpath("//div[@class='order-review-container']/div[@class='place-order-button well']/div[@class='component submit-button']/button[@class='main-button']")).click();
+
         //getDriver().findElement(By.xpath("//button[text()='Place Order'])[1]")).click();
         //click(By.xpath("//button[text()='Place Order'])[1]"));
 
         //getDriver().findElement(By.xpath("//div[contains(@class, 'total-cost')]")).click();
-//        click(By.xpath("(//button[text()='Place Order'])[1]"));
+        //click(By.xpath("(//button[text()='Place Order'])[1]"));
     }
 
     public void checkPaymentResult() {

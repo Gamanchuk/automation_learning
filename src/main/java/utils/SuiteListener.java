@@ -29,6 +29,6 @@ public class SuiteListener implements ISuiteListener {
 
     @Override
     public void onFinish(ISuite iSuite) {
-
+        DriverFactory.quitDriver();
     }
 }
