@@ -45,8 +45,10 @@ public class PepBoysBillingPage extends PepBoysBasePage {
         waitForElementVisible(By.xpath("//h2[text()='Shipping Address']"));
         By shippingMethodOptionEl = By.xpath("//div[contains(text(), '" + shippingMethod + "')]");
 
-        click(By.xpath("//div[contains(@class, 'radio-list') and contains(@class, 'radio-collapsed')]"));
-        click(shippingMethodOptionEl);
+        if(!isElementPresent(shippingMethodOptionEl)){
+            click(By.xpath("//div[contains(@class, 'radio-list') and contains(@class, 'radio-collapsed')]"));
+            click(shippingMethodOptionEl);
+        }
 
         // Getting shipping method price to recheck in order
 //        String option = getDriver().findElement(shippingMethodOptionEl).getText();
@@ -77,7 +79,7 @@ public class PepBoysBillingPage extends PepBoysBasePage {
         getDriver().findElement(By.xpath("//div[contains(@class, 'total-cost')]")).click();
 
         // TODO: investigate problem with path 'Place Order' button
-       // focusOut();
+        // focusOut();
         getDriver().findElement(By.xpath("//div[@class='order-review-container']/div[@class='place-order-button well']/div[@class='component submit-button']/button[@class='main-button']")).click();
 
         //getDriver().findElement(By.xpath("//button[text()='Place Order'])[1]")).click();
