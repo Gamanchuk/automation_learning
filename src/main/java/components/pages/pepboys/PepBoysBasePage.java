@@ -11,8 +11,9 @@ import static org.testng.Assert.assertTrue;
 
 public abstract class PepBoysBasePage extends Component {
     public final String BASE_URL = "http://mstage.stage.pepboys.com/";
-    public final String START_URL = BASE_URL + "?_mwexperienceid=75b123b0-6444-4893-9825-1303473bc59f";
-
+    public final String COOKIES = "?_mwexperienceid=75b123b0-6444-4893-9825-1303473bc59f";
+    public final String STORE_PATH = "eserve/appointment";
+    public final String START_URL = BASE_URL + COOKIES;
 //    private String itemId = null;
 //
 //    private By searchBox = By.id("search-site");
