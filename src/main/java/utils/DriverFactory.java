@@ -6,6 +6,9 @@ import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import io.appium.java_client.service.local.flags.GeneralServerFlag;
 import io.appium.java_client.service.local.flags.IOSServerFlag;
+import org.apache.commons.exec.CommandLine;
+import org.apache.commons.exec.DefaultExecuteResultHandler;
+import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
@@ -62,7 +65,7 @@ public class DriverFactory {
                 desiredCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, deviceName);
                 desiredCapabilities.setCapability(MobileCapabilityType.UDID, deviceUdid);
                 desiredCapabilities.setCapability(MobileCapabilityType.TAKES_SCREENSHOT, "true");
-                desiredCapabilities.setCapability("autoAcceptAlerts",true);
+                desiredCapabilities.setCapability("safariAllowPopups", true);
 
                 if (Config.PLATFORM_NAME.equals("iOS")) {
                     desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
@@ -86,12 +89,19 @@ public class DriverFactory {
         return driver;
     }
 
+    /**
+     * Appium is an open source, cross-platform test automation tool for native, hybrid and mobile web apps,
+     * tested on simulators (iOS), emulators (Android), and real devices (iOS, Android, Windows).
+     * Function serves for creating appium service
+     */
     private static void startAppiumService() {
         if (service == null) {
 
             int appiumPort = Integer.parseInt(Config.APPIUM_PORT);
-            String proxyPort = Config.PROXY_PORT;
+            int proxyPort = Integer.parseInt(Config.PROXY_PORT);
 
+
+            iOSProxyRunner(proxyPort);
             killAppiumServer(appiumPort);
 
             log.info("");
@@ -103,7 +113,7 @@ public class DriverFactory {
             AppiumServiceBuilder serviceBuilder = new AppiumServiceBuilder();
             serviceBuilder.usingPort(appiumPort);
             if (Config.PLATFORM_NAME.equals("iOS")) {
-                serviceBuilder.withArgument(IOSServerFlag.WEBKIT_DEBUG_PROXY_PORT, proxyPort);
+                serviceBuilder.withArgument(IOSServerFlag.WEBKIT_DEBUG_PROXY_PORT, String.valueOf(proxyPort));
                 // serviceBuilder.withArgument(GeneralServerFlag.LOG_LEVEL, "warn");
                 serviceBuilder.withArgument(GeneralServerFlag.SESSION_OVERRIDE);
             }
@@ -116,29 +126,12 @@ public class DriverFactory {
         }
     }
 
-    public static void quitDriver() {
-
-        log.info("DELETE DRIVER");
-
-        driver.quit();
-        if (service != null) {
-            log.info("DELETE APPIUM");
-            service.stop();
-        }
-    }
-
-    public static void deleteAllCookies() {
-        driver.manage().deleteAllCookies();
-
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
+    /**
+     * Function serves for deleting process appium
+     *
+     * @param port for communication with device
+     */
     private static void killAppiumServer(int port) {
-
         try {
             log.info("Look for the launched appium server on port: " + port);
             ProcessResult processResult = new ProcessExecutor().command("lsof", "-ti", "tcp:" + port)
@@ -166,6 +159,85 @@ public class DriverFactory {
         } catch (IOException | InterruptedException | TimeoutException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * The ios_webkit_debug_proxy (aka iwdp) proxies requests from usbmuxd daemon over a websocket connection,
+     * allowing developers to send commands to MobileSafari and UIWebViews on real and simulated iOS devices.
+     *
+     * @param port for communication with "proxy"
+     */
+    private static void iOSProxyRunner(int port) {
+        if (Config.PLATFORM_NAME.equals("iOS")) {
+
+            killiOSProxy(port);
+
+            CommandLine iOSProxyCommand = new CommandLine("ios_webkit_debug_proxy");
+            iOSProxyCommand.addArgument("-c");
+            iOSProxyCommand.addArgument(Config.DEVICE_UID + ":" + port);
+            iOSProxyCommand.addArgument("-F");
+
+            DefaultExecuteResultHandler executeResultHandler = new DefaultExecuteResultHandler();
+            DefaultExecutor executor = new DefaultExecutor();
+            executor.setExitValue(1);
+
+            try {
+                executor.execute(iOSProxyCommand, executeResultHandler);
+                Thread.sleep(5000);
+                log.info("iOS Proxy started.");
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * Function serves for deleting process ios_webkit_debug_proxy
+     *
+     * @param port for communication with "proxy"
+     */
+    private static void killiOSProxy(int port) {
+        log.info("Look for the launched iOS proxy on port: " + port);
+        try {
+            ProcessResult processResult = new ProcessExecutor().command("lsof", "-ti", "tcp:" + port)
+                    .readOutput(true).execute();
+
+            if (processResult.getExitValue() == 0) {
+                log.info("Killing iOS Proxy");
+
+                Pattern pattern = Pattern.compile("[0-9]+");
+                Matcher matcher = pattern.matcher(processResult.outputUTF8());
+                matcher.find();
+
+                int PID = Integer.parseInt(matcher.group(0));
+                log.info("Found PID iOS Proxy: " + PID);
+
+                PidProcess process = Processes.newPidProcess(PID);
+                process.destroyGracefully();
+
+                log.info("iOS Proxy killed");
+            } else {
+                log.info("Port: " + port + " is free");
+            }
+
+        } catch (IOException | InterruptedException | TimeoutException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void quitDriver() {
+
+        log.info("DELETE DRIVER");
+
+        driver.quit();
+        if (service != null) {
+            log.info("DELETE APPIUM");
+            service.stop();
+        }
+    }
+
+    //TODO: add functionality delete cookies
+    public static void deleteAllCookies() {
     }
 
 
