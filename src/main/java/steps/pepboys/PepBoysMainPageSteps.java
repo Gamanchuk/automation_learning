@@ -25,7 +25,8 @@ public class PepBoysMainPageSteps {
 
     @Given("^user makes appoint with code \"([^\"]*)\"$")
     public void userMakesAppointWithCode(String code) {
-        makeAppointmentPage.navigateWithCookies();
+        makeAppointmentPage.openPage();
+        assertTrue(makeAppointmentPage.isPage(), "Appointment page was not opened");
         makeAppointmentPage.selectDifferentLocation(code);
         CommonFunctions.attachScreenshot("Store: " + code + " selected");
     }

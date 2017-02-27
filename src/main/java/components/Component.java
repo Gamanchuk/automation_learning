@@ -154,6 +154,17 @@ public abstract class Component {
         actions.perform();
     }
 
+    public void navigate(String url) {
+        getDriver().navigate().to(url);
+        waitForAjax();
+    }
+
+    public void navigateWithCookies(String url, String cookies) {
+        getDriver().navigate().to(url + cookies);
+        waitForAjax();
+    }
+
+
     protected void waitForAjax() {
         new WebDriverWait(driver, TIMEOUT_SECONDS).until(new ExpectedCondition<Boolean>() {
             public Boolean apply(WebDriver driver) {
@@ -171,7 +182,7 @@ public abstract class Component {
         });
     }
 
-    protected void waitForJavascript() {
+    protected void waitForDocumentReady() {
         new WebDriverWait(driver, TIMEOUT_SECONDS).until(new ExpectedCondition<Boolean>() {
             public Boolean apply(WebDriver driver) {
                 JavascriptExecutor js = (JavascriptExecutor) driver;

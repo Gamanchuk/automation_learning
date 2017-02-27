@@ -1,29 +1,21 @@
 package components.pages.pepboys;
 
 import org.openqa.selenium.By;
-import utils.CommonFunctions;
 
 public class PepBoysMakeAppointmentPage extends PepBoysMainPage {
+    public final String STORE_PATH = "eserve/appointment";
+
     private By img = By.cssSelector("img.storeButtonImage");
     private By selectLocationBtn = By.cssSelector("button.locationBtn");
 
 
     public boolean isPage() {
         waitForAttributeVisible(img, "src", "https://static.pepboys.com/images/eServe2.0/Location-Selector-Button-Icon-14x20.gif");
-        waitForAjax();
         return true;
     }
 
-    public void navigate() {
-        getDriver().navigate().to(BASE_URL + STORE_PATH);
-        waitForAjax();
-        isPage();
-    }
-
-    public void navigateWithCookies() {
-        getDriver().navigate().to(BASE_URL + STORE_PATH + COOKIES);
-        waitForAjax();
-        isPage();
+    public void openPage() {
+        navigateWithCookies(BASE_URL + STORE_PATH, COOKIES);
     }
 
     public void selectDifferentLocation(String locationZipCode) {

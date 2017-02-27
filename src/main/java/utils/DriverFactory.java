@@ -183,7 +183,7 @@ public class DriverFactory {
 
             try {
                 executor.execute(iOSProxyCommand, executeResultHandler);
-                Thread.sleep(5000);
+                Thread.sleep(3000);
                 log.info("iOS Proxy started.");
             } catch (IOException | InterruptedException e) {
                 e.printStackTrace();

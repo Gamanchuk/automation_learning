@@ -10,7 +10,6 @@ Feature: Some feature
 
   @TestCaseId("16247")
   Scenario: Place Order as a "Guest" with Credit Card
-    # TODO: move it to the background
     Given user types billing info for "qa user"
     And chooses "Ground" shipping method
     And uses "visa" card for payment
