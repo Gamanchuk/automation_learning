@@ -14,7 +14,7 @@ import java.io.IOException;
 
 import static utils.CommonFunctions.attachScreenshot;
 
-public class AllureReporterExt extends AllureReporter {
+public class AllureReporterExt extends AllureReporter  {
     private static Log log = LogFactory.getLog(DriverFactory.class);
     private Scenario scenario;
     private Background background;
