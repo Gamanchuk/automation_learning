@@ -5,13 +5,23 @@ import org.openqa.selenium.By;
 import static org.testng.Assert.assertTrue;
 
 public class PepBoysProductPage extends PepBoysBasePage {
+    private String productId;
+
+    public boolean isPage() {
+        waitForElementVisible(By.xpath("//div[@class='mw-note-value' and text()='" + productId + "']"));
+        return true;
+    }
+
+    public void openProductPage(String productId) {
+        this.productId = productId;
+        getDriver().navigate().to(BASE_URL + "product/details/" + productId);
+
+    }
 
     public void setDeliveryOption(String deliveryOption) {
         By option = By.xpath("//label[contains(., '" + deliveryOption + "')]");
-//        waitForElementClickable(option);
         click(option);
     }
-
 
     public void addToCart() {
         click(By.xpath("//button[text()='Add to cart']"));
