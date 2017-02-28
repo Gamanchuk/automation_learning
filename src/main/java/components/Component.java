@@ -9,7 +9,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.DriverFactory;
 
-
 import static org.junit.Assert.fail;
 
 public abstract class Component {
@@ -102,7 +101,7 @@ public abstract class Component {
                 .until(new ExpectedCondition<Boolean>() {
                            @Override
                            public Boolean apply(WebDriver webDriver) {
-                               Object result = ((JavascriptExecutor)driver).executeScript("return (typeof arguments[0].naturalWidth!=\"undefined\" && arguments[0].naturalWidth>0)", driver.findElement(image));
+                               Object result = ((JavascriptExecutor) driver).executeScript("return (typeof arguments[0].naturalWidth!=\"undefined\" && arguments[0].naturalWidth>0)", driver.findElement(image));
                                return (Boolean) result;
                            }
                        }
@@ -122,7 +121,7 @@ public abstract class Component {
 
     public void click(By el) {
 
-        if(getDriver().getPageSource().contains("Your ideas make"))
+        if (getDriver().getPageSource().contains("Your ideas make"))
             getDriver().findElement(By.xpath("//a[@class='acsCloseButton--link acsCloseButton acsDeclineButton']")).click();
 
         try {
@@ -142,7 +141,7 @@ public abstract class Component {
     }
 
     public void sendKeysOneByOne(By el, String str) {
-        for(char ch : str.toCharArray()) {
+        for (char ch : str.toCharArray()) {
             getDriver().findElement(el).sendKeys(ch + "");
         }
     }
@@ -153,6 +152,45 @@ public abstract class Component {
         Actions actions = new Actions(getDriver());
         actions.moveToElement(el);
         actions.perform();
+    }
+
+    public void navigate(String url) {
+        getDriver().navigate().to(url);
+        waitForAjax();
+    }
+
+    public void navigateWithCookies(String url, String cookies) {
+        getDriver().navigate().to(url + cookies);
+        waitForAjax();
+    }
+
+
+    protected void waitForAjax() {
+        new WebDriverWait(driver, TIMEOUT_SECONDS).until(new ExpectedCondition<Boolean>() {
+            public Boolean apply(WebDriver driver) {
+                boolean result = false;
+                try {
+                    JavascriptExecutor js = (JavascriptExecutor) driver;
+                    result = (Boolean) js.executeScript("return jQuery.active === 0");
+                    log.info("jQuery not active: " + result);
+                } catch (JavascriptException js) {
+                    return false;
+                }
+
+                return result;
+            }
+        });
+    }
+
+    protected void waitForDocumentReady() {
+        new WebDriverWait(driver, TIMEOUT_SECONDS).until(new ExpectedCondition<Boolean>() {
+            public Boolean apply(WebDriver driver) {
+                JavascriptExecutor js = (JavascriptExecutor) driver;
+                boolean result = (Boolean) js.executeScript("return document.readyState").toString().equals("complete");
+                log.info("document.readyState: " + result);
+                return result;
+            }
+        });
     }
 
     public void focusOut() {

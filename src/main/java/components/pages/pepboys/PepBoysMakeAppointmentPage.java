@@ -2,37 +2,35 @@ package components.pages.pepboys;
 
 import org.openqa.selenium.By;
 
-import java.util.concurrent.TimeUnit;
-
 public class PepBoysMakeAppointmentPage extends PepBoysMainPage {
+    public final String STORE_PATH = "eserve/appointment";
+
+    private By img = By.cssSelector("img.storeButtonImage");
+    private By selectLocationBtn = By.cssSelector("button.locationBtn");
+
+
+    public boolean isPage() {
+        waitForAttributeVisible(img, "src", "https://static.pepboys.com/images/eServe2.0/Location-Selector-Button-Icon-14x20.gif");
+        return true;
+    }
+
+    public void openPage() {
+        navigateWithCookies(BASE_URL + STORE_PATH, COOKIES);
+    }
 
     public void selectDifferentLocation(String locationZipCode) {
-        By selectLocationBtn = By.cssSelector("button.locationBtn");
-        By img = By.cssSelector("img.storeButtonImage");
         By zipCodeField = By.id("zipCode");
 
-        waitForAttributeVisible(img,"src","https://static.pepboys.com/images/eServe2.0/Location-Selector-Button-Icon-14x20.gif");
-
-       // waitForImageLoaded(By.cssSelector("img.storeButtonImage"));
-        click(selectLocationBtn);
+        focusOut();
+        getDriver().findElement(selectLocationBtn).click();
         waitForElementVisible(zipCodeField);
+        waitForAjax();
 
         getDriver().findElement(zipCodeField).sendKeys(locationZipCode);
-        click(By.cssSelector("button.j-findStores"));
-        waitForElementVisible(By.xpath("//div[contains(text(), 'store near " + locationZipCode + "')]"));
+        getDriver().findElement(By.cssSelector("button.j-findStores")).click();
+        waitForAjax();
 
-        click(By.cssSelector("button.j-chooseStore"));
-        waitForElementVisible(selectLocationBtn);
-
-        getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
-        try {
-            Thread.sleep(10000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-//        getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-//        getDriver().manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-
+        getDriver().findElement(By.cssSelector("button.j-chooseStore")).click();
+        waitForAjax();
     }
 }

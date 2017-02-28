@@ -23,6 +23,15 @@ public class PepBoysMainPageSteps {
 
     private CategoriesWidget categoriesWidget = new CategoriesWidget();
 
+    @Given("^user makes appoint with code \"([^\"]*)\"$")
+    public void userMakesAppointWithCode(String code) {
+        makeAppointmentPage.openPage();
+        assertTrue(makeAppointmentPage.isPage(), "Appointment page was not opened");
+        makeAppointmentPage.selectDifferentLocation(code);
+        CommonFunctions.attachScreenshot("Store: " + code + " selected");
+    }
+
+    @Deprecated
     @Given("^user makes appoint with zip-code \"([^\"]*)\"$")
     public void makeAppointment(String zipCode) {
         mainPage.navigateMainPage();
@@ -94,6 +103,8 @@ public class PepBoysMainPageSteps {
         assertTrue(productPage.isInfoDialogOpened(), "Info dialog about adding item to cart was not displayed");
         CommonFunctions.attachScreenshot("Info dialog about adding item to cart was opened");
     }
+
+
 }
 
 
