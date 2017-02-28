@@ -46,7 +46,7 @@ public class PepBoysBillingPage extends PepBoysBasePage {
             click(shippingMethodOptionEl);
         }
 
-        // Getting shipping method price to recheck in order
+        //TODO: Getting shipping method price to recheck in order
 //        String option = getDriver().findElement(shippingMethodOptionEl).getText();
 //        float shippingPrice = CommonFunctions.getCurrency(option);
 //        TestGlobalsManager.setTestGlobal("shippingPrice", shippingPrice);
