@@ -9,7 +9,7 @@ import utils.pepboys.BillingUser;
 public class PayPalLoginPage extends Component {
 
     public void doLogin(BillingUser user) {
-        waitForAjax();
+
         switchToIframe("injectedUl");
 
         By logInButton = By.id("btnLogin");
