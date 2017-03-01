@@ -8,9 +8,11 @@ public class BillingUser {
     private String email;
     private String cityInfo;
     private String password;
+    private String paypalEmail;
+    private String paypalPassword;
 
 
-    public BillingUser(String name, String address, String appartment, String phone, String email, String cityInfo, String password) {
+    public BillingUser(String name, String address, String appartment, String phone, String email, String cityInfo, String password, String paypalEmail, String paypalPassword) {
         this.name = name;
         this.address = address;
         this.apartment = appartment;
@@ -18,6 +20,8 @@ public class BillingUser {
         this.email = email;
         this.cityInfo = cityInfo;
         this.password = password;
+        this.paypalEmail = paypalEmail;
+        this.paypalPassword = paypalPassword;
     }
 
     public String getName() {
@@ -46,5 +50,13 @@ public class BillingUser {
 
     public String getPassword() {
         return password;
+    }
+
+    public String getPaypalEmail() {
+        return paypalEmail;
+    }
+
+    public String getPaypalPassword() {
+        return paypalPassword;
     }
 }

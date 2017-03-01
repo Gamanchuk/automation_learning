@@ -10,6 +10,7 @@ import static org.testng.AssertJUnit.assertEquals;
 
 public class PepBoysBillingPage extends PepBoysBasePage {
     private By continueBtn = By.xpath("//button[text()='Continue']");
+    private By placeOrderBtn = By.xpath("//div[@class='order-review-container']/div[@class='place-order-button well']/div[@class='component submit-button']/button[@class='main-button']");
 
     public void inputBillingInfo(BillingUser user) {
         getDriver().findElement(By.id("billing-name")).sendKeys(user.getName());
@@ -41,7 +42,7 @@ public class PepBoysBillingPage extends PepBoysBasePage {
         waitForElementVisible(By.xpath("//h2[text()='Shipping Address']"));
         By shippingMethodOptionEl = By.xpath("//div[contains(text(), '" + shippingMethod + "')]");
 
-        if(!isElementPresent(shippingMethodOptionEl)){
+        if (!isElementPresent(shippingMethodOptionEl)) {
             click(By.xpath("//div[contains(@class, 'radio-list') and contains(@class, 'radio-collapsed')]"));
             click(shippingMethodOptionEl);
         }
@@ -65,8 +66,14 @@ public class PepBoysBillingPage extends PepBoysBasePage {
 
         CommonFunctions.attachScreenshot("Payment details");
 
+        this.confirmsPurchase();
+    }
+
+    public void confirmsPurchase() {
+        waitForElementClickable(placeOrderBtn);
         getDriver().findElement(By.xpath("//div[contains(@class, 'total-cost')]")).click();
-        getDriver().findElement(By.xpath("//div[@class='order-review-container']/div[@class='place-order-button well']/div[@class='component submit-button']/button[@class='main-button']")).click();
+        CommonFunctions.attachScreenshot("Confirms");
+        getDriver().findElement(placeOrderBtn).click();
     }
 
     public void checkPaymentResult() {

@@ -162,7 +162,7 @@ public abstract class Component {
     public void navigateWithCookies(String url, String cookies) {
         getDriver().navigate().to(url + cookies);
         waitForRedirect(url + cookies);
-        waitForAjax();
+       // waitForAjax();
     }
 
 
@@ -209,5 +209,16 @@ public abstract class Component {
 
     public void focusOut() {
         getDriver().findElement(By.cssSelector("body")).click();
+    }
+
+    public void switchToIframe(String iframeName){
+        waitForElementVisible(By.name(iframeName));
+        driver.switchTo().frame(iframeName);
+
+    }
+    public void switchToDefaultIframe(){
+
+        driver.switchTo().defaultContent();
+
     }
 }
