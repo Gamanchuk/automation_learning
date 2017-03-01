@@ -8,7 +8,8 @@ public class DataProvider {
             "10th floor",
             "4152011234",
             "qa@moovweb.com",
-            "San Francisco CA 94105"
+            "San Francisco CA 94105",
+            "Spear201!"
     );
 
     // Cards

@@ -3,18 +3,21 @@ package utils.pepboys;
 public class BillingUser {
     private String name;
     private String address;
-    private String appartment;
+    private String apartment;
     private String phone;
     private String email;
     private String cityInfo;
+    private String password;
 
-    public BillingUser(String name, String address, String appartment, String phone, String email, String cityInfo) {
+
+    public BillingUser(String name, String address, String appartment, String phone, String email, String cityInfo, String password) {
         this.name = name;
         this.address = address;
-        this.appartment = appartment;
+        this.apartment = appartment;
         this.phone = phone;
         this.email = email;
         this.cityInfo = cityInfo;
+        this.password = password;
     }
 
     public String getName() {
@@ -25,8 +28,8 @@ public class BillingUser {
         return address;
     }
 
-    public String getAppartment() {
-        return appartment;
+    public String getApartment() {
+        return apartment;
     }
 
     public String getPhone() {
@@ -39,5 +42,9 @@ public class BillingUser {
 
     public String getCityInfo() {
         return cityInfo;
+    }
+
+    public String getPassword() {
+        return password;
     }
 }
