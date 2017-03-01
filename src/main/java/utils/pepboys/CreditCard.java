@@ -4,11 +4,13 @@ public class CreditCard {
     private String number;
     private String expDate;
     private String cvv;
+    private String cardholderName;
 
-    public CreditCard(String number, String expDate, String cvv) {
+    public CreditCard(String number, String expDate, String cvv, String cardholderName) {
         this.number = number;
         this.expDate = expDate;
         this.cvv = cvv;
+        this.cardholderName = cardholderName;
     }
 
     public String getNumber() {
@@ -21,5 +23,9 @@ public class CreditCard {
 
     public String getCvv() {
         return cvv;
+    }
+
+    public String getCardholderName() {
+        return cardholderName;
     }
 }
