@@ -10,8 +10,8 @@ Feature: Some feature
 
   @TestCaseId("16248")
   Scenario: Place Order as a "Guest" with Credit Card
-    Given user make authorisation for "qa user"
-    And apply billing info for address "201 SPEAR ST"
+    Given user makes authorisation for "qa user"
+    And applies billing info for address "201 SPEAR ST"
     And chooses "Ground" shipping method
     And uses "visa" card for payment
     Then user should be on thank you page

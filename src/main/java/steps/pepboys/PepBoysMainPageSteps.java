@@ -90,13 +90,13 @@ public class PepBoysMainPageSteps {
     }
 
 
-    @Given("^user make authorisation for \"([^\"]*)\"$")
-    public void userMakeAuthorisationFor(String userName) {
+    @Given("^user makes authorisation for \"([^\"]*)\"$")
+    public void userMakesAuthorisationFor(String userName) {
         billingPage.doLogin(DataProvider.getUser(userName));
     }
 
-    @And("^apply billing info for address \"([^\"]*)\"$")
-    public void applyBillingInfo(String address) {
+    @And("^applies billing info for address \"([^\"]*)\"$")
+    public void appliesBillingInfo(String address) {
         billingPage.applyBillingInfo(address);
 
     }
