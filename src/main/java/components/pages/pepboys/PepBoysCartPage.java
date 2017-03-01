@@ -11,7 +11,6 @@ public class PepBoysCartPage extends PepBoysBasePage {
             click(By.id("j-payPalCheckout"));
         }
 
-
         CommonFunctions.attachScreenshot("Payment method");
         waitForElementVisible(By.xpath("//button[text()='Continue']"));
         waitForElementClickable(By.xpath("//button[text()='Continue']"));

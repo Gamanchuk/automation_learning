@@ -18,7 +18,7 @@ public class PepBoysBillingPage extends PepBoysBasePage {
         click(By.xpath("(//div[contains(., '" + user.getCityInfo() + "')]/../input[@name='addresses'])[1]"));
 
         waitForElementVisible(By.id("billing-address-line2"));
-        getDriver().findElement(By.id("billing-address-line2")).sendKeys(user.getAppartment());
+        getDriver().findElement(By.id("billing-address-line2")).sendKeys(user.getApartment());
         getDriver().findElement(By.id("billing-email")).sendKeys(user.getEmail());
 
         // Need to send phone number digit by digit

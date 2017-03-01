@@ -13,7 +13,6 @@ import static org.testng.Assert.assertTrue;
 
 public class PepBoysMainPageSteps {
 
-    private PepBoysMainPage mainPage = new PepBoysMainPage();
     private PepBoysMakeAppointmentPage makeAppointmentPage = new PepBoysMakeAppointmentPage();
     private PepBoysProductsInCategoryPage productsPage = new PepBoysProductsInCategoryPage();
     private PepBoysCategoriesPage categoriesPage = new PepBoysCategoriesPage();
@@ -29,21 +28,6 @@ public class PepBoysMainPageSteps {
         assertTrue(makeAppointmentPage.isPage(), "Appointment page was not opened");
         makeAppointmentPage.selectDifferentLocation(code);
         CommonFunctions.attachScreenshot("Store: " + code + " selected");
-    }
-
-    @Deprecated
-    @Given("^user makes appoint with zip-code \"([^\"]*)\"$")
-    public void makeAppointment(String zipCode) {
-        mainPage.navigateMainPage();
-        mainPage.openMakeAppointment();
-        makeAppointmentPage.selectDifferentLocation(zipCode);
-    }
-
-    @Given("^user is on main page$")
-    public void userIsOnMainPage() {
-        mainPage.navigateMainPage();
-        assertTrue(mainPage.isPageLoaded(), "Main page was not loaded");
-        CommonFunctions.attachScreenshot("Main page loaded");
     }
 
     @When("^user selects \"([^\"]*)\"$")
@@ -97,7 +81,8 @@ public class PepBoysMainPageSteps {
 
     @And("^user add to cart product with id \"([^\"]*)\" with \"([^\"]*)\" delivery option$")
     public void userAddToCartProductWithIdWithDeliveryOption(String id, String deliveryOption) throws Throwable {
-        mainPage.openProductPage(id);
+        productPage.openProductPage(id);
+        assertTrue(productPage.isPage(), "Product page was not opened");
         productPage.setDeliveryOption(deliveryOption);
         productPage.addToCart();
         assertTrue(productPage.isInfoDialogOpened(), "Info dialog about adding item to cart was not displayed");

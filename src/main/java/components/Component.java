@@ -161,6 +161,7 @@ public abstract class Component {
 
     public void navigateWithCookies(String url, String cookies) {
         getDriver().navigate().to(url + cookies);
+        waitForRedirect(url + cookies);
         waitForAjax();
     }
 
@@ -171,9 +172,10 @@ public abstract class Component {
                 boolean result = false;
                 try {
                     JavascriptExecutor js = (JavascriptExecutor) driver;
-                    result = (Boolean) js.executeScript("return jQuery.active === 0");
+                    result = (Boolean) js.executeScript("return jQuery.active === 0 && jQuery.isReady && document.readyState == 'complete'");
                     log.info("jQuery not active: " + result);
                 } catch (JavascriptException js) {
+                    log.info("waitForAjax: " + js.getMessage());
                     return false;
                 }
 
@@ -192,6 +194,18 @@ public abstract class Component {
             }
         });
     }
+
+    protected void waitForRedirect(String url) {
+        new WebDriverWait(driver, TIMEOUT_SECONDS).until(new ExpectedCondition<Boolean>() {
+            public Boolean apply(WebDriver driver) {
+                String currentUrl = driver.getCurrentUrl();
+                boolean result = currentUrl.equals(url);
+                log.info("Browser url changed: " + result + ". Current url: " + currentUrl);
+                return result;
+            }
+        });
+    }
+
 
     public void focusOut() {
         getDriver().findElement(By.cssSelector("body")).click();
