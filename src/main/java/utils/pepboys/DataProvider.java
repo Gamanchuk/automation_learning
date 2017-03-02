@@ -9,8 +9,11 @@ public class DataProvider {
             "4152011234",
             "qa@moovweb.com",
             "San Francisco CA 94105",
-            "Spear201!"
+            "Spear201!",
+            "manytu2012-buy@gmail.com",
+            "q1q1q1q1"
     );
+
 
     // Cards
     private static CreditCard visa = new CreditCard(

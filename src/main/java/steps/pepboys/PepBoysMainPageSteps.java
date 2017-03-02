@@ -2,6 +2,7 @@ package steps.pepboys;
 
 import components.pages.pepboys.*;
 import components.widgets.CategoriesWidget;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -73,6 +74,11 @@ public class PepBoysMainPageSteps {
         billingPage.inputPaymentDetails(DataProvider.getCard(cardName));
     }
 
+    @And("^user confirms purchase$")
+    public void userConfirmsPurchase(){
+       billingPage.confirmsPurchase();
+    }
+
     @Then("^user should be on thank you page$")
     public void userShouldBeOnThankYouPage() {
         billingPage.checkPaymentResult();
@@ -88,6 +94,7 @@ public class PepBoysMainPageSteps {
         assertTrue(productPage.isInfoDialogOpened(), "Info dialog about adding item to cart was not displayed");
         CommonFunctions.attachScreenshot("Info dialog about adding item to cart was opened");
     }
+
 
 
     @Given("^user makes authorisation for \"([^\"]*)\"$")

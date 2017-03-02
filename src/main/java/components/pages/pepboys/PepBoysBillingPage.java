@@ -16,6 +16,7 @@ public class PepBoysBillingPage extends PepBoysBasePage {
     private static Log log = LogFactory.getLog(PepBoysBillingPage.class);
 
     private By continueBtn = By.xpath("//button[text()='Continue']");
+    private By placeOrderBtn = By.xpath("//div[@class='order-review-container']/div[@class='place-order-button well']/div[@class='component submit-button']/button[@class='main-button']");
     private By signInButton = By.xpath("//button[text()='Sign In']");
     private By signInCheckoutButton = By.xpath("//button[text()='Sign In & Checkout']");
 
@@ -74,8 +75,14 @@ public class PepBoysBillingPage extends PepBoysBasePage {
 
         CommonFunctions.attachScreenshot("Payment details");
 
+        this.confirmsPurchase();
+    }
+
+    public void confirmsPurchase() {
+        waitForElementClickable(placeOrderBtn);
         getDriver().findElement(By.xpath("//div[contains(@class, 'total-cost')]")).click();
-        getDriver().findElement(By.xpath("//div[@class='order-review-container']/div[@class='place-order-button well']/div[@class='component submit-button']/button[@class='main-button']")).click();
+        CommonFunctions.attachScreenshot("Confirms");
+        getDriver().findElement(placeOrderBtn).click();
     }
 
     public void checkPaymentResult() {

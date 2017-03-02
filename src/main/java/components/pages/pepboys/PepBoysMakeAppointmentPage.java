@@ -10,7 +10,9 @@ public class PepBoysMakeAppointmentPage extends PepBoysBasePage {
 
 
     public boolean isPage() {
+        waitForElementClickable(selectLocationBtn);
         waitForAttributeVisible(img, "src", "https://static.pepboys.com/images/eServe2.0/Location-Selector-Button-Icon-14x20.gif");
+       waitForAjax();
         return true;
     }
 
