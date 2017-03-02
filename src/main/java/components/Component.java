@@ -60,7 +60,7 @@ public abstract class Component {
                 .until(ExpectedConditions.elementToBeClickable(element));
     }
 
-    public void waitForElementInvisibilityOfElementLocated(By element) {
+    public void waitForElementInvisibility(By element) {
         log.info("Waiting " + TIMEOUT_SECONDS + "s for element: '" + element + "' hidden");
         new WebDriverWait(driver, TIMEOUT_SECONDS)
                 .until(ExpectedConditions.invisibilityOfElementLocated(element));

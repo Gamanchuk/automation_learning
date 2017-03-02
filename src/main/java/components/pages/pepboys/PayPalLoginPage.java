@@ -21,7 +21,12 @@ public class PayPalLoginPage extends Component {
 
         CommonFunctions.attachScreenshot("Login PayPal Page");
         getDriver().findElement(logInButton).click();
+
+        // waiting for spinner
         switchToDefaultIframe();
+        waitForElementVisible(By.id("spinner"));
+        waitForElementInvisibility(By.id("spinner"));
+
         CommonFunctions.attachScreenshot("Login PayPal Page after SignIn");
     }
 
