@@ -18,8 +18,12 @@ public class PayPalLoginPage extends Component {
 
         getDriver().findElement(By.id("email")).sendKeys(user.getPaypalEmail());
         getDriver().findElement(By.id("password")).sendKeys(user.getPaypalPassword());
-
-        focusOut();
+        
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         CommonFunctions.attachScreenshot("Login PayPal Page");
         getDriver().findElement(logInButton).click();
