@@ -12,9 +12,6 @@ import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.logging.LogType;
-import org.openqa.selenium.logging.LoggingPreferences;
-import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
@@ -28,7 +25,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -102,8 +98,9 @@ public class DriverFactory {
             int appiumPort = Integer.parseInt(Config.APPIUM_PORT);
             int proxyPort = Integer.parseInt(Config.PROXY_PORT);
 
+            if (Config.PLATFORM_NAME.equals("iOS"))
+                iOSProxyRunner(proxyPort);
 
-            iOSProxyRunner(proxyPort);
             killAppiumServer(appiumPort);
 
             log.info("");
