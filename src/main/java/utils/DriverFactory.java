@@ -11,7 +11,6 @@ import org.apache.commons.exec.DefaultExecuteResultHandler;
 import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -76,15 +75,14 @@ public class DriverFactory {
                     desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, platformName);
                     desiredCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, deviceName);
                     desiredCapabilities.setCapability(MobileCapabilityType.UDID, deviceUdid);
-                    desiredCapabilities.setCapability(MobileCapabilityType.TAKES_SCREENSHOT, "true");
-                    desiredCapabilities.setCapability("safariAllowPopups", true);
 
                     if (Config.PLATFORM_NAME.equals("iOS")) {
                         desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
                         desiredCapabilities.setCapability("wdaLocalPort", Integer.parseInt(iproxyPort));
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.LAUNCH_TIMEOUT, 500000);
-                        desiredCapabilities.setCapability(IOSMobileCapabilityType.TAKES_SCREENSHOT, "true");
                         // desiredCapabilities.setCapability("realDeviceLogger", "/usr/local/lib/node_modules/deviceconsole/deviceconsole");
+                        desiredCapabilities.setCapability(IOSMobileCapabilityType.AUTO_ACCEPT_ALERTS, true);
+                        desiredCapabilities.setCapability("useNewWDA", true);
                     }
 
                     eventListener = new MyWebDriverEventListener();
@@ -125,7 +123,7 @@ public class DriverFactory {
             serviceBuilder.usingPort(appiumPort);
             if (Config.PLATFORM_NAME.equals("iOS")) {
                 serviceBuilder.withArgument(IOSServerFlag.WEBKIT_DEBUG_PROXY_PORT, String.valueOf(proxyPort));
-                serviceBuilder.withArgument(GeneralServerFlag.LOG_LEVEL, "warn");
+              //  serviceBuilder.withArgument(GeneralServerFlag.LOG_LEVEL, "warn");
                 serviceBuilder.withArgument(GeneralServerFlag.SESSION_OVERRIDE);
             }
 
@@ -240,8 +238,9 @@ public class DriverFactory {
 
         log.info("DELETE DRIVER");
 
-        driver.quit();
         driver.close();
+        driver.quit();
+
         if (service != null) {
             log.info("DELETE APPIUM");
             service.stop();
