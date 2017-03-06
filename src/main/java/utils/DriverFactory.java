@@ -108,8 +108,9 @@ public class DriverFactory {
             int appiumPort = Integer.parseInt(Config.APPIUM_PORT);
             int proxyPort = Integer.parseInt(Config.PROXY_PORT);
 
-            if (Config.PLATFORM_NAME.equals("iOS"))
+            if (Config.PLATFORM_NAME.equals("iOS")) {
                 iOSProxyRunner(proxyPort);
+            }
 
             killAppiumServer(appiumPort);
 
@@ -123,7 +124,7 @@ public class DriverFactory {
             serviceBuilder.usingPort(appiumPort);
             if (Config.PLATFORM_NAME.equals("iOS")) {
                 serviceBuilder.withArgument(IOSServerFlag.WEBKIT_DEBUG_PROXY_PORT, String.valueOf(proxyPort));
-              //  serviceBuilder.withArgument(GeneralServerFlag.LOG_LEVEL, "warn");
+                //  serviceBuilder.withArgument(GeneralServerFlag.LOG_LEVEL, "warn");
                 serviceBuilder.withArgument(GeneralServerFlag.SESSION_OVERRIDE);
             }
 
