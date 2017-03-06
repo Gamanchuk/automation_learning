@@ -59,9 +59,10 @@ public class PepBoysMainPageSteps {
         cartPage.payUsingPaymentMethod(method);
     }
 
-    @And("^user types billing info for \"([^\"]*)\"$")
-    public void typesBillingInfoFor(String userName) {
+    @And("^user types billing info for \"([^\"]*)\" with confirmation method \"([^\"]*)\"$")
+    public void typesBillingInfoFor(String userName, String confirmationMethod) {
         billingPage.inputBillingInfo(DataProvider.getUser(userName));
+        billingPage.confirmBillingInfo(confirmationMethod);
     }
 
     @And("^chooses \"([^\"]*)\" shipping method$")

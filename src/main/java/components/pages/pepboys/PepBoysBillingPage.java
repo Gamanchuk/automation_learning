@@ -37,13 +37,23 @@ public class PepBoysBillingPage extends PepBoysBasePage {
         CommonFunctions.attachScreenshot("Billing info");
 
         // Disable focus from input field. ( Fix problem on iOS)
-        getDriver().findElement(By.xpath("//div[@class='address-container well'][2]")).click();
+//        getDriver().findElement(By.xpath("//div[@class='address-container well'][2]")).click();
+        focusOut();
 
+
+    }
+
+    public void confirmBillingInfo(String confirmMethod){
         ((JavascriptExecutor) getDriver()).executeScript("window.scrollBy(0,250)", "");
-        getDriver().findElement(continueBtn).click();
 
+        if(confirmMethod.equals("Continue")){
+            getDriver().findElement(continueBtn).click(); //Place order btn must be
+        }else if(confirmMethod.equals("Place Order")){
+            getDriver().findElement(placeOrderBtn).click();
+        }
         this.useRecommended();
     }
+
 
     public void selectShippingMethod(String shippingMethod) {
 
@@ -124,7 +134,12 @@ public class PepBoysBillingPage extends PepBoysBasePage {
 
     private void useRecommended() {
         By recommendedAddressRadio = By.xpath("//div[@class='radio-list-option' and contains(., 'Use Recommended Address')]");
-        waitForElementVisible(recommendedAddressRadio);
-        getDriver().findElement(recommendedAddressRadio).click();
+            try {
+                waitForElementVisible(recommendedAddressRadio);
+                getDriver().findElement(recommendedAddressRadio).click();
+            }catch (Exception e) {
+                log.info(e.getMessage());
+            }
+        }
     }
-}
+

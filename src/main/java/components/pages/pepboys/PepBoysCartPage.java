@@ -11,11 +11,17 @@ public class PepBoysCartPage extends PepBoysBasePage {
             CommonFunctions.attachScreenshot("Payment method");
             waitForElementVisible(By.xpath("//button[text()='Continue']"));
             waitForElementClickable(By.xpath("//button[text()='Continue']"));
+
         } else if (method.equals("PayPal")) {
             click(By.id("j-payPalCheckout"));
 
             CommonFunctions.attachScreenshot("Payment method");
+
+        } else if(method.equals("Pay in Store")){
+            click(By.id("j-payInStore"));
+            CommonFunctions.attachScreenshot("Payment method");
         }
+
 
     }
 }

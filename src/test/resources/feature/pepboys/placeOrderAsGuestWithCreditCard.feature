@@ -10,7 +10,7 @@ Feature: Some feature
 
   @TestCaseId("16247")
   Scenario: Place Order as a "Guest" with Credit Card
-    Given user types billing info for "qa user"
+    Given user types billing info for "qa user" with confirmation method "Continue"
     And chooses "Ground" shipping method
     And uses "visa" card for payment
     Then user should be on thank you page
