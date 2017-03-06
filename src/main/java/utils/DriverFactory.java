@@ -41,8 +41,9 @@ public class DriverFactory {
 
     public static WebDriver getDriver() {
 
-        if (!Boolean.valueOf(System.getProperty("use.desktop.browser")))
+        if (!Boolean.valueOf(System.getProperty("use.desktop.browser"))) {
             startAppiumService();
+        }
 
         if (driver == null) {
 
