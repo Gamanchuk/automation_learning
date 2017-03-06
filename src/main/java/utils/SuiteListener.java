@@ -31,7 +31,8 @@ public class SuiteListener implements ISuiteListener {
     public void onFinish(ISuite iSuite) {
         DriverFactory.quitDriver();
 
-        if (Config.PLATFORM_NAME.equals("iOS"))
+        if (Config.PLATFORM_NAME.equals("iOS")) {
             DriverFactory.killiOSProxy(Integer.parseInt(Config.PROXY_PORT));
+        }
     }
 }
