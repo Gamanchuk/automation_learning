@@ -12,6 +12,8 @@ import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
@@ -23,6 +25,8 @@ import org.zeroturnaround.process.Processes;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.regex.Matcher;
@@ -37,51 +41,60 @@ public class DriverFactory {
 
     public static WebDriver getDriver() {
 
-        startAppiumService();
+        if (!Boolean.valueOf(System.getProperty("use.desktop.browser"))) {
+            startAppiumService();
+        }
 
         if (driver == null) {
+
             String browserName = Config.DEVICE_BROWSER;
             String platformVersion = Config.PLATFORM_VERSION;
             String platformName = Config.PLATFORM_NAME;
             String deviceName = Config.DEVICE_NAME;
             String deviceUdid = Config.DEVICE_UID;
             String iproxyPort = Config.IPROXY_PORT;
+
             try {
-                log.info("****************************** CREATING REMOTE WEB DRIVER ******************************");
-                log.info("PLATFORM NAME: " + platformName);
-                log.info("PLATFORM VERSION: " + platformVersion);
-                log.info("DEVICE NAME: " + deviceName);
-                log.info("DEVICE BROWSER: " + browserName);
-                log.info("DEVICE UDID: " + deviceUdid);
-                log.info("DEVICE USB PORT: " + iproxyPort);
-                log.info("APPIUM URL: " + service.getUrl());
-                log.info("****************************************************************************************");
-                log.info("");
+                if (Boolean.valueOf(System.getProperty("use.desktop.browser"))) {
+                    initChromeDriver();
+                } else {
 
-                DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-                desiredCapabilities.setCapability(MobileCapabilityType.BROWSER_NAME, browserName);
-                desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, platformVersion);
-                desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, platformName);
-                desiredCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, deviceName);
-                desiredCapabilities.setCapability(MobileCapabilityType.UDID, deviceUdid);
+                    log.info("****************************** CREATING REMOTE WEB DRIVER ******************************");
+                    log.info("PLATFORM NAME: " + platformName);
+                    log.info("PLATFORM VERSION: " + platformVersion);
+                    log.info("DEVICE NAME: " + deviceName);
+                    log.info("DEVICE BROWSER: " + browserName);
+                    log.info("DEVICE UDID: " + deviceUdid);
+                    log.info("DEVICE USB PORT: " + iproxyPort);
+                    log.info("APPIUM URL: " + service.getUrl());
+                    log.info("****************************************************************************************");
+                    log.info("");
 
+                    DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+                    desiredCapabilities.setCapability(MobileCapabilityType.BROWSER_NAME, browserName);
+                    desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, platformVersion);
+                    desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, platformName);
+                    desiredCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, deviceName);
+                    desiredCapabilities.setCapability(MobileCapabilityType.UDID, deviceUdid);
 
-                if (Config.PLATFORM_NAME.equals("iOS")) {
-                    desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
-                    desiredCapabilities.setCapability("wdaLocalPort", Integer.parseInt(iproxyPort));
-                    desiredCapabilities.setCapability(IOSMobileCapabilityType.LAUNCH_TIMEOUT, 500000);
-                    desiredCapabilities.setCapability("useNewWDA", true);
-                    desiredCapabilities.setCapability("safariAllowPopups", true);
-                    //desiredCapabilities.setCapability("xcodeOrgId", "Y95G5M3Q84");
-                    //desiredCapabilities.setCapability("xcodeSigningId", "iPhone Developer");
-                    // desiredCapabilities.setCapability("realDeviceLogger", "/usr/local/lib/node_modules/deviceconsole/deviceconsole");
+                    if (Config.PLATFORM_NAME.equals("iOS")) {
+                        desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
+                        desiredCapabilities.setCapability("wdaLocalPort", Integer.parseInt(iproxyPort));
+                        desiredCapabilities.setCapability(IOSMobileCapabilityType.LAUNCH_TIMEOUT, 500000);
+                        // desiredCapabilities.setCapability("realDeviceLogger", "/usr/local/lib/node_modules/deviceconsole/deviceconsole");
+                        desiredCapabilities.setCapability(IOSMobileCapabilityType.AUTO_ACCEPT_ALERTS, true);
+                        desiredCapabilities.setCapability("useNewWDA", true);
+                        desiredCapabilities.setCapability("safariAllowPopups", true);
+                        // desiredCapabilities.setCapability("xcodeOrgId", "Y95G5M3Q84");
+                        // desiredCapabilities.setCapability("xcodeSigningId", "iPhone Developer");
+                        // desiredCapabilities.setCapability("realDeviceLogger", "/usr/local/lib/node_modules/deviceconsole/deviceconsole");
+                    }
+
+                    eventListener = new MyWebDriverEventListener();
+
+                    driver = new EventFiringWebDriver(new RemoteWebDriver(new URL(String.valueOf(service.getUrl())), desiredCapabilities)).register(eventListener);
+                    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
                 }
-
-                eventListener = new MyWebDriverEventListener();
-
-                driver = new EventFiringWebDriver(new RemoteWebDriver(new URL(String.valueOf(service.getUrl())), desiredCapabilities)).register(eventListener);
-                driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-
 
             } catch (Exception e) {
                 throw new AssertionError("Can't create driver: " + e.getMessage());
@@ -100,8 +113,10 @@ public class DriverFactory {
             int appiumPort = Integer.parseInt(Config.APPIUM_PORT);
             int proxyPort = Integer.parseInt(Config.PROXY_PORT);
 
+            if (Config.PLATFORM_NAME.equals("iOS")) {
+                iOSProxyRunner(proxyPort);
+            }
 
-            iOSProxyRunner(proxyPort);
             killAppiumServer(appiumPort);
 
             log.info("");
@@ -229,7 +244,9 @@ public class DriverFactory {
 
         log.info("DELETE DRIVER");
 
+        driver.close();
         driver.quit();
+
         if (service != null) {
             log.info("DELETE APPIUM");
             service.stop();
@@ -238,20 +255,22 @@ public class DriverFactory {
 
     //TODO: add functionality delete cookies
     public static void deleteAllCookies() {
+
     }
 
+    private static void initChromeDriver() {
+        System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver");
+        Map<String, String> mobileEmulation = new HashMap<String, String>();
+        mobileEmulation.put("deviceName", "Google Nexus 5");
 
-//    private static void initChromeDriver() {
-//        System.setProperty("tests.chrome.driver", "/../../resources/chromedriver");
-//        Map<String, String> mobileEmulation = new HashMap<String, String>();
-//        mobileEmulation.put("deviceName", "Google Nexus 5");
-//
-//        Map<String, Object> chromeOptions = new HashMap<String, Object>();
-//        chromeOptions.put("mobileEmulation", mobileEmulation);
-//        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-//        capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-//        eventListener = new MyWebDriverEventListener();
-//
-//        driver = new EventFiringWebDriver(new ChromeDriver(capabilities)).register(eventListener);
-//    }
+        Map<String, Object> chromeOptions = new HashMap<String, Object>();
+        chromeOptions.put("mobileEmulation", mobileEmulation);
+        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+        capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+        eventListener = new MyWebDriverEventListener();
+
+        driver = new EventFiringWebDriver(new ChromeDriver(capabilities)).register(eventListener);
+    }
 }
+
+
