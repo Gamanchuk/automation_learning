@@ -9,14 +9,12 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.DriverFactory;
 
-import static org.junit.Assert.fail;
-
 public abstract class Component {
 
-    private final int TIMEOUT_SECONDS = 40;
+    private final int TIMEOUT_SECONDS = 50;
 
     private WebDriver driver = DriverFactory.getDriver();
-    private Log log = LogFactory.getLog(this.getClass());
+    public Log log = LogFactory.getLog(this.getClass());
 
     public WebDriver getDriver() {
         return DriverFactory.getDriver();
@@ -114,7 +112,7 @@ public abstract class Component {
             new WebDriverWait(driver, timeout).until(webElementExpectedCondition);
             return true;
         } catch (TimeoutException e) {
-            fail("Condition failed!\n" + e);
+            log.info("Condition failed!\n" + e);
             return false;
         }
     }

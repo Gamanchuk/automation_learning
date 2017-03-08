@@ -12,9 +12,6 @@ import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.logging.LogType;
-import org.openqa.selenium.logging.LoggingPreferences;
-import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
@@ -28,7 +25,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -68,14 +64,16 @@ public class DriverFactory {
                 desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, platformName);
                 desiredCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, deviceName);
                 desiredCapabilities.setCapability(MobileCapabilityType.UDID, deviceUdid);
-                desiredCapabilities.setCapability(MobileCapabilityType.TAKES_SCREENSHOT, "true");
-                desiredCapabilities.setCapability("safariAllowPopups", true);
+
 
                 if (Config.PLATFORM_NAME.equals("iOS")) {
                     desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
                     desiredCapabilities.setCapability("wdaLocalPort", Integer.parseInt(iproxyPort));
                     desiredCapabilities.setCapability(IOSMobileCapabilityType.LAUNCH_TIMEOUT, 500000);
-                    desiredCapabilities.setCapability(IOSMobileCapabilityType.TAKES_SCREENSHOT, "true");
+                    desiredCapabilities.setCapability("useNewWDA", true);
+                    desiredCapabilities.setCapability("safariAllowPopups", true);
+                    //desiredCapabilities.setCapability("xcodeOrgId", "Y95G5M3Q84");
+                    //desiredCapabilities.setCapability("xcodeSigningId", "iPhone Developer");
                     // desiredCapabilities.setCapability("realDeviceLogger", "/usr/local/lib/node_modules/deviceconsole/deviceconsole");
                 }
 
@@ -116,7 +114,7 @@ public class DriverFactory {
             serviceBuilder.usingPort(appiumPort);
             if (Config.PLATFORM_NAME.equals("iOS")) {
                 serviceBuilder.withArgument(IOSServerFlag.WEBKIT_DEBUG_PROXY_PORT, String.valueOf(proxyPort));
-                serviceBuilder.withArgument(GeneralServerFlag.LOG_LEVEL, "warn");
+                //serviceBuilder.withArgument(GeneralServerFlag.LOG_LEVEL, "warn");
                 serviceBuilder.withArgument(GeneralServerFlag.SESSION_OVERRIDE);
             }
 
