@@ -134,12 +134,6 @@ public class PepBoysBillingPage extends PepBoysBasePage {
 
     private void useRecommended() {
         By recommendedAddressRadio = By.xpath("//div[@class='radio-list-option' and contains(., 'Use Recommended Address')]");
-//        try {
-//            waitForElementVisible(recommendedAddressRadio, 5);
-//            getDriver().findElement(recommendedAddressRadio).click();
-//        } catch (Exception e) {
-//            log.info(e.getMessage());
-//        }
 
         if (isElementVisible(recommendedAddressRadio, 5)) {
             getDriver().findElement(recommendedAddressRadio).click();
