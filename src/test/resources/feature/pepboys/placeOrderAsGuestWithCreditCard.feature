@@ -15,4 +15,3 @@ Feature: Some feature
     And chooses "Ground" shipping method
     And uses "visa" card for payment
     Then user should be on thank you page
-

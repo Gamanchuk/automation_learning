@@ -20,6 +20,5 @@ xhr.setRequestHeader("referer", "https://mstage.stage.pepboys.com/eserve/appoint
 xhr.setRequestHeader("x-requested-with", "XMLHttpRequest");
 xhr.setRequestHeader("dnt", "1");
 xhr.setRequestHeader("cache-control", "no-cache");
-xhr.setRequestHeader("postman-token", "e0be90ad-7771-6456-2d9b-5e632e05d446");
 
 xhr.send(data);
