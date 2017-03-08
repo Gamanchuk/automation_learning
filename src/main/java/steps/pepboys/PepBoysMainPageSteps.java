@@ -30,7 +30,7 @@ public class PepBoysMainPageSteps {
         CommonFunctions.attachScreenshot("Store: " + code + " selected");
     }
 
-    @Given("^user makes appoint with api$")
+    @Given("^user makes appoint$")
     public void userMakesAppointWithApi() throws Throwable {
         makeAppointmentPage.openPage();
         assertTrue(makeAppointmentPage.isPage(), "Appointment page was not opened");

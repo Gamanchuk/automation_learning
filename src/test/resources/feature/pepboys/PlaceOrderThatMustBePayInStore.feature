@@ -3,7 +3,7 @@
 Feature: Some feature
 
   Background:
-    Given user makes appoint with api
+    Given user makes appoint
     And user adds to cart product with id "8536851" with "Pick Up in Store" delivery option
     And user views cart
     And chooses "Pay in Store" method
@@ -13,4 +13,3 @@ Feature: Some feature
     Given user types billing info for "qa user"
     And presses the "Place Order" button
     Then user should be on thank you page
-    
