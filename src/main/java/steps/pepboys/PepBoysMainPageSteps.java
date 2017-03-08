@@ -34,7 +34,7 @@ public class PepBoysMainPageSteps {
     public void userMakesAppointWithApi() throws Throwable {
         makeAppointmentPage.openPage();
         assertTrue(makeAppointmentPage.isPage(), "Appointment page was not opened");
-        makeAppointmentPage.setLocationStoreApi();
+        makeAppointmentPage.setStoreLocationApi();
     }
 
     @When("^user selects \"([^\"]*)\"$")
