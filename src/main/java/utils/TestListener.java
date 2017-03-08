@@ -22,11 +22,11 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
 
     public void transform(ITestAnnotation annotation, Class testClass,
                           Constructor testConstructor, Method testMethod) {
-//
-//        IRetryAnalyzer retry = annotation.getRetryAnalyzer();
-//        if (retry == null) {
-//            annotation.setRetryAnalyzer(Retry.class);
-//        }
+
+        IRetryAnalyzer retry = annotation.getRetryAnalyzer();
+        if (retry == null) {
+            annotation.setRetryAnalyzer(Retry.class);
+        }
     }
 
     @Override
@@ -42,7 +42,7 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
 
     @Override
     public void onTestFailure(ITestResult iTestResult) {
-     //   fireRetryTest("The test has been failed then retried.", iTestResult);
+        fireRetryTest("The test has been failed then retried.", iTestResult);
     }
 
     @Override
@@ -62,14 +62,14 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
 
     @Override
     public void onFinish(ITestContext iTestContext) {
-//        Iterator<ITestResult> listOfFailedTests = iTestContext.getFailedTests().getAllResults().iterator();
-//        while (listOfFailedTests.hasNext()) {
-//            ITestResult failedTest = listOfFailedTests.next();
-//            ITestNGMethod method = failedTest.getMethod();
-//            if (iTestContext.getPassedTests().getResults(method).size() > 0) {
-//                listOfFailedTests.remove();
-//            }
-//        }
+        Iterator<ITestResult> listOfFailedTests = iTestContext.getFailedTests().getAllResults().iterator();
+        while (listOfFailedTests.hasNext()) {
+            ITestResult failedTest = listOfFailedTests.next();
+            ITestNGMethod method = failedTest.getMethod();
+            if (iTestContext.getPassedTests().getResults(method).size() > 0) {
+                listOfFailedTests.remove();
+            }
+        }
 
     }
 
@@ -81,10 +81,10 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
      * @param result  <code>ITestResult</code> containing information about the run test
      */
     protected void fireRetryTest(String message, ITestResult result) {
-//        if (((IAllureRetryAnalyzer) result.getMethod().getRetryAnalyzer()).retry(result, false)) {
-//            getLifecycle().fire(new TestCasePendingEvent().withMessage(message));
-//            getLifecycle().fire(new TestCaseFinishedEvent());
-//        }
+        if (((IAllureRetryAnalyzer) result.getMethod().getRetryAnalyzer()).retry(result, true)) {
+            getLifecycle().fire(new TestCasePendingEvent().withMessage(message));
+            getLifecycle().fire(new TestCaseFinishedEvent());
+        }
     }
 
     /**
