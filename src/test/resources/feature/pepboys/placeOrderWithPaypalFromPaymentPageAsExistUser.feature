@@ -1,4 +1,5 @@
-@pepBoys
+@pepBoys, @debug
+
 
 Feature: Some feature
 
@@ -8,12 +9,14 @@ Feature: Some feature
     And user views cart
     And chooses "Pay Online" method
 
-  @TestCaseId("16250")
-  Scenario: Place Order with Paypal from Payment page as Guest
-    Given user types billing info for "qa user"
+  @TestCaseId("16251")
+  Scenario: Place Order with Paypal from Payment page as Exist use
+    Given user makes authorisation for "qa user"
+    And applies billing info for address "201 SPEAR ST"
     And presses the "Continue" button
     And chooses "Ground" shipping method
     And uses PayPal for payment
     And user confirms purchase as "qa user" with PayPal
     Then user should be on thank you page
 
+  
