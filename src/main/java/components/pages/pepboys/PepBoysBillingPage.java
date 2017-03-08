@@ -47,7 +47,7 @@ public class PepBoysBillingPage extends PepBoysBasePage {
             this.useRecommended();
         } else if (confirmMethod.equals("Place Order")) {
             getDriver().findElement(By.xpath("//div[contains(@class, 'total-cost')]")).click();
-            CommonFunctions.attachScreenshot("Confirms");
+            CommonFunctions.attachScreenshot("Billing info");
             getDriver().findElement(placeOrderBtn).click();
         }
 
@@ -118,7 +118,8 @@ public class PepBoysBillingPage extends PepBoysBasePage {
             e.printStackTrace();
         }
 
-        //TODO: Some problem. select passed but func dosent select address
+        // TODO: There's an issue whith address dropdown, the wrong address is selected by default.
+        // Need to handle it somehow
         this.select(address);
         CommonFunctions.attachScreenshot("Billing info");
     }
