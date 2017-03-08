@@ -8,7 +8,7 @@ import utils.CommonFunctions;
 import utils.pepboys.BillingUser;
 import utils.pepboys.CreditCard;
 
-import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertTrue;
 
 public class PepBoysBillingPage extends PepBoysBasePage {
 
@@ -98,9 +98,18 @@ public class PepBoysBillingPage extends PepBoysBasePage {
     }
 
     public void checkPaymentResult() {
-        By thanksMsg = By.cssSelector("span.thankmsg");
+        By thanksMsg = By.xpath("//div[@class='order-thank-you inset-all']/div");
         waitForElementVisible(thanksMsg, 100);
-        assertEquals(getDriver().findElement(thanksMsg).getText(), "Thank You for Your Order");
+
+        boolean flag = false;
+        String actualMessage = getDriver().findElement(thanksMsg).getText().toLowerCase();
+        String expectedMessage = "thank you for your order";
+
+        if (actualMessage.contains(expectedMessage) || actualMessage.contains(expectedMessage + ".")) {
+            flag = true;
+        }
+
+        assertTrue(flag);
         CommonFunctions.attachScreenshot("Thank You Page");
     }
 

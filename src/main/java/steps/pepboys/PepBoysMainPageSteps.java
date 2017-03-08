@@ -87,15 +87,14 @@ public class PepBoysMainPageSteps {
     }
 
     @And("^user confirms purchase$")
-    public void userConfirmsPurchase(){
-       billingPage.confirmsPurchase();
+    public void userConfirmsPurchase() {
+        billingPage.confirmsPurchase();
     }
 
     @Then("^user should be on thank you page$")
     public void userShouldBeOnThankYouPage() {
         billingPage.checkPaymentResult();
     }
-
 
     @And("^user adds to cart product with id \"([^\"]*)\" with \"([^\"]*)\" delivery option$")
     public void userAddsToCartProductWithIdWithDeliveryOption(String id, String deliveryOption) throws Throwable {
@@ -122,6 +121,8 @@ public class PepBoysMainPageSteps {
         billingPage.purchaseWithPayPal();
         CommonFunctions.attachScreenshot("Purchase with PayPal");
     }
+
+
 }
 
 
