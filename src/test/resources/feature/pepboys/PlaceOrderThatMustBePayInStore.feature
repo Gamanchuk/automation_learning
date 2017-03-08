@@ -13,3 +13,4 @@ Feature: Some feature
     Given user types billing info for "qa user"
     And presses the "Place Order" button
     Then user should be on thank you page
+    
