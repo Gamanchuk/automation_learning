@@ -1,10 +1,10 @@
-@pepBoys
+@pepBoys, @debug
 
 Feature: Some feature
 
   Background:
-    Given user makes appoint with code "94105"
-    And user add to cart product with id "8536851" with "Ship to Home" delivery option
+    Given user makes appoint with api
+    And user adds to cart product with id "8536851" with "Ship to Home" delivery option
     And user views cart
     And chooses "PayPal" method
     And user confirms purchase as "qa user" with PayPal
