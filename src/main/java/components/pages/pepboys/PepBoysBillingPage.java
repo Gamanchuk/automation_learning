@@ -101,15 +101,8 @@ public class PepBoysBillingPage extends PepBoysBasePage {
         By thanksMsg = By.xpath("//div[@class='order-thank-you inset-all']/div");
         waitForElementVisible(thanksMsg, 100);
 
-        boolean flag = false;
-        String actualMessage = getDriver().findElement(thanksMsg).getText().toLowerCase();
-        String expectedMessage = "thank you for your order";
-
-        if (actualMessage.contains(expectedMessage) || actualMessage.contains(expectedMessage + ".")) {
-            flag = true;
-        }
-
-        assertTrue(flag);
+        String message = getDriver().findElement(thanksMsg).getText().toLowerCase();
+        assertTrue(message.contains("thank you for your order"));
         CommonFunctions.attachScreenshot("Thank You Page");
     }
 
