@@ -4,7 +4,7 @@ Feature: Some feature
 
   Background:
     Given user makes appoint
-    And user adds to cart product with id "8536851" with "Pick Up in Store" delivery option
+    And user adds to cart product with id "8076476" with "Pick Up in Store" delivery option
     And user views cart
     And chooses "Pay in Store" method
 
