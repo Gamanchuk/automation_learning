@@ -4,7 +4,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-
 import org.testng.Reporter;
 import ru.yandex.qatools.allure.annotations.Attachment;
 
@@ -59,6 +58,11 @@ public class CommonFunctions {
     @Attachment(value = "ISSUES: {0}", type = "text/html")
     public static String attachIssuesLink(String id, String link) {
         return "<script language=javascript> window.location.href ='" + link + "'</script>";
+    }
+
+    @Attachment(value = "Test failed. See Attached Dom tree", type = "text/html")
+    public static String attachDomThree(String dom) {
+        return dom;
     }
 
     @Attachment(value = "{0}", type = "image/png")
