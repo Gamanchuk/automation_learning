@@ -42,7 +42,7 @@ public class PepBoysMakeAppointmentPage extends PepBoysBasePage {
         waitForAjax();
     }
 
-    public void setLocationStoreApi() {
+    public void setStoreLocationApi() {
         String fileContents = null;
         try {
             fileContents = Files.toString(new File("src/main/java/api/pepboys/postNewStoreLocation.js"), Charsets.UTF_8);

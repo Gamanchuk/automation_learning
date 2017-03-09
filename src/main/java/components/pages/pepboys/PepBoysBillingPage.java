@@ -48,7 +48,7 @@ public class PepBoysBillingPage extends PepBoysBasePage {
             this.useRecommended();
         } else if (confirmMethod.equals("Place Order")) {
             getDriver().findElement(By.xpath("//div[contains(@class, 'total-cost')]")).click();
-            CommonFunctions.attachScreenshot("Confirms");
+            CommonFunctions.attachScreenshot("Billing info");
             getDriver().findElement(placeOrderBtn).click();
         }
 
@@ -133,7 +133,8 @@ public class PepBoysBillingPage extends PepBoysBasePage {
             e.printStackTrace();
         }
 
-        //TODO: Some problem. select passed but func dosent select address
+        // TODO: There's an issue whith address dropdown, the wrong address is selected by default.
+        // Need to handle it somehow
         this.select(address);
         CommonFunctions.attachScreenshot("Billing info");
     }
@@ -148,12 +149,6 @@ public class PepBoysBillingPage extends PepBoysBasePage {
 
     private void useRecommended() {
         By recommendedAddressRadio = By.xpath("//div[@class='radio-list-option' and contains(., 'Use Recommended Address')]");
-//        try {
-//            waitForElementVisible(recommendedAddressRadio, 5);
-//            getDriver().findElement(recommendedAddressRadio).click();
-//        } catch (Exception e) {
-//            log.info(e.getMessage());
-//        }
 
         if (isElementVisible(recommendedAddressRadio, 5)) {
             getDriver().findElement(recommendedAddressRadio).click();
