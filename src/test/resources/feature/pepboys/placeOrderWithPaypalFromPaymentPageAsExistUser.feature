@@ -1,10 +1,10 @@
-@pepBoys, @debug
+@pepBoys
 
 
 Feature: Some feature
 
   Background:
-    Given user makes appoint with api
+    Given user makes appoint
     And user adds to cart product with id "8536851" with "Ship to Home" delivery option
     And user views cart
     And chooses "Pay Online" method
