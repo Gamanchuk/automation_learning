@@ -36,14 +36,23 @@ public class PepBoysBillingPage extends PepBoysBasePage {
 
         CommonFunctions.attachScreenshot("Billing info");
 
-        // Disable focus from input field. ( Fix problem on iOS)
-        getDriver().findElement(By.xpath("//div[@class='address-container well'][2]")).click();
-
-        ((JavascriptExecutor) getDriver()).executeScript("window.scrollBy(0,250)", "");
-        getDriver().findElement(continueBtn).click();
-
-        this.useRecommended();
+        focusOut();
     }
+
+    public void confirmBillingInfo(String confirmMethod) {
+        ((JavascriptExecutor) getDriver()).executeScript("window.scrollBy(0,250)", "");
+
+        if (confirmMethod.equals("Continue")) {
+            getDriver().findElement(continueBtn).click();
+            this.useRecommended();
+        } else if (confirmMethod.equals("Place Order")) {
+            getDriver().findElement(By.xpath("//div[contains(@class, 'total-cost')]")).click();
+            CommonFunctions.attachScreenshot("Billing info");
+            getDriver().findElement(placeOrderBtn).click();
+        }
+
+    }
+
 
     public void selectShippingMethod(String shippingMethod) {
 
@@ -72,10 +81,7 @@ public class PepBoysBillingPage extends PepBoysBasePage {
             getDriver().findElement(By.id("-cc-name")).sendKeys("");
         getDriver().findElement(By.id("-cc-name")).sendKeys(card.getCardholderName());
 
-
         CommonFunctions.attachScreenshot("Payment details");
-
-        this.confirmsPurchase();
     }
 
     public void confirmsPurchase() {
@@ -104,14 +110,18 @@ public class PepBoysBillingPage extends PepBoysBasePage {
     }
 
     public void applyBillingInfo(String address) {
-        waitForElementClickable(continueBtn);
+        //  waitForElementClickable(continueBtn);
 
+        try {
+            Thread.sleep(30000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // TODO: There's an issue whith address dropdown, the wrong address is selected by default.
+        // Need to handle it somehow
         this.select(address);
         CommonFunctions.attachScreenshot("Billing info");
-        getDriver().findElement(continueBtn).click();
-
-        // If you long time on page appears a window with a choice 'Recommended Address'. May be it is bug or incorrect behavior
-        //this.useRecommended();
     }
 
     private void select(String arg) {
@@ -124,7 +134,10 @@ public class PepBoysBillingPage extends PepBoysBasePage {
 
     private void useRecommended() {
         By recommendedAddressRadio = By.xpath("//div[@class='radio-list-option' and contains(., 'Use Recommended Address')]");
-        waitForElementVisible(recommendedAddressRadio);
-        getDriver().findElement(recommendedAddressRadio).click();
+
+        if (isElementVisible(recommendedAddressRadio, 5)) {
+            getDriver().findElement(recommendedAddressRadio).click();
+        }
     }
 }
+

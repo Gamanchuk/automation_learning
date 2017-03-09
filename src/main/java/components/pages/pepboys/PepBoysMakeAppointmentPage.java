@@ -1,6 +1,13 @@
 package components.pages.pepboys;
 
+import com.google.common.base.Charsets;
+import com.google.common.io.Files;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import utils.DriverFactory;
+
+import java.io.File;
+import java.io.IOException;
 
 public class PepBoysMakeAppointmentPage extends PepBoysBasePage {
     public final String STORE_PATH = "eserve/appointment/";
@@ -10,20 +17,18 @@ public class PepBoysMakeAppointmentPage extends PepBoysBasePage {
 
 
     public boolean isPage() {
-        waitForElementClickable(selectLocationBtn);
-        //waitForAttributeVisible(img, "src", "https://static.pepboys.com/images/eServe2.0/Location-Selector-Button-Icon-14x20.gif");
-       waitForAjax();
+        waitForElementVisible(By.id("locationForm"));
+        waitForAjax();
         return true;
     }
 
     public void openPage() {
-
         navigateWithCookies(BASE_URL + STORE_PATH, COOKIES);
     }
 
     public void selectDifferentLocation(String locationZipCode) {
-        By zipCodeField = By.id("zipCode");
 
+        By zipCodeField = By.id("zipCode");
         focusOut();
         getDriver().findElement(selectLocationBtn).click();
         waitForElementVisible(zipCodeField);
@@ -35,5 +40,17 @@ public class PepBoysMakeAppointmentPage extends PepBoysBasePage {
 
         getDriver().findElement(By.cssSelector("button.j-chooseStore")).click();
         waitForAjax();
+    }
+
+    public void setStoreLocationApi() {
+        String fileContents = null;
+        try {
+            fileContents = Files.toString(new File("src/main/java/api/pepboys/postNewStoreLocation.js"), Charsets.UTF_8);
+        } catch (IOException e) {
+            log.warn("Cannot read file");
+        }
+
+        JavascriptExecutor js = (JavascriptExecutor) DriverFactory.getDriver();
+        js.executeScript(fileContents);
     }
 }

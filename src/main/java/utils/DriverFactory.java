@@ -84,6 +84,10 @@ public class DriverFactory {
                         // desiredCapabilities.setCapability("realDeviceLogger", "/usr/local/lib/node_modules/deviceconsole/deviceconsole");
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.AUTO_ACCEPT_ALERTS, true);
                         desiredCapabilities.setCapability("useNewWDA", true);
+                        desiredCapabilities.setCapability("safariAllowPopups", true);
+                        // desiredCapabilities.setCapability("xcodeOrgId", "Y95G5M3Q84");
+                        // desiredCapabilities.setCapability("xcodeSigningId", "iPhone Developer");
+                        // desiredCapabilities.setCapability("realDeviceLogger", "/usr/local/lib/node_modules/deviceconsole/deviceconsole");
                     }
 
                     eventListener = new MyWebDriverEventListener();
@@ -125,7 +129,7 @@ public class DriverFactory {
             serviceBuilder.usingPort(appiumPort);
             if (Config.PLATFORM_NAME.equals("iOS")) {
                 serviceBuilder.withArgument(IOSServerFlag.WEBKIT_DEBUG_PROXY_PORT, String.valueOf(proxyPort));
-                //  serviceBuilder.withArgument(GeneralServerFlag.LOG_LEVEL, "warn");
+                //serviceBuilder.withArgument(GeneralServerFlag.LOG_LEVEL, "warn");
                 serviceBuilder.withArgument(GeneralServerFlag.SESSION_OVERRIDE);
             }
 

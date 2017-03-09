@@ -41,7 +41,7 @@ public class PayPalLoginPage extends Component {
        //switchToIframe("injectedUl");
         By continueButton = By.id("confirmButtonTop");
 
-        waitForElementClickable(continueButton);
+       //  waitForElementClickable(continueButton);
 
         getDriver().findElement(continueButton).click();
 

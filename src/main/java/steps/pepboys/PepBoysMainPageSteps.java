@@ -2,7 +2,6 @@ package steps.pepboys;
 
 import components.pages.pepboys.*;
 import components.widgets.CategoriesWidget;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -29,6 +28,13 @@ public class PepBoysMainPageSteps {
         assertTrue(makeAppointmentPage.isPage(), "Appointment page was not opened");
         makeAppointmentPage.selectDifferentLocation(code);
         CommonFunctions.attachScreenshot("Store: " + code + " selected");
+    }
+
+    @Given("^user makes appoint$")
+    public void userMakesAppointWithApi() throws Throwable {
+        makeAppointmentPage.openPage();
+        assertTrue(makeAppointmentPage.isPage(), "Appointment page was not opened");
+        makeAppointmentPage.setStoreLocationApi();
     }
 
     @When("^user selects \"([^\"]*)\"$")
@@ -64,6 +70,11 @@ public class PepBoysMainPageSteps {
         billingPage.inputBillingInfo(DataProvider.getUser(userName));
     }
 
+    @And("^presses the \"([^\"]*)\" button$")
+    public void pressesTheButton(String confirmationMethod) {
+        billingPage.confirmBillingInfo(confirmationMethod);
+    }
+
     @And("^chooses \"([^\"]*)\" shipping method$")
     public void choosesShippingMethod(String shippingMethod) {
         billingPage.selectShippingMethod(shippingMethod);
@@ -72,6 +83,8 @@ public class PepBoysMainPageSteps {
     @And("^uses \"([^\"]*)\" card for payment$")
     public void usesCardForPayment(String cardName) {
         billingPage.inputPaymentDetails(DataProvider.getCard(cardName));
+        billingPage.confirmBillingInfo("Place Order");
+
     }
 
     @And("^user confirms purchase$")
@@ -85,8 +98,8 @@ public class PepBoysMainPageSteps {
     }
 
 
-    @And("^user add to cart product with id \"([^\"]*)\" with \"([^\"]*)\" delivery option$")
-    public void userAddToCartProductWithIdWithDeliveryOption(String id, String deliveryOption) throws Throwable {
+    @And("^user adds to cart product with id \"([^\"]*)\" with \"([^\"]*)\" delivery option$")
+    public void userAddsToCartProductWithIdWithDeliveryOption(String id, String deliveryOption) throws Throwable {
         productPage.openProductPage(id);
         assertTrue(productPage.isPage(), "Product page was not opened");
         productPage.setDeliveryOption(deliveryOption);
@@ -107,6 +120,8 @@ public class PepBoysMainPageSteps {
         billingPage.applyBillingInfo(address);
 
     }
+
+
 }
 
 
