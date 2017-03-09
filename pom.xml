@@ -25,29 +25,6 @@
     <description>Allure Cucumber-JVM Usage Example</description>
 
     <dependencies>
-
-
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>4.3.6</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpasyncclient</artifactId>
-            <version>4.0.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpmime</artifactId>
-            <version>4.3.6</version>
-        </dependency>
-        <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>20140107</version>
-        </dependency>
-
         <dependency>
             <groupId>org.zeroturnaround</groupId>
             <artifactId>zt-exec</artifactId>
@@ -215,6 +192,7 @@
                         <environment.name>${testing.env}</environment.name>
                         <properties.file.name>${props.file.name}</properties.file.name>
                         <projectTracking>${projectTracking}</projectTracking>
+                        <use.desktop.browser>${use.desktop.browser}</use.desktop.browser>
                         <suite.id>${suite.id}</suite.id>
                     </systemPropertyVariables>
                 </configuration>
@@ -260,6 +238,13 @@
             <id>Project-Tracking</id>
             <properties>
                 <projectTracking>true</projectTracking>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>use-desktop-browser</id>
+            <properties>
+                <use.desktop.browser>true</use.desktop.browser>
             </properties>
         </profile>
 
