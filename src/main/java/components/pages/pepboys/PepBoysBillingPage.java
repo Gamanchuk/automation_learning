@@ -8,7 +8,7 @@ import utils.CommonFunctions;
 import utils.pepboys.BillingUser;
 import utils.pepboys.CreditCard;
 
-import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertTrue;
 
 public class PepBoysBillingPage extends PepBoysBasePage {
 
@@ -19,6 +19,7 @@ public class PepBoysBillingPage extends PepBoysBasePage {
     private By placeOrderBtn = By.xpath("//div[@class='order-review-container']/div[@class='place-order-button well']/div[@class='component submit-button']/button[@class='main-button']");
     private By signInButton = By.xpath("//button[text()='Sign In']");
     private By signInCheckoutButton = By.xpath("//button[text()='Sign In & Checkout']");
+    private By ccNumber = By.id("cc-number");
 
 
     public void inputBillingInfo(BillingUser user) {
@@ -70,7 +71,7 @@ public class PepBoysBillingPage extends PepBoysBasePage {
     }
 
     public void inputPaymentDetails(CreditCard card) {
-        waitForElementVisible(By.id("cc-number"));
+        waitForElementVisible(ccNumber);
 
         getDriver().findElement(By.id("cc-number")).sendKeys(card.getNumber());
         getDriver().findElement(By.id("cc-exp")).sendKeys(card.getExpDate());
@@ -84,6 +85,11 @@ public class PepBoysBillingPage extends PepBoysBasePage {
         CommonFunctions.attachScreenshot("Payment details");
     }
 
+    public void purchaseWithPayPal() {
+        waitForElementVisible(ccNumber);
+        getDriver().findElement(By.xpath("//a[@data-analytics-name='Paypal']")).click();
+    }
+
     public void confirmsPurchase() {
         waitForElementClickable(placeOrderBtn);
         getDriver().findElement(By.xpath("//div[contains(@class, 'total-cost')]")).click();
@@ -92,9 +98,11 @@ public class PepBoysBillingPage extends PepBoysBasePage {
     }
 
     public void checkPaymentResult() {
-        By thanksMsg = By.cssSelector("span.thankmsg");
-        waitForElementVisible(thanksMsg);
-        assertEquals(getDriver().findElement(thanksMsg).getText(), "Thank You for Your Order");
+        By thanksMsg = By.xpath("//div[@class='order-thank-you inset-all']/div");
+        waitForElementVisible(thanksMsg, 100);
+
+        String message = getDriver().findElement(thanksMsg).getText().toLowerCase();
+        assertTrue(message.contains("thank you for your order"));
         CommonFunctions.attachScreenshot("Thank You Page");
     }
 

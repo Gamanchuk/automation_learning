@@ -84,19 +84,17 @@ public class PepBoysMainPageSteps {
     public void usesCardForPayment(String cardName) {
         billingPage.inputPaymentDetails(DataProvider.getCard(cardName));
         billingPage.confirmBillingInfo("Place Order");
-
     }
 
     @And("^user confirms purchase$")
-    public void userConfirmsPurchase(){
-       billingPage.confirmsPurchase();
+    public void userConfirmsPurchase() {
+        billingPage.confirmsPurchase();
     }
 
     @Then("^user should be on thank you page$")
     public void userShouldBeOnThankYouPage() {
         billingPage.checkPaymentResult();
     }
-
 
     @And("^user adds to cart product with id \"([^\"]*)\" with \"([^\"]*)\" delivery option$")
     public void userAddsToCartProductWithIdWithDeliveryOption(String id, String deliveryOption) throws Throwable {
@@ -108,8 +106,6 @@ public class PepBoysMainPageSteps {
         CommonFunctions.attachScreenshot("Info dialog about adding item to cart was opened");
     }
 
-
-
     @Given("^user makes authorisation for \"([^\"]*)\"$")
     public void userMakesAuthorisationFor(String userName) {
         billingPage.doLogin(DataProvider.getUser(userName));
@@ -118,7 +114,12 @@ public class PepBoysMainPageSteps {
     @And("^applies billing info for address \"([^\"]*)\"$")
     public void appliesBillingInfo(String address) {
         billingPage.applyBillingInfo(address);
+    }
 
+    @And("^uses PayPal for payment$")
+    public void usesPayPalForPayment() {
+        billingPage.purchaseWithPayPal();
+        CommonFunctions.attachScreenshot("Purchase with PayPal");
     }
 
 

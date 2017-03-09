@@ -40,13 +40,16 @@ public class AllureReporterExt extends AllureReporter {
         }
 
         if ("failed".equals(result.getStatus())) {
-            log.info("failed");
+            log.info("Test failed. Step name: " + caseName);
             attachScreenshot("Failed screenshot: " + caseName);
 
             if (Boolean.valueOf(System.getProperty("projectTracking"))) {
                 String ticketId = setJiraIssues(String.valueOf(result.getError()));
                 setTestResult(TestRailStatus.FAILED, String.valueOf(result.getError()), ticketId);
             }
+
+            DriverFactory.quitDriver();
+
         } else if ("passed".equals(result.getStatus())) {
             log.info("passed: " + caseName);
             if (Boolean.valueOf(System.getProperty("projectTracking")))

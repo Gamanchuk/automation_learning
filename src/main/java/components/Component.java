@@ -210,7 +210,7 @@ public abstract class Component {
     }
 
     public void switchToIframe(String iframeName){
-        waitForElementVisible(By.name(iframeName));
+        waitForElementVisible(By.name(iframeName), 120);
         driver.switchTo().frame(iframeName);
 
     }
