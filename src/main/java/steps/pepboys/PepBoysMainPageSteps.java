@@ -2,6 +2,7 @@ package steps.pepboys;
 
 import components.pages.pepboys.*;
 import components.widgets.CategoriesWidget;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -14,11 +15,13 @@ import static org.testng.Assert.assertTrue;
 public class PepBoysMainPageSteps {
 
     private PepBoysMakeAppointmentPage makeAppointmentPage = new PepBoysMakeAppointmentPage();
+    private PepBoysMainPage mainPage = new PepBoysMainPage();
     private PepBoysProductsInCategoryPage productsPage = new PepBoysProductsInCategoryPage();
     private PepBoysCategoriesPage categoriesPage = new PepBoysCategoriesPage();
     private PepBoysProductPage productPage = new PepBoysProductPage();
     private PepBoysCartPage cartPage = new PepBoysCartPage();
     private PepBoysBillingPage billingPage = new PepBoysBillingPage();
+    private PepBoysTiresPage tiresPage = new PepBoysTiresPage();
 
     private CategoriesWidget categoriesWidget = new CategoriesWidget();
 
@@ -123,6 +126,27 @@ public class PepBoysMainPageSteps {
     }
 
 
+    @And("^user adding vehicle \"([^\"]*)\"$")
+    public void userAddingVehicle(String vehicle) throws Throwable {
+        makeAppointmentPage.openPage();
+        assertTrue(makeAppointmentPage.isPage(), "Appointment page was not opened");
+        makeAppointmentPage.selectVehicle(DataProvider.getVehicle(vehicle));
+    }
+
+    @And("^user adds to cart tires with SKU \"([^\"]*)\" with \"([^\"]*)\" delivery option for \"([^\"]*)\"$")
+    public void userAddsToCartTiresWithIdWithDeliveryOption(String sku, String deliveryOption, String vehicle) throws Throwable {
+        mainPage.openPageWithCookies();
+        categoriesWidget.openCategory("Tires");
+        tiresPage.shopForTiresBy("Tires by Vehicle");
+        tiresPage.selectVehicle(DataProvider.getVehicle(vehicle));
+        tiresPage.addTiresToCart(sku);
+    }
+
+    @And("^user continue shopping$")
+    public void userContinueShopping() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        throw new PendingException();
+    }
 }
 
 

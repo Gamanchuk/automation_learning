@@ -44,6 +44,16 @@ public class DataProvider {
             "qa moovweb"
     );
 
+    // Vehicles
+    private static Vehicle captiva = new Vehicle(
+            "2014",
+            "CHEVROLET",
+            "CAPTIVA",
+            "4-146  2.4L DOHC",
+            "4WD/AWD",
+            "LS, LT"
+    );
+
     public static BillingUser getUser(String userName) {
         switch (userName) {
             case "qa user":
@@ -65,6 +75,15 @@ public class DataProvider {
                 return mastercard;
             default:
                 throw new Error("Unknown card: " + cardName);
+        }
+    }
+
+    public static Vehicle getVehicle(String model) {
+        switch (model) {
+            case "captiva":
+                return captiva;
+            default:
+                throw new Error("Unknown vehicle: " + model);
         }
     }
 }

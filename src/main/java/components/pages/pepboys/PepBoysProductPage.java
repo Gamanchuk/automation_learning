@@ -35,4 +35,8 @@ public class PepBoysProductPage extends PepBoysBasePage {
         click(By.xpath("//button[text()='View Cart']"));
         assertTrue(isElementClickable(By.xpath("//a[text()='Pay Online']")));
     }
+
+    public void clickContinueInAddToCartDialog() {
+        click(By.xpath("//button[text()='Continue']"));
+    }
 }
