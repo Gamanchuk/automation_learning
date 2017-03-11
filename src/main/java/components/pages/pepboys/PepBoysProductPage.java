@@ -33,10 +33,10 @@ public class PepBoysProductPage extends PepBoysBasePage {
 
     public void clickViewCartInAddToCartDialog() {
         click(By.xpath("//button[text()='View Cart']"));
-        assertTrue(isElementClickable(By.xpath("//a[text()='Pay Online']")));
+//        assertTrue(isElementClickable(By.xpath("//a[text()='Pay Online']")));
     }
 
     public void clickContinueInAddToCartDialog() {
-        click(By.xpath("//button[text()='Continue']"));
+        click(By.xpath("//button[text()='Continue Shopping']"));
     }
 }

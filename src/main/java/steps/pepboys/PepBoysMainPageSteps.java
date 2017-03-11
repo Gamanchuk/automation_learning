@@ -2,7 +2,6 @@ package steps.pepboys;
 
 import components.pages.pepboys.*;
 import components.widgets.CategoriesWidget;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -65,6 +64,11 @@ public class PepBoysMainPageSteps {
 
     @And("^chooses \"([^\"]*)\" method$")
     public void userChoosesMethod(String method) throws Throwable {
+        cartPage.payUsingPaymentMethod(method);
+    }
+
+    @And("^chooses \"([^\"]*)\" method with appointment details$")
+    public void userChoosesMethodWithAppointmentDetails(String method) throws Throwable {
         cartPage.payUsingPaymentMethod(method);
     }
 
@@ -144,8 +148,23 @@ public class PepBoysMainPageSteps {
 
     @And("^user continue shopping$")
     public void userContinueShopping() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        productPage.clickContinueInAddToCartDialog();
+    }
+
+    @And("^user adds to cart any tires with \"([^\"]*)\" delivery option for \"([^\"]*)\"$")
+    public void userAddsToCartAnyTiresWithDeliveryOptionFor(String deliveryOption, String vehicle) throws Throwable {
+//        mainPage.openPageWithCookies();
+//        categoriesWidget.openCategory("Tires");
+//        tiresPage.shopForTiresBy("Tires by Vehicle");
+//        tiresPage.selectVehicle(DataProvider.getVehicle(vehicle));
+//        tiresPage.addAnyTiresToCart();
+
+        tiresPage.addSingleTyresToCart();
+    }
+
+    @And("^user schedule installation time$")
+    public void userScheduleInstallationTime() throws Throwable {
+        cartPage.scheduleInstallationTime();
     }
 }
 

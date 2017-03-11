@@ -13,7 +13,8 @@ Feature: Some feature
 
   @TestCaseId("16247")
   Scenario: Place Multiple Orders as a "Guest"
-    Given user types billing info for "qa user"
+    Given user makes authorisation for "qa user"
+    And applies billing info for address "201 SPEAR ST"
     And presses the "Continue" button
     And chooses "Ground" shipping method
     And uses "visa" card for payment

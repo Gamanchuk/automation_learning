@@ -14,11 +14,13 @@ import java.io.IOException;
 
 public class PepBoysTiresPage extends PepBoysBasePage {
 
+    private final String TIRES_URL = "https://mstage.stage.pepboys.com/tires/details/Hankook/Dynapro%2520RA33/1158139/07923/2015/CHEVROLET/CAPTIVA/0/4-146%2520%25202.4L%2520DOHC/4WD/1/";
+
     public void shopForTiresBy(String option) {
         By optionLink = By.xpath("//a[contains(text(), '" + option + "')]");
-        waitForAjax();
+        waitForDocumentReady();
         waitForElementVisible(optionLink);
-        getDriver().findElement(optionLink).click();
+        click(optionLink);
     }
 
     public void selectVehicle(Vehicle vehicle) {
@@ -41,18 +43,29 @@ public class PepBoysTiresPage extends PepBoysBasePage {
         CommonFunctions.attachScreenshot("Vehicle config");
 
         focusOut();
-        click(By.xpath("//button[text()='Next']"));
+        By nextBtn = By.xpath("//button[text()='Next']");
+        scrollToElement(getDriver().findElement(nextBtn));
+        click(nextBtn);
     }
 
     public void addTiresToCart(String sku) {
         By addItemToCartBtn = By.xpath("//div[contains(@class,'j-results-item') and contains(., '"+ sku + "')]//button[text()='Add to cart']");
-        waitForElementClickable(addItemToCartBtn);
+        scrollToElement(getDriver().findElement(addItemToCartBtn));
         click(addItemToCartBtn);
-
-        int i = 0;
         waitForElementVisible(By.xpath("//h3[text()='Your item(s) have been added to the cart']"));
-
-//        getDriver().findElement(addItemToCartBtn).click();
     }
 
+
+    public void addAnyTiresToCart() {
+        By addItemToCartBtn = By.xpath("(//div[contains(@class,'j-results-item')]//button[text()='Add to cart'])[1]");
+        scrollToElement(getDriver().findElement(addItemToCartBtn));
+        click(addItemToCartBtn);
+        waitForElementVisible(By.xpath("//h3[text()='Your item(s) have been added to the cart']"));
+    }
+
+    public void addSingleTyresToCart() {
+        getDriver().navigate().to(TIRES_URL);
+        CommonFunctions.attachScreenshot("Tires page");
+        click(By.xpath("//button[text()='Add to cart']"));
+    }
 }

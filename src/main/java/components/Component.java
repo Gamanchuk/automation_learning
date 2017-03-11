@@ -9,6 +9,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.DriverFactory;
 
+import java.util.concurrent.TimeUnit;
+
 public abstract class Component {
 
     private final int TIMEOUT_SECONDS = 50;
@@ -119,7 +121,8 @@ public abstract class Component {
 
     public void click(By el) {
 
-        if (getDriver().getPageSource().contains("Your ideas make"))
+        if (getDriver().getPageSource().contains("Your ideas make")
+                || getDriver().getPageSource().contains("We want your feedback"))
             getDriver().findElement(By.xpath("//a[@class='acsCloseButton--link acsCloseButton acsDeclineButton']")).click();
 
         try {
@@ -207,6 +210,7 @@ public abstract class Component {
 
     public void focusOut() {
         getDriver().findElement(By.cssSelector("body")).click();
+        getDriver().manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
     }
 
     public void switchToIframe(String iframeName){
