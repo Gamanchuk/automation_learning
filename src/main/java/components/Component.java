@@ -121,9 +121,13 @@ public abstract class Component {
 
     public void click(By el) {
 
-        if (getDriver().getPageSource().contains("Your ideas make")
-                || getDriver().getPageSource().contains("We want your feedback"))
+        String pageSource = getDriver().getPageSource();
+
+        if (pageSource.contains("Your ideas make")
+                || pageSource.contains("We want your feedback")) {
             getDriver().findElement(By.xpath("//a[@class='acsCloseButton--link acsCloseButton acsDeclineButton']")).click();
+
+        }
 
         try {
             WebDriverWait wait = new WebDriverWait(driver, 30, 200);
@@ -163,7 +167,7 @@ public abstract class Component {
     public void navigateWithCookies(String url, String cookies) {
         getDriver().navigate().to(url + cookies);
         waitForRedirect(url + cookies);
-       // waitForAjax();
+        // waitForAjax();
     }
 
 
@@ -213,12 +217,13 @@ public abstract class Component {
         getDriver().manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
     }
 
-    public void switchToIframe(String iframeName){
+    public void switchToIframe(String iframeName) {
         waitForElementVisible(By.name(iframeName), 120);
         driver.switchTo().frame(iframeName);
 
     }
-    public void switchToDefaultIframe(){
+
+    public void switchToDefaultIframe() {
 
         driver.switchTo().defaultContent();
 

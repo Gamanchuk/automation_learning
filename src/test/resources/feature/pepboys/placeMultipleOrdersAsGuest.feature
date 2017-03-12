@@ -4,9 +4,9 @@ Feature: Some feature
 
   Background:
     Given user makes appoint
-    And user adds to cart product with id "8076476" with "Pick Up in Store" delivery option
-    And user adds to cart product with id "8536851" with "Ship to Home" delivery option
-    And user adds to cart any tires with "Installation" delivery option for "captiva"
+    And user adds to cart product with id "8536868" with "Pick Up in Store" delivery option
+    And user adds to cart product with id "8536875" with "Ship to Home" delivery option
+    And user adds to cart any tires with "Installation" delivery option for "captive"
     And user views cart
     And user schedule installation time
     And chooses "Pay Online" method with appointment details

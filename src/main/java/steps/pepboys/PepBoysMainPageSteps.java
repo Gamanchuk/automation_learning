@@ -29,6 +29,12 @@ public class PepBoysMainPageSteps {
         makeAppointmentPage.openPage();
         assertTrue(makeAppointmentPage.isPage(), "Appointment page was not opened");
         makeAppointmentPage.selectDifferentLocation(code);
+
+        try {
+            Thread.sleep(20000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         CommonFunctions.attachScreenshot("Store: " + code + " selected");
     }
 
@@ -109,6 +115,7 @@ public class PepBoysMainPageSteps {
         assertTrue(productPage.isPage(), "Product page was not opened");
         productPage.setDeliveryOption(deliveryOption);
         productPage.addToCart();
+
         assertTrue(productPage.isInfoDialogOpened(), "Info dialog about adding item to cart was not displayed");
         CommonFunctions.attachScreenshot("Info dialog about adding item to cart was opened");
     }
@@ -160,6 +167,8 @@ public class PepBoysMainPageSteps {
 //        tiresPage.addAnyTiresToCart();
 
         tiresPage.addSingleTyresToCart();
+        productPage.addToCart();
+
     }
 
     @And("^user schedule installation time$")

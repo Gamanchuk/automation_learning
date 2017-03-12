@@ -9,7 +9,7 @@ Feature: Some feature
     And chooses "Pay in Store" method
 
   @TestCaseId("16254")
-  Scenario:Place order that must be pay in store
+  Scenario: Place order that must be pay in store
     Given user types billing info for "qa user"
     And presses the "Place Order" button
     Then user should be on thank you page
