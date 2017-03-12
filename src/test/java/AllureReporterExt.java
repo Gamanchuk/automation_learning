@@ -5,10 +5,7 @@ import gherkin.formatter.model.Tag;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import ru.yandex.qatools.allure.cucumberjvm.AllureReporter;
-import utils.DriverFactory;
-import utils.JiraHelper;
-import utils.TestRailRunHelper;
-import utils.TestRailStatus;
+import utils.*;
 
 import java.io.IOException;
 
@@ -47,6 +44,9 @@ public class AllureReporterExt extends AllureReporter {
                 String ticketId = setJiraIssues(String.valueOf(result.getError()));
                 setTestResult(TestRailStatus.FAILED, String.valueOf(result.getError()), ticketId);
             }
+
+
+            CommonFunctions.attachDomThree(DriverFactory.getDriver().getPageSource());
 
             DriverFactory.quitDriver();
 
