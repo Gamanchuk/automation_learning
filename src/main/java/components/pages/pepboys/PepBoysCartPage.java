@@ -21,4 +21,16 @@ public class PepBoysCartPage extends PepBoysBasePage {
             waitForElementClickable(By.xpath("//button[text()='Continue']"));
         }
     }
+
+    public void scheduleInstallationTime() {
+        waitForElementVisible(By.xpath("//h4[text()='Schedule Your Installation Time']"));
+        waitForElementVisible(By.xpath("(//div[@class='dateHeader'])[5]"));
+        getDriver().findElement(By.xpath("(//div[@class='dateHeader'])[5]")).click();
+
+        By availableTime = By.xpath("//div[@data-ur-state='enabled' and @class='dayColumn']//div[contains(@class, 'timeSlotOuter') and not(contains(@class, 'unavailable'))]");
+        scrollToElement(getDriver().findElement(availableTime));
+        getDriver().findElement(availableTime).click();
+
+        click(By.xpath("//a[text()='Next']"));
+    }
 }

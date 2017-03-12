@@ -9,6 +9,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.DriverFactory;
 
+import java.util.concurrent.TimeUnit;
+
 public abstract class Component {
 
     private final int TIMEOUT_SECONDS = 50;
@@ -119,8 +121,13 @@ public abstract class Component {
 
     public void click(By el) {
 
-        if (getDriver().getPageSource().contains("Your ideas make"))
+        String pageSource = getDriver().getPageSource();
+
+        if (pageSource.contains("Your ideas make")
+                || pageSource.contains("We want your feedback")) {
             getDriver().findElement(By.xpath("//a[@class='acsCloseButton--link acsCloseButton acsDeclineButton']")).click();
+
+        }
 
         try {
             WebDriverWait wait = new WebDriverWait(driver, 30, 200);
@@ -160,7 +167,7 @@ public abstract class Component {
     public void navigateWithCookies(String url, String cookies) {
         getDriver().navigate().to(url + cookies);
         waitForRedirect(url + cookies);
-       // waitForAjax();
+        // waitForAjax();
     }
 
 
@@ -207,14 +214,16 @@ public abstract class Component {
 
     public void focusOut() {
         getDriver().findElement(By.cssSelector("body")).click();
+        getDriver().manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
     }
 
-    public void switchToIframe(String iframeName){
+    public void switchToIframe(String iframeName) {
         waitForElementVisible(By.name(iframeName), 120);
         driver.switchTo().frame(iframeName);
 
     }
-    public void switchToDefaultIframe(){
+
+    public void switchToDefaultIframe() {
 
         driver.switchTo().defaultContent();
 

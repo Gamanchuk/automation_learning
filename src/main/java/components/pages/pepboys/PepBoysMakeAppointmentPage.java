@@ -4,7 +4,10 @@ import com.google.common.base.Charsets;
 import com.google.common.io.Files;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.support.ui.Select;
+import utils.CommonFunctions;
 import utils.DriverFactory;
+import utils.pepboys.Vehicle;
 
 import java.io.File;
 import java.io.IOException;
@@ -52,5 +55,25 @@ public class PepBoysMakeAppointmentPage extends PepBoysBasePage {
 
         JavascriptExecutor js = (JavascriptExecutor) DriverFactory.getDriver();
         js.executeScript(fileContents);
+    }
+
+    public void selectVehicle(Vehicle vehicle) {
+        By addVehicleBtn = By.xpath("//*[text()='Add Vehicle']/..");
+        getDriver().findElement(addVehicleBtn).click();
+
+        By modelYearSelect = By.xpath("//select[contains(@class, 'yearSelector')]");
+        By makeSelect = By.xpath("//select[contains(@class, 'makeSelector')]");
+        By modelSelect = By.xpath("//select[contains(@class, 'modelSelector')]");
+        By engineSelect = By.xpath("//select[contains(@class, 'engineSelector')]");
+
+        waitForElementVisible(modelYearSelect);
+        new Select(getDriver().findElement(modelYearSelect)).selectByVisibleText(vehicle.getModelYear());
+        new Select(getDriver().findElement(makeSelect)).selectByVisibleText(vehicle.getMake());
+        new Select(getDriver().findElement(modelSelect)).selectByVisibleText(vehicle.getModel());
+        new Select(getDriver().findElement(engineSelect)).selectByVisibleText(vehicle.getEngine());
+
+        CommonFunctions.attachScreenshot("Vehicle config");
+
+        getDriver().findElement(By.xpath("//button[contains(@class, 'j-saveVehicle')]")).click();
     }
 }

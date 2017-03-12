@@ -14,11 +14,13 @@ import static org.testng.Assert.assertTrue;
 public class PepBoysMainPageSteps {
 
     private PepBoysMakeAppointmentPage makeAppointmentPage = new PepBoysMakeAppointmentPage();
+    private PepBoysMainPage mainPage = new PepBoysMainPage();
     private PepBoysProductsInCategoryPage productsPage = new PepBoysProductsInCategoryPage();
     private PepBoysCategoriesPage categoriesPage = new PepBoysCategoriesPage();
     private PepBoysProductPage productPage = new PepBoysProductPage();
     private PepBoysCartPage cartPage = new PepBoysCartPage();
     private PepBoysBillingPage billingPage = new PepBoysBillingPage();
+    private PepBoysTiresPage tiresPage = new PepBoysTiresPage();
 
     private CategoriesWidget categoriesWidget = new CategoriesWidget();
 
@@ -27,6 +29,12 @@ public class PepBoysMainPageSteps {
         makeAppointmentPage.openPage();
         assertTrue(makeAppointmentPage.isPage(), "Appointment page was not opened");
         makeAppointmentPage.selectDifferentLocation(code);
+
+        try {
+            Thread.sleep(20000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         CommonFunctions.attachScreenshot("Store: " + code + " selected");
     }
 
@@ -62,6 +70,11 @@ public class PepBoysMainPageSteps {
 
     @And("^chooses \"([^\"]*)\" method$")
     public void userChoosesMethod(String method) throws Throwable {
+        cartPage.payUsingPaymentMethod(method);
+    }
+
+    @And("^chooses \"([^\"]*)\" method with appointment details$")
+    public void userChoosesMethodWithAppointmentDetails(String method) throws Throwable {
         cartPage.payUsingPaymentMethod(method);
     }
 
@@ -102,6 +115,7 @@ public class PepBoysMainPageSteps {
         assertTrue(productPage.isPage(), "Product page was not opened");
         productPage.setDeliveryOption(deliveryOption);
         productPage.addToCart();
+
         assertTrue(productPage.isInfoDialogOpened(), "Info dialog about adding item to cart was not displayed");
         CommonFunctions.attachScreenshot("Info dialog about adding item to cart was opened");
     }
@@ -123,6 +137,44 @@ public class PepBoysMainPageSteps {
     }
 
 
+    @And("^user adding vehicle \"([^\"]*)\"$")
+    public void userAddingVehicle(String vehicle) throws Throwable {
+        makeAppointmentPage.openPage();
+        assertTrue(makeAppointmentPage.isPage(), "Appointment page was not opened");
+        makeAppointmentPage.selectVehicle(DataProvider.getVehicle(vehicle));
+    }
+
+    @And("^user adds to cart tires with SKU \"([^\"]*)\" with \"([^\"]*)\" delivery option for \"([^\"]*)\"$")
+    public void userAddsToCartTiresWithIdWithDeliveryOption(String sku, String deliveryOption, String vehicle) throws Throwable {
+        mainPage.openPageWithCookies();
+        categoriesWidget.openCategory("Tires");
+        tiresPage.shopForTiresBy("Tires by Vehicle");
+        tiresPage.selectVehicle(DataProvider.getVehicle(vehicle));
+        tiresPage.addTiresToCart(sku);
+    }
+
+    @And("^user continue shopping$")
+    public void userContinueShopping() throws Throwable {
+        productPage.clickContinueInAddToCartDialog();
+    }
+
+    @And("^user adds to cart any tires with \"([^\"]*)\" delivery option for \"([^\"]*)\"$")
+    public void userAddsToCartAnyTiresWithDeliveryOptionFor(String deliveryOption, String vehicle) throws Throwable {
+//        mainPage.openPageWithCookies();
+//        categoriesWidget.openCategory("Tires");
+//        tiresPage.shopForTiresBy("Tires by Vehicle");
+//        tiresPage.selectVehicle(DataProvider.getVehicle(vehicle));
+//        tiresPage.addAnyTiresToCart();
+
+        tiresPage.addSingleTyresToCart();
+        productPage.addToCart();
+
+    }
+
+    @And("^user schedule installation time$")
+    public void userScheduleInstallationTime() throws Throwable {
+        cartPage.scheduleInstallationTime();
+    }
 }
 
 

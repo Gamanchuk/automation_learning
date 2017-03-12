@@ -1,4 +1,5 @@
-@pepBoys, @debug
+
+@pepBoys
 
 
 Feature: Some feature

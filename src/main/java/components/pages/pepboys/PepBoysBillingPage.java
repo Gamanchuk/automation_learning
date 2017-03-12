@@ -8,6 +8,8 @@ import utils.CommonFunctions;
 import utils.pepboys.BillingUser;
 import utils.pepboys.CreditCard;
 
+import java.util.concurrent.TimeUnit;
+
 import static org.testng.AssertJUnit.assertTrue;
 
 public class PepBoysBillingPage extends PepBoysBasePage {
@@ -29,11 +31,11 @@ public class PepBoysBillingPage extends PepBoysBasePage {
         click(By.xpath("(//div[contains(., '" + user.getCityInfo() + "')]/../input[@name='addresses'])[1]"));
 
         waitForElementVisible(By.id("billing-address-line2"));
+        sendKeysOneByOne(By.id("billing-tel"), user.getPhone());
         getDriver().findElement(By.id("billing-address-line2")).sendKeys(user.getApartment());
         getDriver().findElement(By.id("billing-email")).sendKeys(user.getEmail());
 
         // Need to send phone number digit by digit
-        sendKeysOneByOne(By.id("billing-tel"), user.getPhone());
 
         CommonFunctions.attachScreenshot("Billing info");
 
@@ -41,7 +43,7 @@ public class PepBoysBillingPage extends PepBoysBasePage {
     }
 
     public void confirmBillingInfo(String confirmMethod) {
-        ((JavascriptExecutor) getDriver()).executeScript("window.scrollBy(0,250)", "");
+        ((JavascriptExecutor) getDriver()).executeScript("window.scrollBy(0,300)", "");
 
         if (confirmMethod.equals("Continue")) {
             getDriver().findElement(continueBtn).click();
