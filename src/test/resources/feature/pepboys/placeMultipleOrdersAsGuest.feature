@@ -11,7 +11,7 @@ Feature: Some feature
     And user schedule installation time
     And chooses "Pay Online" method with appointment details
 
-  @TestCaseId("16247")
+  @TestCaseId("16252")
   Scenario: Place Multiple Orders as a "Guest"
     Given user types billing info for "qa user"
     And presses the "Continue" button

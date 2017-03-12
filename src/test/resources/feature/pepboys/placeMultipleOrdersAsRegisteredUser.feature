@@ -11,8 +11,8 @@ Feature: Some feature
     And user schedule installation time
     And chooses "Pay Online" method with appointment details
 
-  @TestCaseId("16247")
-  Scenario: Place Multiple Orders as a "Guest"
+  @TestCaseId("16253")
+  Scenario: Place Multiple Orders as exist user
     Given user makes authorisation for "qa user"
     And applies billing info for address "201 SPEAR ST"
     And presses the "Continue" button
