@@ -3,10 +3,14 @@ package components.pages.pepboys;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import utils.CommonFunctions;
 import utils.pepboys.BillingUser;
 import utils.pepboys.CreditCard;
 
+import java.util.concurrent.TimeUnit;
+
+import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertTrue;
 
 public class PepBoysBillingPage extends PepBoysBasePage {
@@ -17,31 +21,87 @@ public class PepBoysBillingPage extends PepBoysBasePage {
     private By signInCheckoutButton = By.xpath("//button[text()='Sign In & Checkout']");
     private By ccNumber = By.id("cc-number");
 
+    // Billing info: element path
+    private By billingName = By.id("billing-name");
+    private By billingAddress = By.id("billing-address-line1");
+    private By billingApartment = By.id("billing-address-line2");
+    private By billingPhone = By.id("billing-tel");
+    private By billingEmail = By.id("billing-email");
+
 
     public void inputBillingInfo(BillingUser user) {
-        getDriver().findElement(By.id("billing-name")).sendKeys(user.getName());
-        getDriver().findElement(By.id("billing-address-line1")).sendKeys(user.getAddress());
+        getDriver().findElement(billingName).sendKeys(user.getName());
+        getDriver().findElement(billingAddress).sendKeys(user.getFullAddress());
 
         click(By.xpath("(//div[contains(., '" + user.getCityInfo() + "')]/../input[@name='addresses'])[1]"));
 
-        waitForElementVisible(By.id("billing-address-line2"));
-        getDriver().findElement(By.id("billing-address-line2")).sendKeys(user.getApartment());
+        waitForElementVisible(billingApartment);
+        getDriver().findElement(billingApartment).sendKeys(user.getApartment());
 
         // Need to send phone number digit by digit
-        sendKeysOneByOne(By.id("billing-tel"), user.getPhone());
-        getDriver().findElement(By.id("billing-email")).sendKeys(user.getEmail());
+        sendKeysOneByOne(billingPhone, user.getPhone());
+        getDriver().findElement(billingEmail).sendKeys(user.getEmail());
 
         CommonFunctions.attachScreenshot("Billing info");
 
         focusOut();
     }
 
+    public void inputBillingInfoManually(BillingUser user) {
+        getDriver().findElement(billingName).sendKeys(user.getName().toUpperCase());
+        getDriver().findElement(billingAddress).sendKeys(user.getFullAddress().toUpperCase());
+
+        click(By.xpath("//a[@class='manual']"));
+
+        waitForElementVisible(billingApartment);
+        getDriver().findElement(billingApartment).sendKeys(user.getApartment().toUpperCase());
+
+        getDriver().findElement(By.id("billing-locality")).sendKeys(user.getCity().toUpperCase());
+
+        WebElement state = getDriver().findElement(By.id("billing-address-level1"));
+        state.click();
+
+        Select selectState = new Select(state);
+        selectState.selectByValue(user.getState());
+
+        getDriver().findElement(By.id("billing-postal-code")).sendKeys(user.getZipCode());
+
+        // Need to send phone number digit by digit
+        sendKeysOneByOne(billingPhone, user.getPhone());
+        getDriver().findElement(billingEmail).sendKeys(user.getEmail());
+
+        CommonFunctions.attachScreenshot("Billing info manually");
+
+        focusOut();
+    }
+
+    public void checkBillingInfo(BillingUser user) {
+        waitForElementClickable(By.xpath("//div[contains(@class, 'radio-list') and contains(@class, 'radio-collapsed')]"));
+
+        getDriver().manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+        String userName = getDriver().findElement(By.xpath("//div[@class='address-recipient']")).getText();
+        String fullAddress = getDriver().findElement(By.xpath("//div[@class='address-line1']")).getText();
+        String cityInfo = getDriver().findElement(By.xpath("//div[@class='address-city-state-zip']")).getText();
+        String phone = getDriver().findElement(By.xpath("//a[@class='phone-display address-phone']")).getText();
+        String email = getDriver().findElement(By.xpath("//div[@class='address-email']")).getText();
+
+        CommonFunctions.attachScreenshot("Billing info");
+
+        assertEquals(userName, user.getName().toUpperCase());
+        assertEquals(fullAddress, user.getFullAddress().toUpperCase());
+        assertEquals(cityInfo, (user.getCity() + ", " + user.getState() + " " + user.getZipCode()).toUpperCase());
+        assertEquals(phone, user.getFormatedPhone());
+        assertEquals(email, user.getEmail());
+
+
+    }
+
     public void confirmBillingInfo(String confirmMethod) {
         ((JavascriptExecutor) getDriver()).executeScript("window.scrollBy(0,300)", "");
 
         if (confirmMethod.equals("Continue")) {
+            CommonFunctions.attachScreenshot("Shipping info");
             getDriver().findElement(continueBtn).click();
-            this.useRecommended();
         } else if (confirmMethod.equals("Place Order")) {
             getDriver().findElement(By.xpath("//div[contains(@class, 'total-cost')]")).click();
             CommonFunctions.attachScreenshot("Billing info");
@@ -49,7 +109,6 @@ public class PepBoysBillingPage extends PepBoysBasePage {
         }
 
     }
-
 
     public void selectShippingMethod(String shippingMethod) {
 
@@ -138,11 +197,21 @@ public class PepBoysBillingPage extends PepBoysBasePage {
         }
     }
 
-    private void useRecommended() {
-        By recommendedAddressRadio = By.xpath("//div[@class='radio-list-option' and contains(., 'Use Recommended Address')]");
+    public void choiceAddressType(String addressType) {
 
-        if (isElementVisible(recommendedAddressRadio, 5)) {
-            getDriver().findElement(recommendedAddressRadio).click();
+        By item = By.xpath("//div[@class='radio-list-option' and contains(., '" + addressType + "')]");
+
+        if (isElementVisible(item, 5)) {
+            getDriver().findElement(item).click();
+            CommonFunctions.attachScreenshot("Choice address type");
+        }
+    }
+
+    private void useManually() {
+        By manuallyAddressRadio = By.xpath("//div[@class='radio-list-option' and contains(., 'Use Entered Address')]");
+
+        if (isElementVisible(manuallyAddressRadio, 5)) {
+            getDriver().findElement(manuallyAddressRadio).click();
         }
     }
 }

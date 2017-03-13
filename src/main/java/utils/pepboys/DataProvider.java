@@ -5,6 +5,9 @@ public class DataProvider {
     private static BillingUser qaUser = new BillingUser(
             "qa moovweb",
             "123 mission street",
+            "San Francisco",
+            "CA",
+            "94105",
             "10th floor",
             "4152011234",
             "qa@moovweb.com",

@@ -45,10 +45,7 @@ public class AllureReporterExt extends AllureReporter {
                 setTestResult(TestRailStatus.FAILED, String.valueOf(result.getError()), ticketId);
             }
 
-
             CommonFunctions.attachDomThree(DriverFactory.getDriver().getPageSource());
-
-            DriverFactory.quitDriver();
 
         } else if ("passed".equals(result.getStatus())) {
             log.info("passed: " + caseName);

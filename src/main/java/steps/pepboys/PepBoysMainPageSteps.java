@@ -83,9 +83,24 @@ public class PepBoysMainPageSteps {
         billingPage.inputBillingInfo(DataProvider.getUser(userName));
     }
 
+    @Given("^user types manually billing info for \"([^\"]*)\"$")
+    public void userTypesManuallyBillingInfoFor(String userName) {
+        billingPage.inputBillingInfoManually(DataProvider.getUser(userName));
+    }
+
+    @Then("^user check billing info for \"([^\"]*)\"$")
+    public void userCheckBillingInfoFor(String userName) {
+        billingPage.checkBillingInfo(DataProvider.getUser(userName));
+    }
+
     @And("^presses the \"([^\"]*)\" button$")
     public void pressesTheButton(String confirmationMethod) {
         billingPage.confirmBillingInfo(confirmationMethod);
+    }
+
+    @And("^choice \"([^\"]*)\"$")
+    public void choice(String addressType) {
+        billingPage.choiceAddressType(addressType);
     }
 
     @And("^chooses \"([^\"]*)\" shipping method$")
@@ -172,9 +187,11 @@ public class PepBoysMainPageSteps {
     }
 
     @And("^user schedule installation time$")
-    public void userScheduleInstallationTime() throws Throwable {
+    public void userScheduleInstallationTime() {
         cartPage.scheduleInstallationTime();
     }
+
+
 }
 
 
