@@ -20,7 +20,7 @@ public class PepBoysProductPage extends PepBoysBasePage {
     public void setDeliveryOption(String deliveryOption) {
         ((JavascriptExecutor) getDriver()).executeScript("window.scrollBy(0,500)", "");
 
-        if (!deliveryOption.contains("Pick Up in Store")) {
+        if (!deliveryOption.equals("Pick Up in Store")) {
             getDriver().findElement(By.xpath("//label[contains(., '" + deliveryOption + "')]")).click();
             waitForAjax();
         }

@@ -1,21 +1,15 @@
 package components.pages.pepboys;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 import utils.CommonFunctions;
 import utils.pepboys.BillingUser;
 import utils.pepboys.CreditCard;
 
-import java.util.concurrent.TimeUnit;
-
 import static org.testng.AssertJUnit.assertTrue;
 
 public class PepBoysBillingPage extends PepBoysBasePage {
-
-    private String data;
-    private static Log log = LogFactory.getLog(PepBoysBillingPage.class);
 
     private By continueBtn = By.xpath("//button[text()='Continue']");
     private By placeOrderBtn = By.xpath("//div[@class='order-review-container']/div[@class='place-order-button well']/div[@class='component submit-button']/button[@class='main-button']");
@@ -31,11 +25,11 @@ public class PepBoysBillingPage extends PepBoysBasePage {
         click(By.xpath("(//div[contains(., '" + user.getCityInfo() + "')]/../input[@name='addresses'])[1]"));
 
         waitForElementVisible(By.id("billing-address-line2"));
-        sendKeysOneByOne(By.id("billing-tel"), user.getPhone());
         getDriver().findElement(By.id("billing-address-line2")).sendKeys(user.getApartment());
-        getDriver().findElement(By.id("billing-email")).sendKeys(user.getEmail());
 
         // Need to send phone number digit by digit
+        sendKeysOneByOne(By.id("billing-tel"), user.getPhone());
+        getDriver().findElement(By.id("billing-email")).sendKeys(user.getEmail());
 
         CommonFunctions.attachScreenshot("Billing info");
 
@@ -61,11 +55,6 @@ public class PepBoysBillingPage extends PepBoysBasePage {
 
         waitForElementVisible(By.xpath("//h2[text()='Shipping Address']"));
         this.select(shippingMethod);
-
-        //TODO: Getting shipping method price to recheck in order
-//        String option = getDriver().findElement(shippingMethodOptionEl).getText();
-//        float shippingPrice = CommonFunctions.getCurrency(option);
-//        TestGlobalsManager.setTestGlobal("shippingPrice", shippingPrice);
 
         focusOut();
         CommonFunctions.attachScreenshot("Shipping method");
@@ -105,6 +94,7 @@ public class PepBoysBillingPage extends PepBoysBasePage {
 
         String message = getDriver().findElement(thanksMsg).getText().toLowerCase();
         assertTrue(message.contains("thank you for your order"));
+
         CommonFunctions.attachScreenshot("Thank You Page");
     }
 
@@ -112,8 +102,14 @@ public class PepBoysBillingPage extends PepBoysBasePage {
         getDriver().findElement(signInButton).click();
         waitForElementClickable(signInCheckoutButton);
 
-        getDriver().findElement(By.id("shipping-email")).sendKeys(user.getEmail());
-        getDriver().findElement(By.id("password")).sendKeys(user.getPassword());
+        WebElement emailField = getDriver().findElement(By.id("shipping-email"));
+        emailField.clear();
+        emailField.sendKeys(user.getEmail());
+
+        WebElement passwordField = getDriver().findElement(By.id("password"));
+        passwordField.clear();
+        passwordField.sendKeys(user.getPassword());
+
         focusOut();
         CommonFunctions.attachScreenshot("Login page");
         getDriver().findElement(signInCheckoutButton).click();
@@ -128,7 +124,7 @@ public class PepBoysBillingPage extends PepBoysBasePage {
             e.printStackTrace();
         }
 
-        // TODO: There's an issue whith address dropdown, the wrong address is selected by default.
+        // TODO: There's an issue which address dropdown, the wrong address is selected by default.
         // Need to handle it somehow
         this.select(address);
         CommonFunctions.attachScreenshot("Billing info");
