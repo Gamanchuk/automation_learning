@@ -6,6 +6,7 @@ import java.text.ParseException;
 public class BillingUser {
     private String name;
     private String fullAddress;
+    private String recomendedAddress;
     private String city;
     private String state;
     private String zipCode;
@@ -62,7 +63,7 @@ public class BillingUser {
     }
 
 
-    public String getFormatedPhone() {
+    public String getFormattedPhone() {
 
         String mask = "(###) ###-####";
         String result = null;

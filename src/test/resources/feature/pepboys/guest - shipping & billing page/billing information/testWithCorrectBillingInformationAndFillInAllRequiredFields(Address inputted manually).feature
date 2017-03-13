@@ -1,7 +1,7 @@
 @pepBoys, @debug
 
 
-Feature: Some feature
+Feature: Guest - Shipping & Billing page
 
   Background:
     Given user makes appoint

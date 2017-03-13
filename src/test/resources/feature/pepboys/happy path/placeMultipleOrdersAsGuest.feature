@@ -1,7 +1,7 @@
 @pepBoys
 
 
-Feature: Some feature
+Feature: Happy Path
 
   Background:
     Given user makes appoint
@@ -16,7 +16,7 @@ Feature: Some feature
   Scenario: Place Multiple Orders as a "Guest"
     Given user types billing info for "qa user"
     And presses the "Continue" button
-    And choice  "Use Recommended Address"
+    And choice "Use Recommended Address"
     And chooses "Ground" shipping method
     And uses "visa" card for payment
     Then user should be on thank you page

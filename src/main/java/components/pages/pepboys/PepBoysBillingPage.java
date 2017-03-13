@@ -48,15 +48,15 @@ public class PepBoysBillingPage extends PepBoysBasePage {
     }
 
     public void inputBillingInfoManually(BillingUser user) {
-        getDriver().findElement(billingName).sendKeys(user.getName().toUpperCase());
-        getDriver().findElement(billingAddress).sendKeys(user.getFullAddress().toUpperCase());
+        getDriver().findElement(billingName).sendKeys(user.getName());
+        getDriver().findElement(billingAddress).sendKeys(user.getFullAddress());
 
         click(By.xpath("//a[@class='manual']"));
 
         waitForElementVisible(billingApartment);
-        getDriver().findElement(billingApartment).sendKeys(user.getApartment().toUpperCase());
+        getDriver().findElement(billingApartment).sendKeys(user.getApartment());
 
-        getDriver().findElement(By.id("billing-locality")).sendKeys(user.getCity().toUpperCase());
+        getDriver().findElement(By.id("billing-locality")).sendKeys(user.getCity());
 
         WebElement state = getDriver().findElement(By.id("billing-address-level1"));
         state.click();
@@ -87,10 +87,10 @@ public class PepBoysBillingPage extends PepBoysBasePage {
 
         CommonFunctions.attachScreenshot("Billing info");
 
-        assertEquals(userName, user.getName().toUpperCase());
-        assertEquals(fullAddress, user.getFullAddress().toUpperCase());
-        assertEquals(cityInfo, (user.getCity() + ", " + user.getState() + " " + user.getZipCode()).toUpperCase());
-        assertEquals(phone, user.getFormatedPhone());
+        assertEquals(userName, user.getName());
+        assertTrue(user.getFullAddress().contains(fullAddress));
+        assertEquals(cityInfo, user.getCity() + ", " + user.getState() + " " + user.getZipCode());
+        assertEquals(phone, user.getFormattedPhone());
         assertEquals(email, user.getEmail());
 
 
@@ -204,14 +204,6 @@ public class PepBoysBillingPage extends PepBoysBasePage {
         if (isElementVisible(item, 5)) {
             getDriver().findElement(item).click();
             CommonFunctions.attachScreenshot("Choice address type");
-        }
-    }
-
-    private void useManually() {
-        By manuallyAddressRadio = By.xpath("//div[@class='radio-list-option' and contains(., 'Use Entered Address')]");
-
-        if (isElementVisible(manuallyAddressRadio, 5)) {
-            getDriver().findElement(manuallyAddressRadio).click();
         }
     }
 }
