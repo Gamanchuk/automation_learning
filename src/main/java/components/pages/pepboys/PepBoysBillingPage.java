@@ -210,8 +210,8 @@ public class PepBoysBillingPage extends PepBoysBasePage {
         String errorTitle = getDriver().findElement(By.xpath(path + "/h2")).getText();
         String errorMessage = getDriver().findElement(By.xpath(path + "/div")).getText();
 
-        assertEquals(errorTitle, "Form Errors");
-        assertEquals(errorMessage, "Please review all inputs.");
+        assertEquals(errorTitle.toLowerCase(), "form errors");
+        assertEquals(errorMessage.toLowerCase(), "please review all inputs.");
     }
 
     private void select(String arg) {
