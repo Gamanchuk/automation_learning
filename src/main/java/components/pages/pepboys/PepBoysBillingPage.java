@@ -87,8 +87,12 @@ public class PepBoysBillingPage extends PepBoysBasePage {
 
         CommonFunctions.attachScreenshot("Billing info");
 
+        String[] address = fullAddress.split(" ");
+        fullAddress = address[0] + " " + address[1] + " " + address[2];
+
+
         assertEquals(userName, user.getName());
-        assertTrue(user.getFullAddress().contains(fullAddress));
+        assertTrue(user.getFullAddress().toLowerCase().contains(fullAddress.toLowerCase()));
         assertEquals(cityInfo, user.getCity() + ", " + user.getState() + " " + user.getZipCode());
         assertEquals(phone, user.getFormattedPhone());
         assertEquals(email, user.getEmail());
