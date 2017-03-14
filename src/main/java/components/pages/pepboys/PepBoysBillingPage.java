@@ -30,7 +30,7 @@ public class PepBoysBillingPage extends PepBoysBasePage {
 
 
     public void inputBillingInfo(BillingUser user) {
-        getDriver().findElement(billingName).sendKeys(user.getName());
+        getDriver().findElement(billingName).sendKeys(user.getFullName());
         getDriver().findElement(billingAddress).sendKeys(user.getFullAddress());
 
         click(By.xpath("(//div[contains(., '" + user.getCityInfo() + "')]/../input[@name='addresses'])[1]"));
@@ -48,7 +48,7 @@ public class PepBoysBillingPage extends PepBoysBasePage {
     }
 
     public void inputBillingInfoManually(BillingUser user) {
-        getDriver().findElement(billingName).sendKeys(user.getName());
+        getDriver().findElement(billingName).sendKeys(user.getFullName());
         getDriver().findElement(billingAddress).sendKeys(user.getFullAddress());
 
         click(By.xpath("//a[@class='manual']"));
@@ -91,7 +91,7 @@ public class PepBoysBillingPage extends PepBoysBasePage {
         fullAddress = address[0] + " " + address[1] + " " + address[2];
 
 
-        assertEquals(userName, user.getName());
+        assertEquals(userName, user.getFullName());
         assertTrue(user.getFullAddress().toLowerCase().contains(fullAddress.toLowerCase()));
         assertEquals(cityInfo, user.getCity() + ", " + user.getState() + " " + user.getZipCode());
         assertEquals(phone, user.getFormattedPhone());

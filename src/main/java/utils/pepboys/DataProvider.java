@@ -3,6 +3,25 @@ package utils.pepboys;
 public class DataProvider {
     // Users
     private static BillingUser qaUser = new BillingUser(
+            "qa",
+            "moovweb",
+            "qa moovweb",
+            "123 mission street",
+            "San Francisco",
+            "CA",
+            "94105",
+            "10th floor",
+            "4152011234",
+            "qa@moovweb.com",
+            "San Francisco CA 94105",
+            "Spear201!",
+            "manytu2012-buy@gmail.com",
+            "q1q1q1q1"
+    );
+
+    private static BillingUser invalidQaUser = new BillingUser(
+            "Moovweb",
+            "!@&$)();:@!",
             "qa moovweb",
             "123 mission street",
             "San Francisco",
