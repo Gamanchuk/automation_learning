@@ -179,6 +179,8 @@ public class PepBoysBillingPage extends PepBoysBasePage {
     }
 
     public void applyBillingInfo(String address) {
+
+        // TODO: Re-work this function
         //  waitForElementClickable(continueBtn);
 
         try {
@@ -193,14 +195,6 @@ public class PepBoysBillingPage extends PepBoysBasePage {
         CommonFunctions.attachScreenshot("Billing info");
     }
 
-    private void select(String arg) {
-        By shippingMethodOptionEl = By.xpath("//div[contains(text(), '" + arg + "')]");
-        if (!isElementPresent(shippingMethodOptionEl)) {
-            click(By.xpath("//div[contains(@class, 'radio-list') and contains(@class, 'radio-collapsed')]"));
-            click(shippingMethodOptionEl);
-        }
-    }
-
     public void choiceAddressType(String addressType) {
 
         By item = By.xpath("//div[@class='radio-list-option' and contains(., '" + addressType + "')]");
@@ -208,6 +202,23 @@ public class PepBoysBillingPage extends PepBoysBasePage {
         if (isElementVisible(item, 5)) {
             getDriver().findElement(item).click();
             CommonFunctions.attachScreenshot("Choice address type");
+        }
+    }
+
+    public void checkBillingInfoFormError() {
+        String path = "//div[@class='component message-panel message-panel-form-error']";
+        String errorTitle = getDriver().findElement(By.xpath(path + "/h2")).getText();
+        String errorMessage = getDriver().findElement(By.xpath(path + "/div")).getText();
+
+        assertEquals(errorTitle, "Form Errors");
+        assertEquals(errorMessage, "Please review all inputs.");
+    }
+
+    private void select(String arg) {
+        By shippingMethodOptionEl = By.xpath("//div[contains(text(), '" + arg + "')]");
+        if (!isElementPresent(shippingMethodOptionEl)) {
+            click(By.xpath("//div[contains(@class, 'radio-list') and contains(@class, 'radio-collapsed')]"));
+            click(shippingMethodOptionEl);
         }
     }
 }

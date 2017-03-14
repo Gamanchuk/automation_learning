@@ -124,6 +124,12 @@ public class PepBoysMainPageSteps {
         billingPage.checkPaymentResult();
     }
 
+    @Then("^user stay at billing tab with error message$")
+    public void userCheckErrorMessage() {
+        billingPage.checkBillingInfoFormError();
+        CommonFunctions.attachScreenshot("Please review all inputs");
+    }
+
     @And("^user adds to cart product with id \"([^\"]*)\" with \"([^\"]*)\" delivery option$")
     public void userAddsToCartProductWithIdWithDeliveryOption(String id, String deliveryOption) throws Throwable {
         productPage.openProductPage(id);
@@ -190,7 +196,6 @@ public class PepBoysMainPageSteps {
     public void userScheduleInstallationTime() {
         cartPage.scheduleInstallationTime();
     }
-
 
 }
 
