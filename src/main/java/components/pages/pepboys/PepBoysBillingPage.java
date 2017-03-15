@@ -333,8 +333,16 @@ public class PepBoysBillingPage extends PepBoysBasePage {
         String path = "//div[@class='component message-panel message-panel-form-error']";
         String errorTitle = getDriver().findElement(By.xpath(path + "/h2")).getText();
         String errorMessage = getDriver().findElement(By.xpath(path + "/div")).getText();
+        boolean flag = false;
 
         assertEquals(errorTitle.toLowerCase(), "form errors");
+
+        if (errorMessage.toLowerCase().equals("please review all inputs.") ||
+                errorMessage.toLowerCase().equals("last name is invalid")) {
+            flag = true;
+        }
+
+        assertTrue("Error message: '" + errorMessage.toLowerCase() + "' doesn't equals", flag);
         assertEquals(errorMessage.toLowerCase(), "please review all inputs.");
     }
 
