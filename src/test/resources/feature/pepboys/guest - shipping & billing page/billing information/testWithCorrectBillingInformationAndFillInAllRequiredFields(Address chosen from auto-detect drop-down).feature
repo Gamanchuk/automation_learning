@@ -1,4 +1,4 @@
-@pepBoys
+@pepBoys, @debug
 
 
 Feature: Guest - Shipping & Billing page
@@ -9,11 +9,11 @@ Feature: Guest - Shipping & Billing page
     And user views cart
     And chooses "Pay Online" method
 
-  @TestCaseId("15493")
-  Scenario: Test with correct billing information and fill in all required fields (Address inputted manually)
-    Given user types manually billing info for "qa user"
+  @TestCaseId("15494")
+  Scenario: Test with correct billing information and fill in all required fields (Address chosen from auto-detect drop-down)
+    Given user types billing info for "qa user"
     And presses the "Continue" button
-    And chooses "Use Entered Address"
+    And chooses "Use Recommended Address"
     Then user checks billing info for "qa user"
 
 
