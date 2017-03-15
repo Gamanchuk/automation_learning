@@ -98,9 +98,9 @@ public class PepBoysMainPageSteps {
         billingPage.confirmBillingInfo(confirmationMethod);
     }
 
-    @And("^choice \"([^\"]*)\"$")
-    public void choice(String addressType) {
-        billingPage.choiceAddressType(addressType);
+    @And("^chooses \"([^\"]*)\"$")
+    public void choose(String addressType) {
+        billingPage.chooseAddressType(addressType);
     }
 
     @And("^chooses \"([^\"]*)\" shipping method$")
@@ -197,6 +197,35 @@ public class PepBoysMainPageSteps {
         cartPage.scheduleInstallationTime();
     }
 
+    @Given("^user fill \"([^\"]*)\" in billing info for \"([^\"]*)\"$")
+    public void userFillInBillingInfoFor(String field, String userName) {
+
+
+    }
+
+
+    @Given("^user types \"([^\"]*)\" in \"([^\"]*)\" on billing info tab$")
+    public void userTypesInOnBillingInfoTab(String value, String field) {
+        billingPage.inputBillingInfoOneByOne(value, field);
+        CommonFunctions.attachScreenshot("Input info one by one in field: " + field);
+    }
+
+    @And("^user navigate back$")
+    public void userNavigateBack() {
+
+    }
+
+    @And("^user navigate back on \"([^\"]*)\"$")
+    public void userNavigateBackOn(String tab) {
+        billingPage.navigateToBillingTab(tab);
+
+
+    }
+
+    @Then("^user check \"([^\"]*)\" with value \"([^\"]*)\"$")
+    public void userCheckWithValue(String field, String value) throws Throwable {
+        billingPage.checkBillingInfo(field, value);
+    }
 }
 
 

@@ -17,7 +17,7 @@ Feature: Happy Path
     Given user makes authorisation for "qa user"
     And applies billing info for address "201 SPEAR ST"
     And presses the "Continue" button
-    And choice "Use Recommended Address"
+    And chooses "Use Recommended Address"
     And chooses "Ground" shipping method
     And uses "visa" card for payment
     Then user should be on thank you page

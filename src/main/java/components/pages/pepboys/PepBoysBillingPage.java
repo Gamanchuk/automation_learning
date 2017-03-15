@@ -27,7 +27,12 @@ public class PepBoysBillingPage extends PepBoysBasePage {
     private By billingApartment = By.id("billing-address-line2");
     private By billingPhone = By.id("billing-tel");
     private By billingEmail = By.id("billing-email");
+    private By billingCity = By.id("billing-locality");
+    private By billingState = By.id("billing-address-level1");
+    private By billingZip = By.id("billing-postal-code");
 
+    private By deliveryApt = By.xpath("//div[@class='address-line2']");
+    private By deliveryName = By.xpath("//div[@class='address-recipient']");
 
     public void inputBillingInfo(BillingUser user) {
         getDriver().findElement(billingName).sendKeys(user.getFullName());
@@ -56,15 +61,15 @@ public class PepBoysBillingPage extends PepBoysBasePage {
         waitForElementVisible(billingApartment);
         getDriver().findElement(billingApartment).sendKeys(user.getApartment());
 
-        getDriver().findElement(By.id("billing-locality")).sendKeys(user.getCity());
+        getDriver().findElement(billingCity).sendKeys(user.getCity());
 
-        WebElement state = getDriver().findElement(By.id("billing-address-level1"));
+        WebElement state = getDriver().findElement(billingState);
         state.click();
 
         Select selectState = new Select(state);
         selectState.selectByValue(user.getState());
 
-        getDriver().findElement(By.id("billing-postal-code")).sendKeys(user.getZipCode());
+        getDriver().findElement(billingZip).sendKeys(user.getZipCode());
 
         // Need to send phone number digit by digit
         sendKeysOneByOne(billingPhone, user.getPhone());
@@ -75,11 +80,68 @@ public class PepBoysBillingPage extends PepBoysBasePage {
         focusOut();
     }
 
+    public void inputBillingInfoOneByOne(String value, String field) {
+
+        WebElement element = null;
+
+        switch (field) {
+            case "name":
+                element = getDriver().findElement(billingName);
+                element.clear();
+                element.sendKeys(value);
+                break;
+            case "last name":
+                element = getDriver().findElement(billingName);
+                element.clear();
+                element.sendKeys(value);
+                break;
+            case "street address":
+                element = getDriver().findElement(billingAddress);
+                element.clear();
+                element.sendKeys(value);
+                break;
+            case "apt":
+                element = getDriver().findElement(billingApartment);
+                element.clear();
+                element.sendKeys(value);
+                break;
+            case "city":
+                element = getDriver().findElement(billingCity);
+                element.clear();
+                element.sendKeys(value);
+                break;
+            case "state":
+                WebElement state = getDriver().findElement(billingState);
+                state.click();
+
+                Select selectState = new Select(state);
+                selectState.selectByValue(value);
+                break;
+            case "zip":
+                element = getDriver().findElement(billingZip);
+                element.clear();
+                element.sendKeys(value);
+                break;
+            case "phone":
+                element = getDriver().findElement(billingPhone);
+                element.clear();
+                sendKeysOneByOne(billingPhone, value);
+                break;
+            case "email":
+                element = getDriver().findElement(billingEmail);
+                element.clear();
+                element.sendKeys(value);
+                break;
+        }
+
+
+    }
+
     public void checkBillingInfo(BillingUser user) {
         waitForElementClickable(By.xpath("//div[contains(@class, 'radio-list') and contains(@class, 'radio-collapsed')]"));
 
         getDriver().manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-        String userName = getDriver().findElement(By.xpath("//div[@class='address-recipient']")).getText();
+        String userName = getDriver().findElement(deliveryName).getText();
         String fullAddress = getDriver().findElement(By.xpath("//div[@class='address-line1']")).getText();
         String cityInfo = getDriver().findElement(By.xpath("//div[@class='address-city-state-zip']")).getText();
         String phone = getDriver().findElement(By.xpath("//a[@class='phone-display address-phone']")).getText();
@@ -96,8 +158,70 @@ public class PepBoysBillingPage extends PepBoysBasePage {
         assertEquals(cityInfo, user.getCity() + ", " + user.getState() + " " + user.getZipCode());
         assertEquals(phone, user.getFormattedPhone());
         assertEquals(email, user.getEmail());
+    }
+
+    public void checkBillingInfo(String field, String value) {
+        waitForElementClickable(By.xpath("//div[contains(@class, 'radio-list') and contains(@class, 'radio-collapsed')]"));
 
 
+        getDriver().manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+//        String userName = getDriver().findElement(By.xpath("//div[@class='address-recipient']")).getText();
+//        String fullAddress = getDriver().findElement(By.xpath("//div[@class='address-line1']")).getText();
+//        String cityInfo = getDriver().findElement(By.xpath("//div[@class='address-city-state-zip']")).getText();
+//        String phone = getDriver().findElement(By.xpath("//a[@class='phone-display address-phone']")).getText();
+//        String email = getDriver().findElement(By.xpath("//div[@class='address-email']")).getText();
+
+        CommonFunctions.attachScreenshot("Billing info");
+//
+//        String[] address = fullAddress.split(" ");
+//        fullAddress = address[0] + " " + address[1] + " " + address[2];
+
+
+        switch (field) {
+            case "name":
+                String name = getDriver().findElement(deliveryName).getText();
+                assertEquals(name, value);
+                break;
+            case "last name":
+
+                break;
+            case "street address":
+
+                break;
+            case "apt":
+                String apt = getDriver().findElement(deliveryApt).getText();
+                assertEquals(apt, value);
+                break;
+            case "city":
+
+                break;
+            case "state":
+
+                break;
+            case "zip":
+
+                break;
+            case "phone":
+
+                break;
+            case "email":
+
+                break;
+        }
+    }
+
+    public void navigateToBillingTab(String tab) {
+        getDriver().findElement(By.xpath("//div[@class='component breadcrumbs']/a[text()='" + tab + "']")).click();
+
+        switch (tab) {
+            case "Billing & Shipping":
+                waitForElementClickable(billingName);
+                break;
+            case "Delivery Method":
+                break;
+            case "Payment & Review":
+                break;
+        }
     }
 
     public void confirmBillingInfo(String confirmMethod) {
@@ -195,7 +319,7 @@ public class PepBoysBillingPage extends PepBoysBasePage {
         CommonFunctions.attachScreenshot("Billing info");
     }
 
-    public void choiceAddressType(String addressType) {
+    public void chooseAddressType(String addressType) {
 
         By item = By.xpath("//div[@class='radio-list-option' and contains(., '" + addressType + "')]");
 
