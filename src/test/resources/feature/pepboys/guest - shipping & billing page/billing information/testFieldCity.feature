@@ -1,4 +1,4 @@
-@pepBoys
+@pepBoys, @debug
 
 
 Feature: Guest - Shipping & Billing page
@@ -9,26 +9,28 @@ Feature: Guest - Shipping & Billing page
     And user views cart
     And chooses "Pay Online" method
 
-  @TestCaseId("15498")
-  Scenario: Test field 'Address Street'
+  @TestCaseId("15500")
+  Scenario: Test field 'City'
     Given user types billing info for "qa user"
-    And user types " " in "street address" on billing info tab
+    And user types " " in "city" on billing info tab
     And presses the "Continue" button
     Then user stay at billing tab with error message
 
-    And user types "Mission Street" in "street address" on billing info tab
+    And user types "San Francisco" in "city" on billing info tab
     And presses the "Continue" button
     And chooses "Use Entered Address"
-    Then user check "street address" with value "Mission Street"
+    Then user check "city" with value "San Francisco"
     And user navigate back on "Billing & Shipping"
 
-    And user types "123456" in "street address" on billing info tab
+    And user types "123456" in "city" on billing info tab
     And presses the "Continue" button
     And chooses "Use Entered Address"
-    Then user check "street address" with value "123456"
+    Then user check "city" with value "123456"
     And user navigate back on "Billing & Shipping"
 
-    And user types "!@$%^&*():_+" in "street address" on billing info tab
+    And user types "!@$%^&*():_+" in "city" on billing info tab
     And presses the "Continue" button
     And chooses "Use Entered Address"
-    Then user check "street address" with value "!@$%^&*():_+"
+    Then user check "city" with value "!@$%^&*():_+"
+
+
