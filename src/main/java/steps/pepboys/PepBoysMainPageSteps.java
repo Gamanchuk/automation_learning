@@ -88,8 +88,8 @@ public class PepBoysMainPageSteps {
         billingPage.inputBillingInfoManually(DataProvider.getUser(userName));
     }
 
-    @Then("^user check billing info for \"([^\"]*)\"$")
-    public void userCheckBillingInfoFor(String userName) {
+    @Then("^user checks billing info for \"([^\"]*)\"$")
+    public void userChecksBillingInfoFor(String userName) {
         billingPage.checkBillingInfo(DataProvider.getUser(userName));
     }
 
@@ -98,9 +98,9 @@ public class PepBoysMainPageSteps {
         billingPage.confirmBillingInfo(confirmationMethod);
     }
 
-    @And("^choice \"([^\"]*)\"$")
-    public void choice(String addressType) {
-        billingPage.choiceAddressType(addressType);
+    @And("^chooses \"([^\"]*)\"$")
+    public void chooses(String addressType) {
+        billingPage.chooseAddressType(addressType);
     }
 
     @And("^chooses \"([^\"]*)\" shipping method$")
@@ -168,8 +168,8 @@ public class PepBoysMainPageSteps {
         tiresPage.addTiresToCart(sku);
     }
 
-    @And("^user continue shopping$")
-    public void userContinueShopping() throws Throwable {
+    @And("^user continues shopping$")
+    public void userContinuesShopping() throws Throwable {
         productPage.clickContinueInAddToCartDialog();
     }
 
@@ -186,8 +186,8 @@ public class PepBoysMainPageSteps {
 
     }
 
-    @And("^user schedule installation time$")
-    public void userScheduleInstallationTime() {
+    @And("^user schedules installation time$")
+    public void userSchedulesInstallationTime() {
         cartPage.scheduleInstallationTime();
     }
 
