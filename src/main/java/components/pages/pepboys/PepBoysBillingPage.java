@@ -8,6 +8,8 @@ import utils.CommonFunctions;
 import utils.pepboys.BillingUser;
 import utils.pepboys.CreditCard;
 
+import javax.swing.text.MaskFormatter;
+import java.text.ParseException;
 import java.util.concurrent.TimeUnit;
 
 import static org.testng.AssertJUnit.assertEquals;
@@ -35,6 +37,7 @@ public class PepBoysBillingPage extends PepBoysBasePage {
     private By deliveryName = By.xpath("//div[@class='address-recipient']");
     private By deliveryStreetAddress = By.xpath("//div[@class='address-line1']");
     private By deliveryCityInfo = By.xpath("//div[@class='address-city-state-zip']");
+    private By deliveryPhone = By.xpath("//a[@class='phone-display address-phone']");
 
 
     public void inputBillingInfo(BillingUser user) {
@@ -147,7 +150,7 @@ public class PepBoysBillingPage extends PepBoysBasePage {
         String userName = getDriver().findElement(deliveryName).getText();
         String fullAddress = getDriver().findElement(deliveryStreetAddress).getText();
         String cityInfo = getDriver().findElement(deliveryCityInfo).getText();
-        String phone = getDriver().findElement(By.xpath("//a[@class='phone-display address-phone']")).getText();
+        String phone = getDriver().findElement(deliveryPhone).getText();
         String email = getDriver().findElement(By.xpath("//div[@class='address-email']")).getText();
 
         CommonFunctions.attachScreenshot("Billing info");
@@ -209,6 +212,20 @@ public class PepBoysBillingPage extends PepBoysBasePage {
                 assertEquals(cityInfo[cityInfo.length - 1], value);
                 break;
             case "phone":
+                String phone = getDriver().findElement(deliveryPhone).getText();
+
+                String mask = "(###) ###-####";
+                String result = null;
+
+                try {
+                    MaskFormatter maskFormatter = new MaskFormatter(mask);
+                    maskFormatter.setValueContainsLiteralCharacters(false);
+                    result = maskFormatter.valueToString(value);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                assertEquals(phone, result);
 
                 break;
             case "email":
