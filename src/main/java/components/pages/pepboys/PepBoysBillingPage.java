@@ -197,7 +197,7 @@ public class PepBoysBillingPage extends PepBoysBasePage {
         }
     }
 
-    public void choiceAddressType(String addressType) {
+    public void chooseAddressType(String addressType) {
 
         By item = By.xpath("//div[@class='radio-list-option' and contains(., '" + addressType + "')]");
 

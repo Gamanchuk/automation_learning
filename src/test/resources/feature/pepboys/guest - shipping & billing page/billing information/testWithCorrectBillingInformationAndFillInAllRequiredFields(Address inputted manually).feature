@@ -13,7 +13,7 @@ Feature: Guest - Shipping & Billing page
   Scenario: Test with correct billing information and fill in all required fields (Address inputted manually)
     Given user types manually billing info for "qa user"
     And presses the "Continue" button
-    And choice "Use Entered Address"
-    Then user check billing info for "qa user"
+    And chooses "Use Entered Address"
+    Then user checks billing info for "qa user"
 
 
