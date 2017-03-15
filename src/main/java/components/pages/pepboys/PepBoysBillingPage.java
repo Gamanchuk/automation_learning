@@ -34,6 +34,8 @@ public class PepBoysBillingPage extends PepBoysBasePage {
     private By deliveryApt = By.xpath("//div[@class='address-line2']");
     private By deliveryName = By.xpath("//div[@class='address-recipient']");
     private By deliveryStreetAddress = By.xpath("//div[@class='address-line1']");
+    private By deliveryCityInfo = By.xpath("//div[@class='address-city-state-zip']");
+
 
     public void inputBillingInfo(BillingUser user) {
         getDriver().findElement(billingName).sendKeys(user.getFullName());
@@ -144,7 +146,7 @@ public class PepBoysBillingPage extends PepBoysBasePage {
         getDriver().manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
         String userName = getDriver().findElement(deliveryName).getText();
         String fullAddress = getDriver().findElement(deliveryStreetAddress).getText();
-        String cityInfo = getDriver().findElement(By.xpath("//div[@class='address-city-state-zip']")).getText();
+        String cityInfo = getDriver().findElement(deliveryCityInfo).getText();
         String phone = getDriver().findElement(By.xpath("//a[@class='phone-display address-phone']")).getText();
         String email = getDriver().findElement(By.xpath("//div[@class='address-email']")).getText();
 
@@ -163,7 +165,7 @@ public class PepBoysBillingPage extends PepBoysBasePage {
 
     public void checkBillingInfo(String field, String value) {
         waitForElementClickable(By.xpath("//div[contains(@class, 'radio-list') and contains(@class, 'radio-collapsed')]"));
-
+        String[] cityInfo = null;
 
         getDriver().manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 //        String userName = getDriver().findElement(By.xpath("//div[@class='address-recipient']")).getText();
@@ -183,9 +185,10 @@ public class PepBoysBillingPage extends PepBoysBasePage {
                 String name = getDriver().findElement(deliveryName).getText();
                 assertEquals(name, value);
                 break;
-            case "last name":
-
-                break;
+//            case "last name":
+//                String lastName = getDriver().findElement(deliveryName).getText();
+//                assertEquals(lastName, value);
+//                break;
             case "street address":
                 String streetAddress = getDriver().findElement(deliveryStreetAddress).getText();
                 assertEquals(streetAddress, value);
@@ -195,13 +198,15 @@ public class PepBoysBillingPage extends PepBoysBasePage {
                 assertEquals(apt, value);
                 break;
             case "city":
-
+                cityInfo = getDriver().findElement(deliveryCityInfo).getText().split(" ");
+                assertEquals(cityInfo[0].split(",")[0], value);
                 break;
             case "state":
 
                 break;
             case "zip":
-
+                cityInfo = getDriver().findElement(deliveryCityInfo).getText().split(" ");
+                assertEquals(cityInfo[cityInfo.length - 1], value);
                 break;
             case "phone":
 
@@ -342,7 +347,8 @@ public class PepBoysBillingPage extends PepBoysBasePage {
 
         if (errorMessage.toLowerCase().equals("please review all inputs.") ||
                 errorMessage.toLowerCase().equals("last name is invalid") ||
-                errorMessage.toLowerCase().equals("address 1 is required")) {
+                errorMessage.toLowerCase().equals("address 1 is required") ||
+                errorMessage.toLowerCase().equals("zip code is invalid (xxxxx or xxxxx-xxxx)")) {
             flag = true;
         }
 
