@@ -1,7 +1,7 @@
 @pepBoys
 
 
-Feature: Some feature
+Feature: Happy Path
 
   Background:
     Given user makes appoint
