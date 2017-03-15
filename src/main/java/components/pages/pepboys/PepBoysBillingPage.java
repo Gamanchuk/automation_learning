@@ -221,13 +221,5 @@ public class PepBoysBillingPage extends PepBoysBasePage {
         assertEquals(errorTitle.toLowerCase(), "form errors");
         assertEquals(errorMessage.toLowerCase(), "please review all inputs.");
     }
-
-    private void select(String arg) {
-        By shippingMethodOptionEl = By.xpath("//div[contains(text(), '" + arg + "')]");
-        if (!isElementPresent(shippingMethodOptionEl)) {
-            click(By.xpath("//div[contains(@class, 'radio-list') and contains(@class, 'radio-collapsed')]"));
-            click(shippingMethodOptionEl);
-        }
-    }
 }
 
