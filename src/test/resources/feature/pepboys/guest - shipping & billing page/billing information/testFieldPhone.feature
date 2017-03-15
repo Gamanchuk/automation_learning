@@ -9,7 +9,7 @@ Feature: Guest - Shipping & Billing page
     And user views cart
     And chooses "Pay Online" method
 
-  @TestCaseId("15502")
+  @TestCaseId("15503")
   Scenario: Test field 'Phone'
     Given user types billing info for "qa user"
     And user types " " in "phone" on billing info tab
