@@ -195,7 +195,15 @@ public class PepBoysBillingPage extends PepBoysBasePage {
         CommonFunctions.attachScreenshot("Billing info");
     }
 
-    public void choiceAddressType(String addressType) {
+    private void select(String arg) {
+        By shippingMethodOptionEl = By.xpath("//div[contains(text(), '" + arg + "')]");
+        if (!isElementPresent(shippingMethodOptionEl)) {
+            click(By.xpath("//div[contains(@class, 'radio-list') and contains(@class, 'radio-collapsed')]"));
+            click(shippingMethodOptionEl);
+        }
+    }
+
+    public void chooseAddressType(String addressType) {
 
         By item = By.xpath("//div[@class='radio-list-option' and contains(., '" + addressType + "')]");
 

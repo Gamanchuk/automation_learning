@@ -13,7 +13,7 @@ Feature: Happy Path
   Scenario: Place Order with Paypal from Payment page as Guest
     Given user types billing info for "qa user"
     And presses the "Continue" button
-    And choice "Use Recommended Address"
+    And chooses "Use Recommended Address"
     And chooses "Ground" shipping method
     And uses PayPal for payment
     And user confirms purchase as "qa user" with PayPal
