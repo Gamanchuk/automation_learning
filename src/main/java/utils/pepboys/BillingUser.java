@@ -4,7 +4,9 @@ import javax.swing.text.MaskFormatter;
 import java.text.ParseException;
 
 public class BillingUser {
-    private String name;
+    private String firstName;
+    private String lastName;
+    private String fullName;
     private String fullAddress;
     private String recomendedAddress;
     private String city;
@@ -19,8 +21,10 @@ public class BillingUser {
     private String paypalPassword;
 
 
-    public BillingUser(String name, String fullAddress, String city, String state, String zipCode, String apartment, String phone, String email, String cityInfo, String password, String paypalEmail, String paypalPassword) {
-        this.name = name;
+    public BillingUser(String firstName, String lastName, String fullName, String fullAddress, String city, String state, String zipCode, String apartment, String phone, String email, String cityInfo, String password, String paypalEmail, String paypalPassword) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.fullName = fullName;
         this.fullAddress = fullAddress;
         this.city = city;
         this.state = state;
@@ -34,8 +38,8 @@ public class BillingUser {
         this.paypalPassword = paypalPassword;
     }
 
-    public String getName() {
-        return name;
+    public String getFullName() {
+        return fullName;
     }
 
     public String getFullAddress() {
@@ -61,7 +65,6 @@ public class BillingUser {
     public String getPhone() {
         return phone;
     }
-
 
     public String getFormattedPhone() {
 
@@ -97,6 +100,14 @@ public class BillingUser {
 
     public String getPaypalPassword() {
         return paypalPassword;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
     }
 
 }

@@ -30,7 +30,7 @@ public class PepBoysBillingPage extends PepBoysBasePage {
 
 
     public void inputBillingInfo(BillingUser user) {
-        getDriver().findElement(billingName).sendKeys(user.getName());
+        getDriver().findElement(billingName).sendKeys(user.getFullName());
         getDriver().findElement(billingAddress).sendKeys(user.getFullAddress());
 
         click(By.xpath("(//div[contains(., '" + user.getCityInfo() + "')]/../input[@name='addresses'])[1]"));
@@ -48,7 +48,7 @@ public class PepBoysBillingPage extends PepBoysBasePage {
     }
 
     public void inputBillingInfoManually(BillingUser user) {
-        getDriver().findElement(billingName).sendKeys(user.getName());
+        getDriver().findElement(billingName).sendKeys(user.getFullName());
         getDriver().findElement(billingAddress).sendKeys(user.getFullAddress());
 
         click(By.xpath("//a[@class='manual']"));
@@ -91,7 +91,7 @@ public class PepBoysBillingPage extends PepBoysBasePage {
         fullAddress = address[0] + " " + address[1] + " " + address[2];
 
 
-        assertEquals(userName, user.getName());
+        assertEquals(userName, user.getFullName());
         assertTrue(user.getFullAddress().toLowerCase().contains(fullAddress.toLowerCase()));
         assertEquals(cityInfo, user.getCity() + ", " + user.getState() + " " + user.getZipCode());
         assertEquals(phone, user.getFormattedPhone());
@@ -179,6 +179,8 @@ public class PepBoysBillingPage extends PepBoysBasePage {
     }
 
     public void applyBillingInfo(String address) {
+
+        // TODO: Re-work this function
         //  waitForElementClickable(continueBtn);
 
         try {
@@ -209,6 +211,15 @@ public class PepBoysBillingPage extends PepBoysBasePage {
             getDriver().findElement(item).click();
             CommonFunctions.attachScreenshot("Choice address type");
         }
+    }
+
+    public void checkBillingInfoFormError() {
+        String path = "//div[@class='component message-panel message-panel-form-error']";
+        String errorTitle = getDriver().findElement(By.xpath(path + "/h2")).getText();
+        String errorMessage = getDriver().findElement(By.xpath(path + "/div")).getText();
+
+        assertEquals(errorTitle.toLowerCase(), "form errors");
+        assertEquals(errorMessage.toLowerCase(), "please review all inputs.");
     }
 }
 

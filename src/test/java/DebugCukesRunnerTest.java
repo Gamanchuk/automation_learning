@@ -3,7 +3,7 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 
 
 @CucumberOptions (
-        features = "src/test/resources/feature/",
+        features = "src/test/resources/features/",
         glue = "steps",
         tags = "@debug"
 )
