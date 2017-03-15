@@ -1,4 +1,4 @@
-@pepBoys, @debug
+@pepBoys
 
 
 Feature: Guest - Shipping & Billing page
@@ -18,5 +18,6 @@ Feature: Guest - Shipping & Billing page
 
     And user types "Moovweb !@#&::!@#()" in "name" on billing info tab
     And presses the "Continue" button
+    And chooses "Use Entered Address"
     Then user stay at billing tab with error message
 

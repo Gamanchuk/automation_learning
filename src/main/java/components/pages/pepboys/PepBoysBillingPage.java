@@ -33,6 +33,7 @@ public class PepBoysBillingPage extends PepBoysBasePage {
 
     private By deliveryApt = By.xpath("//div[@class='address-line2']");
     private By deliveryName = By.xpath("//div[@class='address-recipient']");
+    private By deliveryStreetAddress = By.xpath("//div[@class='address-line1']");
 
     public void inputBillingInfo(BillingUser user) {
         getDriver().findElement(billingName).sendKeys(user.getFullName());
@@ -142,7 +143,7 @@ public class PepBoysBillingPage extends PepBoysBasePage {
 
         getDriver().manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
         String userName = getDriver().findElement(deliveryName).getText();
-        String fullAddress = getDriver().findElement(By.xpath("//div[@class='address-line1']")).getText();
+        String fullAddress = getDriver().findElement(deliveryStreetAddress).getText();
         String cityInfo = getDriver().findElement(By.xpath("//div[@class='address-city-state-zip']")).getText();
         String phone = getDriver().findElement(By.xpath("//a[@class='phone-display address-phone']")).getText();
         String email = getDriver().findElement(By.xpath("//div[@class='address-email']")).getText();
@@ -186,7 +187,8 @@ public class PepBoysBillingPage extends PepBoysBasePage {
 
                 break;
             case "street address":
-
+                String streetAddress = getDriver().findElement(deliveryStreetAddress).getText();
+                assertEquals(streetAddress, value);
                 break;
             case "apt":
                 String apt = getDriver().findElement(deliveryApt).getText();
@@ -330,6 +332,7 @@ public class PepBoysBillingPage extends PepBoysBasePage {
     }
 
     public void checkBillingInfoFormError() {
+        getDriver().manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         String path = "//div[@class='component message-panel message-panel-form-error']";
         String errorTitle = getDriver().findElement(By.xpath(path + "/h2")).getText();
         String errorMessage = getDriver().findElement(By.xpath(path + "/div")).getText();
@@ -338,12 +341,12 @@ public class PepBoysBillingPage extends PepBoysBasePage {
         assertEquals(errorTitle.toLowerCase(), "form errors");
 
         if (errorMessage.toLowerCase().equals("please review all inputs.") ||
-                errorMessage.toLowerCase().equals("last name is invalid")) {
+                errorMessage.toLowerCase().equals("last name is invalid") ||
+                errorMessage.toLowerCase().equals("address 1 is required")) {
             flag = true;
         }
 
         assertTrue("Error message: '" + errorMessage.toLowerCase() + "' doesn't equals", flag);
-        assertEquals(errorMessage.toLowerCase(), "please review all inputs.");
     }
 
     private void select(String arg) {
