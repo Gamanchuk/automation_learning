@@ -80,6 +80,8 @@ public class DataProvider {
         switch (userName) {
             case "qa user":
                 return qaUser;
+            case "invalid qa user":
+                return invalidQaUser;
             default:
                 throw new Error("Unknown user: " + userName);
         }
