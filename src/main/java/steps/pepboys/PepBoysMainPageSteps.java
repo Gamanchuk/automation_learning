@@ -2,6 +2,7 @@ package steps.pepboys;
 
 import components.pages.pepboys.*;
 import components.widgets.CategoriesWidget;
+import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -197,6 +198,11 @@ public class PepBoysMainPageSteps {
         cartPage.scheduleInstallationTime();
     }
 
+    @After
+    public void cleanUpCart() {
+        cartPage.openCartPage();
+        cartPage.cleanUpCart();
+    }
 }
 
 
