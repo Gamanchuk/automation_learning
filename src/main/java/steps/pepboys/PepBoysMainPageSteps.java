@@ -2,6 +2,7 @@ package steps.pepboys;
 
 import components.pages.pepboys.*;
 import components.widgets.CategoriesWidget;
+import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -197,22 +198,18 @@ public class PepBoysMainPageSteps {
         cartPage.scheduleInstallationTime();
     }
 
-    @Given("^user fill \"([^\"]*)\" in billing info for \"([^\"]*)\"$")
-    public void userFillInBillingInfoFor(String field, String userName) {
 
+    @After
+    public void cleanUpCart() {
+        cartPage.openCartPage();
+        cartPage.cleanUpCart();
 
-    }
 
 
     @Given("^user types \"([^\"]*)\" in \"([^\"]*)\" on billing info tab$")
     public void userTypesInOnBillingInfoTab(String value, String field) {
         billingPage.inputBillingInfoOneByOne(value, field);
         CommonFunctions.attachScreenshot("Input info one by one in field: " + field);
-    }
-
-    @And("^user navigate back$")
-    public void userNavigateBack() {
-
     }
 
     @And("^user navigate back on \"([^\"]*)\"$")
@@ -225,6 +222,7 @@ public class PepBoysMainPageSteps {
     @Then("^user check \"([^\"]*)\" with value \"([^\"]*)\"$")
     public void userCheckWithValue(String field, String value) throws Throwable {
         billingPage.checkBillingInfo(field, value);
+
     }
 }
 
