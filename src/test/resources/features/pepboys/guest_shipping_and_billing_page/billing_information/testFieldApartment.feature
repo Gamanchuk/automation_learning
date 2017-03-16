@@ -15,7 +15,7 @@ Feature: Guest - Shipping & Billing page
     Given user types billing info for "qa user"
     And user types " " in "apt" on billing info tab
     And presses the "Continue" button
-    Then user check billing info for "qa user"
+    Then user checks billing info for "qa user"
     And user navigate back on "Billing & Shipping"
 
     And user types "12345" in "apt" on billing info tab
