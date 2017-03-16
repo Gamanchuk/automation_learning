@@ -138,6 +138,7 @@ public class PepBoysBillingPage extends PepBoysBasePage {
                 element = getDriver().findElement(billingEmail);
                 element.clear();
                 element.sendKeys(value);
+                focusOut();
                 break;
         }
 
