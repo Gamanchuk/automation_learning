@@ -204,7 +204,7 @@ public class PepBoysMainPageSteps {
         cartPage.openCartPage();
         cartPage.cleanUpCart();
 
-
+    }
 
     @Given("^user types \"([^\"]*)\" in \"([^\"]*)\" on billing info tab$")
     public void userTypesInOnBillingInfoTab(String value, String field) {
@@ -225,5 +225,6 @@ public class PepBoysMainPageSteps {
 
     }
 }
+
 
 
