@@ -8,6 +8,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import utils.CommonFunctions;
+import utils.TestGlobalsManager;
 import utils.pepboys.DataProvider;
 
 import static org.testng.Assert.assertTrue;
@@ -145,6 +146,7 @@ public class PepBoysMainPageSteps {
     @Given("^user makes authorisation for \"([^\"]*)\"$")
     public void userMakesAuthorisationFor(String userName) {
         billingPage.doLogin(DataProvider.getUser(userName));
+        TestGlobalsManager.setTestGlobal("authorised", true);
     }
 
     @And("^applies billing info for address \"([^\"]*)\"$")
@@ -232,6 +234,9 @@ public class PepBoysMainPageSteps {
     public void cleanUpCart() {
         cartPage.openCartPage();
         cartPage.cleanUpCart();
+        if(TestGlobalsManager.getTestGlobal("authorised") != null) {
+            mainPage.doLogout();
+        }
     }
 }
 

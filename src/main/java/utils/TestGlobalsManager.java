@@ -1,7 +1,5 @@
 package utils;
 
-import com.google.common.base.Preconditions;
-
 import java.util.HashMap;
 
 public class TestGlobalsManager {
@@ -16,8 +14,11 @@ public class TestGlobalsManager {
     }
 
     public static Object getTestGlobal(String name) {
-        Preconditions.checkNotNull(getGlobals());
-        return getGlobals().get(name);
+        if(getGlobals() != null) {
+            return getGlobals().get(name);
+        } else {
+            return null;
+        }
     }
 
     public static boolean hasTestGlobal(String name) {
