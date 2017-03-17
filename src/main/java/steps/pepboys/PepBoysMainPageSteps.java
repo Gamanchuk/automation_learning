@@ -126,8 +126,8 @@ public class PepBoysMainPageSteps {
         billingPage.checkPaymentResult();
     }
 
-    @Then("^user stay at billing tab with error message$")
-    public void userCheckErrorMessage() {
+    @Then("^user stays at billing tab with error message$")
+    public void userChecksErrorMessage() {
         billingPage.checkBillingInfoFormError();
         CommonFunctions.attachScreenshot("Please review all inputs");
     }
@@ -220,20 +220,20 @@ public class PepBoysMainPageSteps {
         CommonFunctions.attachScreenshot("Input info one by one in field: " + field);
     }
 
-    @And("^user navigate back on \"([^\"]*)\"$")
-    public void userNavigateBackOn(String tab) {
+    @And("^user navigates back on \"([^\"]*)\"$")
+    public void userNavigatesBackOn(String tab) {
         billingPage.navigateToBillingTab(tab);
 
 
     }
 
-    @Then("^user check \"([^\"]*)\" with value \"([^\"]*)\"$")
-    public void userCheckWithValue(String field, String value) throws Throwable {
+    @Then("^user checks \"([^\"]*)\" with value \"([^\"]*)\"$")
+    public void userChecksWithValue(String field, String value) throws Throwable {
         billingPage.checkBillingInfo(field, value);
     }
 
     @After
-    public void cleanUpCart() {
+    public void cleanUp() {
         cartPage.openCartPage();
         cartPage.cleanUpCart();
         if(TestGlobalsManager.getTestGlobal("authorised") != null) {

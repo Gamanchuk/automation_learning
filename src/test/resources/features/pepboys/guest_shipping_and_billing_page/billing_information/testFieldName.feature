@@ -14,15 +14,15 @@ Feature: Guest - Shipping & Billing page
     Given user types billing info for "qa user"
     And user types " " in "name" on billing info tab
     And presses the "Continue" button
-    Then user stay at billing tab with error message
+    Then user stays at billing tab with error message
 
     And user types "!@#&( !@#()" in "name" on billing info tab
     And presses the "Continue" button
-    Then user stay at billing tab with error message
+    Then user stays at billing tab with error message
 
     And user types "Mr Donal Trump III" in "name" on billing info tab
     And presses the "Continue" button
     And chooses "Use Entered Address"
-    Then user check "name" with value "Mr Donal Trump III"
+    Then user checks "name" with value "Mr Donal Trump III"
 
 

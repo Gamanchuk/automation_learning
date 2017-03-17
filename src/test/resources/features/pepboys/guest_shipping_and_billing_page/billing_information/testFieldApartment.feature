@@ -16,21 +16,21 @@ Feature: Guest - Shipping & Billing page
     And user types " " in "apt" on billing info tab
     And presses the "Continue" button
     Then user checks billing info for "qa user"
-    And user navigate back on "Billing & Shipping"
+    And user navigates back on "Billing & Shipping"
 
     And user types "12345" in "apt" on billing info tab
     And presses the "Continue" button
-    Then user check "apt" with value "12345"
-    And user navigate back on "Billing & Shipping"
+    Then user checks "apt" with value "12345"
+    And user navigates back on "Billing & Shipping"
 
     And user types "Some Apartment" in "apt" on billing info tab
     And presses the "Continue" button
-    Then user check "apt" with value "Some Apartment"
-    And user navigate back on "Billing & Shipping"
+    Then user checks "apt" with value "Some Apartment"
+    And user navigates back on "Billing & Shipping"
 
     And user types "!#&@()" in "apt" on billing info tab
     And presses the "Continue" button
-    Then user check "apt" with value "!#&@()"
+    Then user checks "apt" with value "!#&@()"
 
 
 

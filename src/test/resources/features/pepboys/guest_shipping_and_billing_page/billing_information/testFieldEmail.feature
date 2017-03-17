@@ -14,31 +14,31 @@ Feature: Guest - Shipping & Billing page
 
     And user types " " in "email" on billing info tab
     And presses the "Continue" button
-    Then user stay at billing tab with error message
+    Then user stays at billing tab with error message
 
     And user types "#######@moovweb.com" in "email" on billing info tab
     And presses the "Continue" button
     And chooses "Use Entered Address"
-    Then user stay at billing tab with error message
+    Then user stays at billing tab with error message
 
     And user types "qa@moovweb" in "email" on billing info tab
     And presses the "Continue" button
-    Then user stay at billing tab with error message
+    Then user stays at billing tab with error message
 
     And user types "qamoovweb.com" in "email" on billing info tab
     And presses the "Continue" button
-    Then user stay at billing tab with error message
+    Then user stays at billing tab with error message
 
     And user types "123456@moovweb.com" in "email" on billing info tab
     And presses the "Continue" button
     And chooses "Use Entered Address"
-    Then user check "email" with value "123456@moovweb.com"
-    And user navigate back on "Billing & Shipping"
+    Then user checks "email" with value "123456@moovweb.com"
+    And user navigates back on "Billing & Shipping"
 
     And user types "qa@moovweb.com" in "email" on billing info tab
     And presses the "Continue" button
     And chooses "Use Entered Address"
-    Then user check "email" with value "qa@moovweb.com"
+    Then user checks "email" with value "qa@moovweb.com"
 
 
 
