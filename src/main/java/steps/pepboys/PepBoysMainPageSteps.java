@@ -200,6 +200,13 @@ public class PepBoysMainPageSteps {
         cartPage.scheduleInstallationTime();
     }
 
+
+    @After
+    public void cleanUpCart() {
+        cartPage.openCartPage();
+        cartPage.cleanUpCart();
+    }
+
     @Given("^user fill \"([^\"]*)\" in billing info for \"([^\"]*)\"$")
     public void userFillInBillingInfoFor(String field, String userName) {
 
@@ -211,11 +218,6 @@ public class PepBoysMainPageSteps {
     public void userTypesInOnBillingInfoTab(String value, String field) {
         billingPage.inputBillingInfoOneByOne(value, field);
         CommonFunctions.attachScreenshot("Input info one by one in field: " + field);
-    }
-
-    @And("^user navigate back$")
-    public void userNavigateBack() {
-
     }
 
     @And("^user navigate back on \"([^\"]*)\"$")
