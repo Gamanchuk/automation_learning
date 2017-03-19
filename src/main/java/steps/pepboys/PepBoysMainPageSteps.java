@@ -207,8 +207,8 @@ public class PepBoysMainPageSteps {
         cartPage.cleanUpCart();
     }
 
-    @Given("^user fill \"([^\"]*)\" in billing info for \"([^\"]*)\"$")
-    public void userFillInBillingInfoFor(String field, String userName) {
+    @Given("^user fills \"([^\"]*)\" in billing info for \"([^\"]*)\"$")
+    public void userFillsInBillingInfoFor(String field, String userName) {
 
 
     }
