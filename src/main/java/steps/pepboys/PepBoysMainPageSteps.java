@@ -1,6 +1,10 @@
 package steps.pepboys;
 
 import components.pages.pepboys.*;
+import components.widgets.AddressFormWidget;
+import components.widgets.ButtonWidget;
+import components.widgets.EmailWidget;
+import components.widgets.ErrorMessageWidget;
 import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -8,6 +12,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import utils.CommonFunctions;
 import utils.TestGlobalsManager;
+import utils.pepboys.BillingUser;
 import utils.pepboys.DataProvider;
 
 import static org.testng.Assert.assertTrue;
@@ -20,8 +25,12 @@ public class PepBoysMainPageSteps {
     private PepBoysCategoriesPage categoriesPage = new PepBoysCategoriesPage();
     private PepBoysProductPage productPage = new PepBoysProductPage();
     private PepBoysCartPage cartPage = new PepBoysCartPage();
-    private PepBoysBillingPage billingPage = new PepBoysBillingPage();
     private PepBoysTiresPage tiresPage = new PepBoysTiresPage();
+
+    private AddressFormWidget addressFormWidget = new AddressFormWidget();
+    private EmailWidget emailWidget = new EmailWidget();
+    private ButtonWidget buttonWidget = new ButtonWidget();
+    private ErrorMessageWidget errorMessageWidget = new ErrorMessageWidget();
 
 
     @Given("^user makes appoint with code \"([^\"]*)\"$")
@@ -80,53 +89,53 @@ public class PepBoysMainPageSteps {
 
     @And("^user types billing info for \"([^\"]*)\"$")
     public void typesBillingInfoFor(String userName) {
-        billingPage.inputBillingInfo(DataProvider.getUser(userName));
+        fillBillingAndShipping(userName, true);
     }
 
     @Given("^user types manually billing info for \"([^\"]*)\"$")
     public void userTypesManuallyBillingInfoFor(String userName) {
-        billingPage.inputBillingInfoManually(DataProvider.getUser(userName));
+        fillBillingAndShipping(userName, false);
     }
 
     @Then("^user checks billing info for \"([^\"]*)\"$")
     public void userChecksBillingInfoFor(String userName) {
-        billingPage.checkBillingInfo(DataProvider.getUser(userName));
+//        addressFormWidget.checkBillingInfo(DataProvider.getUser(userName));
     }
 
     @And("^presses the \"([^\"]*)\" button$")
     public void pressesTheButton(String confirmationMethod) {
-        billingPage.confirmBillingInfo(confirmationMethod);
+        buttonWidget.clickButton();
     }
 
     @And("^chooses \"([^\"]*)\"$")
     public void chooses(String addressType) {
-        billingPage.chooseAddressType(addressType);
+//        addressFormWidget.chooseAddressType(addressType);
     }
 
     @And("^chooses \"([^\"]*)\" shipping method$")
     public void choosesShippingMethod(String shippingMethod) {
-        billingPage.selectShippingMethod(shippingMethod);
+//        addressFormWidget.selectShippingMethod(shippingMethod);
     }
 
     @And("^uses \"([^\"]*)\" card for payment$")
     public void usesCardForPayment(String cardName) {
-        billingPage.inputPaymentDetails(DataProvider.getCard(cardName));
-        billingPage.confirmBillingInfo("Place Order");
+//        addressFormWidget.inputPaymentDetails(DataProvider.getCard(cardName));
+//        addressFormWidget.confirmBillingInfo("Place Order");
     }
 
     @And("^user confirms purchase$")
     public void userConfirmsPurchase() {
-        billingPage.confirmsPurchase();
+//        addressFormWidget.confirmsPurchase();
     }
 
     @Then("^user should be on thank you page$")
     public void userShouldBeOnThankYouPage() {
-        billingPage.checkPaymentResult();
+//        addressFormWidget.checkPaymentResult();
     }
 
     @Then("^user stays at billing tab with error message$")
     public void userChecksErrorMessage() {
-        billingPage.checkBillingInfoFormError();
+//        addressFormWidget.checkBillingInfoFormError();
         CommonFunctions.attachScreenshot("Please review all inputs");
     }
 
@@ -143,18 +152,18 @@ public class PepBoysMainPageSteps {
 
     @Given("^user makes authorisation for \"([^\"]*)\"$")
     public void userMakesAuthorisationFor(String userName) {
-        billingPage.doLogin(DataProvider.getUser(userName));
+//        addressFormWidget.doLogin(DataProvider.getUser(userName));
         TestGlobalsManager.setTestGlobal("authorised", true);
     }
 
     @And("^applies billing info for address \"([^\"]*)\"$")
     public void appliesBillingInfo(String address) {
-        billingPage.applyBillingInfo(address);
+//        addressFormWidget.applyBillingInfo(address);
     }
 
     @And("^uses PayPal for payment$")
     public void usesPayPalForPayment() {
-        billingPage.purchaseWithPayPal();
+//        addressFormWidget.purchaseWithPayPal();
         CommonFunctions.attachScreenshot("Purchase with PayPal");
     }
 
@@ -212,31 +221,47 @@ public class PepBoysMainPageSteps {
     }
 
 
-    @Given("^user types \"([^\"]*)\" in \"([^\"]*)\" on billing info tab$")
-    public void userTypesInOnBillingInfoTab(String value, String field) {
-        billingPage.inputBillingInfoOneByOne(value, field);
-        CommonFunctions.attachScreenshot("Input info one by one in field: " + field);
+    @Given("^user types \"([^\"]*)\" into the \"([^\"]*)\" field$")
+    public void userTypesValueIntoField(String value, String field) {
+        addressFormWidget.inputValueIntoField(value, field);
+        CommonFunctions.attachScreenshot(String.format("Input '%s' into '%s'", value, field));
     }
 
     @And("^user navigates back on \"([^\"]*)\"$")
     public void userNavigatesBackOn(String tab) {
-        billingPage.navigateToBillingTab(tab);
-
-
+//        addressFormWidget.navigateToBillingTab(tab);
     }
 
     @Then("^user checks \"([^\"]*)\" with value \"([^\"]*)\"$")
     public void userChecksWithValue(String field, String value) throws Throwable {
-        billingPage.checkBillingInfo(field, value);
+//        addressFormWidget.checkBillingInfo(field, value);
     }
 
     @After
     public void cleanUp() {
         cartPage.openCartPage();
         cartPage.cleanUpCart();
-        if(TestGlobalsManager.getTestGlobal("authorised") != null) {
+        if (TestGlobalsManager.getTestGlobal("authorised") != null) {
             mainPage.doLogout();
         }
+    }
+
+    private void fillBillingAndShipping(String userName, boolean autoFill) {
+        BillingUser user = DataProvider.getUser(userName);
+        addressFormWidget.fillAddressForm(
+                user.getFullName(),
+                user.getFullAddress(),
+                user.getCityInfo(),
+                user.getCity(),
+                user.getApartment(),
+                user.getPhone(),
+                user.getState(),
+                user.getZipCode(),
+                autoFill
+        );
+
+        emailWidget.fillEmailField(user.getEmail());
+        CommonFunctions.attachScreenshot("Billing info");
     }
 }
 
