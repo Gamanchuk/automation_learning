@@ -1,4 +1,4 @@
-package components.pages.pepboys;
+package components.widgets;
 
 
 import components.Component;
@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import utils.CommonFunctions;
 import utils.pepboys.BillingUser;
 
-public class PayPalLoginPage extends Component {
+public class PayPalWidget extends Component {
 
     public void doLogin(BillingUser user) {
 

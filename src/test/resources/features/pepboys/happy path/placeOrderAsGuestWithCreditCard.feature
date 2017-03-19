@@ -1,4 +1,4 @@
-@pepBoys
+@pepBoys, @debug
 
 
 Feature: Happy Path
