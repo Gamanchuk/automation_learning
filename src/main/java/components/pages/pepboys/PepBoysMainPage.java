@@ -28,4 +28,8 @@ public class PepBoysMainPage extends PepBoysBasePage {
         click(By.xpath("//a[text()='Make Appointment']"));
         waitForElementPresence(By.cssSelector("button.locationBtn"));
     }
+
+    public void doLogout() {
+        getDriver().navigate().to(BASE_URL + "logout");
+    }
 }

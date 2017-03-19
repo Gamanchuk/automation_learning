@@ -1,8 +1,7 @@
 package components.pages.pepboys;
 
 import org.openqa.selenium.By;
-
-import static org.testng.Assert.assertTrue;
+import org.openqa.selenium.JavascriptExecutor;
 
 public class PepBoysProductPage extends PepBoysBasePage {
     private String productId;
@@ -19,8 +18,12 @@ public class PepBoysProductPage extends PepBoysBasePage {
     }
 
     public void setDeliveryOption(String deliveryOption) {
-        By option = By.xpath("//label[contains(., '" + deliveryOption + "')]");
-        click(option);
+        ((JavascriptExecutor) getDriver()).executeScript("window.scrollBy(0,500)", "");
+
+        if (!deliveryOption.equals("Pick Up in Store")) {
+            getDriver().findElement(By.xpath("//label[contains(., '" + deliveryOption + "')]")).click();
+            waitForAjax();
+        }
     }
 
     public void addToCart() {
@@ -33,6 +36,10 @@ public class PepBoysProductPage extends PepBoysBasePage {
 
     public void clickViewCartInAddToCartDialog() {
         click(By.xpath("//button[text()='View Cart']"));
-        assertTrue(isElementClickable(By.xpath("//a[text()='Pay Online']")));
+//        assertTrue(isElementClickable(By.xpath("//a[text()='Pay Online']")));
+    }
+
+    public void clickContinueInAddToCartDialog() {
+        click(By.xpath("//button[text()='Continue Shopping']"));
     }
 }

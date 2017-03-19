@@ -3,6 +3,7 @@ package components.pages.pepboys;
 
 import components.Component;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import utils.CommonFunctions;
 import utils.pepboys.BillingUser;
 
@@ -16,14 +17,13 @@ public class PayPalLoginPage extends Component {
 
         waitForElementClickable(logInButton);
 
-        getDriver().findElement(By.id("email")).sendKeys(user.getPaypalEmail());
-        getDriver().findElement(By.id("password")).sendKeys(user.getPaypalPassword());
+        WebElement emailField = getDriver().findElement(By.id("email"));
+        emailField.clear();
+        emailField.sendKeys(user.getPaypalEmail());
 
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        WebElement passwordField = getDriver().findElement(By.id("password"));
+        passwordField.clear();
+        passwordField.sendKeys(user.getPaypalPassword());
 
         CommonFunctions.attachScreenshot("Login PayPal Page");
         getDriver().findElement(logInButton).click();
@@ -36,14 +36,7 @@ public class PayPalLoginPage extends Component {
         CommonFunctions.attachScreenshot("Login PayPal Page after SignIn");
     }
 
-   public void confirmationPay(){
-
-       //switchToIframe("injectedUl");
-        By continueButton = By.id("confirmButtonTop");
-
-        waitForElementClickable(continueButton);
-
-        getDriver().findElement(continueButton).click();
-
+    public void confirmationPay() {
+        getDriver().findElement(By.id("confirmButtonTop")).click();
     }
 }

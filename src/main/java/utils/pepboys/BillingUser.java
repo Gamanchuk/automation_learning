@@ -1,8 +1,17 @@
 package utils.pepboys;
 
+import javax.swing.text.MaskFormatter;
+import java.text.ParseException;
+
 public class BillingUser {
-    private String name;
-    private String address;
+    private String firstName;
+    private String lastName;
+    private String fullName;
+    private String fullAddress;
+    private String recomendedAddress;
+    private String city;
+    private String state;
+    private String zipCode;
     private String apartment;
     private String phone;
     private String email;
@@ -12,10 +21,15 @@ public class BillingUser {
     private String paypalPassword;
 
 
-    public BillingUser(String name, String address, String appartment, String phone, String email, String cityInfo, String password, String paypalEmail, String paypalPassword) {
-        this.name = name;
-        this.address = address;
-        this.apartment = appartment;
+    public BillingUser(String firstName, String lastName, String fullName, String fullAddress, String city, String state, String zipCode, String apartment, String phone, String email, String cityInfo, String password, String paypalEmail, String paypalPassword) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.fullName = fullName;
+        this.fullAddress = fullAddress;
+        this.city = city;
+        this.state = state;
+        this.zipCode = zipCode;
+        this.apartment = apartment;
         this.phone = phone;
         this.email = email;
         this.cityInfo = cityInfo;
@@ -24,12 +38,24 @@ public class BillingUser {
         this.paypalPassword = paypalPassword;
     }
 
-    public String getName() {
-        return name;
+    public String getFullName() {
+        return fullName;
     }
 
-    public String getAddress() {
-        return address;
+    public String getFullAddress() {
+        return fullAddress;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public String getZipCode() {
+        return zipCode;
     }
 
     public String getApartment() {
@@ -38,6 +64,22 @@ public class BillingUser {
 
     public String getPhone() {
         return phone;
+    }
+
+    public String getFormattedPhone() {
+
+        String mask = "(###) ###-####";
+        String result = null;
+
+        try {
+            MaskFormatter maskFormatter = new MaskFormatter(mask);
+            maskFormatter.setValueContainsLiteralCharacters(false);
+            result = maskFormatter.valueToString(this.phone);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 
     public String getEmail() {
@@ -59,4 +101,13 @@ public class BillingUser {
     public String getPaypalPassword() {
         return paypalPassword;
     }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
 }

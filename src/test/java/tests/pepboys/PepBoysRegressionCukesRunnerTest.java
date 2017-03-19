@@ -5,7 +5,7 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 
 
 @CucumberOptions (
-        features = "src/test/resources/feature/pepboys/",
+        features = "src/test/resources/features/pepboys/",
         glue = "steps.pepboys",
         tags = "@regression"
 )
