@@ -1,7 +1,6 @@
 package steps.pepboys;
 
 import components.pages.pepboys.*;
-import components.widgets.CategoriesWidget;
 import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -24,7 +23,6 @@ public class PepBoysMainPageSteps {
     private PepBoysBillingPage billingPage = new PepBoysBillingPage();
     private PepBoysTiresPage tiresPage = new PepBoysTiresPage();
 
-    private CategoriesWidget categoriesWidget = new CategoriesWidget();
 
     @Given("^user makes appoint with code \"([^\"]*)\"$")
     public void userMakesAppointWithCode(String code) {
@@ -49,8 +47,8 @@ public class PepBoysMainPageSteps {
 
     @When("^user selects \"([^\"]*)\"$")
     public void userSelectsProduct(String productName) {
-        categoriesWidget.openCategory("Accessories");
-        categoriesWidget.openCategory("Exterior Accessories");
+        categoriesPage.openCategory("Accessories");
+        categoriesPage.openCategory("Exterior Accessories");
         categoriesPage.openCategory("Body Protection");
         productsPage.openProductByName(productName);
         CommonFunctions.attachScreenshot("Opened '" + productName + "' page");
@@ -171,7 +169,7 @@ public class PepBoysMainPageSteps {
     @And("^user adds to cart tires with SKU \"([^\"]*)\" with \"([^\"]*)\" delivery option for \"([^\"]*)\"$")
     public void userAddsToCartTiresWithIdWithDeliveryOption(String sku, String deliveryOption, String vehicle) throws Throwable {
         mainPage.openPageWithCookies();
-        categoriesWidget.openCategory("Tires");
+        categoriesPage.openCategory("Tires");
         tiresPage.shopForTiresBy("Tires by Vehicle");
         tiresPage.selectVehicle(DataProvider.getVehicle(vehicle));
         tiresPage.addTiresToCart(sku);
