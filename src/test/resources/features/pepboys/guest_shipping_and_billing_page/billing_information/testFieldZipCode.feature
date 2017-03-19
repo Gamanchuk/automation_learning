@@ -14,20 +14,20 @@ Feature: Guest - Shipping & Billing page
     Given user types billing info for "qa user"
     And user types " " in "zip" on billing info tab
     And presses the "Continue" button
-    Then user stay at billing tab with error message
+    Then user stays at billing tab with error message
 
     And user types "zipCode" in "zip" on billing info tab
     And presses the "Continue" button
     And chooses "Use Entered Address"
-    Then user stay at billing tab with error message
+    Then user stays at billing tab with error message
 
     And user types "!@$%^&*():_+" in "zip" on billing info tab
     And presses the "Continue" button
     And chooses "Use Entered Address"
-    Then user stay at billing tab with error message
+    Then user stays at billing tab with error message
 
     And user types "94105" in "zip" on billing info tab
     And presses the "Continue" button
     And chooses "Use Entered Address"
-    Then user check "zip" with value "94105"
+    Then user checks "zip" with value "94105"
 

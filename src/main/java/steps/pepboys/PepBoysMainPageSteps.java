@@ -8,6 +8,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import utils.CommonFunctions;
+import utils.TestGlobalsManager;
 import utils.pepboys.DataProvider;
 
 import static org.testng.Assert.assertTrue;
@@ -100,7 +101,7 @@ public class PepBoysMainPageSteps {
     }
 
     @And("^chooses \"([^\"]*)\"$")
-    public void choose(String addressType) {
+    public void chooses(String addressType) {
         billingPage.chooseAddressType(addressType);
     }
 
@@ -125,8 +126,8 @@ public class PepBoysMainPageSteps {
         billingPage.checkPaymentResult();
     }
 
-    @Then("^user stay at billing tab with error message$")
-    public void userCheckErrorMessage() {
+    @Then("^user stays at billing tab with error message$")
+    public void userChecksErrorMessage() {
         billingPage.checkBillingInfoFormError();
         CommonFunctions.attachScreenshot("Please review all inputs");
     }
@@ -145,6 +146,7 @@ public class PepBoysMainPageSteps {
     @Given("^user makes authorisation for \"([^\"]*)\"$")
     public void userMakesAuthorisationFor(String userName) {
         billingPage.doLogin(DataProvider.getUser(userName));
+        TestGlobalsManager.setTestGlobal("authorised", true);
     }
 
     @And("^applies billing info for address \"([^\"]*)\"$")
@@ -203,8 +205,14 @@ public class PepBoysMainPageSteps {
     public void cleanUpCart() {
         cartPage.openCartPage();
         cartPage.cleanUpCart();
+    }
+
+    @Given("^user fills \"([^\"]*)\" in billing info for \"([^\"]*)\"$")
+    public void userFillsInBillingInfoFor(String field, String userName) {
+
 
     }
+
 
     @Given("^user types \"([^\"]*)\" in \"([^\"]*)\" on billing info tab$")
     public void userTypesInOnBillingInfoTab(String value, String field) {
@@ -212,19 +220,26 @@ public class PepBoysMainPageSteps {
         CommonFunctions.attachScreenshot("Input info one by one in field: " + field);
     }
 
-    @And("^user navigate back on \"([^\"]*)\"$")
-    public void userNavigateBackOn(String tab) {
+    @And("^user navigates back on \"([^\"]*)\"$")
+    public void userNavigatesBackOn(String tab) {
         billingPage.navigateToBillingTab(tab);
 
 
     }
 
-    @Then("^user check \"([^\"]*)\" with value \"([^\"]*)\"$")
-    public void userCheckWithValue(String field, String value) throws Throwable {
+    @Then("^user checks \"([^\"]*)\" with value \"([^\"]*)\"$")
+    public void userChecksWithValue(String field, String value) throws Throwable {
         billingPage.checkBillingInfo(field, value);
+    }
 
+    @After
+    public void cleanUp() {
+        cartPage.openCartPage();
+        cartPage.cleanUpCart();
+        if(TestGlobalsManager.getTestGlobal("authorised") != null) {
+            mainPage.doLogout();
+        }
     }
 }
-
 
 

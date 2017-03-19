@@ -15,20 +15,20 @@ Feature: Guest - Shipping & Billing page
     Given user types billing info for "qa user"
     And user types " " in "phone" on billing info tab
     And presses the "Continue" button
-    Then user stay at billing tab with error message
+    Then user stays at billing tab with error message
 
     And user types "phoneNumber" in "phone" on billing info tab
     And presses the "Continue" button
     And chooses "Use Entered Address"
-    Then user stay at billing tab with error message
+    Then user stays at billing tab with error message
 
     And user types "!@$%^&*():_" in "phone" on billing info tab
     And presses the "Continue" button
     And chooses "Use Entered Address"
-    Then user stay at billing tab with error message
+    Then user stays at billing tab with error message
 
     And user types "4152011234" in "phone" on billing info tab
     And presses the "Continue" button
     And chooses "Use Entered Address"
-    Then user check "phone" with value "4152011234"
+    Then user checks "phone" with value "4152011234"
 

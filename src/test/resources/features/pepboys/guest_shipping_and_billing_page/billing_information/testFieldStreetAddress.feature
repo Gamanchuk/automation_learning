@@ -14,21 +14,21 @@ Feature: Guest - Shipping & Billing page
     Given user types billing info for "qa user"
     And user types " " in "street address" on billing info tab
     And presses the "Continue" button
-    Then user stay at billing tab with error message
+    Then user stays at billing tab with error message
 
     And user types "Mission Street" in "street address" on billing info tab
     And presses the "Continue" button
     And chooses "Use Entered Address"
-    Then user check "street address" with value "Mission Street"
-    And user navigate back on "Billing & Shipping"
+    Then user checks "street address" with value "Mission Street"
+    And user navigates back on "Billing & Shipping"
 
     And user types "123456" in "street address" on billing info tab
     And presses the "Continue" button
     And chooses "Use Entered Address"
-    Then user check "street address" with value "123456"
-    And user navigate back on "Billing & Shipping"
+    Then user checks "sstreet address" with value "123456"
+    And user navigates back on "Billing & Shipping"
 
     And user types "!@$%^&*():_+" in "street address" on billing info tab
     And presses the "Continue" button
     And chooses "Use Entered Address"
-    Then user check "street address" with value "!@$%^&*():_+"
+    Then user checks "street address" with value "!@$%^&*():_+"
