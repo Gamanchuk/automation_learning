@@ -236,10 +236,17 @@ public class PepBoysMainPageSteps {
     public void cleanUp() {
         cartPage.openCartPage();
         cartPage.cleanUpCart();
-        if(TestGlobalsManager.getTestGlobal("authorised") != null) {
+        if (TestGlobalsManager.getTestGlobal("authorised") != null) {
             mainPage.doLogout();
         }
     }
+
+    @And("^user types rewards number \"([^\"]*)\"$")
+    public void userTypesRewardsCode(String rewardsCode) throws Throwable {
+        billingPage.setRewards(rewardsCode);
+        CommonFunctions.attachScreenshot("Rewards Number");
+    }
+
 }
 
 

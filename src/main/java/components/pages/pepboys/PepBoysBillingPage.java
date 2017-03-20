@@ -370,5 +370,19 @@ public class PepBoysBillingPage extends PepBoysBasePage {
 
         assertTrue("Error message: '" + errorMessage.toLowerCase() + "' doesn't equals", flag);
     }
+
+    public void setRewards(String rewardsCode) {
+        ((JavascriptExecutor) getDriver()).executeScript("window.scrollBy(0,500)", "");
+
+        getDriver().findElement(By.xpath("//a[contains(@class, 'plus-collapser')]/div/div/h2")).click();
+
+        if (rewardsCode.equals("Don't have a rewards number")) {
+            getDriver().findElement(By.xpath("//div[@class='inset']/div[contains(@class, 'checkbox-row')]/input")).click();
+        } else {
+            WebElement rewardsEl = getDriver().findElement(By.xpath("//div[contains(@class, 'rewards-account-input')]/input"));
+            rewardsEl.clear();
+            rewardsEl.sendKeys(rewardsCode);
+        }
+    }
 }
 
