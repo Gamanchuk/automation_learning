@@ -35,20 +35,21 @@ public class AddressDisplayWidget extends Component {
     }
 
     public void checkFieldValue(String fieldName, String expectedValue) {
-        String fieldValue = getDriver().findElement(getFieldByName(fieldName)).getText();
-        assertEquals(expectedValue, fieldValue);
+        By field = getFieldByName(fieldName);
+        String fieldValue = getDriver().findElement(field).getText();
+        assertEquals(fieldValue, expectedValue, "Unexpected " + fieldName);
     }
 
     public void checkCityInfo(String expectedCityInfo) {
 //        String cityInfo = getDriver().findElement(deliveryCityInfo).getText().split(" ");
         String cityInfo = getDriver().findElement(deliveryCityInfo).getText();
-        assertEquals("Unexpected city", expectedCityInfo, cityInfo.split(",")[0]);
+        assertEquals(cityInfo.split(",")[0], expectedCityInfo, "Unexpected city");
     }
 
     public void checkZip(String expectedZip) {
 //        String cityInfo = getDriver().findElement(deliveryCityInfo).getText().split(" ");
         String cityInfo = getDriver().findElement(deliveryCityInfo).getText();
-        assertEquals("Unexpected zip code", expectedZip, cityInfo.split(",")[1]);
+        assertEquals(cityInfo.split(",")[1], expectedZip, "Unexpected zip code");
     }
 
     public void checkPhone(String expectedPhone) {
@@ -63,21 +64,21 @@ public class AddressDisplayWidget extends Component {
             e.printStackTrace();
         }
 
-        assertEquals("Incorrect phone number was saved", result, phone);
+        assertEquals(phone, result, "Incorrect phone number was saved");
     }
 
     private By getFieldByName(String fieldName) {
         switch (fieldName) {
-            case "name":
+            case "Full Name":
                 return deliveryName;
-            case "street address":
+            case "Street Address":
                 return deliveryStreetAddress;
-            case "apt":
+            case "Apt, Bldg.":
                 return deliveryApt;
             // Add handle state popup
 //            case "state":
 //                break;
-            case "email":
+            case "Email":
                 return deliveryEmail;
             default:
                 throw new Error("Unknown field");

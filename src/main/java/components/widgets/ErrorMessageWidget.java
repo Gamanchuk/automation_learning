@@ -19,7 +19,7 @@ public class ErrorMessageWidget extends Component {
         String errorTitleText = getDriver().findElement(errorTitleEl).getText();
         String errorMessageText = getDriver().findElement(errorMessageEl).getText();
 
-        assertEquals("Unexpected error title", title, errorTitleText);
-        assertEquals("Unexpected error message", message, errorMessageText);
+        assertEquals(errorTitleText, title, "Unexpected error title");
+        assertEquals(errorMessageText, message, "Unexpected error message");
     }
 }

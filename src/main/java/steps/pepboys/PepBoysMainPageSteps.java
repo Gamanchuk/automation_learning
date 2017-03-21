@@ -199,12 +199,6 @@ public class PepBoysMainPageSteps {
 
     @And("^user adds to cart any tires with \"([^\"]*)\" delivery option for \"([^\"]*)\"$")
     public void userAddsToCartAnyTiresWithDeliveryOptionFor(String deliveryOption, String vehicle) throws Throwable {
-//        mainPage.openPageWithCookies();
-//        categoriesWidget.openCategory("Tires");
-//        tiresPage.shopForTiresBy("Tires by Vehicle");
-//        tiresPage.selectVehicle(DataProvider.getVehicle(vehicle));
-//        tiresPage.addAnyTiresToCart();
-
         tiresPage.addSingleTyresToCart();
         productPage.addToCart();
 
@@ -215,11 +209,11 @@ public class PepBoysMainPageSteps {
         cartPage.scheduleInstallationTime();
     }
 
-    @Given("^user fills \"([^\"]*)\" in billing info for \"([^\"]*)\"$")
-    public void userFillsInBillingInfoFor(String field, String userName) {
-
-
-    }
+//    @Given("^user fills \"([^\"]*)\" in billing info for \"([^\"]*)\"$")
+//    public void userFillsInBillingInfoFor(String field, String userName) {
+//
+//
+//    }
 
 
     @Given("^user types \"([^\"]*)\" into the \"([^\"]*)\" field$")
@@ -228,14 +222,21 @@ public class PepBoysMainPageSteps {
         CommonFunctions.attachScreenshot(String.format("Input '%s' into '%s'", value, field));
     }
 
-    @And("^user navigates back on \"([^\"]*)\"$")
-    public void userNavigatesBackOn(String tab) {
-//        addressFormWidget.navigateToBillingTab(tab);
+    @And("^user navigates to \"([^\"]*)\" breadcrumb$")
+    public void userNavigatesToBreadcrumb(String breadcrumb) {
+        breadcrumbWidget.clickBreadcrumb(breadcrumb);
     }
 
-    @Then("^user checks \"([^\"]*)\" with value \"([^\"]*)\"$")
-    public void userChecksWithValue(String field, String value) throws Throwable {
-//        addressFormWidget.checkBillingInfo(field, value);
+    @Then("^user checks \"([^\"]*)\" with value \"([^\"]*)\" on \"([^\"]*)\" tab$")
+    public void userChecksWithValueOnTab(String field, String value, String breadcrumb) throws Throwable {
+        breadcrumbWidget.waitForBreadcrumbActive(breadcrumb);
+        addressDisplayWidget.checkFieldValue(field, value);
+    }
+
+    @Then("^user checks city info with value \"([^\"]*)\" on \"([^\"]*)\" tab$")
+    public void userChecksWithValueOnTab(String value, String breadcrumb) throws Throwable {
+        breadcrumbWidget.waitForBreadcrumbActive(breadcrumb);
+        addressDisplayWidget.checkCityInfo(value);
     }
 
     @After
@@ -265,7 +266,7 @@ public class PepBoysMainPageSteps {
         CommonFunctions.attachScreenshot("Billing info");
     }
 
-    @Then("^user stays at \"([^\"]*)\" tab$")
+    @Then("^user should stay at \"([^\"]*)\" tab$")
     public void userStaysAtTab(String tabName) {
         assertTrue(breadcrumbWidget.isTabActive(tabName), "Tab " + tabName + " is not an active");
     }

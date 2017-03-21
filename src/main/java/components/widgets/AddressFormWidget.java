@@ -285,4 +285,3 @@ public class AddressFormWidget extends Component {
         element.sendKeys(value);
     }
 }
-

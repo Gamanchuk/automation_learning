@@ -16,4 +16,14 @@ public class BreadcrumbWidget extends Component {
     private By getBreadcrumbByName(String name) {
         return By.xpath("//a[contains(@class, 'breadcrumb') and text()='" + name + "']");
     }
+
+    public void clickBreadcrumb(String breadcrumb) {
+        getDriver().findElement(getBreadcrumbByName(breadcrumb)).click();
+        waitForBreadcrumbActive(breadcrumb);
+    }
+
+    public void waitForBreadcrumbActive(String breadcrumb) {
+        waitForElementVisible(By.xpath(
+                "//a[contains(@class, 'breadcrumb') and contains(@class, 'active') and text()='" + breadcrumb + "']"));
+    }
 }

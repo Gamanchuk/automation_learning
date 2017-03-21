@@ -12,27 +12,30 @@ Feature: Guest - Shipping & Billing page
   Scenario: Test field 'Email'
     Given user types billing info for "qa user"
 
-#    And user types " " into the "email" field
-#    And presses the "Continue" button
-#    Then user stays at billing tab with error message
-#
-#    And user types "#######@moovweb.com" into the "email" field
-#    And presses the "Continue" button
-#    And chooses "Use Entered Address"
-#    Then user stays at billing tab with error message
-#
-#    And user types "qa@moovweb" into the "email" field
-#    And presses the "Continue" button
-#    Then user stays at billing tab with error message
-#
-#    And user types "qamoovweb.com" into the "email" field
-#    And presses the "Continue" button
-#    Then user stays at billing tab with error message
-#
-#    And user types "123456@moovweb.com" into the "email" field
-#    And presses the "Continue" button
-#    And chooses "Use Entered Address"
-#    Then user checks "email" with value "123456@moovweb.com"
+    And user types "" into the "Email" field
+    And presses the "Continue" button
+    Then user should stay at "Billing & Shipping" tab
+
+    And user types "#######@moovweb.com" into the "Email" field
+    And presses the "Continue" button
+    And chooses "Use Entered Address"
+    Then user should stay at "Billing & Shipping" tab
+    And sees "FORM ERRORS" error message with text "Please review all inputs."
+
+    And user types "qa@moovweb" into the "Email" field
+    And presses the "Continue" button
+    Then user should stay at "Billing & Shipping" tab
+    And sees "FORM ERRORS" error message with text "Please review all inputs."
+
+    And user types "qamoovweb.com" into the "Email" field
+    And presses the "Continue" button
+    Then user should stay at "Billing & Shipping" tab
+    And sees "FORM ERRORS" error message with text "Please review all inputs."
+
+    And user types "123456@moovweb.com" into the "email" field
+    And presses the "Continue" button
+    And chooses "Use Entered Address"
+#    Then user checks "Email" with value "123456@moovweb.com"
 #    And user navigates back on "Billing & Shipping"
 #
 #    And user types "qa@moovweb.com" into the "email" field
