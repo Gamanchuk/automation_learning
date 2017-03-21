@@ -12,5 +12,6 @@ Feature: Guest - Shipping & Billing page
   @TestCaseId("15495")
   Scenario: Test billing form with blank fields (error message should be displayed)
     Given presses the "Continue" button
-    Then user stays at billing tab with error message
+    Then user stays at "Billing & Shipping" tab
+    And sees "Form Errors" error message with text "Please review all inputs."
 

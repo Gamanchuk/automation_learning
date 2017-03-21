@@ -25,13 +25,6 @@ public class AddressFormWidget extends Component {
     // Billing info: element path
 
 
-//    private By deliveryApt = By.xpath("//div[@class='address-line2']");
-//    private By deliveryName = By.xpath("//div[@class='address-recipient']");
-//    private By deliveryStreetAddress = By.xpath("//div[@class='address-line1']");
-//    private By deliveryCityInfo = By.xpath("//div[@class='address-cityInfo-state-zip']");
-//    private By deliveryPhone = By.xpath("//a[@class='phone-display address-phone']");
-//    private By deliveryEmail = By.xpath("//div[@class='address-email']");
-
     public void fillAddressForm(String fullName, String address, String cityInfo, String city, String apartment, String phone, String state, String zip, boolean autoFill) {
         fillField(nameField, fullName);
         fillField(addressField, address);

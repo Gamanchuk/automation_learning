@@ -1,10 +1,7 @@
 package steps.pepboys;
 
 import components.pages.pepboys.*;
-import components.widgets.AddressFormWidget;
-import components.widgets.ButtonWidget;
-import components.widgets.EmailWidget;
-import components.widgets.ErrorMessageWidget;
+import components.widgets.*;
 import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -28,10 +25,11 @@ public class PepBoysMainPageSteps {
     private PepBoysTiresPage tiresPage = new PepBoysTiresPage();
 
     private AddressFormWidget addressFormWidget = new AddressFormWidget();
+    private AddressDisplayWidget addressDisplayWidget = new AddressDisplayWidget();
     private EmailWidget emailWidget = new EmailWidget();
     private ButtonWidget buttonWidget = new ButtonWidget();
     private ErrorMessageWidget errorMessageWidget = new ErrorMessageWidget();
-
+    private BreadcrumbWidget breadcrumbWidget = new BreadcrumbWidget();
 
     @Given("^user makes appoint with code \"([^\"]*)\"$")
     public void userMakesAppointWithCode(String code) {
@@ -99,7 +97,16 @@ public class PepBoysMainPageSteps {
 
     @Then("^user checks billing info for \"([^\"]*)\"$")
     public void userChecksBillingInfoFor(String userName) {
-//        addressFormWidget.checkBillingInfo(DataProvider.getUser(userName));
+        BillingUser user = DataProvider.getUser(userName);
+        addressDisplayWidget.checkBillingInfo(
+                user.getFullName(),
+                user.getApartment(),
+                user.getFullAddress(),
+                user.getCityInfo(),
+                user.getZipCode(),
+                user.getPhone(),
+                user.getEmail()
+        );
     }
 
     @And("^presses the \"([^\"]*)\" button$")
@@ -138,6 +145,7 @@ public class PepBoysMainPageSteps {
 //        addressFormWidget.checkBillingInfoFormError();
         CommonFunctions.attachScreenshot("Please review all inputs");
     }
+
 
     @And("^user adds to cart product with id \"([^\"]*)\" with \"([^\"]*)\" delivery option$")
     public void userAddsToCartProductWithIdWithDeliveryOption(String id, String deliveryOption) throws Throwable {
@@ -207,13 +215,6 @@ public class PepBoysMainPageSteps {
         cartPage.scheduleInstallationTime();
     }
 
-
-    @After
-    public void cleanUpCart() {
-        cartPage.openCartPage();
-        cartPage.cleanUpCart();
-    }
-
     @Given("^user fills \"([^\"]*)\" in billing info for \"([^\"]*)\"$")
     public void userFillsInBillingInfoFor(String field, String userName) {
 
@@ -262,6 +263,16 @@ public class PepBoysMainPageSteps {
 
         emailWidget.fillEmailField(user.getEmail());
         CommonFunctions.attachScreenshot("Billing info");
+    }
+
+    @Then("^user stays at \"([^\"]*)\" tab$")
+    public void userStaysAtTab(String tabName) {
+        assertTrue(breadcrumbWidget.isTabActive(tabName), "Tab " + tabName + " is not an active");
+    }
+
+    @And("^sees \"([^\"]*)\" error message with text \"([^\"]*)\"$")
+    public void seesErrorMessageWithText(String errorTitle, String errorMessage) {
+        errorMessageWidget.checkError(errorTitle, errorMessage);
     }
 }
 
