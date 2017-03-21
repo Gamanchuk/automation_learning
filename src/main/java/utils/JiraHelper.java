@@ -63,4 +63,27 @@ public class JiraHelper {
 
         return issuesLink;
     }
+
+    public static void addAttachment(String issuesKey) {
+
+//
+//        Request request = new Request.Builder()
+//                .url(JIRA_URL + "/issue")
+//                .header("Authorization", "Basic " + AUTH_HEADER)
+//                .post(RequestBody.create(MEDIA_TYPE_MARKDOWN, out.toString()))
+//                .build();
+//
+//
+//        File fileToUpload = new File("");
+//
+//        FileBody fileBody = new FileBody(fileToUpload, "application/octet-stream", "UTF-8");
+//
+//        Request request = new Request.Builder()
+//                .url(JIRA_URL + "/issue")
+//                .header("Authorization", "Basic " + AUTH_HEADER)
+//                .post(RequestBody.create(MEDIA_TYPE_MARKDOWN, out.toString()))
+//                .
+//                .build();
+    }
+
 }
