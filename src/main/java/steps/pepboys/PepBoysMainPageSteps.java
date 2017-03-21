@@ -243,10 +243,17 @@ public class PepBoysMainPageSteps {
 
     @And("^user types rewards number \"([^\"]*)\"$")
     public void userTypesRewardsCode(String rewardsCode) throws Throwable {
+        billingPage.openRewards();
         billingPage.setRewards(rewardsCode);
         CommonFunctions.attachScreenshot("Rewards Number");
     }
 
+    @And("^user chooses don't have a reward number$")
+    public void userChoosesDonTHaveARewardNumber() {
+        billingPage.openRewards();
+        billingPage.getRewards();
+        CommonFunctions.attachScreenshot("Don't have a reward number");
+    }
 }
 
 

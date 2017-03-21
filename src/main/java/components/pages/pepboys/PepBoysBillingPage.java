@@ -1,7 +1,6 @@
 package components.pages.pepboys;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import utils.CommonFunctions;
@@ -239,7 +238,7 @@ public class PepBoysBillingPage extends PepBoysBasePage {
     }
 
     public void confirmBillingInfo(String confirmMethod) {
-        ((JavascriptExecutor) getDriver()).executeScript("window.scrollBy(0,300)", "");
+        javascriptScroll(300);
 
         if (confirmMethod.equals("Continue")) {
             CommonFunctions.attachScreenshot("Shipping info");
@@ -372,12 +371,19 @@ public class PepBoysBillingPage extends PepBoysBasePage {
     }
 
     public void setRewards(String rewardsCode) {
-        ((JavascriptExecutor) getDriver()).executeScript("window.scrollBy(0,500)", "");
-
-        getDriver().findElement(By.xpath("//a[contains(@class, 'plus-collapser')]/div/div/h2")).click();
         WebElement rewardsEl = getDriver().findElement(By.xpath("//div[contains(@class, 'rewards-account-input')]/input"));
         rewardsEl.clear();
         rewardsEl.sendKeys(rewardsCode);
+    }
+
+    public void getRewards() {
+        getDriver().findElement(By.xpath("//div[@class='inset']/div[contains(@class, 'checkbox-row')]/input")).click();
+    }
+
+    public void openRewards() {
+        javascriptScroll(500);
+        getDriver().findElement(By.xpath("//a[contains(@class, 'plus-collapser')]/div/div/h2")).click();
+        focusOut();
     }
 }
 
