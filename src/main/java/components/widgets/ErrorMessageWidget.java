@@ -28,5 +28,11 @@ public class ErrorMessageWidget extends Component {
 
         deleteElementFromDom(errorTitleEl);
         deleteElementFromDom(errorMessageEl);
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
