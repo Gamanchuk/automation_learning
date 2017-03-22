@@ -14,12 +14,13 @@ public class ErrorMessageWidget extends Component {
     private By errorMessageEl = By.xpath(PATH_BASE + "/div");
 
     public void checkError(String title, String message) {
+        ((JavascriptExecutor) getDriver()).executeScript("window.scrollBy(0,-300)", "");
+
         waitForElementVisible(errorTitleEl);
 
         String errorTitleText = getDriver().findElement(errorTitleEl).getText();
         String errorMessageText = getDriver().findElement(errorMessageEl).getText();
 
-        ((JavascriptExecutor) getDriver()).executeScript("window.scrollBy(0,-300)", "");
         CommonFunctions.attachScreenshot("Check error alert");
 
         assertEquals(errorTitleText, title, "Unexpected error title");
