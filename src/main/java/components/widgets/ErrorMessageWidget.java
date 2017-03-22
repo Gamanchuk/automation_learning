@@ -26,8 +26,8 @@ public class ErrorMessageWidget extends Component {
         assertEquals(errorTitleText, title, "Unexpected error title");
         assertEquals(errorMessageText, message, "Unexpected error message");
 
-        deleteElementFromDom(errorTitleEl);
-        deleteElementFromDom(errorMessageEl);
+        deleteElementFromDom(By.xpath(PATH_BASE));
+
 
         try {
             Thread.sleep(1000);
