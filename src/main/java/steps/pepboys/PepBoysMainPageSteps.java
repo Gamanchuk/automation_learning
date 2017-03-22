@@ -122,6 +122,9 @@ public class PepBoysMainPageSteps {
 
     @And("^chooses \"([^\"]*)\" shipping method$")
     public void choosesShippingMethod(String shippingMethod) {
+
+        int i = 0;
+
 //        addressFormWidget.selectShippingMethod(shippingMethod);
     }
 
@@ -238,7 +241,7 @@ public class PepBoysMainPageSteps {
     @Then("^user checks zip code with value \"([^\"]*)\" on \"([^\"]*)\" tab$")
     public void userChecksZipWithValueOnTab(String value, String breadcrumb) {
         breadcrumbWidget.waitForBreadcrumbActive(breadcrumb);
-        addressDisplayWidget.checkCityInfo(value);
+        addressDisplayWidget.checkZip(value);
         CommonFunctions.attachScreenshot("Checks information on " + breadcrumb);
     }
 

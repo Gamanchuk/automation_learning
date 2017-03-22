@@ -16,7 +16,7 @@ public class ErrorMessageWidget extends Component {
     public void checkError(String title, String message) {
         ((JavascriptExecutor) getDriver()).executeScript("window.scrollBy(0,-300)", "");
 
-        waitForElementVisible(errorTitleEl);
+        waitForElementVisible(errorMessageEl);
 
         String errorTitleText = getDriver().findElement(errorTitleEl).getText();
         String errorMessageText = getDriver().findElement(errorMessageEl).getText();
@@ -26,7 +26,7 @@ public class ErrorMessageWidget extends Component {
         assertEquals(errorTitleText, title, "Unexpected error title");
         assertEquals(errorMessageText, message, "Unexpected error message");
 
-        deleteElementFromDom(errorTitleEl);
+//        deleteElementFromDom(errorTitleEl);
 
         try {
             Thread.sleep(1000);

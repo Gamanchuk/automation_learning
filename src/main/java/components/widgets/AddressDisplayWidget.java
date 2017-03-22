@@ -14,7 +14,7 @@ public class AddressDisplayWidget extends Component {
     private By deliveryApt = By.xpath("//div[@class='address-line2']");
     private By deliveryName = By.xpath("//div[@class='address-recipient']");
     private By deliveryStreetAddress = By.xpath("//div[@class='address-line1']");
-    private By deliveryCityInfo = By.xpath("//div[@class='address-cityInfo-state-zip']");
+    private By deliveryCityInfo = By.xpath("//div[@class='address-city-state-zip']");
     private By deliveryPhone = By.xpath("//a[@class='phone-display address-phone']");
     private By deliveryEmail = By.xpath("//div[@class='address-email']");
 
@@ -49,7 +49,9 @@ public class AddressDisplayWidget extends Component {
     public void checkZip(String expectedZip) {
 //        String cityInfo = getDriver().findElement(deliveryCityInfo).getText().split(" ");
         String cityInfo = getDriver().findElement(deliveryCityInfo).getText();
-        assertEquals(cityInfo.split(",")[1], expectedZip, "Unexpected zip code");
+        String[] split = cityInfo.split(",")[1].trim().split(" ");
+        String zip = split[split.length - 1];
+        assertEquals(zip, expectedZip, "Unexpected zip code");
     }
 
     public void checkPhone(String expectedPhone) {

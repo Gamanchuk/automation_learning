@@ -24,11 +24,6 @@ Feature: Guest - Shipping & Billing page
     Then user should stay at "Billing & Shipping" tab
     And sees "FORM ERRORS" error message with text "Email Address is invalid"
 
-    And user types "qa@moovweb" into the email field
-    And presses the "Continue" button
-    Then user should stay at "Billing & Shipping" tab
-    And sees "FORM ERRORS" error message with text "Please review all inputs."
-
     And user types "qamoovweb.com" into the email field
     And presses the "Continue" button
     Then user should stay at "Billing & Shipping" tab
@@ -39,6 +34,11 @@ Feature: Guest - Shipping & Billing page
     And chooses "Use Entered Address"
     Then user checks "Email" with value "123456@moovweb.com" on "Delivery Method" tab
     And user navigates to "Billing & Shipping" breadcrumb
+
+    And user types "qa@moovweb" into the email field
+    And presses the "Continue" button
+    Then user should stay at "Billing & Shipping" tab
+    And sees "FORM ERRORS" error message with text "Please review all inputs."
 
     And user types "qa@moovweb.com" into the email field
     And presses the "Continue" button
