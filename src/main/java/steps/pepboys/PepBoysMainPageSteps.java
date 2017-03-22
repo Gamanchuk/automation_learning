@@ -141,13 +141,6 @@ public class PepBoysMainPageSteps {
 //        addressFormWidget.checkPaymentResult();
     }
 
-    @Then("^user stays at billing tab with error message$")
-    public void userChecksErrorMessage() {
-//        addressFormWidget.checkBillingInfoFormError();
-        CommonFunctions.attachScreenshot("Please review all inputs");
-    }
-
-
     @And("^user adds to cart product with id \"([^\"]*)\" with \"([^\"]*)\" delivery option$")
     public void userAddsToCartProductWithIdWithDeliveryOption(String id, String deliveryOption) throws Throwable {
         productPage.openProductPage(id);
