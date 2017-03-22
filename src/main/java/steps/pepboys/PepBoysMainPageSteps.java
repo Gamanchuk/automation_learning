@@ -10,6 +10,7 @@ import cucumber.api.java.en.When;
 import utils.CommonFunctions;
 import utils.TestGlobalsManager;
 import utils.pepboys.BillingUser;
+import utils.pepboys.CreditCard;
 import utils.pepboys.DataProvider;
 
 import static org.testng.Assert.assertTrue;
@@ -31,6 +32,8 @@ public class PepBoysMainPageSteps {
     private ButtonWidget buttonWidget = new ButtonWidget();
     private ErrorMessageWidget errorMessageWidget = new ErrorMessageWidget();
     private BreadcrumbWidget breadcrumbWidget = new BreadcrumbWidget();
+    private ShippingOptionsWidget shippingOptionsWidget = new ShippingOptionsWidget();
+    private CreditCardFormWidget creditCardFormWidget = new CreditCardFormWidget();
 
     @Given("^user makes appoint with code \"([^\"]*)\"$")
     public void userMakesAppointWithCode(String code) {
@@ -122,16 +125,19 @@ public class PepBoysMainPageSteps {
 
     @And("^chooses \"([^\"]*)\" shipping method$")
     public void choosesShippingMethod(String shippingMethod) {
-
-        int i = 0;
-
-//        addressFormWidget.selectShippingMethod(shippingMethod);
+        shippingOptionsWidget.selectShippingMethod(shippingMethod);
+        CommonFunctions.attachScreenshot("Shipping method");
     }
 
     @And("^uses \"([^\"]*)\" card for payment$")
     public void usesCardForPayment(String cardName) {
-//        addressFormWidget.inputPaymentDetails(DataProvider.getCard(cardName));
-//        addressFormWidget.confirmBillingInfo("Place Order");
+        CreditCard card = DataProvider.getCard(cardName);
+        creditCardFormWidget.inputPaymentDetails(
+                card.getNumber(),
+                card.getExpDate(),
+                card.getCvv(),
+                card.getCardholderName()
+        );
     }
 
     @And("^user confirms purchase$")
@@ -141,6 +147,9 @@ public class PepBoysMainPageSteps {
 
     @Then("^user should be on thank you page$")
     public void userShouldBeOnThankYouPage() {
+
+        int i = 0;
+
 //        addressFormWidget.checkPaymentResult();
     }
 

@@ -15,13 +15,6 @@ public class AddressFormWidget extends Component {
     private By stateField = By.id("billing-address-level1");
     private By zipField = By.id("billing-postal-code");
 
-
-//    private By continueBtn = By.xpath("//button[text()='Continue']");
-//    private By placeOrderBtn = By.xpath("//div[@class='order-review-container']/div[@class='place-order-button well']/div[@class='component submit-button']/button[@class='main-button']");
-//    private By signInButton = By.xpath("//button[text()='Sign In']");
-//    private By signInCheckoutButton = By.xpath("//button[text()='Sign In & Checkout']");
-//    private By ccNumber = By.id("cc-number");
-
     public void fillAddressForm(String fullName, String address, String cityInfo, String city, String apartment, String phone, String state, String zip, boolean autoFill) {
         fillField(nameField, fullName);
         fillField(addressField, address);
@@ -137,30 +130,6 @@ public class AddressFormWidget extends Component {
 //        }
 //    }
 //
-//    public void selectShippingMethod(String shippingMethod) {
-//
-//        waitForElementVisible(By.xpath("//h2[text()='Shipping Address']"));
-//        this.select(shippingMethod);
-//
-//        focusOut();
-//        CommonFunctions.attachScreenshot("Shipping method");
-//        click(continueBtn);
-//    }
-//
-//    public void inputPaymentDetails(CreditCard card) {
-//        waitForElementVisible(ccNumber);
-//
-//        getDriver().findElement(By.id("cc-number")).sendKeys(card.getNumber());
-//        getDriver().findElement(By.id("cc-exp")).sendKeys(card.getExpDate());
-//        getDriver().findElement(By.id("cc-csc")).sendKeys(card.getCvv());
-//
-//        // Element must be displayed if you pay as registered user
-//        if (getDriver().findElement(By.id("-cc-name")).isDisplayed())
-//            getDriver().findElement(By.id("-cc-name")).sendKeys("");
-//        getDriver().findElement(By.id("-cc-name")).sendKeys(card.getCardholderName());
-//
-//        CommonFunctions.attachScreenshot("Payment details");
-//    }
 //
 //    public void purchaseWithPayPal() {
 //        waitForElementVisible(ccNumber);
@@ -218,13 +187,6 @@ public class AddressFormWidget extends Component {
 //        CommonFunctions.attachScreenshot("Billing info");
 //    }
 //
-//    private void select(String arg) {
-//        By shippingMethodOptionEl = By.xpath("//div[contains(text(), '" + arg + "')]");
-//        if (!isElementPresent(shippingMethodOptionEl)) {
-//            click(By.xpath("//div[contains(@class, 'radio-list') and contains(@class, 'radio-collapsed')]"));
-//            click(shippingMethodOptionEl);
-//        }
-//    }
 //
 
     public void inputValueIntoField(String value, String field) {

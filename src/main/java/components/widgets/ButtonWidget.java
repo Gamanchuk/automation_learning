@@ -7,6 +7,6 @@ public class ButtonWidget extends Component {
     private By btn = By.xpath("//div[contains(@class, 'submit-button')]//button");
 
     public void clickButton() {
-        getDriver().findElement(btn).click();
+        getDriver().findElements(btn).get(0).click();
     }
 }
