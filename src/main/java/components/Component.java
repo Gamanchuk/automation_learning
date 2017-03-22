@@ -228,4 +228,16 @@ public abstract class Component {
         driver.switchTo().defaultContent();
 
     }
+
+    public void deleteElementFromDom(By path) {
+
+
+        JavascriptExecutor js = null;
+        if (driver instanceof JavascriptExecutor) {
+            js = (JavascriptExecutor) driver;
+        }
+
+        js.executeScript("arguments[0].parentNode.removeChild(arguments[0])", driver.findElement(path));
+//        js.executeScript("return document.getElementsByClassName('review-info-star').remove();");
+    }
 }

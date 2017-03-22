@@ -2,7 +2,6 @@ package steps.pepboys;
 
 import components.pages.pepboys.*;
 import components.widgets.*;
-import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -233,12 +232,14 @@ public class PepBoysMainPageSteps {
     public void userChecksWithValueOnTab(String field, String value, String breadcrumb) throws Throwable {
         breadcrumbWidget.waitForBreadcrumbActive(breadcrumb);
         addressDisplayWidget.checkFieldValue(field, value);
+        CommonFunctions.attachScreenshot("Checks " + field + " on " + breadcrumb + " tab");
     }
 
     @Then("^user checks city info with value \"([^\"]*)\" on \"([^\"]*)\" tab$")
     public void userChecksWithValueOnTab(String value, String breadcrumb) throws Throwable {
         breadcrumbWidget.waitForBreadcrumbActive(breadcrumb);
         addressDisplayWidget.checkCityInfo(value);
+        CommonFunctions.attachScreenshot("Checks information on " + breadcrumb);
     }
 
     @After

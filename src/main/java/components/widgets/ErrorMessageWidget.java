@@ -2,8 +2,8 @@ package components.widgets;
 
 import components.Component;
 import org.openqa.selenium.By;
-
-import java.util.concurrent.TimeUnit;
+import org.openqa.selenium.JavascriptExecutor;
+import utils.CommonFunctions;
 
 import static org.testng.Assert.assertEquals;
 
@@ -15,12 +15,17 @@ public class ErrorMessageWidget extends Component {
 
     public void checkError(String title, String message) {
         waitForElementVisible(errorTitleEl);
-        getDriver().manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 
         String errorTitleText = getDriver().findElement(errorTitleEl).getText();
         String errorMessageText = getDriver().findElement(errorMessageEl).getText();
 
+        ((JavascriptExecutor) getDriver()).executeScript("window.scrollBy(0,-300)", "");
+        CommonFunctions.attachScreenshot("Check error alert");
+
         assertEquals(errorTitleText, title, "Unexpected error title");
         assertEquals(errorMessageText, message, "Unexpected error message");
+
+        deleteElementFromDom(errorTitleEl);
+        deleteElementFromDom(errorMessageEl);
     }
 }
