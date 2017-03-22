@@ -11,5 +11,6 @@ public class EmailWidget extends Component {
         WebElement emailEl = getDriver().findElement(emailField);
         emailEl.clear();
         emailEl.sendKeys(email);
+        focusOut();
     }
 }

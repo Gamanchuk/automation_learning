@@ -1,4 +1,4 @@
-@pepBoys
+@pepBoys #@debug
 
 
 Feature: Guest - Shipping & Billing page
@@ -12,23 +12,24 @@ Feature: Guest - Shipping & Billing page
   @TestCaseId("15498")
   Scenario: Test field 'Address Street'
     Given user types billing info for "qa user"
-#    And user types " " into the "Street Address" field
-#    And presses the "Continue" button
-#    Then user stays at billing tab with error message
-#
-#    And user types "Mission Street" into the "Street Address" field
-#    And presses the "Continue" button
-#    And chooses "Use Entered Address"
-#    Then user checks "Street Address" with value "Mission Street"
-#    And user navigates back on "Billing & Shipping"
-#
-#    And user types "123456" into the "street address" field
-#    And presses the "Continue" button
-#    And chooses "Use Entered Address"
-#    Then user checks "Street Address" with value "123456"
-#    And user navigates back on "Billing & Shipping"
-#
-#    And user types "!@$%^&*():_+" into the "Street Address" field
-#    And presses the "Continue" button
-#    And chooses "Use Entered Address"
-#    Then user checks "Street Address" with value "!@$%^&*():_+"
+    And user types "" into the "Street Address" field
+    And presses the "Continue" button
+    Then user should stay at "Billing & Shipping" tab
+    And sees "FORM ERRORS" error message with text "Please review all inputs."
+
+    And user types "Mission Street" into the "Street Address" field
+    And presses the "Continue" button
+    And chooses "Use Entered Address"
+    Then user checks "Street Address" with value "Mission Street" on "Delivery Method" tab
+    And user navigates to "Billing & Shipping" breadcrumb
+
+    And user types "123456" into the "Street Address" field
+    And presses the "Continue" button
+    And chooses "Use Entered Address"
+    Then user checks "Street Address" with value "123456" on "Delivery Method" tab
+    And user navigates to "Billing & Shipping" breadcrumb
+
+    And user types "!@$%^&*():_+" into the "Street Address" field
+    And presses the "Continue" button
+    And chooses "Use Entered Address"
+    Then user checks "Street Address" with value "!@$%^&*():_+" on "Delivery Method" tab

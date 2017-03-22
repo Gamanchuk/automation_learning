@@ -229,7 +229,14 @@ public class PepBoysMainPageSteps {
     }
 
     @Then("^user checks city info with value \"([^\"]*)\" on \"([^\"]*)\" tab$")
-    public void userChecksWithValueOnTab(String value, String breadcrumb) throws Throwable {
+    public void userChecksCityInfoWithValueOnTab(String value, String breadcrumb) {
+        breadcrumbWidget.waitForBreadcrumbActive(breadcrumb);
+        addressDisplayWidget.checkCityInfo(value);
+        CommonFunctions.attachScreenshot("Checks information on " + breadcrumb);
+    }
+
+    @Then("^user checks zip code with value \"([^\"]*)\" on \"([^\"]*)\" tab$")
+    public void userChecksZipWithValueOnTab(String value, String breadcrumb) {
         breadcrumbWidget.waitForBreadcrumbActive(breadcrumb);
         addressDisplayWidget.checkCityInfo(value);
         CommonFunctions.attachScreenshot("Checks information on " + breadcrumb);
@@ -275,6 +282,7 @@ public class PepBoysMainPageSteps {
     @And("^user types \"([^\"]*)\" into the email field$")
     public void userTypesIntoTheEmailField(String email) throws Throwable {
         emailWidget.fillEmailField(email);
+
         CommonFunctions.attachScreenshot(String.format("Input '%s' into email field", email));
     }
 }
