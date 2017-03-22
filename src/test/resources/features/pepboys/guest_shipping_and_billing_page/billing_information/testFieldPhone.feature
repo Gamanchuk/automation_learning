@@ -1,6 +1,4 @@
-@pepBoys
-
-
+@pepBoys @ignore
 
 Feature: Guest - Shipping & Billing page
 
@@ -9,6 +7,11 @@ Feature: Guest - Shipping & Billing page
     And user adds to cart product with id "8076476" with "Ship to Home" delivery option
     And user views cart
     And chooses "Pay Online" method
+
+
+  # This Scenario is ignored, because we can check input values with Selenium
+  # Invalid data will be filled into phone field
+
 
   @TestCaseId("15503")
   Scenario: Test field 'Phone'

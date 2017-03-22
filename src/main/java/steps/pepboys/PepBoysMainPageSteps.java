@@ -2,6 +2,7 @@ package steps.pepboys;
 
 import components.pages.pepboys.*;
 import components.widgets.*;
+import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -26,6 +27,7 @@ public class PepBoysMainPageSteps {
 
     private AddressFormWidget addressFormWidget = new AddressFormWidget();
     private AddressDisplayWidget addressDisplayWidget = new AddressDisplayWidget();
+    private AddressVerificationWidget addressVerificationWidget = new AddressVerificationWidget();
     private EmailWidget emailWidget = new EmailWidget();
     private ButtonWidget buttonWidget = new ButtonWidget();
     private ErrorMessageWidget errorMessageWidget = new ErrorMessageWidget();
@@ -116,7 +118,7 @@ public class PepBoysMainPageSteps {
 
     @And("^chooses \"([^\"]*)\"$")
     public void chooses(String addressType) {
-//        addressFormWidget.chooseAddressType(addressType);
+        addressVerificationWidget.chooseAddressType(addressType);
     }
 
     @And("^chooses \"([^\"]*)\" shipping method$")
@@ -274,6 +276,12 @@ public class PepBoysMainPageSteps {
     @And("^sees \"([^\"]*)\" error message with text \"([^\"]*)\"$")
     public void seesErrorMessageWithText(String errorTitle, String errorMessage) {
         errorMessageWidget.checkError(errorTitle, errorMessage);
+    }
+
+    @And("^user types \"([^\"]*)\" into the email field$")
+    public void userTypesIntoTheEmailField(String email) throws Throwable {
+        emailWidget.fillEmailField(email);
+        CommonFunctions.attachScreenshot(String.format("Input '%s' into email field", email));
     }
 }
 

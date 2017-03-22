@@ -1,4 +1,4 @@
-@pepBoys, @refactoring
+@pepBoys @refactoring
 
 
 Feature: Guest - Shipping & Billing page
@@ -12,6 +12,6 @@ Feature: Guest - Shipping & Billing page
   @TestCaseId("15495")
   Scenario: Test billing form with blank fields (error message should be displayed)
     Given presses the "Continue" button
-    Then user stays at "Billing & Shipping" tab
-    And sees "Form Errors" error message with text "Please review all inputs."
+    Then user should stay at "Billing & Shipping" tab
+    And sees "FORM ERRORS" error message with text "Please review all inputs."
 

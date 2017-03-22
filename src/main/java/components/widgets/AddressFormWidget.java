@@ -22,9 +22,6 @@ public class AddressFormWidget extends Component {
 //    private By signInCheckoutButton = By.xpath("//button[text()='Sign In & Checkout']");
 //    private By ccNumber = By.id("cc-number");
 
-    // Billing info: element path
-
-
     public void fillAddressForm(String fullName, String address, String cityInfo, String city, String apartment, String phone, String state, String zip, boolean autoFill) {
         fillField(nameField, fullName);
         fillField(addressField, address);
@@ -226,16 +223,6 @@ public class AddressFormWidget extends Component {
 //        if (!isElementPresent(shippingMethodOptionEl)) {
 //            click(By.xpath("//div[contains(@class, 'radio-list') and contains(@class, 'radio-collapsed')]"));
 //            click(shippingMethodOptionEl);
-//        }
-//    }
-//
-//    public void chooseAddressType(String addressType) {
-//
-//        By item = By.xpath("//div[@class='radio-list-option' and contains(., '" + addressType + "')]");
-//
-//        if (isElementVisible(item, 5)) {
-//            getDriver().findElement(item).click();
-//            CommonFunctions.attachScreenshot("Choice address type");
 //        }
 //    }
 //
