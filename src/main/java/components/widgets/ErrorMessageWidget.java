@@ -14,6 +14,7 @@ public class ErrorMessageWidget extends Component {
     private By errorMessageEl = By.xpath(PATH_BASE + "/div");
 
     public void checkError(String title, String message) {
+        waitForElementVisible(errorTitleEl);
         getDriver().manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 
         String errorTitleText = getDriver().findElement(errorTitleEl).getText();
