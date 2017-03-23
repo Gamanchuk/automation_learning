@@ -22,10 +22,10 @@ public class AddressDisplayWidget extends Component {
         waitForElementClickable(By.xpath("//div[contains(@class, 'radio-list') and contains(@class, 'radio-collapsed')]"));
         getDriver().manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 
-        checkFieldValue("name", name);
-        checkFieldValue("street address", streetAddress);
-        checkFieldValue("apt", apt);
-        checkFieldValue("email", email);
+        checkFieldValue("Full Name", name);
+        checkFieldValue("Street Address", streetAddress);
+        checkFieldValue("Apt, Bldg.", apt);
+        checkFieldValue("Email", email);
 
         checkCityInfo(cityInfo);
         checkPhone(phone);
