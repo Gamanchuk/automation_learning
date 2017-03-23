@@ -297,6 +297,13 @@ public class PepBoysMainPageSteps {
 
         CommonFunctions.attachScreenshot(String.format("Input '%s' into email field", email));
     }
+
+    @And("^user types rewards number \"([^\"]*)\"$")
+    public void userTypesRewardsNumber(String arg0) throws Throwable {
+//        billingPage.openRewards(); 
+//        billingPage.setRewards(rewardsCode); 
+//        CommonFunctions.attachScreenshot("Rewards Number");
+    }
 }
 
 
