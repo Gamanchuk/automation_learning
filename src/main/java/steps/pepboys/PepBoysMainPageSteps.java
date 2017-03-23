@@ -39,6 +39,7 @@ public class PepBoysMainPageSteps {
     private RadioListWidget radioListWidget = new RadioListWidget();
     private PaymentTypesWidget paymentTypesWidget = new PaymentTypesWidget();
     private PaypalWellWidget paypalWellWidget = new PaypalWellWidget();
+    private CollapserWidget collapserWidget = new CollapserWidget();
 
     @Given("^user makes appoint with code \"([^\"]*)\"$")
     public void userMakesAppointWithCode(String code) {
@@ -295,10 +296,10 @@ public class PepBoysMainPageSteps {
     }
 
     @And("^user types rewards number \"([^\"]*)\"$")
-    public void userTypesRewardsNumber(String arg0) throws Throwable {
-//        billingPage.openRewards(); 
-//        billingPage.setRewards(rewardsCode); 
-//        CommonFunctions.attachScreenshot("Rewards Number");
+    public void userTypesRewardsNumber(String rewardsCode) {
+        collapserWidget.openRewards();
+        collapserWidget.setRewards(rewardsCode);
+        CommonFunctions.attachScreenshot("Rewards Number");
     }
 
     @And("^checks payment details for \"([^\"]*)\"$")
