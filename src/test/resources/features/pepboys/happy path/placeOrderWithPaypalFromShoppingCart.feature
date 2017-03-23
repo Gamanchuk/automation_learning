@@ -1,4 +1,4 @@
-@pepBoys
+@pepBoys @debug
 
 
 Feature: Happy Path
@@ -13,5 +13,7 @@ Feature: Happy Path
   @TestCaseId("16249")
   Scenario: Place Order with Paypal from Shopping cart page
     And chooses "Ground" shipping method
-    And user confirms purchase
+    And presses the "Continue" button
+    And checks payment details for "qa user"
+    And presses the "Place Order" button
     Then user should be on thank you page

@@ -20,11 +20,12 @@ public class CreditCardFormWidget extends Component {
 
         // Element must be displayed if you pay as registered user
         if (getDriver().findElement(ccName).isDisplayed()) {
-            getDriver().findElement(ccName).sendKeys("");
+            getDriver().findElement(ccName).clear();
+            getDriver().findElement(ccName).sendKeys(cardholderName);
         }
-        getDriver().findElement(ccName).sendKeys(cardholderName);
 
         focusOut();
+//        focusOut();
         CommonFunctions.attachScreenshot("Payment details");
     }
 }

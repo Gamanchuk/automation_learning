@@ -34,6 +34,11 @@ public class PepBoysMainPageSteps {
     private BreadcrumbWidget breadcrumbWidget = new BreadcrumbWidget();
     private ShippingOptionsWidget shippingOptionsWidget = new ShippingOptionsWidget();
     private CreditCardFormWidget creditCardFormWidget = new CreditCardFormWidget();
+    private HeaderWidget headerWidget = new HeaderWidget();
+    private SignInFormWidget signInFormWidget = new SignInFormWidget();
+    private RadioListWidget radioListWidget = new RadioListWidget();
+    private PaymentTypesWidget paymentTypesWidget = new PaymentTypesWidget();
+    private PaypalWellWidget paypalWellWidget = new PaypalWellWidget();
 
     @Given("^user makes appoint with code \"([^\"]*)\"$")
     public void userMakesAppointWithCode(String code) {
@@ -140,11 +145,6 @@ public class PepBoysMainPageSteps {
         );
     }
 
-    @And("^user confirms purchase$")
-    public void userConfirmsPurchase() {
-//        addressFormWidget.confirmsPurchase();
-    }
-
     @Then("^user should be on thank you page$")
     public void userShouldBeOnThankYouPage() {
 
@@ -166,18 +166,21 @@ public class PepBoysMainPageSteps {
 
     @Given("^user makes authorisation for \"([^\"]*)\"$")
     public void userMakesAuthorisationFor(String userName) {
-//        addressFormWidget.doLogin(DataProvider.getUser(userName));
+        BillingUser user = DataProvider.getUser(userName);
+        headerWidget.pressSignInButton();
+        signInFormWidget.signIn(user.getEmail(), user.getPassword());
         TestGlobalsManager.setTestGlobal("authorised", true);
     }
 
     @And("^applies billing info for address \"([^\"]*)\"$")
     public void appliesBillingInfo(String address) {
-//        addressFormWidget.applyBillingInfo(address);
+        radioListWidget.select(address);
+        CommonFunctions.attachScreenshot("Billing info");
     }
 
     @And("^uses PayPal for payment$")
     public void usesPayPalForPayment() {
-//        addressFormWidget.purchaseWithPayPal();
+        paymentTypesWidget.purchaseWithPayPal();
         CommonFunctions.attachScreenshot("Purchase with PayPal");
     }
 
@@ -214,13 +217,6 @@ public class PepBoysMainPageSteps {
     public void userSchedulesInstallationTime() {
         cartPage.scheduleInstallationTime();
     }
-
-//    @Given("^user fills \"([^\"]*)\" in billing info for \"([^\"]*)\"$")
-//    public void userFillsInBillingInfoFor(String field, String userName) {
-//
-//
-//    }
-
 
     @Given("^user types \"([^\"]*)\" into the \"([^\"]*)\" field$")
     public void userTypesValueIntoField(String value, String field) {
@@ -303,6 +299,11 @@ public class PepBoysMainPageSteps {
 //        billingPage.openRewards(); 
 //        billingPage.setRewards(rewardsCode); 
 //        CommonFunctions.attachScreenshot("Rewards Number");
+    }
+
+    @And("^checks payment details for \"([^\"]*)\"$")
+    public void checksPaymentDetails(String userName) throws Throwable {
+        paypalWellWidget.checkPayPalAccount(DataProvider.getUser(userName).getPaypalEmail());
     }
 }
 

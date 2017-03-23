@@ -1,4 +1,4 @@
-@pepBoys @debug
+@pepBoys @refactoring
 
 
 Feature: Happy Path
@@ -20,4 +20,7 @@ Feature: Happy Path
 
     And uses "visa" card for payment
     And presses the "Place Order" button
+
+    # TODO: Update this method after fixing issue with Place Order
+
     Then user should be on thank you page
