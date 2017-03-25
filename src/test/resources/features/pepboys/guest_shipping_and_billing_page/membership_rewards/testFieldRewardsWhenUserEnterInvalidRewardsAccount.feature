@@ -1,4 +1,4 @@
-@pepBoys @debug
+@pepBoys @refactoring
 
 
 Feature: Membership Rewards
@@ -12,7 +12,6 @@ Feature: Membership Rewards
   @TestCaseId("15390")
   Scenario: Test field "Rewards" when user enter Invalid Rewards Account
     Given user types billing info for "qa user"
-
     And user types rewards number "1212"
     And presses the "Continue" button
     And chooses "Use Entered Address"
@@ -34,4 +33,4 @@ Feature: Membership Rewards
     And user types rewards number ""
     And presses the "Continue" button
     And chooses "Use Entered Address"
-#    Then user checks billing info for "qa user"
+    Then user checks billing info for "qa user"

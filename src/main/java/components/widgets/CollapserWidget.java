@@ -3,27 +3,15 @@ package components.widgets;
 
 import components.Component;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 public class CollapserWidget extends Component {
-    private String collapserPath = "//a[contains(@class, 'plus-collapser')]";
-    private By openCollapser = By.xpath(collapserPath + "/div/div/h2");
+    private By collapserLink = By.cssSelector("a.collapser-link");
 
-    public void getRewards() {
-        getDriver().findElement(By.xpath("//div[@class='inset']/div[contains(@class, 'checkbox-row')]/input")).click();
-    }
-
-    public void openRewards() {
+    public void openCollapser() {
         javascriptScroll(500);
 
-        if (getDriver().findElement(By.xpath(collapserPath)).getAttribute("class").contains("collapsed")) {
-            getDriver().findElement(openCollapser).click();
+        if (getDriver().findElement(collapserLink).getAttribute("class").contains("collapsed")) {
+            getDriver().findElement(collapserLink).click();
         }
-    }
-
-    public void setRewards(String rewardsCode) {
-        WebElement rewardsEl = getDriver().findElement(By.xpath("//div[contains(@class, 'rewards-account-input')]/input"));
-        rewardsEl.clear();
-        rewardsEl.sendKeys(rewardsCode);
     }
 }

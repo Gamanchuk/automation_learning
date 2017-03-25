@@ -40,6 +40,7 @@ public class PepBoysMainPageSteps {
     private PaymentTypesWidget paymentTypesWidget = new PaymentTypesWidget();
     private PaypalWellWidget paypalWellWidget = new PaypalWellWidget();
     private CollapserWidget collapserWidget = new CollapserWidget();
+    private RewardsAccountWidget rewardsAccountWidget = new RewardsAccountWidget();
 
     @Given("^user makes appoint with code \"([^\"]*)\"$")
     public void userMakesAppointWithCode(String code) {
@@ -112,7 +113,7 @@ public class PepBoysMainPageSteps {
                 user.getFullName(),
                 user.getApartment(),
                 user.getFullAddress(),
-                user.getCityInfo(),
+                user.getCity(),
                 user.getZipCode(),
                 user.getPhone(),
                 user.getEmail()
@@ -297,8 +298,8 @@ public class PepBoysMainPageSteps {
 
     @And("^user types rewards number \"([^\"]*)\"$")
     public void userTypesRewardsNumber(String rewardsCode) {
-        collapserWidget.openRewards();
-        collapserWidget.setRewards(rewardsCode);
+        collapserWidget.openCollapser();
+        rewardsAccountWidget.setRewards(rewardsCode);
         CommonFunctions.attachScreenshot("Rewards Number");
     }
 
