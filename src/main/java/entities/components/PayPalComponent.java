@@ -1,13 +1,13 @@
-package components.pages.pepboys;
+package entities.components;
 
 
-import components.Component;
+import entities.Component;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import utils.CommonFunctions;
 import utils.pepboys.BillingUser;
 
-public class PayPalLoginPage extends Component {
+public class PayPalComponent extends Component {
 
     public void doLogin(BillingUser user) {
 
