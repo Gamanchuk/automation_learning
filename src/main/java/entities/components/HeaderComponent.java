@@ -1,9 +1,9 @@
-package components.widgets;
+package entities.components;
 
-import components.Component;
+import entities.Component;
 import org.openqa.selenium.By;
 
-public class HeaderWidget extends Component {
+public class HeaderComponent extends Component {
     private final String HEADER_PATH = "//header[contains(@class, 'header')]";
 
     public void pressSignInButton() {

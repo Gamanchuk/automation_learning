@@ -1,4 +1,4 @@
-package components;
+package entities;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

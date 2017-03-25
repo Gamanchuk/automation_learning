@@ -1,6 +1,6 @@
-package components.pages.pepboys;
+package entities.pages.pepboys;
 
-import components.Component;
+import entities.Component;
 
 public abstract class PepBoysBasePage extends Component {
     public final String BASE_URL = "https://mstage.stage.pepboys.com/";

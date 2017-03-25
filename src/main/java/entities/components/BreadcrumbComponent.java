@@ -1,9 +1,9 @@
-package components.widgets;
+package entities.components;
 
-import components.Component;
+import entities.Component;
 import org.openqa.selenium.By;
 
-public class BreadcrumbWidget extends Component {
+public class BreadcrumbComponent extends Component {
 
     public boolean isTabActive(String tabName) {
         return getDriver().findElement(getBreadcrumbByName(tabName)).getAttribute("class").contains("active");

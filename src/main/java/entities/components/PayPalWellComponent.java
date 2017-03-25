@@ -1,11 +1,11 @@
-package components.widgets;
+package entities.components;
 
-import components.Component;
+import entities.Component;
 import org.openqa.selenium.By;
 
 import static org.testng.Assert.assertEquals;
 
-public class PaypalWellWidget extends Component {
+public class PayPalWellComponent extends Component {
 
     public void checkPayPalAccount(String account) {
         By payPalWell = By.xpath("//div[contains(@class, 'paypal-well')]");

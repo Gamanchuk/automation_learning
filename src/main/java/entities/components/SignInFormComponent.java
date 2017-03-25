@@ -1,11 +1,11 @@
-package components.widgets;
+package entities.components;
 
-import components.Component;
+import entities.Component;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import utils.CommonFunctions;
 
-public class SignInFormWidget extends Component {
+public class SignInFormComponent extends Component {
     private By signInButton = By.xpath("//div[contains(@class,'submit-button')]//button");
     private By emailField = By.id("shipping-email");
     private By passwordField = By.id("password");

@@ -1,10 +1,10 @@
-package components.widgets;
+package entities.components;
 
-import components.Component;
+import entities.Component;
 import org.openqa.selenium.By;
 import utils.CommonFunctions;
 
-public class CreditCardFormWidget extends Component {
+public class CreditCardFormComponent extends Component {
 
     private By ccNumber = By.id("cc-number");
     private By exp = By.id("cc-exp");

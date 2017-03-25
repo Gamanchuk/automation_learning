@@ -1,13 +1,13 @@
-package components.widgets;
+package entities.components;
 
-import components.Component;
+import entities.Component;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import utils.CommonFunctions;
 
 import static org.testng.Assert.assertEquals;
 
-public class ErrorMessageWidget extends Component {
+public class ErrorMessageComponent extends Component {
     private final String PATH_BASE = "//div[contains(@class, 'message-panel-form-error')]";
 
     private By errorTitleEl = By.xpath(PATH_BASE + "/h2");

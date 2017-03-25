@@ -1,11 +1,11 @@
-package components.widgets;
+package entities.components;
 
-import components.Component;
+import entities.Component;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-public class AddressFormWidget extends Component {
+public class AddressFormComponent extends Component {
 
     private By nameField = By.id("billing-name");
     private By addressField = By.id("billing-address-line1");

@@ -1,10 +1,10 @@
-package components.widgets;
+package entities.components;
 
-import components.Component;
+import entities.Component;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-public class EmailWidget extends Component {
+public class EmailComponent extends Component {
     private By emailField = By.id("billing-email");
 
     public void fillEmailField(String email) {

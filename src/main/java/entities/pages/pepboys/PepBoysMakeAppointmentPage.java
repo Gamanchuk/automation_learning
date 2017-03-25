@@ -1,4 +1,4 @@
-package components.pages.pepboys;
+package entities.pages.pepboys;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;

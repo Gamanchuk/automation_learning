@@ -1,6 +1,6 @@
-package components.pages.pepboys;
+package entities.pages.pepboys;
 
-import components.Component;
+import entities.Component;
 import org.openqa.selenium.By;
 
 public class PepBoysCategoriesPage extends Component {

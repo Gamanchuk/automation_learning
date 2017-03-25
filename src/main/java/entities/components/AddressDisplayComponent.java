@@ -1,6 +1,6 @@
-package components.widgets;
+package entities.components;
 
-import components.Component;
+import entities.Component;
 import org.openqa.selenium.By;
 import utils.CommonFunctions;
 
@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 import static org.testng.Assert.assertEquals;
 
-public class AddressDisplayWidget extends Component {
+public class AddressDisplayComponent extends Component {
     private By deliveryApt = By.xpath("//div[@class='address-line2']");
     private By deliveryName = By.xpath("//div[@class='address-recipient']");
     private By deliveryStreetAddress = By.xpath("//div[@class='address-line1']");

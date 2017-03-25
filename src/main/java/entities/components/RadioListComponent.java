@@ -1,9 +1,9 @@
-package components.widgets;
+package entities.components;
 
-import components.Component;
+import entities.Component;
 import org.openqa.selenium.By;
 
-public class RadioListWidget extends Component {
+public class RadioListComponent extends Component {
 
     public void select(String option) {
         String selectedOptionPath = "//div[contains(@class, 'radio-list-option-selected')]";
