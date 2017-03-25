@@ -128,12 +128,4 @@ public class PepBoysMainPageSteps {
             mainPage.doLogout();
         }
     }
-
-    @And("^user types rewards number \"([^\"]*)\"$")
-    public void userTypesRewardsCode(String rewardsCode) throws Throwable {
-        billingPage.openRewards();
-        billingPage.setRewards(rewardsCode);
-        CommonFunctions.attachScreenshot("Rewards Number");
-    }
-
 }

@@ -47,7 +47,7 @@ public class PepBoysCheckoutSteps {
                 user.getFullName(),
                 user.getApartment(),
                 user.getFullAddress(),
-                user.getCityInfo(),
+                user.getCity(),
                 user.getZipCode(),
                 user.getPhone(),
                 user.getEmail()

@@ -9,6 +9,7 @@ import java.text.ParseException;
 import java.util.concurrent.TimeUnit;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.AssertJUnit.assertTrue;
 
 public class AddressDisplayComponent extends Component {
     private By deliveryApt = By.xpath("//div[@class='address-line2']");
@@ -22,16 +23,33 @@ public class AddressDisplayComponent extends Component {
         waitForElementClickable(By.xpath("//div[contains(@class, 'radio-list') and contains(@class, 'radio-collapsed')]"));
         getDriver().manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 
-        checkFieldValue("name", name);
-        checkFieldValue("street address", streetAddress);
-        checkFieldValue("apt", apt);
-        checkFieldValue("email", email);
+        checkFieldValue("Full Name", name);
+        checkFieldValue("Street Address", streetAddress);
+        checkFieldValue("Email", email);
 
+        checkStreetAddress(streetAddress);
+        checkApt(apt);
         checkCityInfo(cityInfo);
         checkPhone(phone);
         checkZip(zip);
 
         CommonFunctions.attachScreenshot("Billing info");
+    }
+
+    public void checkStreetAddress(String expectedAddress) {
+        String address = getDriver().findElement(deliveryStreetAddress).getText();
+        assertTrue("Unexpected apt. Expected: " + expectedAddress
+                        + "Address: " + address,
+                address.contains(expectedAddress));
+    }
+
+    public void checkApt(String expectedApt) {
+        String address = getDriver().findElement(deliveryStreetAddress).getText();
+        String apt = getDriver().findElement(deliveryApt).getText();
+        assertTrue("Unexpected apt. Expected: " + expectedApt
+                        + "Address: " + address
+                        + "Apt: " + apt,
+                address.contains(expectedApt) || apt.contains(expectedApt));
     }
 
     public void checkFieldValue(String fieldName, String expectedValue) {
