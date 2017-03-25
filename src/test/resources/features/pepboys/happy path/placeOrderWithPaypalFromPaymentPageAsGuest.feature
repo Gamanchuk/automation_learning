@@ -1,4 +1,4 @@
-@pepBoys
+@pepBoys  @refactoring
 
 
 Feature: Happy Path
@@ -15,6 +15,7 @@ Feature: Happy Path
     And presses the "Continue" button
     And chooses "Use Recommended Address"
     And chooses "Ground" shipping method
+    And presses the "Continue" button
     And uses PayPal for payment
     And user confirms purchase as "qa user" with PayPal
     Then user should be on thank you page

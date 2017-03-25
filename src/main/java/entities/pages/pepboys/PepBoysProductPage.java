@@ -1,4 +1,4 @@
-package components.pages.pepboys;
+package entities.pages.pepboys;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;

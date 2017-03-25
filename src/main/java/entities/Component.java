@@ -1,4 +1,4 @@
-package components;
+package entities;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -236,4 +236,24 @@ public abstract class Component {
         driver.switchTo().defaultContent();
 
     }
+
+    public void deleteElementFromDom(By path) {
+        if (driver instanceof JavascriptExecutor) {
+            ((JavascriptExecutor) driver).executeScript(
+                    "arguments[0].parentNode.removeChild(arguments[0])", driver.findElement(path));
+        }
+//        js.executeScript("return document.getElementsByClassName('review-info-star').remove();");
+    }
+
+
+    /**
+     * @param ynum Required. How many pixels to scroll by, along the y-axis (vertical).
+     *             Positive values will scroll down, while negative values scroll up
+     */
+
+    public void javascriptScroll(int ynum) {
+        ((JavascriptExecutor) getDriver()).executeScript("window.scrollBy(0," + ynum + ")", "");
+    }
+
+
 }

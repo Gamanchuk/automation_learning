@@ -277,6 +277,13 @@
                 <suite.id>93</suite.id>
             </properties>
         </profile>
+        <profile>
+            <id>suite-refactoring</id>
+            <properties>
+                <testng.suite>${basedir}/src/test/resources/testsuites/refactoring.xml</testng.suite>
+                <suite.id>42</suite.id>
+            </properties>
+        </profile>
 
 
         <!--environments-->
