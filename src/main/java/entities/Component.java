@@ -217,6 +217,14 @@ public abstract class Component {
         getDriver().manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
     }
 
+    /**
+     * @param ynum Required. How many pixels to scroll by, along the y-axis (vertical).
+     *             Positive values will scroll down, while negative values scroll up
+     */
+    public void javascriptScroll(int ynum) {
+        ((JavascriptExecutor) getDriver()).executeScript("window.scrollBy(0," + ynum + ")", "");
+    }
+
     public void switchToIframe(String iframeName) {
         waitForElementVisible(By.name(iframeName), 120);
         driver.switchTo().frame(iframeName);
@@ -236,16 +244,4 @@ public abstract class Component {
         }
 //        js.executeScript("return document.getElementsByClassName('review-info-star').remove();");
     }
-
-
-    /**
-     * @param ynum Required. How many pixels to scroll by, along the y-axis (vertical).
-     *             Positive values will scroll down, while negative values scroll up
-     */
-
-    public void javascriptScroll(int ynum) {
-        ((JavascriptExecutor) getDriver()).executeScript("window.scrollBy(0," + ynum + ")", "");
-    }
-
-
 }
