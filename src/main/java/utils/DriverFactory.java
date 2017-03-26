@@ -59,7 +59,7 @@ public class DriverFactory {
                     initChromeDriver();
                 } else {
 
-                    log.info("****************************** CREATING REMOTE WEB DRIVER ******************************");
+                    log.info("**************************** CREATING REMOTE WEB DRIVER ***************************");
                     log.info("PLATFORM NAME: " + platformName);
                     log.info("PLATFORM VERSION: " + platformVersion);
                     log.info("DEVICE NAME: " + deviceName);
@@ -67,7 +67,7 @@ public class DriverFactory {
                     log.info("DEVICE UDID: " + deviceUdid);
                     log.info("DEVICE USB PORT: " + iproxyPort);
                     log.info("APPIUM URL: " + service.getUrl());
-                    log.info("****************************************************************************************");
+                    log.info("***********************************************************************************");
                     log.info("");
 
                     DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
@@ -119,7 +119,7 @@ public class DriverFactory {
             killAppiumServer(appiumPort);
 
             log.info("");
-            log.info("******************************* STARTING APPIUM SERVICE ********************************");
+            log.info("******************************* STARTING APPIUM SERVICE ***********************************");
             log.info("APPIUM PORT: " + appiumPort);
             log.info("IOS WEB PROXY PORT: " + proxyPort);
 
@@ -135,7 +135,7 @@ public class DriverFactory {
             service = AppiumDriverLocalService.buildService(serviceBuilder);
             service.start();
             log.info("APPIUM URL: " + service.getUrl());
-            log.info("****************************************************************************************");
+            log.info("*******************************************************************************************");
             log.info("");
         }
     }
