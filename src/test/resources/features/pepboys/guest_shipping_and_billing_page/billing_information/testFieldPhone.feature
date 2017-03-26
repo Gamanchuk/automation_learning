@@ -18,20 +18,23 @@ Feature: Guest - Shipping & Billing page
     Given user types billing info for "qa user"
     And user types " " into the "Phone Number" field
     And presses the "Continue" button
-    Then user stays at billing tab with error message
+    Then user should stay at "Billing & Shipping" tab
+    And sees "FORM ERRORS" error message with text "Please review all inputs."
 
     And user types "phoneNumber" into the "Phone Number" field
     And presses the "Continue" button
     And chooses "Use Entered Address"
-    Then user stays at billing tab with error message
+    Then user should stay at "Billing & Shipping" tab
+    And sees "FORM ERRORS" error message with text "Please review all inputs."
 
     And user types "!@$%^&*():_" into the "Phone Number" field
     And presses the "Continue" button
     And chooses "Use Entered Address"
-    Then user stays at billing tab with error message
+    Then user should stay at "Billing & Shipping" tab
+    And sees "FORM ERRORS" error message with text "Please review all inputs."
 
     And user types "4152011234" into the "Phone Number" field
     And presses the "Continue" button
     And chooses "Use Entered Address"
-    Then user checks "Phone Number" with value "4152011234"
+#    Then user checks "Phone" with value "4152011234" on "Delivery Method" tab
 

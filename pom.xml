@@ -333,7 +333,7 @@
             </properties>
         </profile>
         <profile>
-            <id>device-iPhone-6Plus</id>
+            <id>device-iPhone-6plus</id>
             <properties>
                 <props.file.name>iphone6plus</props.file.name>
             </properties>
