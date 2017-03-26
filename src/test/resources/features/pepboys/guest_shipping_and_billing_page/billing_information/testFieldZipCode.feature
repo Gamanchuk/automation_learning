@@ -14,6 +14,7 @@ Feature: Guest - Shipping & Billing page
     Given user types billing info for "qa user"
     And user types "" into the "Zip Code" field
     And presses the "Continue" button
+    And chooses "Use Entered Address"
     Then user should stay at "Billing & Shipping" tab
     And sees "FORM ERRORS" error message with text "Please review all inputs."
 
