@@ -9,6 +9,9 @@ Feature: Guest - Shipping & Billing page
     And user views cart
     And chooses "Pay Online" method
 
+    # This Scenario is ignored, because we can check input values with Selenium
+    # Invalid data will be filled into zip code field
+
   @TestCaseId("15502")
   Scenario: Test field 'Zip Code'
     Given user types billing info for "qa user"
