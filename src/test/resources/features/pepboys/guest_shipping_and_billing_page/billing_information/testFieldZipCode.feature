@@ -16,7 +16,7 @@ Feature: Guest - Shipping & Billing page
     And presses the "Continue" button
     And chooses "Use Entered Address"
     Then user should stay at "Billing & Shipping" tab
-    And sees "FORM ERRORS" error message with text "Please review all inputs."
+    And sees "FORM ERRORS" error message with text "ZIP Code is required"
 
     And user types "zipCode" into the "Zip Code" field
     And presses the "Continue" button
