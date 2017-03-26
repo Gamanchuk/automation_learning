@@ -85,8 +85,7 @@ public class DriverFactory {
                         desiredCapabilities.setCapability("useNewWDA", true);
                         desiredCapabilities.setCapability("xcodeOrgId", "Y95G5M3Q84");
                         desiredCapabilities.setCapability("xcodeSigningId", "iPhone Developer");
-                        desiredCapabilities.setCapability("updatedWDABundleId", "iPhone Developer");
-
+                        desiredCapabilities.setCapability("updatedWDABundleId", "com.moovweb.WebDriverAgentRunner");
                     }
 
                     eventListener = new MyWebDriverEventListener();
@@ -99,7 +98,6 @@ public class DriverFactory {
                 throw new AssertionError("Can't create driver: " + e.getMessage());
             }
         }
-
         return driver;
     }
 
