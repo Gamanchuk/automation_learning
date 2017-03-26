@@ -1,6 +1,6 @@
 package entities.components;
 
-import entities.Component;
+import entities.Entity;
 import org.openqa.selenium.By;
 import utils.CommonFunctions;
 
@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 import static org.testng.Assert.assertEquals;
 import static org.testng.AssertJUnit.assertTrue;
 
-public class AddressDisplayComponent extends Component {
+public class AddressDisplayComponent extends BaseComponent {
     private By deliveryApt = By.xpath("//div[@class='address-line2']");
     private By deliveryName = By.xpath("//div[@class='address-recipient']");
     private By deliveryStreetAddress = By.xpath("//div[@class='address-line1']");
@@ -25,7 +25,10 @@ public class AddressDisplayComponent extends Component {
 
         checkFieldValue("Full Name", name);
         checkFieldValue("Street Address", streetAddress);
-        checkFieldValue("Email", email);
+
+        if(isElementVisible(deliveryEmail)) {
+            checkFieldValue("Email", email);
+        }
 
         checkStreetAddress(streetAddress);
         checkApt(apt);

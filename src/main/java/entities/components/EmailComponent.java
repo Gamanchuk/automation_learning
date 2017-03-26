@@ -1,10 +1,10 @@
 package entities.components;
 
-import entities.Component;
+import entities.Entity;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-public class EmailComponent extends Component {
+public class EmailComponent extends BaseComponent {
     private By emailField = By.id("billing-email");
 
     public void fillEmailField(String email) {

@@ -1,11 +1,11 @@
 package entities.components;
 
 
-import entities.Component;
+import entities.Entity;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-public class CollapserComponent extends Component {
+public class CollapserComponent extends BaseComponent {
 
     public void getRewards() {
         getDriver().findElement(By.xpath("//div[@class='inset']/div[contains(@class, 'checkbox-row')]/input")).click();
