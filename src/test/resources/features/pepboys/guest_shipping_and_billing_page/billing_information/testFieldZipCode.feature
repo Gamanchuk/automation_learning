@@ -1,4 +1,4 @@
-@pepBoys @refactoring
+@pepBoys @refactoring @ignore
 
 
 Feature: Guest - Shipping & Billing page
