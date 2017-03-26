@@ -283,7 +283,7 @@
             <id>suite-refactoring</id>
             <properties>
                 <testng.suite>${basedir}/src/test/resources/testsuites/refactoring.xml</testng.suite>
-                <suite.id>42</suite.id>
+                <suite.id>93</suite.id>
             </properties>
         </profile>
 
@@ -311,7 +311,7 @@
         <profile>
             <id>device-iPhone-6</id>
             <properties>
-                <props.file.name>iphone6_personal</props.file.name>
+                <props.file.name>iphone6</props.file.name>
             </properties>
         </profile>
         <profile>
