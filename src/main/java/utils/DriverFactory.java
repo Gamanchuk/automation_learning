@@ -83,10 +83,10 @@ public class DriverFactory {
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.LAUNCH_TIMEOUT, 500000);
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.AUTO_ACCEPT_ALERTS, true);
                         desiredCapabilities.setCapability("useNewWDA", true);
-                        desiredCapabilities.setCapability("safariAllowPopups", true);
-                        // desiredCapabilities.setCapability("xcodeOrgId", "Y95G5M3Q84");
-                        // desiredCapabilities.setCapability("xcodeSigningId", "iPhone Developer");
-                        
+                        desiredCapabilities.setCapability("xcodeOrgId", "Y95G5M3Q84");
+                        desiredCapabilities.setCapability("xcodeSigningId", "iPhone Developer");
+                        desiredCapabilities.setCapability("updatedWDABundleId", "iPhone Developer");
+
                     }
 
                     eventListener = new MyWebDriverEventListener();
