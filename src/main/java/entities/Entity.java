@@ -11,12 +11,34 @@ import utils.DriverFactory;
 
 import java.util.concurrent.TimeUnit;
 
-public abstract class Component {
+public abstract class Entity {
 
     private final int TIMEOUT_SECONDS = 50;
 
+    private WebElement root = null;
     private WebDriver driver = DriverFactory.getDriver();
+
     public Log log = LogFactory.getLog(this.getClass());
+
+    public Entity() {
+
+    }
+
+    public Entity(WebElement root) {
+        this.root = root;
+    }
+
+    public void setRoot(WebElement root) {
+        this.root = root;
+    }
+
+    public WebElement findElement(By selector) {
+        if(root != null) {
+            return root.findElement(selector);
+        } else {
+            return driver.findElement(selector);
+        }
+    }
 
     public WebDriver getDriver() {
         return DriverFactory.getDriver();
@@ -52,7 +74,6 @@ public abstract class Component {
     public boolean isElementPresent(By element) {
         return this.isElementPresent(element, TIMEOUT_SECONDS);
     }
-
 
     public void waitForElementClickable(By element, int timeout) {
         log.info("Waiting " + timeout + "s for element: '" + element + "' clickable");
@@ -101,77 +122,64 @@ public abstract class Component {
                 .until(new ExpectedCondition<Boolean>() {
                            @Override
                            public Boolean apply(WebDriver webDriver) {
-                               Object result = ((JavascriptExecutor) driver).executeScript("return (typeof arguments[0].naturalWidth!=\"undefined\" && arguments[0].naturalWidth>0)", driver.findElement(image));
+                               Object result = ((JavascriptExecutor) driver).executeScript("return (typeof arguments[0].naturalWidth!=\"undefined\" && arguments[0].naturalWidth>0)", findElement(image));
                                return (Boolean) result;
                            }
                        }
-
                 );
     }
 
-    private boolean waitForCondition(ExpectedCondition<WebElement> webElementExpectedCondition, int timeout) {
-        try {
-            new WebDriverWait(driver, timeout).until(webElementExpectedCondition);
-            return true;
-        } catch (TimeoutException e) {
-            log.info("Condition failed!\n" + e);
-            return false;
-        }
-    }
-
-    public void click(By el) {
-
-        String pageSource = getDriver().getPageSource();
+    public void click(By selector) {
+        String pageSource = driver.getPageSource();
 
         if (pageSource.contains("Your ideas make")
                 || pageSource.contains("We want your feedback")) {
-            getDriver().findElement(By.xpath("//a[@class='acsCloseButton--link acsCloseButton acsDeclineButton']")).click();
-
+            findElement(By.xpath("//a[@class='acsCloseButton--link acsCloseButton acsDeclineButton']")).click();
         }
 
         try {
             WebDriverWait wait = new WebDriverWait(driver, 30, 200);
-            wait.until(ExpectedConditions.presenceOfElementLocated(el));
-            wait.until(ExpectedConditions.visibilityOfElementLocated(el));
-            wait.until(ExpectedConditions.elementToBeClickable(el));
-            scrollToElement(driver.findElement(el));
-            driver.findElement(el).click();
+            wait.until(ExpectedConditions.presenceOfElementLocated(selector));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(selector));
+            wait.until(ExpectedConditions.elementToBeClickable(selector));
+            scrollToElement(findElement(selector));
+            findElement(selector).click();
         } catch (Exception e) {
             log.info(e.getMessage());
             log.info(e.getStackTrace());
-            WebElement element = driver.findElement(el);
+            WebElement element = findElement(selector);
             scrollToElement(element);
             element.click();
         }
     }
 
-    public void sendKeysOneByOne(By el, String str) {
+    public void sendKeysOneByOne(By selector, String str) {
+        WebElement el = findElement(selector);
         for (char ch : str.toCharArray()) {
-            getDriver().findElement(el).sendKeys(ch + "");
+            el.sendKeys(ch + "");
         }
     }
 
     public void scrollToElement(WebElement el) {
         log.info("Scroll to element: " + el);
         el.getLocation();
-        Actions actions = new Actions(getDriver());
+        Actions actions = new Actions(driver);
         actions.moveToElement(el);
         actions.perform();
     }
 
     public void navigate(String url) {
-        getDriver().navigate().to(url);
+        driver.navigate().to(url);
         waitForAjax();
     }
 
     public void navigateWithCookies(String url, String cookies) {
-        getDriver().navigate().to(url + cookies);
+        driver.navigate().to(url + cookies);
         waitForRedirect(url + cookies);
         // waitForAjax();
     }
 
-
-    protected void waitForAjax() {
+    public void waitForAjax() {
         new WebDriverWait(driver, TIMEOUT_SECONDS).until(new ExpectedCondition<Boolean>() {
             public Boolean apply(WebDriver driver) {
                 boolean result = false;
@@ -188,7 +196,7 @@ public abstract class Component {
             }
         });
     }
-
+    
     protected void waitForDocumentReady() {
         new WebDriverWait(driver, TIMEOUT_SECONDS).until(new ExpectedCondition<Boolean>() {
             public Boolean apply(WebDriver driver) {
@@ -211,18 +219,18 @@ public abstract class Component {
         });
     }
 
-
     public void focusOut() {
-        getDriver().findElement(By.cssSelector("body")).click();
-        getDriver().manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
+        driver.findElement(By.cssSelector("body")).click();
+        driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
     }
+
 
     /**
      * @param ynum Required. How many pixels to scroll by, along the y-axis (vertical).
      *             Positive values will scroll down, while negative values scroll up
      */
     public void javascriptScroll(int ynum) {
-        ((JavascriptExecutor) getDriver()).executeScript("window.scrollBy(0," + ynum + ")", "");
+        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0," + ynum + ")", "");
     }
 
     public void switchToIframe(String iframeName) {
@@ -232,16 +240,24 @@ public abstract class Component {
     }
 
     public void switchToDefaultIframe() {
-
         driver.switchTo().defaultContent();
-
     }
 
     public void deleteElementFromDom(By path) {
         if (driver instanceof JavascriptExecutor) {
             ((JavascriptExecutor) driver).executeScript(
-                    "arguments[0].parentNode.removeChild(arguments[0])", driver.findElement(path));
+                    "arguments[0].parentNode.removeChild(arguments[0])", findElement(path));
         }
 //        js.executeScript("return document.getElementsByClassName('review-info-star').remove();");
+    }
+
+    private boolean waitForCondition(ExpectedCondition<WebElement> webElementExpectedCondition, int timeout) {
+        try {
+            new WebDriverWait(driver, timeout).until(webElementExpectedCondition);
+            return true;
+        } catch (TimeoutException e) {
+            log.info("Condition failed!\n" + e);
+            return false;
+        }
     }
 }

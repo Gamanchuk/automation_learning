@@ -1,9 +1,9 @@
 package entities.components;
 
-import entities.Component;
+import entities.Entity;
 import org.openqa.selenium.By;
 
-public class HeaderComponent extends Component {
+public class HeaderComponent extends BaseComponent {
     private final String HEADER_PATH = "//header[contains(@class, 'header')]";
 
     public void pressSignInButton() {

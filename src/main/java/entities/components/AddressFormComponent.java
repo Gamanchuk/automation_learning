@@ -1,19 +1,18 @@
 package entities.components;
 
-import entities.Component;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-public class AddressFormComponent extends Component {
+public class AddressFormComponent extends BaseComponent {
 
-    private By nameField = By.id("billing-name");
-    private By addressField = By.id("billing-address-line1");
-    private By apartmentField = By.id("billing-address-line2");
-    private By phoneField = By.id("billing-tel");
-    private By cityField = By.id("billing-locality");
-    private By stateField = By.id("billing-address-level1");
-    private By zipField = By.id("billing-postal-code");
+    private By nameField = By.cssSelector(".name-input input");
+    private By addressField = By.cssSelector(".address-line1 input");
+    private By apartmentField = By.cssSelector(".address-line2 input");
+    private By phoneField = By.cssSelector(".phone-input input");
+    private By cityField = By.cssSelector(".city-input input");
+    private By stateField = By.cssSelector(".state-input select");
+    private By zipField = By.cssSelector(".zip-input input");
 
     public void fillAddressForm(String fullName, String address, String cityInfo, String city, String apartment, String phone, String state, String zip, boolean autoFill) {
         fillField(nameField, fullName);
@@ -24,16 +23,17 @@ public class AddressFormComponent extends Component {
             click(By.xpath("(//div[contains(., '" + cityInfo + "')]/../input[@name='addresses'])[1]"));
         } else {
             click(By.xpath("//a[@class='manual']"));
+            findElement(By.xpath("//a[contains(text(), 'enter city')]")).click();
             fillField(cityField, city);
             fillField(zipField, zip);
-            fillZip(zip);
+            fillState(state);
         }
 
         waitForElementVisible(apartmentField);
         fillField(apartmentField, apartment);
 
         // Need to send phone number digit by digit
-        sendKeysOneByOne(phoneField, phone);
+        fillPhone(phone);
         focusOut();
     }
 
@@ -54,16 +54,14 @@ public class AddressFormComponent extends Component {
     }
 
     public void fillPhone(String phone) {
-        getDriver().findElement(phoneField).clear();
+        findElement(phoneField).clear();
         sendKeysOneByOne(phoneField, phone);
     }
 
-    public void fillZip(String zip) {
-        WebElement state = getDriver().findElement(stateField);
-        state.click();
-
-        Select selectState = new Select(state);
-        selectState.selectByValue(zip);
+    public void fillState(String state) {
+        WebElement stateEl = findElement(stateField);
+        Select selectState = new Select(stateEl);
+        selectState.selectByValue(state);
     }
 
     private By getFieldByName(String name) {
@@ -88,7 +86,7 @@ public class AddressFormComponent extends Component {
     }
 
     private void fillField(By field, String value) {
-        WebElement element = getDriver().findElement(field);
+        WebElement element = findElement(field);
         element.clear();
         element.sendKeys(value);
     }

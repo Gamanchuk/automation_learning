@@ -1,9 +1,9 @@
 package entities.components;
 
-import entities.Component;
+import entities.Entity;
 import org.openqa.selenium.By;
 
-public class RadioListComponent extends Component {
+public class RadioListComponent extends BaseComponent {
 
     public void select(String option) {
         String selectedOptionPath = "//div[contains(@class, 'radio-list-option-selected')]";

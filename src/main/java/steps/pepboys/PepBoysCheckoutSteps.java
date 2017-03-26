@@ -28,16 +28,16 @@ public class PepBoysCheckoutSteps {
     private PaymentTypesComponent paymentTypesComponent = new PaymentTypesComponent();
     private PayPalWellComponent payPalWellComponent = new PayPalWellComponent();
     private CollapserComponent collapserComponent = new CollapserComponent();
-
+    private CheckboxRowComponent checkboxRowComponent = new CheckboxRowComponent();
 
     @And("^user types billing info for \"([^\"]*)\"$")
     public void typesBillingInfoFor(String userName) {
-        fillBillingAndShipping(userName, true);
+        fillBillingInfo(userName, true);
     }
 
     @Given("^user types manually billing info for \"([^\"]*)\"$")
     public void userTypesManuallyBillingInfoFor(String userName) {
-        fillBillingAndShipping(userName, false);
+        fillBillingInfo(userName, false);
     }
 
     @Then("^user checks billing info for \"([^\"]*)\"$")
@@ -170,8 +170,8 @@ public class PepBoysCheckoutSteps {
         payPalWellComponent.checkPayPalAccount(DataProvider.getUser(userName).getPaypalEmail());
     }
 
-
-    private void fillBillingAndShipping(String userName, boolean autoFill) {
+    private void fillShipping(String userName, boolean autoFill) {
+        addressFormComponent.setRoot(BaseComponent.getContainerByTitle("Shipping Address"));
         BillingUser user = DataProvider.getUser(userName);
         addressFormComponent.fillAddressForm(
                 user.getFullName(),
@@ -184,8 +184,41 @@ public class PepBoysCheckoutSteps {
                 user.getZipCode(),
                 autoFill
         );
+        CommonFunctions.attachScreenshot("Shipping info");
+    }
 
+    @Given("^user types manually shipping info for \"([^\"]*)\"$")
+    public void userTypesManuallyShippingInfoFor(String userName) {
+        checkboxRowComponent.check("Yes, shipping address and billing address are the same", false);
+        fillShippingInfo(userName, false);
+    }
+
+    private void fillBillingInfo(String userName, boolean autoFil) {
+        BillingUser user = DataProvider.getUser(userName);
+        addressFormComponent.setRoot(BaseComponent.getContainerByTitle("Billing Address"));
+        fillAddressForm(user, autoFil);
         emailComponent.fillEmailField(user.getEmail());
         CommonFunctions.attachScreenshot("Billing info");
+    }
+
+    private void fillShippingInfo(String userName, boolean autoFil) {
+        BillingUser user = DataProvider.getUser(userName);
+        addressFormComponent.setRoot(BaseComponent.getContainerByTitle("Shipping Address"));
+        fillAddressForm(user, autoFil);
+        CommonFunctions.attachScreenshot("Shipping info");
+    }
+
+    private void fillAddressForm(BillingUser user, boolean autoFill) {
+        addressFormComponent.fillAddressForm(
+                user.getFullName(),
+                user.getFullAddress(),
+                user.getCityInfo(),
+                user.getCity(),
+                user.getApartment(),
+                user.getPhone(),
+                user.getState(),
+                user.getZipCode(),
+                autoFill
+        );
     }
 }
