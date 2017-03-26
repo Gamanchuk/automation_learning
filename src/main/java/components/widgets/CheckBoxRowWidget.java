@@ -1,11 +1,11 @@
 package components.widgets;
 
 
-import components.Component;
+import entities.components.BaseComponent;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-public class CheckBoxRowWidget extends Component {
+public class CheckBoxRowWidget extends BaseComponent {
     private By checkBoxRow = By.cssSelector("label.checkbox-row");
 
     private WebElement getCheckBoxRowElementByLabel(String label) {

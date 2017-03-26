@@ -1,11 +1,11 @@
 package components.widgets;
 
 
-import components.Component;
+import entities.components.BaseComponent;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-public class RewardsAccountWidget extends Component {
+public class RewardsAccountWidget extends BaseComponent {
     CheckBoxRowWidget checkBoxRowWidget = new CheckBoxRowWidget();
 
     public void getRewards() {

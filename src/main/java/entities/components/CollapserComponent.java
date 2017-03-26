@@ -1,7 +1,6 @@
 package entities.components;
 
 
-import entities.Entity;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -13,8 +12,12 @@ public class CollapserComponent extends BaseComponent {
 
     public void openRewards() {
         javascriptScroll(500);
-        getDriver().findElement(By.xpath("//a[contains(@class, 'plus-collapser')]/div/div/h2")).click();
-        focusOut();
+        if (getDriver().findElement(By.xpath("//a[contains(@class, 'plus-collapser')]"))
+                .getAttribute("class")
+                .contains("collapsed")) {
+            getDriver().findElement(By.xpath("//a[contains(@class, 'plus-collapser')]/div/div/h2")).click();
+            focusOut();
+        }
     }
 
     public void setRewards(String rewardsCode) {
