@@ -1,5 +1,4 @@
-@pepBoys  @refactoring
-
+@pepBoys
 Feature: Happy Path
 
   Background:

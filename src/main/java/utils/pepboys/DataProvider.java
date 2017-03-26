@@ -10,7 +10,7 @@ public class DataProvider {
             "San Francisco",
             "CA",
             "94105",
-            "10th floor",
+            "10",
             "4152011234",
             "qa@moovweb.com",
             "San Francisco CA 94105",

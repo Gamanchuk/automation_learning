@@ -4,7 +4,7 @@ import org.testng.ITestResult;
 import utils.retries.AbstractAllureRetryAnalyzer;
 
 public class Retry extends AbstractAllureRetryAnalyzer {
-    private int MAX_RETRY_COUNT = 3;   // RETRIES number
+    private int MAX_RETRY_COUNT = 0;   // RETRIES number
     private int CURRENT_RETRY_COUNT = 0;
 
     @Override

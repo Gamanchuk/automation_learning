@@ -59,7 +59,7 @@ public class DriverFactory {
                     initChromeDriver();
                 } else {
 
-                    log.info("****************************** CREATING REMOTE WEB DRIVER ******************************");
+                    log.info("**************************** CREATING REMOTE WEB DRIVER ***************************");
                     log.info("PLATFORM NAME: " + platformName);
                     log.info("PLATFORM VERSION: " + platformVersion);
                     log.info("DEVICE NAME: " + deviceName);
@@ -67,7 +67,7 @@ public class DriverFactory {
                     log.info("DEVICE UDID: " + deviceUdid);
                     log.info("DEVICE USB PORT: " + iproxyPort);
                     log.info("APPIUM URL: " + service.getUrl());
-                    log.info("****************************************************************************************");
+                    log.info("***********************************************************************************");
                     log.info("");
 
                     DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
@@ -81,13 +81,11 @@ public class DriverFactory {
                         desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
                         desiredCapabilities.setCapability("wdaLocalPort", Integer.parseInt(iproxyPort));
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.LAUNCH_TIMEOUT, 500000);
-                        // desiredCapabilities.setCapability("realDeviceLogger", "/usr/local/lib/node_modules/deviceconsole/deviceconsole");
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.AUTO_ACCEPT_ALERTS, true);
                         desiredCapabilities.setCapability("useNewWDA", true);
-                        desiredCapabilities.setCapability("safariAllowPopups", true);
-                        // desiredCapabilities.setCapability("xcodeOrgId", "Y95G5M3Q84");
-                        // desiredCapabilities.setCapability("xcodeSigningId", "iPhone Developer");
-                        // desiredCapabilities.setCapability("realDeviceLogger", "/usr/local/lib/node_modules/deviceconsole/deviceconsole");
+                        desiredCapabilities.setCapability("xcodeOrgId", "Y95G5M3Q84");
+                        desiredCapabilities.setCapability("xcodeSigningId", "iPhone Developer");
+                        desiredCapabilities.setCapability("updatedWDABundleId", "com.moovweb.WebDriverAgentRunner");
                     }
 
                     eventListener = new MyWebDriverEventListener();
@@ -100,7 +98,6 @@ public class DriverFactory {
                 throw new AssertionError("Can't create driver: " + e.getMessage());
             }
         }
-
         return driver;
     }
 
@@ -120,7 +117,7 @@ public class DriverFactory {
             killAppiumServer(appiumPort);
 
             log.info("");
-            log.info("******************************* STARTING APPIUM SERVICE ********************************");
+            log.info("******************************* STARTING APPIUM SERVICE ***********************************");
             log.info("APPIUM PORT: " + appiumPort);
             log.info("IOS WEB PROXY PORT: " + proxyPort);
 
@@ -136,7 +133,7 @@ public class DriverFactory {
             service = AppiumDriverLocalService.buildService(serviceBuilder);
             service.start();
             log.info("APPIUM URL: " + service.getUrl());
-            log.info("****************************************************************************************");
+            log.info("*******************************************************************************************");
             log.info("");
         }
     }

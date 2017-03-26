@@ -1,4 +1,4 @@
-@pepBoys @refactoring
+@pepBoys @refactoring @ignore
 
 
 Feature: Guest - Shipping & Billing page
@@ -9,13 +9,17 @@ Feature: Guest - Shipping & Billing page
     And user views cart
     And chooses "Pay Online" method
 
+    # This Scenario is ignored, because we can check input values with Selenium
+    # Invalid data will be filled into zip code field
+
   @TestCaseId("15502")
   Scenario: Test field 'Zip Code'
     Given user types billing info for "qa user"
     And user types "" into the "Zip Code" field
     And presses the "Continue" button
+    And chooses "Use Entered Address"
     Then user should stay at "Billing & Shipping" tab
-    And sees "FORM ERRORS" error message with text "Please review all inputs."
+    And sees "FORM ERRORS" error message with text "ZIP Code is required"
 
     And user types "zipCode" into the "Zip Code" field
     And presses the "Continue" button
