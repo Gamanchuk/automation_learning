@@ -1,6 +1,5 @@
 package entities.components;
 
-import entities.Entity;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import utils.CommonFunctions;
@@ -24,5 +23,9 @@ public class SignInFormComponent extends BaseComponent {
         focusOut();
         CommonFunctions.attachScreenshot("Login page");
         getDriver().findElement(signInButton).click();
+
+        waitForElementVisible(By.xpath("//div[contains(@class, 'radio-list-option-selected')]"));
     }
+
+
 }

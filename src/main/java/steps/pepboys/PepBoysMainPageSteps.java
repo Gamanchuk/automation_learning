@@ -3,6 +3,7 @@ package steps.pepboys;
 import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import entities.pages.pepboys.*;
 import utils.CommonFunctions;
@@ -127,5 +128,16 @@ public class PepBoysMainPageSteps {
         if (TestGlobalsManager.getTestGlobal("authorised") != null) {
             mainPage.doLogout();
         }
+    }
+
+    @Then("^user should be navigate to main page$")
+    public void userShouldBeNavigateToMainPage() {
+        assertTrue(mainPage.isPage(), "Main page was not opened");
+        CommonFunctions.attachScreenshot("Main page opened");
+    }
+
+    @And("^user navigates to cart page$")
+    public void userNavigatesToCartPage() {
+        cartPage.openCartPage();
     }
 }

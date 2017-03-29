@@ -221,4 +221,15 @@ public class PepBoysCheckoutSteps {
                 autoFill
         );
     }
+
+    @Given("^user press the logo$")
+    public void userPressTheLogo() {
+        headerComponent.pressLogoLink();
+        CommonFunctions.attachScreenshot("Press the logo link");
+    }
+
+    @And("^user press the signIn button$")
+    public void userPressTheSignInButton() {
+        headerComponent.pressSignInButton();
+    }
 }
