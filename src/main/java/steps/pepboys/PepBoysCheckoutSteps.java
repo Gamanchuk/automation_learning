@@ -256,8 +256,15 @@ public class PepBoysCheckoutSteps {
 
     @Given("^user checks support number with label \"([^\"]*)\" and number \"([^\"]*)\"$")
     public void userChecksSupportNumberWithLabelAndNumber(String phoneLabel, String phoneNumber) {
-        footerComponent.checkPhoneNumberLabel(phoneLabel);
-        footerComponent.pressCall();
-        footerComponent.checkCallAlert(phoneNumber);
+        footerComponent.checkPhoneNumber(phoneLabel, phoneNumber);
+        //TODO: need found solution for check text in native alert
+        //  footerComponent.pressCall();
+        //footerComponent.checkCallAlert(phoneNumber);
+    }
+
+    @And("^user press the Shopping Cart icon$")
+    public void userPressTheShoppingCartIcon() {
+        headerComponent.pressShippingCartIcon();
+        CommonFunctions.attachScreenshot("Open Shipping Cart");
     }
 }

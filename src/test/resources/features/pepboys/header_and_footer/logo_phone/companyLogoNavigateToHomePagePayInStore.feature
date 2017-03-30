@@ -22,12 +22,16 @@ Feature: Header and Footer
     Given user navigates to cart page
     And chooses "Pay in Store" method
     And user press the signIn button
+    And user checks support number with label "1-800-PEP-BOYS (737-2697)" and number "18007372697"
+    And user checks text "© Copyright 2017 - The Pep Boys" in footer
     And user press the logo
     Then user should be navigate to main page
 
     Given user navigates to cart page
     And chooses "Pay in Store" method
     And user makes authorisation for "qa user"
+    And user checks support number with label "1-800-PEP-BOYS (737-2697)" and number "18007372697"
+    And user checks text "© Copyright 2017 - The Pep Boys" in footer
     And user press the logo
     Then user should be navigate to main page
 

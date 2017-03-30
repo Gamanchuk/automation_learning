@@ -140,4 +140,9 @@ public class PepBoysMainPageSteps {
     public void userNavigatesToCartPage() {
         cartPage.openCartPage();
     }
+
+    @Then("^user should be navigate to cart page$")
+    public void userShouldBeNavigateToCartPage() {
+        assertTrue(cartPage.isPage(), "Shopping Cart not opened");
+    }
 }

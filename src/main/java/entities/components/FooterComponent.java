@@ -1,7 +1,6 @@
 package entities.components;
 
 import org.openqa.selenium.By;
-import utils.CommonFunctions;
 
 import static org.testng.Assert.assertEquals;
 
@@ -19,28 +18,27 @@ public class FooterComponent extends BaseComponent {
         getDriver().findElement(By.xpath(PHONE_PATH)).click();
     }
 
-    public void checkCallAlert(String expectedNumber) {
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        getDriver().findElement(By.linkText("Cancel")).click();
-
-        CommonFunctions.attachScreenshot("Call Alert");
+    public void checkCallAlert(String expectedLabelNumber, String expectedHyperLinkNumber) {
+//
+//
+//        CommonFunctions.attachScreenshot("Call Alert");
 //        String actualNumber = alert.getText();
 //        assertEquals(actualNumber, expectedNumber, "Unexpected phone number");
-
-        //alert.dismiss();
-        javascriptScroll(-500);
+//
+//        //alert.dismiss();
+//        javascriptScroll(-500);
     }
 
 
-    public void checkPhoneNumberLabel(String expectedText) {
-        javascriptScroll(500);
+    public void checkPhoneNumber(String expectedPhoneLabelText, String expectedHyperLinkNumber) {
+        //javascriptScroll(500);
         By note = By.xpath(PHONE_PATH);
-        String actualText = getDriver().findElement(note).getText();
-        assertEquals(actualText, expectedText, "Unexpected footer phone label");
+
+        String actualPhoneLabelText = getDriver().findElement(note).getText();
+        assertEquals(actualPhoneLabelText, expectedPhoneLabelText, "Unexpected footer phone label");
+
+        String actualHyperLinkNumber = getDriver().findElement(note).getAttribute("href");
+        assertEquals(actualHyperLinkNumber, "tel:" + expectedHyperLinkNumber, "Unexpected footer phone number (hyper link)");
     }
 
 

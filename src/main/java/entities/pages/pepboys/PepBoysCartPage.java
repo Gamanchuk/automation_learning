@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.testng.AssertJUnit.assertTrue;
+
 public class PepBoysCartPage extends PepBoysBasePage {
 
     public void payUsingPaymentMethod(String method) {
@@ -83,6 +85,11 @@ public class PepBoysCartPage extends PepBoysBasePage {
 
     public void openCartPage() {
         getDriver().navigate().to(BASE_URL + "cart");
+        assertTrue("Shaping Cart not opened", isPage());
+    }
+
+    public boolean isPage() {
         waitForElementVisible(By.xpath("//h1[@class='cartTitle']"));
+        return true;
     }
 }
