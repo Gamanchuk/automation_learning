@@ -81,12 +81,13 @@ public class DriverFactory {
                         desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
                         desiredCapabilities.setCapability("wdaLocalPort", Integer.parseInt(iproxyPort));
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.LAUNCH_TIMEOUT, 500000);
-                        desiredCapabilities.setCapability("useNewWDA", true);
-                        desiredCapabilities.setCapability("startIWDP", true);
-                        desiredCapabilities.setCapability("preventWDAAttachments", true);
-                        desiredCapabilities.setCapability("xcodeOrgId", "Y95G5M3Q84");
-                        desiredCapabilities.setCapability("xcodeSigningId", "iPhone Developer");
-                        desiredCapabilities.setCapability("updatedWDABundleId", "com.moovweb.WebDriverAgentRunner");
+
+                        //desiredCapabilities.setCapability("useNewWDA", true);
+                        //desiredCapabilities.setCapability("startIWDP", true);
+                        //desiredCapabilities.setCapability("preventWDAAttachments", true);
+                        //desiredCapabilities.setCapability("xcodeOrgId", "Y95G5M3Q84");
+                        //desiredCapabilities.setCapability("xcodeSigningId", "iPhone Developer");
+                        //desiredCapabilities.setCapability("updatedWDABundleId", "com.moovweb.WebDriverAgentRunner");
                     }
 
                     eventListener = new MyWebDriverEventListener();
@@ -111,9 +112,9 @@ public class DriverFactory {
             int appiumPort = Integer.parseInt(Config.APPIUM_PORT);
             int proxyPort = Integer.parseInt(Config.PROXY_PORT);
 
-//            if (Config.PLATFORM_NAME.equals("iOS")) {
-//                iOSProxyRunner(proxyPort);
-//            }
+            if (Config.PLATFORM_NAME.equals("iOS")) {
+                iOSProxyRunner(proxyPort);
+            }
 
             killAppiumServer(appiumPort);
 
@@ -127,7 +128,7 @@ public class DriverFactory {
             serviceBuilder.usingPort(appiumPort);
             if (Config.PLATFORM_NAME.equals("iOS")) {
                 serviceBuilder.withArgument(IOSServerFlag.WEBKIT_DEBUG_PROXY_PORT, String.valueOf(proxyPort));
-                serviceBuilder.withArgument(GeneralServerFlag.LOG_LEVEL, "warn");
+                //serviceBuilder.withArgument(GeneralServerFlag.LOG_LEVEL, "warn");
                 serviceBuilder.withArgument(GeneralServerFlag.SESSION_OVERRIDE);
             }
 
@@ -163,6 +164,7 @@ public class DriverFactory {
 
                 PidProcess process = Processes.newPidProcess(PID);
                 process.destroyGracefully();
+                Thread.sleep(3000);
 
                 log.info("Appium Server killed");
             } else {
@@ -227,6 +229,7 @@ public class DriverFactory {
 
                 PidProcess process = Processes.newPidProcess(PID);
                 process.destroyGracefully();
+                Thread.sleep(700);
 
                 log.info("iOS Proxy killed");
             } else {
