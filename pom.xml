@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <selenium.version>3.0.1</selenium.version>
+        <selenium.version>3.2.0</selenium.version>
         <selendroid.version>0.17.0</selendroid.version>
         <aspectj.version>1.8.9</aspectj.version>
         <allure.version>1.5.0</allure.version>

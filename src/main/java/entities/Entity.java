@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.DriverFactory;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public abstract class Entity {
@@ -37,6 +38,14 @@ public abstract class Entity {
             return root.findElement(selector);
         } else {
             return driver.findElement(selector);
+        }
+    }
+
+    public List<WebElement> findElements(By selector) {
+        if(root != null) {
+            return root.findElements(selector);
+        } else {
+            return driver.findElements(selector);
         }
     }
 
@@ -224,6 +233,16 @@ public abstract class Entity {
         driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
     }
 
+
+    public WebElement findElementWithTextBy(String text, By selector) {
+        List<WebElement> elements = findElements(selector);
+        for(WebElement element : elements) {
+            if (element.getText().contains(text)) {
+                return element;
+            }
+        }
+        return null;
+    }
 
     /**
      * @param ynum Required. How many pixels to scroll by, along the y-axis (vertical).

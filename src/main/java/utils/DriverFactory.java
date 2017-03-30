@@ -238,15 +238,17 @@ public class DriverFactory {
     }
 
     public static void quitDriver() {
-
         log.info("DELETE DRIVER");
-
         driver.close();
         driver.quit();
+        driver = null;
+    }
 
+    public static void killAppium() {
         if (service != null) {
             log.info("DELETE APPIUM");
             service.stop();
+            service = null;
         }
     }
 

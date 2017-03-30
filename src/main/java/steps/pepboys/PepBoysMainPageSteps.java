@@ -1,12 +1,10 @@
 package steps.pepboys;
 
-import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import entities.pages.pepboys.*;
 import utils.CommonFunctions;
-import utils.TestGlobalsManager;
 import utils.pepboys.DataProvider;
 
 import static org.testng.Assert.assertTrue;
@@ -120,12 +118,17 @@ public class PepBoysMainPageSteps {
         cartPage.scheduleInstallationTime();
     }
 
-    @After
-    public void cleanUp() {
-        cartPage.openCartPage();
-        cartPage.cleanUpCart();
-        if (TestGlobalsManager.getTestGlobal("authorised") != null) {
-            mainPage.doLogout();
-        }
+//    @After
+//    public void cleanUp() {
+//        cartPage.openCartPage();
+//        cartPage.cleanUpCart();
+//        if (TestGlobalsManager.getTestGlobal("authorised") != null) {
+//            mainPage.doLogout();
+//        }
+//    }
+
+    @Given("^failed step$")
+    public void failedStep() {
+        assertTrue(false);
     }
 }
