@@ -29,7 +29,7 @@ public class MyWebDriverEventListener implements WebDriverEventListener {
 
     @Override
     public void beforeAlertAccept(WebDriver webDriver) {
-s
+
     }
 
     @Override

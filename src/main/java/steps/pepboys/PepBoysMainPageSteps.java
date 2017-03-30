@@ -126,9 +126,4 @@ public class PepBoysMainPageSteps {
 //            mainPage.doLogout();
 //        }
 //    }
-
-    @Given("^failed step$")
-    public void failedStep() {
-        assertTrue(false);
-    }
 }
