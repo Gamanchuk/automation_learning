@@ -1,6 +1,5 @@
 @pepBoys
 
-
 Feature: Guest - Shipping & Billing page
 
   Background:

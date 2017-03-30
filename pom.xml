@@ -234,6 +234,7 @@
     </build>
 
     <profiles>
+        <!--project tracking-->
         <profile>
             <id>Project-Tracking</id>
             <properties>
@@ -241,6 +242,7 @@
             </properties>
         </profile>
 
+        <!--use desktop browser-->
         <profile>
             <id>use-desktop-browser</id>
             <properties>
@@ -281,22 +283,21 @@
             <id>suite-refactoring</id>
             <properties>
                 <testng.suite>${basedir}/src/test/resources/testsuites/refactoring.xml</testng.suite>
-                <suite.id>42</suite.id>
+                <suite.id>93</suite.id>
             </properties>
         </profile>
-
 
         <!--environments-->
         <profile>
-            <id>env-eugene-local-1</id>
+            <id>env-eugene-local</id>
             <properties>
-                <testing.env>eugene_local1</testing.env>
+                <testing.env>eugene_local</testing.env>
             </properties>
         </profile>
         <profile>
-            <id>env-eugene-local-2</id>
+            <id>env-nik-local</id>
             <properties>
-                <testing.env>eugene_local2</testing.env>
+                <testing.env>nik_local</testing.env>
             </properties>
         </profile>
         <profile>
@@ -308,34 +309,9 @@
 
         <!--devices-->
         <profile>
-            <id>device-IPhone-6</id>
+            <id>device-iPhone-6</id>
             <properties>
                 <props.file.name>iphone6</props.file.name>
-            </properties>
-        </profile>
-
-        <profile>
-            <id>device-IPhone-Simulator</id>
-            <properties>
-                <props.file.name>iphone_simulator</props.file.name>
-            </properties>
-        </profile>
-        <profile>
-            <id>device-IPhone-6+</id>
-            <properties>
-                <props.file.name>iphone6+</props.file.name>
-            </properties>
-        </profile>
-        <profile>
-            <id>device-IPhone4s</id>
-            <properties>
-                <props.file.name>iphone4s</props.file.name>
-            </properties>
-        </profile>
-        <profile>
-            <id>device-GalaxyNote4</id>
-            <properties>
-                <props.file.name>galaxy_note</props.file.name>
             </properties>
         </profile>
         <profile>
@@ -345,9 +321,33 @@
             </properties>
         </profile>
         <profile>
-            <id>device-android-simulator</id>
+            <id>device-GalaxyS5</id>
             <properties>
-                <props.file.name>android_simulator</props.file.name>
+                <props.file.name>galaxy_s5</props.file.name>
+            </properties>
+        </profile>
+        <profile>
+            <id>device-GalaxyNote</id>
+            <properties>
+                <props.file.name>galaxy_note</props.file.name>
+            </properties>
+        </profile>
+        <profile>
+            <id>device-iPhone-6plus</id>
+            <properties>
+                <props.file.name>iphone6plus</props.file.name>
+            </properties>
+        </profile>
+        <profile>
+            <id>device-iPhone-5c</id>
+            <properties>
+                <props.file.name>iphone5c</props.file.name>
+            </properties>
+        </profile>
+        <profile>
+            <id>device-iPhone-6s</id>
+            <properties>
+                <props.file.name>iphone6s</props.file.name>
             </properties>
         </profile>
     </profiles>
@@ -362,5 +362,4 @@
             </plugin>
         </plugins>
     </reporting>
-
 </project>
