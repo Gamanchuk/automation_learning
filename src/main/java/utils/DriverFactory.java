@@ -80,9 +80,9 @@ public class DriverFactory {
                     if (Config.PLATFORM_NAME.equals("iOS")) {
                         desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
                         desiredCapabilities.setCapability("wdaLocalPort", Integer.parseInt(iproxyPort));
-                        desiredCapabilities.setCapability(IOSMobileCapabilityType.LAUNCH_TIMEOUT, 500000);
+                        desiredCapabilities.setCapability(IOSMobileCapabilityType.LAUNCH_TIMEOUT, 1000000);
                         desiredCapabilities.setCapability("useNewWDA", true);
-                        desiredCapabilities.setCapability("startIWDP", true);
+                        //  desiredCapabilities.setCapability("startIWDP", true);
                         desiredCapabilities.setCapability("preventWDAAttachments", true);
                         desiredCapabilities.setCapability("xcodeOrgId", "Y95G5M3Q84");
                         desiredCapabilities.setCapability("xcodeSigningId", "iPhone Developer");
@@ -111,9 +111,9 @@ public class DriverFactory {
             int appiumPort = Integer.parseInt(Config.APPIUM_PORT);
             int proxyPort = Integer.parseInt(Config.PROXY_PORT);
 
-//            if (Config.PLATFORM_NAME.equals("iOS")) {
-//                iOSProxyRunner(proxyPort);
-//            }
+            if (Config.PLATFORM_NAME.equals("iOS")) {
+                iOSProxyRunner(proxyPort);
+            }
 
             killAppiumServer(appiumPort);
 
@@ -127,7 +127,7 @@ public class DriverFactory {
             serviceBuilder.usingPort(appiumPort);
             if (Config.PLATFORM_NAME.equals("iOS")) {
                 serviceBuilder.withArgument(IOSServerFlag.WEBKIT_DEBUG_PROXY_PORT, String.valueOf(proxyPort));
-                serviceBuilder.withArgument(GeneralServerFlag.LOG_LEVEL, "warn");
+                // serviceBuilder.withArgument(GeneralServerFlag.LOG_LEVEL, "warn");
                 serviceBuilder.withArgument(GeneralServerFlag.SESSION_OVERRIDE);
             }
 

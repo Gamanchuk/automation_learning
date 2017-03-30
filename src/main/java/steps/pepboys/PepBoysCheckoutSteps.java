@@ -4,6 +4,7 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import entities.components.*;
+import entities.pages.pepboys.PepBoysMainPage;
 import utils.CommonFunctions;
 import utils.TestGlobalsManager;
 import utils.pepboys.BillingUser;
@@ -23,6 +24,7 @@ public class PepBoysCheckoutSteps {
     private ShippingOptionsComponent shippingOptionsComponent = new ShippingOptionsComponent();
     private CreditCardFormComponent creditCardFormComponent = new CreditCardFormComponent();
     private HeaderComponent headerComponent = new HeaderComponent();
+    private FooterComponent footerComponent = new FooterComponent();
     private SignInFormComponent signInFormComponent = new SignInFormComponent();
     private RadioListComponent radioListComponent = new RadioListComponent();
     private PaymentTypesComponent paymentTypesComponent = new PaymentTypesComponent();
@@ -231,5 +233,31 @@ public class PepBoysCheckoutSteps {
     @And("^user press the signIn button$")
     public void userPressTheSignInButton() {
         headerComponent.pressSignInButton();
+    }
+
+    @And("^user logOut from checkout$")
+    public void userLogOutFromCheckout() {
+        PepBoysMainPage mainPage = new PepBoysMainPage();
+        if (TestGlobalsManager.getTestGlobal("authorised") != null) {
+            mainPage.doLogout();
+            TestGlobalsManager.setTestGlobal("authorised", false);
+        }
+    }
+
+    @Given("^user checks text in footer$")
+    public void userChecksTextInFooter() {
+
+    }
+
+    @Given("^user checks text \"([^\"]*)\" in footer$")
+    public void userChecksTextInFooter(String note) {
+        footerComponent.checkNote(note);
+    }
+
+    @Given("^user checks support number with label \"([^\"]*)\" and number \"([^\"]*)\"$")
+    public void userChecksSupportNumberWithLabelAndNumber(String phoneLabel, String phoneNumber) {
+        footerComponent.checkPhoneNumberLabel(phoneLabel);
+        footerComponent.pressCall();
+        footerComponent.checkCallAlert(phoneNumber);
     }
 }

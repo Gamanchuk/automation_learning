@@ -113,6 +113,7 @@ public abstract class Entity {
                 .until(ExpectedConditions.presenceOfElementLocated(element));
     }
 
+
     public void waitForElementPresence(By element) {
         this.waitForElementVisible(element, TIMEOUT_SECONDS);
     }
@@ -260,4 +261,12 @@ public abstract class Entity {
             return false;
         }
     }
+
+    public void waitForAlertIsPresent() {
+        log.info("Waiting 2s for iOS Alert prent");
+        new WebDriverWait(driver, 2)
+                .until(ExpectedConditions.alertIsPresent());
+    }
+
+
 }

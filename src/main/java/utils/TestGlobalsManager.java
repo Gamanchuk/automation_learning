@@ -29,4 +29,6 @@ public class TestGlobalsManager {
         if (null == getGlobals()) initTestGlobals();
         getGlobals().put(name, value);
     }
+
+
 }

@@ -29,6 +29,9 @@ public class PepBoysCartPage extends PepBoysBasePage {
         if (method.equals("Pay Online")) {
             waitForElementVisible(By.xpath("//button[text()='Continue']"));
             waitForElementClickable(By.xpath("//button[text()='Continue']"));
+        } else if (method.equals("Pay in Store")) {
+            waitForElementVisible(By.xpath("//button[text()='Place Order']"));
+            waitForElementClickable(By.xpath("//button[text()='Place Order']"));
         }
     }
 
@@ -69,7 +72,7 @@ public class PepBoysCartPage extends PepBoysBasePage {
         ArrayList<String> itemIds = new ArrayList<>();
 
         List<WebElement> items = getDriver().findElements(By.xpath("//tr[contains(@class, 'mw-item-row')]"));
-        if(items.size() != 0) {
+        if (items.size() != 0) {
             for (WebElement item : items) {
                 itemIds.add(item.getAttribute("data-itemid"));
             }
