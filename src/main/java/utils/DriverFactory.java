@@ -82,7 +82,7 @@ public class DriverFactory {
                         desiredCapabilities.setCapability("wdaLocalPort", Integer.parseInt(iproxyPort));
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.LAUNCH_TIMEOUT, 500000);
                         desiredCapabilities.setCapability("useNewWDA", true);
-                        desiredCapabilities.setCapability("startIWDP", true);
+                        //desiredCapabilities.setCapability("startIWDP", true);
                         desiredCapabilities.setCapability("preventWDAAttachments", true);
                         desiredCapabilities.setCapability("xcodeOrgId", "Y95G5M3Q84");
                         desiredCapabilities.setCapability("xcodeSigningId", "iPhone Developer");
@@ -111,9 +111,9 @@ public class DriverFactory {
             int appiumPort = Integer.parseInt(Config.APPIUM_PORT);
             int proxyPort = Integer.parseInt(Config.PROXY_PORT);
 
-//            if (Config.PLATFORM_NAME.equals("iOS")) {
-//                iOSProxyRunner(proxyPort);
-//            }
+            if (Config.PLATFORM_NAME.equals("iOS")) {
+                iOSProxyRunner(proxyPort);
+            }
 
             killAppiumServer(appiumPort);
 
