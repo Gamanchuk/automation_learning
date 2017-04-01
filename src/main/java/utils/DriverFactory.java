@@ -165,6 +165,7 @@ public class DriverFactory {
 
                 PidProcess process = Processes.newPidProcess(PID);
                 process.destroyGracefully();
+                Thread.sleep(3000);
 
                 log.info("Appium Server killed");
             } else {
@@ -229,6 +230,7 @@ public class DriverFactory {
 
                 PidProcess process = Processes.newPidProcess(PID);
                 process.destroyGracefully();
+                Thread.sleep(700);
 
                 log.info("iOS Proxy killed");
             } else {
