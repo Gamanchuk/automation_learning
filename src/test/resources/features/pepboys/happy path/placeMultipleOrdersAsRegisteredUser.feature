@@ -19,5 +19,6 @@ Feature: Happy Path
     And presses the "Continue" button
     And chooses "Use Recommended Address"
     And chooses "Ground" shipping method
+    And presses the "Continue" button
     And uses "visa" card for payment
     Then user should be on thank you page
