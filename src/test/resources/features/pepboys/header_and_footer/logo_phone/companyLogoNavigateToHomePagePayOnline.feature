@@ -1,7 +1,7 @@
 @pepBoys
 
 
-Feature: Header and Footer
+Feature: Header and Footer (Pay Online)
 
   Background:
     Given user makes appoint
