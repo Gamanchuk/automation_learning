@@ -81,13 +81,14 @@ public class DriverFactory {
                         desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
                         desiredCapabilities.setCapability("wdaLocalPort", Integer.parseInt(iproxyPort));
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.LAUNCH_TIMEOUT, 500000);
-
-                        //desiredCapabilities.setCapability("useNewWDA", true);
+                        desiredCapabilities.setCapability("useNewWDA", true);
                         //desiredCapabilities.setCapability("startIWDP", true);
-                        //desiredCapabilities.setCapability("preventWDAAttachments", true);
-                        //desiredCapabilities.setCapability("xcodeOrgId", "Y95G5M3Q84");
-                        //desiredCapabilities.setCapability("xcodeSigningId", "iPhone Developer");
-                        //desiredCapabilities.setCapability("updatedWDABundleId", "com.moovweb.WebDriverAgentRunner");
+                        desiredCapabilities.setCapability("preventWDAAttachments", true);
+                        desiredCapabilities.setCapability("xcodeOrgId", "Y95G5M3Q84");
+                        desiredCapabilities.setCapability("xcodeSigningId", "iPhone Developer");
+                        desiredCapabilities.setCapability("updatedWDABundleId", "com.moovweb.WebDriverAgentRunner");
+
+
                     }
 
                     eventListener = new MyWebDriverEventListener();
@@ -242,15 +243,17 @@ public class DriverFactory {
     }
 
     public static void quitDriver() {
-
         log.info("DELETE DRIVER");
-
         driver.close();
         driver.quit();
+        driver = null;
+    }
 
+    public static void killAppium() {
         if (service != null) {
             log.info("DELETE APPIUM");
             service.stop();
+            service = null;
         }
     }
 

@@ -1,6 +1,5 @@
 package entities.components;
 
-import entities.Entity;
 import org.openqa.selenium.By;
 
 public class ButtonComponent extends BaseComponent {
@@ -8,5 +7,9 @@ public class ButtonComponent extends BaseComponent {
 
     public void clickButton() {
         getDriver().findElements(btn).get(0).click();
+    }
+
+    public boolean isOverlayDisplayed() {
+        return isElementVisible(By.className("spinner-container"), 2);
     }
 }

@@ -10,10 +10,8 @@ import ru.yandex.qatools.allure.events.TestCaseFinishedEvent;
 import ru.yandex.qatools.allure.events.TestCasePendingEvent;
 import utils.retries.IAllureRetryAnalyzer;
 
-import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
-import java.util.Date;
 import java.util.Iterator;
 
 public class TestListener implements ITestListener, IAnnotationTransformer {
@@ -36,23 +34,25 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
 
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
-
+        DriverFactory.quitDriver();
     }
 
 
     @Override
     public void onTestFailure(ITestResult iTestResult) {
+        DriverFactory.quitDriver();
         fireRetryTest("The test has been failed then retried.", iTestResult);
     }
 
     @Override
     public void onTestSkipped(ITestResult iTestResult) {
+        DriverFactory.quitDriver();
 
     }
 
     @Override
     public void onTestFailedButWithinSuccessPercentage(ITestResult iTestResult) {
-
+        DriverFactory.quitDriver();
     }
 
     @Override

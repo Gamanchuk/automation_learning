@@ -1,6 +1,5 @@
 @pepBoys
 
-
 Feature: Guest - Shipping & Billing page
 
   Background:
@@ -9,12 +8,12 @@ Feature: Guest - Shipping & Billing page
     And user views cart
     And chooses "Pay Online" method
 
-  @TestCaseId("15493")
-  Scenario: Test with correct shipping information and fill in all required fields (Address input manually)
-    Given user types manually billing info for "qa user"
-    And user types manually shipping info for "qa user"
+  @TestCaseId("15494")
+  Scenario: Test with correct shipping information and fill in all existing fields (Address chosen from dropdown of auto-detect)
+    Given user types billing info for "qa user"
+    And user types shipping info for "qa user"
     And presses the "Continue" button
-    And chooses "Use Entered Address"
+    And chooses "Use Recommended Address"
     Then user checks billing info for "qa user"
 
 
