@@ -1,6 +1,7 @@
 package utils;
 
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.testng.*;
@@ -10,8 +11,11 @@ import ru.yandex.qatools.allure.events.TestCaseFinishedEvent;
 import ru.yandex.qatools.allure.events.TestCasePendingEvent;
 import utils.retries.IAllureRetryAnalyzer;
 
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 public class TestListener implements ITestListener, IAnnotationTransformer {
@@ -36,6 +40,9 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
     public void onTestSuccess(ITestResult iTestResult) {
         log.info("Test \"" + iTestResult.getTestName() + "\" completed in "
                 + countDuration(iTestResult.getEndMillis() - iTestResult.getStartMillis()));
+        if (Boolean.valueOf(System.getProperty("projectTracking"))) {
+            setTestResults(TestRailStatus.PASSED, "", "");
+        }
         DriverFactory.quitDriver();
     }
 
@@ -48,10 +55,58 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
 
     @Override
     public void onTestFailure(ITestResult iTestResult) {
-        DriverFactory.quitDriver();
-        log.info("Test \"" + iTestResult.getTestName() + "\" failed in "
+        String caseName = (String) TestGlobalsManager.getTestGlobal("caseName");
+        String dom = CommonFunctions.attachDomThree(DriverFactory.getDriver().getPageSource());
+        String errorMessage = String.valueOf(iTestResult.getThrowable().getMessage());
+
+        log.info("Test \"" + iTestResult.getName() + "\" failed in "
                 + countDuration(iTestResult.getEndMillis() - iTestResult.getStartMillis()));
+
+        if (Boolean.valueOf(System.getProperty("projectTracking"))) {
+            String ticketId = setJiraIssues(caseName, errorMessage);
+            try {
+                File attachment = File.createTempFile("attachment", ".html");
+                FileUtils.writeStringToFile(attachment, dom);
+//                    JiraHelper.addAttachment(ticketId, attachment);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            setTestResults(TestRailStatus.FAILED, errorMessage, ticketId);
+        }
+
+        DriverFactory.quitDriver();
         fireRetryTest("The test has been failed then retried.", iTestResult);
+    }
+
+    private void setTestResults(TestRailStatus status, String error, String issuesLink) {
+        try {
+            ArrayList<String> ids = (ArrayList<String>) TestGlobalsManager.getTestGlobal("testCaseIds");
+            if(ids != null) {
+                for (String id : ids) {
+                    TestRailRunHelper.getInstance().setTestResult(id, status, error, issuesLink);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private String setJiraIssues(String caseName, String result) {
+        String ticketId = null;
+
+        try {
+            ticketId = JiraHelper.publishJira(
+                    "Automation - \"" + caseName + "\" failed",
+                    "{noformat}\n" + result + "\n{noformat}",
+                    Config.DEVICE_NAME + " " + Config.PLATFORM_NAME + " " + Config.PLATFORM_VERSION,
+                    caseName,
+                    result);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return ticketId;
     }
 
     @Override
