@@ -1,8 +1,6 @@
 package entities.components;
 
-import entities.Entity;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import utils.CommonFunctions;
 
 import static org.testng.Assert.assertEquals;
@@ -14,7 +12,7 @@ public class ErrorMessageComponent extends BaseComponent {
     private By errorMessageEl = By.xpath(PATH_BASE + "/div");
 
     public void checkError(String title, String message) {
-        ((JavascriptExecutor) getDriver()).executeScript("window.scrollBy(0,-300)", "");
+        javascriptScroll(-500);
 
         waitForElementVisible(errorMessageEl);
 
@@ -33,5 +31,8 @@ public class ErrorMessageComponent extends BaseComponent {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        javascriptScroll(500);
+
     }
 }
