@@ -56,10 +56,11 @@ public class PepBoysCheckoutSteps {
 
     @And("^presses the \"([^\"]*)\" button$")
     public void pressesTheButton(String confirmationMethod) {
+        buttonComponent.focusOut();
         buttonComponent.clickButton();
-        if(!buttonComponent.isOverlayDisplayed()) {
-            buttonComponent.clickButton();
-        }
+        //if(!buttonComponent.isOverlayDisplayed()) {
+        //  buttonComponent.clickButton();
+        //}
     }
 
     @And("^chooses \"([^\"]*)\"$")
