@@ -11,29 +11,25 @@ Feature: Header and Footer
 
 
   @TestCaseId("15368")
-  Scenario: Company Logo navigate to home page (Pay Online)
-
-    # From Billing & Shipping tab
+  Scenario: Company Logo navigate to home page (Guest, Pay Online, Billing & Shipping tab)
     Given user checks support number with label "1-800-PEP-BOYS (737-2697)" and number "18007372697"
     And user checks text "© Copyright 2017 - The Pep Boys" in footer
     And user presses the logo
     Then user should be on main page
 
-    # From Delivery Method tab
-    Given user navigates to cart page
-    And chooses "Pay Online" method
+  @TestCaseId("15484")
+  Scenario: Company Logo navigate to home page (Guest, Pay Online, Delivery Method tab)
     And user types billing info for "qa user"
     And presses the "Continue" button
     And chooses "Use Recommended Address"
     And chooses "Ground" shipping method
     And user checks support number with label "1-800-PEP-BOYS (737-2697)" and number "18007372697"
     And user checks text "© Copyright 2017 - The Pep Boys" in footer
-    And user press the logo
-    Then user should be navigate to main page
+    And user presses the logo
+    Then user should be on main page
 
-    # From Payment & Review tab
-    Given user navigates to cart page
-    And chooses "Pay Online" method
+  @TestCaseId("15395")
+  Scenario: Company Logo navigate to home page (Guest, Pay Online, Payment & Review tab)
     And user types billing info for "qa user"
     And presses the "Continue" button
     And chooses "Use Recommended Address"
@@ -42,33 +38,27 @@ Feature: Header and Footer
     And uses "visa" card for payment
     And user checks support number with label "1-800-PEP-BOYS (737-2697)" and number "18007372697"
     And user checks text "© Copyright 2017 - The Pep Boys" in footer
-    And user press the logo
-    Then user should be navigate to main page
+    And user presses the logo
+    Then user should be on main page
 
-    # From login page
-    Given user navigates to cart page
-    And chooses "Pay Online" method
-    And user press the signIn button
+  @TestCaseId("15363")
+  Scenario: Company Logo navigate to home page (Guest, Pay Online, Sign In page)
+    And user presses the signIn button
     And user checks support number with label "1-800-PEP-BOYS (737-2697)" and number "18007372697"
     And user checks text "© Copyright 2017 - The Pep Boys" in footer
-    And user press the logo
-    Then user should be navigate to main page
+    And user presses the logo
+    Then user should be on main page
 
-    #======#
-
-  # From Billing & Shipping tab (Existing Account)
-    Given user navigates to cart page
-    And chooses "Pay Online" method
+  @TestCaseId("15424")
+  Scenario: Company Logo navigate to home page Company Logo navigate to home page (Existent user, Pay Online, Billing & Shipping tab)
     And user makes authorisation for "qa user"
     And user checks support number with label "1-800-PEP-BOYS (737-2697)" and number "18007372697"
     And user checks text "© Copyright 2017 - The Pep Boys" in footer
-    And user press the logo
-    Then user should be navigate to main page
-    And user logOut from checkout
+    And user presses the logo
+    Then user should be on main page
 
-    # From Delivery Method tab (Existing Account)
-    Given user navigates to cart page
-    And chooses "Pay Online" method
+  @TestCaseId("15479")
+  Scenario: Company Logo navigate to home page Company Logo navigate to home page (Existent user, Pay Online, Delivery Method tab)
     And user makes authorisation for "qa user"
     And applies billing info for address "123 Mission Street, 10th Floor"
     And presses the "Continue" button
@@ -76,13 +66,11 @@ Feature: Header and Footer
     And chooses "Ground" shipping method
     And user checks support number with label "1-800-PEP-BOYS (737-2697)" and number "18007372697"
     And user checks text "© Copyright 2017 - The Pep Boys" in footer
-    And user press the logo
-    Then user should be navigate to main page
-    And user logOut from checkout
+    And user presses the logo
+    Then user should be on main page
 
-    # From Payment & Review tab (Existing Account)
-    Given user navigates to cart page
-    And chooses "Pay Online" method
+  @TestCaseId("15448")
+  Scenario: Company Logo navigate to home page Company Logo navigate to home page (Existent user, Pay Online, Payment & Review tab)
     And user makes authorisation for "qa user"
     And applies billing info for address "201 SPEAR ST"
     And presses the "Continue" button
@@ -92,7 +80,6 @@ Feature: Header and Footer
     And uses "visa" card for payment
     And user checks support number with label "1-800-PEP-BOYS (737-2697)" and number "18007372697"
     And user checks text "© Copyright 2017 - The Pep Boys" in footer
-    And user press the logo
-    Then user should be navigate to main page
-    And user logOut from checkout
+    And user presses the logo
+    Then user should be on main page
 

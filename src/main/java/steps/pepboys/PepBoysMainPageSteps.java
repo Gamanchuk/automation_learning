@@ -130,8 +130,8 @@ public class PepBoysMainPageSteps {
         }
     }
 
-    @Then("^user should be navigate to main page$")
-    public void userShouldBeNavigateToMainPage() {
+    @Then("^user should be on main page$")
+    public void userShouldBeOnMainPage() {
         assertTrue(mainPage.isPage(), "Main page was not opened");
         CommonFunctions.attachScreenshot("Main page opened");
     }

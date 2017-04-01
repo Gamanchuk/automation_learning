@@ -225,7 +225,7 @@ public class PepBoysCheckoutSteps {
     }
 
     @Given("^user presses the logo$")
-    public void userPressTheLogo() {
+    public void userPressesTheLogo() {
         headerComponent.pressLogoLink();
         CommonFunctions.attachScreenshot("Press the logo link");
     }
