@@ -19,7 +19,7 @@ Feature: Header and Footer (Pay Online)
 
   @TestCaseId("15484")
   Scenario: Company Logo navigate to home page (Guest, Pay Online, Delivery Method tab)
-    And user types billing info for "qa user"
+    Given user types billing info for "qa user"
     And presses the "Continue" button
     And chooses "Use Recommended Address"
     And chooses "Ground" shipping method
@@ -30,7 +30,7 @@ Feature: Header and Footer (Pay Online)
 
   @TestCaseId("15395")
   Scenario: Company Logo navigate to home page (Guest, Pay Online, Payment & Review tab)
-    And user types billing info for "qa user"
+    Given user types billing info for "qa user"
     And presses the "Continue" button
     And chooses "Use Recommended Address"
     And chooses "Ground" shipping method
@@ -43,7 +43,7 @@ Feature: Header and Footer (Pay Online)
 
   @TestCaseId("15363")
   Scenario: Company Logo navigate to home page (Guest, Pay Online, Sign In page)
-    And user presses the signIn button
+    Given user presses the signIn button
     And user checks support number with label "1-800-PEP-BOYS (737-2697)" and number "18007372697"
     And user checks text "© Copyright 2017 - The Pep Boys" in footer
     And user presses the logo
@@ -51,7 +51,7 @@ Feature: Header and Footer (Pay Online)
 
   @TestCaseId("15424")
   Scenario: Company Logo navigate to home page Company Logo navigate to home page (Existent user, Pay Online, Billing & Shipping tab)
-    And user makes authorisation for "qa user"
+    Given user makes authorisation for "qa user"
     And user checks support number with label "1-800-PEP-BOYS (737-2697)" and number "18007372697"
     And user checks text "© Copyright 2017 - The Pep Boys" in footer
     And user presses the logo
@@ -59,7 +59,7 @@ Feature: Header and Footer (Pay Online)
 
   @TestCaseId("15479")
   Scenario: Company Logo navigate to home page Company Logo navigate to home page (Existent user, Pay Online, Delivery Method tab)
-    And user makes authorisation for "qa user"
+    Given user makes authorisation for "qa user"
     And applies billing info for address "123 Mission Street, 10th Floor"
     And presses the "Continue" button
     And chooses "Use Recommended Address"
@@ -71,8 +71,8 @@ Feature: Header and Footer (Pay Online)
 
   @TestCaseId("15448")
   Scenario: Company Logo navigate to home page Company Logo navigate to home page (Existent user, Pay Online, Payment & Review tab)
-    And user makes authorisation for "qa user"
-    And applies billing info for address "201 SPEAR ST"
+    Given user makes authorisation for "qa user"
+    And applies billing info for address "123 Mission Street, 10th Floor"
     And presses the "Continue" button
     And chooses "Use Recommended Address"
     And chooses "Ground" shipping method
