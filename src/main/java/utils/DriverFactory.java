@@ -129,7 +129,7 @@ public class DriverFactory {
             serviceBuilder.usingPort(appiumPort);
             if (Config.PLATFORM_NAME.equals("iOS")) {
                 serviceBuilder.withArgument(IOSServerFlag.WEBKIT_DEBUG_PROXY_PORT, String.valueOf(proxyPort));
-                // serviceBuilder.withArgument(GeneralServerFlag.LOG_LEVEL, "warn");
+                //serviceBuilder.withArgument(GeneralServerFlag.LOG_LEVEL, "warn");
                 serviceBuilder.withArgument(GeneralServerFlag.SESSION_OVERRIDE);
             }
 
@@ -243,15 +243,17 @@ public class DriverFactory {
     }
 
     public static void quitDriver() {
-
         log.info("DELETE DRIVER");
-
         driver.close();
         driver.quit();
+        driver = null;
+    }
 
+    public static void killAppium() {
         if (service != null) {
             log.info("DELETE APPIUM");
             service.stop();
+            service = null;
         }
     }
 

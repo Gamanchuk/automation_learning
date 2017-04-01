@@ -1,6 +1,5 @@
 package entities.components;
 
-import entities.Entity;
 import org.openqa.selenium.By;
 import utils.CommonFunctions;
 
@@ -26,15 +25,15 @@ public class AddressDisplayComponent extends BaseComponent {
         checkFieldValue("Full Name", name);
         checkFieldValue("Street Address", streetAddress);
 
-        if(isElementVisible(deliveryEmail)) {
-            checkFieldValue("Email", email);
-        }
-
         checkStreetAddress(streetAddress);
         checkApt(apt);
         checkCityInfo(cityInfo);
         checkPhone(phone);
         checkZip(zip);
+
+        if(isElementPresent(deliveryEmail, 1)) {
+            checkFieldValue("Email", email);
+        }
 
         CommonFunctions.attachScreenshot("Billing info");
     }

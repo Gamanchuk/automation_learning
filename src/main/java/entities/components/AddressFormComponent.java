@@ -20,13 +20,21 @@ public class AddressFormComponent extends BaseComponent {
 
         if (autoFill) {
             // Waiting for dropdown
-            click(By.xpath("(//div[contains(., '" + cityInfo + "')]/../input[@name='addresses'])[1]"));
+            waitForElementVisible(By.cssSelector("div.radio-list"));
+            findElementWithTextBy(cityInfo, By.cssSelector("p.subtext")).click();
         } else {
-            click(By.xpath("//a[@class='manual']"));
-            findElement(By.xpath("//a[contains(text(), 'enter city')]")).click();
+            click(By.cssSelector("a.manual"));
+            findElementWithTextBy("enter city", By.cssSelector("div.zip-message a")).click();
             fillField(cityField, city);
             fillField(zipField, zip);
             fillState(state);
+        }
+
+        // Need to sleep for second to avoid selenium exception
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
 
         waitForElementVisible(apartmentField);

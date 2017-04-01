@@ -12,12 +12,13 @@ Feature: Guest - Shipping & Billing page
   @TestCaseId("15497")
   Scenario: Test field 'Last name'
     Given user types billing info for "qa user"
-    And user types "Moovweb" into the "Full Name" field of "Billing Address" form
+    And user types shipping info for "qa user"
+    And user types "Moovweb" into the "Full Name" field of "Shipping Address" form
     And presses the "Continue" button
     Then user should stay at "Billing & Shipping" tab
     And sees "FORM ERRORS" error message with text "Please review all inputs."
 
-    And user types "Moovweb !@#&::!@#()" into the "Full Name" field of "Billing Address" form
+    And user types "Moovweb !@#&::!@#()" into the "Full Name" field of "Shipping Address" form
     And presses the "Continue" button
     And chooses "Use Entered Address"
     Then user should stay at "Billing & Shipping" tab

@@ -59,6 +59,9 @@ public class PepBoysCheckoutSteps {
     @And("^presses the \"([^\"]*)\" button$")
     public void pressesTheButton(String confirmationMethod) {
         buttonComponent.clickButton();
+        if(!buttonComponent.isOverlayDisplayed()) {
+            buttonComponent.clickButton();
+        }
     }
 
     @And("^chooses \"([^\"]*)\"$")
@@ -111,8 +114,9 @@ public class PepBoysCheckoutSteps {
         CommonFunctions.attachScreenshot("Purchase with PayPal");
     }
 
-    @Given("^user types \"([^\"]*)\" into the \"([^\"]*)\" field$")
-    public void userTypesValueIntoField(String value, String field) {
+    @Given("^user types \"([^\"]*)\" into the \"([^\"]*)\" field of \"([^\"]*)\" form$")
+    public void userTypesValueIntoField(String value, String field, String formTitle) {
+        addressFormComponent.setRoot(BaseComponent.getContainerByTitle(formTitle));
         addressFormComponent.inputValueIntoField(value, field);
         CommonFunctions.attachScreenshot(String.format("Input '%s' into '%s'", value, field));
     }
@@ -194,6 +198,11 @@ public class PepBoysCheckoutSteps {
         checkboxRowComponent.check("Yes, shipping address and billing address are the same", false);
         fillShippingInfo(userName, false);
     }
+    @Given("^user types shipping info for \"([^\"]*)\"$")
+    public void userTypesShippingInfoFor(String userName) throws Throwable {
+        checkboxRowComponent.check("Yes, shipping address and billing address are the same", false);
+        fillShippingInfo(userName, true);
+    }
 
     private void fillBillingInfo(String userName, boolean autoFil) {
         BillingUser user = DataProvider.getUser(userName);
@@ -266,5 +275,10 @@ public class PepBoysCheckoutSteps {
     public void userPressesTheShoppingCartIcon() {
         headerComponent.pressShippingCartIcon();
         CommonFunctions.attachScreenshot("Open Shipping Cart");
+    }
+
+    @And("^unset checkbox \"([^\"]*)\"$")
+    public void unsetCheckbox(String label) {
+        checkboxRowComponent.check(label, false);
     }
 }

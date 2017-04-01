@@ -1,4 +1,4 @@
-@pepBoys
+@pepBoys @debug
 
 
 Feature: Guest - Shipping & Billing page
@@ -9,17 +9,11 @@ Feature: Guest - Shipping & Billing page
     And user views cart
     And chooses "Pay Online" method
 
-  @TestCaseId("15497")
-  Scenario: Test field 'Last name'
+  @TestCaseId("15495")
+  Scenario: Test with correct shipping information and do not fill in all required fields (error message should be displayed)
     Given user types billing info for "qa user"
-    And user types "Moovweb" into the "Full Name" field of "Billing Address" form
+    And unset checkbox "Yes, shipping address and billing address are the same"
     And presses the "Continue" button
     Then user should stay at "Billing & Shipping" tab
     And sees "FORM ERRORS" error message with text "Please review all inputs."
-
-    And user types "Moovweb !@#&::!@#()" into the "Full Name" field of "Billing Address" form
-    And presses the "Continue" button
-    And chooses "Use Entered Address"
-    Then user should stay at "Billing & Shipping" tab
-    And sees "FORM ERRORS" error message with text "Last Name is invalid"
 
