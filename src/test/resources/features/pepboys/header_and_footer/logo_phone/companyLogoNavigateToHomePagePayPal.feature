@@ -1,7 +1,7 @@
 @pepBoys
 
 
-Feature: Header and Footer
+Feature: Header and Footer (PayPal)
 
   Background:
     Given user makes appoint
@@ -10,25 +10,22 @@ Feature: Header and Footer
     And chooses "PayPal" method
 
 
-  @TestCaseId("15368")
-  Scenario: Company Logo navigate to home page (PayPal)
-
-    #From Delivery Method tab (PayPal)
+  @TestCaseId("15555")
+  Scenario: Company Logo navigate to home page (Guest, PayPal, Delivery Method tab)
     And user confirms purchase as "qa user" with PayPal
     And chooses "Ground" shipping method
     And user checks support number with label "1-800-PEP-BOYS (737-2697)" and number "18007372697"
     And user checks text "© Copyright 2017 - The Pep Boys" in footer
-    And user press the logo
-    Then user should be navigate to main page
+    And user presses the logo
+    Then user should be on main page
 
-    #From Payment & Review tab (PayPal)
-    Given user navigates to cart page
-    And chooses "PayPal" method
+  @TestCaseId("15560")
+  Scenario: Company Logo navigate to home page (Guest, PayPal, Payment & Review tab)
     And user confirms purchase with PayPal
     And chooses "Ground" shipping method
     And presses the "Continue" button
     And checks payment details for "qa user"
     And user checks support number with label "1-800-PEP-BOYS (737-2697)" and number "18007372697"
     And user checks text "© Copyright 2017 - The Pep Boys" in footer
-    And user press the logo
-    Then user should be navigate to main page
+    And user presses the logo
+    Then user should be on main page

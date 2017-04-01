@@ -10,14 +10,16 @@ Feature: Header and Footer (Pay in Store)
     And chooses "Pay in Store" method
 
 
-  @TestCaseId("16693")
+  @TestCaseId("16693") @TestCaseId("16694") @TestCaseId("16695") @TestCaseId("16697")
   Scenario: Company Logo navigate to home page (Guest, Pay in Store, Billing & Shipping tab)
+    Given user checks support number with label "1-800-PEP-BOYS (737-2697)" and number "18007372697"
+    And user checks text "© Copyright 2017 - The Pep Boys" in footer
     And user presses the logo
     Then user should be on main page
 
   @TestCaseId("16689")
   Scenario: Company Logo navigate to home page (Guest, Pay in Store, SignIn page)
-    And user presses the signIn button
+    Given user presses the signIn button
     And user checks support number with label "1-800-PEP-BOYS (737-2697)" and number "18007372697"
     And user checks text "© Copyright 2017 - The Pep Boys" in footer
     And user presses the logo
@@ -25,7 +27,7 @@ Feature: Header and Footer (Pay in Store)
 
   @TestCaseId("16666")
   Scenario: Company Logo navigate to home page (Existent user, Pay in Store, Billing & Shipping tab)
-    And user makes authorisation for "qa user"
+    Given user makes authorisation for "qa user"
     And user checks support number with label "1-800-PEP-BOYS (737-2697)" and number "18007372697"
     And user checks text "© Copyright 2017 - The Pep Boys" in footer
     And user presses the logo
