@@ -11,6 +11,8 @@ Feature: Header and Footer (PayPal)
 
 
   @TestCaseId("15555")
+  @TestCaseId("15557")
+  @TestCaseId("15559")
   Scenario: Company Logo navigate to home page (Guest, PayPal, Delivery Method tab)
     And user confirms purchase as "qa user" with PayPal
     And chooses "Ground" shipping method
@@ -20,6 +22,8 @@ Feature: Header and Footer (PayPal)
     Then user should be on main page
 
   @TestCaseId("15560")
+  @TestCaseId("15562")
+  @TestCaseId("15564")
   Scenario: Company Logo navigate to home page (Guest, PayPal, Payment & Review tab)
     And user confirms purchase with PayPal
     And chooses "Ground" shipping method

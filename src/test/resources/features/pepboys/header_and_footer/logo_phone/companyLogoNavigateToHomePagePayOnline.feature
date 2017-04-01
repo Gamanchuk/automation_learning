@@ -11,6 +11,8 @@ Feature: Header and Footer (Pay Online)
 
 
   @TestCaseId("15368")
+  @TestCaseId("15370")
+  @TestCaseId("15372")
   Scenario: Company Logo navigate to home page (Guest, Pay Online, Billing & Shipping tab)
     Given user checks support number with label "1-800-PEP-BOYS (737-2697)" and number "18007372697"
     And user checks text "© Copyright 2017 - The Pep Boys" in footer
@@ -18,6 +20,8 @@ Feature: Header and Footer (Pay Online)
     Then user should be on main page
 
   @TestCaseId("15484")
+  @TestCaseId("15486")
+  @TestCaseId("15488")
   Scenario: Company Logo navigate to home page (Guest, Pay Online, Delivery Method tab)
     Given user types billing info for "qa user"
     And presses the "Continue" button
@@ -29,6 +33,8 @@ Feature: Header and Footer (Pay Online)
     Then user should be on main page
 
   @TestCaseId("15395")
+  @TestCaseId("15397")
+  @TestCaseId("15399")
   Scenario: Company Logo navigate to home page (Guest, Pay Online, Payment & Review tab)
     Given user types billing info for "qa user"
     And presses the "Continue" button
@@ -42,6 +48,8 @@ Feature: Header and Footer (Pay Online)
     Then user should be on main page
 
   @TestCaseId("15363")
+  @TestCaseId("15365")
+  @TestCaseId("15366")
   Scenario: Company Logo navigate to home page (Guest, Pay Online, Sign In page)
     Given user presses the signIn button
     And user checks support number with label "1-800-PEP-BOYS (737-2697)" and number "18007372697"
@@ -50,6 +58,8 @@ Feature: Header and Footer (Pay Online)
     Then user should be on main page
 
   @TestCaseId("15424")
+  @TestCaseId("15426")
+  @TestCaseId("15428")
   Scenario: Company Logo navigate to home page Company Logo navigate to home page (Existent user, Pay Online, Billing & Shipping tab)
     Given user makes authorisation for "qa user"
     And user checks support number with label "1-800-PEP-BOYS (737-2697)" and number "18007372697"
@@ -58,6 +68,8 @@ Feature: Header and Footer (Pay Online)
     Then user should be on main page
 
   @TestCaseId("15479")
+  @TestCaseId("15481")
+  @TestCaseId("15483")
   Scenario: Company Logo navigate to home page Company Logo navigate to home page (Existent user, Pay Online, Delivery Method tab)
     Given user makes authorisation for "qa user"
     And applies billing info for address "123 Mission Street, 10th Floor"
@@ -70,6 +82,8 @@ Feature: Header and Footer (Pay Online)
     Then user should be on main page
 
   @TestCaseId("15448")
+  @TestCaseId("15450")
+  @TestCaseId("15452")
   Scenario: Company Logo navigate to home page Company Logo navigate to home page (Existent user, Pay Online, Payment & Review tab)
     Given user makes authorisation for "qa user"
     And applies billing info for address "123 Mission Street, 10th Floor"
