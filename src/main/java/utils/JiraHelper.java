@@ -6,6 +6,7 @@ import org.apache.commons.logging.LogFactory;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
 
@@ -14,10 +15,10 @@ import static utils.CommonFunctions.attachIssuesLink;
 
 public class JiraHelper {
     //TODO: Change OAuth access tokens, url, project key
-    private final static String AUTH_HEADER = "YWRtaW46YXV0b21hdGlvbjIwMjA=";
-    private final static String JIRA_BASE_URL = "https://automation2020.atlassian.net/";
+    private final static String AUTH_HEADER = "c2hhcG92YWxvdmVpOlRlc3RlcjEyMzQ=";
+    private final static String JIRA_BASE_URL = "https://moovweb.atlassian.net/";
     private final static String JIRA_URL = JIRA_BASE_URL + "rest/api/2";
-    private final static String PROJECT_KEY = "AUT";
+    private final static String PROJECT_KEY = "AUTO";
 
     private static final MediaType MEDIA_TYPE_MARKDOWN = MediaType.parse("application/json");
     private final static OkHttpClient client = new OkHttpClient();
@@ -64,26 +65,16 @@ public class JiraHelper {
         return issuesLink;
     }
 
-    public static void addAttachment(String issuesKey) {
+    public static void addAttachment(String issueKey, File file) throws IOException {
+        Request request = new Request.Builder()
+                .url(JIRA_URL + "/issue/"+ issueKey +"/attachments")
+                .header("X-Atlassian-Token", "nocheck")
+                .header("Authorization", "Basic " + AUTH_HEADER)
+                .post(RequestBody.create(MEDIA_TYPE_MARKDOWN, file))
+                .build();
 
-//
-//        Request request = new Request.Builder()
-//                .url(JIRA_URL + "/issue")
-//                .header("Authorization", "Basic " + AUTH_HEADER)
-//                .post(RequestBody.create(MEDIA_TYPE_MARKDOWN, out.toString()))
-//                .build();
-//
-//
-//        File fileToUpload = new File("");
-//
-//        FileBody fileBody = new FileBody(fileToUpload, "application/octet-stream", "UTF-8");
-//
-//        Request request = new Request.Builder()
-//                .url(JIRA_URL + "/issue")
-//                .header("Authorization", "Basic " + AUTH_HEADER)
-//                .post(RequestBody.create(MEDIA_TYPE_MARKDOWN, out.toString()))
-//                .
-//                .build();
-    }
+        Response response = client.newCall(request).execute();
+        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+}
 
 }

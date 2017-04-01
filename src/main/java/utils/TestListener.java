@@ -34,20 +34,30 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
 
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
+        log.info("Test \"" + iTestResult.getTestName() + "\" completed in "
+                + countDuration(iTestResult.getEndMillis() - iTestResult.getStartMillis()));
         DriverFactory.quitDriver();
     }
 
+    private String countDuration(long milis) {
+        int durationInSeconds = Math.round(milis / 1000);
+        int minutes = Math.round(durationInSeconds / 60);
+        int seconds = durationInSeconds % 60;
+        return minutes + ":" + seconds;
+    }
 
     @Override
     public void onTestFailure(ITestResult iTestResult) {
         DriverFactory.quitDriver();
+        log.info("Test \"" + iTestResult.getTestName() + "\" failed in "
+                + countDuration(iTestResult.getEndMillis() - iTestResult.getStartMillis()));
         fireRetryTest("The test has been failed then retried.", iTestResult);
     }
 
     @Override
     public void onTestSkipped(ITestResult iTestResult) {
+        log.info("Test \"" + iTestResult.getTestName() + "\" skipped");
         DriverFactory.quitDriver();
-
     }
 
     @Override
