@@ -82,8 +82,10 @@ public class DriverFactory {
                         desiredCapabilities.setCapability("wdaLocalPort", Integer.parseInt(iproxyPort));
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.LAUNCH_TIMEOUT, 1000000);
                         desiredCapabilities.setCapability("useNewWDA", true);
-                        //  desiredCapabilities.setCapability("startIWDP", true);
-                        desiredCapabilities.setCapability("preventWDAAttachments", true);
+                        //desiredCapabilities.setCapability("startIWDP", true);
+                        desiredCapabilities.setCapability("showXcodeLog", true);
+                        //desiredCapabilities.setCapability("preventWDAAttachments", true);
+                        //desiredCapabilities.setCapability("xcodeConfigFile", "src/resources/Config.xcconfig");
                         desiredCapabilities.setCapability("xcodeOrgId", "Y95G5M3Q84");
                         desiredCapabilities.setCapability("xcodeSigningId", "iPhone Developer");
                         desiredCapabilities.setCapability("updatedWDABundleId", "com.moovweb.WebDriverAgentRunner");

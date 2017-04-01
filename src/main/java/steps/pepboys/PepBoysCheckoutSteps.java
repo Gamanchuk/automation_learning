@@ -224,19 +224,19 @@ public class PepBoysCheckoutSteps {
         );
     }
 
-    @Given("^user press the logo$")
+    @Given("^user presses the logo$")
     public void userPressTheLogo() {
         headerComponent.pressLogoLink();
         CommonFunctions.attachScreenshot("Press the logo link");
     }
 
-    @And("^user press the signIn button$")
-    public void userPressTheSignInButton() {
+    @And("^user presses the signIn button$")
+    public void userPressesTheSignInButton() {
         headerComponent.pressSignInButton();
     }
 
-    @And("^user logOut from checkout$")
-    public void userLogOutFromCheckout() {
+    @And("^user logs out from checkout$")
+    public void userLogsOutFromCheckout() {
         PepBoysMainPage mainPage = new PepBoysMainPage();
         if (TestGlobalsManager.getTestGlobal("authorised") != null) {
             mainPage.doLogout();
@@ -262,8 +262,8 @@ public class PepBoysCheckoutSteps {
         //footerComponent.checkCallAlert(phoneNumber);
     }
 
-    @And("^user press the Shopping Cart icon$")
-    public void userPressTheShoppingCartIcon() {
+    @And("^user presses the Shopping Cart icon$")
+    public void userPressesTheShoppingCartIcon() {
         headerComponent.pressShippingCartIcon();
         CommonFunctions.attachScreenshot("Open Shipping Cart");
     }
