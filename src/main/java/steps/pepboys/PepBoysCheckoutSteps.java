@@ -59,7 +59,7 @@ public class PepBoysCheckoutSteps {
     @And("^presses the \"([^\"]*)\" button$")
     public void pressesTheButton(String confirmationMethod) {
         buttonComponent.clickButton();
-        if(!buttonComponent.isOverlayDisplayed()) {
+        if (!buttonComponent.isOverlayDisplayed()) {
             buttonComponent.clickButton();
         }
     }
@@ -211,7 +211,6 @@ public class PepBoysCheckoutSteps {
     }
 
 
-
     private void fillBillingInfo(String userName, boolean autoFil) {
         BillingUser user = DataProvider.getUser(userName);
         addressFormComponent.setRoot(BaseComponent.getContainerByTitle("Billing Address"));
@@ -242,8 +241,10 @@ public class PepBoysCheckoutSteps {
     }
 
     @Given("^failed step$")
-    public void failedStep() throws Throwable {
+    public void failedStep() {
         assertTrue(false);
+    }
+
     @Given("^user presses the logo$")
     public void userPressesTheLogo() {
         headerComponent.pressLogoLink();
@@ -288,8 +289,4 @@ public class PepBoysCheckoutSteps {
         CommonFunctions.attachScreenshot("Open Shipping Cart");
     }
 
-    @And("^unset checkbox \"([^\"]*)\"$")
-    public void unsetCheckbox(String label) {
-        checkboxRowComponent.check(label, false);
-    }
 }
