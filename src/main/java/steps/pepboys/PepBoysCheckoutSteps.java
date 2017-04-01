@@ -198,11 +198,19 @@ public class PepBoysCheckoutSteps {
         checkboxRowComponent.check("Yes, shipping address and billing address are the same", false);
         fillShippingInfo(userName, false);
     }
+
+    @And("^unset checkbox \"([^\"]*)\"$")
+    public void unsetCheckbox(String label) {
+        checkboxRowComponent.check(label, false);
+    }
+
     @Given("^user types shipping info for \"([^\"]*)\"$")
     public void userTypesShippingInfoFor(String userName) throws Throwable {
         checkboxRowComponent.check("Yes, shipping address and billing address are the same", false);
         fillShippingInfo(userName, true);
     }
+
+
 
     private void fillBillingInfo(String userName, boolean autoFil) {
         BillingUser user = DataProvider.getUser(userName);
@@ -233,6 +241,9 @@ public class PepBoysCheckoutSteps {
         );
     }
 
+    @Given("^failed step$")
+    public void failedStep() throws Throwable {
+        assertTrue(false);
     @Given("^user presses the logo$")
     public void userPressesTheLogo() {
         headerComponent.pressLogoLink();

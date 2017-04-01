@@ -9,7 +9,7 @@ Feature: Guest - Shipping & Billing page
     And user views cart
     And chooses "Pay Online" method
 
-  @TestCaseId("15493")
+  @TestCaseId("15374")
   Scenario: Test with correct shipping information and fill in all required fields (Address input manually)
     Given user types manually billing info for "qa user"
     And user types manually shipping info for "qa user"

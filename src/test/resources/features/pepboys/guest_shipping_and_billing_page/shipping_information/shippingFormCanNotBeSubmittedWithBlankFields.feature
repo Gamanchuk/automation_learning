@@ -9,7 +9,7 @@ Feature: Guest - Shipping & Billing page
     And user views cart
     And chooses "Pay Online" method
 
-  @TestCaseId("15495")
+  @TestCaseId("15376")
   Scenario: Test with correct shipping information and do not fill in all required fields (error message should be displayed)
     Given user types billing info for "qa user"
     And unset checkbox "Yes, shipping address and billing address are the same"

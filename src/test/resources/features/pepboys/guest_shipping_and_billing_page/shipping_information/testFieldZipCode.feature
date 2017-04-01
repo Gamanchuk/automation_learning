@@ -8,7 +8,7 @@ Feature: Guest - Shipping & Billing page
     And user views cart
     And chooses "Pay Online" method
 
-  @TestCaseId("15502")
+  @TestCaseId("15384")
   Scenario: Test field 'Zip Code'
     Given user types billing info for "qa user"
     And user types shipping info for "qa user"

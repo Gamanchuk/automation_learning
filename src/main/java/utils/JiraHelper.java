@@ -25,7 +25,7 @@ public class JiraHelper {
 
     private static Log log = LogFactory.getLog(JiraHelper.class);
 
-    public static String publishJira(String title, String description) throws JSONException, IOException {
+    public static String publishJira(String title, String description, String environment, String expectedResult, String actualResult) throws JSONException, IOException {
 
         JSONObject data = new JSONObject();
         JSONObject fields = new JSONObject();
@@ -39,6 +39,9 @@ public class JiraHelper {
         fields.put("summary", title);
         fields.put("description", description);
         fields.put("issuetype", issueType);
+        fields.put("customfield_12701", expectedResult);
+        fields.put("customfield_12700", actualResult);
+        fields.put("environment", environment);
 
         data.put("fields", fields);
         StringWriter out = new StringWriter();
