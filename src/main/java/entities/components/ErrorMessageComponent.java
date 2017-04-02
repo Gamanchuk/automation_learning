@@ -12,7 +12,7 @@ public class ErrorMessageComponent extends BaseComponent {
     private By errorMessageEl = By.xpath(PATH_BASE + "/div");
 
     public void checkError(String title, String message) {
-        javascriptScroll(-500);
+        javascriptScroll(-300);
 
         waitForElementVisible(errorMessageEl);
 
@@ -27,12 +27,12 @@ public class ErrorMessageComponent extends BaseComponent {
 //        deleteElementFromDom(errorTitleEl);
 
         try {
-            Thread.sleep(1000);
+            Thread.sleep(1500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        javascriptScroll(500);
+        javascriptScroll(300);
 
     }
 }
