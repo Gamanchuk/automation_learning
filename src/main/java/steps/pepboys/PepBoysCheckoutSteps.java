@@ -148,6 +148,7 @@ public class PepBoysCheckoutSteps {
 
     @Then("^user should stay at \"([^\"]*)\" tab$")
     public void userStaysAtTab(String tabName) {
+        breadcrumbWidget.waitForBreadcrumbActive(tabName);
         assertTrue(breadcrumbWidget.isTabActive(tabName), "Tab " + tabName + " is not an active");
     }
 
