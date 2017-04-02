@@ -20,8 +20,14 @@ public class SignInFormComponent extends BaseComponent {
         passwordFieldEl.clear();
         passwordFieldEl.sendKeys(password);
 
-        focusOut();
+        //focusOut();
         CommonFunctions.attachScreenshot("Login page");
+        
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         getDriver().findElement(signInButton).click();
 
         waitForElementVisible(By.xpath("//div[contains(@class, 'radio-list-option-selected')]"));
