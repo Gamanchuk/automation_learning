@@ -294,17 +294,40 @@ public class DriverFactory {
 
     public static void stopScreenVideo() {
 
-        try {
-            log.info("Stop Video Capture");
-            ProcessResult processResult = new ProcessExecutor().command("flick", "video", "-a", "stop", "-p", Config.PLATFORM_NAME.toLowerCase(), "-u", Config.DEVICE_UID, "-n", "data", "-f", "mp4", "-t")
-                    .readOutput(true).execute();
+//        try {
+//            log.info("Stop Video Capture");
+//            ProcessResult processResult = new ProcessExecutor().command("flick", "video", "-a", "stop", "-p", Config.PLATFORM_NAME.toLowerCase(), "-u", Config.DEVICE_UID, "-n", "data", "-f", "mp4", "-t")
+//                    .readOutput(true).execute();
+//
+//            Thread.sleep(1500);
+//        } catch (IOException | InterruptedException | TimeoutException e) {
+//            e.printStackTrace();
+//        }
+//    }
+        
+        CommandLine recorder = new CommandLine("flick");
+        recorder.addArgument("video");
+        recorder.addArgument("-a");
+        recorder.addArgument("stop");
+        recorder.addArgument("-p " + Config.PLATFORM_NAME.toLowerCase());
+        recorder.addArgument("-u " + Config.DEVICE_UID);
+        recorder.addArgument("-n data");
+        recorder.addArgument("-f mp4");
+        recorder.addArgument("-t");
 
+        DefaultExecuteResultHandler executeResultHandler = new DefaultExecuteResultHandler();
+        DefaultExecutor executor = new DefaultExecutor();
+        executor.setExitValue(1);
+
+        try {
+            executor.execute(recorder, executeResultHandler);
             Thread.sleep(1500);
-        } catch (IOException | InterruptedException | TimeoutException e) {
+            log.info("Video stop.");
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
-    }
 
+    }
     //TODO: add functionality delete cookies
     public static void deleteAllCookies() {
 
