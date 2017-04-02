@@ -304,14 +304,16 @@ public class DriverFactory {
 //            e.printStackTrace();
 //        }
 //    }
-        
+
+        log.info(System.getProperty("user.dir"));
+
         CommandLine recorder = new CommandLine("flick");
         recorder.addArgument("video");
         recorder.addArgument("-a");
         recorder.addArgument("stop");
         recorder.addArgument("-p " + Config.PLATFORM_NAME.toLowerCase());
         recorder.addArgument("-u " + Config.DEVICE_UID);
-        recorder.addArgument("-n data");
+        recorder.addArgument("-o " + System.getProperty("user.dir"));
         recorder.addArgument("-f mp4");
         recorder.addArgument("-t");
 

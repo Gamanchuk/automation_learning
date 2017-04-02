@@ -78,7 +78,7 @@ public class CommonFunctions {
     @Attachment(value = "Screen Recording Video", type = "video/mp4")
     public static byte[] attachScreeVideo(String name) {
 
-        File file = new File(name + ".mp4");
+        File file = new File(System.getProperty("user.dir") + "/" + Config.DEVICE_UID + ".mp4");
 
         byte[] byteVideo = new byte[(int) file.length()];
         try {
