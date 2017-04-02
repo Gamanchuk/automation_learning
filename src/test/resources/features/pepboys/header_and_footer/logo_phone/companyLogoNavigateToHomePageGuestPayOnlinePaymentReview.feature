@@ -1,4 +1,4 @@
-@pepBoys
+@pepBoys @debug
 
 
 Feature: Header and Footer (Pay Online)
@@ -18,6 +18,8 @@ Feature: Header and Footer (Pay Online)
     And presses the "Continue" button
     And chooses "Use Recommended Address"
     And chooses "Ground" shipping method
+    And presses the "Continue" button
+    And uses "visa" card for payment
     And user checks support number with label "1-800-PEP-BOYS (737-2697)" and number "18007372697"
     And user checks text "© Copyright 2017 - The Pep Boys" in footer
     And user presses the logo

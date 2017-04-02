@@ -16,7 +16,7 @@ public class HeaderComponent extends BaseComponent {
     }
 
     public void pressShippingCartIcon() {
-        getDriver().findElement(By.xpath(HEADER_PATH + "//div[@class='cart-icon']")).click();
+        getDriver().findElement(By.xpath(HEADER_PATH + "//div[@class='cart-icon']/a")).click();
 
     }
 }
