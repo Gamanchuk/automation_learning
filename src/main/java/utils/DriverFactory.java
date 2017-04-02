@@ -257,6 +257,33 @@ public class DriverFactory {
         }
     }
 
+    public static void startVideoRecording() {
+        try {
+            log.info("Start Video Recording");
+
+            ProcessResult process = new ProcessExecutor().command("rm", "-rf", ".flick/" + Config.DEVICE_UID)
+                    .readOutput(true).execute();
+
+            ProcessResult processResult = new ProcessExecutor().command("flick", "video", "-a", "start", "-p", Config.PLATFORM_NAME.toLowerCase(), "-u", Config.DEVICE_UID, "-e", "true")
+                    .readOutput(true).execute();
+        } catch (IOException | InterruptedException | TimeoutException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void stopScreenVideo() {
+
+        try {
+            log.info("Stop Video Capture");
+            ProcessResult processResult = new ProcessExecutor().command("flick", "video", "-a", "stop", "-p", Config.PLATFORM_NAME.toLowerCase(), "-u", Config.DEVICE_UID, "-o", "/Users/eugene/Project/moovweb-automation", "-n", "data", "-f", "mp4", "-t")
+                    .readOutput(true).execute();
+
+            Thread.sleep(1500);
+        } catch (IOException | InterruptedException | TimeoutException e) {
+            e.printStackTrace();
+        }
+    }
+
     //TODO: add functionality delete cookies
     public static void deleteAllCookies() {
 
