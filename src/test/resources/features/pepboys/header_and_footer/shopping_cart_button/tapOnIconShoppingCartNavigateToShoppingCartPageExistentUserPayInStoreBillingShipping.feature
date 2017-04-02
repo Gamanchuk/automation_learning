@@ -1,4 +1,4 @@
-@pepBoys @debug1
+@pepBoys @debug
 
 
 Feature: Header and Footer (Pay in Store)
