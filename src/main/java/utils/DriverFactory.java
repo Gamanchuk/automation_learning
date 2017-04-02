@@ -274,13 +274,16 @@ public class DriverFactory {
         recorder.addArgument("video");
         recorder.addArgument("-a");
         recorder.addArgument("start");
-        recorder.addArgument("-p " + Config.PLATFORM_NAME.toLowerCase());
-        recorder.addArgument("-u " + Config.DEVICE_UID);
-        recorder.addArgument("-e true");
+        recorder.addArgument("-p");
+        recorder.addArgument(Config.PLATFORM_NAME.toLowerCase());
+        recorder.addArgument("-u ");
+        recorder.addArgument(Config.DEVICE_UID);
+        recorder.addArgument("-e");
+        recorder.addArgument("true");
 
         DefaultExecuteResultHandler executeResultHandler = new DefaultExecuteResultHandler();
         DefaultExecutor executor = new DefaultExecutor();
-        executor.setExitValue(1);
+        executor.setExitValue(0);
 
         try {
             executor.execute(recorder, executeResultHandler);
@@ -300,17 +303,21 @@ public class DriverFactory {
         recorder.addArgument("video");
         recorder.addArgument("-a");
         recorder.addArgument("stop");
-        recorder.addArgument("-p " + Config.PLATFORM_NAME.toLowerCase());
-        recorder.addArgument("-u " + Config.DEVICE_UID);
-        recorder.addArgument("-o " + System.getProperty("user.dir"));
-        recorder.addArgument("-f mp4");
+        recorder.addArgument("-p");
+        recorder.addArgument(Config.PLATFORM_NAME.toLowerCase());
+        recorder.addArgument("-u");
+        recorder.addArgument(Config.DEVICE_UID);
+        recorder.addArgument("-o");
+        recorder.addArgument(System.getProperty("user.dir"));
+        recorder.addArgument("-f");
+        recorder.addArgument("mp4");
         recorder.addArgument("-t");
 
 
         log.info(recorder.getExecutable());
         DefaultExecuteResultHandler executeResultHandler = new DefaultExecuteResultHandler();
         DefaultExecutor executor = new DefaultExecutor();
-        executor.setExitValue(1);
+        executor.setExitValue(0);
 
         try {
             executor.execute(recorder, executeResultHandler);
