@@ -80,6 +80,8 @@ public class CommonFunctions {
 
         File file = new File(System.getProperty("user.dir") + "/" + Config.DEVICE_UID + ".mp4");
 
+        log.info("screen file: " + file.getAbsolutePath());
+
         byte[] byteVideo = new byte[(int) file.length()];
         try {
             FileInputStream fileInputStream = new FileInputStream(file);

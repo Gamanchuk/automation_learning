@@ -294,17 +294,6 @@ public class DriverFactory {
 
     public static void stopScreenVideo() {
 
-//        try {
-//            log.info("Stop Video Capture");
-//            ProcessResult processResult = new ProcessExecutor().command("flick", "video", "-a", "stop", "-p", Config.PLATFORM_NAME.toLowerCase(), "-u", Config.DEVICE_UID, "-n", "data", "-f", "mp4", "-t")
-//                    .readOutput(true).execute();
-//
-//            Thread.sleep(1500);
-//        } catch (IOException | InterruptedException | TimeoutException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
         log.info(System.getProperty("user.dir"));
 
         CommandLine recorder = new CommandLine("flick");
