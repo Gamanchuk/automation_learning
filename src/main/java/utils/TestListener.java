@@ -38,7 +38,8 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
 
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
-        log.info("Test \"" + iTestResult.getTestName() + "\" completed in "
+        String caseName = (String) TestGlobalsManager.getTestGlobal("caseName");
+        log.info("Test \"" + caseName + "\" completed in "
                 + countDuration(iTestResult.getEndMillis() - iTestResult.getStartMillis()));
         if (Boolean.valueOf(System.getProperty("projectTracking"))) {
             setTestResults(TestRailStatus.PASSED, "", "");
