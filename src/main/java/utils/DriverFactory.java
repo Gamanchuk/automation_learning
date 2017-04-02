@@ -306,6 +306,8 @@ public class DriverFactory {
         recorder.addArgument("-f mp4");
         recorder.addArgument("-t");
 
+
+        log.info(recorder.getExecutable());
         DefaultExecuteResultHandler executeResultHandler = new DefaultExecuteResultHandler();
         DefaultExecutor executor = new DefaultExecutor();
         executor.setExitValue(1);
