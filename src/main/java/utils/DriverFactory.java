@@ -258,17 +258,7 @@ public class DriverFactory {
     }
 
     public static void startVideoRecording() {
-//        try {
-//            log.info("Start Video Recording");
-//
-//            ProcessResult process = new ProcessExecutor().command("rm", "-rf", ".flick/" + Config.DEVICE_UID)
-//                    .readOutput(true).execute();
-//
-//            ProcessResult processResult = new ProcessExecutor().command("flick", "video", "-a", "start", "-p", Config.PLATFORM_NAME.toLowerCase(), "-u", Config.DEVICE_UID, "-e", "true")
-//                    .readOutput(true).execute();
-//        } catch (IOException | InterruptedException | TimeoutException e) {
-//            e.printStackTrace();
-//        }
+        log.info("Start video recording.");
 
         CommandLine recorder = new CommandLine("flick");
         recorder.addArgument("video");
@@ -288,7 +278,7 @@ public class DriverFactory {
         try {
             executor.execute(recorder, executeResultHandler);
             Thread.sleep(1000);
-            log.info("Video started.");
+            log.info("Recording started.");
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
@@ -296,8 +286,7 @@ public class DriverFactory {
     }
 
     public static void stopScreenVideo() {
-
-        log.info(System.getProperty("user.dir"));
+        log.info("Stop video recording. Move temp video file to: " + System.getProperty("user.dir"));
 
         CommandLine recorder = new CommandLine("flick");
         recorder.addArgument("video");
@@ -322,12 +311,13 @@ public class DriverFactory {
         try {
             executor.execute(recorder, executeResultHandler);
             Thread.sleep(2000);
-            log.info("Video stop.");
+            log.info("Recording  stop.");
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
 
     }
+
     //TODO: add functionality delete cookies
     public static void deleteAllCookies() {
 
