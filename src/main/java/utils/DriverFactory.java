@@ -9,6 +9,7 @@ import io.appium.java_client.service.local.flags.IOSServerFlag;
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecuteResultHandler;
 import org.apache.commons.exec.DefaultExecutor;
+import org.apache.commons.exec.PumpStreamHandler;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
@@ -23,6 +24,7 @@ import org.zeroturnaround.exec.ProcessResult;
 import org.zeroturnaround.process.PidProcess;
 import org.zeroturnaround.process.Processes;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
@@ -260,6 +262,10 @@ public class DriverFactory {
     public static void startVideoRecording() {
         log.info("Start video recording.");
 
+
+        ByteArrayOutputStream stdout = new ByteArrayOutputStream();
+        PumpStreamHandler psh = new PumpStreamHandler(stdout);
+
         CommandLine recorder = new CommandLine("flick");
         recorder.addArgument("video");
         recorder.addArgument("-a");
@@ -276,8 +282,10 @@ public class DriverFactory {
         executor.setExitValue(0);
 
         try {
+            executor.setStreamHandler(psh);
             executor.execute(recorder, executeResultHandler);
             Thread.sleep(1000);
+            log.info("stdout: " + stdout.toString());
             log.info("Recording started.");
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
@@ -287,6 +295,9 @@ public class DriverFactory {
 
     public static void stopScreenVideo() {
         log.info("Stop video recording. Move temp video file to: " + System.getProperty("user.dir"));
+
+        ByteArrayOutputStream stdout = new ByteArrayOutputStream();
+        PumpStreamHandler psh = new PumpStreamHandler(stdout);
 
         CommandLine recorder = new CommandLine("flick");
         recorder.addArgument("video");
@@ -303,18 +314,21 @@ public class DriverFactory {
         recorder.addArgument("-t");
 
 
-        log.info(recorder.getExecutable());
+
         DefaultExecuteResultHandler executeResultHandler = new DefaultExecuteResultHandler();
         DefaultExecutor executor = new DefaultExecutor();
         executor.setExitValue(0);
 
         try {
+            executor.setStreamHandler(psh);
             executor.execute(recorder, executeResultHandler);
             Thread.sleep(2000);
+            log.info("stdout: " + stdout.toString());
             log.info("Recording  stop.");
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
+
 
     }
 
