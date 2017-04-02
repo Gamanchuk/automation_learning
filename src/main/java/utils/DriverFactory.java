@@ -275,7 +275,7 @@ public class DriverFactory {
 
         try {
             log.info("Stop Video Capture");
-            ProcessResult processResult = new ProcessExecutor().command("flick", "video", "-a", "stop", "-p", Config.PLATFORM_NAME.toLowerCase(), "-u", Config.DEVICE_UID, "-o", "/Users/eugene/Project/moovweb-automation", "-n", "data", "-f", "mp4", "-t")
+            ProcessResult processResult = new ProcessExecutor().command("flick", "video", "-a", "stop", "-p", Config.PLATFORM_NAME.toLowerCase(), "-u", Config.DEVICE_UID, "-n", "data", "-f", "mp4", "-t")
                     .readOutput(true).execute();
 
             Thread.sleep(1500);
