@@ -312,7 +312,7 @@ public class DriverFactory {
 
         try {
             executor.execute(recorder, executeResultHandler);
-            Thread.sleep(1500);
+            Thread.sleep(2000);
             log.info("Video stop.");
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
