@@ -211,7 +211,6 @@ public class PepBoysCheckoutSteps {
     }
 
 
-
     private void fillBillingInfo(String userName, boolean autoFil) {
         BillingUser user = DataProvider.getUser(userName);
         addressFormComponent.setRoot(BaseComponent.getContainerByTitle("Billing Address"));
@@ -244,5 +243,11 @@ public class PepBoysCheckoutSteps {
     @Given("^failed step$")
     public void failedStep() throws Throwable {
         assertTrue(false);
+    }
+
+    @Given("^user email \"([^\"]*)\" password \"([^\"]*)\" makes authorisation$")
+    public void userEmailPasswordMakesAuthorisation(String email, String password) {
+        headerComponent.pressSignInButton();
+        signInFormComponent.signIn(email, password);
     }
 }
