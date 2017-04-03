@@ -1,6 +1,6 @@
 @pepBoys @debug
 
-Feature: Sign In page
+Feature: Sign In page (Pay in Store)
 
   Background:
     Given user makes appoint
