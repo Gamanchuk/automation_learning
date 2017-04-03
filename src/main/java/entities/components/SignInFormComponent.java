@@ -23,6 +23,8 @@ public class SignInFormComponent extends BaseComponent {
 
         focusOut();
         CommonFunctions.attachScreenshot("Login page");
+
+        waitForElementClickable(signInButton);
         getDriver().findElement(signInButton).click();
     }
 
