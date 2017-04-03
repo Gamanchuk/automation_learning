@@ -11,7 +11,7 @@ public class SignInFormComponent extends BaseComponent {
     private By passwordField = By.id("password");
 
     public void signIn(String email, String password) {
-        waitForElementClickable(signInButton);
+        waitForElementVisible(signInButton);
 
         WebElement emailFieldEl = getDriver().findElement(emailField);
         emailFieldEl.clear();
