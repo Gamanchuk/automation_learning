@@ -1,4 +1,4 @@
-@pepBoys @debug1
+@pepBoys @debug
 
 Feature: Sign In page (Pay in Store)
 
