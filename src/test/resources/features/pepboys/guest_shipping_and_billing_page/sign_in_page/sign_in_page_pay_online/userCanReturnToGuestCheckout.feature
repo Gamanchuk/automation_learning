@@ -9,7 +9,7 @@ Feature: Sign In page
     And chooses "Pay Online" method
 
 
-  @TestCaseId("15529")
+  @TestCaseId("15527")
   Scenario: User can return to Guest Checkout
     Given user presses the signIn button
     And user presses the Proceed to Guest Checkout link
