@@ -250,4 +250,14 @@ public class PepBoysCheckoutSteps {
         headerComponent.pressSignInButton();
         signInFormComponent.signIn(email, password);
     }
+
+    @And("^user presses the signIn button$")
+    public void userPressesTheSignInButton() {
+        headerComponent.pressSignInButton();
+    }
+
+    @And("^user presses the Forgot Password link$")
+    public void userPressesTheForgotPasswordLink() {
+        signInFormComponent.pressForgotPasswordLink();
+    }
 }
