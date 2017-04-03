@@ -23,8 +23,7 @@ public class ErrorMessageComponent extends BaseComponent {
 
         assertEquals(errorTitleText, title, "Unexpected error title");
         assertEquals(errorMessageText, message, "Unexpected error message");
-
-//        deleteElementFromDom(errorTitleEl);
+        
 
         try {
             Thread.sleep(1500);
