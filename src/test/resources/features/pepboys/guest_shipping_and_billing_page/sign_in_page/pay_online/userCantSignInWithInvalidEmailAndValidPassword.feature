@@ -9,8 +9,8 @@ Feature: Sign In page
     And chooses "Pay Online" method
 
 
-  @TestCaseId("15530")
-  Scenario: User can't sign in with valid "email address" and invalid "password"
-    Given user email "qa@moovweb.com" password "invalid" makes authorisation
+  @TestCaseId("15531")
+  Scenario: User can't sign in with invalid "email address" and valid "password" (Pay Online)
+    Given user email "notqa@moovweb.com" password "Spear201!" makes authorisation
     Then sees "FORM ERRORS" error message with text "Your login attempt was not successful, try again."
     

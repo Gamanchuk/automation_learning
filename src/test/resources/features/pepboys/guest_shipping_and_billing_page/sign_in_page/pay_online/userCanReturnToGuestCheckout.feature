@@ -9,9 +9,8 @@ Feature: Sign In page
     And chooses "Pay Online" method
 
 
-  @TestCaseId("15537")
-  Scenario: User can click on Forgot Password link
+  @TestCaseId("15527")
+  Scenario: User can return to Guest Checkout (Pay Online)
     Given user presses the signIn button
-    And user presses the Forgot Password link
-    Then user should be on Forgot Password page
-    
+    And user presses the Proceed to Guest Checkout link
+    Then user should be on "Billing & Shipping" tab

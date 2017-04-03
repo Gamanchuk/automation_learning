@@ -9,8 +9,8 @@ Feature: Sign In page
     And chooses "Pay Online" method
 
 
-  @TestCaseId("15534")
-  Scenario: User can't sign in with valid "email address" and empty "password"
-    Given user email "qa@moovweb.com" password "" makes authorisation
+  @TestCaseId("15532")
+  Scenario: User can't sign in with empty "email address" and "password" (Pay Online)
+    Given user email "" password "" makes authorisation
     Then sees "FORM ERRORS" error message with text "Please review all inputs."
     
