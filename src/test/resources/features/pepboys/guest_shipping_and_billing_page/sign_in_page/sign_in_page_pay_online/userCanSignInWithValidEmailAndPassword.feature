@@ -10,7 +10,7 @@ Feature: Sign In page
 
 
   @TestCaseId("15529")
-  Scenario: Verify if user can sign in with valid "email address" and valid "password"
+  Scenario: User can sign in with valid "email address" and valid "password"
     Given user makes authorisation for "qa user"
     Then user should stay at "Billing & Shipping" tab
     
