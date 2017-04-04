@@ -264,7 +264,6 @@ public class DriverFactory {
     public static void startVideoRecording() {
         log.info("Start video recording.");
 
-
         CommandLine recorderStart = new CommandLine("flick");
         recorderStart.addArgument("video");
         recorderStart.addArgument("-a");
@@ -282,7 +281,7 @@ public class DriverFactory {
 
         try {
             System.out.println("Waiting for executing command ...");
-            executor.execute(recorderStart);
+            executor.execute(recorderStart, executeResultHandler);
             executeResultHandler.waitFor();
             System.out.println("Command executed. Exit code: " + executeResultHandler.getExitValue());
         } catch (InterruptedException e) {
@@ -315,7 +314,7 @@ public class DriverFactory {
 
         try {
             System.out.println("Waiting for executing ...");
-            executor.execute(recorderStop);
+            executor.execute(recorderStop, executeResultHandler);
             executeResultHandler.waitFor();
             System.out.println("Command executed. Exit code: " + executeResultHandler.getExitValue());
         } catch (InterruptedException e) {
