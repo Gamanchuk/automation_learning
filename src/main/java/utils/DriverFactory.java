@@ -280,13 +280,11 @@ public class DriverFactory {
         executor.setExitValue(0);
 
         try {
-            System.out.println("Waiting for executing command ...");
+            System.out.println("Waiting for executing. Command: " + Arrays.toString(recorderStart.toStrings()));
             executor.execute(recorderStart, executeResultHandler);
             executeResultHandler.waitFor(5000);
             System.out.println("Command executed. Exit code: " + executeResultHandler.getExitValue());
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (InterruptedException | IOException e) {
             e.printStackTrace();
         }
     }
@@ -313,14 +311,12 @@ public class DriverFactory {
         executor.setExitValue(0);
 
         try {
-            System.out.println("Waiting for executing ...");
+            System.out.println("Waiting for executing. Command: " + Arrays.toString(recorderStop.toStrings()));
             executor.execute(recorderStop, executeResultHandler);
             executeResultHandler.waitFor(5000);
-            Thread.sleep(5000);
+            Thread.sleep(20000);
             System.out.println("Command executed. Exit code: " + executeResultHandler.getExitValue());
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (InterruptedException | IOException e) {
             e.printStackTrace();
         }
 
