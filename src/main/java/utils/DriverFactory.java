@@ -25,6 +25,7 @@ import org.zeroturnaround.process.Processes;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -198,11 +199,10 @@ public class DriverFactory {
             executor.setExitValue(0);
 
             try {
-                log.info("Execute command: " + iOSProxyCommand.toStrings());
+                log.info("Execute command: " + Arrays.toString(iOSProxyCommand.toStrings()));
                 executor.execute(iOSProxyCommand, executeResultHandler);
                 Thread.sleep(3000);
-                int exitValue = executeResultHandler.getExitValue();
-                log.info("iOS Proxy started. Exit value: " + exitValue);
+                log.info("iOS Proxy started.");
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (InterruptedException e) {
