@@ -1,6 +1,7 @@
 package entities.components;
 
 import org.openqa.selenium.By;
+import utils.CommonFunctions;
 
 import static org.testng.AssertJUnit.assertTrue;
 
@@ -13,13 +14,14 @@ public class ShippingOptionsComponent extends BaseComponent {
     }
 
     public void checkShippingOptions(String expectedOption) {
-        javascriptScroll(500);
+        javascriptScroll(600);
         String actualOption = getDriver()
                 .findElement(By.xpath("//div[@class='shipping-option-display']")).getText();
 
         assertTrue("Expected option: [" + expectedOption + "]" +
                 " doesn't contains Actual option: [" + actualOption + "]", expectedOption.contains(actualOption));
 
-        javascriptScroll(-500);
+        CommonFunctions.attachScreenshot("Delivery Method");
+        javascriptScroll(-600);
     }
 }

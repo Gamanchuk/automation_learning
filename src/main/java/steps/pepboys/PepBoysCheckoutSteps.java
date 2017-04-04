@@ -274,4 +274,10 @@ public class PepBoysCheckoutSteps {
         breadcrumbWidget.waitForBreadcrumbActive(tabName);
         assertTrue(breadcrumbWidget.isTabActive(tabName), "Tab " + tabName + " is not an active");
     }
+
+    @And("^user checks \"([^\"]*)\" shipping method$")
+    public void userChecksShippingMethod(String method) {
+        shippingOptionsComponent.checkShippingOptions(method);
+
+    }
 }

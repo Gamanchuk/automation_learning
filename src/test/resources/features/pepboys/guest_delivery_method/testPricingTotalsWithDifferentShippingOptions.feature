@@ -13,13 +13,34 @@ Feature: Guest - Delivery Method
     Given user types billing info for "qa user"
     And presses the "Continue" button
     And chooses "Use Recommended Address"
+
     And chooses "Ground: 5-7 Days" shipping method
     And presses the "Continue" button
-    And user should stay at "<string>" tab
+    And user should be on "Payment & Review" tab
+    And user checks "Ground: 5-7 Days" shipping method
+    And user navigates to "Delivery Method" breadcrumb
 
-    And uses "visa" card for payment
-    And presses the "Place Order" button
+    And chooses "Expedited: 2 Days" shipping method
+    And presses the "Continue" button
+    And user should be on "Payment & Review" tab
+    And user checks "Expedited: 2 Days" shipping method
+    And user navigates to "Delivery Method" breadcrumb
 
-    # TODO: Update this method after fixing issue with Place Order
+    And chooses "Expedited: 3 Days" shipping method
+    And presses the "Continue" button
+    And user should be on "Payment & Review" tab
+    And user checks "Expedited: 3 Days" shipping method
+    And user navigates to "Delivery Method" breadcrumb
 
-    Then user should be on thank you page
+    And chooses "Next Day: 1 Day" shipping method
+    And presses the "Continue" button
+    And user should be on "Payment & Review" tab
+    And user checks "Next Day: 1 Day" shipping method
+
+
+
+
+
+
+
+
