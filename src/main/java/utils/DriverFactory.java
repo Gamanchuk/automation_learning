@@ -9,7 +9,6 @@ import io.appium.java_client.service.local.flags.IOSServerFlag;
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecuteResultHandler;
 import org.apache.commons.exec.DefaultExecutor;
-import org.apache.commons.exec.PumpStreamHandler;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
@@ -24,7 +23,6 @@ import org.zeroturnaround.exec.ProcessResult;
 import org.zeroturnaround.process.PidProcess;
 import org.zeroturnaround.process.Processes;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
@@ -202,9 +200,12 @@ public class DriverFactory {
             try {
                 log.info("Execute command: " + iOSProxyCommand.toStrings());
                 executor.execute(iOSProxyCommand, executeResultHandler);
+                Thread.sleep(3000);
                 int exitValue = executeResultHandler.getExitValue();
                 log.info("iOS Proxy started. Exit value: " + exitValue);
             } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
@@ -263,72 +264,99 @@ public class DriverFactory {
     public static void startVideoRecording() {
         log.info("Start video recording.");
 
-
-        ByteArrayOutputStream stdout = new ByteArrayOutputStream();
-        PumpStreamHandler psh = new PumpStreamHandler(stdout);
-
-        CommandLine recorder = new CommandLine("flick");
-        recorder.addArgument("video");
-        recorder.addArgument("-a");
-        recorder.addArgument("start");
-        recorder.addArgument("-p");
-        recorder.addArgument(Config.PLATFORM_NAME.toLowerCase());
-        recorder.addArgument("-u ");
-        recorder.addArgument(Config.DEVICE_UID);
-        recorder.addArgument("-e");
-        recorder.addArgument("true");
-
-        DefaultExecuteResultHandler executeResultHandler = new DefaultExecuteResultHandler();
-        DefaultExecutor executor = new DefaultExecutor();
-        executor.setExitValue(0);
-
+//        CommandLine recorder = new CommandLine("flick");
+//        recorder.addArgument("video");
+//        recorder.addArgument("-a");
+//        recorder.addArgument("start");
+//        recorder.addArgument("-p");
+//        recorder.addArgument(Config.PLATFORM_NAME.toLowerCase());
+//        recorder.addArgument("-u");
+//        recorder.addArgument(Config.DEVICE_UID);
+//        recorder.addArgument("-e");
+//        recorder.addArgument("true");
+//
+//        DefaultExecuteResultHandler executeResultHandler = new DefaultExecuteResultHandler();
+//        DefaultExecutor executor = new DefaultExecutor();
+//        executor.setExitValue(0);
 
         try {
-            log.info("Execute command: " + recorder.toStrings());
-            executor.execute(recorder, executeResultHandler);
-            int exitValue = executeResultHandler.getExitValue();
-            log.info("Recording started. Exit value: " + exitValue);
+            Process p = Runtime.getRuntime().exec("flick video " +
+                    "-a start " +
+                    "-p " + Config.PLATFORM_NAME.toLowerCase() +
+                    "-u " + Config.DEVICE_UID +
+                    "-e true");
+
+            System.out.println("Waiting for executing ...");
+            p.waitFor();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println("Batch file done.");
+
+//        try {
+//            log.info("Execute command: " + recorder.toStrings());
+//            executor.execute(recorder, executeResultHandler);
+//            int exitValue = executeResultHandler.getExitValue();
+//            log.info("Recording started. Exit value: " + exitValue);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
     }
 
     public static void stopScreenVideo() {
         log.info("Stop video recording. Move temp video file to: " + System.getProperty("user.dir"));
 
-        ByteArrayOutputStream stdout = new ByteArrayOutputStream();
-        PumpStreamHandler psh = new PumpStreamHandler(stdout);
-
-        CommandLine recorder = new CommandLine("flick");
-        recorder.addArgument("video");
-        recorder.addArgument("-a");
-        recorder.addArgument("stop");
-        recorder.addArgument("-p");
-        recorder.addArgument(Config.PLATFORM_NAME.toLowerCase());
-        recorder.addArgument("-u");
-        recorder.addArgument(Config.DEVICE_UID);
-        recorder.addArgument("-o");
-        recorder.addArgument(System.getProperty("user.dir"));
-        recorder.addArgument("-f");
-        recorder.addArgument("mp4");
-        recorder.addArgument("-t");
-
-
-
-        DefaultExecuteResultHandler executeResultHandler = new DefaultExecuteResultHandler();
-        DefaultExecutor executor = new DefaultExecutor();
-        executor.setExitValue(0);
+//        ByteArrayOutputStream stdout = new ByteArrayOutputStream();
+//        PumpStreamHandler psh = new PumpStreamHandler(stdout);
+//
+//        CommandLine recorder = new CommandLine("flick");
+//        recorder.addArgument("video");
+//        recorder.addArgument("-a");
+//        recorder.addArgument("stop");
+//        recorder.addArgument("-p");
+//        recorder.addArgument(Config.PLATFORM_NAME.toLowerCase());
+//        recorder.addArgument("-u");
+//        recorder.addArgument(Config.DEVICE_UID);
+//        recorder.addArgument("-o");
+//        recorder.addArgument(System.getProperty("user.dir"));
+//        recorder.addArgument("-f");
+//        recorder.addArgument("mp4");
+//        recorder.addArgument("-t");
 
         try {
-            log.info("Execute command: " + recorder.toStrings());
-            executor.setStreamHandler(psh);
-            executor.execute(recorder, executeResultHandler);
-            int exitValue = executeResultHandler.getExitValue();
-            log.info("Recording stop. Exit value: " + exitValue);
+            Process p = Runtime.getRuntime().exec("flick video " +
+                    "-a stop " +
+                    "-p " + Config.PLATFORM_NAME.toLowerCase() +
+                    "-u " + Config.DEVICE_UID +
+                    "-o " + System.getProperty("user.dir") +
+                    "-f mp4" +
+                    "-t");
+
+            System.out.println("Waiting for executing ...");
+            p.waitFor();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println("Batch file done.");
+
+//        DefaultExecuteResultHandler executeResultHandler = new DefaultExecuteResultHandler();
+//        DefaultExecutor executor = new DefaultExecutor();
+//        executor.setExitValue(0);
+//
+//        try {
+//            log.info("Execute command: " + recorder.toStrings());
+//            executor.setStreamHandler(psh);
+//            executor.execute(recorder, executeResultHandler);
+//            int exitValue = executeResultHandler.getExitValue();
+//            log.info("Recording stop. Exit value: " + exitValue);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
 
     }
