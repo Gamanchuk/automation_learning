@@ -280,20 +280,22 @@ public class DriverFactory {
 //        executor.setExitValue(0);
 
         try {
-            Process p = Runtime.getRuntime().exec("flick video " +
+            ProcessBuilder pb = new ProcessBuilder("/usr/local/bin/flick video " +
                     "-a start " +
                     "-p " + Config.PLATFORM_NAME.toLowerCase() +
                     "-u " + Config.DEVICE_UID +
                     "-e true");
 
+            Process p = pb.start();
             System.out.println("Waiting for executing ...");
-            p.waitFor();
+            int exitCode = p.waitFor();
+            System.out.println("Command executed. Exit code: " + exitCode);
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("Batch file done.");
+       
 
 //        try {
 //            log.info("Execute command: " + recorder.toStrings());
@@ -327,22 +329,23 @@ public class DriverFactory {
 //        recorder.addArgument("-t");
 
         try {
-            Process p = Runtime.getRuntime().exec("flick video " +
+            ProcessBuilder pb = new ProcessBuilder("/usr/local/bin/flick video " +
                     "-a stop " +
                     "-p " + Config.PLATFORM_NAME.toLowerCase() +
                     "-u " + Config.DEVICE_UID +
                     "-o " + System.getProperty("user.dir") +
                     "-f mp4" +
                     "-t");
-
+            Process p = pb.start();
             System.out.println("Waiting for executing ...");
-            p.waitFor();
+            int exitCode = p.waitFor();
+            System.out.println("Command executed. Exit code: " + exitCode);
+
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("Batch file done.");
 
 //        DefaultExecuteResultHandler executeResultHandler = new DefaultExecuteResultHandler();
 //        DefaultExecutor executor = new DefaultExecutor();
