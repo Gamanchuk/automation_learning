@@ -23,6 +23,7 @@ import org.zeroturnaround.exec.ProcessResult;
 import org.zeroturnaround.process.PidProcess;
 import org.zeroturnaround.process.Processes;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
@@ -264,7 +265,7 @@ public class DriverFactory {
     public static void startVideoRecording() {
         log.info("Start video recording.");
 
-        CommandLine recorderStart = new CommandLine("flick");
+        CommandLine recorderStart = new CommandLine("/usr/local/bin/flick");
         recorderStart.addArgument("video");
         recorderStart.addArgument("-a");
         recorderStart.addArgument("start");
@@ -292,7 +293,7 @@ public class DriverFactory {
     public static void stopScreenVideo() {
         log.info("Stop video recording. Move temp video file to: " + System.getProperty("user.dir"));
 
-        CommandLine recorderStop = new CommandLine("flick");
+        CommandLine recorderStop = new CommandLine("/usr/local/bin/flick");
         recorderStop.addArgument("video");
         recorderStop.addArgument("-a");
         recorderStop.addArgument("stop");
@@ -308,6 +309,11 @@ public class DriverFactory {
 
         DefaultExecuteResultHandler executeResultHandler = new DefaultExecuteResultHandler();
         DefaultExecutor executor = new DefaultExecutor();
+
+        File flickFolder = new File("/usr/local/bin/flick");
+
+
+        executor.setWorkingDirectory(flickFolder);
         executor.setExitValue(0);
 
         try {
