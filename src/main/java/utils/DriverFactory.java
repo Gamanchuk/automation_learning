@@ -197,13 +197,13 @@ public class DriverFactory {
 
             DefaultExecuteResultHandler executeResultHandler = new DefaultExecuteResultHandler();
             DefaultExecutor executor = new DefaultExecutor();
-            executor.setExitValue(1);
 
             try {
+                log.info("Execute command: " + iOSProxyCommand.toStrings());
                 executor.execute(iOSProxyCommand, executeResultHandler);
-                Thread.sleep(3000);
-                log.info("iOS Proxy started.");
-            } catch (IOException | InterruptedException e) {
+                int exitValue = executeResultHandler.getExitValue();
+                log.info("iOS Proxy started. Exit value: " + exitValue);
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
@@ -279,15 +279,14 @@ public class DriverFactory {
 
         DefaultExecuteResultHandler executeResultHandler = new DefaultExecuteResultHandler();
         DefaultExecutor executor = new DefaultExecutor();
-        executor.setExitValue(0);
+
 
         try {
-            executor.setStreamHandler(psh);
+            log.info("Execute command: " + recorder.toStrings());
             executor.execute(recorder, executeResultHandler);
-            Thread.sleep(1000);
-            log.info("stdout: " + stdout.toString());
-            log.info("Recording started.");
-        } catch (IOException | InterruptedException e) {
+            int exitValue = executeResultHandler.getExitValue();
+            log.info("Recording started. Exit value: " + exitValue);
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -320,12 +319,12 @@ public class DriverFactory {
         executor.setExitValue(0);
 
         try {
+            log.info("Execute command: " + recorder.toStrings());
             executor.setStreamHandler(psh);
             executor.execute(recorder, executeResultHandler);
-            Thread.sleep(2000);
-            log.info("stdout: " + stdout.toString());
-            log.info("Recording  stop.");
-        } catch (IOException | InterruptedException e) {
+            int exitValue = executeResultHandler.getExitValue();
+            log.info("Recording stop. Exit value: " + exitValue);
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
