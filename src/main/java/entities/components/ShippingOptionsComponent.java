@@ -16,7 +16,7 @@ public class ShippingOptionsComponent extends BaseComponent {
     public void checkShippingOptions(String expectedOption) {
         javascriptScroll(600);
         String actualOption = getDriver()
-                .findElement(By.xpath("//div[@class='shipping-option-display']")).getText();
+                .findElement(By.xpath("//div[contains(@class, 'shipping-option-display')]")).getText();
 
         assertTrue("Expected option: [" + expectedOption + "]" +
                 " doesn't contains Actual option: [" + actualOption + "]", expectedOption.contains(actualOption));
