@@ -2,6 +2,7 @@ package steps.pepboys;
 
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import entities.pages.pepboys.*;
 import utils.CommonFunctions;
@@ -18,6 +19,7 @@ public class PepBoysMainPageSteps {
     private PepBoysProductPage productPage = new PepBoysProductPage();
     private PepBoysCartPage cartPage = new PepBoysCartPage();
     private PepBoysTiresPage tiresPage = new PepBoysTiresPage();
+    private PepBoysForgotPasswordPage forgotPasswordPage = new PepBoysForgotPasswordPage();
 
     @Given("^user makes appoint with code \"([^\"]*)\"$")
     public void userMakesAppointWithCode(String code) {
@@ -117,6 +119,12 @@ public class PepBoysMainPageSteps {
     public void userSchedulesInstallationTime() {
         cartPage.scheduleInstallationTime();
     }
+
+    @Then("^user should be on Forgot Password page$")
+    public void userShouldBeOnForgotPasswordPage() {
+        assertTrue(forgotPasswordPage.isPage(), "Unexpected page. Expected page: [Forgot Password page]");
+    }
+
 
 //    @After
 //    public void cleanUp() {

@@ -4,6 +4,7 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import entities.components.*;
+import entities.pages.pepboys.PepBoysLoginPage;
 import utils.CommonFunctions;
 import utils.TestGlobalsManager;
 import utils.pepboys.BillingUser;
@@ -210,7 +211,6 @@ public class PepBoysCheckoutSteps {
     }
 
 
-
     private void fillBillingInfo(String userName, boolean autoFil) {
         BillingUser user = DataProvider.getUser(userName);
         addressFormComponent.setRoot(BaseComponent.getContainerByTitle("Billing Address"));
@@ -243,5 +243,35 @@ public class PepBoysCheckoutSteps {
     @Given("^failed step$")
     public void failedStep() throws Throwable {
         assertTrue(false);
+    }
+
+    @Given("^user email \"([^\"]*)\" password \"([^\"]*)\" makes authorisation$")
+    public void userEmailPasswordMakesAuthorisation(String email, String password) {
+        headerComponent.pressSignInButton();
+        signInFormComponent.signIn(email, password);
+    }
+
+    @And("^user presses the signIn button$")
+    public void userPressesTheSignInButton() {
+        headerComponent.pressSignInButton();
+    }
+
+    @And("^user presses the Forgot Password link$")
+    public void userPressesTheForgotPasswordLink() {
+        signInFormComponent.pressForgotPasswordLink();
+    }
+
+
+    @And("^user presses the Proceed to Guest Checkout link$")
+    public void userPressesTheProceedToGuestCheckoutLink() {
+        PepBoysLoginPage loginPage = new PepBoysLoginPage();
+        loginPage.proccedToGuestCheckout();
+
+    }
+
+    @Then("^user should be on \"([^\"]*)\" tab$")
+    public void userShouldBeOnTab(String tabName) {
+        breadcrumbWidget.waitForBreadcrumbActive(tabName);
+        assertTrue(breadcrumbWidget.isTabActive(tabName), "Tab " + tabName + " is not an active");
     }
 }
