@@ -197,6 +197,7 @@ public class DriverFactory {
 
             DefaultExecuteResultHandler executeResultHandler = new DefaultExecuteResultHandler();
             DefaultExecutor executor = new DefaultExecutor();
+            executor.setExitValue(0);
 
             try {
                 log.info("Execute command: " + iOSProxyCommand.toStrings());
@@ -279,6 +280,7 @@ public class DriverFactory {
 
         DefaultExecuteResultHandler executeResultHandler = new DefaultExecuteResultHandler();
         DefaultExecutor executor = new DefaultExecutor();
+        executor.setExitValue(0);
 
 
         try {
