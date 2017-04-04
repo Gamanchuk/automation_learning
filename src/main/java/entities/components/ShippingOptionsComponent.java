@@ -19,7 +19,7 @@ public class ShippingOptionsComponent extends BaseComponent {
                 .findElement(By.xpath("//div[contains(@class, 'shipping-option-display')]")).getText();
 
         assertTrue("Expected option: [" + expectedOption + "]" +
-                " doesn't contains Actual option: [" + actualOption + "]", expectedOption.contains(actualOption));
+                " doesn't contains Actual option: [" + actualOption + "]", actualOption.contains(expectedOption));
 
         CommonFunctions.attachScreenshot("Delivery Method");
         javascriptScroll(-600);
