@@ -4,6 +4,7 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import entities.components.*;
+import entities.pages.pepboys.PepBoysThankYouPage;
 import utils.CommonFunctions;
 import utils.TestGlobalsManager;
 import utils.pepboys.BillingUser;
@@ -29,6 +30,7 @@ public class PepBoysCheckoutSteps {
     private PayPalWellComponent payPalWellComponent = new PayPalWellComponent();
     private CollapserComponent collapserComponent = new CollapserComponent();
     private CheckboxRowComponent checkboxRowComponent = new CheckboxRowComponent();
+    private RewardSummaryComponent rewardSummaryComponent = new RewardSummaryComponent();
 
     @And("^user types billing info for \"([^\"]*)\"$")
     public void typesBillingInfoFor(String userName) {
@@ -87,10 +89,8 @@ public class PepBoysCheckoutSteps {
 
     @Then("^user should be on thank you page$")
     public void userShouldBeOnThankYouPage() {
-
-        int i = 0;
-
-//        addressFormComponent.checkPaymentResult();
+        PepBoysThankYouPage pepBoysThankYouPage = new PepBoysThankYouPage();
+        pepBoysThankYouPage.checkPaymentResult();
     }
 
     @Given("^user makes authorisation for \"([^\"]*)\"$")
@@ -210,7 +210,6 @@ public class PepBoysCheckoutSteps {
     }
 
 
-
     private void fillBillingInfo(String userName, boolean autoFil) {
         BillingUser user = DataProvider.getUser(userName);
         addressFormComponent.setRoot(BaseComponent.getContainerByTitle("Billing Address"));
@@ -243,5 +242,11 @@ public class PepBoysCheckoutSteps {
     @Given("^failed step$")
     public void failedStep() throws Throwable {
         assertTrue(false);
+    }
+
+    @Then("^user presses the Find out more link$")
+    public void userPressesTheFindOutMoreLink() {
+        rewardSummaryComponent.clickFindOutMore();
+        CommonFunctions.attachScreenshot("Find Out More");
     }
 }
