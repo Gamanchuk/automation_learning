@@ -1,6 +1,6 @@
 @pepBoys @debug
 
-Feature: Guest - Delivery Method
+Feature: Existing User - Delivery Method
 
   Background:
     Given user makes appoint
@@ -8,11 +8,11 @@ Feature: Guest - Delivery Method
     And user views cart
     And chooses "Pay Online" method
 
-  @TestCaseId("15490")
-  Scenario: Test Pricing Totals with different shipping options
-    Given user types billing info for "qa user"
+  @TestCaseId("15492")
+  Scenario: Test Pricing Totals with different shipping options (Existing User)
+    Given user makes authorisation for "qa user"
+    And applies billing info for address "201 SPEAR ST"
     And presses the "Continue" button
-    And chooses "Use Recommended Address"
 
     And chooses "Ground: 5-7 Days" shipping method
     And presses the "Continue" button
