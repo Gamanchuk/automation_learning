@@ -19,4 +19,5 @@ Feature: Guest - Thank You Page
     And presses the "Place Order" button
     And user should be on thank you page
     Then user presses the Find out more link
+    And user should be on rewards page
 

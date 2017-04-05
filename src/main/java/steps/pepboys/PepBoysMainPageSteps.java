@@ -20,6 +20,7 @@ public class PepBoysMainPageSteps {
     private PepBoysCartPage cartPage = new PepBoysCartPage();
     private PepBoysTiresPage tiresPage = new PepBoysTiresPage();
     private PepBoysForgotPasswordPage forgotPasswordPage = new PepBoysForgotPasswordPage();
+    private PepBoysRewardsPage rewardsPage = new PepBoysRewardsPage();
 
     @Given("^user makes appoint with code \"([^\"]*)\"$")
     public void userMakesAppointWithCode(String code) {
@@ -123,6 +124,13 @@ public class PepBoysMainPageSteps {
     @Then("^user should be on Forgot Password page$")
     public void userShouldBeOnForgotPasswordPage() {
         assertTrue(forgotPasswordPage.isPage(), "Unexpected page. Expected page: [Forgot Password page]");
+        CommonFunctions.attachScreenshot("Forgot Password page");
+    }
+
+    @And("^user should be on rewards page$")
+    public void userShouldBeOnRewardsPage() {
+        assertTrue(rewardsPage.isPage(), "Unexpected page. Expected page: [Rewards page]");
+        CommonFunctions.attachScreenshot("Rewards page");
     }
 
 
