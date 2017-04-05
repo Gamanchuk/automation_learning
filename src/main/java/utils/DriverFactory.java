@@ -321,7 +321,7 @@ public class DriverFactory {
             executor.execute(recorderStop, executeResultHandler);
             executeResultHandler.waitFor(5000);
             Thread.sleep(20000);
-            System.out.println("Command executed. Exit code: " + executeResultHandler.getExitValue());
+            System.out.println("Command executed.");
         } catch (InterruptedException | IOException e) {
             e.printStackTrace();
         }
