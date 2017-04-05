@@ -5,6 +5,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import entities.components.*;
 import entities.pages.pepboys.PepBoysLoginPage;
+import entities.pages.pepboys.PepBoysThankYouPage;
 import utils.CommonFunctions;
 import utils.TestGlobalsManager;
 import utils.pepboys.BillingUser;
@@ -30,6 +31,7 @@ public class PepBoysCheckoutSteps {
     private PayPalWellComponent payPalWellComponent = new PayPalWellComponent();
     private CollapserComponent collapserComponent = new CollapserComponent();
     private CheckboxRowComponent checkboxRowComponent = new CheckboxRowComponent();
+    private RewardSummaryComponent rewardSummaryComponent = new RewardSummaryComponent();
 
     @And("^user types billing info for \"([^\"]*)\"$")
     public void typesBillingInfoFor(String userName) {
@@ -88,10 +90,8 @@ public class PepBoysCheckoutSteps {
 
     @Then("^user should be on thank you page$")
     public void userShouldBeOnThankYouPage() {
-
-        int i = 0;
-
-//        addressFormComponent.checkPaymentResult();
+        PepBoysThankYouPage pepBoysThankYouPage = new PepBoysThankYouPage();
+        pepBoysThankYouPage.checkPaymentResult();
     }
 
     @Given("^user makes authorisation for \"([^\"]*)\"$")
@@ -104,6 +104,7 @@ public class PepBoysCheckoutSteps {
 
     @And("^applies billing info for address \"([^\"]*)\"$")
     public void appliesBillingInfo(String address) {
+        assertTrue(radioListComponent.exists(), "Billing Address Drop-Down doesn't exist");
         radioListComponent.select(address);
         CommonFunctions.attachScreenshot("Billing info");
     }
@@ -245,6 +246,12 @@ public class PepBoysCheckoutSteps {
         assertTrue(false);
     }
 
+    @Then("^user presses the Find out more link$")
+    public void userPressesTheFindOutMoreLink() {
+        rewardSummaryComponent.clickFindOutMore();
+        CommonFunctions.attachScreenshot("Find Out More");
+    }
+
     @Given("^user email \"([^\"]*)\" password \"([^\"]*)\" makes authorisation$")
     public void userEmailPasswordMakesAuthorisation(String email, String password) {
         headerComponent.pressSignInButton();
@@ -271,7 +278,20 @@ public class PepBoysCheckoutSteps {
 
     @Then("^user should be on \"([^\"]*)\" tab$")
     public void userShouldBeOnTab(String tabName) {
-        breadcrumbWidget.waitForBreadcrumbActive(tabName);
-        assertTrue(breadcrumbWidget.isTabActive(tabName), "Tab " + tabName + " is not an active");
+        if (TestGlobalsManager.getTestGlobal("authorised") != null
+                && tabName.equals("Billing & Shipping")) {
+            assertTrue(radioListComponent.exists(), "Billing Address Drop-Down doesn't exist");
+        } else {
+            breadcrumbWidget.waitForBreadcrumbActive(tabName);
+            assertTrue(breadcrumbWidget.isTabActive(tabName), "Tab " + tabName + " is not an active");
+        }
+
+        CommonFunctions.attachScreenshot("Billing & Shipping");
+    }
+
+    @And("^user checks \"([^\"]*)\" shipping method$")
+    public void userChecksShippingMethod(String method) {
+        shippingOptionsComponent.checkShippingOptions(method);
+
     }
 }
