@@ -1,6 +1,6 @@
 @pepBoys @debug
 
-Feature: Guest - Thank You Page
+Feature: Existing User - Thank You Page
 
   Background:
     Given user makes appoint
@@ -9,10 +9,10 @@ Feature: Guest - Thank You Page
     And chooses "Pay Online" method
 
   @TestCaseId("15422")
-  Scenario: Links at Thank you page (Guest)
-    Given user types billing info for "qa user"
+  Scenario: Links at Thank you page (Existing User)
+    Given user makes authorisation for "qa user"
+    And applies billing info for address "201 SPEAR ST"
     And presses the "Continue" button
-    And chooses "Use Recommended Address"
     And chooses "Ground: 5-7 Days" shipping method
     And presses the "Continue" button
     And uses "visa" card for payment
