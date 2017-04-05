@@ -6,16 +6,14 @@ Feature: Existing User - Thank You Page
     Given user makes appoint
     And user adds to cart product with id "8076476" with "Ship to Home" delivery option
     And user views cart
-    And chooses "Pay Online" method
+    And chooses "PayPal" method
+    And user confirms purchase as "qa user" with PayPal
 
-  @TestCaseId("15422")
-  Scenario: Links at Thank you page (Existing User)
-    Given user makes authorisation for "qa user"
-    And applies billing info for address "201 SPEAR ST"
+  @TestCaseId("15570")
+  Scenario: Links at Thank you page (PayPal)
+    Given chooses "Ground: 5-7 Days" shipping method
     And presses the "Continue" button
-    And chooses "Ground: 5-7 Days" shipping method
-    And presses the "Continue" button
-    And uses "visa" card for payment
+    And checks payment details for "qa user"
     And presses the "Place Order" button
     And user should be on thank you page
     Then user presses the Find out more link
