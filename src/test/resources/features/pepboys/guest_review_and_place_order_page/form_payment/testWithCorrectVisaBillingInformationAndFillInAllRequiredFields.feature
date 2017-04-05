@@ -1,6 +1,6 @@
 @pepBoys
 
-Feature: Guest - Shipping & Billing page
+Feature: Happy Path
 
   Background:
     Given user makes appoint
@@ -8,11 +8,16 @@ Feature: Guest - Shipping & Billing page
     And user views cart
     And chooses "Pay Online" method
 
-  @TestCaseId("15494")
-  Scenario: Test with correct billing information and fill in all required fields (Address chosen from auto-detect drop-down)
+  @TestCaseId("15400")
+  Scenario: Test with correct Visa billing information and fill in all required fields
     Given user types billing info for "qa user"
     And presses the "Continue" button
     And chooses "Use Recommended Address"
-    Then user checks billing info for "qa user"
 
+    And chooses "Ground" shipping method
+    And presses the "Continue" button
+
+    And uses "visa" card for payment
+    And presses the "Place Order" button
+    Then user should be on thank you page
 

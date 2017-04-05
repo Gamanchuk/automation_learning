@@ -1,8 +1,11 @@
 package entities.components;
 
-import entities.Entity;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import utils.CommonFunctions;
+import utils.TestGlobalsManager;
+
+import static org.testng.AssertJUnit.assertTrue;
 
 public class CreditCardFormComponent extends BaseComponent {
 
@@ -11,21 +14,61 @@ public class CreditCardFormComponent extends BaseComponent {
     private By csc = By.id("cc-csc");
     private By ccName = By.id("-cc-name");
 
-    public void inputPaymentDetails(String number, String expDate, String cvv, String cardholderName) {
+    public void inputPaymentDetails(String name, String number, String expDate, String cvv, String cardholderName) {
         waitForElementVisible(ccNumber);
+         fillField(ccNumber, number);
 
-        getDriver().findElement(ccNumber).sendKeys(number);
-        getDriver().findElement(exp).sendKeys(expDate);
-        getDriver().findElement(csc).sendKeys(cvv);
+        assertTrue("Card icon was not displayed or incorrect",
+                findElement(By.cssSelector("div.credit-card-number-input")).getAttribute("class").contains(name));
+
+        fillField(exp, expDate);
+        fillField(csc, cvv);
 
         // Element must be displayed if you pay as registered user
-        if (getDriver().findElement(ccName).isDisplayed()) {
-            getDriver().findElement(ccName).clear();
-            getDriver().findElement(ccName).sendKeys(cardholderName);
+        Object authorised = TestGlobalsManager.getTestGlobal("authorised");
+        if (authorised != null && (boolean)authorised) {
+            fillField(ccName, cardholderName);
         }
 
-        focusOut();
 //        focusOut();
         CommonFunctions.attachScreenshot("Payment details");
+    }
+
+    public void inputValueIntoField(String value, String field) {
+        By fieldEl = getFieldByName(field);
+        waitForElementVisible(fieldEl);
+        fillField(fieldEl, value);
+//        focusOut(findElement(fieldEl));
+    }
+
+    private By getFieldByName(String name) {
+        switch (name) {
+            case "Card Number":
+                return ccNumber;
+            case "Expiration":
+                return exp;
+            case "CVV":
+                return csc;
+            case "Cardholder Name":
+                return ccName;
+            default:
+                throw new Error("Unknown field name: " + name);
+        }
+    }
+
+    private void fillField(By field, String value) {
+        WebElement element = findElement(field);
+        focusOut(element);
+        element.clear();
+        element.sendKeys(value);
+    }
+
+    public boolean hasErrorTooltipWithMessage(String error) {
+        waitForElementVisible(By.cssSelector("div.tooltip.error"));
+
+        // Have to use complex selector, because label can be either on span or on div
+        String selector = "div.tooltip.error div.tooltip-contents span, div.tooltip.error div.tooltip-contents div";
+        WebElement messageEl = findElementWithTextBy(error, By.cssSelector(selector));
+        return messageEl != null;
     }
 }

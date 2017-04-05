@@ -233,6 +233,9 @@ public abstract class Entity {
         driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
     }
 
+    public void focusOut(WebElement element) {
+        ((JavascriptExecutor)driver).executeScript("arguments[0].blur()", element);
+    }
 
     public WebElement findElementWithTextBy(String text, By selector) {
         List<WebElement> elements = findElements(selector);

@@ -18,7 +18,9 @@ public class BreadcrumbComponent extends BaseComponent {
     }
 
     public void clickBreadcrumb(String breadcrumb) {
-        getDriver().findElement(getBreadcrumbByName(breadcrumb)).click();
+        By breadcrumbPath = getBreadcrumbByName(breadcrumb);
+        waitForElementClickable(breadcrumbPath);
+        getDriver().findElement(breadcrumbPath).click();
         waitForBreadcrumbActive(breadcrumb);
     }
 

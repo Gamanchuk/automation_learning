@@ -39,6 +39,7 @@ public class DataProvider {
 
     // Cards
     private static CreditCard visa = new CreditCard(
+            "visa",
             "4111111111111111",
             "12/17",
             "111",
@@ -46,6 +47,7 @@ public class DataProvider {
     );
 
     private static CreditCard discover = new CreditCard(
+            "discover",
             "6011111111111117",
             "12/17",
             "111",
@@ -53,6 +55,7 @@ public class DataProvider {
     );
 
     private static CreditCard amex = new CreditCard(
+            "americanexpress",
             "378282246310005",
             "12/17",
             "1111",
@@ -60,6 +63,7 @@ public class DataProvider {
     );
 
     private static CreditCard mastercard = new CreditCard(
+            "mastercard",
             "5555555555554444",
             "12/17",
             "111",

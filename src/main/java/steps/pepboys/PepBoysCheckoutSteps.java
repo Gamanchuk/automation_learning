@@ -1,10 +1,12 @@
 package steps.pepboys;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import entities.components.*;
+import entities.pages.pepboys.PepBoysThankYouPage;
 import utils.CommonFunctions;
 import utils.TestGlobalsManager;
 import utils.pepboys.BillingUser;
@@ -16,6 +18,9 @@ import static utils.CommonFunctions.attachScreeVideo;
 import static utils.DriverFactory.stopScreenVideo;
 
 public class PepBoysCheckoutSteps {
+
+    private PepBoysThankYouPage thankYouPage = new PepBoysThankYouPage();
+
     private AddressFormComponent addressFormComponent = new AddressFormComponent();
     private AddressDisplayComponent addressDisplayComponent = new AddressDisplayComponent();
     private AddressVerificationComponent addressVerificationComponent = new AddressVerificationComponent();
@@ -81,6 +86,7 @@ public class PepBoysCheckoutSteps {
     public void usesCardForPayment(String cardName) {
         CreditCard card = DataProvider.getCard(cardName);
         creditCardFormComponent.inputPaymentDetails(
+                card.getName(),
                 card.getNumber(),
                 card.getExpDate(),
                 card.getCvv(),
@@ -89,11 +95,9 @@ public class PepBoysCheckoutSteps {
     }
 
     @Then("^user should be on thank you page$")
-    public void userShouldBeOnThankYouPage() {
-
-        int i = 0;
-
-//        addressFormComponent.checkPaymentResult();
+    public void userShouldBeOnThankYouPage() throws InterruptedException {
+        assertTrue(thankYouPage.isOnThankYouPage(), "User is not on \"Thank You\" page");
+        CommonFunctions.attachScreenshot("Thank You Page");
     }
 
     @Given("^user makes authorisation for \"([^\"]*)\"$")
@@ -116,7 +120,7 @@ public class PepBoysCheckoutSteps {
         CommonFunctions.attachScreenshot("Purchase with PayPal");
     }
 
-    @Given("^user types \"([^\"]*)\" into the \"([^\"]*)\" field of \"([^\"]*)\" form$")
+    @Given("^user types \"([^\"]*)\" into the \"([^\"]*)\" field of \"([^\"]*)\" address form$")
     public void userTypesValueIntoField(String value, String field, String formTitle) {
         addressFormComponent.setRoot(BaseComponent.getContainerByTitle(formTitle));
         addressFormComponent.inputValueIntoField(value, field);
@@ -162,7 +166,6 @@ public class PepBoysCheckoutSteps {
     @And("^user types \"([^\"]*)\" into the email field$")
     public void userTypesIntoTheEmailField(String email) throws Throwable {
         emailComponent.fillEmailField(email);
-
         CommonFunctions.attachScreenshot(String.format("Input '%s' into email field", email));
     }
 
@@ -253,7 +256,27 @@ public class PepBoysCheckoutSteps {
         attachScreeVideo("data");
     }
 
+    @Then("^user should see \"([^\"]*)\" form$")
+    public void userShouldSeeForm(String formTitle) {
+        assertTrue(BaseComponent.getContainerByTitle(formTitle).isDisplayed(),
+                "Form " + formTitle + " not found");
+    }
 
+    @Then("^user should be on \"([^\"]*)\" tab$")
+    public void userShouldBeOnTab(String tab) throws Throwable {
+        breadcrumbWidget.waitForBreadcrumbActive(tab);
+    }
 
+    @And("^user types \"([^\"]*)\" into \"([^\"]*)\" field of Card Form$")
+    public void userTypesIntoFieldOfCardForm(String value, String field) {
+        creditCardFormComponent.inputValueIntoField(value, field);
+        CommonFunctions.attachScreenshot(String.format("Input '%s' into '%s'", value, field));
 
+    }
+
+    @And("^sees error tooltip with text \"([^\"]*)\"$")
+    public void seesErrorTooltipWithText(String error) {
+        assertTrue(creditCardFormComponent.hasErrorTooltipWithMessage(error),
+                "Tooltip with message \"" + error + "\" not found");
+    }
 }
