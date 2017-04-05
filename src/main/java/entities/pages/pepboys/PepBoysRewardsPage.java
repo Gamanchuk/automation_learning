@@ -7,7 +7,7 @@ public class PepBoysRewardsPage extends PepBoysBasePage {
     public boolean isPage() {
 
         if (TestGlobalsManager.getTestGlobal("authorised") != null) {
-
+            waitForElementVisible(By.id(""));
         } else {
             waitForElementVisible(By.id("contentContainer"));
         }
