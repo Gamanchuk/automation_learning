@@ -262,8 +262,6 @@ public class DriverFactory {
     }
 
     public static void startVideoRecording() {
-        log.info("Start video recording.");
-
         CommandLine recorderStart = new CommandLine("/usr/local/bin/flick");
         recorderStart.addArgument("video");
         recorderStart.addArgument("-a");
@@ -280,9 +278,10 @@ public class DriverFactory {
         executor.setExitValue(0);
 
         try {
+            log.info("Start video recording.");
             System.out.println("Waiting for executing. Command: " + Arrays.toString(recorderStart.toStrings()));
             executor.execute(recorderStart, executeResultHandler);
-            executeResultHandler.waitFor(5000);
+            executeResultHandler.waitFor();
             System.out.println("Command executed. Exit code: " + executeResultHandler.getExitValue());
         } catch (InterruptedException | IOException e) {
             log.error("Cannot execute command: " + Arrays.toString(recorderStart.toStrings()));
@@ -290,8 +289,6 @@ public class DriverFactory {
     }
 
     public static void stopScreenVideo() {
-        log.info("Stop video recording. Move temp video file to: " + System.getProperty("user.dir"));
-
         CommandLine recorderStop = new CommandLine("/usr/local/bin/flick");
         recorderStop.addArgument("video");
         recorderStop.addArgument("-a");
@@ -313,16 +310,16 @@ public class DriverFactory {
         executor.setExitValue(0);
 
         try {
+            log.info("Stop video recording. Move temp video file to: " + System.getProperty("user.dir"));
             System.out.println("Waiting for executing. Command: " + Arrays.toString(recorderStop.toStrings()));
             executor.execute(recorderStop, executeResultHandler);
-            executeResultHandler.waitFor(20000);
-            Thread.sleep(40000);
+            executeResultHandler.waitFor();
             System.out.println("Command executed. Exit code: " + executeResultHandler.getExitValue());
         } catch (InterruptedException | IOException e) {
             log.error("Cannot execute command: " + Arrays.toString(recorderStop.toStrings()));
         }
-
     }
+
 
     //TODO: add functionality delete cookies
     public static void deleteAllCookies() {
