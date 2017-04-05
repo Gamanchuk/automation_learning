@@ -18,8 +18,6 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import static utils.DriverFactory.startVideoRecording;
-
 public class TestListener implements ITestListener, IAnnotationTransformer {
     private static Log log = LogFactory.getLog(TestListener.class);
     private Allure lifecycle = Allure.LIFECYCLE;
@@ -35,7 +33,7 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
 
     @Override
     public void onTestStart(ITestResult iTestResult) {
-        startVideoRecording();
+
     }
 
     @Override
