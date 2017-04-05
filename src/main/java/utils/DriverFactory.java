@@ -300,6 +300,8 @@ public class DriverFactory {
         recorderStop.addArgument(Config.PLATFORM_NAME.toLowerCase());
         recorderStop.addArgument("-u");
         recorderStop.addArgument(Config.DEVICE_UID);
+        recorderStop.addArgument("-e");
+        recorderStop.addArgument("true");
         recorderStop.addArgument("-o");
         recorderStop.addArgument(System.getProperty("user.dir"));
         recorderStop.addArgument("-f");
