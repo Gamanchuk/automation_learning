@@ -104,6 +104,7 @@ public class PepBoysCheckoutSteps {
 
     @And("^applies billing info for address \"([^\"]*)\"$")
     public void appliesBillingInfo(String address) {
+        assertTrue(radioListComponent.exists(), "Billing Address Drop-Down doesn't exist");
         radioListComponent.select(address);
         CommonFunctions.attachScreenshot("Billing info");
     }
@@ -277,8 +278,15 @@ public class PepBoysCheckoutSteps {
 
     @Then("^user should be on \"([^\"]*)\" tab$")
     public void userShouldBeOnTab(String tabName) {
-        breadcrumbWidget.waitForBreadcrumbActive(tabName);
-        assertTrue(breadcrumbWidget.isTabActive(tabName), "Tab " + tabName + " is not an active");
+        if (TestGlobalsManager.getTestGlobal("authorised") != null
+                && tabName.equals("Billing & Shipping")) {
+            assertTrue(radioListComponent.exists(), "Billing Address Drop-Down doesn't exist");
+        } else {
+            breadcrumbWidget.waitForBreadcrumbActive(tabName);
+            assertTrue(breadcrumbWidget.isTabActive(tabName), "Tab " + tabName + " is not an active");
+        }
+
+        CommonFunctions.attachScreenshot("Billing & Shipping");
     }
 
     @And("^user checks \"([^\"]*)\" shipping method$")

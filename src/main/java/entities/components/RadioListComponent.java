@@ -7,13 +7,14 @@ import utils.CommonFunctions;
 import java.util.List;
 
 public class RadioListComponent extends BaseComponent {
+    private String selectedOptionPath = "//div[contains(@class, 'radio-list-option-selected')]";
 
     public void select(String option) {
-        String selectedOptionPath = "//div[contains(@class, 'radio-list-option-selected')]";
+
         String itemPath = "//div[contains(@class, 'radio-list-option')]";
         String itemDetailsPath = "//div[contains(@class, 'radio-list-details')]";
         String itemListPath = "//div[contains(@class, 'radio-expanded')]";
-        waitForElementVisible(By.xpath(selectedOptionPath));
+
 
         String actualItem = getDriver()
                 .findElement(By.xpath(selectedOptionPath + itemDetailsPath + "//div"))
@@ -35,4 +36,10 @@ public class RadioListComponent extends BaseComponent {
             }
         }
     }
+
+    public boolean exists() {
+        waitForElementVisible(By.xpath(selectedOptionPath));
+        return true;
+    }
+
 }
