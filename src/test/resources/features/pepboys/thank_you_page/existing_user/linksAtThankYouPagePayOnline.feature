@@ -9,7 +9,7 @@ Feature: Existing User - Thank You Page
     And chooses "Pay Online" method
 
   @TestCaseId("15422")
-  Scenario: Links at Thank you page (Existing User)
+  Scenario: Links at Thank you page (Existing User, Pay Online)
     Given user makes authorisation for "qa user"
     And applies billing info for address "201 SPEAR ST"
     And presses the "Continue" button
