@@ -86,9 +86,6 @@ public class CommonFunctions {
         try {
             FileInputStream fileInputStream = new FileInputStream(file);
             fileInputStream.read(byteVideo);
-            for (int i = 0; i < byteVideo.length; i++) {
-                System.out.print((char) byteVideo[i]);
-            }
         } catch (FileNotFoundException e) {
             log.error("File with video not found.");
         } catch (IOException e1) {
