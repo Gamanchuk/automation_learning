@@ -23,7 +23,6 @@ import org.zeroturnaround.exec.ProcessResult;
 import org.zeroturnaround.process.PidProcess;
 import org.zeroturnaround.process.Processes;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
@@ -309,11 +308,6 @@ public class DriverFactory {
 
         DefaultExecuteResultHandler executeResultHandler = new DefaultExecuteResultHandler();
         DefaultExecutor executor = new DefaultExecutor();
-
-        File flickFolder = new File("/usr/local/bin/flick");
-
-
-        executor.setWorkingDirectory(flickFolder);
         executor.setExitValue(0);
 
         try {
