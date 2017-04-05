@@ -6,6 +6,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import entities.pages.pepboys.*;
 import utils.CommonFunctions;
+import utils.TestGlobalsManager;
 import utils.pepboys.DataProvider;
 
 import static org.testng.Assert.assertTrue;
@@ -21,6 +22,7 @@ public class PepBoysMainPageSteps {
     private PepBoysTiresPage tiresPage = new PepBoysTiresPage();
     private PepBoysForgotPasswordPage forgotPasswordPage = new PepBoysForgotPasswordPage();
     private PepBoysRewardsPage rewardsPage = new PepBoysRewardsPage();
+    private PepBoysMyAccountPage myAccountPage = new PepBoysMyAccountPage();
 
     @Given("^user makes appoint with code \"([^\"]*)\"$")
     public void userMakesAppointWithCode(String code) {
@@ -129,10 +131,15 @@ public class PepBoysMainPageSteps {
 
     @And("^user should be on rewards page$")
     public void userShouldBeOnRewardsPage() {
-        assertTrue(rewardsPage.isPage(), "Unexpected page. Expected page: [Rewards page]");
-        CommonFunctions.attachScreenshot("Rewards page");
-    }
 
+        if (TestGlobalsManager.getTestGlobal("authorised") != null) {
+            assertTrue(myAccountPage.isPage(), "Unexpected page. Expected page: [MyAccount page 'Rewards tab']");
+            CommonFunctions.attachScreenshot("Rewards page");
+        } else {
+            assertTrue(rewardsPage.isPage(), "Unexpected page. Expected page: [Rewards page]");
+            CommonFunctions.attachScreenshot("Rewards page");
+        }
+    }
 
 //    @After
 //    public void cleanUp() {
