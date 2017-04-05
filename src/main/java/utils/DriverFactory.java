@@ -201,12 +201,10 @@ public class DriverFactory {
             try {
                 log.info("Execute command: " + Arrays.toString(iOSProxyCommand.toStrings()));
                 executor.execute(iOSProxyCommand, executeResultHandler);
-                Thread.sleep(3000);
+                executeResultHandler.waitFor();
                 log.info("iOS Proxy started.");
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            } catch (IOException | InterruptedException e) {
+                log.error("Cannot execute command: " + Arrays.toString(iOSProxyCommand.toStrings()));
             }
         }
     }
@@ -279,10 +277,10 @@ public class DriverFactory {
 
         try {
             log.info("Start video recording.");
-            System.out.println("Waiting for executing. Command: " + Arrays.toString(recorderStart.toStrings()));
+            log.info("Waiting for executing. Command: " + Arrays.toString(recorderStart.toStrings()));
             executor.execute(recorderStart, executeResultHandler);
             executeResultHandler.waitFor();
-            System.out.println("Command executed. Exit code: " + executeResultHandler.getExitValue());
+            log.info("Command executed. Exit code: " + executeResultHandler.getExitValue());
         } catch (InterruptedException | IOException e) {
             log.error("Cannot execute command: " + Arrays.toString(recorderStart.toStrings()));
         }
@@ -311,10 +309,10 @@ public class DriverFactory {
 
         try {
             log.info("Stop video recording. Move temp video file to: " + System.getProperty("user.dir"));
-            System.out.println("Waiting for executing. Command: " + Arrays.toString(recorderStop.toStrings()));
+            log.info("Waiting for executing. Command: " + Arrays.toString(recorderStop.toStrings()));
             executor.execute(recorderStop, executeResultHandler);
             executeResultHandler.waitFor();
-            System.out.println("Command executed. Exit code: " + executeResultHandler.getExitValue());
+            log.info("Command executed. Exit code: " + executeResultHandler.getExitValue());
         } catch (InterruptedException | IOException e) {
             log.error("Cannot execute command: " + Arrays.toString(recorderStop.toStrings()));
         }
