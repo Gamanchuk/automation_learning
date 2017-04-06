@@ -12,5 +12,5 @@ Feature: Sign In page (Pay in Store)
   @TestCaseId("16678")
   Scenario: User can sign in with valid "email address" and valid "password" (Pay in Store)
     Given user makes authorisation for "qa user"
-    Then user should be on "Billing & Shipping" tab
+    Then user should be on "Billing" page
     

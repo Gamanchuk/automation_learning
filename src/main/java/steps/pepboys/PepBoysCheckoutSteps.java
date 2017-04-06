@@ -32,6 +32,7 @@ public class PepBoysCheckoutSteps {
     private CollapserComponent collapserComponent = new CollapserComponent();
     private CheckboxRowComponent checkboxRowComponent = new CheckboxRowComponent();
     private RewardSummaryComponent rewardSummaryComponent = new RewardSummaryComponent();
+    private TitleComponent titleComponent = new TitleComponent();
 
     @And("^user types billing info for \"([^\"]*)\"$")
     public void typesBillingInfoFor(String userName) {
@@ -293,5 +294,11 @@ public class PepBoysCheckoutSteps {
     public void userChecksShippingMethod(String method) {
         shippingOptionsComponent.checkShippingOptions(method);
 
+    }
+
+    @Then("^user should be on \"([^\"]*)\" page$")
+    public void userShouldBeOnPage(String pageName) {
+        assertTrue(titleComponent.exists() && titleComponent.getTitleText().contains(pageName), " Unexpected Page Title. " +
+                "[Expected: " + pageName + "] but found [Actual: " + titleComponent.getTitleText());
     }
 }
