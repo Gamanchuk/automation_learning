@@ -279,14 +279,8 @@ public class PepBoysCheckoutSteps {
 
     @Then("^user should be on \"([^\"]*)\" tab$")
     public void userShouldBeOnTab(String tabName) {
-        if (TestGlobalsManager.getTestGlobal("authorised") != null
-                && tabName.equals("Billing & Shipping")) {
-            assertTrue(radioListComponent.exists(), "Billing Address Drop-Down doesn't exist");
-        } else {
-            breadcrumbWidget.waitForBreadcrumbActive(tabName);
-            assertTrue(breadcrumbWidget.isTabActive(tabName), "Tab " + tabName + " is not an active");
-        }
-
+        breadcrumbWidget.waitForBreadcrumbActive(tabName);
+        assertTrue(breadcrumbWidget.isTabActive(tabName), "Tab " + tabName + " is not an active");
         CommonFunctions.attachScreenshot("Billing & Shipping");
     }
 
@@ -298,7 +292,6 @@ public class PepBoysCheckoutSteps {
 
     @Then("^user should be on \"([^\"]*)\" page$")
     public void userShouldBeOnPage(String pageName) {
-        assertTrue(titleComponent.exists() && titleComponent.getTitleText().contains(pageName), " Unexpected Page Title. " +
-                "[Expected: " + pageName + "] but found [Actual: " + titleComponent.getTitleText());
+        assertTrue(titleComponent.exists(pageName), "Unexpected Page Title.");
     }
 }
