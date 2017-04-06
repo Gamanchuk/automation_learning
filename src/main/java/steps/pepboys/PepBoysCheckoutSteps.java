@@ -1,5 +1,6 @@
 package steps.pepboys;
 
+import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -13,6 +14,8 @@ import utils.pepboys.CreditCard;
 import utils.pepboys.DataProvider;
 
 import static org.testng.Assert.assertTrue;
+import static utils.CommonFunctions.attachScreeVideo;
+import static utils.DriverFactory.stopScreenVideo;
 
 public class PepBoysCheckoutSteps {
     private AddressFormComponent addressFormComponent = new AddressFormComponent();
@@ -301,4 +304,14 @@ public class PepBoysCheckoutSteps {
         assertTrue(titleComponent.exists() && titleComponent.getTitleText().contains(pageName), " Unexpected Page Title. " +
                 "[Expected: " + pageName + "] but found [Actual: " + titleComponent.getTitleText());
     }
+
+    @After
+    public void after() {
+        stopScreenVideo();
+        attachScreeVideo("data");
+    }
+
+
+
+
 }
