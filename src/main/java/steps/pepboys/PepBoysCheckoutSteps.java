@@ -1,11 +1,11 @@
 package steps.pepboys;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import entities.components.*;
+import entities.pages.pepboys.PepBoysPaymentAndReviewCheckoutPage;
 import entities.pages.pepboys.PepBoysThankYouPage;
 import utils.CommonFunctions;
 import utils.TestGlobalsManager;
@@ -20,6 +20,7 @@ import static utils.DriverFactory.stopScreenVideo;
 public class PepBoysCheckoutSteps {
 
     private PepBoysThankYouPage thankYouPage = new PepBoysThankYouPage();
+    private PepBoysPaymentAndReviewCheckoutPage paymentAndReviewPage = new PepBoysPaymentAndReviewCheckoutPage();
 
     private AddressFormComponent addressFormComponent = new AddressFormComponent();
     private AddressDisplayComponent addressDisplayComponent = new AddressDisplayComponent();
@@ -37,6 +38,7 @@ public class PepBoysCheckoutSteps {
     private PayPalWellComponent payPalWellComponent = new PayPalWellComponent();
     private CollapserComponent collapserComponent = new CollapserComponent();
     private CheckboxRowComponent checkboxRowComponent = new CheckboxRowComponent();
+    private ModalComponent modalComponent = new ModalComponent();
 
     @And("^user types billing info for \"([^\"]*)\"$")
     public void typesBillingInfoFor(String userName) {
@@ -51,14 +53,29 @@ public class PepBoysCheckoutSteps {
     @Then("^user checks billing info for \"([^\"]*)\"$")
     public void userChecksBillingInfoFor(String userName) {
         BillingUser user = DataProvider.getUser(userName);
-        addressDisplayComponent.checkBillingInfo(
+        addressDisplayComponent.setRoot(BaseComponent.getComponentByTitle("Billing Address"));
+        addressDisplayComponent.checkInfo(
                 user.getFullName(),
                 user.getApartment(),
                 user.getFullAddress(),
                 user.getCity(),
                 user.getZipCode(),
-                user.getPhone(),
-                user.getEmail()
+                user.getPhone()
+        );
+        addressDisplayComponent.checkFieldValue("Email", user.getEmail());
+    }
+
+    @Then("^user checks shipping info for \"([^\"]*)\"$")
+    public void userChecksShippingInfoFor(String userName) {
+        BillingUser user = DataProvider.getUser(userName);
+        addressDisplayComponent.setRoot(BaseComponent.getComponentByTitle("Shipping Address"));
+        addressDisplayComponent.checkInfo(
+                user.getFullName(),
+                user.getApartment(),
+                user.getFullAddress(),
+                user.getCity(),
+                user.getZipCode(),
+                user.getPhone()
         );
     }
 
@@ -278,5 +295,29 @@ public class PepBoysCheckoutSteps {
     public void seesErrorTooltipWithText(String error) {
         assertTrue(creditCardFormComponent.hasErrorTooltipWithMessage(error),
                 "Tooltip with message \"" + error + "\" not found");
+    }
+
+    @And("^sees modal error with text \"([^\"]*)\"$")
+    public void seesModalErrorWithText(String text)  {
+        modalComponent.waitForModalToOpen();
+        assertTrue(modalComponent.hasMessageWithText(text), "Unexpected text was displayed");
+        CommonFunctions.attachScreenshot("Error Modal opened");
+    }
+
+    @And("^user clicks Terms link$")
+    public void userClicksTermsLink() {
+        paymentAndReviewPage.clickTerms();
+    }
+
+    @Then("^user should see Terms modal with \"([^\"]*)\"$")
+    public void userShouldSeeTermsModalWith(String text) throws Throwable {
+        modalComponent.waitForModalToOpen();
+        assertTrue(modalComponent.hasText(text), "Unexpected Terms");
+        CommonFunctions.attachScreenshot("Terms Modal opened");
+    }
+
+    @And("^user clicks arrow for \"([^\"]*)\"$")
+    public void userClicksArrowFor(String componentName) {
+        paymentAndReviewPage.clickArrowFor(componentName);
     }
 }

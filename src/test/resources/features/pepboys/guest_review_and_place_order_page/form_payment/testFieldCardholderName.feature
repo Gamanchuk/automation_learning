@@ -1,4 +1,4 @@
-@pepBoys @debug
+@pepBoys
 
 Feature: Happy Path
 
@@ -8,7 +8,8 @@ Feature: Happy Path
     And user views cart
     And chooses "Pay Online" method
 
-  @TestCaseId("15405")
+  @TestCaseId("15406")
+  @TestCaseId("15407")
   Scenario: Test field "Cardholder Name"
     Given user types billing info for "qa user"
     And presses the "Continue" button
@@ -20,18 +21,10 @@ Feature: Happy Path
     And uses "visa" card for payment
 
     And user types "" into "Cardholder Name" field of Card Form
-#    And sees error tooltip with text "Name can't be blank"
     And presses the "Place Order" button
     Then user should stay at "Payment & Review" tab
     And sees "FORM ERRORS" error message with text "Please review all inputs."
 
     And user types "!@#$%^&*())(*&^%$#@! !@#$%^&*())(*&^%$#@!" into "Cardholder Name" field of Card Form
     And presses the "Place Order" button
-    Then user should stay at "Payment & Review" tab
-#    And sees "FORM ERRORS" error message with text "Please review all inputs."
-
-#    And user types "" into "Cardholder Name" field of Card Form
-#    And sees error tooltip with text "Name can't be blank"
-#    And presses the "Place Order" button
-#    Then user should stay at "Payment & Review" tab
-#    And sees "FORM ERRORS" error message with text "Please review all inputs."
+    Then sees modal error with text "Your order was declined"
