@@ -129,6 +129,7 @@ public class PepBoysCheckoutSteps {
     @And("^user navigates to \"([^\"]*)\" breadcrumb$")
     public void userNavigatesToBreadcrumb(String breadcrumb) {
         breadcrumbWidget.clickBreadcrumb(breadcrumb);
+        CommonFunctions.attachScreenshot("Click Breadcrumb: " + breadcrumb);
     }
 
     @Then("^user checks \"([^\"]*)\" with value \"([^\"]*)\" on \"([^\"]*)\" tab$")
@@ -282,15 +283,9 @@ public class PepBoysCheckoutSteps {
 
     @Then("^user should be on \"([^\"]*)\" tab$")
     public void userShouldBeOnTab(String tabName) {
-        if (TestGlobalsManager.getTestGlobal("authorised") != null
-                && tabName.equals("Billing & Shipping")) {
-            assertTrue(radioListComponent.exists(), "Billing Address Drop-Down doesn't exist");
-        } else {
-            breadcrumbWidget.waitForBreadcrumbActive(tabName);
-            assertTrue(breadcrumbWidget.isTabActive(tabName), "Tab " + tabName + " is not an active");
-        }
-
-        CommonFunctions.attachScreenshot("Billing & Shipping");
+        breadcrumbWidget.waitForBreadcrumbActive(tabName);
+        assertTrue(breadcrumbWidget.isTabActive(tabName), "Tab " + tabName + " is not an active");
+        CommonFunctions.attachScreenshot("User on [" + tabName + "] tab");
     }
 
     @And("^user checks \"([^\"]*)\" shipping method$")
@@ -310,8 +305,6 @@ public class PepBoysCheckoutSteps {
         stopScreenVideo();
         attachScreeVideo("data");
     }
-
-
 
 
 }

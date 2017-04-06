@@ -14,6 +14,7 @@ Feature: PayPal - Delivery Method
     Given chooses "Ground: 5-7 Days" shipping method
     And presses the "Continue" button
     And user should be on "Payment & Review" tab
+
     Then user navigates to "Delivery Method" breadcrumb
     And user should be on "Delivery Method" tab
 

@@ -1,4 +1,4 @@
-@pepBoys
+@pepBoys @debug
 
 Feature: Guest - Delivery Method
 
@@ -9,7 +9,7 @@ Feature: Guest - Delivery Method
     And chooses "Pay Online" method
 
   @TestCaseId("15489")
-  Scenario: Breadcrumb links redirect user to correct page (Guest)
+  Scenario: Breadcrumb links redirect user to correct page (Guest, Pay Online)
     Given user types billing info for "qa user"
     And presses the "Continue" button
     And chooses "Use Recommended Address"
