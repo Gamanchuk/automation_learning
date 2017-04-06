@@ -103,6 +103,7 @@ public class PepBoysCheckoutSteps {
         BillingUser user = DataProvider.getUser(userName);
         headerComponent.pressSignInButton();
         signInFormComponent.signIn(user.getEmail(), user.getPassword());
+        buttonComponent.clickButton();
         TestGlobalsManager.setTestGlobal("authorised", true);
     }
 
@@ -259,7 +260,9 @@ public class PepBoysCheckoutSteps {
     @Given("^user email \"([^\"]*)\" password \"([^\"]*)\" makes authorisation$")
     public void userEmailPasswordMakesAuthorisation(String email, String password) {
         headerComponent.pressSignInButton();
+        CommonFunctions.attachScreenshot("Press Sign In button");
         signInFormComponent.signIn(email, password);
+        buttonComponent.clickButton();
     }
 
     @And("^user presses the signIn button$")
