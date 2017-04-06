@@ -1,6 +1,6 @@
 @pepBoys
 
-Feature: Existing User - Thank You Page
+Feature: PayPal - Thank You Page
 
   Background:
     Given user makes appoint
