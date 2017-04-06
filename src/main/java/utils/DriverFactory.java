@@ -200,7 +200,7 @@ public class DriverFactory {
             try {
                 log.info("Execute command: " + Arrays.toString(iOSProxyCommand.toStrings()));
                 executor.execute(iOSProxyCommand, executeResultHandler);
-                executeResultHandler.waitFor();
+                Thread.sleep(2000);
                 log.info("iOS Proxy started.");
             } catch (IOException | InterruptedException e) {
                 log.error("Cannot execute command: " + Arrays.toString(iOSProxyCommand.toStrings()));
