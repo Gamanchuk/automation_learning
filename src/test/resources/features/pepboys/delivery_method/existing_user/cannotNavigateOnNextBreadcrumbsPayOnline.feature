@@ -1,4 +1,4 @@
-@pepBoys @debug
+@pepBoys
 
 Feature: Existing User - Delivery Method
 
@@ -8,7 +8,7 @@ Feature: Existing User - Delivery Method
     And user views cart
     And chooses "Pay Online" method
 
-  @TestCaseId("15367")
+  @TestCaseId("")
   Scenario: Cannot navigate on next Breadcrumbs (Existing User, Pay Online)
     Given user makes authorisation for "qa user"
     And user should be on "Billing & Shipping" tab

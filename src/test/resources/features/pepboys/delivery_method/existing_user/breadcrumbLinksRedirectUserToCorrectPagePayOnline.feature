@@ -1,4 +1,4 @@
-@pepBoys @debug
+@pepBoys
 
 Feature: Existing User - Delivery Method
 
