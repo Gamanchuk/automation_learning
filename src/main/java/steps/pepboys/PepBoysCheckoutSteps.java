@@ -77,6 +77,7 @@ public class PepBoysCheckoutSteps {
 
     @And("^chooses \"([^\"]*)\" shipping method$")
     public void choosesShippingMethod(String shippingMethod) {
+
         shippingOptionsComponent.selectShippingMethod(shippingMethod);
         CommonFunctions.attachScreenshot("Shipping method");
     }
