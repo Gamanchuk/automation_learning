@@ -1,6 +1,6 @@
 @pepBoys
 
-Feature: PayPal - Delivery Method
+Feature: Existing User - Thank You Page
 
   Background:
     Given user makes appoint
@@ -9,19 +9,13 @@ Feature: PayPal - Delivery Method
     And chooses "PayPal" method
     And user confirms purchase as "qa user" with PayPal
 
-  @TestCaseId("15553")
-  Scenario: Breadcrumb links redirect user to correct page (PayPal)
+  @TestCaseId("15570")
+  Scenario: Links at Thank you page (PayPal)
     Given chooses "Ground: 5-7 Days" shipping method
     And presses the "Continue" button
-    And user should be on "Payment & Review" tab
-    Then user navigates to "Delivery Method" breadcrumb
-    And user should be on "Delivery Method" tab
-
-
-
-
-
-
-
-
+    And checks payment details for "qa user"
+    And presses the "Place Order" button
+    And user should be on thank you page
+    Then user presses the Find out more link
+    And user should be on rewards page
 

@@ -1,6 +1,6 @@
 @pepBoys
 
-Feature: Guest - Delivery Method
+Feature: Guest - Thank You Page
 
   Background:
     Given user makes appoint
@@ -8,25 +8,16 @@ Feature: Guest - Delivery Method
     And user views cart
     And chooses "Pay Online" method
 
-  @TestCaseId("15489")
-  Scenario: Breadcrumb links redirect user to correct page (Guest)
+  @TestCaseId("15422")
+  Scenario: Links at Thank you page (Guest, Pay Online)
     Given user types billing info for "qa user"
     And presses the "Continue" button
     And chooses "Use Recommended Address"
     And chooses "Ground: 5-7 Days" shipping method
     And presses the "Continue" button
-    And user should be on "Payment & Review" tab
-
-    Then user navigates to "Delivery Method" breadcrumb
-    And user should be on "Delivery Method" tab
-
-    Then user navigates to "Billing & Shipping" breadcrumb
-    And user should be on "Billing & Shipping" tab
-
-
-
-
-
-
-
+    And uses "visa" card for payment
+    And presses the "Place Order" button
+    And user should be on thank you page
+    Then user presses the Find out more link
+    And user should be on rewards page
 

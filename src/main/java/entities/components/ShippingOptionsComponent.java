@@ -3,13 +3,14 @@ package entities.components;
 import org.openqa.selenium.By;
 import utils.CommonFunctions;
 
-import static org.testng.AssertJUnit.assertTrue;
+import static org.testng.Assert.assertTrue;
+
 
 public class ShippingOptionsComponent extends BaseComponent {
     private RadioListComponent radioListComponent = new RadioListComponent();
 
     public void selectShippingMethod(String shippingMethod) {
-        waitForElementVisible(By.xpath("//h2[text()='Shipping Method']"));
+        assertTrue(radioListComponent.exists(), "Shipping Method Drop-Down doesn't exist");
         radioListComponent.select(shippingMethod);
     }
 
@@ -18,8 +19,8 @@ public class ShippingOptionsComponent extends BaseComponent {
         String actualOption = getDriver()
                 .findElement(By.xpath("//div[contains(@class, 'shipping-option-display')]")).getText();
 
-        assertTrue("Expected option: [" + expectedOption + "]" +
-                " doesn't contains Actual option: [" + actualOption + "]", actualOption.contains(expectedOption));
+        assertTrue(actualOption.contains(expectedOption), "Expected option: [" + expectedOption + "]" +
+                " doesn't contains Actual option: [" + actualOption + "]");
 
         CommonFunctions.attachScreenshot("Delivery Method");
         javascriptScroll(-600);

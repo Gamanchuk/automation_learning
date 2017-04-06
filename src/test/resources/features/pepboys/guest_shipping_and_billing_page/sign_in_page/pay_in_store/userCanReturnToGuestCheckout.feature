@@ -13,4 +13,4 @@ Feature: Sign In page (Pay in Store)
   Scenario: User can return to Guest Checkout (Pay in Store)
     Given user presses the signIn button
     And user presses the Proceed to Guest Checkout link
-    Then user should be on "Billing & Shipping" tab
+    Then user should be on "Billing" page

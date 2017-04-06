@@ -29,6 +29,9 @@ public class PepBoysCartPage extends PepBoysBasePage {
         if (method.equals("Pay Online")) {
             waitForElementVisible(By.xpath("//button[text()='Continue']"));
             waitForElementClickable(By.xpath("//button[text()='Continue']"));
+        } else if (method.equals("Pay in Store")) {
+            waitForElementVisible(By.xpath("//button[text()='Place Order']"));
+            waitForElementClickable(By.xpath("//button[text()='Place Order']"));
         }
     }
 
