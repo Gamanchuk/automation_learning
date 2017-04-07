@@ -5,8 +5,8 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import entities.components.*;
-import entities.pages.pepboys.PepBoysMainPage;
 import entities.pages.pepboys.PepBoysLoginPage;
+import entities.pages.pepboys.PepBoysMainPage;
 import entities.pages.pepboys.PepBoysThankYouPage;
 import utils.CommonFunctions;
 import utils.TestGlobalsManager;
@@ -259,11 +259,6 @@ public class PepBoysCheckoutSteps {
     public void userPressesTheLogo() {
         headerComponent.pressLogoLink();
         CommonFunctions.attachScreenshot("Press the logo link");
-    }
-
-    @And("^user presses the signIn button$")
-    public void userPressesTheSignInButton() {
-        headerComponent.pressSignInButton();
     }
 
     @And("^user logs out from checkout$")
