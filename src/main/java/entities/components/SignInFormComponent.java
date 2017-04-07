@@ -5,12 +5,12 @@ import org.openqa.selenium.WebElement;
 import utils.CommonFunctions;
 
 public class SignInFormComponent extends BaseComponent {
-    private By signInButton = By.xpath("//div[contains(@class,'submit-button')]//button");
+    private By forgotPassword = By.xpath("//div[contains(@class,'login-buttons')]//a");
     private By emailField = By.id("shipping-email");
     private By passwordField = By.id("password");
 
     public void signIn(String email, String password) {
-        waitForElementClickable(emailField);
+        waitForElementVisible(passwordField);
 
         WebElement emailFieldEl = getDriver().findElement(emailField);
         emailFieldEl.clear();
@@ -20,18 +20,16 @@ public class SignInFormComponent extends BaseComponent {
         passwordFieldEl.clear();
         passwordFieldEl.sendKeys(password);
 
-        //focusOut();
+        focusOut();
         CommonFunctions.attachScreenshot("Login page");
-        
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        getDriver().findElement(signInButton).click();
 
-        waitForElementVisible(By.xpath("//div[contains(@class, 'radio-list-option-selected')]"));
+        waitForElementClickable(signInButton);
+        getDriver().findElement(signInButton).click();
     }
 
-
+    public void pressForgotPasswordLink() {
+        waitForElementClickable(forgotPassword);
+        CommonFunctions.attachScreenshot("Login page: Forgot Password");
+        getDriver().findElement(forgotPassword).click();
+    }
 }
