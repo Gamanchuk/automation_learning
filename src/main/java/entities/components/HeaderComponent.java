@@ -8,7 +8,6 @@ public class HeaderComponent extends BaseComponent {
     public void pressSignInButton() {
         waitForElementClickable(By.xpath(HEADER_PATH + "//button[text()='Sign In']"));
         getDriver().findElement(By.xpath(HEADER_PATH + "//button[text()='Sign In']")).click();
-        waitForElementClickable(By.xpath("//div[contains(@class,'submit-button')]//button"));
     }
 
     public void pressLogoLink() {

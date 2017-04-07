@@ -105,6 +105,7 @@ public class PepBoysCheckoutSteps {
     public void userMakesAuthorisationFor(String userName) {
         BillingUser user = DataProvider.getUser(userName);
         headerComponent.pressSignInButton();
+        assertTrue(signInFormComponent.exist(), "SignIn form component doesn't present");
         signInFormComponent.signIn(user.getEmail(), user.getPassword());
         buttonComponent.clickButton();
         TestGlobalsManager.setTestGlobal("authorised", true);
@@ -312,6 +313,7 @@ public class PepBoysCheckoutSteps {
     @And("^user presses the signIn button$")
     public void userPressesTheSignInButton() {
         headerComponent.pressSignInButton();
+        assertTrue(signInFormComponent.exist(), "SignIn form component doesn't present");
     }
 
     @And("^user presses the Forgot Password link$")

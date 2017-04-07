@@ -10,8 +10,6 @@ public class SignInFormComponent extends BaseComponent {
     private By passwordField = By.id("password");
 
     public void signIn(String email, String password) {
-        waitForElementVisible(passwordField);
-
         WebElement emailFieldEl = getDriver().findElement(emailField);
         emailFieldEl.clear();
         emailFieldEl.sendKeys(email);
@@ -28,5 +26,10 @@ public class SignInFormComponent extends BaseComponent {
         waitForElementClickable(forgotPassword);
         CommonFunctions.attachScreenshot("Login page: Forgot Password");
         getDriver().findElement(forgotPassword).click();
+    }
+
+    public boolean exist() {
+        waitForElementVisible(passwordField);
+        return true;
     }
 }

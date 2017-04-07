@@ -15,7 +15,7 @@ Feature: Header and Footer (Pay Online)
     Given user types billing info for "qa user"
     And presses the "Continue" button
     And chooses "Use Recommended Address"
-    And chooses "Ground" shipping method
+    And chooses "Ground: 5-7 Days" shipping method
     And presses the "Continue" button
     And uses "visa" card for payment
     And user presses the Shopping Cart icon
