@@ -13,7 +13,7 @@ Feature: Header and Footer (PayPal)
   @TestCaseId("15563")
   Scenario: Tap on icon Shopping Cart navigate to shopping cart page (Guest, PayPal, Payment & Review tab)
     Given user confirms purchase as "qa user" with PayPal
-    And chooses "Ground" shipping method
+    And chooses "Ground: 5-7 Days" shipping method
     And presses the "Continue" button
     And checks payment details for "qa user"
     And user presses the Shopping Cart icon
