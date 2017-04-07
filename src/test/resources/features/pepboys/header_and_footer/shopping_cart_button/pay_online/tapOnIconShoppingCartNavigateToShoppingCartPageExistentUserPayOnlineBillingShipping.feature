@@ -13,5 +13,6 @@ Feature: Header and Footer (Pay Online)
   @TestCaseId("15427")
   Scenario: Tap on icon Shopping Cart navigate to shopping cart page (Existent user, Pay Online, Billing & Shipping tab)
     Given user makes authorisation for "qa user"
+    And user should be on "Billing & Shipping" tab
     And user presses the Shopping Cart icon
     Then user should be on cart page

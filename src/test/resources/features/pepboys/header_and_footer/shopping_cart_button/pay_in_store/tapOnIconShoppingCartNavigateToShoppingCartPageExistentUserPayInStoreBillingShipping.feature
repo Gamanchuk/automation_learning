@@ -13,6 +13,7 @@ Feature: Header and Footer (Pay in Store)
   @TestCaseId("16669")
   Scenario: Tap on icon Shopping Cart navigate to shopping cart page (Existent user, Pay in Store, Billing & Shipping tab)
     Given user makes authorisation for "qa user"
+    And user should be on "Billing" page
     And user presses the Shopping Cart icon
     Then user should be on cart page
 
