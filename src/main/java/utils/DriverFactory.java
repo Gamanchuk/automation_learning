@@ -25,6 +25,7 @@ import org.zeroturnaround.process.Processes;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -95,6 +96,7 @@ public class DriverFactory {
 
                     driver = new EventFiringWebDriver(new RemoteWebDriver(new URL(String.valueOf(service.getUrl())), desiredCapabilities)).register(eventListener);
                     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+                    startVideoRecording();
                 }
 
             } catch (Exception e) {
@@ -195,14 +197,15 @@ public class DriverFactory {
 
             DefaultExecuteResultHandler executeResultHandler = new DefaultExecuteResultHandler();
             DefaultExecutor executor = new DefaultExecutor();
-            executor.setExitValue(1);
+            executor.setExitValue(0);
 
             try {
+                log.info("Execute command: " + Arrays.toString(iOSProxyCommand.toStrings()));
                 executor.execute(iOSProxyCommand, executeResultHandler);
-                Thread.sleep(3000);
+                Thread.sleep(2000);
                 log.info("iOS Proxy started.");
             } catch (IOException | InterruptedException e) {
-                e.printStackTrace();
+                log.error("Cannot execute command: " + Arrays.toString(iOSProxyCommand.toStrings()));
             }
         }
     }
@@ -256,6 +259,66 @@ public class DriverFactory {
             service = null;
         }
     }
+
+    public static void startVideoRecording() {
+        CommandLine recorderStart = new CommandLine("/usr/local/bin/flick");
+        recorderStart.addArgument("video");
+        recorderStart.addArgument("-a");
+        recorderStart.addArgument("start");
+        recorderStart.addArgument("-p");
+        recorderStart.addArgument(Config.PLATFORM_NAME.toLowerCase());
+        recorderStart.addArgument("-u");
+        recorderStart.addArgument(Config.DEVICE_UID);
+        recorderStart.addArgument("-e");
+        recorderStart.addArgument("true");
+
+        DefaultExecuteResultHandler executeResultHandler = new DefaultExecuteResultHandler();
+        DefaultExecutor executor = new DefaultExecutor();
+        executor.setExitValue(0);
+
+        try {
+            log.info("Start video recording.");
+            log.info("Waiting for executing. Command: " + Arrays.toString(recorderStart.toStrings()));
+            executor.execute(recorderStart, executeResultHandler);
+            executeResultHandler.waitFor();
+            log.info("Command executed. Exit code: " + executeResultHandler.getExitValue());
+        } catch (InterruptedException | IOException e) {
+            log.error("Cannot execute command: " + Arrays.toString(recorderStart.toStrings()));
+        }
+    }
+
+    public static void stopScreenVideo() {
+        CommandLine recorderStop = new CommandLine("/usr/local/bin/flick");
+        recorderStop.addArgument("video");
+        recorderStop.addArgument("-a");
+        recorderStop.addArgument("stop");
+        recorderStop.addArgument("-p");
+        recorderStop.addArgument(Config.PLATFORM_NAME.toLowerCase());
+        recorderStop.addArgument("-u");
+        recorderStop.addArgument(Config.DEVICE_UID);
+        recorderStop.addArgument("-e");
+        recorderStop.addArgument("true");
+        recorderStop.addArgument("-o");
+        recorderStop.addArgument(System.getProperty("user.dir"));
+        recorderStop.addArgument("-f");
+        recorderStop.addArgument("mp4");
+        recorderStop.addArgument("-t");
+
+        DefaultExecuteResultHandler executeResultHandler = new DefaultExecuteResultHandler();
+        DefaultExecutor executor = new DefaultExecutor();
+        executor.setExitValue(0);
+
+        try {
+            log.info("Stop video recording. Move temp video file to: " + System.getProperty("user.dir"));
+            log.info("Waiting for executing. Command: " + Arrays.toString(recorderStop.toStrings()));
+            executor.execute(recorderStop, executeResultHandler);
+            executeResultHandler.waitFor();
+            log.info("Command executed. Exit code: " + executeResultHandler.getExitValue());
+        } catch (InterruptedException | IOException e) {
+            log.error("Cannot execute command: " + Arrays.toString(recorderStop.toStrings()));
+        }
+    }
+
 
     //TODO: add functionality delete cookies
     public static void deleteAllCookies() {

@@ -1,5 +1,6 @@
 package steps.pepboys;
 
+import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -12,6 +13,8 @@ import utils.pepboys.CreditCard;
 import utils.pepboys.DataProvider;
 
 import static org.testng.Assert.assertTrue;
+import static utils.CommonFunctions.attachScreeVideo;
+import static utils.DriverFactory.stopScreenVideo;
 
 public class PepBoysCheckoutSteps {
     private AddressFormComponent addressFormComponent = new AddressFormComponent();
@@ -58,6 +61,7 @@ public class PepBoysCheckoutSteps {
 
     @And("^presses the \"([^\"]*)\" button$")
     public void pressesTheButton(String confirmationMethod) {
+        buttonComponent.javascriptScroll(200);
         buttonComponent.clickButton();
         if (!buttonComponent.isOverlayDisplayed()) {
             buttonComponent.clickButton();
@@ -288,5 +292,15 @@ public class PepBoysCheckoutSteps {
         headerComponent.pressShippingCartIcon();
         CommonFunctions.attachScreenshot("Open Shipping Cart");
     }
+
+
+    @After
+    public void after() {
+        stopScreenVideo();
+        attachScreeVideo("data");
+    }
+
+
+
 
 }
