@@ -270,12 +270,7 @@ public class PepBoysCheckoutSteps {
             TestGlobalsManager.setTestGlobal("authorised", false);
         }
     }
-
-    @Given("^user checks text in footer$")
-    public void userChecksTextInFooter() {
-
-    }
-
+    
     @Given("^user checks text \"([^\"]*)\" in footer$")
     public void userChecksTextInFooter(String note) {
         footerComponent.checkNote(note);
