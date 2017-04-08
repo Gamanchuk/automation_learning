@@ -1,6 +1,5 @@
 package entities.components;
 
-import entities.Entity;
 import org.openqa.selenium.By;
 
 public class ShippingOptionsComponent extends BaseComponent {

@@ -115,7 +115,18 @@ public class PepBoysMainPageSteps {
 
     @And("^user schedules installation time$")
     public void userSchedulesInstallationTime() {
-        cartPage.scheduleInstallationTime();
+        cartPage.waitForInstallationDialogToOpen();
+        cartPage.selectInstallationTime();
+        cartPage.submitInstallationTime();
+    }
+
+    @And("^user updates installation time$")
+    public void userUpdatesInstallationTime() {
+        cartPage.clickEditInstallationTime();
+        cartPage.waitForInstallationDialogToOpen();
+        cartPage.moveToNextFiveDays();
+        cartPage.selectInstallationTime();
+        cartPage.submitInstallationTime();
     }
 
 //    @After

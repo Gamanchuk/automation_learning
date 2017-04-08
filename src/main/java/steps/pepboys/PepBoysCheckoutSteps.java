@@ -68,7 +68,14 @@ public class PepBoysCheckoutSteps {
     @Then("^user checks shipping info for \"([^\"]*)\"$")
     public void userChecksShippingInfoFor(String userName) {
         BillingUser user = DataProvider.getUser(userName);
-        addressDisplayComponent.setRoot(BaseComponent.getComponentByTitle("Shipping Address"));
+        String currentTab = breadcrumbWidget.getActiveTab();
+
+        if(currentTab.equals("Delivery Method")) {
+            addressDisplayComponent.setRoot(BaseComponent.getContainerByTitle("Shipping Address"));
+        } else {
+            addressDisplayComponent.setRoot(BaseComponent.getComponentByTitle("Shipping Address"));
+        }
+
         addressDisplayComponent.checkInfo(
                 user.getFullName(),
                 user.getApartment(),

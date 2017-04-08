@@ -1,21 +1,24 @@
-@pepBoys @ignore
+@pepBoys @debug
 
 Feature: Happy Path
 
   Background:
     Given user makes appoint
-    And user adds to cart any tires with "Installation" delivery option for "captive"
+    And user adds to cart any tires with "Installation" delivery option for "captiva"
     And user views cart
-    And chooses "Pay Online" method
+    And user schedules installation time
+    And chooses "Pay Online" method with appointment details
 
-  @TestCaseId("15403")
-  Scenario: Test field "Card Number"
+  @TestCaseId("15415")
+  Scenario: Edit installation time
     Given user types billing info for "qa user"
     And presses the "Continue" button
     And chooses "Use Recommended Address"
+#    And user checks installation time
+    And user clicks arrow for "Installation"
 
-    And chooses "Ground" shipping method
-    And presses the "Continue" button
+#    Then user should be on "Shopping Cart" page
+#    And user updates installation time
 
-    And user clicks arrow for "Billing Address"
+
 
