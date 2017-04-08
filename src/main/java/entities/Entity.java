@@ -34,7 +34,7 @@ public abstract class Entity {
     }
 
     public WebElement findElement(By selector) {
-        if(root != null) {
+        if (root != null) {
             return root.findElement(selector);
         } else {
             return driver.findElement(selector);
@@ -42,7 +42,7 @@ public abstract class Entity {
     }
 
     public List<WebElement> findElements(By selector) {
-        if(root != null) {
+        if (root != null) {
             return root.findElements(selector);
         } else {
             return driver.findElements(selector);
@@ -206,7 +206,7 @@ public abstract class Entity {
             }
         });
     }
-    
+
     protected void waitForDocumentReady() {
         new WebDriverWait(driver, TIMEOUT_SECONDS).until(new ExpectedCondition<Boolean>() {
             public Boolean apply(WebDriver driver) {
@@ -237,7 +237,7 @@ public abstract class Entity {
 
     public WebElement findElementWithTextBy(String text, By selector) {
         List<WebElement> elements = findElements(selector);
-        for(WebElement element : elements) {
+        for (WebElement element : elements) {
             if (element.getText().contains(text)) {
                 return element;
             }
@@ -262,15 +262,7 @@ public abstract class Entity {
     public void switchToDefaultIframe() {
         driver.switchTo().defaultContent();
     }
-
-    public void deleteElementFromDom(By path) {
-        if (driver instanceof JavascriptExecutor) {
-            ((JavascriptExecutor) driver).executeScript(
-                    "arguments[0].parentNode.removeChild(arguments[0])", findElement(path));
-        }
-//        js.executeScript("return document.getElementsByClassName('review-info-star').remove();");
-    }
-
+    
     private boolean waitForCondition(ExpectedCondition<WebElement> webElementExpectedCondition, int timeout) {
         try {
             new WebDriverWait(driver, timeout).until(webElementExpectedCondition);
@@ -280,12 +272,4 @@ public abstract class Entity {
             return false;
         }
     }
-
-    public void waitForAlertIsPresent() {
-        log.info("Waiting 2s for iOS Alert prent");
-        new WebDriverWait(driver, 2)
-                .until(ExpectedConditions.alertIsPresent());
-    }
-
-
 }
