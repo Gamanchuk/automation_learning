@@ -1,6 +1,7 @@
 package entities.components;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import static org.testng.Assert.assertEquals;
 
@@ -13,16 +14,16 @@ public class FooterComponent extends BaseComponent {
         String actualText = getDriver().findElement(note).getText();
         assertEquals(actualText, expectedText, "Unexpected footer note");
     }
-    
+
     public void checkPhoneNumber(String expectedPhoneLabelText, String expectedHyperLinkNumber) {
-        //javascriptScroll(500);
         By note = By.xpath(PHONE_PATH);
 
-        String actualPhoneLabelText = getDriver().findElement(note).getText();
-        assertEquals(actualPhoneLabelText, expectedPhoneLabelText, "Unexpected footer phone label");
+        WebElement phoneEl = getDriver().findElement(note);
 
-        String actualHyperLinkNumber = getDriver().findElement(note).getAttribute("href");
-        assertEquals(actualHyperLinkNumber, "tel:" + expectedHyperLinkNumber, "Unexpected footer phone number (hyper link)");
+        assertEquals(phoneEl.getText(), expectedPhoneLabelText, "Unexpected footer phone label");
+        assertEquals(phoneEl.getAttribute("href"),
+                "tel:" + expectedHyperLinkNumber,
+                "Unexpected footer phone number (hyper link)");
     }
 
 
