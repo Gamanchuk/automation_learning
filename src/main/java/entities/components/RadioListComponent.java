@@ -43,7 +43,6 @@ public class RadioListComponent extends BaseComponent {
     }
 
     public boolean exists() {
-        waitForElementVisible(By.xpath(selectedOptionPath));
-        return true;
+        return isElementVisible(By.xpath(selectedOptionPath));
     }
 }
