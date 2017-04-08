@@ -11,6 +11,6 @@ Feature: Sign In page (Pay in Store)
 
   @TestCaseId("16681")
   Scenario: User can't sign in with empty "email address" and "password" (Pay in Store)
-    Given user email "" password "" makes authorisation
+    Given user makes authorisation with "" email and "" password
     Then sees "FORM ERRORS" error message with text "Please review all inputs."
     

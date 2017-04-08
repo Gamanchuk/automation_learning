@@ -270,7 +270,7 @@ public class PepBoysCheckoutSteps {
             TestGlobalsManager.setTestGlobal("authorised", false);
         }
     }
-    
+
     @Given("^user checks text \"([^\"]*)\" in footer$")
     public void userChecksTextInFooter(String note) {
         footerComponent.checkNote(note);
@@ -297,8 +297,8 @@ public class PepBoysCheckoutSteps {
         CommonFunctions.attachScreenshot("Find Out More");
     }
 
-    @Given("^user email \"([^\"]*)\" password \"([^\"]*)\" makes authorisation$")
-    public void userEmailPasswordMakesAuthorisation(String email, String password) {
+    @Given("^user makes authorisation with \"([^\"]*)\" email and \"([^\"]*)\" password$")
+    public void userMakesAuthorisationWithEmailAndPassword(String email, String password) throws Throwable {
         headerComponent.pressSignInButton();
         CommonFunctions.attachScreenshot("Press Sign In button");
         signInFormComponent.signIn(email, password);
@@ -347,8 +347,4 @@ public class PepBoysCheckoutSteps {
         stopScreenVideo();
         attachScreeVideo("data");
     }
-
-
-
-
 }

@@ -11,6 +11,6 @@ Feature: Sign In page (Pay in Store)
 
   @TestCaseId("16679")
   Scenario: User can't sign in with valid "email address" and invalid "password" (Pay in Store)
-    Given user email "qa@moovweb.com" password "invalid" makes authorisation
+    Given user makes authorisation with "qa@moovweb.com" email and "invalid" password
     Then sees "FORM ERRORS" error message with text "Your login attempt was not successful, try again."
     
