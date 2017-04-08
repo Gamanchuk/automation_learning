@@ -31,6 +31,11 @@ public class RadioListComponent extends BaseComponent {
                 if (element.getText().contains(option)) {
                     log.info("Method contains: " + element.getText());
                     element.click();
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 }
             }
