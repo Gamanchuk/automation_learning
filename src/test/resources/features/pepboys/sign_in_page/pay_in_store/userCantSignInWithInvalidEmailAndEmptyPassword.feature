@@ -1,4 +1,4 @@
-@pepBoys @debug
+@pepBoys
 
 Feature: Sign In page (Pay in Store)
 
@@ -9,8 +9,8 @@ Feature: Sign In page (Pay in Store)
     And chooses "Pay in Store" method
 
 
-  @TestCaseId("16684")
-  Scenario: User can't sign in with empty "email address" and invalid "password" (Pay in Store)
-    Given user email "" password "invalid" makes authorisation
+  @TestCaseId("16685")
+  Scenario: User can't sign in with invalid "email address" and empty "password" (Pay in Store)
+    Given user email "notqa@moovweb.com" password "" makes authorisation
     Then sees "FORM ERRORS" error message with text "Please review all inputs."
     

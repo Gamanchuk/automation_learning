@@ -1,4 +1,4 @@
-@pepBoys @debug
+@pepBoys
 
 Feature: Sign In page (Pay in Store)
 
@@ -9,9 +9,8 @@ Feature: Sign In page (Pay in Store)
     And chooses "Pay in Store" method
 
 
-  @TestCaseId("16686")
-  Scenario: User can click on Forgot Password link (Pay in Store)
-    Given user presses the signIn button
-    And user presses the Forgot Password link
-    Then user should be on Forgot Password page
+  @TestCaseId("16678")
+  Scenario: User can sign in with valid "email address" and valid "password" (Pay in Store)
+    Given user makes authorisation for "qa user"
+    Then user should be on "Billing" page
     
