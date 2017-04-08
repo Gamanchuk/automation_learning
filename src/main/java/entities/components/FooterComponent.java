@@ -13,23 +13,7 @@ public class FooterComponent extends BaseComponent {
         String actualText = getDriver().findElement(note).getText();
         assertEquals(actualText, expectedText, "Unexpected footer note");
     }
-
-    public void pressCall() {
-        getDriver().findElement(By.xpath(PHONE_PATH)).click();
-    }
-
-    public void checkCallAlert(String expectedLabelNumber, String expectedHyperLinkNumber) {
-//
-//
-//        CommonFunctions.attachScreenshot("Call Alert");
-//        String actualNumber = alert.getText();
-//        assertEquals(actualNumber, expectedNumber, "Unexpected phone number");
-//
-//        //alert.dismiss();
-//        javascriptScroll(-500);
-    }
-
-
+    
     public void checkPhoneNumber(String expectedPhoneLabelText, String expectedHyperLinkNumber) {
         //javascriptScroll(500);
         By note = By.xpath(PHONE_PATH);
