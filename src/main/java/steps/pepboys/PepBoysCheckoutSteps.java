@@ -1,5 +1,6 @@
 package steps.pepboys;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -13,6 +14,12 @@ import utils.pepboys.BillingUser;
 import utils.pepboys.CreditCard;
 import utils.pepboys.DataProvider;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 import static utils.CommonFunctions.attachScreeVideo;
 import static utils.DriverFactory.stopScreenVideo;
@@ -326,5 +333,12 @@ public class PepBoysCheckoutSteps {
     @And("^user clicks arrow for \"([^\"]*)\"$")
     public void userClicksArrowFor(String componentName) {
         paymentAndReviewPage.clickArrowFor(componentName);
+    }
+
+    @And("^user checks installation time$")
+    public void userChecksInstallationTime() {
+        Date installationDate = (Date)TestGlobalsManager.getTestGlobal("installationTime");
+        DateFormat df = new SimpleDateFormat("EEE. MM/dd/yyyy @ h:mm a", Locale.ENGLISH);
+        assertEquals(paymentAndReviewPage.getInstallationTime(), df.format(installationDate), "Unextpected installation date");
     }
 }

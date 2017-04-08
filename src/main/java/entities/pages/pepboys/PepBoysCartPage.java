@@ -12,13 +12,10 @@ import utils.TestGlobalsManager;
 import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class PepBoysCartPage extends PepBoysBasePage {
 
@@ -40,11 +37,13 @@ public class PepBoysCartPage extends PepBoysBasePage {
     }
 
     public void waitForInstallationDialogToOpen() {
-        waitForElementVisible(By.xpath("//h4[text()='Schedule Your Installation Time']"));
+        waitForElementVisible(By.cssSelector("div.modal-dialog"));
     }
 
     public void moveToNextFiveDays() {
-        findElement(By.xpath("//button[text()='Next 5 Days >>']"));
+        By nextButton = By.xpath("//button[text()='Next 5 Days >>']");
+        waitForElementVisible(nextButton);
+        findElement(nextButton).click();
     }
 
     public void clickEditInstallationTime() {
@@ -52,18 +51,28 @@ public class PepBoysCartPage extends PepBoysBasePage {
     }
 
     public void selectInstallationTime() {
-        waitForElementVisible(By.xpath("(//div[@class='dateHeader'])[1]"));
-
         // We are going to install tires in 3 days
-        Date date = new Date();
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        calendar.add(Calendar.DATE, 3);
-        date = calendar.getTime();
+//        Date date = TestGlobalsManager.getTestGlobal("installationTime") == null
+//                ? new Date()
+//                : (Date) TestGlobalsManager.getTestGlobal("installationTime");
 
-        DateFormat df = new SimpleDateFormat("EEE", Locale.ENGLISH);
-        String dateOfWeek = df.format(date);
-        findElement(By.xpath("//div[@class='dateHeader' and contains(., '" + dateOfWeek + "')]")).click();
+
+        By latestDay = By.xpath("(//div[@class='dateHeader'])[5]");
+        waitForElementVisible(latestDay);
+        findElement(latestDay).click();
+
+        String day = findElement(latestDay).findElement(By.cssSelector("div.subDate")).getText();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        int year = calendar.get(Calendar.YEAR);
+
+        try {
+            Date date = new SimpleDateFormat("MMM d", Locale.ENGLISH).parse(day);
+            calendar.setTime(date);
+            calendar.set(Calendar.YEAR, year);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         getDriver().manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 
@@ -83,11 +92,13 @@ public class PepBoysCartPage extends PepBoysBasePage {
             // TODO add method to move forward if there's no free time
         }
 
-        TestGlobalsManager.setTestGlobal("installationName", calendar.getTime());
+        TestGlobalsManager.setTestGlobal("installationTime", calendar.getTime());
     }
 
     public void submitInstallationTime() {
         click(By.xpath("//a[text()='Next']"));
+        waitForElementHidden(By.cssSelector("div.modal-dialog"));
+
     }
 
     public void cleanUpCart() {
@@ -127,5 +138,9 @@ public class PepBoysCartPage extends PepBoysBasePage {
     public void openCartPage() {
         getDriver().navigate().to(BASE_URL + "cart");
         waitForElementVisible(By.xpath("//h1[@class='cartTitle']"));
+    }
+
+    public boolean isOnCartPage() {
+        return isElementVisible(By.xpath("//h1[text()='Shopping Cart']"));
     }
 }

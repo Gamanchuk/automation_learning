@@ -14,11 +14,16 @@ Feature: Happy Path
     Given user types billing info for "qa user"
     And presses the "Continue" button
     And chooses "Use Recommended Address"
-#    And user checks installation time
+    And user checks installation time
     And user clicks arrow for "Installation"
 
-#    Then user should be on "Shopping Cart" page
-#    And user updates installation time
+    Then user should be on cart page
+    And user updates installation time
+    And chooses "Pay Online" method with appointment details
+    And presses the "Continue" button
+    And user should be on "Payment & Review" tab
+    And user checks installation time
+
 
 
 

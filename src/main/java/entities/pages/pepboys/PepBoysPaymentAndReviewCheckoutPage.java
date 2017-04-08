@@ -12,4 +12,8 @@ public class PepBoysPaymentAndReviewCheckoutPage extends PepBoysBasePage {
         waitForElementPresence(By.xpath("//a[text()='Terms']"));
         BaseComponent.getComponentByTitle(componentName).findElement(By.cssSelector("div.display-well-arrow")).click();
     }
+
+    public String getInstallationTime() {
+        return findElement(By.cssSelector("span.est-pickup-time-value")).getText();
+    }
 }

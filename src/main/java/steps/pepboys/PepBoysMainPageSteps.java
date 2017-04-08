@@ -1,7 +1,9 @@
 package steps.pepboys;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import entities.pages.pepboys.*;
 import utils.CommonFunctions;
@@ -117,6 +119,7 @@ public class PepBoysMainPageSteps {
     public void userSchedulesInstallationTime() {
         cartPage.waitForInstallationDialogToOpen();
         cartPage.selectInstallationTime();
+        CommonFunctions.attachScreenshot("Installation time");
         cartPage.submitInstallationTime();
     }
 
@@ -126,7 +129,13 @@ public class PepBoysMainPageSteps {
         cartPage.waitForInstallationDialogToOpen();
         cartPage.moveToNextFiveDays();
         cartPage.selectInstallationTime();
+        CommonFunctions.attachScreenshot("Installation time");
         cartPage.submitInstallationTime();
+    }
+
+    @Then("^user should be on cart page$")
+    public void userShouldBeOnCartPage() throws Throwable {
+        assertTrue(cartPage.isOnCartPage(), "User is not on the cart page");
     }
 
 //    @After
