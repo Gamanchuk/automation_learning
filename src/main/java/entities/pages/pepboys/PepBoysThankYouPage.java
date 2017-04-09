@@ -6,8 +6,6 @@ import utils.CommonFunctions;
 import static org.testng.AssertJUnit.assertTrue;
 
 public class PepBoysThankYouPage extends PepBoysBasePage {
-
-
     public void checkPaymentResult() {
         By thanksMsg = By.xpath("//div[contains(@class, 'order-thank-you')]/div");
         waitForElementVisible(thanksMsg, 100);
@@ -17,8 +15,4 @@ public class PepBoysThankYouPage extends PepBoysBasePage {
 
         CommonFunctions.attachScreenshot("Thank You Page");
     }
-
-
-
-
 }

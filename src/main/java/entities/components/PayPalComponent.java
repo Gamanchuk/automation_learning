@@ -35,6 +35,11 @@ public class PayPalComponent extends BaseComponent {
     }
 
     public void confirmationPay() {
+        waitForElementClickable(By.id("confirmButtonTop"));
         getDriver().findElement(By.id("confirmButtonTop")).click();
+    }
+
+    public void logOut() {
+        getDriver().navigate().to("https://sandbox.paypal.com/myaccount/logout");
     }
 }

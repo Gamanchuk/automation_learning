@@ -74,7 +74,7 @@ public class PepBoysCartPage extends PepBoysBasePage {
         ArrayList<String> itemIds = new ArrayList<>();
 
         List<WebElement> items = getDriver().findElements(By.xpath("//tr[contains(@class, 'mw-item-row')]"));
-        if(items.size() != 0) {
+        if (items.size() != 0) {
             for (WebElement item : items) {
                 itemIds.add(item.getAttribute("data-itemid"));
             }
@@ -85,7 +85,7 @@ public class PepBoysCartPage extends PepBoysBasePage {
 
     public void openCartPage() {
         getDriver().navigate().to(BASE_URL + "cart");
-        assertTrue(isPage(), "Cart page was not opened");
+        assertTrue("Shopping Cart not opened", isPage());
     }
 
     public boolean isPage() {

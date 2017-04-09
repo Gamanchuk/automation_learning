@@ -141,6 +141,30 @@ public class PepBoysMainPageSteps {
         }
     }
 
+//    @After
+//    public void cleanUp() {
+//        cartPage.openCartPage();
+//        cartPage.cleanUpCart();
+//        if (TestGlobalsManager.getTestGlobal("authorised") != null) {
+//            mainPage.doLogout();
+//        }
+//    }
+
+    @Then("^user should be on main page$")
+    public void userShouldBeOnMainPage() {
+        assertTrue(mainPage.isPage(), "Main page was not opened");
+        CommonFunctions.attachScreenshot("Main page opened");
+    }
+
+    @And("^user navigates to cart page$")
+    public void userNavigatesToCartPage() {
+        cartPage.openCartPage();
+    }
+
+    @Then("^user should be on cart page$")
+    public void userShouldBeOnCartPage() {
+        assertTrue(cartPage.isPage(), "Shopping Cart not opened");
+    }
     @And("^user should be on cart page$")
     public void userShouldBeOnCartPage() {
         assertTrue(cartPage.isPage(), "Cart page was not opened");
