@@ -7,8 +7,12 @@ public class PepBoysProductPage extends PepBoysBasePage {
     private String productId;
 
     public boolean isPage() {
-        waitForElementVisible(By.xpath("//div[@class='mw-note-value' and text()='" + productId + "']"));
-        return true;
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return isElementVisible(By.xpath("//div[@class='mw-note-value' and text()='" + productId + "']"));
     }
 
     public void openProductPage(String productId) {

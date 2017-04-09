@@ -1,6 +1,5 @@
 package entities.components;
 
-import entities.Entity;
 import org.openqa.selenium.By;
 
 public class BreadcrumbComponent extends BaseComponent {
@@ -19,7 +18,6 @@ public class BreadcrumbComponent extends BaseComponent {
 
     public void clickBreadcrumb(String breadcrumb) {
         getDriver().findElement(getBreadcrumbByName(breadcrumb)).click();
-        waitForBreadcrumbActive(breadcrumb);
     }
 
     public void waitForBreadcrumbActive(String breadcrumb) {

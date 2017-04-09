@@ -51,6 +51,12 @@ public class AllureReporterExt extends AllureReporter {
             if (tag.getName().contains("@TestCaseId"))
                 ids.add(tag.getName().split("\"")[1]);
         }
+
+        log.info("Count @TestCase found: " + ids.size());
+        for (String s : ids) {
+            log.info("@TestCaseId: " + s);
+        }
+
         TestGlobalsManager.setTestGlobal("testCaseIds", ids);
         return ids;
     }

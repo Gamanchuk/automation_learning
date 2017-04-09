@@ -5,6 +5,9 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import entities.components.*;
+import entities.pages.pepboys.PepBoysLoginPage;
+import entities.pages.pepboys.PepBoysMainPage;
+import entities.pages.pepboys.PepBoysThankYouPage;
 import utils.CommonFunctions;
 import utils.TestGlobalsManager;
 import utils.pepboys.BillingUser;
@@ -26,12 +29,15 @@ public class PepBoysCheckoutSteps {
     private ShippingOptionsComponent shippingOptionsComponent = new ShippingOptionsComponent();
     private CreditCardFormComponent creditCardFormComponent = new CreditCardFormComponent();
     private HeaderComponent headerComponent = new HeaderComponent();
+    private FooterComponent footerComponent = new FooterComponent();
     private SignInFormComponent signInFormComponent = new SignInFormComponent();
     private RadioListComponent radioListComponent = new RadioListComponent();
     private PaymentTypesComponent paymentTypesComponent = new PaymentTypesComponent();
     private PayPalWellComponent payPalWellComponent = new PayPalWellComponent();
     private CollapserComponent collapserComponent = new CollapserComponent();
     private CheckboxRowComponent checkboxRowComponent = new CheckboxRowComponent();
+    private RewardSummaryComponent rewardSummaryComponent = new RewardSummaryComponent();
+    private TitleComponent titleComponent = new TitleComponent();
 
     @And("^user types billing info for \"([^\"]*)\"$")
     public void typesBillingInfoFor(String userName) {
@@ -90,22 +96,23 @@ public class PepBoysCheckoutSteps {
 
     @Then("^user should be on thank you page$")
     public void userShouldBeOnThankYouPage() {
-
-        int i = 0;
-
-//        addressFormComponent.checkPaymentResult();
+        PepBoysThankYouPage pepBoysThankYouPage = new PepBoysThankYouPage();
+        pepBoysThankYouPage.checkPaymentResult();
     }
 
     @Given("^user makes authorisation for \"([^\"]*)\"$")
     public void userMakesAuthorisationFor(String userName) {
         BillingUser user = DataProvider.getUser(userName);
         headerComponent.pressSignInButton();
+        assertTrue(signInFormComponent.exist(), "SignIn form component doesn't present");
         signInFormComponent.signIn(user.getEmail(), user.getPassword());
+        buttonComponent.clickButton();
         TestGlobalsManager.setTestGlobal("authorised", true);
     }
 
     @And("^applies billing info for address \"([^\"]*)\"$")
     public void appliesBillingInfo(String address) {
+        assertTrue(radioListComponent.exists(), "Billing Address Drop-Down doesn't exist");
         radioListComponent.select(address);
         CommonFunctions.attachScreenshot("Billing info");
     }
@@ -126,6 +133,7 @@ public class PepBoysCheckoutSteps {
     @And("^user navigates to \"([^\"]*)\" breadcrumb$")
     public void userNavigatesToBreadcrumb(String breadcrumb) {
         breadcrumbWidget.clickBreadcrumb(breadcrumb);
+        CommonFunctions.attachScreenshot("Click Breadcrumb: " + breadcrumb);
     }
 
     @Then("^user checks \"([^\"]*)\" with value \"([^\"]*)\" on \"([^\"]*)\" tab$")
@@ -243,8 +251,94 @@ public class PepBoysCheckoutSteps {
     }
 
     @Given("^failed step$")
-    public void failedStep() throws Throwable {
+    public void failedStep() {
         assertTrue(false);
+    }
+
+    @Given("^user presses the logo$")
+    public void userPressesTheLogo() {
+        headerComponent.pressLogoLink();
+        CommonFunctions.attachScreenshot("Press the logo link");
+    }
+
+    @And("^user logs out from checkout$")
+    public void userLogsOutFromCheckout() {
+        PepBoysMainPage mainPage = new PepBoysMainPage();
+        if (TestGlobalsManager.getTestGlobal("authorised") != null) {
+            mainPage.doLogout();
+            TestGlobalsManager.setTestGlobal("authorised", false);
+        }
+    }
+
+    @Given("^user checks text \"([^\"]*)\" in footer$")
+    public void userChecksTextInFooter(String note) {
+        footerComponent.checkNote(note);
+    }
+
+    @Given("^user checks support number with label \"([^\"]*)\" and number \"([^\"]*)\"$")
+    public void userChecksSupportNumberWithLabelAndNumber(String phoneLabel, String phoneNumber) {
+        footerComponent.checkPhoneNumber(phoneLabel, phoneNumber);
+        //TODO: need found solution for check text in native alert
+        //  footerComponent.pressCall();
+        //footerComponent.checkCallAlert(phoneNumber);
+    }
+
+    @And("^user presses the Shopping Cart icon$")
+    public void userPressesTheShoppingCartIcon() {
+        headerComponent.pressShippingCartIcon();
+        CommonFunctions.attachScreenshot("Open Shipping Cart");
+    }
+
+
+    @Then("^user presses the Find out more link$")
+    public void userPressesTheFindOutMoreLink() {
+        rewardSummaryComponent.clickFindOutMore();
+        CommonFunctions.attachScreenshot("Find Out More");
+    }
+
+    @Given("^user makes authorisation with \"([^\"]*)\" email and \"([^\"]*)\" password$")
+    public void userMakesAuthorisationWithEmailAndPassword(String email, String password) throws Throwable {
+       // headerComponent.pressSignInButton();
+      //  CommonFunctions.attachScreenshot("Press Sign In button");
+        signInFormComponent.signIn(email, password);
+        buttonComponent.clickButton();
+    }
+
+    @And("^user presses the signIn button$")
+    public void userPressesTheSignInButton() {
+        headerComponent.pressSignInButton();
+        assertTrue(signInFormComponent.exist(), "SignIn form component doesn't present");
+    }
+
+    @And("^user presses the Forgot Password link$")
+    public void userPressesTheForgotPasswordLink() {
+        signInFormComponent.pressForgotPasswordLink();
+    }
+
+
+    @And("^user presses the Proceed to Guest Checkout link$")
+    public void userPressesTheProceedToGuestCheckoutLink() {
+        PepBoysLoginPage loginPage = new PepBoysLoginPage();
+        loginPage.proccedToGuestCheckout();
+
+    }
+
+    @Then("^user should be on \"([^\"]*)\" tab$")
+    public void userShouldBeOnTab(String tabName) {
+        breadcrumbWidget.waitForBreadcrumbActive(tabName);
+        assertTrue(breadcrumbWidget.isTabActive(tabName), "Tab " + tabName + " is not an active");
+        CommonFunctions.attachScreenshot("User on [" + tabName + "] tab");
+    }
+
+    @And("^user checks \"([^\"]*)\" shipping method$")
+    public void userChecksShippingMethod(String method) {
+        shippingOptionsComponent.checkShippingOptions(method);
+
+    }
+
+    @Then("^user should be on \"([^\"]*)\" page$")
+    public void userShouldBeOnPage(String pageName) {
+        assertTrue(titleComponent.exists(pageName), "Unexpected Page Title.");
     }
 
     @After
@@ -252,8 +346,4 @@ public class PepBoysCheckoutSteps {
         stopScreenVideo();
         attachScreeVideo("data");
     }
-
-
-
-
 }
