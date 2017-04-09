@@ -141,12 +141,10 @@ public class PepBoysMainPageSteps {
         }
     }
 
-//    @After
-//    public void cleanUp() {
-//        cartPage.openCartPage();
-//        cartPage.cleanUpCart();
-//        if (TestGlobalsManager.getTestGlobal("authorised") != null) {
-//            mainPage.doLogout();
-//        }
-//    }
+    @And("^user should be on cart page$")
+    public void userShouldBeOnCartPage() {
+        assertTrue(cartPage.isPage(), "Cart page was not opened");
+    }
+
+
 }

@@ -1,4 +1,4 @@
-@pepBoys
+@pepBoys @debug
 
 Feature: Existing User - Thank You Page
 
@@ -16,4 +16,5 @@ Feature: Existing User - Thank You Page
     And presses the "Place Order" button
     And user should be on thank you page
     And presses the "Continue" button
+    And user should be on cart page
 
