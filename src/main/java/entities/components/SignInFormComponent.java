@@ -5,14 +5,11 @@ import org.openqa.selenium.WebElement;
 import utils.CommonFunctions;
 
 public class SignInFormComponent extends BaseComponent {
-    // private By signInButton = By.xpath("//div[contains(@class,'submit-button')]//button");
     private By forgotPassword = By.xpath("//div[contains(@class,'login-buttons')]//a");
     private By emailField = By.id("shipping-email");
     private By passwordField = By.id("password");
 
     public void signIn(String email, String password) {
-        waitForElementVisible(passwordField);
-
         WebElement emailFieldEl = getDriver().findElement(emailField);
         emailFieldEl.clear();
         emailFieldEl.sendKeys(email);
@@ -29,5 +26,10 @@ public class SignInFormComponent extends BaseComponent {
         waitForElementClickable(forgotPassword);
         CommonFunctions.attachScreenshot("Login page: Forgot Password");
         getDriver().findElement(forgotPassword).click();
+    }
+
+    public boolean exist() {
+        waitForElementVisible(passwordField);
+        return true;
     }
 }

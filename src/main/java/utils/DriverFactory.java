@@ -81,10 +81,12 @@ public class DriverFactory {
                     if (Config.PLATFORM_NAME.equals("iOS")) {
                         desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
                         desiredCapabilities.setCapability("wdaLocalPort", Integer.parseInt(iproxyPort));
-                        desiredCapabilities.setCapability(IOSMobileCapabilityType.LAUNCH_TIMEOUT, 500000);
+                        desiredCapabilities.setCapability(IOSMobileCapabilityType.LAUNCH_TIMEOUT, 1000000);
                         desiredCapabilities.setCapability("useNewWDA", true);
                         //desiredCapabilities.setCapability("startIWDP", true);
-                        desiredCapabilities.setCapability("preventWDAAttachments", true);
+                        desiredCapabilities.setCapability("showXcodeLog", true);
+                        //desiredCapabilities.setCapability("preventWDAAttachments", true);
+                        //desiredCapabilities.setCapability("xcodeConfigFile", "src/resources/Config.xcconfig");
                         desiredCapabilities.setCapability("xcodeOrgId", "Y95G5M3Q84");
                         //desiredCapabilities.setCapability("xcodeSigningId", "iPhone Developer");
                         //desiredCapabilities.setCapability("updatedWDABundleId", "com.moovweb.WebDriverAgentRunner");
@@ -129,7 +131,7 @@ public class DriverFactory {
             serviceBuilder.usingPort(appiumPort);
             if (Config.PLATFORM_NAME.equals("iOS")) {
                 serviceBuilder.withArgument(IOSServerFlag.WEBKIT_DEBUG_PROXY_PORT, String.valueOf(proxyPort));
-                serviceBuilder.withArgument(GeneralServerFlag.LOG_LEVEL, "warn");
+                //serviceBuilder.withArgument(GeneralServerFlag.LOG_LEVEL, "warn");
                 serviceBuilder.withArgument(GeneralServerFlag.SESSION_OVERRIDE);
             }
 

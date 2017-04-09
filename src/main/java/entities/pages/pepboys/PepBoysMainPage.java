@@ -7,7 +7,7 @@ public class PepBoysMainPage extends PepBoysBasePage {
     private By searchBox = By.id("search-site");
 
     public boolean isPage() {
-        waitForElementVisible(searchBox);
+        waitForElementClickable(searchBox);
         waitForElementVisible(By.xpath("//h2[text()='Popular Categories']"));
         return true;
     }
