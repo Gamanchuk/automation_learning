@@ -81,6 +81,7 @@ public class PepBoysMainPageSteps {
     @And("^user adds to cart product with id \"([^\"]*)\" with \"([^\"]*)\" delivery option$")
     public void userAddsToCartProductWithIdWithDeliveryOption(String id, String deliveryOption) throws Throwable {
         productPage.openProductPage(id);
+        Thread.sleep(2000);
         assertTrue(productPage.isPage(), "Product page was not opened");
         productPage.setDeliveryOption(deliveryOption);
         productPage.addToCart();
