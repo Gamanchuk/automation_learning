@@ -20,25 +20,25 @@ Feature: Sign In page (Pay Online)
   @TestCaseId("15527")
   Scenario: User can't sign in with incorrect/invalid/empty email address and password (Pay Online)
 
-    Given user email "" password "invalid" makes authorisation
+    Given user makes authorisation with "" email and "invalid" password
     Then sees "FORM ERRORS" error message with text "Please review all inputs."
 
-    Given user email "" password "" makes authorisation
+    Given user makes authorisation with "" email and "" password
     Then sees "FORM ERRORS" error message with text "Please review all inputs."
 
-    Given user email "" password "Spear201!" makes authorisation
+    Given user makes authorisation with "" email and "Spear201!" password
     Then sees "FORM ERRORS" error message with text "Please review all inputs."
 
-    Given user email "notqa@moovweb.com" password "" makes authorisation
+    Given user makes authorisation with "notqa@moovweb.com" email and "" password
     Then sees "FORM ERRORS" error message with text "Please review all inputs."
 
-    Given user email "notqa@moovweb.com" password "Spear201!" makes authorisation
+    Given user makes authorisation with "notqa@moovweb.com" email and "Spear201!" password
     Then sees "FORM ERRORS" error message with text "Your login attempt was not successful, try again."
 
-    Given user email "qa@moovweb.com" password "" makes authorisation
+    Given user makes authorisation with "qa@moovweb.com" email and "" password
     Then sees "FORM ERRORS" error message with text "Please review all inputs."
 
-    Given user email "qa@moovweb.com" password "invalid" makes authorisation
+    Given user makes authorisation with "qa@moovweb.com" email and "invalid" password
     Then sees "FORM ERRORS" error message with text "Your login attempt was not successful, try again."
 
     And user presses the Proceed to Guest Checkout link
