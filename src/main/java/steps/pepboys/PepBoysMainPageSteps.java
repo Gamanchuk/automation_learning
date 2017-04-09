@@ -81,6 +81,7 @@ public class PepBoysMainPageSteps {
     @And("^user adds to cart product with id \"([^\"]*)\" with \"([^\"]*)\" delivery option$")
     public void userAddsToCartProductWithIdWithDeliveryOption(String id, String deliveryOption) throws Throwable {
         productPage.openProductPage(id);
+        Thread.sleep(2000);
         assertTrue(productPage.isPage(), "Product page was not opened");
         productPage.setDeliveryOption(deliveryOption);
         productPage.addToCart();
@@ -149,4 +150,20 @@ public class PepBoysMainPageSteps {
 //            mainPage.doLogout();
 //        }
 //    }
+
+    @Then("^user should be on main page$")
+    public void userShouldBeOnMainPage() {
+        assertTrue(mainPage.isPage(), "Main page was not opened");
+        CommonFunctions.attachScreenshot("Main page opened");
+    }
+
+    @And("^user navigates to cart page$")
+    public void userNavigatesToCartPage() {
+        cartPage.openCartPage();
+    }
+
+    @Then("^user should be on cart page$")
+    public void userShouldBeOnCartPage() {
+        assertTrue(cartPage.isPage(), "Shopping Cart not opened");
+    }
 }
