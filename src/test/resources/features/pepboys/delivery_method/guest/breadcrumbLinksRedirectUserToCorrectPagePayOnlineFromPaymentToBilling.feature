@@ -1,4 +1,4 @@
-@pepBoys @debug
+@pepBoys
 
 Feature: Guest - Delivery Method
 
