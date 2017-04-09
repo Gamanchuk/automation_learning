@@ -1,4 +1,4 @@
-@pepBoys
+@pepBoys @debug
 
 Feature: Existing User - Delivery Method
 
@@ -19,21 +19,18 @@ Feature: Existing User - Delivery Method
     And user should be on "Payment & Review" tab
     And user checks "Ground: 5-7 Days" shipping method
     And user navigates to "Delivery Method" breadcrumb
-    And user should be on "Delivery Method" tab
 
     And chooses "Expedited: 2 Days" shipping method
     And presses the "Continue" button
     And user should be on "Payment & Review" tab
     And user checks "Expedited: 2 Days" shipping method
     And user navigates to "Delivery Method" breadcrumb
-    And user should be on "Delivery Method" tab
 
     And chooses "Expedited: 3 Days" shipping method
     And presses the "Continue" button
     And user should be on "Payment & Review" tab
     And user checks "Expedited: 3 Days" shipping method
     And user navigates to "Delivery Method" breadcrumb
-    And user should be on "Delivery Method" tab
 
     And chooses "Next Day: 1 Day" shipping method
     And presses the "Continue" button

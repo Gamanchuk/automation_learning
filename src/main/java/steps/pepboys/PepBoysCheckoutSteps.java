@@ -129,6 +129,12 @@ public class PepBoysCheckoutSteps {
 
     @And("^user navigates to \"([^\"]*)\" breadcrumb$")
     public void userNavigatesToBreadcrumb(String breadcrumb) {
+        this.userPressesBreadcrumbTab(breadcrumb);
+        this.userShouldBeOnTab(breadcrumb);
+    }
+
+    @And("^user presses \"([^\"]*)\" breadcrumb tab$")
+    public void userPressesBreadcrumbTab(String breadcrumb) {
         breadcrumbWidget.clickBreadcrumb(breadcrumb);
         CommonFunctions.attachScreenshot("Click Breadcrumb: " + breadcrumb);
     }

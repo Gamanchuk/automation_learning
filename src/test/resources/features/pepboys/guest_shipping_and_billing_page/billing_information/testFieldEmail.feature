@@ -34,7 +34,6 @@ Feature: Guest - Shipping & Billing page
     And chooses "Use Entered Address"
     Then user checks "Email" with value "123456@moovweb.com" on "Delivery Method" tab
     And user navigates to "Billing & Shipping" breadcrumb
-    And user should be on "Billing & Shipping" tab
 
     And user types "qa@moovweb" into the email field
     And presses the "Continue" button

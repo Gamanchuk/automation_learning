@@ -1,4 +1,4 @@
-@pepBoys
+@pepBoys @debug
 
 Feature: Guest - Delivery Method
 
@@ -16,9 +16,8 @@ Feature: Guest - Delivery Method
     And chooses "Ground: 5-7 Days" shipping method
     And presses the "Continue" button
     And user should be on "Payment & Review" tab
-
     Then user navigates to "Billing & Shipping" breadcrumb
-    And user should be on "Billing & Shipping" tab
+
 
 
 
