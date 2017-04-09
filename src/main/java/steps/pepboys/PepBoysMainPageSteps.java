@@ -1,6 +1,5 @@
 package steps.pepboys;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -110,7 +109,7 @@ public class PepBoysMainPageSteps {
 
     @And("^user adds to cart any tires with \"([^\"]*)\" delivery option for \"([^\"]*)\"$")
     public void userAddsToCartAnyTiresWithDeliveryOptionFor(String deliveryOption, String vehicle) throws Throwable {
-        tiresPage.addSingleTyresToCart();
+        tiresPage.openTiresPage();
         productPage.addToCart();
 
     }
