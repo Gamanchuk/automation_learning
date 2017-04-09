@@ -17,6 +17,8 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
+import static org.testng.AssertJUnit.assertTrue;
+
 public class PepBoysCartPage extends PepBoysBasePage {
 
     public void payUsingPaymentMethod(String method) {
@@ -33,6 +35,9 @@ public class PepBoysCartPage extends PepBoysBasePage {
         if (method.equals("Pay Online")) {
             waitForElementVisible(By.xpath("//button[text()='Continue']"));
             waitForElementClickable(By.xpath("//button[text()='Continue']"));
+        } else if (method.equals("Pay in Store")) {
+            waitForElementVisible(By.xpath("//button[text()='Place Order']"));
+            waitForElementClickable(By.xpath("//button[text()='Place Order']"));
         }
     }
 
@@ -126,7 +131,7 @@ public class PepBoysCartPage extends PepBoysBasePage {
         ArrayList<String> itemIds = new ArrayList<>();
 
         List<WebElement> items = getDriver().findElements(By.xpath("//tr[contains(@class, 'mw-item-row')]"));
-        if(items.size() != 0) {
+        if (items.size() != 0) {
             for (WebElement item : items) {
                 itemIds.add(item.getAttribute("data-itemid"));
             }
@@ -137,7 +142,11 @@ public class PepBoysCartPage extends PepBoysBasePage {
 
     public void openCartPage() {
         getDriver().navigate().to(BASE_URL + "cart");
-        waitForElementVisible(By.xpath("//h1[@class='cartTitle']"));
+        assertTrue("Shopping Cart not opened", isPage());
+    }
+
+    public boolean isPage() {
+        return isElementVisible(By.xpath("//h1[@class='cartTitle']"));
     }
 
     public boolean isOnCartPage() {

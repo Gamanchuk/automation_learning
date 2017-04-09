@@ -81,13 +81,15 @@ public class DriverFactory {
                     if (Config.PLATFORM_NAME.equals("iOS")) {
                         desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
                         desiredCapabilities.setCapability("wdaLocalPort", Integer.parseInt(iproxyPort));
-                        desiredCapabilities.setCapability(IOSMobileCapabilityType.LAUNCH_TIMEOUT, 500000);
+                        desiredCapabilities.setCapability(IOSMobileCapabilityType.LAUNCH_TIMEOUT, 1000000);
                         desiredCapabilities.setCapability("useNewWDA", true);
                         //desiredCapabilities.setCapability("startIWDP", true);
-                        desiredCapabilities.setCapability("preventWDAAttachments", true);
+                        desiredCapabilities.setCapability("showXcodeLog", true);
+                        //desiredCapabilities.setCapability("preventWDAAttachments", true);
+                        //desiredCapabilities.setCapability("xcodeConfigFile", "src/resources/Config.xcconfig");
                         desiredCapabilities.setCapability("xcodeOrgId", "Y95G5M3Q84");
-                        desiredCapabilities.setCapability("xcodeSigningId", "iPhone Developer");
-                        desiredCapabilities.setCapability("updatedWDABundleId", "com.moovweb.WebDriverAgentRunner");
+                        //desiredCapabilities.setCapability("xcodeSigningId", "iPhone Developer");
+                        //desiredCapabilities.setCapability("updatedWDABundleId", "com.moovweb.WebDriverAgentRunner");
                     }
 
                     eventListener = new MyWebDriverEventListener();
@@ -200,7 +202,7 @@ public class DriverFactory {
             try {
                 log.info("Execute command: " + Arrays.toString(iOSProxyCommand.toStrings()));
                 executor.execute(iOSProxyCommand, executeResultHandler);
-                executeResultHandler.waitFor();
+                Thread.sleep(2000);
                 log.info("iOS Proxy started.");
             } catch (IOException | InterruptedException e) {
                 log.error("Cannot execute command: " + Arrays.toString(iOSProxyCommand.toStrings()));

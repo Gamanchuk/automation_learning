@@ -21,12 +21,14 @@ Feature: Guest - Shipping & Billing page
     And chooses "Use Entered Address"
     Then user checks "Street Address" with value "Mission Street" on "Delivery Method" tab
     And user navigates to "Billing & Shipping" breadcrumb
+    And user should be on "Billing & Shipping" tab
 
     And user types "123456" into the "Street Address" field of "Billing Address" address form
     And presses the "Continue" button
     And chooses "Use Entered Address"
     Then user checks "Street Address" with value "123456" on "Delivery Method" tab
     And user navigates to "Billing & Shipping" breadcrumb
+    And user should be on "Billing & Shipping" tab
 
     And user types "!@$%^&*():_+" into the "Street Address" field of "Billing Address" address form
     And presses the "Continue" button

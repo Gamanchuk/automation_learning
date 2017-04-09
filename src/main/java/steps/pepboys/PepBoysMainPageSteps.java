@@ -6,6 +6,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import entities.pages.pepboys.*;
 import utils.CommonFunctions;
+import utils.TestGlobalsManager;
 import utils.pepboys.DataProvider;
 
 import static org.testng.Assert.assertTrue;
@@ -19,6 +20,9 @@ public class PepBoysMainPageSteps {
     private PepBoysProductPage productPage = new PepBoysProductPage();
     private PepBoysCartPage cartPage = new PepBoysCartPage();
     private PepBoysTiresPage tiresPage = new PepBoysTiresPage();
+    private PepBoysForgotPasswordPage forgotPasswordPage = new PepBoysForgotPasswordPage();
+    private PepBoysRewardsPage rewardsPage = new PepBoysRewardsPage();
+    private PepBoysMyAccountPage myAccountPage = new PepBoysMyAccountPage();
 
     @Given("^user makes appoint with code \"([^\"]*)\"$")
     public void userMakesAppointWithCode(String code) {
@@ -77,6 +81,7 @@ public class PepBoysMainPageSteps {
     @And("^user adds to cart product with id \"([^\"]*)\" with \"([^\"]*)\" delivery option$")
     public void userAddsToCartProductWithIdWithDeliveryOption(String id, String deliveryOption) throws Throwable {
         productPage.openProductPage(id);
+        Thread.sleep(2000);
         assertTrue(productPage.isPage(), "Product page was not opened");
         productPage.setDeliveryOption(deliveryOption);
         productPage.addToCart();
@@ -137,6 +142,24 @@ public class PepBoysMainPageSteps {
         assertTrue(cartPage.isOnCartPage(), "User is not on the cart page");
     }
 
+    @Then("^user should be on Forgot Password page$")
+    public void userShouldBeOnForgotPasswordPage() {
+        assertTrue(forgotPasswordPage.isPage(), "Unexpected page. Expected page: [Forgot Password page]");
+        CommonFunctions.attachScreenshot("Forgot Password page");
+    }
+
+    @And("^user should be on rewards page$")
+    public void userShouldBeOnRewardsPage() {
+
+        if (TestGlobalsManager.getTestGlobal("authorised") != null) {
+            assertTrue(myAccountPage.isPage(), "Unexpected page. Expected page: [MyAccount page 'Rewards tab']");
+            CommonFunctions.attachScreenshot("Rewards page");
+        } else {
+            assertTrue(rewardsPage.isPage(), "Unexpected page. Expected page: [Rewards page]");
+            CommonFunctions.attachScreenshot("Rewards page");
+        }
+    }
+
 //    @After
 //    public void cleanUp() {
 //        cartPage.openCartPage();
@@ -145,4 +168,20 @@ public class PepBoysMainPageSteps {
 //            mainPage.doLogout();
 //        }
 //    }
+
+    @Then("^user should be on main page$")
+    public void userShouldBeOnMainPage() {
+        assertTrue(mainPage.isPage(), "Main page was not opened");
+        CommonFunctions.attachScreenshot("Main page opened");
+    }
+
+    @And("^user navigates to cart page$")
+    public void userNavigatesToCartPage() {
+        cartPage.openCartPage();
+    }
+
+    @Then("^user should be on cart page$")
+    public void userShouldBeOnCartPage() {
+        assertTrue(cartPage.isPage(), "Shopping Cart not opened");
+    }
 }
