@@ -1,4 +1,4 @@
-@pepBoys @refactoring
+@pepBoys
 
 Feature: Guest - Shipping & Billing page
 
@@ -22,14 +22,12 @@ Feature: Guest - Shipping & Billing page
     And chooses "Use Entered Address"
     Then user checks city info with value "SanFrancisco" on "Delivery Method" tab
     And user navigates to "Billing & Shipping" breadcrumb
-    And user should be on "Billing & Shipping" tab
 
     And user types "123456" into the "City" field of "Billing Address" form
     And presses the "Continue" button
     And chooses "Use Entered Address"
     Then user checks city info with value "123456" on "Delivery Method" tab
     And user navigates to "Billing & Shipping" breadcrumb
-    And user should be on "Billing & Shipping" tab
 
     And user types "!@$%^&*():_+" into the "City" field of "Billing Address" form
     And presses the "Continue" button
