@@ -1,4 +1,4 @@
-@pepBoys
+@pepBoys 
 
 Feature: Happy Path
 
@@ -19,7 +19,7 @@ Feature: Happy Path
     And presses the "Continue" button
 
     And user should be on "Payment & Review" tab
-#    And user can expand and collapse Order summary
+    And user can expand and collapse Order summary
 
     And user clicks Terms link
     Then user should see Terms modal with "APPLICABLE LAW AND ARBITRATION AGREEMENT"

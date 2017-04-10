@@ -137,11 +137,6 @@ public class PepBoysMainPageSteps {
         cartPage.submitInstallationTime();
     }
 
-    @Then("^user should be on cart page$")
-    public void userShouldBeOnCartPage() throws Throwable {
-        assertTrue(cartPage.isOnCartPage(), "User is not on the cart page");
-    }
-
     @Then("^user should be on Forgot Password page$")
     public void userShouldBeOnForgotPasswordPage() {
         assertTrue(forgotPasswordPage.isPage(), "Unexpected page. Expected page: [Forgot Password page]");

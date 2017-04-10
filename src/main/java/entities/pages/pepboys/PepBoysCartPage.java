@@ -148,8 +148,4 @@ public class PepBoysCartPage extends PepBoysBasePage {
     public boolean isPage() {
         return isElementVisible(By.xpath("//h1[@class='cartTitle']"));
     }
-
-    public boolean isOnCartPage() {
-        return isElementVisible(By.xpath("//h1[text()='Shopping Cart']"));
-    }
 }

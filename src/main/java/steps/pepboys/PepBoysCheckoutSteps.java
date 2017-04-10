@@ -1,5 +1,6 @@
 package steps.pepboys;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -9,7 +10,7 @@ import entities.pages.pepboys.PepBoysPaymentAndReviewCheckoutPage;
 import entities.pages.pepboys.PepBoysThankYouPage;
 import entities.pages.pepboys.PepBoysLoginPage;
 import entities.pages.pepboys.PepBoysMainPage;
-import entities.pages.pepboys.PepBoysThankYouPage;
+import org.openqa.selenium.By;
 import utils.CommonFunctions;
 import utils.TestGlobalsManager;
 import utils.pepboys.BillingUser;
@@ -24,6 +25,7 @@ import java.util.Locale;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 import static utils.CommonFunctions.attachScreeVideo;
+import static utils.DriverFactory.getDriver;
 import static utils.DriverFactory.stopScreenVideo;
 
 public class PepBoysCheckoutSteps {
@@ -51,6 +53,7 @@ public class PepBoysCheckoutSteps {
     private RewardSummaryComponent rewardSummaryComponent = new RewardSummaryComponent();
     private TitleComponent titleComponent = new TitleComponent();
     private ModalComponent modalComponent = new ModalComponent();
+    private RewardsAccountComponent rewardsAccountComponent = new RewardsAccountComponent();
 
     @And("^user types billing info for \"([^\"]*)\"$")
     public void typesBillingInfoFor(String userName) {
@@ -212,13 +215,13 @@ public class PepBoysCheckoutSteps {
 
     @And("^user types rewards number \"([^\"]*)\"$")
     public void userTypesRewardsNumber(String rewardsCode) {
-        collapserComponent.openRewards();
-        collapserComponent.setRewards(rewardsCode);
+        collapserComponent.openCollapser();
+        rewardsAccountComponent.setRewards(rewardsCode);
         CommonFunctions.attachScreenshot("Rewards Number");
     }
 
     @And("^checks payment details for \"([^\"]*)\"$")
-    public void checksPaymentDetails(String userName) throws Throwable {
+    public void checksPaymentDetails(String userName) {
         payPalWellComponent.checkPayPalAccount(DataProvider.getUser(userName).getPaypalEmail());
     }
 
@@ -389,11 +392,6 @@ public class PepBoysCheckoutSteps {
                 "Form " + formTitle + " not found");
     }
 
-    @Then("^user should be on \"([^\"]*)\" tab$")
-    public void userShouldBeOnTab(String tab) throws Throwable {
-        breadcrumbWidget.waitForBreadcrumbActive(tab);
-    }
-
     @And("^user types \"([^\"]*)\" into \"([^\"]*)\" field of Card Form$")
     public void userTypesIntoFieldOfCardForm(String value, String field) {
         creditCardFormComponent.inputValueIntoField(value, field);
@@ -436,5 +434,12 @@ public class PepBoysCheckoutSteps {
         Date installationDate = (Date)TestGlobalsManager.getTestGlobal("installationTime");
         DateFormat df = new SimpleDateFormat("EEE. MM/dd/yyyy @ h:mm a", Locale.ENGLISH);
         assertEquals(paymentAndReviewPage.getInstallationTime(), df.format(installationDate), "Unextpected installation date");
+    }
+
+    @And("^user can expand and collapse Order summary$")
+    public void userCanExpandAndCollapseOrderSummary() {
+        collapserComponent.setRoot(ModalComponent.getComponentByTitle("Order Summary"));
+        collapserComponent.openCollapser();
+        assertTrue(new OrderSummaryComponent().isVisible(), "Order Summary in invisible");
     }
 }
