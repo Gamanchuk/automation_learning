@@ -12,8 +12,8 @@ Feature: Existing User - Delivery Method
   Scenario: Cannot navigate on next Breadcrumbs (Existing User, Pay Online)
     Given user makes authorisation for "qa user"
     And user should be on "Billing & Shipping" tab
-    And user navigates to "Delivery Method" breadcrumb
-    And user navigates to "Payment & Review" breadcrumb
+    And user presses "Delivery Method" breadcrumb tab
+    And user presses "Payment & Review" breadcrumb tab
     Then user should be on "Billing & Shipping" tab
 
 
