@@ -85,7 +85,7 @@ public class PepBoysCartPage extends PepBoysBasePage {
 
     public void openCartPage() {
         getDriver().navigate().to(BASE_URL + "cart");
-        assertTrue("Shopping Cart not opened", isPage());
+        assertTrue(isPage(), "Shopping Cart not opened");
     }
 
     public boolean isPage() {
