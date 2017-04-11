@@ -1,6 +1,6 @@
 @pepBoys @debug
 
-Feature: Guest - Thank You Page
+Feature: Existing User - Thank You Page
 
   Background:
     Given user makes appoint
@@ -8,16 +8,16 @@ Feature: Guest - Thank You Page
     And user views cart
     And chooses "Pay Online" method
 
-  @TestCaseId("15422")
-  Scenario: Links at Thank you page (Guest, Pay Online)
-    Given user types billing info for "qa user"
+  @TestCaseId("15473")
+  @TestCaseId("15471")
+  Scenario: Check button Continue Shopping (Existing User, Pay Online)
+    Given user makes authorisation for "qa user"
+    And applies billing info for address "123 Mission Street, 10th Floor"
     And presses the "Continue" button
-    And chooses "Use Recommended Address"
     And chooses "Ground: 5-7 Days" shipping method
     And presses the "Continue" button
     And uses "visa" card for payment
     And presses the "Place Order" button
     And user should be on thank you page
-    Then user presses the Find out more link
-    And user should be on rewards page
-
+    Then presses the "Continue Shopping" button
+    And user should be on main page

@@ -67,9 +67,9 @@ public class PepBoysCheckoutSteps {
     public void pressesTheButton(String confirmationMethod) {
         buttonComponent.javascriptScroll(200);
         buttonComponent.clickButton();
-        if (!buttonComponent.isOverlayDisplayed()) {
-            buttonComponent.clickButton();
-        }
+//        if (!buttonComponent.isOverlayDisplayed()) {
+//            buttonComponent.clickButton();
+//        }
     }
 
     @And("^chooses \"([^\"]*)\"$")
@@ -98,6 +98,7 @@ public class PepBoysCheckoutSteps {
     public void userShouldBeOnThankYouPage() {
         PepBoysThankYouPage pepBoysThankYouPage = new PepBoysThankYouPage();
         pepBoysThankYouPage.checkPaymentResult();
+        assertTrue(pepBoysThankYouPage.isCollapsed(), "Order collapser not collapsed");
     }
 
     @Given("^user makes authorisation for \"([^\"]*)\"$")

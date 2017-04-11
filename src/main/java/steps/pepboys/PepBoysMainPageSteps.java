@@ -81,7 +81,6 @@ public class PepBoysMainPageSteps {
     @And("^user adds to cart product with id \"([^\"]*)\" with \"([^\"]*)\" delivery option$")
     public void userAddsToCartProductWithIdWithDeliveryOption(String id, String deliveryOption) throws Throwable {
         productPage.openProductPage(id);
-        Thread.sleep(2000);
         assertTrue(productPage.isPage(), "Product page was not opened");
         productPage.setDeliveryOption(deliveryOption);
         productPage.addToCart();
@@ -162,8 +161,10 @@ public class PepBoysMainPageSteps {
         cartPage.openCartPage();
     }
 
-    @Then("^user should be on cart page$")
+    @And("^user should be on cart page$")
     public void userShouldBeOnCartPage() {
-        assertTrue(cartPage.isPage(), "Shopping Cart not opened");
+        assertTrue(cartPage.isPage(), "Cart page was not opened");
     }
+
+
 }
