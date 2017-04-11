@@ -17,6 +17,12 @@ public class PepBoysThankYouPage extends PepBoysBasePage {
         return getDriver().findElement(collapser).getAttribute("class").contains("collapsed");
     }
 
+    public void openCollapser() {
+        if (isCollapsed()) {
+            getDriver().findElement(collapser).click();
+        }
+    }
+
     public String getOrder() {
         return getDriver().findElement(collapser).getText().split("#")[1];
     }
