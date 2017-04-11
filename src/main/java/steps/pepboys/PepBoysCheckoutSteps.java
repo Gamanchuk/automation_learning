@@ -98,6 +98,7 @@ public class PepBoysCheckoutSteps {
     public void userShouldBeOnThankYouPage() {
         PepBoysThankYouPage pepBoysThankYouPage = new PepBoysThankYouPage();
         pepBoysThankYouPage.checkPaymentResult();
+        assertTrue(pepBoysThankYouPage.isCollapsed(), "Order collapser not collapsed");
     }
 
     @Given("^user makes authorisation for \"([^\"]*)\"$")

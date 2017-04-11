@@ -9,6 +9,7 @@ Feature: Existing User - Thank You Page
     And chooses "Pay Online" method
 
   @TestCaseId("15473")
+  @TestCaseId("15471")
   Scenario: Check button Continue Shopping (Existing User, Pay Online)
     Given user makes authorisation for "qa user"
     And applies billing info for address "123 Mission Street, 10th Floor"

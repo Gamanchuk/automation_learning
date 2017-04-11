@@ -9,6 +9,7 @@ Feature: Guest - Thank You Page
     And chooses "Pay in Store" method
 
   @TestCaseId("16662")
+  @TestCaseId("16661")
   Scenario: Check button Continue Shopping (Existing User, Pay in Store)
     Given user types billing info for "qa user"
     And presses the "Place Order" button

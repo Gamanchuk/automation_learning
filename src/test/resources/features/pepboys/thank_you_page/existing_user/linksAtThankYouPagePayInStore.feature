@@ -1,4 +1,4 @@
-@pepBoys
+@pepBoys @debug
 
 Feature: Existing User - Thank You Page
 

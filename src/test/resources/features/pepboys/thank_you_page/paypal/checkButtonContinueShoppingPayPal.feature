@@ -10,6 +10,7 @@ Feature: PayPal - Thank You Page
 
 
   @TestCaseId("15569")
+  @TestCaseId("15567")
   Scenario: Check button Continue Shopping (Guest, PayPal)
     Given user confirms purchase as "qa user" with PayPal
     And chooses "Ground: 5-7 Days" shipping method
