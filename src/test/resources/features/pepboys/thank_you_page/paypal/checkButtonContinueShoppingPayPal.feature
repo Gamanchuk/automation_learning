@@ -1,4 +1,4 @@
-@pepBoys @debug
+@pepBoys
 
 Feature: PayPal - Thank You Page
 

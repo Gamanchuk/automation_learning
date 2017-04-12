@@ -1,5 +1,6 @@
 package utils;
 
+import io.appium.java_client.remote.IOSMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
@@ -81,10 +82,11 @@ public class DriverFactory {
                         desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
                         desiredCapabilities.setCapability("wdaLocalPort", Integer.parseInt(iproxyPort));
                         desiredCapabilities.setCapability("useNewWDA", true);
-                        desiredCapabilities.setCapability("preventWDAAttachments", true);
+                        //desiredCapabilities.setCapability("preventWDAAttachments", true);
+                        desiredCapabilities.setCapability(IOSMobileCapabilityType.LAUNCH_TIMEOUT, 500000);
 
                         //desiredCapabilities.setCapability("startIWDP", true);
-                        //desiredCapabilities.setCapability("showXcodeLog", true);
+                        desiredCapabilities.setCapability("showXcodeLog", true);
                         //desiredCapabilities.setCapability("xcodeConfigFile", "src/resources/Config.xcconfig");
                         desiredCapabilities.setCapability("xcodeOrgId", "Y95G5M3Q84");
                         desiredCapabilities.setCapability("xcodeSigningId", "iPhone Developer");

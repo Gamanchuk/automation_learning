@@ -167,4 +167,9 @@ public class PepBoysMainPageSteps {
     }
 
 
+    @And("^clean up cart$")
+    public void cleanUpCart() {
+        cartPage.openCartPage();
+        cartPage.cleanUpCart();
+    }
 }

@@ -19,7 +19,7 @@ public class AddressDisplayComponent extends BaseComponent {
     private By deliveryEmail = By.xpath("//div[@class='address-email']");
 
     public void checkBillingInfo(String name, String apt, String streetAddress, String cityInfo, String zip, String phone, String email) {
-        waitForElementClickable(By.xpath("//div[contains(@class, 'radio-list') and contains(@class, 'radio-collapsed')]"));
+        //waitForElementClickable(By.xpath("//div[contains(@class, 'radio-list') and contains(@class, 'radio-collapsed')]"));
         getDriver().manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 
         checkFieldValue("Full Name", name);
