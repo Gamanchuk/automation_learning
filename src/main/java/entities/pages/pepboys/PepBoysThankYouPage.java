@@ -36,4 +36,8 @@ public class PepBoysThankYouPage extends PepBoysBasePage {
 
         CommonFunctions.attachScreenshot("Thank You Page");
     }
+
+    public void clickOnReschedule() {
+        getDriver().findElement(By.xpath("//a[contains(@class, 'edit-installation-link')]")).click();
+    }
 }

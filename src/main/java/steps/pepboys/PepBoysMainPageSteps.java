@@ -23,6 +23,8 @@ public class PepBoysMainPageSteps {
     private PepBoysForgotPasswordPage forgotPasswordPage = new PepBoysForgotPasswordPage();
     private PepBoysRewardsPage rewardsPage = new PepBoysRewardsPage();
     private PepBoysMyAccountPage myAccountPage = new PepBoysMyAccountPage();
+    private PepBoysThankYouPage thankYouPage = new PepBoysThankYouPage();
+    private PepBoysTrackingPage trackingPage = new PepBoysTrackingPage();
 
     @Given("^user makes appoint with code \"([^\"]*)\"$")
     public void userMakesAppointWithCode(String code) {

@@ -5,9 +5,7 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import entities.components.*;
-import entities.pages.pepboys.PepBoysLoginPage;
-import entities.pages.pepboys.PepBoysMainPage;
-import entities.pages.pepboys.PepBoysThankYouPage;
+import entities.pages.pepboys.*;
 import utils.CommonFunctions;
 import utils.TestGlobalsManager;
 import utils.pepboys.BillingUser;
@@ -38,6 +36,8 @@ public class PepBoysCheckoutSteps {
     private CheckboxRowComponent checkboxRowComponent = new CheckboxRowComponent();
     private RewardSummaryComponent rewardSummaryComponent = new RewardSummaryComponent();
     private TitleComponent titleComponent = new TitleComponent();
+
+    private PepBoysThankYouPage pepBoysThankYouPage = new PepBoysThankYouPage();
 
     @And("^user types billing info for \"([^\"]*)\"$")
     public void typesBillingInfoFor(String userName) {
@@ -96,9 +96,25 @@ public class PepBoysCheckoutSteps {
 
     @Then("^user should be on thank you page$")
     public void userShouldBeOnThankYouPage() {
-        PepBoysThankYouPage pepBoysThankYouPage = new PepBoysThankYouPage();
         pepBoysThankYouPage.checkPaymentResult();
         assertTrue(pepBoysThankYouPage.isCollapsed(), "Order collapser not collapsed");
+    }
+
+    @And("^user presses the reschedule link$")
+    public void userPressesTheRescheduleLink() {
+        PepBoysTrackingPage trackingPage = new PepBoysTrackingPage();
+        PepBoysMyAccountPage myAccountPage = new PepBoysMyAccountPage();
+        pepBoysThankYouPage.openCollapser();
+        pepBoysThankYouPage.clickOnReschedule();
+        CommonFunctions.attachScreenshot("Click on Reschedule Link");
+
+        if (TestGlobalsManager.getTestGlobal("authorised") != null) {
+            assertTrue(myAccountPage.isPage(), "Unexpected page. Expected page: [MyAccount page 'Rewards tab']");
+            CommonFunctions.attachScreenshot("Rewards page");
+        } else {
+            assertTrue(trackingPage.isPage(), "Tracking page not opened");
+            CommonFunctions.attachScreenshot("Tracking page opened");
+        }
     }
 
     @Given("^user makes authorisation for \"([^\"]*)\"$")
@@ -326,7 +342,7 @@ public class PepBoysCheckoutSteps {
     @And("^user presses the Proceed to Guest Checkout link$")
     public void userPressesTheProceedToGuestCheckoutLink() {
         PepBoysLoginPage loginPage = new PepBoysLoginPage();
-        loginPage.proccedToGuestCheckout();
+        loginPage.proceedToGuestCheckout();
 
     }
 

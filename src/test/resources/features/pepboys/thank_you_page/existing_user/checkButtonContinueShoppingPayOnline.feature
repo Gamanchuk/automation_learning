@@ -14,8 +14,6 @@ Feature: Existing User - Thank You Page
     Given user makes authorisation for "qa user"
     And applies billing info for address "123 Mission Street, 10th Floor"
     And presses the "Continue" button
-    And chooses "Ground: 5-7 Days" shipping method
-    And presses the "Continue" button
     And uses "visa" card for payment
     And presses the "Place Order" button
     And user should be on thank you page
