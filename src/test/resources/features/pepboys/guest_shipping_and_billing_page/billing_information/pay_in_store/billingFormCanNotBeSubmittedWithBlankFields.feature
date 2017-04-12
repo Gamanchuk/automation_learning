@@ -1,4 +1,5 @@
-@pepBoys @debug1
+@pepBoys @debug
+
 Feature: Guest - Shipping & Billing page (Pay In Store)
 
   Background:

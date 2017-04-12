@@ -10,17 +10,16 @@ Feature: Guest - Shipping & Billing page (Pay In Store)
     And chooses "Pay in Store" method
 
   @TestCaseId("16644")
-  Scenario Outline: Test field 'Last name'
+  Scenario: Test field 'Last name'
     Given user types billing info for "qa user"
-    And user types "<string>" into the "Full Name" field of "Billing Address" form
+    And user types "Moovweb " into the "Full Name" field of "Billing Address" form
     And presses the "Place Order" button
-    And sees "FORM ERRORS" error message with text "<error>"
+    And sees "FORM ERRORS" error message with text "Please review all inputs."
 
+    And user types "Moovweb !@#&::!@#()" into the "Full Name" field of "Billing Address" form
+    And presses the "Place Order" button
+    And sees "FORM ERRORS" error message with text "Last Name is invalid"
 
-    Examples:
-      | string              | error                     |
-      | Moovweb             | Please review all inputs. |
-      | Moovweb !@#&::!@#() | Last Name is invalid      |
 
 
 

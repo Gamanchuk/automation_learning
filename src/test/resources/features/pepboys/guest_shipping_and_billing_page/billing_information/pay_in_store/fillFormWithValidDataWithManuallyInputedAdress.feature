@@ -5,7 +5,7 @@ Feature: Guest - Shipping & Billing page (Pay In Store)
 
   Background:
     Given user makes appoint
-    And user adds to cart product with id "8322906" with "Pick Up in Store" delivery option
+    And user adds to cart product with id "9423853" with "Pick Up in Store" delivery option
     And user views cart
     And chooses "Pay in Store" method
 
