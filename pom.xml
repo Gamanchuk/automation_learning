@@ -297,7 +297,7 @@
         <profile>
             <id>env-adam-local</id>
             <properties>
-                <testing.env>nexus_5x</testing.env>
+                <testing.env>adam_local</testing.env>
             </properties>
         </profile>
         <profile>
@@ -320,6 +320,14 @@
                 <props.file.name>iphone6</props.file.name>
             </properties>
         </profile>
+
+        <profile>
+            <id>device-Nexus-5X</id>
+            <properties>
+                <props.file.name>nexus_5x.properties</props.file.name>
+            </properties>
+        </profile>
+
         <profile>
             <id>device-GalaxyS6</id>
             <properties>
