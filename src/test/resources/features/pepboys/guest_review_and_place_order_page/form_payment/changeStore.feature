@@ -1,28 +1,23 @@
-@pepBoys 
+@pepBoys @debug
 
 Feature: Happy Path
 
   Background:
     Given user makes appoint
-    And user adds to cart any tires with "Installation" delivery option for "captiva"
+    And user adds to cart product with "Pick Up in Store" delivery option
     And user views cart
-    And user schedules installation time
-    And chooses "Pay Online" method with appointment details
+    And chooses "Pay in Store" method
 
   @TestCaseId("15415")
   Scenario: Edit installation time
     Given user types billing info for "qa user"
-    And presses the "Continue" button
-    And chooses "Use Recommended Address"
-    And user checks installation time
-    And user clicks arrow for "Installation"
+    And user clicks arrow for "Pick Up in Store"
+    And user should be on cart page
+    And user changes store
+    And chooses "Pay in Store" method
 
-    Then user should be on cart page
-    And user updates installation time
-    And chooses "Pay Online" method with appointment details
-    And presses the "Continue" button
-    And user should be on "Payment & Review" tab
-    And user checks installation time
+#    Then user types billing info for "qa user"
+    And checks Pick Up in Store info
 
 
 

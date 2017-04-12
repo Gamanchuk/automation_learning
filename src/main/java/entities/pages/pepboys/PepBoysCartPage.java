@@ -22,6 +22,8 @@ import static org.testng.AssertJUnit.assertTrue;
 public class PepBoysCartPage extends PepBoysBasePage {
 
     public void payUsingPaymentMethod(String method) {
+        waitForAjax();
+
         if (method.equals("Pay Online")) {
             click(By.id("j-payOnline"));
         } else if (method.equals("PayPal")) {
@@ -127,6 +129,34 @@ public class PepBoysCartPage extends PepBoysBasePage {
         }
     }
 
+    public void openCartPage() {
+        getDriver().navigate().to(BASE_URL + "cart");
+        assertTrue("Shopping Cart not opened", isPage());
+    }
+
+    public boolean isPage() {
+        return isElementVisible(By.xpath("//h1[@class='cartTitle']"));
+    }
+
+    public boolean isPayInStoreUnavailableMessageDisplayed() {
+        return isElementVisible(By.xpath("//div[contains(text(), 'the Pay in Store option is not available')]"), 1);
+    }
+
+    public void changeLocation() {
+        findElement(By.cssSelector("a.changeTargetStore")).click();
+        waitForElementVisible(By.cssSelector("div.modal-dialog"));
+        By chooseStoreButton = By.cssSelector("button.j-chooseStore");
+        if(isElementVisible(chooseStoreButton)) {
+            WebElement chooseStoreButtonEl = findElement(chooseStoreButton);
+            String storeId = chooseStoreButtonEl.getAttribute("data-store");
+            TestGlobalsManager.setTestGlobal("storeId", storeId);
+            chooseStoreButtonEl.click();
+        } else {
+            // TODO: 12.04.17 Search store by zip code
+        }
+        waitForElementHidden(By.cssSelector("div.modal-dialog"));
+    }
+
     private ArrayList<String> getItemIds() {
         ArrayList<String> itemIds = new ArrayList<>();
 
@@ -138,14 +168,5 @@ public class PepBoysCartPage extends PepBoysBasePage {
         }
 
         return itemIds;
-    }
-
-    public void openCartPage() {
-        getDriver().navigate().to(BASE_URL + "cart");
-        assertTrue("Shopping Cart not opened", isPage());
-    }
-
-    public boolean isPage() {
-        return isElementVisible(By.xpath("//h1[@class='cartTitle']"));
     }
 }

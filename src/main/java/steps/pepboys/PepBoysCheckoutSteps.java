@@ -442,4 +442,9 @@ public class PepBoysCheckoutSteps {
         collapserComponent.openCollapser();
         assertTrue(new OrderSummaryComponent().isVisible(), "Order Summary in invisible");
     }
+
+    @And("^checks Pick Up in Store info$")
+    public void checksPickUpInStoreInfo() {
+        paymentAndReviewPage.checkPickUpInStoreInfo();
+    }
 }

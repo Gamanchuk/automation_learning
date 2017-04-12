@@ -2,6 +2,7 @@ package utils.pepboys;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class DataProvider {
     private static Map<String, BillingUser> users = new HashMap<String, BillingUser>(){{
@@ -87,15 +88,58 @@ public class DataProvider {
     }};
 
     private static Map<String, Vehicle> vehicles = new HashMap<String, Vehicle>() {{
-       put("captiva", new Vehicle(
-               "2014",
-               "CHEVROLET",
-               "CAPTIVA",
-               "4-146  2.4L DOHC",
-               "4WD/AWD",
-               "LS, LT"
-       ));
+        put("captiva", new Vehicle(
+                "2014",
+                "CHEVROLET",
+                "CAPTIVA",
+                "4-146  2.4L DOHC",
+                "4WD/AWD",
+                "LS, LT"
+        ));
     }};
+
+    private static String [] items = {
+            "787226",
+            "787233",
+            "785244",
+            "9011450",
+            "8322906",
+            "1231825",
+            "627470",
+            "627487",
+            "627494",
+            "627463",
+            "832661",
+            "9983690",
+            "9046614",
+            "9654183",
+            "9856226",
+            "9983676",
+            "9663165",
+            "9663189",
+            "9046571",
+            "9856240",
+            "47407",
+            "9856507",
+            "46866",
+            "9046557",
+            "800282",
+            "936477",
+            "619277",
+            "619284",
+            "619303",
+            "619310",
+            "9307698",
+            "9655155",
+            "9423853",
+            "9655162",
+            "401582",
+            "617219",
+            "9654826",
+            "186838",
+            "186821",
+            "186845"
+    };
 
     public static BillingUser getUser(String userName) {
         return users.get(userName);
@@ -107,5 +151,10 @@ public class DataProvider {
 
     public static Vehicle getVehicle(String model) {
         return vehicles.get(model);
+    }
+
+    public static String getRandomItemId() {
+        int itemNumber = ThreadLocalRandom.current().nextInt(0, items.length);
+        return items[itemNumber];
     }
 }
