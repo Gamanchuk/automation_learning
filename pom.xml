@@ -324,7 +324,7 @@
         <profile>
             <id>device-Nexus-5X</id>
             <properties>
-                <props.file.name>nexus_5x.properties</props.file.name>
+                <props.file.name>nexus_5x</props.file.name>
             </properties>
         </profile>
 
