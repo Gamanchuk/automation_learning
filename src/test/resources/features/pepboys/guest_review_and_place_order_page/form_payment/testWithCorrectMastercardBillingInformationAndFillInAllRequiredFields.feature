@@ -1,6 +1,6 @@
 @pepBoys 
 
-Feature: Happy Path
+Feature: GUEST - REVIEW & PLACE ORDER PAGE
 
   Background:
     Given user makes appoint

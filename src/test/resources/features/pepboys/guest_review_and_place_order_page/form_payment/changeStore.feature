@@ -1,6 +1,6 @@
-@pepBoys @debug
+@pepBoys
 
-Feature: Happy Path
+Feature: GUEST - REVIEW & PLACE ORDER PAGE
 
   Background:
     Given user makes appoint
@@ -8,7 +8,7 @@ Feature: Happy Path
     And user views cart
     And chooses "Pay in Store" method
 
-  @TestCaseId("15415")
+  @TestCaseId("15416")
   Scenario: Edit installation time
     Given user types billing info for "qa user"
     And user clicks arrow for "Pick Up in Store"

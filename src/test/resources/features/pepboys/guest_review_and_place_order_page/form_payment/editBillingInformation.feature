@@ -1,6 +1,6 @@
 @pepBoys
 
-Feature: Happy Path
+Feature: GUEST - REVIEW & PLACE ORDER PAGE
 
   Background:
     Given user makes appoint
@@ -8,7 +8,7 @@ Feature: Happy Path
     And user views cart
     And chooses "Pay Online" method
 
-  @TestCaseId("15403")
+  @TestCaseId("15413")
   Scenario: Test field "Card Number"
     Given user types billing info for "qa user"
     And presses the "Continue" button

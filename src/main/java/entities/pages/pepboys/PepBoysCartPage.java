@@ -58,12 +58,6 @@ public class PepBoysCartPage extends PepBoysBasePage {
     }
 
     public void selectInstallationTime() {
-        // We are going to install tires in 3 days
-//        Date date = TestGlobalsManager.getTestGlobal("installationTime") == null
-//                ? new Date()
-//                : (Date) TestGlobalsManager.getTestGlobal("installationTime");
-
-
         By latestDay = By.xpath("(//div[@class='dateHeader'])[5]");
         waitForElementVisible(latestDay);
         findElement(latestDay).click();
