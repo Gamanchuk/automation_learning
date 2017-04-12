@@ -144,8 +144,9 @@ public class PepBoysCheckoutSteps {
     public void userMakesAuthorisationFor(String userName) {
         BillingUser user = DataProvider.getUser(userName);
         headerComponent.pressSignInButton();
-        assertTrue(signInFormComponent.exist(), "SignIn form component doesn't present");
+        assertTrue(signInFormComponent.exist(), "Sign In form component doesn't present");
         signInFormComponent.signIn(user.getEmail(), user.getPassword());
+        CommonFunctions.attachScreenshot("Set [" + user.getEmail() + "] email and [" + user.getPassword() + "] password");
         buttonComponent.clickButton();
         TestGlobalsManager.setTestGlobal("authorised", true);
     }
@@ -172,6 +173,12 @@ public class PepBoysCheckoutSteps {
 
     @And("^user navigates to \"([^\"]*)\" breadcrumb$")
     public void userNavigatesToBreadcrumb(String breadcrumb) {
+        this.userPressesBreadcrumbTab(breadcrumb);
+        this.userShouldBeOnTab(breadcrumb);
+    }
+
+    @And("^user presses \"([^\"]*)\" breadcrumb tab$")
+    public void userPressesBreadcrumbTab(String breadcrumb) {
         breadcrumbWidget.clickBreadcrumb(breadcrumb);
         CommonFunctions.attachScreenshot("Click Breadcrumb: " + breadcrumb);
     }
@@ -337,9 +344,8 @@ public class PepBoysCheckoutSteps {
 
     @Given("^user makes authorisation with \"([^\"]*)\" email and \"([^\"]*)\" password$")
     public void userMakesAuthorisationWithEmailAndPassword(String email, String password) throws Throwable {
-       // headerComponent.pressSignInButton();
-      //  CommonFunctions.attachScreenshot("Press Sign In button");
         signInFormComponent.signIn(email, password);
+        CommonFunctions.attachScreenshot("Set [" + email + "] email and [" + password + "] password");
         buttonComponent.clickButton();
     }
 

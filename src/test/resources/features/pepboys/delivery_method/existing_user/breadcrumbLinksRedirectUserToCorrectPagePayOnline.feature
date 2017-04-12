@@ -18,10 +18,8 @@ Feature: Existing User - Delivery Method
     And user should be on "Payment & Review" tab
 
     Then user navigates to "Delivery Method" breadcrumb
-    And user should be on "Delivery Method" tab
+    And user navigates to "Billing & Shipping" breadcrumb
 
-    Then user navigates to "Billing & Shipping" breadcrumb
-    And user should be on "Billing & Shipping" tab
 
 
 
