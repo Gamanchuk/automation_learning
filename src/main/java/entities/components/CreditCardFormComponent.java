@@ -1,7 +1,6 @@
 package entities.components;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import utils.CommonFunctions;
 
 public class CreditCardFormComponent extends BaseComponent {
@@ -10,14 +9,13 @@ public class CreditCardFormComponent extends BaseComponent {
     private By exp = By.id("cc-exp");
     private By csc = By.id("cc-csc");
     private By ccName = By.id("-cc-name");
+    private By cardForm = By.xpath("//div[contains(@class, 'credit-card-form')]");
+
 
     public void inputPaymentDetails(String number, String expDate, String cvv, String cardholderName) {
         waitForElementVisible(ccNumber);
 
-        WebElement cardNumberEl = getDriver().findElement(ccNumber);
-        cardNumberEl.sendKeys(number);
-
-
+        getDriver().findElement(ccNumber).sendKeys(number);
         getDriver().findElement(exp).sendKeys(expDate);
         getDriver().findElement(csc).sendKeys(cvv);
 
@@ -27,8 +25,8 @@ public class CreditCardFormComponent extends BaseComponent {
             getDriver().findElement(ccName).sendKeys(cardholderName);
         }
 
-        cardNumberEl.click();
 
+        getDriver().findElement(cardForm).click();
         CommonFunctions.attachScreenshot("Payment details");
     }
 }
