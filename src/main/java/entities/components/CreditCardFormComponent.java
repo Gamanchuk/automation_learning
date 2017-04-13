@@ -9,7 +9,6 @@ public class CreditCardFormComponent extends BaseComponent {
     private By exp = By.id("cc-exp");
     private By csc = By.id("cc-csc");
     private By ccName = By.id("-cc-name");
-    private By cardForm = By.xpath("//div[contains(@class, 'credit-card-form')]");
 
 
     public void inputPaymentDetails(String number, String expDate, String cvv, String cardholderName) {
@@ -24,9 +23,6 @@ public class CreditCardFormComponent extends BaseComponent {
             getDriver().findElement(ccName).clear();
             getDriver().findElement(ccName).sendKeys(cardholderName);
         }
-
-
-        getDriver().findElement(cardForm).click();
         CommonFunctions.attachScreenshot("Payment details");
     }
 }
