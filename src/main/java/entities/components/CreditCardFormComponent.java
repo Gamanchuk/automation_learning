@@ -24,7 +24,7 @@ public class CreditCardFormComponent extends BaseComponent {
         }
 
 
-        focusOut();
+        focusOut(getDriver().findElement(exp));
 
         CommonFunctions.attachScreenshot("Payment details");
     }
