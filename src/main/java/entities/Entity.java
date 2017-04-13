@@ -230,7 +230,7 @@ public abstract class Entity {
     }
 
     public void focusOut() {
-        driver.findElement(By.cssSelector("body")).click();
+        driver.findElement(By.cssSelector("head")).click();
         driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
     }
 

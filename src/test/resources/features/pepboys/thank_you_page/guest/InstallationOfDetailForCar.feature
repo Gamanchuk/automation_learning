@@ -11,7 +11,7 @@ Feature: Guest - Thank You Page
     And chooses "Pay Online" method with appointment details
 
   @TestCaseId("15420")
-  Scenario: Place Multiple Orders as exist user
+  Scenario: Installation of detail for car
     Given user types billing info for "qa user"
     And presses the "Continue" button
     And chooses "Use Recommended Address"

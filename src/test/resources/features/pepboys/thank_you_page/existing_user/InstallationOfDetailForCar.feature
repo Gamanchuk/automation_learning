@@ -11,7 +11,7 @@ Feature: Existing User - Thank You Page
     And chooses "Pay Online" method with appointment details
 
   @TestCaseId("15420")
-  Scenario: Place Multiple Orders as exist user
+  Scenario: Installation of detail for car
     Given user makes authorisation for "qa user"
     And applies billing info for address "123 Mission Street, 10th Floor"
     And presses the "Continue" button

@@ -1,4 +1,4 @@
-@pepBoys @debug1
+@pepBoys @debug
 
 
 Feature: PayPal - Thank You Page
@@ -11,7 +11,7 @@ Feature: PayPal - Thank You Page
     And chooses "Pay Online" method
 
   @TestCaseId("15420")
-  Scenario: Place Multiple Orders as exist user
+  Scenario: Installation of detail for car
     Given user types billing info for "qa user"
     And presses the "Continue" button
     And uses PayPal for payment
