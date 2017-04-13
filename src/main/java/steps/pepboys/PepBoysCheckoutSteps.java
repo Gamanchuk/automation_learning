@@ -65,7 +65,7 @@ public class PepBoysCheckoutSteps {
 
     @And("^presses the \"([^\"]*)\" button$")
     public void pressesTheButton(String confirmationMethod) {
-        //buttonComponent.javascriptScroll(200);
+        buttonComponent.javascriptScroll(200);
         buttonComponent.clickButton();
 //        if (!buttonComponent.isOverlayDisplayed()) {
 //            buttonComponent.clickButton();
