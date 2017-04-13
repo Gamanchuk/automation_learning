@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.DriverFactory;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public abstract class Entity {
 
@@ -230,12 +231,7 @@ public abstract class Entity {
 
     public void focusOut() {
         driver.findElement(By.cssSelector("body")).click();
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        //driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
+        driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
     }
 
 

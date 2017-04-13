@@ -78,6 +78,7 @@ public class DriverFactory {
                     desiredCapabilities.setCapability(MobileCapabilityType.UDID, deviceUdid);
                     desiredCapabilities.setCapability("unicodeKeyboard", true);
                     desiredCapabilities.setCapability("resetKeyboard", true);
+                    desiredCapabilities.setCapability("clearSystemFiles", true);
 
 
 

@@ -1,12 +1,14 @@
 package entities.components;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 public class ButtonComponent extends BaseComponent {
     private By btn = By.xpath("//div[contains(@class, 'submit-button')]//button");
 
     public void clickButton() {
-        getDriver().findElements(btn).get(0).click();
+        WebElement element = getDriver().findElements(btn).get(0);
+        element.click();
     }
 
     public boolean isOverlayDisplayed() {
