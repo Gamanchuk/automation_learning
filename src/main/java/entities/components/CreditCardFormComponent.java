@@ -18,14 +18,14 @@ public class CreditCardFormComponent extends BaseComponent {
         getDriver().findElement(csc).sendKeys(cvv);
 
         // Element must be displayed if you pay as registered user
-        if (getDriver().findElement(ccName).isDisplayed()) {
-            getDriver().findElement(ccName).clear();
-            getDriver().findElement(ccName).sendKeys(cardholderName);
-        }
+//        if (getDriver().findElement(ccName).isDisplayed()) {
+//            getDriver().findElement(ccName).clear();
+//            getDriver().findElement(ccName).sendKeys(cardholderName);
+        //}
 
 
         focusOut();
-        
+
         CommonFunctions.attachScreenshot("Payment details");
     }
 }
