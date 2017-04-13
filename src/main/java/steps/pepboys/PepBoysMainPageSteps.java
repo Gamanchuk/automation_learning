@@ -133,7 +133,6 @@ public class PepBoysMainPageSteps {
 
     @And("^user should be on rewards page$")
     public void userShouldBeOnRewardsPage() {
-
         if (TestGlobalsManager.getTestGlobal("authorised") != null) {
             assertTrue(myAccountPage.isPage(), "Unexpected page. Expected page: [MyAccount page 'Rewards tab']");
             CommonFunctions.attachScreenshot("Rewards page");

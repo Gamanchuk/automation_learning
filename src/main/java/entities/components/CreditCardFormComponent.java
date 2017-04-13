@@ -23,8 +23,9 @@ public class CreditCardFormComponent extends BaseComponent {
             getDriver().findElement(ccName).sendKeys(cardholderName);
         }
 
+
         focusOut();
-//        focusOut();
+        
         CommonFunctions.attachScreenshot("Payment details");
     }
 }

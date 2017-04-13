@@ -1,4 +1,4 @@
-@pepBoys @debug
+@pepBoys @debug1
 
 Feature: Guest - Thank You Page
 

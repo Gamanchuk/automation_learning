@@ -192,7 +192,7 @@ public class PepBoysCheckoutSteps {
     }
 
     @And("^user types \"([^\"]*)\" into the email field$")
-    public void userTypesIntoTheEmailField(String email) throws Throwable {
+    public void userTypesIntoTheEmailField(String email) {
         emailComponent.fillEmailField(email);
 
         CommonFunctions.attachScreenshot(String.format("Input '%s' into email field", email));
@@ -206,7 +206,7 @@ public class PepBoysCheckoutSteps {
     }
 
     @And("^checks payment details for \"([^\"]*)\"$")
-    public void checksPaymentDetails(String userName) throws Throwable {
+    public void checksPaymentDetails(String userName) {
         payPalWellComponent.checkPayPalAccount(DataProvider.getUser(userName).getPaypalEmail());
     }
 

@@ -76,6 +76,10 @@ public class DriverFactory {
                     desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, platformName);
                     desiredCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, deviceName);
                     desiredCapabilities.setCapability(MobileCapabilityType.UDID, deviceUdid);
+                    desiredCapabilities.setCapability("unicodeKeyboard", true);
+                    desiredCapabilities.setCapability("resetKeyboard", true);
+
+
 
                     if (Config.PLATFORM_NAME.equals("iOS")) {
                         desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
