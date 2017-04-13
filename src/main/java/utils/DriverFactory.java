@@ -84,7 +84,7 @@ public class DriverFactory {
                         desiredCapabilities.setCapability("preventWDAAttachments", true);
 
                         //desiredCapabilities.setCapability("startIWDP", true);
-                        //desiredCapabilities.setCapability("showXcodeLog", true);
+                        desiredCapabilities.setCapability("showXcodeLog", true);
                         //desiredCapabilities.setCapability("xcodeConfigFile", "src/resources/Config.xcconfig");
                         desiredCapabilities.setCapability("xcodeOrgId", "Y95G5M3Q84");
                         desiredCapabilities.setCapability("xcodeSigningId", "iPhone Developer");
