@@ -5,7 +5,7 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 @CucumberOptions (
         features = "src/test/resources/features/",
         glue = "steps",
-        tags = "@debug1"
+        tags = "@debug"
 )
 class DebugCukesRunnerTest extends AbstractTestNGCucumberTests {
 
