@@ -7,25 +7,22 @@ import utils.CommonFunctions;
 import java.util.List;
 
 public class RadioListComponent extends BaseComponent {
-    private String selectedOptionPath = "//div[contains(@class, 'radio-list-option-selected')]";
+    private By currentItem = By.cssSelector(".radio-list-option-selected div");
+
 
     public void select(String option) {
+        By selectedItem = By.cssSelector(".radio-list-option-selected>div>div");
+        By item = By.cssSelector(".radio-list-details>div");
 
-        String itemPath = "//div[contains(@class, 'radio-list-option')]";
-        String itemDetailsPath = "//div[contains(@class, 'radio-list-details')]";
-        String itemListPath = "//div[contains(@class, 'radio-expanded')]";
-
-
-        String actualItem = getDriver()
-                .findElement(By.xpath(selectedOptionPath + itemDetailsPath + "//div"))
+        String actualItem = findElement(selectedItem)
                 .getText();
 
         if (!actualItem.contains(option)) {
-            getDriver().findElement(By.xpath(selectedOptionPath)).click();
+            findElement(currentItem).click();
             CommonFunctions.attachScreenshot("List methods");
 
-            List<WebElement> listWebElement = getDriver()
-                    .findElements(By.xpath(itemListPath + itemPath + itemDetailsPath + "//div"));
+            List<WebElement> listWebElement = findElements(item);
+            log.info("Size [listWebElement]: " + listWebElement.size());
 
             for (WebElement element : listWebElement) {
                 if (element.getText().contains(option)) {
@@ -43,6 +40,6 @@ public class RadioListComponent extends BaseComponent {
     }
 
     public boolean exists() {
-        return isElementVisible(By.xpath(selectedOptionPath));
+        return isElementVisible(currentItem);
     }
 }

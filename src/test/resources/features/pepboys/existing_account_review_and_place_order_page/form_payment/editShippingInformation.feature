@@ -1,6 +1,6 @@
 @pepBoys @debug
 
-Feature: GUEST - REVIEW & PLACE ORDER PAGE
+Feature: EXISTING ACCOUNT - REVIEW & PLACE ORDER PAGE
 
   Background:
     Given user makes appoint
@@ -8,22 +8,26 @@ Feature: GUEST - REVIEW & PLACE ORDER PAGE
     And user views cart
     And chooses "Pay Online" method
 
-  @TestCaseId("15412")
+  @TestCaseId("15465")
   Scenario: Test field "Card Number"
-    Given user types billing info for "qa user"
-    And user types shipping info for "qa user"
+    Given user makes authorisation for "qa user"
+    And applies shipping info for address "123 Mission Street, 10th Floor"
     And presses the "Continue" button
-    And chooses "Use Recommended Address"
 
-    And chooses "Ground" shipping method
+    And chooses "Ground: 5-7 Days" shipping method
     And presses the "Continue" button
+    And user should be on "Payment & Review" tab
+
 
     And user clicks arrow for "Shipping Address"
-    And user types manually shipping info for "qa user2"
+    And applies shipping info for address "8th avenue, Unit 1611"
     And presses the "Continue" button
-    And chooses "Use Recommended Address"
 
-    And chooses "Ground" shipping method
+    And chooses "Ground: 5-7 Days" shipping method
     And presses the "Continue" button
-    And user checks shipping info for "qa user2"
+
+    Then user should be on "Payment & Review" tab
+    And user checks shipping info for "qa user3"
+
+
 

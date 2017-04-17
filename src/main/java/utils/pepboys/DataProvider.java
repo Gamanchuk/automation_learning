@@ -38,6 +38,22 @@ public class DataProvider {
                 "manytu2012-buy@gmail.com",
                 "q1q1q1q1"
         ));
+        put("qa user3", new BillingUser(
+                "Qa",
+                "moovweb",
+                "Qa moovweb",
+                "8th avenue",
+                "New york",
+                "NY",
+                "10018",
+                "Unit 1611",
+                "5122014321",
+                "qa@moovweb.com",
+                "New york NY 10018",
+                "Spear201!",
+                "manytu2012-buy@gmail.com",
+                "q1q1q1q1"
+        ));
         put("invalidQaUser", new BillingUser(
                 "Moovweb",
                 "!@&$)();:@!",
