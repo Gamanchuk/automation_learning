@@ -1,6 +1,6 @@
 @pepBoys @debug
 
-Feature: GUEST - REVIEW & PLACE ORDER PAGE
+Feature: EXISTING ACCOUNT - REVIEW & PLACE ORDER PAGE
 
   Background:
     Given user makes appoint
