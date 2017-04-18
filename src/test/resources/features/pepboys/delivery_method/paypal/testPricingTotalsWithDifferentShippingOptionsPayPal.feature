@@ -1,6 +1,6 @@
 @pepBoys
 
-Feature: PayPal - Delivery Method
+Feature: PAYPAL - DELIVERY METHOD
 
   Background:
     Given user makes appoint
