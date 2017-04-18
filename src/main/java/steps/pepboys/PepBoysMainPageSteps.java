@@ -1,6 +1,5 @@
 package steps.pepboys;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -82,6 +81,7 @@ public class PepBoysMainPageSteps {
     @And("^user adds to cart product with id \"([^\"]*)\" with \"([^\"]*)\" delivery option$")
     public void userAddsToCartProductWithIdWithDeliveryOption(String id, String deliveryOption) {
         productPage.openProductPage(id);
+        assertTrue(productPage.isPage(), "Product page was not opened");
         productPage.setDeliveryOption(deliveryOption);
         productPage.addToCart();
 
@@ -166,15 +166,6 @@ public class PepBoysMainPageSteps {
         }
     }
 
-//    @After
-//    public void cleanUp() {
-//        cartPage.openCartPage();
-//        cartPage.cleanUpCart();
-//        if (TestGlobalsManager.getTestGlobal("authorised") != null) {
-//            mainPage.doLogout();
-//        }
-//    }
-
     @Then("^user should be on main page$")
     public void userShouldBeOnMainPage() {
         assertTrue(mainPage.isPage(), "Main page was not opened");
@@ -186,9 +177,16 @@ public class PepBoysMainPageSteps {
         cartPage.openCartPage();
     }
 
-    @Then("^user should be on cart page$")
+    @And("^user should be on cart page$")
     public void userShouldBeOnCartPage() {
-        assertTrue(cartPage.isPage(), "Shopping Cart not opened");
+        assertTrue(cartPage.isPage(), "Cart page was not opened");
+    }
+
+
+    @And("^clean up cart$")
+    public void cleanUpCart() {
+        cartPage.openCartPage();
+        cartPage.cleanUpCart();
     }
 
     @And("^checks, that Pay in Store option is available$")
