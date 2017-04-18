@@ -14,6 +14,7 @@ import utils.pepboys.BillingUser;
 import utils.pepboys.CreditCard;
 import utils.pepboys.DataProvider;
 
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 import static utils.CommonFunctions.attachScreeVideo;
 import static utils.DriverFactory.stopScreenVideo;
@@ -41,12 +42,17 @@ public class PepBoysCheckoutSteps {
 
     @And("^user types billing info for \"([^\"]*)\"$")
     public void typesBillingInfoFor(String userName) {
-        fillBillingInfo(userName, true);
+        fillBillingInfo(userName, true, true);
+    }
+
+    @And("^user types billing info for \"([^\"]*)\" and checks email$")
+    public void typesBillingInfoForUserAndChecksEmail(String userName) {
+        fillBillingInfo(userName, true, false);
     }
 
     @Given("^user types manually billing info for \"([^\"]*)\"$")
     public void userTypesManuallyBillingInfoFor(String userName) {
-        fillBillingInfo(userName, false);
+        fillBillingInfo(userName, false, true);
     }
 
     @Then("^user checks billing info for \"([^\"]*)\"$")
@@ -116,6 +122,13 @@ public class PepBoysCheckoutSteps {
         assertTrue(radioListComponent.exists(), "Billing Address Drop-Down doesn't exist");
         radioListComponent.select(address);
         CommonFunctions.attachScreenshot("Billing info");
+    }
+
+    @And("^selects \"Enters a New Address\"$")
+    public void entersNewAddress() {
+        assertTrue(radioListComponent.exists(), "Billing Address Drop-Down doesn't exist");
+        radioListComponent.select("Enter a New Address");
+        CommonFunctions.attachScreenshot("Entering new address");
     }
 
     @And("^uses PayPal for payment$")
@@ -228,18 +241,24 @@ public class PepBoysCheckoutSteps {
     }
 
 
-    private void fillBillingInfo(String userName, boolean autoFil) {
+    private void fillBillingInfo(String userName, boolean autoFill, boolean fillEmail) {
         BillingUser user = DataProvider.getUser(userName);
         addressFormComponent.setRoot(BaseComponent.getContainerByTitle("Billing Address"));
-        fillAddressForm(user, autoFil);
-        emailComponent.fillEmailField(user.getEmail());
+        fillAddressForm(user, autoFill);
+
+        if(fillEmail) {
+            emailComponent.fillEmailField(user.getEmail());
+        } else {
+            assertEquals(user.getEmail(), emailComponent.getEmailDisplayValue(), "Unexpected email was used");
+        }
+
         CommonFunctions.attachScreenshot("Billing info");
     }
 
-    private void fillShippingInfo(String userName, boolean autoFil) {
+    private void fillShippingInfo(String userName, boolean autoFill) {
         BillingUser user = DataProvider.getUser(userName);
         addressFormComponent.setRoot(BaseComponent.getContainerByTitle("Shipping Address"));
-        fillAddressForm(user, autoFil);
+        fillAddressForm(user, autoFill);
         CommonFunctions.attachScreenshot("Shipping info");
     }
 

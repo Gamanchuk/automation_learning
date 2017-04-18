@@ -16,16 +16,13 @@ public class RadioListComponent extends BaseComponent {
         String itemListPath = "//div[contains(@class, 'radio-expanded')]";
 
 
-        String actualItem = getDriver()
-                .findElement(By.xpath(selectedOptionPath + itemDetailsPath + "//div"))
-                .getText();
+        String actualItem = findElement(By.xpath(selectedOptionPath + itemDetailsPath + "//div")).getText();
 
         if (!actualItem.contains(option)) {
-            getDriver().findElement(By.xpath(selectedOptionPath)).click();
+            click(By.xpath(selectedOptionPath));
             CommonFunctions.attachScreenshot("List methods");
 
-            List<WebElement> listWebElement = getDriver()
-                    .findElements(By.xpath(itemListPath + itemPath + itemDetailsPath + "//div"));
+            List<WebElement> listWebElement = getDriver().findElements(By.xpath(itemListPath + itemPath + itemDetailsPath));
 
             for (WebElement element : listWebElement) {
                 if (element.getText().contains(option)) {

@@ -19,6 +19,43 @@ public class DataProvider {
             "q1q1q1q1"
     );
 
+    // User for "Registered User" tests
+    private static BillingUser moovwebQa = new BillingUser(
+            "Moovweb",
+            "QA",
+            "Moovweb QA",
+            "123 MISSION ST",
+            "San Francisco",
+            "CA",
+            "94105",
+            "10",
+            "4152011234",
+            "qa@moovweb.com",
+            "San Francisco CA 94105",
+            "Spear201!",
+            "manytu2012-buy@gmail.com",
+            "q1q1q1q1"
+    );
+
+    // User for "Registered User" tests
+    private static BillingUser userAtSpearStreet = new BillingUser(
+            "Moovweb",
+            "QA",
+            "Moovweb QA",
+            "201 Spear St",
+            "San Francisco",
+            "CA",
+            "94105",
+            "10",
+            "4154154156",
+            "qa@moovweb.com",
+            "San Francisco CA 94105",
+            "Spear201!",
+            "manytu2012-buy@gmail.com",
+            "q1q1q1q1"
+    );
+
+
     private static BillingUser invalidQaUser = new BillingUser(
             "Moovweb",
             "!@&$)();:@!",
@@ -80,6 +117,10 @@ public class DataProvider {
         switch (userName) {
             case "qa user":
                 return qaUser;
+            case "Moovweb QA":
+                return moovwebQa;
+            case "user at Spear street":
+                return userAtSpearStreet;
             case "invalid qa user":
                 return invalidQaUser;
             default:

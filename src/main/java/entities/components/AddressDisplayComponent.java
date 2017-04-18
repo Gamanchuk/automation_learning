@@ -19,17 +19,22 @@ public class AddressDisplayComponent extends BaseComponent {
     private By deliveryEmail = By.xpath("//div[@class='address-email']");
 
     public void checkBillingInfo(String name, String apt, String streetAddress, String cityInfo, String zip, String phone, String email) {
-        waitForElementClickable(By.xpath("//div[contains(@class, 'radio-list') and contains(@class, 'radio-collapsed')]"));
+        waitForElementVisible(deliveryName);
+
+//        waitForElementClickable(By.xpath("//div[contains(@class, 'radio-list') and contains(@class, 'radio-collapsed')]"));
         getDriver().manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 
         checkFieldValue("Full Name", name);
         checkFieldValue("Street Address", streetAddress);
 
         checkStreetAddress(streetAddress);
-        checkApt(apt);
         checkCityInfo(cityInfo);
         checkPhone(phone);
         checkZip(zip);
+
+        if(isElementPresent(deliveryApt, 1)) {
+            checkApt(apt);
+        }
 
         if(isElementPresent(deliveryEmail, 1)) {
             checkFieldValue("Email", email);
@@ -62,8 +67,8 @@ public class AddressDisplayComponent extends BaseComponent {
 
     public void checkCityInfo(String expectedCityInfo) {
 //        String cityInfo = getDriver().findElement(deliveryCityInfo).getText().split(" ");
-        String cityInfo = getDriver().findElement(deliveryCityInfo).getText();
-        assertEquals(cityInfo.split(",")[0], expectedCityInfo, "Unexpected city");
+        String cityInfo = findElement(deliveryCityInfo).getText().toLowerCase();
+        assertEquals(cityInfo.split(",")[0], expectedCityInfo.toLowerCase(), "Unexpected city");
     }
 
     public void checkZip(String expectedZip) {

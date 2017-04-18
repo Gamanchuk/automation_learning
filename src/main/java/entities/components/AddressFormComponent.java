@@ -20,8 +20,8 @@ public class AddressFormComponent extends BaseComponent {
 
         if (autoFill) {
             // Waiting for dropdown
-            waitForElementVisible(By.cssSelector("div.radio-list"));
-            findElementWithTextBy(cityInfo, By.cssSelector("p.subtext")).click();
+            waitForElementVisible(By.cssSelector("a.manual"));
+            findElementWithTextBy(cityInfo, By.cssSelector("div.radio-list-details p.subtext")).click();
         } else {
             click(By.cssSelector("a.manual"));
             findElementWithTextBy("enter city", By.cssSelector("div.zip-message a")).click();
@@ -42,7 +42,7 @@ public class AddressFormComponent extends BaseComponent {
 
         // Need to send phone number digit by digit
         fillPhone(phone);
-        focusOut();
+        focusOut(findElement(phoneField));
     }
 
 //    public void checkPaymentResult() {
