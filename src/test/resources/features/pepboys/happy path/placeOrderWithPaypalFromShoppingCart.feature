@@ -12,7 +12,7 @@ Feature: Happy Path
     
   @TestCaseId("16249")
   Scenario: Place Order with Paypal from Shopping cart page
-    And chooses "Ground" shipping method
+    And chooses "Ground: 5-7 Days" shipping method
     And presses the "Continue" button
     And checks payment details for "qa user"
     And presses the "Place Order" button

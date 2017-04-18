@@ -1,16 +1,14 @@
 package steps.pepboys;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import entities.components.*;
-import entities.pages.pepboys.PepBoysPaymentAndReviewCheckoutPage;
-import entities.pages.pepboys.PepBoysThankYouPage;
 import entities.pages.pepboys.PepBoysLoginPage;
 import entities.pages.pepboys.PepBoysMainPage;
-import org.openqa.selenium.By;
+import entities.pages.pepboys.PepBoysPaymentAndReviewCheckoutPage;
+import entities.pages.pepboys.PepBoysThankYouPage;
 import utils.CommonFunctions;
 import utils.TestGlobalsManager;
 import utils.pepboys.BillingUser;
@@ -25,7 +23,6 @@ import java.util.Locale;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 import static utils.CommonFunctions.attachScreeVideo;
-import static utils.DriverFactory.getDriver;
 import static utils.DriverFactory.stopScreenVideo;
 
 public class PepBoysCheckoutSteps {
@@ -105,8 +102,8 @@ public class PepBoysCheckoutSteps {
     public void pressesTheButton(String confirmationMethod) {
         buttonComponent.javascriptScroll(200);
         buttonComponent.clickButton();
-        if (!buttonComponent.isOverlayDisplayed()) {
-            buttonComponent.clickButton();
+        if (confirmationMethod.equals("Place Order")) {
+            buttonComponent.clickTotalCost();
         }
     }
 
@@ -154,8 +151,18 @@ public class PepBoysCheckoutSteps {
     @And("^applies billing info for address \"([^\"]*)\"$")
     public void appliesBillingInfo(String address) {
         assertTrue(radioListComponent.exists(), "Billing Address Drop-Down doesn't exist");
+        radioListComponent.setRoot(BaseComponent.getContainerByTitle("Billing Address"));
         radioListComponent.select(address);
         CommonFunctions.attachScreenshot("Billing info");
+    }
+
+    @And("^applies shipping info for address \"([^\"]*)\"$")
+    public void appliesShippingInfoForAddress(String address) {
+        assertTrue(radioListComponent.exists(), "Billing Address Drop-Down doesn't exist");
+        checkboxRowComponent.check("Yes, shipping address and billing address are the same", false);
+        radioListComponent.setRoot(BaseComponent.getContainerByTitle("Shipping Address"));
+        radioListComponent.select(address);
+        CommonFunctions.attachScreenshot("Shipping info");
     }
 
     @And("^uses PayPal for payment$")
@@ -439,7 +446,7 @@ public class PepBoysCheckoutSteps {
     public void userChecksInstallationTime() {
         Date installationDate = (Date)TestGlobalsManager.getTestGlobal("installationTime");
         DateFormat df = new SimpleDateFormat("EEE. MM/dd/yyyy @ h:mm a", Locale.ENGLISH);
-        assertEquals(paymentAndReviewPage.getInstallationTime(), df.format(installationDate), "Unextpected installation date");
+        assertEquals(paymentAndReviewPage.getInstallationTime(), df.format(installationDate), "Unexpected installation date");
     }
 
     @And("^user can expand and collapse Order summary$")
@@ -453,4 +460,6 @@ public class PepBoysCheckoutSteps {
     public void checksPickUpInStoreInfo() {
         paymentAndReviewPage.checkPickUpInStoreInfo();
     }
+
+
 }

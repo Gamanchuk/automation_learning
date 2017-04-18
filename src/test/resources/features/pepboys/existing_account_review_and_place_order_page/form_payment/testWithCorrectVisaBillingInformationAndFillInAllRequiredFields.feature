@@ -1,6 +1,7 @@
 @pepBoys
 
-Feature: Happy Path
+
+Feature: EXISTING ACCOUNT - REVIEW & PLACE ORDER PAGE
 
   Background:
     Given user makes appoint
@@ -8,11 +9,12 @@ Feature: Happy Path
     And user views cart
     And chooses "Pay Online" method
 
-  @TestCaseId("16247")
-  Scenario: Place Order as a "Guest" with Credit Card
-    Given user types billing info for "qa user"
+  @TestCaseId("15400")
+  @Issue("MCCAT-5505")
+  Scenario: Test with correct Visa billing information and fill in all required fields
+    Given user makes authorisation for "qa user"
+    And applies billing info for address "123 Mission Street, 10th Floor"
     And presses the "Continue" button
-    And chooses "Use Recommended Address"
 
     And chooses "Ground: 5-7 Days" shipping method
     And presses the "Continue" button
@@ -20,3 +22,4 @@ Feature: Happy Path
     And uses "visa" card for payment
     And presses the "Place Order" button
     Then user should be on thank you page
+
