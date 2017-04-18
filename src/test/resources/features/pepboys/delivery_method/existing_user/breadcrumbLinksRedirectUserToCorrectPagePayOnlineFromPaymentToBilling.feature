@@ -1,6 +1,6 @@
 @pepBoys
 
-Feature: Existing User - Delivery Method
+Feature: EXISTING ACCOUNT - DELIVERY METHOD
 
   Background:
     Given user makes appoint
