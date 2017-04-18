@@ -1,16 +1,10 @@
 package steps.pepboys;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import entities.components.*;
-import entities.pages.pepboys.PepBoysPaymentAndReviewCheckoutPage;
-import entities.pages.pepboys.PepBoysThankYouPage;
-import entities.pages.pepboys.PepBoysLoginPage;
-import entities.pages.pepboys.PepBoysMainPage;
-import org.openqa.selenium.By;
 import entities.pages.pepboys.*;
 import utils.CommonFunctions;
 import utils.TestGlobalsManager;
@@ -26,7 +20,6 @@ import java.util.Locale;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 import static utils.CommonFunctions.attachScreeVideo;
-import static utils.DriverFactory.getDriver;
 import static utils.DriverFactory.stopScreenVideo;
 
 public class PepBoysCheckoutSteps {
@@ -137,7 +130,6 @@ public class PepBoysCheckoutSteps {
     public void userShouldBeOnThankYouPage() {
         assertTrue(thankYouPage.isOnThankYouPage(), "User is not on \"Thank You\" page");
         assertTrue(pepBoysThankYouPage.isCollapsed(), "Order collapser not collapsed");
-        thankYouPage.checkPaymentResult();
         CommonFunctions.attachScreenshot("Thank You Page");
     }
 
