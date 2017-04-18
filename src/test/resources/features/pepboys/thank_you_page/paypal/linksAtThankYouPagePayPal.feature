@@ -1,7 +1,6 @@
-@pepBoys @debug
+@pepBoys
 
-Feature: PayPal - Thank You Page
-
+Feature: PAYPAL - THANK YOU PAGE
   Background:
     Given user makes appoint
     And user adds to cart product with id "8076476" with "Ship to Home" delivery option

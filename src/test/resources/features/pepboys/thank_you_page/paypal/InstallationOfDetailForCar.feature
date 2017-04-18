@@ -1,7 +1,7 @@
-@pepBoys @debug
+@pepBoys
 
 
-Feature: PayPal - Thank You Page
+Feature: PAYPAL - THANK YOU PAGE
 
   Background:
     Given user makes appoint

@@ -1,6 +1,6 @@
-@pepBoys @debug
+@pepBoys
 
-Feature: Existing User - Thank You Page
+Feature: EXISTING ACCOUNT - THANK YOU PAGE
 
   Background:
     Given user makes appoint

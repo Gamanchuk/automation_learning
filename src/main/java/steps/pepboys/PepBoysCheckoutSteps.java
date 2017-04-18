@@ -81,7 +81,7 @@ public class PepBoysCheckoutSteps {
         BillingUser user = DataProvider.getUser(userName);
         String currentTab = breadcrumbWidget.getActiveTab();
 
-        if(currentTab.equals("Delivery Method")) {
+        if (currentTab.equals("Delivery Method")) {
             addressDisplayComponent.setRoot(BaseComponent.getContainerByTitle("Shipping Address"));
         } else {
             addressDisplayComponent.setRoot(BaseComponent.getComponentByTitle("Shipping Address"));
@@ -99,7 +99,10 @@ public class PepBoysCheckoutSteps {
 
     @And("^presses the \"([^\"]*)\" button$")
     public void pressesTheButton(String confirmationMethod) {
-        buttonComponent.javascriptScroll(200);
+        if (confirmationMethod.equals("Place Order")) {
+            buttonComponent.focusOnOrderTotal();
+        }
+
         buttonComponent.clickButton();
     }
 
@@ -422,7 +425,7 @@ public class PepBoysCheckoutSteps {
     }
 
     @And("^sees modal error with text \"([^\"]*)\"$")
-    public void seesModalErrorWithText(String text)  {
+    public void seesModalErrorWithText(String text) {
         modalComponent.waitForModalToOpen();
         assertTrue(modalComponent.hasMessageWithText(text), "Unexpected text was displayed");
         CommonFunctions.attachScreenshot("Error Modal opened");
@@ -447,7 +450,7 @@ public class PepBoysCheckoutSteps {
 
     @And("^user checks installation time$")
     public void userChecksInstallationTime() {
-        Date installationDate = (Date)TestGlobalsManager.getTestGlobal("installationTime");
+        Date installationDate = (Date) TestGlobalsManager.getTestGlobal("installationTime");
         DateFormat df = new SimpleDateFormat("EEE. MM/dd/yyyy @ h:mm a", Locale.ENGLISH);
         assertEquals(paymentAndReviewPage.getInstallationTime(), df.format(installationDate), "Unextpected installation date");
     }

@@ -1,6 +1,6 @@
-@pepBoys @debug1
+@pepBoys
 
-Feature: Guest - Thank You Page
+Feature: GUEST - THANK YOU PAGE
 
   Background:
     Given user makes appoint

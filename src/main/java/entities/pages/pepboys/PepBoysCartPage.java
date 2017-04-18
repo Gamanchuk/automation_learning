@@ -11,7 +11,6 @@ import utils.TestGlobalsManager;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -125,7 +124,7 @@ public class PepBoysCartPage extends PepBoysBasePage {
 
     public void openCartPage() {
         getDriver().navigate().to(BASE_URL + "cart");
-        assertTrue("Shopping Cart not opened", isPage());
+        assertTrue(isPage(), "Shopping Cart not opened");
     }
 
     public boolean isPage() {
@@ -162,14 +161,5 @@ public class PepBoysCartPage extends PepBoysBasePage {
         }
 
         return itemIds;
-    }
-
-    public void openCartPage() {
-        getDriver().navigate().to(BASE_URL + "cart");
-        assertTrue("Shopping Cart not opened", isPage());
-    }
-
-    public boolean isPage() {
-        return isElementVisible(By.xpath("//h1[@class='cartTitle']"));
     }
 }
