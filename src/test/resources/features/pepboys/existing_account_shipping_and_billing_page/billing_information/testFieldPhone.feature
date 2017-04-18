@@ -20,24 +20,24 @@ Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE
     And selects "Enters a New Address"
     And user types billing info for "user at Spear street" and checks email
 
-    And user types " " into the "Phone Number" field
+    And user types " " into the "Phone Number" field of "Billing Address" address form
     And presses the "Continue" button
     Then user should stay at "Billing & Shipping" tab
     And sees "FORM ERRORS" error message with text "Please review all inputs."
 
-    And user types "phoneNumber" into the "Phone Number" field
-    And presses the "Continue" button
-    And chooses "Use Entered Address"
-    Then user should stay at "Billing & Shipping" tab
-    And sees "FORM ERRORS" error message with text "Please review all inputs."
-
-    And user types "!@$%^&*():_" into the "Phone Number" field
+    And user types "phoneNumber" into the "Phone Number" field of "Billing Address" address form
     And presses the "Continue" button
     And chooses "Use Entered Address"
     Then user should stay at "Billing & Shipping" tab
     And sees "FORM ERRORS" error message with text "Please review all inputs."
 
-    And user types "4152011234" into the "Phone Number" field
+    And user types "!@$%^&*():_" into the "Phone Number" field of "Billing Address" address form
+    And presses the "Continue" button
+    And chooses "Use Entered Address"
+    Then user should stay at "Billing & Shipping" tab
+    And sees "FORM ERRORS" error message with text "Please review all inputs."
+
+    And user types "4152011234" into the "Phone Number" field of "Billing Address" address form
     And presses the "Continue" button
     And chooses "Use Entered Address"
 #    Then user checks "Phone" with value "4152011234" on "Delivery Method" tab
