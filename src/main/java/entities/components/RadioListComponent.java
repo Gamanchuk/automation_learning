@@ -7,32 +7,24 @@ import utils.CommonFunctions;
 import java.util.List;
 
 public class RadioListComponent extends BaseComponent {
-    private By currentItem = By.cssSelector(".radio-list-option-selected div");
-
+    private By currentItem = By.cssSelector(".radio-list-option-selected");
 
     public void select(String option) {
-        By selectedItem = By.cssSelector(".radio-list-option-selected>div>div");
-        By item = By.cssSelector(".radio-list-details>div");
+        By currentItemDetails = By.cssSelector(".radio-list-option-selected .radio-list-details");
 
-        String actualItem = findElement(selectedItem)
-                .getText();
-
-        if (!actualItem.contains(option)) {
+        if (!findElement(currentItemDetails).getText().contains(option)) {
             findElement(currentItem).click();
             CommonFunctions.attachScreenshot("List methods");
 
-            List<WebElement> listWebElement = findElements(item);
-            log.info("Size [listWebElement]: " + listWebElement.size());
+            By itemDetails = By.cssSelector(".radio-list-option .radio-list-details");
+            List<WebElement> items = findElements(itemDetails);
+            log.info("Size [listWebElement]: " + items.size());
 
-            for (WebElement element : listWebElement) {
-                if (element.getText().contains(option)) {
-                    log.info("Method contains: " + element.getText());
-                    element.click();
-                    try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+            for (WebElement item : items) {
+                if (item.getText().contains(option)) {
+                    log.info("Method contains: " + item.getText());
+                    item.click();
+                    CommonFunctions.sleep(500);
                     break;
                 }
             }
