@@ -9,7 +9,8 @@ public class ButtonComponent extends BaseComponent {
         getDriver().findElements(btn).get(0).click();
     }
 
-    public void focusOnOrderTotal() {
+
+    public void clickTotalCost() {
         getDriver().findElement(By.xpath("//div[contains(@class, 'total-cost')]")).click();
     }
 

@@ -99,10 +99,10 @@ public class PepBoysCheckoutSteps {
 
     @And("^presses the \"([^\"]*)\" button$")
     public void pressesTheButton(String confirmationMethod) {
+      buttonComponent.javascriptScroll(200);
         if (confirmationMethod.equals("Place Order")) {
-            buttonComponent.focusOnOrderTotal();
+           buttonComponent.clickTotalCost();
         }
-
         buttonComponent.clickButton();
     }
 
@@ -167,8 +167,18 @@ public class PepBoysCheckoutSteps {
     @And("^applies billing info for address \"([^\"]*)\"$")
     public void appliesBillingInfo(String address) {
         assertTrue(radioListComponent.exists(), "Billing Address Drop-Down doesn't exist");
+        radioListComponent.setRoot(BaseComponent.getContainerByTitle("Billing Address"));
         radioListComponent.select(address);
         CommonFunctions.attachScreenshot("Billing info");
+    }
+
+    @And("^applies shipping info for address \"([^\"]*)\"$")
+    public void appliesShippingInfoForAddress(String address) {
+        assertTrue(radioListComponent.exists(), "Billing Address Drop-Down doesn't exist");
+        checkboxRowComponent.check("Yes, shipping address and billing address are the same", false);
+        radioListComponent.setRoot(BaseComponent.getContainerByTitle("Shipping Address"));
+        radioListComponent.select(address);
+        CommonFunctions.attachScreenshot("Shipping info");
     }
 
     @And("^uses PayPal for payment$")
@@ -452,7 +462,7 @@ public class PepBoysCheckoutSteps {
     public void userChecksInstallationTime() {
         Date installationDate = (Date) TestGlobalsManager.getTestGlobal("installationTime");
         DateFormat df = new SimpleDateFormat("EEE. MM/dd/yyyy @ h:mm a", Locale.ENGLISH);
-        assertEquals(paymentAndReviewPage.getInstallationTime(), df.format(installationDate), "Unextpected installation date");
+        assertEquals(paymentAndReviewPage.getInstallationTime(), df.format(installationDate), "Unexpected installation date");
     }
 
     @And("^user can expand and collapse Order summary$")
@@ -466,4 +476,6 @@ public class PepBoysCheckoutSteps {
     public void checksPickUpInStoreInfo() {
         paymentAndReviewPage.checkPickUpInStoreInfo();
     }
+
+
 }
