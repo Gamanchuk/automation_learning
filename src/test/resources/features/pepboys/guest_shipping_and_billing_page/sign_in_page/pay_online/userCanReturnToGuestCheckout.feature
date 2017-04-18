@@ -1,4 +1,4 @@
-@pepBoys @debug
+@pepBoys 
 
 Feature: Sign In page (Pay Online)
 

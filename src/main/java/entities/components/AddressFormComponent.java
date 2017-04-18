@@ -23,8 +23,10 @@ public class AddressFormComponent extends BaseComponent {
             waitForElementVisible(By.cssSelector("div.radio-list"));
             findElementWithTextBy(cityInfo, By.cssSelector("p.subtext")).click();
         } else {
-            click(By.cssSelector("a.manual"));
-            findElementWithTextBy("enter city", By.cssSelector("div.zip-message a")).click();
+            if (isElementVisible(By.cssSelector("a.manual"), 1)) {
+                click(By.cssSelector("a.manual"));
+                findElementWithTextBy("enter city", By.cssSelector("div.zip-message a")).click();
+            }
             fillField(cityField, city);
             fillField(zipField, zip);
             fillState(state);
@@ -42,7 +44,7 @@ public class AddressFormComponent extends BaseComponent {
 
         // Need to send phone number digit by digit
         fillPhone(phone);
-        focusOut();
+        focusOut(findElement(phoneField));
     }
 
 //    public void checkPaymentResult() {
