@@ -17,7 +17,9 @@ public class PepBoysPaymentAndReviewCheckoutPage extends PepBoysBasePage {
     }
 
     public String getInstallationTime() {
-        return findElement(By.cssSelector("span.est-pickup-time-value")).getText();
+        By installationTime = By.cssSelector("span.est-pickup-time-value");
+        waitForElementVisible(installationTime);
+        return findElement(installationTime).getText();
     }
 
     public void checkPickUpInStoreInfo() {
