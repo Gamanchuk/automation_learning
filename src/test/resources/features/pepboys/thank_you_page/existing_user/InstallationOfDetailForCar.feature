@@ -1,7 +1,6 @@
 @pepBoys
 
-
-Feature: Guest - Thank You Page
+Feature: EXISTING ACCOUNT - THANK YOU PAGE
 
   Background:
     Given user makes appoint
@@ -10,11 +9,12 @@ Feature: Guest - Thank You Page
     And user schedules installation time
     And chooses "Pay Online" method with appointment details
 
-  @TestCaseId("")
-  Scenario: Place Multiple Orders as exist user
-    Given user types billing info for "qa user"
+  @TestCaseId("15420")
+  Scenario: Installation of detail for car
+    Given user makes authorisation for "qa user"
+    And applies billing info for address "123 Mission Street, 10th Floor"
     And presses the "Continue" button
-    And chooses "Use Recommended Address"
     And uses "visa" card for payment
     And presses the "Place Order" button
-    Then user should be on thank you page
+    And user should be on thank you page
+    And user presses the reschedule link

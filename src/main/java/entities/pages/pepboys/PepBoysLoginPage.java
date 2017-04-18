@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 
 public class PepBoysLoginPage extends PepBoysBasePage {
 
-    public void proccedToGuestCheckout() {
+    public void proceedToGuestCheckout() {
         getDriver().findElement(By.xpath("//div[@class='guest-checkout-link']//a")).click();
     }
 }
