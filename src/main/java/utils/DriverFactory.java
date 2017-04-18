@@ -86,9 +86,9 @@ public class DriverFactory {
                         //desiredCapabilities.setCapability("startIWDP", true);
                         //desiredCapabilities.setCapability("showXcodeLog", true);
                         //desiredCapabilities.setCapability("xcodeConfigFile", "src/resources/Config.xcconfig");
-                        //desiredCapabilities.setCapability("xcodeOrgId", "Y95G5M3Q84");
-                        //desiredCapabilities.setCapability("xcodeSigningId", "iPhone Developer");
-                        //desiredCapabilities.setCapability("updatedWDABundleId", "com.moovweb.WebDriverAgentRunner");
+                        desiredCapabilities.setCapability("xcodeOrgId", "Y95G5M3Q84");
+                        desiredCapabilities.setCapability("xcodeSigningId", "iPhone Developer");
+                        desiredCapabilities.setCapability("updatedWDABundleId", "com.moovweb.WebDriverAgentRunner");
                     }
 
                     eventListener = new MyWebDriverEventListener();

@@ -1,6 +1,6 @@
-@pepBoys @debug1
+@pepBoys @debug
 
-Feature: GUEST - REVIEW & PLACE ORDER PAGE
+Feature: EXISTING ACCOUNT - REVIEW & PLACE ORDER PAGE
 
   Background:
     Given user makes appoint
@@ -8,15 +8,17 @@ Feature: GUEST - REVIEW & PLACE ORDER PAGE
     And user views cart
     And chooses "Pay in Store" method
 
-  @TestCaseId("")
+  @Issue("MCCAT-5562")
+  @TestCaseId("15468")
   Scenario: Edit installation time
     Given user makes authorisation for "qa user"
     And user clicks arrow for "Pick Up in Store"
     And user should be on cart page
+
     And user changes store
     And chooses "Pay in Store" method
 
-#    Then user types billing info for "qa user"
+    Then user should be on "Billing" page
     And checks Pick Up in Store info
 
 
