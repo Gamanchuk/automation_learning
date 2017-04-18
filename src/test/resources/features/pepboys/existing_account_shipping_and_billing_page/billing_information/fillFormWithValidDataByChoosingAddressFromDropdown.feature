@@ -1,4 +1,4 @@
-@pepBoys @debug
+@pepBoys
 
 Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE
 
@@ -17,6 +17,9 @@ Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE
 
     And presses the "Continue" button
     And user should be on "Delivery Method" tab
+    And presses the "Continue" button
+
+    And user should be on "Payment & Review" tab
     Then user checks billing info for "user at Spear street"
 
 

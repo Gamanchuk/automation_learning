@@ -7,7 +7,7 @@ import utils.DriverFactory;
 
 public class BaseComponent extends Entity {
     public static WebElement getContainerByTitle(String title) {
-        return DriverFactory.getDriver().findElement(By.xpath("//div[contains(@class, 'title-component') and contains(.,'" + title + "')]/ancestor::div[contains(@class, 'container')]"));
+        return DriverFactory.getDriver().findElement(By.xpath("//div[contains(@class, 'title-component') and contains(.,'" + title + "')]/ancestor::div[contains(@class, 'container') and not(contains(@class, 'header'))]"));
     }
 
     public static WebElement getComponentByTitle(String title) {

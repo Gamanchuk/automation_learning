@@ -70,7 +70,7 @@ public class PepBoysCheckoutSteps {
     @Then("^user checks billing info for \"([^\"]*)\"$")
     public void userChecksBillingInfoFor(String userName) {
         BillingUser user = DataProvider.getUser(userName);
-        addressDisplayComponent.setRoot(BaseComponent.getComponentByTitle("Billing Address"));
+        addressDisplayComponent.setRoot(BaseComponent.getContainerByTitle("Billing Address"));
         addressDisplayComponent.checkInfo(
                 user.getFullName(),
                 user.getApartment(),
