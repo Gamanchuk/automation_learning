@@ -10,12 +10,13 @@ Feature: Happy Path
     And chooses "Pay Online" method
 
   @TestCaseId("16251")
+  @TestCaseId("15461")
   Scenario: Place Order with Paypal from Payment page as Exist use
     Given user makes authorisation for "qa user"
     And applies billing info for address "201 SPEAR ST"
     And presses the "Continue" button
     And chooses "Use Recommended Address"
-    And chooses "Ground" shipping method
+    And chooses "Ground: 5-7 Days" shipping method
     And presses the "Continue" button
     And uses PayPal for payment
     And user confirms purchase as "qa user" with PayPal

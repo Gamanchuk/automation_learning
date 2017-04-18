@@ -296,6 +296,12 @@
             </properties>
         </profile>
         <profile>
+            <id>env-adam-local</id>
+            <properties>
+                <testing.env>adam_local</testing.env>
+            </properties>
+        </profile>
+        <profile>
             <id>env-nik-local</id>
             <properties>
                 <testing.env>nik_local</testing.env>
@@ -315,6 +321,14 @@
                 <props.file.name>iphone6</props.file.name>
             </properties>
         </profile>
+
+        <profile>
+            <id>device-Nexus-5X</id>
+            <properties>
+                <props.file.name>nexus_5x</props.file.name>
+            </properties>
+        </profile>
+
         <profile>
             <id>device-GalaxyS6</id>
             <properties>
@@ -360,6 +374,14 @@
                 <groupId>ru.yandex.qatools.allure</groupId>
                 <artifactId>allure-maven-plugin</artifactId>
                 <version>2.5</version>
+                <configuration>
+                    <properties>
+                        <allure.issues.tracker.pattern>https://moovweb.atlassian.net/browse/%s
+                        </allure.issues.tracker.pattern>
+                        <allure.tests.management.pattern>https://moovweb.testrail.net/%s
+                        </allure.tests.management.pattern>
+                    </properties>
+                </configuration>
             </plugin>
         </plugins>
     </reporting>

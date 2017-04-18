@@ -12,9 +12,9 @@ Feature: Happy Path
     Given user makes authorisation for "qa user"
     And applies billing info for address "201 SPEAR ST"
     And presses the "Continue" button
-#    And chooses "Use Recommended Address"
+    And chooses "Use Recommended Address"
 
-    And chooses "Ground" shipping method
+    And chooses "Ground: 5-7 Days" shipping method
     And presses the "Continue" button
 
     And uses "visa" card for payment

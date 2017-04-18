@@ -7,35 +7,24 @@ import utils.CommonFunctions;
 import java.util.List;
 
 public class RadioListComponent extends BaseComponent {
-    private String selectedOptionPath = "//div[contains(@class, 'radio-list-option-selected')]";
+    private By currentItem = By.cssSelector(".radio-list-option-selected");
 
     public void select(String option) {
+        By currentItemDetails = By.cssSelector(".radio-list-option-selected .radio-list-details");
 
-        String itemPath = "//div[contains(@class, 'radio-list-option')]";
-        String itemDetailsPath = "//div[contains(@class, 'radio-list-details')]";
-        String itemListPath = "//div[contains(@class, 'radio-expanded')]";
-
-
-        String actualItem = getDriver()
-                .findElement(By.xpath(selectedOptionPath + itemDetailsPath + "//div"))
-                .getText();
-
-        if (!actualItem.contains(option)) {
-            getDriver().findElement(By.xpath(selectedOptionPath)).click();
+        if (!findElement(currentItemDetails).getText().contains(option)) {
+            findElement(currentItem).click();
             CommonFunctions.attachScreenshot("List methods");
 
-            List<WebElement> listWebElement = getDriver()
-                    .findElements(By.xpath(itemListPath + itemPath + itemDetailsPath + "//div"));
+            By itemDetails = By.cssSelector(".radio-list-option .radio-list-details");
+            List<WebElement> items = findElements(itemDetails);
+            log.info("Size [listWebElement]: " + items.size());
 
-            for (WebElement element : listWebElement) {
-                if (element.getText().contains(option)) {
-                    log.info("Method contains: " + element.getText());
-                    element.click();
-                    try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+            for (WebElement item : items) {
+                if (item.getText().contains(option)) {
+                    log.info("Method contains: " + item.getText());
+                    item.click();
+                    CommonFunctions.sleep(500);
                     break;
                 }
             }
@@ -43,6 +32,6 @@ public class RadioListComponent extends BaseComponent {
     }
 
     public boolean exists() {
-        return isElementVisible(By.xpath(selectedOptionPath));
+        return isElementVisible(currentItem);
     }
 }

@@ -127,6 +127,17 @@ public abstract class Entity {
         this.waitForElementVisible(element, TIMEOUT_SECONDS);
     }
 
+
+    public void waitForElementHidden(By element) {
+        this.waitForElementVisible(element, TIMEOUT_SECONDS);
+    }
+
+    public void waitForElementHidden(By element, int timeout) {
+        log.info("Waiting " + timeout + "s for element: '" + element + "' hidden");
+        new WebDriverWait(driver, TIMEOUT_SECONDS)
+                .until(ExpectedConditions.invisibilityOfElementLocated(element));
+    }
+
     public void waitForImageLoaded(By image) {
         new WebDriverWait(driver, TIMEOUT_SECONDS)
                 .until(new ExpectedCondition<Boolean>() {
@@ -234,6 +245,9 @@ public abstract class Entity {
         driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
     }
 
+    public void focusOut(WebElement element) {
+        ((JavascriptExecutor)driver).executeScript("arguments[0].blur()", element);
+    }
 
     public WebElement findElementWithTextBy(String text, By selector) {
         List<WebElement> elements = findElements(selector);
