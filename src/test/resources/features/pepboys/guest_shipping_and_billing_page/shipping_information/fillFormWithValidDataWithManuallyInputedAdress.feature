@@ -15,6 +15,7 @@ Feature: Guest - Shipping & Billing page
     And user types manually shipping info for "qa user"
     And presses the "Continue" button
     And chooses "Use Entered Address"
+
     Then user checks billing info for "qa user"
 
 

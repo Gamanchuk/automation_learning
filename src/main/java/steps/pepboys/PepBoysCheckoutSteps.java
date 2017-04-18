@@ -213,11 +213,23 @@ public class PepBoysCheckoutSteps {
         CommonFunctions.attachScreenshot("Checks " + field + " on " + breadcrumb + " tab");
     }
 
+    @Then("^user checks \"([^\"]*)\" with value \"([^\"]*)\" on thank you page$")
+    public void userChecksWithValueOnThankYouPage(String field, String value) throws Throwable {
+        addressDisplayComponent.checkFieldValue(field, value);
+        CommonFunctions.attachScreenshot("Checks " + field + " on thank you page");
+    }
+
     @Then("^user checks city info with value \"([^\"]*)\" on \"([^\"]*)\" tab$")
     public void userChecksCityInfoWithValueOnTab(String value, String breadcrumb) {
         breadcrumbWidget.waitForBreadcrumbActive(breadcrumb);
         addressDisplayComponent.checkCityInfo(value);
         CommonFunctions.attachScreenshot("Checks information on " + breadcrumb);
+    }
+
+    @Then("^user checks city info with value \"([^\"]*)\" on thank you page$")
+    public void userChecksCityInfoWithValueOnThankYouPage(String value) throws Throwable {
+        addressDisplayComponent.checkCityInfo(value);
+        CommonFunctions.attachScreenshot("Checks information on thank you page");
     }
 
     @Then("^user checks zip code with value \"([^\"]*)\" on \"([^\"]*)\" tab$")
