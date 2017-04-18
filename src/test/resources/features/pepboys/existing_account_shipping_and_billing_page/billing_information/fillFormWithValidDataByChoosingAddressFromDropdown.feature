@@ -1,4 +1,4 @@
-@pepBoys @MORE_debug
+@pepBoys @debug
 
 
 Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE
