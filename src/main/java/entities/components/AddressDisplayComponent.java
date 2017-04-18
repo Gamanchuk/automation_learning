@@ -11,16 +11,14 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.AssertJUnit.assertTrue;
 
 public class AddressDisplayComponent extends BaseComponent {
-    private By deliveryApt = By.xpath("//div[@class='address-line2']");
-    private By deliveryName = By.xpath("//div[@class='address-recipient']");
-    private By deliveryStreetAddress = By.xpath("//div[@class='address-line1']");
-    private By deliveryCityInfo = By.xpath("//div[@class='address-city-state-zip']");
-    private By deliveryPhone = By.xpath("//a[@class='phone-display address-phone']");
-    private By deliveryEmail = By.xpath("//div[@class='address-email']");
+    private By deliveryApt = By.cssSelector("div.address-line2");
+    private By deliveryName = By.cssSelector("div.address-recipient");
+    private By deliveryStreetAddress = By.cssSelector("div.address-line1");
+    private By deliveryCityInfo = By.cssSelector("div.address-city-state-zip");
+    private By deliveryPhone = By.cssSelector("a.phone-display.address-phone");
+    private By deliveryEmail = By.cssSelector("div.address-email");
 
-    public void checkBillingInfo(String name, String apt, String streetAddress, String cityInfo, String zip, String phone, String email) {
-        waitForElementVisible(deliveryName);
-
+    public void checkInfo(String name, String apt, String streetAddress, String cityInfo, String zip, String phone) {
 //        waitForElementClickable(By.xpath("//div[contains(@class, 'radio-list') and contains(@class, 'radio-collapsed')]"));
         getDriver().manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 
@@ -28,31 +26,24 @@ public class AddressDisplayComponent extends BaseComponent {
         checkFieldValue("Street Address", streetAddress);
 
         checkStreetAddress(streetAddress);
+        checkApt(apt);
         checkCityInfo(cityInfo);
         checkPhone(phone);
         checkZip(zip);
-
-        if(isElementPresent(deliveryApt, 1)) {
-            checkApt(apt);
-        }
-
-        if(isElementPresent(deliveryEmail, 1)) {
-            checkFieldValue("Email", email);
-        }
 
         CommonFunctions.attachScreenshot("Billing info");
     }
 
     public void checkStreetAddress(String expectedAddress) {
-        String address = getDriver().findElement(deliveryStreetAddress).getText();
+        String address = findElement(deliveryStreetAddress).getText();
         assertTrue("Unexpected apt. Expected: " + expectedAddress
                         + "Address: " + address,
                 address.contains(expectedAddress));
     }
 
     public void checkApt(String expectedApt) {
-        String address = getDriver().findElement(deliveryStreetAddress).getText();
-        String apt = getDriver().findElement(deliveryApt).getText();
+        String address = findElement(deliveryStreetAddress).getText();
+        String apt = findElement(deliveryApt).getText();
         assertTrue("Unexpected apt. Expected: " + expectedApt
                         + "Address: " + address
                         + "Apt: " + apt,
@@ -61,26 +52,26 @@ public class AddressDisplayComponent extends BaseComponent {
 
     public void checkFieldValue(String fieldName, String expectedValue) {
         By field = getFieldByName(fieldName);
-        String fieldValue = getDriver().findElement(field).getText();
+        String fieldValue = findElement(field).getText();
         assertEquals(fieldValue, expectedValue, "Unexpected " + fieldName);
     }
 
     public void checkCityInfo(String expectedCityInfo) {
 //        String cityInfo = getDriver().findElement(deliveryCityInfo).getText().split(" ");
-        String cityInfo = findElement(deliveryCityInfo).getText().toLowerCase();
-        assertEquals(cityInfo.split(",")[0], expectedCityInfo.toLowerCase(), "Unexpected city");
+        String cityInfo = findElement(deliveryCityInfo).getText();
+        assertEquals(cityInfo.split(",")[0], expectedCityInfo, "Unexpected city");
     }
 
     public void checkZip(String expectedZip) {
 //        String cityInfo = getDriver().findElement(deliveryCityInfo).getText().split(" ");
-        String cityInfo = getDriver().findElement(deliveryCityInfo).getText();
+        String cityInfo = findElement(deliveryCityInfo).getText();
         String[] split = cityInfo.split(",")[1].trim().split(" ");
         String zip = split[split.length - 1];
         assertEquals(zip, expectedZip, "Unexpected zip code");
     }
 
     public void checkPhone(String expectedPhone) {
-        String phone = getDriver().findElement(deliveryPhone).getText();
+        String phone = findElement(deliveryPhone).getText();
         String result = null;
 
         try {

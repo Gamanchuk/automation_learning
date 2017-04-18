@@ -6,23 +6,14 @@ import org.openqa.selenium.WebElement;
 
 public class CollapserComponent extends BaseComponent {
 
-    public void getRewards() {
-        getDriver().findElement(By.xpath("//div[@class='inset']/div[contains(@class, 'checkbox-row')]/input")).click();
-    }
-
-    public void openRewards() {
+    // TODO: update this method to use collapser name
+    public void openCollapser() {
         javascriptScroll(500);
-        if (getDriver().findElement(By.xpath("//a[contains(@class, 'plus-collapser')]"))
+        if (findElement(By.cssSelector("a.collapser-link"))
                 .getAttribute("class")
                 .contains("collapsed")) {
-            getDriver().findElement(By.xpath("//a[contains(@class, 'plus-collapser')]/div/div/h2")).click();
-            focusOut();
+            click(By.cssSelector("a.collapser-link"));
+//            focusOut();
         }
-    }
-
-    public void setRewards(String rewardsCode) {
-        WebElement rewardsEl = getDriver().findElement(By.xpath("//div[contains(@class, 'rewards-account-input')]/input"));
-        rewardsEl.clear();
-        rewardsEl.sendKeys(rewardsCode);
     }
 }

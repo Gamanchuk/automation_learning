@@ -6,6 +6,9 @@ import utils.CommonFunctions;
 import static org.testng.AssertJUnit.assertTrue;
 
 public class PepBoysThankYouPage extends PepBoysBasePage {
+    public boolean isOnThankYouPage() {
+        return isElementPresent(By.xpath("//span[@class='thankmsg' and text()='Thank You for Your Order']"));
+    }
     public void checkPaymentResult() {
         By thanksMsg = By.xpath("//div[contains(@class, 'order-thank-you')]/div");
         waitForElementVisible(thanksMsg, 100);

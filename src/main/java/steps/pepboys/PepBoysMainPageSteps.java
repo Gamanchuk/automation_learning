@@ -1,5 +1,6 @@
 package steps.pepboys;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -39,7 +40,7 @@ public class PepBoysMainPageSteps {
     }
 
     @Given("^user makes appoint$")
-    public void userMakesAppointWithApi() throws Throwable {
+    public void userMakesAppointWithApi() {
         makeAppointmentPage.openPage();
         assertTrue(makeAppointmentPage.isPage(), "Appointment page was not opened");
         makeAppointmentPage.setStoreLocationApi();
@@ -69,20 +70,18 @@ public class PepBoysMainPageSteps {
     }
 
     @And("^chooses \"([^\"]*)\" method$")
-    public void userChoosesMethod(String method) throws Throwable {
+    public void userChoosesMethod(String method) {
         cartPage.payUsingPaymentMethod(method);
     }
 
     @And("^chooses \"([^\"]*)\" method with appointment details$")
-    public void userChoosesMethodWithAppointmentDetails(String method) throws Throwable {
+    public void userChoosesMethodWithAppointmentDetails(String method) {
         cartPage.payUsingPaymentMethod(method);
     }
 
     @And("^user adds to cart product with id \"([^\"]*)\" with \"([^\"]*)\" delivery option$")
-    public void userAddsToCartProductWithIdWithDeliveryOption(String id, String deliveryOption) throws Throwable {
+    public void userAddsToCartProductWithIdWithDeliveryOption(String id, String deliveryOption) {
         productPage.openProductPage(id);
-        Thread.sleep(2000);
-        assertTrue(productPage.isPage(), "Product page was not opened");
         productPage.setDeliveryOption(deliveryOption);
         productPage.addToCart();
 
@@ -90,16 +89,29 @@ public class PepBoysMainPageSteps {
         CommonFunctions.attachScreenshot("Info dialog about adding item to cart was opened");
     }
 
+    @And("^user adds to cart product with \"([^\"]*)\" delivery option$")
+    public void userAddsToCartProductWithDeliveryOption(String deliveryOption) {
+        productPage.openProductPage(DataProvider.getRandomItemId());
+
+        if(deliveryOption.equals("Pick Up in Store")) {
+            while (!productPage.isAvailableInStore()) {
+                productPage.openProductPage(DataProvider.getRandomItemId());
+            }
+        }
+
+        productPage.setDeliveryOption(deliveryOption);
+        productPage.addToCart();
+    }
 
     @And("^user adding vehicle \"([^\"]*)\"$")
-    public void userAddingVehicle(String vehicle) throws Throwable {
+    public void userAddingVehicle(String vehicle) {
         makeAppointmentPage.openPage();
         assertTrue(makeAppointmentPage.isPage(), "Appointment page was not opened");
         makeAppointmentPage.selectVehicle(DataProvider.getVehicle(vehicle));
     }
 
     @And("^user adds to cart tires with SKU \"([^\"]*)\" with \"([^\"]*)\" delivery option for \"([^\"]*)\"$")
-    public void userAddsToCartTiresWithIdWithDeliveryOption(String sku, String deliveryOption, String vehicle) throws Throwable {
+    public void userAddsToCartTiresWithIdWithDeliveryOption(String sku, String deliveryOption, String vehicle) {
         mainPage.openPageWithCookies();
         categoriesPage.openCategory("Tires");
         tiresPage.shopForTiresBy("Tires by Vehicle");
@@ -108,20 +120,33 @@ public class PepBoysMainPageSteps {
     }
 
     @And("^user continues shopping$")
-    public void userContinuesShopping() throws Throwable {
+    public void userContinuesShopping() {
         productPage.clickContinueInAddToCartDialog();
     }
 
     @And("^user adds to cart any tires with \"([^\"]*)\" delivery option for \"([^\"]*)\"$")
-    public void userAddsToCartAnyTiresWithDeliveryOptionFor(String deliveryOption, String vehicle) throws Throwable {
-        tiresPage.addSingleTyresToCart();
+    public void userAddsToCartAnyTiresWithDeliveryOptionFor(String deliveryOption, String vehicle) {
+        tiresPage.openTiresPage();
         productPage.addToCart();
 
     }
 
     @And("^user schedules installation time$")
     public void userSchedulesInstallationTime() {
-        cartPage.scheduleInstallationTime();
+        cartPage.waitForInstallationDialogToOpen();
+        cartPage.selectInstallationTime();
+        CommonFunctions.attachScreenshot("Installation time");
+        cartPage.submitInstallationTime();
+    }
+
+    @And("^user updates installation time$")
+    public void userUpdatesInstallationTime() {
+        cartPage.clickEditInstallationTime();
+        cartPage.waitForInstallationDialogToOpen();
+        cartPage.moveToNextFiveDays();
+        cartPage.selectInstallationTime();
+        CommonFunctions.attachScreenshot("Installation time");
+        cartPage.submitInstallationTime();
     }
 
     @Then("^user should be on Forgot Password page$")
@@ -132,7 +157,6 @@ public class PepBoysMainPageSteps {
 
     @And("^user should be on rewards page$")
     public void userShouldBeOnRewardsPage() {
-
         if (TestGlobalsManager.getTestGlobal("authorised") != null) {
             assertTrue(myAccountPage.isPage(), "Unexpected page. Expected page: [MyAccount page 'Rewards tab']");
             CommonFunctions.attachScreenshot("Rewards page");
@@ -165,5 +189,19 @@ public class PepBoysMainPageSteps {
     @Then("^user should be on cart page$")
     public void userShouldBeOnCartPage() {
         assertTrue(cartPage.isPage(), "Shopping Cart not opened");
+    }
+
+    @And("^checks, that Pay in Store option is available$")
+    public void checksThatPayInStoreOptionIsAvailable() {
+        while(cartPage.isPayInStoreUnavailableMessageDisplayed()) {
+            cartPage.cleanUpCart();
+            userAddsToCartProductWithIdWithDeliveryOption(DataProvider.getRandomItemId(), "Ship to Home");
+            userViewsCart();
+        }
+    }
+
+    @And("^user changes store$")
+    public void userChangesStore() {
+        cartPage.changeLocation();
     }
 }

@@ -7,6 +7,7 @@ import cucumber.api.java.en.Then;
 import entities.components.*;
 import entities.pages.pepboys.PepBoysLoginPage;
 import entities.pages.pepboys.PepBoysMainPage;
+import entities.pages.pepboys.PepBoysPaymentAndReviewCheckoutPage;
 import entities.pages.pepboys.PepBoysThankYouPage;
 import utils.CommonFunctions;
 import utils.TestGlobalsManager;
@@ -14,12 +15,21 @@ import utils.pepboys.BillingUser;
 import utils.pepboys.CreditCard;
 import utils.pepboys.DataProvider;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 import static utils.CommonFunctions.attachScreeVideo;
 import static utils.DriverFactory.stopScreenVideo;
 
 public class PepBoysCheckoutSteps {
+
+    private PepBoysThankYouPage thankYouPage = new PepBoysThankYouPage();
+    private PepBoysPaymentAndReviewCheckoutPage paymentAndReviewPage = new PepBoysPaymentAndReviewCheckoutPage();
+
     private AddressFormComponent addressFormComponent = new AddressFormComponent();
     private AddressDisplayComponent addressDisplayComponent = new AddressDisplayComponent();
     private AddressVerificationComponent addressVerificationComponent = new AddressVerificationComponent();
@@ -39,6 +49,8 @@ public class PepBoysCheckoutSteps {
     private CheckboxRowComponent checkboxRowComponent = new CheckboxRowComponent();
     private RewardSummaryComponent rewardSummaryComponent = new RewardSummaryComponent();
     private TitleComponent titleComponent = new TitleComponent();
+    private ModalComponent modalComponent = new ModalComponent();
+    private RewardsAccountComponent rewardsAccountComponent = new RewardsAccountComponent();
 
     @And("^user types billing info for \"([^\"]*)\"$")
     public void typesBillingInfoFor(String userName) {
@@ -58,14 +70,36 @@ public class PepBoysCheckoutSteps {
     @Then("^user checks billing info for \"([^\"]*)\"$")
     public void userChecksBillingInfoFor(String userName) {
         BillingUser user = DataProvider.getUser(userName);
-        addressDisplayComponent.checkBillingInfo(
+        addressDisplayComponent.setRoot(BaseComponent.getComponentByTitle("Billing Address"));
+        addressDisplayComponent.checkInfo(
                 user.getFullName(),
                 user.getApartment(),
                 user.getFullAddress(),
                 user.getCity(),
                 user.getZipCode(),
-                user.getPhone(),
-                user.getEmail()
+                user.getPhone()
+        );
+        addressDisplayComponent.checkFieldValue("Email", user.getEmail());
+    }
+
+    @Then("^user checks shipping info for \"([^\"]*)\"$")
+    public void userChecksShippingInfoFor(String userName) {
+        BillingUser user = DataProvider.getUser(userName);
+        String currentTab = breadcrumbWidget.getActiveTab();
+
+        if(currentTab.equals("Delivery Method")) {
+            addressDisplayComponent.setRoot(BaseComponent.getContainerByTitle("Shipping Address"));
+        } else {
+            addressDisplayComponent.setRoot(BaseComponent.getComponentByTitle("Shipping Address"));
+        }
+
+        addressDisplayComponent.checkInfo(
+                user.getFullName(),
+                user.getApartment(),
+                user.getFullAddress(),
+                user.getCity(),
+                user.getZipCode(),
+                user.getPhone()
         );
     }
 
@@ -73,9 +107,9 @@ public class PepBoysCheckoutSteps {
     public void pressesTheButton(String confirmationMethod) {
         buttonComponent.javascriptScroll(200);
         buttonComponent.clickButton();
-//        if (!buttonComponent.isOverlayDisplayed()) {
-//            buttonComponent.clickButton();
-//        }
+        if (confirmationMethod.equals("Place Order")) {
+            buttonComponent.clickTotalCost();
+        }
     }
 
     @And("^chooses \"([^\"]*)\"$")
@@ -93,6 +127,7 @@ public class PepBoysCheckoutSteps {
     public void usesCardForPayment(String cardName) {
         CreditCard card = DataProvider.getCard(cardName);
         creditCardFormComponent.inputPaymentDetails(
+                card.getName(),
                 card.getNumber(),
                 card.getExpDate(),
                 card.getCvv(),
@@ -102,8 +137,9 @@ public class PepBoysCheckoutSteps {
 
     @Then("^user should be on thank you page$")
     public void userShouldBeOnThankYouPage() {
-        PepBoysThankYouPage pepBoysThankYouPage = new PepBoysThankYouPage();
-        pepBoysThankYouPage.checkPaymentResult();
+        assertTrue(thankYouPage.isOnThankYouPage(), "User is not on \"Thank You\" page");
+        thankYouPage.checkPaymentResult();
+        CommonFunctions.attachScreenshot("Thank You Page");
     }
 
     @Given("^user makes authorisation for \"([^\"]*)\"$")
@@ -120,8 +156,18 @@ public class PepBoysCheckoutSteps {
     @And("^applies billing info for address \"([^\"]*)\"$")
     public void appliesBillingInfo(String address) {
         assertTrue(radioListComponent.exists(), "Billing Address Drop-Down doesn't exist");
+        radioListComponent.setRoot(BaseComponent.getContainerByTitle("Billing Address"));
         radioListComponent.select(address);
         CommonFunctions.attachScreenshot("Billing info");
+    }
+
+    @And("^applies shipping info for address \"([^\"]*)\"$")
+    public void appliesShippingInfoForAddress(String address) {
+        assertTrue(radioListComponent.exists(), "Billing Address Drop-Down doesn't exist");
+        checkboxRowComponent.check("Yes, shipping address and billing address are the same", false);
+        radioListComponent.setRoot(BaseComponent.getContainerByTitle("Shipping Address"));
+        radioListComponent.select(address);
+        CommonFunctions.attachScreenshot("Shipping info");
     }
 
     @And("^selects \"Enters a New Address\"$")
@@ -137,7 +183,7 @@ public class PepBoysCheckoutSteps {
         CommonFunctions.attachScreenshot("Purchase with PayPal");
     }
 
-    @Given("^user types \"([^\"]*)\" into the \"([^\"]*)\" field of \"([^\"]*)\" form$")
+    @Given("^user types \"([^\"]*)\" into the \"([^\"]*)\" field of \"([^\"]*)\" address form$")
     public void userTypesValueIntoField(String value, String field, String formTitle) {
         addressFormComponent.setRoot(BaseComponent.getContainerByTitle(formTitle));
         addressFormComponent.inputValueIntoField(value, field);
@@ -190,19 +236,18 @@ public class PepBoysCheckoutSteps {
     @And("^user types \"([^\"]*)\" into the email field$")
     public void userTypesIntoTheEmailField(String email) throws Throwable {
         emailComponent.fillEmailField(email);
-
         CommonFunctions.attachScreenshot(String.format("Input '%s' into email field", email));
     }
 
     @And("^user types rewards number \"([^\"]*)\"$")
     public void userTypesRewardsNumber(String rewardsCode) {
-        collapserComponent.openRewards();
-        collapserComponent.setRewards(rewardsCode);
+        collapserComponent.openCollapser();
+        rewardsAccountComponent.setRewards(rewardsCode);
         CommonFunctions.attachScreenshot("Rewards Number");
     }
 
     @And("^checks payment details for \"([^\"]*)\"$")
-    public void checksPaymentDetails(String userName) throws Throwable {
+    public void checksPaymentDetails(String userName) {
         payPalWellComponent.checkPayPalAccount(DataProvider.getUser(userName).getPaypalEmail());
     }
 
@@ -371,4 +416,68 @@ public class PepBoysCheckoutSteps {
         stopScreenVideo();
         attachScreeVideo("data");
     }
+
+    @Then("^user should see \"([^\"]*)\" form$")
+    public void userShouldSeeForm(String formTitle) {
+        assertTrue(BaseComponent.getContainerByTitle(formTitle).isDisplayed(),
+                "Form " + formTitle + " not found");
+    }
+
+    @And("^user types \"([^\"]*)\" into \"([^\"]*)\" field of Card Form$")
+    public void userTypesIntoFieldOfCardForm(String value, String field) {
+        creditCardFormComponent.inputValueIntoField(value, field);
+        CommonFunctions.attachScreenshot(String.format("Input '%s' into '%s'", value, field));
+
+    }
+
+    @And("^sees error tooltip with text \"([^\"]*)\"$")
+    public void seesErrorTooltipWithText(String error) {
+        assertTrue(creditCardFormComponent.hasErrorTooltipWithMessage(error),
+                "Tooltip with message \"" + error + "\" not found");
+    }
+
+    @And("^sees modal error with text \"([^\"]*)\"$")
+    public void seesModalErrorWithText(String text)  {
+        modalComponent.waitForModalToOpen();
+        assertTrue(modalComponent.hasMessageWithText(text), "Unexpected text was displayed");
+        CommonFunctions.attachScreenshot("Error Modal opened");
+    }
+
+    @And("^user clicks Terms link$")
+    public void userClicksTermsLink() {
+        paymentAndReviewPage.clickTerms();
+    }
+
+    @Then("^user should see Terms modal with \"([^\"]*)\"$")
+    public void userShouldSeeTermsModalWith(String text) throws Throwable {
+        modalComponent.waitForModalToOpen();
+        assertTrue(modalComponent.hasText(text), "Unexpected Terms");
+        CommonFunctions.attachScreenshot("Terms Modal opened");
+    }
+
+    @And("^user clicks arrow for \"([^\"]*)\"$")
+    public void userClicksArrowFor(String componentName) {
+        paymentAndReviewPage.clickArrowFor(componentName);
+    }
+
+    @And("^user checks installation time$")
+    public void userChecksInstallationTime() {
+        Date installationDate = (Date)TestGlobalsManager.getTestGlobal("installationTime");
+        DateFormat df = new SimpleDateFormat("EEE. MM/dd/yyyy @ h:mm a", Locale.ENGLISH);
+        assertEquals(paymentAndReviewPage.getInstallationTime(), df.format(installationDate), "Unexpected installation date");
+    }
+
+    @And("^user can expand and collapse Order summary$")
+    public void userCanExpandAndCollapseOrderSummary() {
+        collapserComponent.setRoot(ModalComponent.getComponentByTitle("Order Summary"));
+        collapserComponent.openCollapser();
+        assertTrue(new OrderSummaryComponent().isVisible(), "Order Summary in invisible");
+    }
+
+    @And("^checks Pick Up in Store info$")
+    public void checksPickUpInStoreInfo() {
+        paymentAndReviewPage.checkPickUpInStoreInfo();
+    }
+
+
 }

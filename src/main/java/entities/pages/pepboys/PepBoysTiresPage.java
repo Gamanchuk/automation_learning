@@ -57,7 +57,7 @@ public class PepBoysTiresPage extends PepBoysBasePage {
         waitForElementVisible(By.xpath("//h3[text()='Your item(s) have been added to the cart']"));
     }
 
-    public void addSingleTyresToCart() {
+    public void openTiresPage() {
         getDriver().navigate().to(TIRES_URL);
         CommonFunctions.attachScreenshot("Tires page");
 //        click(By.xpath("//button[text()='Add to cart']"));

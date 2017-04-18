@@ -3,6 +3,8 @@ package entities.pages.pepboys;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 
+import static org.testng.Assert.assertTrue;
+
 public class PepBoysProductPage extends PepBoysBasePage {
     private String productId;
 
@@ -18,7 +20,7 @@ public class PepBoysProductPage extends PepBoysBasePage {
     public void openProductPage(String productId) {
         this.productId = productId;
         getDriver().navigate().to(BASE_URL + "product/details/" + productId);
-
+        assertTrue(isPage(), "Product page was not opened");
     }
 
     public void setDeliveryOption(String deliveryOption) {
@@ -45,5 +47,9 @@ public class PepBoysProductPage extends PepBoysBasePage {
 
     public void clickContinueInAddToCartDialog() {
         click(By.xpath("//button[text()='Continue Shopping']"));
+    }
+
+    public boolean isAvailableInStore() {
+        return isElementPresent(By.xpath("//div[contains(text(), 'Pay in Store Available')]"));
     }
 }

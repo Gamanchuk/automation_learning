@@ -12,7 +12,7 @@ public class EmailComponent extends BaseComponent {
         WebElement emailEl = findElement(emailField);
         emailEl.clear();
         emailEl.sendKeys(email);
-        focusOut();
+        focusOut(emailEl);
     }
 
     public String getEmailDisplayValue() {
