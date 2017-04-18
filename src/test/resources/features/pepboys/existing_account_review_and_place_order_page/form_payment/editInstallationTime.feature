@@ -1,6 +1,6 @@
 @pepBoys @debug
 
-Feature: GUEST - REVIEW & PLACE ORDER PAGE
+Feature: EXISTING ACCOUNT - REVIEW & PLACE ORDER PAGE
 
   Background:
     Given user makes appoint
@@ -9,11 +9,13 @@ Feature: GUEST - REVIEW & PLACE ORDER PAGE
     And user schedules installation time
     And chooses "Pay Online" method with appointment details
 
-  @TestCaseId("15415")
+  @TestCaseId("15467")
   Scenario: Edit installation time
-    Given user types billing info for "qa user"
+    Given user makes authorisation for "qa user"
+    And applies billing info for address "123 Mission Street, 10th Floor"
     And presses the "Continue" button
-    And chooses "Use Recommended Address"
+    And user should be on "Payment & Review" tab
+
     And user checks installation time
     And user clicks arrow for "Installation"
 
