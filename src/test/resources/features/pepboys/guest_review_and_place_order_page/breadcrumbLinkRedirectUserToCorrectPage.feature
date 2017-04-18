@@ -1,5 +1,4 @@
-@pepBoys
-
+@pepBoys @debug
 
 Feature: GUEST - REVIEW & PLACE ORDER PAGE
 
@@ -15,7 +14,7 @@ Feature: GUEST - REVIEW & PLACE ORDER PAGE
     And presses the "Continue" button
     And chooses "Use Recommended Address"
 
-    And chooses "Ground" shipping method
+    And chooses "Ground: 5-7 Days" shipping method
     And presses the "Continue" button
     Then user should be on "Payment & Review" tab
 

@@ -14,7 +14,7 @@ Feature: GUEST - REVIEW & PLACE ORDER PAGE
     And presses the "Continue" button
     And chooses "Use Recommended Address"
 
-    And chooses "Ground" shipping method
+    And chooses "Ground: 5-7 Days" shipping method
     And presses the "Continue" button
 
     And user clicks arrow for "Billing Address"
@@ -22,6 +22,6 @@ Feature: GUEST - REVIEW & PLACE ORDER PAGE
     And presses the "Continue" button
     And chooses "Use Recommended Address"
 
-    And chooses "Ground" shipping method
+    And chooses "Ground: 5-7 Days" shipping method
     And presses the "Continue" button
     And user checks billing info for "qa user2"
