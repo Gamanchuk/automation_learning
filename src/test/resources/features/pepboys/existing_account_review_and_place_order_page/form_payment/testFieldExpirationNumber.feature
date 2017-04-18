@@ -1,6 +1,6 @@
-@pepBoys @debug
+@pepBoys
 
-Feature: GUEST - REVIEW & PLACE ORDER PAGE
+Feature: EXISTING ACCOUNT - REVIEW & PLACE ORDER PAGE
 
   Background:
     Given user makes appoint
@@ -9,14 +9,14 @@ Feature: GUEST - REVIEW & PLACE ORDER PAGE
     And chooses "Pay Online" method
 
   @TestCaseId("15404")
+
   Scenario: Test field "Expiration"
-    Given user types billing info for "qa user"
-    And presses the "Continue" button
-    And chooses "Use Recommended Address"
-
-    And chooses "Ground" shipping method
+    Given user makes authorisation for "qa user"
+    And applies billing info for address "123 Mission Street, 10th Floor"
     And presses the "Continue" button
 
+    And chooses "Ground: 5-7 Days" shipping method
+    And presses the "Continue" button
     And uses "visa" card for payment
 
     And user types "01" into "Expiration" field of Card Form
