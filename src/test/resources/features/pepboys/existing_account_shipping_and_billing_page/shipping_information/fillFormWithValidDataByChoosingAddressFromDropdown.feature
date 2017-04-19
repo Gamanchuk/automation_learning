@@ -1,4 +1,4 @@
-@pepBoys @debug
+@pepBoys
 
 Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE
 
@@ -14,15 +14,15 @@ Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE
     And user should be on "Billing & Shipping" tab
     And selects "Enter a New Address" for shipping address
 
-    And applies shipping info for address "201 Spear St, 10"
-    And user checks shipping info for "user at Spear street"
+    And applies shipping info for address "8th avenue, Unit 1611"
+    And user checks shipping info for "qa user3"
 
     And presses the "Continue" button
     And user should be on "Delivery Method" tab
-    And user checks shipping info for "user at Spear street"
+    And user checks shipping info for "qa user3"
     And presses the "Continue" button
 
     And user should be on "Payment & Review" tab
-    Then user checks shipping info for "user at Spear street"
+    Then user checks shipping info for "qa user3"
 
 
