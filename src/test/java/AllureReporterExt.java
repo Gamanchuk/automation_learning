@@ -1,13 +1,12 @@
-import gherkin.formatter.model.Background;
-import gherkin.formatter.model.Result;
-import gherkin.formatter.model.Scenario;
-import gherkin.formatter.model.Tag;
+import gherkin.formatter.model.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import ru.yandex.qatools.allure.cucumberjvm.AllureReporter;
-import utils.*;
+import utils.CommonFunctions;
+import utils.DriverFactory;
+import utils.TestGlobalsManager;
 
-import java.io.IOException;
+import java.util.ArrayList;
 
 import static utils.CommonFunctions.attachScreenshot;
 
@@ -24,79 +23,41 @@ public class AllureReporterExt extends AllureReporter {
     @Override
     public void scenario(Scenario scenario) {
         this.scenario = scenario;
+        if(scenario != null) {
+            getTestCaseIDs();
+            TestGlobalsManager.setTestGlobal("caseName", scenario.getName());
+        }
+    }
+
+    @Override
+    public void before(Match match, Result result) {
+
     }
 
     @Override
     public void result(Result result) {
-        String caseName = null;
-
         if (scenario != null) {
-            caseName = scenario.getName();
-        } else {
-            caseName = background.getName();
-        }
-
-        if ("failed".equals(result.getStatus())) {
-            log.info("Test failed. Step name: " + caseName);
-            attachScreenshot("Failed screenshot: " + caseName);
-
-            if (Boolean.valueOf(System.getProperty("projectTracking"))) {
-                String ticketId = setJiraIssues(String.valueOf(result.getError()));
-                setTestResult(TestRailStatus.FAILED, String.valueOf(result.getError()), ticketId);
+            if (result.getStatus().equals("failed")) {
+                attachScreenshot("Failed screenshot: " + scenario.getName());
+                CommonFunctions.attachDomThree(DriverFactory.getDriver().getPageSource());
             }
-
-            CommonFunctions.attachDomThree(DriverFactory.getDriver().getPageSource());
-
-        } else if ("passed".equals(result.getStatus())) {
-            log.info("passed: " + caseName);
-            if (Boolean.valueOf(System.getProperty("projectTracking")))
-                setTestResult(TestRailStatus.PASSED, "", "");
         }
-
         super.result(result);
     }
 
-    private int getTestCaseID() {
-
-        String id = null;
+    private ArrayList<String> getTestCaseIDs() {
+        ArrayList<String> ids = new ArrayList<>();
         for (Tag tag : scenario.getTags()) {
             if (tag.getName().contains("@TestCaseId"))
-                id = tag.getName().split("\"")[1];
+                ids.add(tag.getName().split("\"")[1]);
         }
-        assert id != null;
-        return Integer.parseInt(id);
+
+        log.info("Count @TestCase found: " + ids.size());
+        for (String s : ids) {
+            log.info("@TestCaseId: " + s);
+        }
+
+        TestGlobalsManager.setTestGlobal("testCaseIds", ids);
+        return ids;
     }
-
-    private void setTestResult(TestRailStatus status, String error, String issuesLink) {
-        try {
-            TestRailRunHelper.getInstance().setTestResult(getTestCaseID(), status, error, issuesLink);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private String setJiraIssues(String result) {
-        String ticketId = null;
-        String caseName = null;
-        String caseId = null;
-
-        if (scenario != null) {
-            caseName = scenario.getName();
-            caseId = scenario.getId();
-        } else {
-            caseName = background.getName();
-            caseId = null;
-        }
-
-        try {
-            ticketId = JiraHelper.publishJira(
-                    "Automation - \"" + caseName + "\" failed",
-                    "{noformat}" + result + "\n" + caseId + "{noformat}");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return ticketId;
-    }
-
 }

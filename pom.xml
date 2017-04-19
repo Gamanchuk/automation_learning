@@ -9,10 +9,10 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <selenium.version>3.0.1</selenium.version>
+        <selenium.version>3.2.0</selenium.version>
         <selendroid.version>0.17.0</selendroid.version>
         <aspectj.version>1.8.9</aspectj.version>
-        <allure.version>1.5.0</allure.version>
+        <allure.version>1.5.2</allure.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring.config>**/**/admin-context.xml</spring.config>
@@ -85,7 +85,7 @@
         <dependency>
             <groupId>ru.yandex.qatools.allure</groupId>
             <artifactId>allure-cucumber-jvm-adaptor</artifactId>
-            <version>1.6.1</version>
+            <version>1.6.2</version>
         </dependency>
         <dependency>
             <groupId>info.cukes</groupId>
@@ -169,6 +169,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.1</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
@@ -234,6 +235,7 @@
     </build>
 
     <profiles>
+        <!--project tracking-->
         <profile>
             <id>Project-Tracking</id>
             <properties>
@@ -241,6 +243,7 @@
             </properties>
         </profile>
 
+        <!--use desktop browser-->
         <profile>
             <id>use-desktop-browser</id>
             <properties>
@@ -277,19 +280,31 @@
                 <suite.id>93</suite.id>
             </properties>
         </profile>
-
+        <profile>
+            <id>suite-refactoring</id>
+            <properties>
+                <testng.suite>${basedir}/src/test/resources/testsuites/refactoring.xml</testng.suite>
+                <suite.id>93</suite.id>
+            </properties>
+        </profile>
 
         <!--environments-->
         <profile>
-            <id>env-eugene-local-1</id>
+            <id>env-eugene-local</id>
             <properties>
-                <testing.env>eugene_local1</testing.env>
+                <testing.env>eugene_local</testing.env>
             </properties>
         </profile>
         <profile>
-            <id>env-eugene-local-2</id>
+            <id>env-adam-local</id>
             <properties>
-                <testing.env>eugene_local2</testing.env>
+                <testing.env>adam_local</testing.env>
+            </properties>
+        </profile>
+        <profile>
+            <id>env-nik-local</id>
+            <properties>
+                <testing.env>nik_local</testing.env>
             </properties>
         </profile>
         <profile>
@@ -301,36 +316,19 @@
 
         <!--devices-->
         <profile>
-            <id>device-IPhone-6</id>
+            <id>device-iPhone-6</id>
             <properties>
                 <props.file.name>iphone6</props.file.name>
             </properties>
         </profile>
 
         <profile>
-            <id>device-IPhone-Simulator</id>
+            <id>device-Nexus-5X</id>
             <properties>
-                <props.file.name>iphone_simulator</props.file.name>
+                <props.file.name>nexus_5x</props.file.name>
             </properties>
         </profile>
-        <profile>
-            <id>device-IPhone-6+</id>
-            <properties>
-                <props.file.name>iphone6+</props.file.name>
-            </properties>
-        </profile>
-        <profile>
-            <id>device-IPhone4s</id>
-            <properties>
-                <props.file.name>iphone4s</props.file.name>
-            </properties>
-        </profile>
-        <profile>
-            <id>device-GalaxyNote4</id>
-            <properties>
-                <props.file.name>galaxy_note</props.file.name>
-            </properties>
-        </profile>
+
         <profile>
             <id>device-GalaxyS6</id>
             <properties>
@@ -338,9 +336,33 @@
             </properties>
         </profile>
         <profile>
-            <id>device-android-simulator</id>
+            <id>device-GalaxyS5</id>
             <properties>
-                <props.file.name>android_simulator</props.file.name>
+                <props.file.name>galaxy_s5</props.file.name>
+            </properties>
+        </profile>
+        <profile>
+            <id>device-GalaxyNote</id>
+            <properties>
+                <props.file.name>galaxy_note</props.file.name>
+            </properties>
+        </profile>
+        <profile>
+            <id>device-iPhone-6plus</id>
+            <properties>
+                <props.file.name>iphone6plus</props.file.name>
+            </properties>
+        </profile>
+        <profile>
+            <id>device-iPhone-5c</id>
+            <properties>
+                <props.file.name>iphone5c</props.file.name>
+            </properties>
+        </profile>
+        <profile>
+            <id>device-iPhone-6s</id>
+            <properties>
+                <props.file.name>iphone6s</props.file.name>
             </properties>
         </profile>
     </profiles>
@@ -352,8 +374,15 @@
                 <groupId>ru.yandex.qatools.allure</groupId>
                 <artifactId>allure-maven-plugin</artifactId>
                 <version>2.5</version>
+                <configuration>
+                    <properties>
+                        <allure.issues.tracker.pattern>https://moovweb.atlassian.net/browse/%s
+                        </allure.issues.tracker.pattern>
+                        <allure.tests.management.pattern>https://moovweb.testrail.net/%s
+                        </allure.tests.management.pattern>
+                    </properties>
+                </configuration>
             </plugin>
         </plugins>
     </reporting>
-
 </project>

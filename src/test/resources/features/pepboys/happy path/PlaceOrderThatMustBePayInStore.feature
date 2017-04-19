@@ -1,6 +1,5 @@
 @pepBoys
 
-
 Feature: Happy Path
 
   Background:

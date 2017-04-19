@@ -12,24 +12,24 @@ Feature: Guest - Shipping & Billing page
   @TestCaseId("15499")
   Scenario: Test field 'Apartment'
     Given user types billing info for "qa user"
-    And user types " " in "apt" on billing info tab
+    And user types "" into the "Apt, Bldg." field of "Billing Address" address form
     And presses the "Continue" button
-    Then user checks billing info for "qa user"
-    And user navigates back on "Billing & Shipping"
+    Then user checks "Apt, Bldg." with value "" on "Delivery Method" tab
+    And user navigates to "Billing & Shipping" breadcrumb
 
-    And user types "12345" in "apt" on billing info tab
+    And user types "12345" into the "Apt, Bldg." field of "Billing Address" address form
     And presses the "Continue" button
-    Then user checks "apt" with value "12345"
-    And user navigates back on "Billing & Shipping"
+    Then user checks "Apt, Bldg." with value "12345" on "Delivery Method" tab
+    And user navigates to "Billing & Shipping" breadcrumb
 
-    And user types "Some Apartment" in "apt" on billing info tab
+    And user types "Some Apartment" into the "Apt, Bldg." field of "Billing Address" address form
     And presses the "Continue" button
-    Then user checks "apt" with value "Some Apartment"
-    And user navigates back on "Billing & Shipping"
+    Then user checks "Apt, Bldg." with value "Some Apartment" on "Delivery Method" tab
+    And user navigates to "Billing & Shipping" breadcrumb
 
-    And user types "!#&@()" in "apt" on billing info tab
+    And user types "!#&@()" into the "Apt, Bldg." field of "Billing Address" address form
     And presses the "Continue" button
-    Then user checks "apt" with value "!#&@()"
+    Then user checks "Apt, Bldg." with value "!#&@()" on "Delivery Method" tab
 
 
 

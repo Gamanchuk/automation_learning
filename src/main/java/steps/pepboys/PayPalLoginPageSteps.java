@@ -1,17 +1,27 @@
 package steps.pepboys;
 
 
-import components.pages.pepboys.PayPalLoginPage;
 import cucumber.api.java.en.And;
+import entities.components.PayPalComponent;
 import utils.pepboys.DataProvider;
 
-public class PayPalLoginPageSteps{
+public class PayPalLoginPageSteps {
 
-    private PayPalLoginPage payPalLoginPage = new PayPalLoginPage();
+    private PayPalComponent payPalComponent = new PayPalComponent();
 
     @And("^user confirms purchase as \"([^\"]*)\" with PayPal$")
     public void userConfirmsPurchaseAsWithPayPal(String userName) {
-        payPalLoginPage.doLogin(DataProvider.getUser(userName));
-        payPalLoginPage.confirmationPay();
+        payPalComponent.doLogin(DataProvider.getUser(userName));
+        payPalComponent.confirmationPay();
+    }
+
+    @And("^user logOut from PayPal$")
+    public void userLogOutFromPayPal() throws Throwable {
+        payPalComponent.logOut();
+    }
+
+    @And("^user confirms purchase with PayPal$")
+    public void userConfirmsPurchaseWithPayPal() {
+        payPalComponent.confirmationPay();
     }
 }

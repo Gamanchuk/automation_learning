@@ -7,6 +7,10 @@ import org.openqa.selenium.TakesScreenshot;
 import org.testng.Reporter;
 import ru.yandex.qatools.allure.annotations.Attachment;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -70,6 +74,29 @@ public class CommonFunctions {
         return ((TakesScreenshot) DriverFactory.getDriver()).getScreenshotAs(OutputType.BYTES);
     }
 
+
+    @Attachment(value = "Screen Recording Video", type = "video/mp4")
+    public static byte[] attachScreeVideo(String name) {
+
+        File file = new File(System.getProperty("user.dir") + "/" + Config.DEVICE_UID + ".mp4");
+
+        log.info("screen file: " + file.getAbsolutePath());
+
+        byte[] byteVideo = new byte[(int) file.length()];
+        try {
+            FileInputStream fileInputStream = new FileInputStream(file);
+            fileInputStream.read(byteVideo);
+        } catch (FileNotFoundException e) {
+            log.error("File with video not found.");
+        } catch (IOException e1) {
+            log.error("Error reading the file.");
+        }
+
+        log.info(byteVideo);
+        file.delete();
+        return byteVideo;
+    }
+
     public static float getCurrency(String str) {
         Pattern pattern = Pattern.compile("\\$(\\d+\\.?\\d{0,2})");
         Matcher matcher = pattern.matcher(str);
@@ -79,7 +106,13 @@ public class CommonFunctions {
         } else {
             throw new Error("Can't get currency from string \'" + str + "\"");
         }
+    }
 
-
+    public static void sleep(long milis) {
+        try {
+            Thread.sleep(milis);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -1,6 +1,5 @@
 @pepBoys
 
-
 Feature: Guest - Shipping & Billing page
 
   Background:
@@ -12,23 +11,24 @@ Feature: Guest - Shipping & Billing page
   @TestCaseId("15498")
   Scenario: Test field 'Address Street'
     Given user types billing info for "qa user"
-    And user types " " in "street address" on billing info tab
+    And user types "" into the "Street Address" field of "Billing Address" address form
     And presses the "Continue" button
-    Then user stays at billing tab with error message
+    Then user should stay at "Billing & Shipping" tab
+    And sees "FORM ERRORS" error message with text "Please review all inputs."
 
-    And user types "Mission Street" in "street address" on billing info tab
+    And user types "Mission Street" into the "Street Address" field of "Billing Address" address form
     And presses the "Continue" button
     And chooses "Use Entered Address"
-    Then user checks "street address" with value "Mission Street"
-    And user navigates back on "Billing & Shipping"
+    Then user checks "Street Address" with value "Mission Street" on "Delivery Method" tab
+    And user navigates to "Billing & Shipping" breadcrumb
 
-    And user types "123456" in "street address" on billing info tab
+    And user types "123456" into the "Street Address" field of "Billing Address" address form
     And presses the "Continue" button
     And chooses "Use Entered Address"
-    Then user checks "sstreet address" with value "123456"
-    And user navigates back on "Billing & Shipping"
+    Then user checks "Street Address" with value "123456" on "Delivery Method" tab
+    And user navigates to "Billing & Shipping" breadcrumb
 
-    And user types "!@$%^&*():_+" in "street address" on billing info tab
+    And user types "!@$%^&*():_+" into the "Street Address" field of "Billing Address" address form
     And presses the "Continue" button
     And chooses "Use Entered Address"
-    Then user checks "street address" with value "!@$%^&*():_+"
+    Then user checks "Street Address" with value "!@$%^&*():_+" on "Delivery Method" tab

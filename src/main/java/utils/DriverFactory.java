@@ -25,6 +25,7 @@ import org.zeroturnaround.process.Processes;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -59,7 +60,7 @@ public class DriverFactory {
                     initChromeDriver();
                 } else {
 
-                    log.info("****************************** CREATING REMOTE WEB DRIVER ******************************");
+                    log.info("**************************** CREATING REMOTE WEB DRIVER ***************************");
                     log.info("PLATFORM NAME: " + platformName);
                     log.info("PLATFORM VERSION: " + platformVersion);
                     log.info("DEVICE NAME: " + deviceName);
@@ -67,7 +68,7 @@ public class DriverFactory {
                     log.info("DEVICE UDID: " + deviceUdid);
                     log.info("DEVICE USB PORT: " + iproxyPort);
                     log.info("APPIUM URL: " + service.getUrl());
-                    log.info("****************************************************************************************");
+                    log.info("***********************************************************************************");
                     log.info("");
 
                     DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
@@ -80,27 +81,30 @@ public class DriverFactory {
                     if (Config.PLATFORM_NAME.equals("iOS")) {
                         desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
                         desiredCapabilities.setCapability("wdaLocalPort", Integer.parseInt(iproxyPort));
-                        desiredCapabilities.setCapability(IOSMobileCapabilityType.LAUNCH_TIMEOUT, 500000);
-                        // desiredCapabilities.setCapability("realDeviceLogger", "/usr/local/lib/node_modules/deviceconsole/deviceconsole");
-                        desiredCapabilities.setCapability(IOSMobileCapabilityType.AUTO_ACCEPT_ALERTS, true);
                         desiredCapabilities.setCapability("useNewWDA", true);
-                        desiredCapabilities.setCapability("safariAllowPopups", true);
-                        // desiredCapabilities.setCapability("xcodeOrgId", "Y95G5M3Q84");
-                        // desiredCapabilities.setCapability("xcodeSigningId", "iPhone Developer");
-                        // desiredCapabilities.setCapability("realDeviceLogger", "/usr/local/lib/node_modules/deviceconsole/deviceconsole");
+                        //desiredCapabilities.setCapability("preventWDAAttachments", true);
+                        desiredCapabilities.setCapability(IOSMobileCapabilityType.LAUNCH_TIMEOUT, 500000);
+
+                        //desiredCapabilities.setCapability("startIWDP", true);
+                        //desiredCapabilities.setCapability("showXcodeLog", true);
+                        //desiredCapabilities.setCapability("xcodeConfigFile", "src/resources/Config.xcconfig");
+
+                        desiredCapabilities.setCapability("xcodeOrgId", "Y95G5M3Q84");
+                        desiredCapabilities.setCapability("xcodeSigningId", "iPhone Developer");
+                        desiredCapabilities.setCapability("updatedWDABundleId", "com.moovweb.WebDriverAgentRunner");
                     }
 
                     eventListener = new MyWebDriverEventListener();
 
                     driver = new EventFiringWebDriver(new RemoteWebDriver(new URL(String.valueOf(service.getUrl())), desiredCapabilities)).register(eventListener);
                     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+                    startVideoRecording();
                 }
 
             } catch (Exception e) {
                 throw new AssertionError("Can't create driver: " + e.getMessage());
             }
         }
-
         return driver;
     }
 
@@ -120,7 +124,7 @@ public class DriverFactory {
             killAppiumServer(appiumPort);
 
             log.info("");
-            log.info("******************************* STARTING APPIUM SERVICE ********************************");
+            log.info("******************************* STARTING APPIUM SERVICE ***********************************");
             log.info("APPIUM PORT: " + appiumPort);
             log.info("IOS WEB PROXY PORT: " + proxyPort);
 
@@ -136,7 +140,7 @@ public class DriverFactory {
             service = AppiumDriverLocalService.buildService(serviceBuilder);
             service.start();
             log.info("APPIUM URL: " + service.getUrl());
-            log.info("****************************************************************************************");
+            log.info("*******************************************************************************************");
             log.info("");
         }
     }
@@ -165,6 +169,7 @@ public class DriverFactory {
 
                 PidProcess process = Processes.newPidProcess(PID);
                 process.destroyGracefully();
+                Thread.sleep(3000);
 
                 log.info("Appium Server killed");
             } else {
@@ -194,14 +199,15 @@ public class DriverFactory {
 
             DefaultExecuteResultHandler executeResultHandler = new DefaultExecuteResultHandler();
             DefaultExecutor executor = new DefaultExecutor();
-            executor.setExitValue(1);
+            executor.setExitValue(0);
 
             try {
+                log.info("Execute command: " + Arrays.toString(iOSProxyCommand.toStrings()));
                 executor.execute(iOSProxyCommand, executeResultHandler);
-                Thread.sleep(3000);
+                Thread.sleep(2000);
                 log.info("iOS Proxy started.");
             } catch (IOException | InterruptedException e) {
-                e.printStackTrace();
+                log.error("Cannot execute command: " + Arrays.toString(iOSProxyCommand.toStrings()));
             }
         }
     }
@@ -229,6 +235,7 @@ public class DriverFactory {
 
                 PidProcess process = Processes.newPidProcess(PID);
                 process.destroyGracefully();
+                Thread.sleep(700);
 
                 log.info("iOS Proxy killed");
             } else {
@@ -241,17 +248,79 @@ public class DriverFactory {
     }
 
     public static void quitDriver() {
-
         log.info("DELETE DRIVER");
-
         driver.close();
         driver.quit();
+        driver = null;
+    }
 
+    public static void killAppium() {
         if (service != null) {
             log.info("DELETE APPIUM");
             service.stop();
+            service = null;
         }
     }
+
+    public static void startVideoRecording() {
+        CommandLine recorderStart = new CommandLine("/usr/local/bin/flick");
+        recorderStart.addArgument("video");
+        recorderStart.addArgument("-a");
+        recorderStart.addArgument("start");
+        recorderStart.addArgument("-p");
+        recorderStart.addArgument(Config.PLATFORM_NAME.toLowerCase());
+        recorderStart.addArgument("-u");
+        recorderStart.addArgument(Config.DEVICE_UID);
+        recorderStart.addArgument("-e");
+        recorderStart.addArgument("true");
+
+        DefaultExecuteResultHandler executeResultHandler = new DefaultExecuteResultHandler();
+        DefaultExecutor executor = new DefaultExecutor();
+        executor.setExitValue(0);
+
+        try {
+            log.info("Start video recording.");
+            log.info("Waiting for executing. Command: " + Arrays.toString(recorderStart.toStrings()));
+            executor.execute(recorderStart, executeResultHandler);
+            executeResultHandler.waitFor();
+            log.info("Command executed. Exit code: " + executeResultHandler.getExitValue());
+        } catch (InterruptedException | IOException e) {
+            log.error("Cannot execute command: " + Arrays.toString(recorderStart.toStrings()));
+        }
+    }
+
+    public static void stopScreenVideo() {
+        CommandLine recorderStop = new CommandLine("/usr/local/bin/flick");
+        recorderStop.addArgument("video");
+        recorderStop.addArgument("-a");
+        recorderStop.addArgument("stop");
+        recorderStop.addArgument("-p");
+        recorderStop.addArgument(Config.PLATFORM_NAME.toLowerCase());
+        recorderStop.addArgument("-u");
+        recorderStop.addArgument(Config.DEVICE_UID);
+        recorderStop.addArgument("-e");
+        recorderStop.addArgument("true");
+        recorderStop.addArgument("-o");
+        recorderStop.addArgument(System.getProperty("user.dir"));
+        recorderStop.addArgument("-f");
+        recorderStop.addArgument("mp4");
+        recorderStop.addArgument("-t");
+
+        DefaultExecuteResultHandler executeResultHandler = new DefaultExecuteResultHandler();
+        DefaultExecutor executor = new DefaultExecutor();
+        executor.setExitValue(0);
+
+        try {
+            log.info("Stop video recording. Move temp video file to: " + System.getProperty("user.dir"));
+            log.info("Waiting for executing. Command: " + Arrays.toString(recorderStop.toStrings()));
+            executor.execute(recorderStop, executeResultHandler);
+            executeResultHandler.waitFor();
+            log.info("Command executed. Exit code: " + executeResultHandler.getExitValue());
+        } catch (InterruptedException | IOException e) {
+            log.error("Cannot execute command: " + Arrays.toString(recorderStop.toStrings()));
+        }
+    }
+
 
     //TODO: add functionality delete cookies
     public static void deleteAllCookies() {
