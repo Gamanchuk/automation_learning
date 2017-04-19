@@ -246,7 +246,7 @@ public abstract class Entity {
     }
 
     public void focusOut(WebElement element) {
-        ((JavascriptExecutor)driver).executeScript("arguments[0].blur()", element);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].blur()", element);
     }
 
     public WebElement findElementWithTextBy(String text, By selector) {
@@ -258,15 +258,6 @@ public abstract class Entity {
         }
         return null;
     }
-
-    /**
-     * @param ynum Required. How many pixels to scroll by, along the y-axis (vertical).
-     *             Positive values will scroll down, while negative values scroll up
-     */
-    public void javascriptScroll(int ynum) {
-        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0," + ynum + ")", "");
-    }
-
 
     /**
      * @param ynum Required. How many pixels to scroll by, along the y-axis (vertical).
@@ -285,7 +276,7 @@ public abstract class Entity {
     public void switchToDefaultIframe() {
         driver.switchTo().defaultContent();
     }
-    
+
     private boolean waitForCondition(ExpectedCondition<WebElement> webElementExpectedCondition, int timeout) {
         try {
             new WebDriverWait(driver, timeout).until(webElementExpectedCondition);
