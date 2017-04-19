@@ -61,11 +61,13 @@ public class AddressFormComponent extends BaseComponent {
     public void inputValueIntoField(String value, String field) {
         By fieldEl = getFieldByName(field);
         fillField(fieldEl, value);
+        focusOut(findElement(fieldEl));
     }
 
     public void fillPhone(String phone) {
         findElement(phoneField).clear();
         sendKeysOneByOne(phoneField, phone);
+        focusOut(findElement(phoneField));
     }
 
     public void fillState(String state) {

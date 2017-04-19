@@ -87,7 +87,7 @@ public class PepBoysCheckoutSteps {
         BillingUser user = DataProvider.getUser(userName);
         String currentTab = breadcrumbWidget.getActiveTab();
 
-        if(currentTab.equals("Delivery Method")) {
+        if(currentTab.equals("Delivery Method") || currentTab.equals("Billing & Shipping")) {
             addressDisplayComponent.setRoot(BaseComponent.getContainerByTitle("Shipping Address"));
         } else {
             addressDisplayComponent.setRoot(BaseComponent.getComponentByTitle("Shipping Address"));
@@ -170,11 +170,16 @@ public class PepBoysCheckoutSteps {
         CommonFunctions.attachScreenshot("Shipping info");
     }
 
-    @And("^selects \"Enters a New Address\"$")
+    @And("^selects \"Enter a New Address\"$")
     public void entersNewAddress() {
         assertTrue(radioListComponent.exists(), "Billing Address Drop-Down doesn't exist");
         radioListComponent.select("Enter a New Address");
         CommonFunctions.attachScreenshot("Entering new address");
+    }
+
+    @And("^selects \"Enter a New Address\" for shipping address$")
+    public void entersNewShipingAddress() {
+        appliesShippingInfoForAddress("Enter a New Address");
     }
 
     @And("^uses PayPal for payment$")

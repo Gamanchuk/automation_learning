@@ -12,8 +12,8 @@ Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE
   Scenario: Test field 'Address Street'
     Given user makes authorisation for "Moovweb QA"
     And user should be on "Billing & Shipping" tab
-    And selects "Enters a New Address"
-    And user types billing info for "user at Spear street" and checks email
+    And selects "Enter a New Address"
+    And user types shipping info for "qa user"
 
     And user types "" into the "Street Address" field of "Billing Address" address form
     And presses the "Continue" button

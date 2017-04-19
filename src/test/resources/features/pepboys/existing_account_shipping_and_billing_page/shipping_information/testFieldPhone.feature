@@ -13,31 +13,31 @@ Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE
   # Invalid data will be filled into phone field
 
 
-  @TestCaseId("15521")
+  @TestCaseId("15440")
   Scenario: Test field 'Phone'
     Given user makes authorisation for "Moovweb QA"
     And user should be on "Billing & Shipping" tab
-    And selects "Enter a New Address"
+    And selects "Enter a New Address" for shipping address
     And user types billing info for "user at Spear street" and checks email
 
-    And user types " " into the "Phone Number" field of "Billing Address" address form
+    And user types " " into the "Phone Number" field of "Shipping Address" address form
     And presses the "Continue" button
     Then user should stay at "Billing & Shipping" tab
     And sees "FORM ERRORS" error message with text "Please review all inputs."
 
-    And user types "phoneNumber" into the "Phone Number" field of "Billing Address" address form
-    And presses the "Continue" button
-    And chooses "Use Entered Address"
-    Then user should stay at "Billing & Shipping" tab
-    And sees "FORM ERRORS" error message with text "Please review all inputs."
-
-    And user types "!@$%^&*():_" into the "Phone Number" field of "Billing Address" address form
+    And user types "phoneNumber" into the "Phone Number" field of "Shipping Address" address form
     And presses the "Continue" button
     And chooses "Use Entered Address"
     Then user should stay at "Billing & Shipping" tab
     And sees "FORM ERRORS" error message with text "Please review all inputs."
 
-    And user types "4152011234" into the "Phone Number" field of "Billing Address" address form
+    And user types "!@$%^&*():_" into the "Phone Number" field of "Shipping Address" address form
+    And presses the "Continue" button
+    And chooses "Use Entered Address"
+    Then user should stay at "Billing & Shipping" tab
+    And sees "FORM ERRORS" error message with text "Please review all inputs."
+
+    And user types "4152011234" into the "Phone Number" field of "Shipping Address" address form
     And presses the "Continue" button
     And chooses "Use Entered Address"
 #    Then user checks "Phone" with value "4152011234" on "Delivery Method" tab

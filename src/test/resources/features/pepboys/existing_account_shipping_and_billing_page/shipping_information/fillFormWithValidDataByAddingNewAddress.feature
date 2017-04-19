@@ -8,12 +8,13 @@ Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE
     And user views cart
     And chooses "Pay Online" method
 
-  @TestCaseId("15509")
-  Scenario: Test with correct billing information and fill in all required fields (Add new address)
+  @TestCaseId("15429")
+  Scenario: TTest with correct shipping information and fill in all required fields (Add address manually)
     Given user makes authorisation for "Moovweb QA"
     And user should be on "Billing & Shipping" tab
-    And selects "Enter a New Address"
-    And user types billing info for "user at Spear street" and checks email
+    And selects "Enter a New Address" for shipping address
+
+    And user types shipping info for "user at Spear street"
     And presses the "Continue" button
 
     And chooses "Use Recommended Address"
@@ -21,6 +22,6 @@ Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE
     And presses the "Continue" button
 
     And user should be on "Payment & Review" tab
-    Then user checks billing info for "user at Spear street"
+    Then user checks shipping info for "user at Spear street"
 
 
