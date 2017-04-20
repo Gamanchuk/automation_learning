@@ -1,4 +1,4 @@
-@pepBoys @debug
+@pepBoys
 
 Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE
 
@@ -10,7 +10,7 @@ Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE
 
 
   @TestCaseId("15443")
-  Scenario: Tooltip of #ID reward account must be present
+  Scenario: Tooltip of ID reward account must be present
     Given user makes authorisation for "qa user"
     And user should be on "Billing & Shipping" tab
-    And user checks "" rewards id
+    Then user checks rewards number for "qa user"
