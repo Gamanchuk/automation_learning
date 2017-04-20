@@ -1,4 +1,4 @@
-@pepBoys @debug  @ignore
+@pepBoys   @ignore
 
 Feature: PAY IN STORE - EXISTING ACCOUNT - SHIPPING & BILLING PAGE
 
