@@ -1,4 +1,4 @@
-@pepBoys @debug
+@pepBoys
 
 Feature: PAY IN STORE - EXISTING ACCOUNT - SHIPPING & BILLING PAGE
 
@@ -11,21 +11,21 @@ Feature: PAY IN STORE - EXISTING ACCOUNT - SHIPPING & BILLING PAGE
   @TestCaseId("16630")
   Scenario: Test field 'Name'
     Given user makes authorisation for "Moovweb QA"
-    And user should be on "Billing & Shipping" tab
+    And user should be on "Billing Address" page
     And selects "Enter a New Address"
     And user types billing info for "qa user" and checks email
 
     And user types "" into the "Full Name" field of "Billing Address" address form
-    And presses the "Continue" button
-    Then user should stay at "Billing & Shipping" tab
+    And presses the "Place Order" button
+    And user should be on "Billing Address" page
     And sees "FORM ERRORS" error message with text "Please review all inputs."
 
     And user types "!@#&( !@#()" into the "Full Name" field of "Billing Address" address form
-    And presses the "Continue" button
-    Then user should stay at "Billing & Shipping" tab
+    And presses the "Place Order" button
+    And user should be on "Billing Address" page
     And sees "FORM ERRORS" error message with text "Please review all inputs."
 
     And user types "Mr Donal Trump III" into the "Full Name" field of "Billing Address" address form
-    And presses the "Continue" button
+    And presses the "Place Order" button
     And chooses "Use Entered Address"
-    Then user checks "Full Name" with value "Mr Donal Trump III" on "Delivery Method" tab
+    Then user should be on thank you page
