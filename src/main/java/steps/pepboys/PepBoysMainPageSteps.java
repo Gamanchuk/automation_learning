@@ -26,6 +26,7 @@ public class PepBoysMainPageSteps {
     private PepBoysThankYouPage thankYouPage = new PepBoysThankYouPage();
     private PepBoysTrackingPage trackingPage = new PepBoysTrackingPage();
 
+
     @Given("^user makes appoint with code \"([^\"]*)\"$")
     public void userMakesAppointWithCode(String code) {
         makeAppointmentPage.openPage();
@@ -203,5 +204,7 @@ public class PepBoysMainPageSteps {
     @And("^user changes store$")
     public void userChangesStore() {
         cartPage.changeLocation();
+
     }
+
 }

@@ -2,7 +2,6 @@ package entities.components;
 
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 public class CollapserComponent extends BaseComponent {
 
@@ -13,7 +12,6 @@ public class CollapserComponent extends BaseComponent {
                 .getAttribute("class")
                 .contains("collapsed")) {
             click(By.cssSelector("a.collapser-link"));
-//            focusOut();
         }
     }
 }
