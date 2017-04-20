@@ -20,8 +20,8 @@ public class AddressFormComponent extends BaseComponent {
 
         if (autoFill) {
             // Waiting for dropdown
-            waitForElementVisible(By.cssSelector("div.radio-list"));
-            findElementWithTextBy(cityInfo, By.cssSelector("p.subtext")).click();
+            waitForElementVisible(By.cssSelector("a.manual"));
+            findElementWithTextBy(cityInfo, By.cssSelector("div.radio-list-details p.subtext")).click();
         } else {
             if (isElementVisible(By.cssSelector("a.manual"), 1)) {
                 click(By.cssSelector("a.manual"));
@@ -61,11 +61,13 @@ public class AddressFormComponent extends BaseComponent {
     public void inputValueIntoField(String value, String field) {
         By fieldEl = getFieldByName(field);
         fillField(fieldEl, value);
+        focusOut(findElement(fieldEl));
     }
 
     public void fillPhone(String phone) {
         findElement(phoneField).clear();
         sendKeysOneByOne(phoneField, phone);
+        focusOut(findElement(phoneField));
     }
 
     public void fillState(String state) {

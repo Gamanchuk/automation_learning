@@ -256,7 +256,7 @@ public abstract class Entity {
                 return element;
             }
         }
-        return null;
+        throw new Error("Element with text: '" + text + "' not found!");
     }
 
     /**
@@ -276,7 +276,7 @@ public abstract class Entity {
     public void switchToDefaultIframe() {
         driver.switchTo().defaultContent();
     }
-    
+
     private boolean waitForCondition(ExpectedCondition<WebElement> webElementExpectedCondition, int timeout) {
         try {
             new WebDriverWait(driver, timeout).until(webElementExpectedCondition);

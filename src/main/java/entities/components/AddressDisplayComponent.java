@@ -52,8 +52,10 @@ public class AddressDisplayComponent extends BaseComponent {
 
     public void checkFieldValue(String fieldName, String expectedValue) {
         By field = getFieldByName(fieldName);
-        String fieldValue = findElement(field).getText();
-        assertEquals(fieldValue, expectedValue, "Unexpected " + fieldName);
+        if(isElementPresent(field, 1)) {
+            String fieldValue = findElement(field).getText();
+            assertEquals(fieldValue, expectedValue, "Unexpected " + fieldName);
+        }
     }
 
     public void checkCityInfo(String expectedCityInfo) {

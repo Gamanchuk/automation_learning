@@ -70,6 +70,54 @@ public class DataProvider {
                 "manytu2012-buy@gmail.com",
                 "q1q1q1q1"
         ));
+        put("user at Spear street", new BillingUser(
+                "Moovweb",
+                "QA",
+                "Moovweb QA",
+                "201 Spear St",
+                "San Francisco",
+                "CA",
+                "94105",
+                "10",
+                "4154154156",
+                "qa@moovweb.com",
+                "San Francisco CA 94105",
+                "Spear201!",
+                "manytu2012-buy@gmail.com",
+                "q1q1q1q1"
+        ));
+        put("Moovweb QA", new BillingUser(
+                "Moovweb",
+                "!@&$)();:@!",
+                "qa moovweb",
+                "123 Mission St",
+                "San Francisco",
+                "CA",
+                "94105",
+                "10th floor",
+                "4152011234",
+                "qa@moovweb.com",
+                "San Francisco CA 94105",
+                "Spear201!",
+                "manytu2012-buy@gmail.com",
+                "q1q1q1q1"
+        ));
+        put("invalidQaUser", new BillingUser(
+                "Moovweb",
+                "!@&$)();:@!",
+                "qa moovweb",
+                "123 Mission St",
+                "San Francisco",
+                "CA",
+                "94105",
+                "10th floor",
+                "4152011234",
+                "qa@moovweb.com",
+                "San Francisco CA 94105",
+                "Spear201!",
+                "manytu2012-buy@gmail.com",
+                "q1q1q1q1"
+        ));
     }};
 
     private static Map<String, CreditCard> cards = new HashMap<String, CreditCard>() {{
