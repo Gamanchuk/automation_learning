@@ -324,7 +324,7 @@ public class PepBoysCheckoutSteps {
         addressFormComponent.setRoot(BaseComponent.getContainerByTitle("Billing Address"));
         fillAddressForm(user, autoFill);
 
-        if(fillEmail) {
+        if (fillEmail) {
             emailComponent.fillEmailField(user.getEmail());
         } else {
             assertEquals(user.getEmail(), emailComponent.getEmailDisplayValue(), "Unexpected email was used");
@@ -523,4 +523,10 @@ public class PepBoysCheckoutSteps {
         CommonFunctions.attachScreenshot("Choice 'Don't have a reward number'");
     }
 
+    @And("^user checks rewards number for \"([^\"]*)\"$")
+    public void userChecksRewardsNumberFor(String userName) {
+        BillingUser user = DataProvider.getUser(userName);
+        assertEquals(collapserComponent.getIdRewards(), user.getRewardsId(), "Unexpected Rewards Number");
+        CommonFunctions.attachScreenshot("Rewards Number");
+    }
 }

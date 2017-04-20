@@ -1,7 +1,7 @@
 @pepBoys @debug
 
 
-Feature: Membership Rewards
+Feature: Guest - Shipping & Billing page
 
   Background:
     Given user makes appoint
@@ -33,4 +33,5 @@ Feature: Membership Rewards
     And user types rewards number ""
     And presses the "Continue" button
     And chooses "Use Entered Address"
-    Then user checks billing info for "qa user"
+    And user should be on "Delivery Method" tab
+    Then user checks shipping info for "qa user"

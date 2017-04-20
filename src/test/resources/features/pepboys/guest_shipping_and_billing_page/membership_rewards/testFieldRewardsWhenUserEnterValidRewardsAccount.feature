@@ -15,6 +15,7 @@ Feature: Guest - Shipping & Billing page
     And user types rewards number "990298322581"
     And presses the "Continue" button
     And chooses "Use Recommended Address"
-    Then user checks billing info for "qa user"
+    And user should be on "Delivery Method" tab
+    Then user checks shipping info for "qa user"
 
 
