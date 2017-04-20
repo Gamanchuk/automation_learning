@@ -12,7 +12,7 @@ Feature: Guest - Shipping & Billing page (Pay In Store)
   @TestCaseId("16645")
   Scenario Outline: Test field 'Address Street' Positive
     Given user types billing info for "qa user"
-    And user types "<value>" into the "Street Address" field of "Billing Address" form
+    And user types "<value>" into the "Street Address" field of "Billing Address" address form
     And presses the "Place Order" button
     Then user should be on thank you page
     And user checks "Street Address" with value "<value>" on thank you page
