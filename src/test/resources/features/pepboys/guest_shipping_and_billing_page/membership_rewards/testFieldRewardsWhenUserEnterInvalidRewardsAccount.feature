@@ -1,7 +1,7 @@
 @pepBoys
 
 
-Feature: Guest - Shipping & Billing page
+Feature: GUEST - MEMBERSHIP REWARDS
 
   Background:
     Given user makes appoint
