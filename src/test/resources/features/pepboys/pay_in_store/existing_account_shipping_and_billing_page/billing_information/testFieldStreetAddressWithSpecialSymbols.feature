@@ -1,4 +1,4 @@
-@pepBoys
+@pepBoys @debug
 
 Feature: PAY IN STORE - EXISTING ACCOUNT - SHIPPING & BILLING PAGE
 
@@ -15,11 +15,7 @@ Feature: PAY IN STORE - EXISTING ACCOUNT - SHIPPING & BILLING PAGE
     And selects "Enter a New Address"
     And user types billing info for "qa user" and checks email
 
-    And user types "" into the "Street Address" field of "Billing Address" address form
-    And presses the "Place Order" button
-    And user should be on "Billing Address" page
-    And sees "FORM ERRORS" error message with text "Please review all inputs."
-
-    And user types "Mission Street" into the "Street Address" field of "Billing Address" address form
+    And user types "!@$%^&*():_+" into the "Street Address" field of "Billing Address" address form
     And presses the "Place Order" button
     And chooses "Use Entered Address"
+    Then user should be on thank you page

@@ -1,23 +1,20 @@
-@pepBoys
+@pepBoys 
 
 Feature: PAY IN STORE - EXISTING ACCOUNT - SHIPPING & BILLING PAGE
 
-  Background:
+  Background: Set Up preconditions for testing billing page
     Given user makes appoint
     And user adds to cart product with "Pick Up in Store" delivery option
     And user views cart
     And chooses "Pay in Store" method
 
-  @TestCaseId("16625")
-  Scenario: Test with correct billing information and fill in all required fields (Add new address)
+  @TestCaseId("16633")
+  Scenario: Test field 'Apartment' with numbers
     Given user makes authorisation for "Moovweb QA"
     And user should be on "Billing Address" page
     And selects "Enter a New Address"
-    And user types billing info for "user at Spear street" and checks email
+    And user types billing info for "qa user" and checks email
+
+    And user types "12345" into the "Apt, Bldg." field of "Billing Address" address form
     And presses the "Place Order" button
-
-    And chooses "Use Recommended Address"
     Then user should be on thank you page
-
-
-
