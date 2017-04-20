@@ -1,6 +1,6 @@
 @pepBoys
 
-Feature: Guest - Delivery Method
+Feature: GUEST - DELIVERY METHOD
 
   Background:
     Given user makes appoint

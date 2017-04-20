@@ -11,13 +11,12 @@ import utils.TestGlobalsManager;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-import static org.testng.AssertJUnit.assertTrue;
+import static org.testng.Assert.assertTrue;
 
 public class PepBoysCartPage extends PepBoysBasePage {
 
@@ -125,7 +124,7 @@ public class PepBoysCartPage extends PepBoysBasePage {
 
     public void openCartPage() {
         getDriver().navigate().to(BASE_URL + "cart");
-        assertTrue("Shopping Cart not opened", isPage());
+        assertTrue(isPage(), "Shopping Cart not opened");
     }
 
     public boolean isPage() {
