@@ -105,9 +105,6 @@ public class PepBoysCheckoutSteps {
     @And("^presses the \"([^\"]*)\" button$")
     public void pressesTheButton(String confirmationMethod) {
         buttonComponent.javascriptScroll(200);
-        if (confirmationMethod.equals("Place Order")) {
-            buttonComponent.clickTotalCost();
-        }
         buttonComponent.clickButton();
     }
 
@@ -324,7 +321,7 @@ public class PepBoysCheckoutSteps {
         addressFormComponent.setRoot(BaseComponent.getContainerByTitle("Billing Address"));
         fillAddressForm(user, autoFill);
 
-        if(fillEmail) {
+        if (fillEmail) {
             emailComponent.fillEmailField(user.getEmail());
         } else {
             assertEquals(user.getEmail(), emailComponent.getEmailDisplayValue(), "Unexpected email was used");
@@ -517,10 +514,14 @@ public class PepBoysCheckoutSteps {
     public void userChoosesDonTHaveARewardNumber() {
         collapserComponent.openCollapser();
         checkboxRowComponent.check("Sign up now and GET 50 BONUS POINTS added to your account!", true);
-
-        //billingPage.openRewards();
-        //billingPage.choiceDontHaveRewards();
-        CommonFunctions.attachScreenshot("Choice 'Don't have a reward number'");
+        CommonFunctions.attachScreenshot("Choose 'Don't have a reward number'");
     }
 
+    @And("^user checks rewards number for \"([^\"]*)\"$")
+    public void userChecksRewardsNumberFor(String userName) {
+        BillingUser user = DataProvider.getUser(userName);
+        String actualRewardsNumber = collapserComponent.getCollapserLinkText().split("# ")[1];
+        assertEquals(actualRewardsNumber, user.getRewardsNumber(), "Unexpected Rewards Number");
+        CommonFunctions.attachScreenshot("Rewards Number");
+    }
 }

@@ -12,6 +12,6 @@ Feature: Guest - Shipping & Billing page (Pay In Store)
   @TestCaseId("16645")
   Scenario: Test field 'Address Street' Negative
     Given user types billing info for "qa user"
-    And user types "" into the "Street Address" field of "Billing Address" form
+    And user types "" into the "Street Address" field of "Billing Address" address form
     And presses the "Place Order" button
     And sees "FORM ERRORS" error message with text "Please review all inputs."

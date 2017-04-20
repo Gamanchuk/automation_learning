@@ -8,7 +8,6 @@ public class BillingUser {
     private String lastName;
     private String fullName;
     private String fullAddress;
-    private String recomendedAddress;
     private String city;
     private String state;
     private String zipCode;
@@ -19,9 +18,12 @@ public class BillingUser {
     private String password;
     private String paypalEmail;
     private String paypalPassword;
+    private String rewardsNumber;
 
 
-    public BillingUser(String firstName, String lastName, String fullName, String fullAddress, String city, String state, String zipCode, String apartment, String phone, String email, String cityInfo, String password, String paypalEmail, String paypalPassword) {
+    public BillingUser(String firstName, String lastName, String fullName, String fullAddress,
+                       String city, String state, String zipCode, String apartment, String phone, String email,
+                       String cityInfo, String password, String paypalEmail, String paypalPassword, String rewardsNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.fullName = fullName;
@@ -36,6 +38,7 @@ public class BillingUser {
         this.password = password;
         this.paypalEmail = paypalEmail;
         this.paypalPassword = paypalPassword;
+        this.rewardsNumber = rewardsNumber;
     }
 
     public String getFullName() {
@@ -108,6 +111,10 @@ public class BillingUser {
 
     public String getFirstName() {
         return firstName;
+    }
+
+    public String getRewardsNumber() {
+        return rewardsNumber;
     }
 
 }

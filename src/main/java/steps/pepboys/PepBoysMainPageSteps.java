@@ -96,7 +96,7 @@ public class PepBoysMainPageSteps {
     public void userAddsToCartProductWithDeliveryOption(String deliveryOption) {
         productPage.openProductPage(DataProvider.getRandomItemId());
 
-        if(deliveryOption.equals("Pick Up in Store")) {
+        if (deliveryOption.equals("Pick Up in Store")) {
             while (!productPage.isAvailableInStore()) {
                 productPage.openProductPage(DataProvider.getRandomItemId());
             }
@@ -194,7 +194,7 @@ public class PepBoysMainPageSteps {
 
     @And("^checks, that Pay in Store option is available$")
     public void checksThatPayInStoreOptionIsAvailable() {
-        while(cartPage.isPayInStoreUnavailableMessageDisplayed()) {
+        while (cartPage.isPayInStoreUnavailableMessageDisplayed()) {
             cartPage.cleanUpCart();
             userAddsToCartProductWithIdWithDeliveryOption(DataProvider.getRandomItemId(), "Ship to Home");
             userViewsCart();
@@ -204,7 +204,5 @@ public class PepBoysMainPageSteps {
     @And("^user changes store$")
     public void userChangesStore() {
         cartPage.changeLocation();
-
     }
-
 }
