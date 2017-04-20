@@ -26,6 +26,7 @@ public class PepBoysMainPageSteps {
     private PepBoysThankYouPage thankYouPage = new PepBoysThankYouPage();
     private PepBoysTrackingPage trackingPage = new PepBoysTrackingPage();
 
+
     @Given("^user makes appoint with code \"([^\"]*)\"$")
     public void userMakesAppointWithCode(String code) {
         makeAppointmentPage.openPage();
@@ -205,17 +206,5 @@ public class PepBoysMainPageSteps {
         cartPage.changeLocation();
 
     }
-    @And("^user types rewards number \"([^\"]*)\"$")
-    public void userTypesRewardsCode(String rewardsCode) {
-        billingPage.openRewards();
-        billingPage.setRewards(rewardsCode);
-        CommonFunctions.attachScreenshot("Rewards Number");
-    }
 
-    @And("^user chooses don't have a reward number$")
-    public void userChoosesDonTHaveARewardNumber() {
-        billingPage.openRewards();
-        billingPage.getRewards();
-        CommonFunctions.attachScreenshot("Don't have a reward number");
-    }
 }

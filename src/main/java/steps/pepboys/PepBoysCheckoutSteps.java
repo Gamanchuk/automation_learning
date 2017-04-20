@@ -99,9 +99,9 @@ public class PepBoysCheckoutSteps {
 
     @And("^presses the \"([^\"]*)\" button$")
     public void pressesTheButton(String confirmationMethod) {
-      buttonComponent.javascriptScroll(200);
+        buttonComponent.javascriptScroll(200);
         if (confirmationMethod.equals("Place Order")) {
-           buttonComponent.clickTotalCost();
+            buttonComponent.clickTotalCost();
         }
         buttonComponent.clickButton();
     }
@@ -489,5 +489,15 @@ public class PepBoysCheckoutSteps {
         paymentAndReviewPage.checkPickUpInStoreInfo();
     }
 
+
+    @And("^user chooses don't have a reward number$")
+    public void userChoosesDonTHaveARewardNumber() {
+        collapserComponent.openCollapser();
+        checkboxRowComponent.check("Sign up now and GET 50 BONUS POINTS added to your account!", true);
+
+        //billingPage.openRewards();
+        //billingPage.choiceDontHaveRewards();
+        CommonFunctions.attachScreenshot("Choice 'Don't have a reward number'");
+    }
 
 }
