@@ -20,7 +20,8 @@ public class DataProvider {
                 "San Francisco CA 94105",
                 "Spear201!",
                 "manytu2012-buy@gmail.com",
-                "q1q1q1q1"
+                "q1q1q1q1",
+                "990298322581"
         ));
         put("qa user2", new BillingUser(
                 "anotherqa",
@@ -36,7 +37,8 @@ public class DataProvider {
                 "San Francisco CA 94103-3449",
                 "Spear201!",
                 "manytu2012-buy@gmail.com",
-                "q1q1q1q1"
+                "q1q1q1q1",
+                "990298322581"
         ));
         put("qa user3", new BillingUser(
                 "Qa",
@@ -52,7 +54,8 @@ public class DataProvider {
                 "New york NY 10018",
                 "Spear201!",
                 "manytu2012-buy@gmail.com",
-                "q1q1q1q1"
+                "q1q1q1q1",
+                "990298322581"
         ));
         put("invalidQaUser", new BillingUser(
                 "Moovweb",
@@ -68,7 +71,8 @@ public class DataProvider {
                 "San Francisco CA 94105",
                 "Spear201!",
                 "manytu2012-buy@gmail.com",
-                "q1q1q1q1"
+                "q1q1q1q1",
+                "990298322581"
         ));
         put("user at Spear street", new BillingUser(
                 "Moovweb",
@@ -84,7 +88,8 @@ public class DataProvider {
                 "San Francisco CA 94105",
                 "Spear201!",
                 "manytu2012-buy@gmail.com",
-                "q1q1q1q1"
+                "q1q1q1q1",
+                "990298322581"
         ));
         put("Moovweb QA", new BillingUser(
                 "Moovweb",
@@ -100,7 +105,8 @@ public class DataProvider {
                 "San Francisco CA 94105",
                 "Spear201!",
                 "manytu2012-buy@gmail.com",
-                "q1q1q1q1"
+                "q1q1q1q1",
+                "990298322581"
         ));
         put("invalidQaUser", new BillingUser(
                 "Moovweb",
@@ -116,7 +122,8 @@ public class DataProvider {
                 "San Francisco CA 94105",
                 "Spear201!",
                 "manytu2012-buy@gmail.com",
-                "q1q1q1q1"
+                "q1q1q1q1",
+                "990298322581"
         ));
     }};
 

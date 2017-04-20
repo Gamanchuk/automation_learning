@@ -14,4 +14,9 @@ public class CollapserComponent extends BaseComponent {
             click(By.cssSelector("a.collapser-link"));
         }
     }
+
+    public String getIdRewards() {
+        return findElement(By.cssSelector("div.collapser-link")).getText().split("#")[1];
+
+    }
 }

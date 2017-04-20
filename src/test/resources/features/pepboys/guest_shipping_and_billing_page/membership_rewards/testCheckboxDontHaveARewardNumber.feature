@@ -1,6 +1,6 @@
 @pepBoys
 
-  #TODO: Finish this case after fix problem "MCCAT-5331"
+
 
 Feature: Guest - Shipping & Billing page
 
@@ -10,7 +10,7 @@ Feature: Guest - Shipping & Billing page
     And user views cart
     And chooses "Pay Online" method
 
-  @Issues("MCCAT-5331")
+  @Issue("MCCAT-5331")
   @TestCaseId("15391")
   Scenario: Test checkbox "Don't have a reward number"
     Given user types billing info for "qa user"
@@ -22,5 +22,5 @@ Feature: Guest - Shipping & Billing page
     And presses the "Place Order" button
     Then user should be on thank you page
 
-
+#Finish this case after fix problem "MCCAT-5331"
 
