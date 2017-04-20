@@ -12,7 +12,7 @@ Feature: Guest - Shipping & Billing page (Pay In Store)
   @TestCaseId("16646")
   Scenario Outline: Test field 'Apartment'
     Given user types billing info for "qa user"
-    And user types "<value>" into the "Apt, Bldg." field of "Billing Address" form
+    And user types "<value>" into the "Apt, Bldg." field of "Billing Address" address form
     And presses the "Place Order" button
     Then user should be on thank you page
     And user checks "Apt, Bldg." with value "<value>" on thank you page

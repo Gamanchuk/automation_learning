@@ -26,6 +26,7 @@ public class PepBoysMainPageSteps {
     private PepBoysThankYouPage thankYouPage = new PepBoysThankYouPage();
     private PepBoysTrackingPage trackingPage = new PepBoysTrackingPage();
 
+
     @Given("^user makes appoint with code \"([^\"]*)\"$")
     public void userMakesAppointWithCode(String code) {
         makeAppointmentPage.openPage();
@@ -95,7 +96,7 @@ public class PepBoysMainPageSteps {
     public void userAddsToCartProductWithDeliveryOption(String deliveryOption) {
         productPage.openProductPage(DataProvider.getRandomItemId());
 
-        if(deliveryOption.equals("Pick Up in Store")) {
+        if (deliveryOption.equals("Pick Up in Store")) {
             while (!productPage.isAvailableInStore()) {
                 productPage.openProductPage(DataProvider.getRandomItemId());
             }
@@ -193,7 +194,7 @@ public class PepBoysMainPageSteps {
 
     @And("^checks, that Pay in Store option is available$")
     public void checksThatPayInStoreOptionIsAvailable() {
-        while(cartPage.isPayInStoreUnavailableMessageDisplayed()) {
+        while (cartPage.isPayInStoreUnavailableMessageDisplayed()) {
             cartPage.cleanUpCart();
             userAddsToCartProductWithIdWithDeliveryOption(DataProvider.getRandomItemId(), "Ship to Home");
             userViewsCart();

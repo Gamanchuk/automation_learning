@@ -11,7 +11,7 @@ Feature: Guest - Shipping & Billing page (Pay In Store)
   @TestCaseId("16647")
   Scenario Outline: Test field 'City'
     Given user types billing info for "qa user"
-    And user types "<value>" into the "City" field of "Billing Address" form
+    And user types "<value>" into the "City" field of "Billing Address" address form
     And presses the "Place Order" button
     Then user should be on thank you page
     And user checks city info with value "<value>" on thank you page

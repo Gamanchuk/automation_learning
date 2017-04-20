@@ -246,7 +246,7 @@ public abstract class Entity {
     }
 
     public void focusOut(WebElement element) {
-        ((JavascriptExecutor)driver).executeScript("arguments[0].blur()", element);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].blur()", element);
     }
 
     public WebElement findElementWithTextBy(String text, By selector) {
@@ -264,7 +264,7 @@ public abstract class Entity {
      *             Positive values will scroll down, while negative values scroll up
      */
     public void javascriptScroll(int ynum) {
-        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0," + ynum + ")", "");
+        ((JavascriptExecutor) getDriver()).executeScript("window.scrollBy(0," + ynum + ")", "");
     }
 
     public void switchToIframe(String iframeName) {
