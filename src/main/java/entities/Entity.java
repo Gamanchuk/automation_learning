@@ -256,7 +256,7 @@ public abstract class Entity {
                 return element;
             }
         }
-        return null;
+        throw new Error("Element with text: '" + text + "' not found!");
     }
 
     /**
