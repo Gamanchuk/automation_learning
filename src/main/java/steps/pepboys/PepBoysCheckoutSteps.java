@@ -514,10 +514,7 @@ public class PepBoysCheckoutSteps {
     public void userChoosesDonTHaveARewardNumber() {
         collapserComponent.openCollapser();
         checkboxRowComponent.check("Sign up now and GET 50 BONUS POINTS added to your account!", true);
-
-        //billingPage.openRewards();
-        //billingPage.choiceDontHaveRewards();
-        CommonFunctions.attachScreenshot("Choice 'Don't have a reward number'");
+        CommonFunctions.attachScreenshot("Choose 'Don't have a reward number'");
     }
 
     @And("^user checks rewards number for \"([^\"]*)\"$")
