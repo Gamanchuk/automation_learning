@@ -16,9 +16,9 @@ public class CollapserComponent extends BaseComponent {
         }
     }
 
-    public String getIdRewards() {
+    public String getCollapserLinkText() {
         javascriptScroll(300);
-        return findElement(By.cssSelector("div.collapser-link")).getText().split("# ")[1];
+        return findElement(By.cssSelector("div.collapser-link")).getText();
 
     }
 }

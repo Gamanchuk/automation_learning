@@ -523,7 +523,8 @@ public class PepBoysCheckoutSteps {
     @And("^user checks rewards number for \"([^\"]*)\"$")
     public void userChecksRewardsNumberFor(String userName) {
         BillingUser user = DataProvider.getUser(userName);
-        assertEquals(collapserComponent.getIdRewards(), user.getRewardsId(), "Unexpected Rewards Number");
+        String actualRewardsNumber = collapserComponent.getCollapserLinkText().split("# ")[1];
+        assertEquals(actualRewardsNumber, user.getRewardsNumber(), "Unexpected Rewards Number");
         CommonFunctions.attachScreenshot("Rewards Number");
     }
 }

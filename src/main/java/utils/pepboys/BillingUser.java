@@ -18,12 +18,12 @@ public class BillingUser {
     private String password;
     private String paypalEmail;
     private String paypalPassword;
-    private String rewardsId;
+    private String rewardsNumber;
 
 
     public BillingUser(String firstName, String lastName, String fullName, String fullAddress,
                        String city, String state, String zipCode, String apartment, String phone, String email,
-                       String cityInfo, String password, String paypalEmail, String paypalPassword, String rewardsId) {
+                       String cityInfo, String password, String paypalEmail, String paypalPassword, String rewardsNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.fullName = fullName;
@@ -38,7 +38,7 @@ public class BillingUser {
         this.password = password;
         this.paypalEmail = paypalEmail;
         this.paypalPassword = paypalPassword;
-        this.rewardsId = rewardsId;
+        this.rewardsNumber = rewardsNumber;
     }
 
     public String getFullName() {
@@ -113,8 +113,8 @@ public class BillingUser {
         return firstName;
     }
 
-    public String getRewardsId() {
-        return rewardsId;
+    public String getRewardsNumber() {
+        return rewardsNumber;
     }
 
 }
