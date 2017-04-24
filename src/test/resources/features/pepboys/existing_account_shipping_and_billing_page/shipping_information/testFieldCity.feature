@@ -1,6 +1,6 @@
 @pepBoys
 
-Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE
+Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE - SHIPPING INFO
 
   Background:
     Given user makes appoint

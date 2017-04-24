@@ -23,7 +23,7 @@ public class AddressFormComponent extends BaseComponent {
             waitForElementVisible(By.cssSelector("a.manual"));
             findElementWithTextBy(cityInfo, By.cssSelector("div.radio-list-details p.subtext")).click();
         } else {
-            if (isElementVisible(By.cssSelector("a.manual"), 1)) {
+            if (isElementVisible(By.cssSelector("a.manual"))) {
                 click(By.cssSelector("a.manual"));
                 findElementWithTextBy("enter city", By.cssSelector("div.zip-message a")).click();
             }

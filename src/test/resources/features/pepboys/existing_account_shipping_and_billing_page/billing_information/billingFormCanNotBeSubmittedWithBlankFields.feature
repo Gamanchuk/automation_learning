@@ -1,6 +1,6 @@
-@pepBoys 
+@pepBoys
 
-Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE
+Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE - BILLING INFO
 
   Background:
     Given user makes appoint
@@ -12,7 +12,7 @@ Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE
   Scenario: Test with correct billing information and do not fill in all required fields (error message should be displayed)
     Given user makes authorisation for "Moovweb QA"
     And user should be on "Billing & Shipping" tab
-    And selects "Enters a New Address"
+    And selects "Enter a New Address"
     And presses the "Continue" button
 
     Then user should stay at "Billing & Shipping" tab

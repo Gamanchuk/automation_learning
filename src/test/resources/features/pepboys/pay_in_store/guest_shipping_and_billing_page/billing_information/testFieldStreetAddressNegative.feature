@@ -14,4 +14,4 @@ Feature: Guest - Shipping & Billing page (Pay In Store)
     Given user types billing info for "qa user"
     And user types "" into the "Street Address" field of "Billing Address" address form
     And presses the "Place Order" button
-    And sees "FORM ERRORS" error message with text "Please review all inputs."
+    And sees "FORM ERRORS" error message with text "Pleaого se review all inputs."

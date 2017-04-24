@@ -1,4 +1,4 @@
-@pepBoys @debug
+@pepBoys
 
 Feature: PAY IN STORE - EXISTING ACCOUNT - SHIPPING & BILLING PAGE
 
@@ -17,5 +17,4 @@ Feature: PAY IN STORE - EXISTING ACCOUNT - SHIPPING & BILLING PAGE
 
     And user types "!@$%^&*():_+" into the "Street Address" field of "Billing Address" address form
     And presses the "Place Order" button
-    And chooses "Use Entered Address"
     Then user should be on thank you page

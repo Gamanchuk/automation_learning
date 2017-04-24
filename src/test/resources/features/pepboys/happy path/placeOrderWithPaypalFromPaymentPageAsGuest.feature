@@ -1,7 +1,6 @@
-@pepBoys
+@pepBoys @happyPath
 
-
-Feature: Happy Path
+Feature: HAPPY PATH
 
   Background:
     Given user makes appoint
@@ -9,7 +8,6 @@ Feature: Happy Path
     And user views cart
     And chooses "Pay Online" method
 
-  @TestCaseId("15408")
   @TestCaseId("16250")
   Scenario: Place Order with Paypal from Payment page as Guest
     Given user types billing info for "qa user"

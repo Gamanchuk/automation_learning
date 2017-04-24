@@ -1,6 +1,6 @@
 @pepBoys
 
-Feature: EXISTING ACCOUNT - MEMBERSHIP REWARDS
+Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE - MEMBERSHIP REWARDS
 
   Background:
     Given user makes appoint

@@ -9,7 +9,6 @@ Feature: GUEST - THANK YOU PAGE
     And chooses "Pay Online" method
 
   @TestCaseId("15421")
-  @TestCaseId("15419")
   Scenario: Check button Continue Shopping (Guest, Pay Online)
     Given user types billing info for "qa user"
     And presses the "Continue" button

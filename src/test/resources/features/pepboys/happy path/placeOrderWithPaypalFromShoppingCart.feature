@@ -1,7 +1,6 @@
-@pepBoys
+@pepBoys @happyPath
 
-
-Feature: Happy Path
+Feature: HAPPY PATH
 
   Background:
     Given user makes appoint

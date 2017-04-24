@@ -50,6 +50,6 @@ public class PepBoysProductPage extends PepBoysBasePage {
     }
 
     public boolean isAvailableInStore() {
-        return isElementPresent(By.xpath("//div[contains(text(), 'Pay in Store Available')]"));
+        return !isElementPresent(By.xpath("//div[contains(text(), 'Not Available')]"), 2);
     }
 }

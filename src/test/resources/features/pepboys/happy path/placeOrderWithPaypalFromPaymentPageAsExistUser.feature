@@ -1,7 +1,6 @@
-@pepBoys
+@pepBoys @happyPath
 
-
-Feature: Happy Path
+Feature: HAPPY PATH
 
   Background:
     Given user makes appoint
@@ -10,7 +9,6 @@ Feature: Happy Path
     And chooses "Pay Online" method
 
   @TestCaseId("16251")
-  @TestCaseId("15461")
   Scenario: Place Order with Paypal from Payment page as Exist use
     Given user makes authorisation for "qa user"
     And applies billing info for address "201 SPEAR ST"

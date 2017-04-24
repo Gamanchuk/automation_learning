@@ -1,6 +1,6 @@
-@pepBoys @MORE_debug
+@pepBoys
 
-Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE
+Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE - SHIPPING INFO
 
   Background:
     Given user makes appoint
@@ -20,18 +20,6 @@ Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE
     And chooses "Use Entered Address"
     Then user should stay at "Billing & Shipping" tab
     And sees "FORM ERRORS" error message with text "Please review all inputs."
-
-#    And user types "zipCode" into the "Zip Code" field of "Billing Address" form
-#    And presses the "Continue" button
-#    And chooses "Use Entered Address"
-#    Then user should stay at "Billing & Shipping" tab
-#    And sees "FORM ERRORS" error message with text "ZIP Code is invalid (xxxxx or xxxxx-xxxx)"
-#
-#    And user types "!@$%^&*():_+" into the "Zip Code" field of "Billing Address" form
-#    And presses the "Continue" button
-#    And chooses "Use Entered Address"
-#    Then user should stay at "Billing & Shipping" tab
-#    And sees "FORM ERRORS" error message with text "ZIP Code is invalid (xxxxx or xxxxx-xxxx)"
 
     And user types "94105" into the "Zip Code" field of "Shipping Address" address form
     And presses the "Continue" button

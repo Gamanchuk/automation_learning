@@ -61,6 +61,11 @@ public class PepBoysCheckoutSteps {
         fillBillingInfo(userName, true, false);
     }
 
+    @And("^user types manually billing info for \"([^\"]*)\" and checks email$")
+    public void userTypesManuallyBillingInfoForAndChecksEmail(String userName) {
+        fillBillingInfo(userName, false, false);
+    }
+
     @Given("^user types manually billing info for \"([^\"]*)\"$")
     public void userTypesManuallyBillingInfoFor(String userName) {
         fillBillingInfo(userName, false, true);
@@ -191,7 +196,7 @@ public class PepBoysCheckoutSteps {
     }
 
     @And("^selects \"Enter a New Address\" for shipping address$")
-    public void entersNewShipingAddress() {
+    public void entersNewShippingAddress() {
         appliesShippingInfoForAddress("Enter a New Address");
     }
 
@@ -225,6 +230,14 @@ public class PepBoysCheckoutSteps {
         breadcrumbWidget.waitForBreadcrumbActive(breadcrumb);
         addressDisplayComponent.checkFieldValue(field, value);
         CommonFunctions.attachScreenshot("Checks " + field + " on " + breadcrumb + " tab");
+    }
+
+
+    @Then("^user checks phone with value \"([^\"]*)\" on \"([^\"]*)\" tab$")
+    public void userChecksPhoneWithValueOnTab(String phone, String breadcrumb) throws Throwable {
+        breadcrumbWidget.waitForBreadcrumbActive(breadcrumb);
+        addressDisplayComponent.checkPhone(phone);
+        CommonFunctions.attachScreenshot("Checks phone on " + breadcrumb + " tab");
     }
 
     @Then("^user checks \"([^\"]*)\" with value \"([^\"]*)\" on thank you page$")
