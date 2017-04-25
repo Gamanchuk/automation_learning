@@ -1,4 +1,4 @@
-@pepBoys @happyPath
+@pepBoys @happyPath @debug
 
 Feature: HAPPY PATH
 
@@ -11,8 +11,8 @@ Feature: HAPPY PATH
   @TestCaseId("16248")
   Scenario: Place Order as a "Registered User" with Credit Card
     Given user makes authorisation for "qa user"
-    And applies billing info for address "201 SPEAR ST"
-    And user checks billing info for "user at Spear street"
+    And applies billing info for address "8th avenue, Unit 1611"
+    And user checks billing info for "qa user3"
     And presses the "Continue" button
     And chooses "Use Recommended Address"
 

@@ -1,4 +1,4 @@
-@pepBoys @debug
+@pepBoys
 
 Feature: EXPRESS PAYPAL - REVIEW & PLACE ORDER PAGE - HEADER & FOOTER
 
