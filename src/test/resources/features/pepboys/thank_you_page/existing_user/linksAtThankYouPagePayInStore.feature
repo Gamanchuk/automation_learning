@@ -10,7 +10,6 @@ Feature: EXISTING ACCOUNT - THANK YOU PAGE
 
   @TestCaseId("16675")
   Scenario: Links at Thank you page (Existing User, Pay in Store)
-    Given user presses the signIn button
     Given user makes authorisation for "qa user"
     And applies billing info for address "201 SPEAR ST"
     And presses the "Place Order" button

@@ -136,6 +136,7 @@ public class PepBoysCheckoutSteps {
         assertTrue(thankYouPage.isOnThankYouPage(), "User is not on \"Thank You\" page");
         assertTrue(pepBoysThankYouPage.isCollapsed(), "Order collapser not collapsed");
         CommonFunctions.attachScreenshot("Thank You Page");
+        CommonFunctions.saveOrder(thankYouPage.getOrder());
     }
 
     @And("^user presses the reschedule link$")
