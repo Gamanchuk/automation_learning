@@ -1,6 +1,6 @@
 @pepBoys
 
-Feature: Sign In page (Pay Online)
+Feature: SIGN IN PAGE
 
   Background:
     Given user makes appoint
@@ -10,7 +10,7 @@ Feature: Sign In page (Pay Online)
 
 
   @TestCaseId("15529")
-  Scenario: User can sign in with valid "email address" and valid "password" (Pay Online)
+  Scenario: User can sign in with valid email address and valid password
     Given user makes authorisation for "qa user"
     Then user should be on "Billing & Shipping" tab
     

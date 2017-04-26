@@ -1,6 +1,6 @@
 @pepBoys
 
-Feature: Sign In page (Pay Online)
+Feature: SIGN IN PAGE
 
   Background:
     Given user makes appoint
@@ -10,7 +10,7 @@ Feature: Sign In page (Pay Online)
 
 
   @TestCaseId("15537")
-  Scenario: User can click on Forgot Password link (Pay Online)
+  Scenario: User can click on Forgot Password link
     Given user presses the signIn button
     And user presses the Forgot Password link
     Then user should be on Forgot Password page

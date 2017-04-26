@@ -10,7 +10,7 @@ Feature: PAY IN STORE - SIGN IN PAGE
 
 
   @TestCaseId("16686")
-  Scenario: User can click on Forgot Password link (Pay in Store)
+  Scenario: User can click on Forgot Password link
     Given user presses the signIn button
     And user presses the Forgot Password link
     Then user should be on Forgot Password page

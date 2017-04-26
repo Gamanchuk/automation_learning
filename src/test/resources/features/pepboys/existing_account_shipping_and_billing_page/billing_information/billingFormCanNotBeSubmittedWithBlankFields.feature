@@ -9,7 +9,7 @@ Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE - BILLING INFO
     And chooses "Pay Online" method
 
   @TestCaseId("15511")
-  Scenario: Test with correct billing information and do not fill in all required fields (error message should be displayed)
+  Scenario: Test with correct billing information and do not fill in all required fields
     Given user makes authorisation for "Moovweb QA"
     And user should be on "Billing & Shipping" tab
     And selects "Enter a New Address"

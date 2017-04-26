@@ -1,6 +1,6 @@
 @pepBoys
 
-Feature: Sign In page (Pay in Store)
+Feature: PAY IN STORE - SIGN IN PAGE
 
   Background:
     Given user makes appoint

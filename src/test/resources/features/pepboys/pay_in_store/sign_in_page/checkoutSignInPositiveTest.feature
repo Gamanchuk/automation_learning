@@ -10,7 +10,7 @@ Feature: PAY IN STORE - SIGN IN PAGE
 
 
   @TestCaseId("16678")
-  Scenario: User can sign in with valid "email address" and valid "password" (Pay in Store)
+  Scenario: User can sign in with valid "email address" and valid "password"
     Given user makes authorisation for "qa user"
     Then user should be on "Billing" page
     

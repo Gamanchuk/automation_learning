@@ -1,6 +1,6 @@
 @pepBoys
 
-Feature: Sign In page (Pay Online)
+Feature: SIGN IN PAGE
 
   Background:
     Given user makes appoint
@@ -10,7 +10,7 @@ Feature: Sign In page (Pay Online)
 
 
   @TestCaseId("15527")
-  Scenario: User can return to Guest Checkout (Pay Online)
+  Scenario: User can return to Guest Checkout
     Given user presses the signIn button
     And user presses the Proceed to Guest Checkout link
     Then user should be on "Billing & Shipping" tab
