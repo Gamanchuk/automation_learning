@@ -1,7 +1,6 @@
 @pepBoys
 
-
-Feature: GUEST - THANK YOU PAGE
+Feature: GUEST - REVIEW & PLACE ORDER PAGE - THANK YOU PAGE
 
   Background:
     Given user makes appoint
@@ -14,7 +13,6 @@ Feature: GUEST - THANK YOU PAGE
   Scenario: Installation of detail for car
     Given user types billing info for "qa user"
     And presses the "Continue" button
-    And chooses "Use Recommended Address"
     And uses "visa" card for payment
     And presses the "Place Order" button
     Then user should be on thank you page

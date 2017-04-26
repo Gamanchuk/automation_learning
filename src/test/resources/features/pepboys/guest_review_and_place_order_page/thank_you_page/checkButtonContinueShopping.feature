@@ -1,6 +1,6 @@
 @pepBoys
 
-Feature: GUEST - THANK YOU PAGE
+Feature: GUEST - REVIEW & PLACE ORDER PAGE - THANK YOU PAGE
 
   Background:
     Given user makes appoint
@@ -9,10 +9,9 @@ Feature: GUEST - THANK YOU PAGE
     And chooses "Pay Online" method
 
   @TestCaseId("15421")
-  Scenario: Check button Continue Shopping (Guest, Pay Online)
+  Scenario: Check button Continue Shopping
     Given user types billing info for "qa user"
     And presses the "Continue" button
-    And chooses "Use Recommended Address"
     And chooses "Ground: 5-7 Days" shipping method
     And presses the "Continue" button
     And uses "visa" card for payment

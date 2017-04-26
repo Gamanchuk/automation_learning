@@ -1,6 +1,6 @@
 @pepBoys
 
-Feature: GUEST - THANK YOU PAGE
+Feature: GUEST - REVIEW & PLACE ORDER PAGE - THANK YOU PAGE
 
   Background:
     Given user makes appoint
@@ -9,7 +9,7 @@ Feature: GUEST - THANK YOU PAGE
     And chooses "Pay Online" method
 
   @TestCaseId("15422")
-  Scenario: Links at Thank you page (Guest, Pay Online)
+  Scenario: Links at Thank you page
     Given user types billing info for "qa user"
     And presses the "Continue" button
     And chooses "Use Recommended Address"

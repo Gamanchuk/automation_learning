@@ -1,6 +1,6 @@
 @pepBoys
 
-Feature: EXISTING ACCOUNT - THANK YOU PAGE
+Feature: EXISTING ACCOUNT - REVIEW & PLACE ORDER PAGE - THANK YOU PAGE
 
   Background:
     Given user makes appoint
