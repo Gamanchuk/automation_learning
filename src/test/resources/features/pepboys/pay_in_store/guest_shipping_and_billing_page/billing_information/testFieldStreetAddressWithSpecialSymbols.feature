@@ -1,6 +1,6 @@
-@pepBoys
+@pepBoys @debug
 
-Feature: PAY IN STORE - EXISTING ACCOUNT - SHIPPING & BILLING PAGE - BILLING INFO
+Feature: PAY IN STORE - GUEST - SHIPPING & BILLING PAGE - BILLING INFO
 
   Background:
     Given user makes appoint
@@ -8,13 +8,9 @@ Feature: PAY IN STORE - EXISTING ACCOUNT - SHIPPING & BILLING PAGE - BILLING INF
     And user views cart
     And chooses "Pay in Store" method
 
-  @TestCaseId("16632")
+  @TestCaseId("16645")
   Scenario: Test field 'Address Street' with special symbols
-    Given user makes authorisation for "Moovweb QA"
-    And user should be on "Billing Address" page
-    And selects "Enter a New Address"
-    And user types billing info for "qa user" and checks email
-
+    Given user types billing info for "qa user"
     And user types "!@$%^&*():_+" into the "Street Address" field of "Billing Address" address form
     And presses the "Place Order" button
-    Then user should be on thank you page
+    Then user checks "Street Address" with value "!@$%^&*():_+" on thank you page

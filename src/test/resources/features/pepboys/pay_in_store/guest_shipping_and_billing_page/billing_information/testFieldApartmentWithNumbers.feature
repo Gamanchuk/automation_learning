@@ -8,11 +8,9 @@ Feature: PAY IN STORE - GUEST - SHIPPING & BILLING PAGE - BILLING INFO
     And user views cart
     And chooses "Pay in Store" method
 
-  @TestCaseId("16641")
-  Scenario: Test with correct billing information and fill in all required fields (Address chosen from auto-detect drop-down)
+  @TestCaseId("16646")
+  Scenario: Test field 'Apartment' with numbers
     Given user types billing info for "qa user"
-    And presses the "Continue" button
-    And user should be on thank you page
-    Then user checks billing info for "qa user"
-
-
+    And user types "12345" into the "Apt, Bldg." field of "Billing Address" address form
+    And presses the "Place Order" button
+    Then user checks "Apt, Bldg." with value "12345" on thank you page

@@ -234,14 +234,15 @@ public class PepBoysCheckoutSteps {
 
 
     @Then("^user checks phone with value \"([^\"]*)\" on \"([^\"]*)\" tab$")
-    public void userChecksPhoneWithValueOnTab(String phone, String breadcrumb) throws Throwable {
+    public void userChecksPhoneWithValueOnTab(String phone, String breadcrumb) {
         breadcrumbWidget.waitForBreadcrumbActive(breadcrumb);
         addressDisplayComponent.checkPhone(phone);
         CommonFunctions.attachScreenshot("Checks phone on " + breadcrumb + " tab");
     }
 
     @Then("^user checks \"([^\"]*)\" with value \"([^\"]*)\" on thank you page$")
-    public void userChecksWithValueOnThankYouPage(String field, String value) throws Throwable {
+    public void userChecksWithValueOnThankYouPage(String field, String value) {
+        this.userShouldBeOnThankYouPage();
         addressDisplayComponent.checkFieldValue(field, value);
         CommonFunctions.attachScreenshot("Checks " + field + " on thank you page");
     }
@@ -254,9 +255,25 @@ public class PepBoysCheckoutSteps {
     }
 
     @Then("^user checks city info with value \"([^\"]*)\" on thank you page$")
-    public void userChecksCityInfoWithValueOnThankYouPage(String value) throws Throwable {
+    public void userChecksCityInfoWithValueOnThankYouPage(String value) {
+        this.userShouldBeOnThankYouPage();
         addressDisplayComponent.checkCityInfo(value);
         CommonFunctions.attachScreenshot("Checks information on thank you page");
+    }
+
+    @And("^user checks phone with value \"([^\"]*)\" on thank you page$")
+    public void userChecksPhoneWithValueOnThankYouPage(String value) {
+        this.userShouldBeOnThankYouPage();
+        addressDisplayComponent.checkPhone(value);
+        CommonFunctions.attachScreenshot("Checks information on thank you page");
+    }
+
+    @And("^user checks zip code with value \"([^\"]*)\" on thank you page$")
+    public void userChecksZipCodeWithValueOnThankYouPage(String value) {
+        this.userShouldBeOnThankYouPage();
+        addressDisplayComponent.checkZip(value);
+        CommonFunctions.attachScreenshot("Checks information on thank you page");
+
     }
 
     @Then("^user checks zip code with value \"([^\"]*)\" on \"([^\"]*)\" tab$")
@@ -537,4 +554,6 @@ public class PepBoysCheckoutSteps {
         assertEquals(actualRewardsNumber, user.getRewardsNumber(), "Unexpected Rewards Number");
         CommonFunctions.attachScreenshot("Rewards Number");
     }
+
+
 }

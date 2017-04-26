@@ -8,11 +8,12 @@ Feature: PAY IN STORE - GUEST - SHIPPING & BILLING PAGE - BILLING INFO
     And user views cart
     And chooses "Pay in Store" method
 
-  @TestCaseId("16641")
-  Scenario: Test with correct billing information and fill in all required fields (Address chosen from auto-detect drop-down)
+  @TestCaseId("16647")
+  Scenario: Test field 'City' with special symbols
     Given user types billing info for "qa user"
-    And presses the "Continue" button
-    And user should be on thank you page
-    Then user checks billing info for "qa user"
+    And user types "!@$%^&*():_+" into the "City" field of "Billing Address" address form
+    And presses the "Place Order" button
+    Then user checks city info with value "!@$%^&*():_+" on thank you page
+
 
 

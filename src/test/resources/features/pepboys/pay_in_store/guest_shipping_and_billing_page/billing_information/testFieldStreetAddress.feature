@@ -8,21 +8,13 @@ Feature: PAY IN STORE - GUEST - SHIPPING & BILLING PAGE - BILLING INFO
     And user views cart
     And chooses "Pay in Store" method
 
-  @TestCaseId("16644")
-  Scenario: Test field 'Last name'
+  @TestCaseId("16645")
+  Scenario: Test field 'Address Street'
     Given user types billing info for "qa user"
-    And user types "Moovweb " into the "Full Name" field of "Billing Address" address form
+    And user types "" into the "Street Address" field of "Billing Address" address form
     And presses the "Place Order" button
     And sees "FORM ERRORS" error message with text "Please review all inputs."
 
-    And user types "Moovweb !@#&::!@#()" into the "Full Name" field of "Billing Address" address form
+    And user types "Mission Street" into the "Street Address" field of "Billing Address" address form
     And presses the "Place Order" button
-    And sees "FORM ERRORS" error message with text "Last Name is invalid"
-
-
-
-
-
-
-
-
+    Then user checks "Street Address" with value "Mission Street" on thank you page
