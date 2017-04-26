@@ -1,6 +1,6 @@
 @pepBoys
 
-Feature: EXISTING ACCOUNT - THANK YOU PAGE
+Feature: PAY IN STORE - EXISTING ACCOUNT - REVIEW & PLACE ORDER PAGE - THANK YOU PAGE
 
   Background:
     Given user makes appoint
@@ -8,13 +8,12 @@ Feature: EXISTING ACCOUNT - THANK YOU PAGE
     And user views cart
     And chooses "Pay in Store" method
 
-  @TestCaseId("16675")
-  Scenario: Links at Thank you page (Existing User, Pay in Store)
-    Given user presses the signIn button
+  @TestCaseId("16674")
+  @TestCaseId("16673")
+  Scenario: Check button Continue Shopping
     Given user makes authorisation for "qa user"
     And applies billing info for address "201 SPEAR ST"
     And presses the "Place Order" button
     And user should be on thank you page
-    Then user presses the Find out more link
-    And user should be on rewards page
-
+    Then presses the "Continue Shopping" button
+    And user should be on main page
