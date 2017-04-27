@@ -1,7 +1,6 @@
 package entities.pages.pepboys;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 
 import static org.testng.Assert.assertTrue;
 
@@ -24,7 +23,7 @@ public class PepBoysProductPage extends PepBoysBasePage {
     }
 
     public void setDeliveryOption(String deliveryOption) {
-        ((JavascriptExecutor) getDriver()).executeScript("window.scrollBy(0,500)", "");
+        javascriptScroll(500);
 
         if (!deliveryOption.equals("Pick Up in Store")) {
             getDriver().findElement(By.xpath("//label[contains(., '" + deliveryOption + "')]")).click();
@@ -42,7 +41,6 @@ public class PepBoysProductPage extends PepBoysBasePage {
 
     public void clickViewCartInAddToCartDialog() {
         click(By.xpath("//button[text()='View Cart']"));
-//        assertTrue(isElementClickable(By.xpath("//a[text()='Pay Online']")));
     }
 
     public void clickContinueInAddToCartDialog() {
@@ -50,6 +48,9 @@ public class PepBoysProductPage extends PepBoysBasePage {
     }
 
     public boolean isAvailableInStore() {
-        return !isElementPresent(By.xpath("//div[contains(text(), 'Not Available')]"), 2);
+        return !isElementPresent(By.xpath("//h4[contains(text(), 'Not Available')]"), 5) &&
+                !isElementPresent(By.xpath("//h4[contains(text(), 'Available tomorrow')]"), 5) &&
+                isElementPresent(By.xpath("//div[contains(text(), 'Pay in Store Available')]"), 5);
+
     }
 }

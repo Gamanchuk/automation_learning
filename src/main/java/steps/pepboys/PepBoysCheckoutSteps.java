@@ -140,6 +140,7 @@ public class PepBoysCheckoutSteps {
     public void userShouldBeOnThankYouPage() {
         assertTrue(thankYouPage.isOnThankYouPage(), "User is not on \"Thank You\" page");
         assertTrue(pepBoysThankYouPage.isCollapsed(), "Order collapser not collapsed");
+        pepBoysThankYouPage.openCollapser();
         CommonFunctions.attachScreenshot("Thank You Page");
     }
 
@@ -147,7 +148,6 @@ public class PepBoysCheckoutSteps {
     public void userPressesTheRescheduleLink() {
         PepBoysTrackingPage trackingPage = new PepBoysTrackingPage();
         PepBoysMyAccountPage myAccountPage = new PepBoysMyAccountPage();
-        pepBoysThankYouPage.openCollapser();
         pepBoysThankYouPage.clickOnReschedule();
         CommonFunctions.attachScreenshot("Click on Reschedule Link");
 

@@ -1,4 +1,4 @@
-@pepBoys @debug
+@pepBoys
 
 Feature: PAY IN STORE - GUEST - SHIPPING & BILLING PAGE - BILLING INFO
 
@@ -12,7 +12,7 @@ Feature: PAY IN STORE - GUEST - SHIPPING & BILLING PAGE - BILLING INFO
   Scenario: Test field 'City'
     Given user types billing info for "qa user"
 
-    And user types "" into the "City" field of "Billing Address" address form
+    And user types " " into the "City" field of "Billing Address" address form
     And presses the "Continue" button
     And chooses "Use Entered Address"
     And sees "FORM ERRORS" error message with text "Please review all inputs."

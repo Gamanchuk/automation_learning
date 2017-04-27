@@ -19,6 +19,7 @@ import java.util.concurrent.TimeUnit;
 import static org.testng.Assert.assertTrue;
 
 public class PepBoysCartPage extends PepBoysBasePage {
+    By payInStore = By.id("j-payInStore");
 
     public void payUsingPaymentMethod(String method) {
         waitForAjax();
@@ -28,7 +29,7 @@ public class PepBoysCartPage extends PepBoysBasePage {
         } else if (method.equals("PayPal")) {
             click(By.id("j-payPalCheckout"));
         } else if (method.equals("Pay in Store")) {
-            click(By.id("j-payInStore"));
+            click(payInStore);
         }
 
         CommonFunctions.attachScreenshot("Payment method");

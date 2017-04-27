@@ -1,4 +1,4 @@
-@pepBoys
+@pepBoys @debug
 
 Feature: PAY IN STORE - GUEST - SHIPPING & BILLING PAGE - BILLING INFO
 
