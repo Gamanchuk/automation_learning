@@ -1,12 +1,9 @@
-@pepBoys @debug
+@pepBoys
 
 Feature: Happy Path
 
   Background:
     Given user makes appoint
-
-    And failed step
-
     And user adds to cart product with id "8076476" with "Ship to Home" delivery option
     And user views cart
     And chooses "Pay Online" method

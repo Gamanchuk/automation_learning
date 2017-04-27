@@ -100,7 +100,7 @@ public class CommonFunctions {
         }
 
         log.info(byteVideo);
-        file.delete();
+//        file.delete();
         return byteVideo;
     }
 

@@ -13,6 +13,7 @@ import java.io.InputStreamReader;
 public class BrowserConsoleLogAggregator {
 
     private static org.apache.commons.logging.Log log = LogFactory.getLog(JiraHelper.class);
+    private static Process adbLogcatProcess = null;
 
     public static void startCapturing() {
         startAdbLogcat();
@@ -20,6 +21,9 @@ public class BrowserConsoleLogAggregator {
 
     public static void stopCapturing() {
         String pid = (String) TestGlobalsManager.getTestGlobal("AGGREGATOR_PID");
+        if(adbLogcatProcess != null) {
+            adbLogcatProcess.destroy();
+        }
         if(pid != null) {
             ProcessBuilder builder = new ProcessBuilder("kill", "-9", pid);
             try {
@@ -33,14 +37,12 @@ public class BrowserConsoleLogAggregator {
     private static void startAdbLogcat() {
         try {
             ProcessBuilder builder = new ProcessBuilder("/bin/bash", "grep_android_logs.sh");
-            Process process = builder.start();
+            adbLogcatProcess = builder.start();
 
-            InputStream is = process.getInputStream();
+            InputStream is = adbLogcatProcess.getInputStream();
             InputStreamReader isr = new InputStreamReader(is);
             BufferedReader br = new BufferedReader(isr);
             String pid = br.readLine();
-
-            process.destroy();
 
             TestGlobalsManager.setTestGlobal("AGGREGATOR_PID", pid);
             log.info("adb logcat pid: " + pid);
