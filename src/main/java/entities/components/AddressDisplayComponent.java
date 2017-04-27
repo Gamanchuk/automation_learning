@@ -20,7 +20,7 @@ public class AddressDisplayComponent extends BaseComponent {
 
     public void checkInfo(String name, String apt, String streetAddress, String cityInfo, String zip, String phone) {
 //        waitForElementClickable(By.xpath("//div[contains(@class, 'radio-list') and contains(@class, 'radio-collapsed')]"));
-        getDriver().manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+        getDriver().manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 
         checkFieldValue("Full Name", name);
         checkFieldValue("Street Address", streetAddress);

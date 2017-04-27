@@ -23,6 +23,7 @@ public class PepBoysThankYouPage extends PepBoysBasePage {
     public void openCollapser() {
         if (isCollapsed()) {
             getDriver().findElement(collapser).click();
+
         }
     }
 

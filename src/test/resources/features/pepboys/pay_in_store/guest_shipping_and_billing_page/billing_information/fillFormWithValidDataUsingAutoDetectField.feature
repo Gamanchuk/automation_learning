@@ -1,4 +1,4 @@
-@pepBoys @debug
+@pepBoys
 
 Feature: PAY IN STORE - GUEST - SHIPPING & BILLING PAGE - BILLING INFO
 
@@ -12,7 +12,6 @@ Feature: PAY IN STORE - GUEST - SHIPPING & BILLING PAGE - BILLING INFO
   Scenario: Test with correct billing information and fill in all required fields (Address chosen from auto-detect drop-down)
     Given user types billing info for "qa user"
     And presses the "Continue" button
-    And user should be on thank you page
-    Then user checks billing info for "qa user"
+    Then user checks billing info for "qa user" on thank you page
 
 

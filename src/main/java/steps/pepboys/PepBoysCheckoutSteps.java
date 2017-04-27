@@ -71,6 +71,21 @@ public class PepBoysCheckoutSteps {
         fillBillingInfo(userName, false, true);
     }
 
+    @Then("^user checks billing info for \"([^\"]*)\" on thank you page$")
+    public void userChecksBillingInfoForOnThankYouPage(String userName) {
+        this.userShouldBeOnThankYouPage();
+        BillingUser user = DataProvider.getUser(userName);
+        addressDisplayComponent.checkInfo(
+                user.getFullName(),
+                user.getApartment(),
+                user.getFullAddress(),
+                user.getCity(),
+                user.getZipCode(),
+                user.getPhone()
+        );
+        addressDisplayComponent.checkFieldValue("Email", user.getEmail());
+    }
+
     @Then("^user checks billing info for \"([^\"]*)\"$")
     public void userChecksBillingInfoFor(String userName) {
         BillingUser user = DataProvider.getUser(userName);
