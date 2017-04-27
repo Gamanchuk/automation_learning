@@ -1,6 +1,7 @@
 package utils;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.CharEncoding;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.OutputType;
@@ -119,7 +120,7 @@ public class CommonFunctions {
 
     public static void saveOrder(String order) {
         try {
-            FileUtils.writeStringToFile(new File("orders.txt"), order);
+            FileUtils.writeStringToFile(new File("orders.txt"), order, CharEncoding.UTF_8, true);
         } catch (IOException e) {
             e.printStackTrace();
         }
