@@ -1,7 +1,6 @@
 package utils;
 
 import org.apache.commons.logging.LogFactory;
-import org.eclipse.jetty.util.log.Log;
 
 import java.io.BufferedReader;
 import java.io.IOException;

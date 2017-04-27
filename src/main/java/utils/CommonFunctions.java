@@ -78,17 +78,23 @@ public class CommonFunctions {
 
     @Attachment(value = "Screen Recording Video", type = "video/mp4")
     public static byte[] attachScreeVideo(String name) {
-
         File file = new File(System.getProperty("user.dir") + "/" + Config.DEVICE_UID + ".mp4");
-
         log.info("screen file: " + file.getAbsolutePath());
+        return readFile(file);
+    }
 
+    @Attachment(value = "File attachment", type = "text/plain")
+    public static byte[] attachFile(File file) {
+        return readFile(file);
+    }
+
+    private static byte [] readFile(File file) {
         byte[] byteVideo = new byte[(int) file.length()];
         try {
             FileInputStream fileInputStream = new FileInputStream(file);
             fileInputStream.read(byteVideo);
         } catch (FileNotFoundException e) {
-            log.error("File with video not found.");
+            log.error("File not found.");
         } catch (IOException e1) {
             log.error("Error reading the file.");
         }
