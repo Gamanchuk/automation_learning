@@ -329,9 +329,9 @@
 
         <!--devices-->
         <profile>
-            <id>device-Samsung-edge7</id>
+            <id>device-Samsung-edge6</id>
             <properties>
-                <props.file.name>edge7</props.file.name>
+                <props.file.name>edge6</props.file.name>
             </properties>
         </profile>
         <profile>
