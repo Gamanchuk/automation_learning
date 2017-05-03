@@ -11,8 +11,8 @@ public class AddressFormComponent extends BaseComponent {
     private By apartmentField = By.cssSelector(".address-line2 input");
     private By phoneField = By.cssSelector(".phone-input input");
     private By cityField = By.cssSelector(".city-input input");
-    private By stateField = By.cssSelector(".state-input select");
     private By zipField = By.cssSelector(".zip-input input");
+    private By stateField = By.cssSelector(".state-input select");
 
     public void fillAddressForm(String fullName, String address, String cityInfo, String city, String apartment, String phone, String state, String zip, boolean autoFill) {
         fillField(nameField, fullName);
@@ -25,7 +25,9 @@ public class AddressFormComponent extends BaseComponent {
         } else {
             if (isElementVisible(By.cssSelector("a.manual"))) {
                 click(By.cssSelector("a.manual"));
-                findElementWithTextBy("enter city", By.cssSelector("div.zip-message a")).click();
+
+                //this element doesn't present
+                //findElementWithTextBy("enter city", By.cssSelector("div.zip-message a")).click();
             }
             fillField(cityField, city);
             fillField(zipField, zip);
@@ -39,7 +41,7 @@ public class AddressFormComponent extends BaseComponent {
             e.printStackTrace();
         }
 
-        waitForElementVisible(apartmentField);
+        // this.waitForElementVisible(apartmentField);
         fillField(apartmentField, apartment);
 
         // Need to send phone number digit by digit
