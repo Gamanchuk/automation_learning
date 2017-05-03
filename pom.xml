@@ -131,7 +131,6 @@
         </dependency>
 
 
-
         <!-- https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp -->
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
@@ -335,7 +334,6 @@
                 <props.file.name>edge7</props.file.name>
             </properties>
         </profile>
-
         <profile>
             <id>device-Samsung-s5</id>
             <properties>
@@ -348,28 +346,24 @@
                 <props.file.name>iphone7plus</props.file.name>
             </properties>
         </profile>
-
         <profile>
             <id>device-iPhone-5s</id>
             <properties>
                 <props.file.name>iphone5s</props.file.name>
             </properties>
         </profile>
-
         <profile>
             <id>device-iPhone-6</id>
             <properties>
                 <props.file.name>iphone6</props.file.name>
             </properties>
         </profile>
-
         <profile>
             <id>device-Nexus-5X</id>
             <properties>
                 <props.file.name>nexus_5x</props.file.name>
             </properties>
         </profile>
-
         <profile>
             <id>device-GalaxyS6</id>
             <properties>
