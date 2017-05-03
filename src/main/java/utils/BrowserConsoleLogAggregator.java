@@ -7,9 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-/**
- * Created by vmaksimenko on 27.04.17.
- */
 public class BrowserConsoleLogAggregator {
 
     private static org.apache.commons.logging.Log log = LogFactory.getLog(JiraHelper.class);
@@ -27,7 +24,7 @@ public class BrowserConsoleLogAggregator {
         if(pid != null) {
             ProcessBuilder builder = new ProcessBuilder("kill", "-9", pid);
             try {
-                Process process = builder.start();
+                builder.start();
             } catch (IOException e) {
                 e.printStackTrace();
             }

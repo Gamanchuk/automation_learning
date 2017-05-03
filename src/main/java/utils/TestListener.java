@@ -59,7 +59,6 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
     public void onTestFailure(ITestResult iTestResult) {
         BrowserConsoleLogAggregator.stopCapturing();
         File androidLog = new File("android_browser.log");
-        CommonFunctions.attachFile(androidLog);
 
         String caseName = (String) TestGlobalsManager.getTestGlobal("caseName");
         String dom = CommonFunctions.attachDomThree(DriverFactory.getDriver().getPageSource());
@@ -68,7 +67,7 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
         log.info("Test \"" + iTestResult.getName() + "\" failed in "
                 + countDuration(iTestResult.getEndMillis() - iTestResult.getStartMillis()));
 
-//        if (Boolean.valueOf(System.getProperty("projectTracking"))) {
+        if (Boolean.valueOf(System.getProperty("projectTracking"))) {
             String ticketId = setJiraIssues(caseName, errorMessage);
             try {
                 File attachment = File.createTempFile("attachment", ".html");
@@ -79,7 +78,7 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
                 e.printStackTrace();
             }
             setTestResults(TestRailStatus.FAILED, errorMessage, JiraHelper.doLinkToIssue(ticketId));
-//        }
+        }
 
         DriverFactory.quitDriver();
         fireRetryTest("The test has been failed then retried.", iTestResult);
