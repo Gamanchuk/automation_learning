@@ -330,6 +330,19 @@
 
         <!--devices-->
         <profile>
+            <id>device-Samsung-edge7</id>
+            <properties>
+                <props.file.name>edge7</props.file.name>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>device-Samsung-s5</id>
+            <properties>
+                <props.file.name>samsung_s5</props.file.name>
+            </properties>
+        </profile>
+        <profile>
             <id>device-iPhone-7plus</id>
             <properties>
                 <props.file.name>iphone7plus</props.file.name>
