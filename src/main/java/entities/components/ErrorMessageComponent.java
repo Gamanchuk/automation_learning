@@ -6,7 +6,7 @@ import utils.CommonFunctions;
 import static org.testng.Assert.assertEquals;
 
 public class ErrorMessageComponent extends BaseComponent {
-    private final String PATH_BASE = "//div[contains(@class, 'message-panel-form-error')]";
+    private final String PATH_BASE = "//div[contains(@class, 'message-panel-form-error') or contains(@class, 'message-panel-error')]";
 
     private By errorTitleEl = By.xpath(PATH_BASE + "/h2");
     private By errorMessageEl = By.xpath(PATH_BASE + "/div");

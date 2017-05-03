@@ -48,6 +48,7 @@ public class PepBoysCheckoutSteps {
     private TitleComponent titleComponent = new TitleComponent();
     private ModalComponent modalComponent = new ModalComponent();
     private RewardsAccountComponent rewardsAccountComponent = new RewardsAccountComponent();
+    private DiscountComponent discountComponent = new DiscountComponent();
 
     private PepBoysThankYouPage pepBoysThankYouPage = new PepBoysThankYouPage();
 
@@ -571,4 +572,10 @@ public class PepBoysCheckoutSteps {
     }
 
 
+    @And("^user types gift card with \"([^\"]*)\" number and \"([^\"]*)\" pin code$")
+    public void userTypesGiftCardWithNumberAndPinCode(String giftNumber, String pinCode) {
+        collapserComponent.openCollapser();
+        discountComponent.fillDiscount(giftNumber, pinCode);
+        CommonFunctions.attachScreenshot("Discount info");
+    }
 }
