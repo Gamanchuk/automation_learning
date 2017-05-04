@@ -288,9 +288,9 @@
             </properties>
         </profile>
         <profile>
-            <id>suite-refactoring</id>
+            <id>suite-happyPath</id>
             <properties>
-                <testng.suite>${basedir}/src/test/resources/testsuites/refactoring.xml</testng.suite>
+                <testng.suite>${basedir}/src/test/resources/testsuites/happyPath.xml</testng.suite>
                 <suite.id>93</suite.id>
             </properties>
         </profile>
