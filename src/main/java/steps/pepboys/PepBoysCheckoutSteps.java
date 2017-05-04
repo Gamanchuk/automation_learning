@@ -157,6 +157,7 @@ public class PepBoysCheckoutSteps {
         assertTrue(pepBoysThankYouPage.isCollapsed(), "Order collapser not collapsed");
         pepBoysThankYouPage.openCollapser();
         CommonFunctions.attachScreenshot("Thank You Page");
+        CommonFunctions.saveOrder(thankYouPage.getOrder());
     }
 
     @And("^user presses the reschedule link$")

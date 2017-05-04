@@ -5,8 +5,8 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 @CucumberOptions(
         features = "src/test/resources/features/",
         glue = "steps",
-        tags = "@refactoring"
+        tags = "@happyPath"
 )
-class RefactoringCukesRunnerTest extends AbstractTestNGCucumberTests {
+class HappyPathCukesRunnerTest extends AbstractTestNGCucumberTests {
 
 }
