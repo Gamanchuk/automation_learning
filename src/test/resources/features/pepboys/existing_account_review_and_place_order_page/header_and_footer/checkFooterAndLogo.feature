@@ -25,3 +25,6 @@ Feature: EXISTING ACCOUNT - REVIEW & PLACE ORDER PAGE - HEADER & FOOTER
     And user presses the logo
     Then user should be on main page
 
+    # Need to change attribute at line 7 from "ship to home" to "Pick up in store"
+    # And remove lines: 20,21. Also we can remove 22 line because it isn't necessary to enter info about CC
+

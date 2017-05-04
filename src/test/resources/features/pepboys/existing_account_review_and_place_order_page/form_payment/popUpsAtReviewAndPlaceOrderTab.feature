@@ -22,3 +22,7 @@ Feature: EXISTING ACCOUNT - REVIEW & PLACE ORDER PAGE
 
     And user clicks Terms link
     Then user should see Terms modal with "APPLICABLE LAW AND ARBITRATION AGREEMENT"
+
+    # Need to rename title of Scenario "Pop-ups at Review and Place order page"
+    # Need to change attribute at line 7 from "ship to home" to "Pick up in store"
+    # And remove lines: 18,19

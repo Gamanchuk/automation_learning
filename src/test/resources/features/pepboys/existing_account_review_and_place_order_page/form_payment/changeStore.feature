@@ -21,6 +21,9 @@ Feature: EXISTING ACCOUNT - REVIEW & PLACE ORDER PAGE
     Then user should be on "Billing" page
     And checks Pick Up in Store info
 
+    # Scenario must be renamed to Change store.
+    # Line 21 have incorrect attribute, must be not "Billing", but "Payment&review"
+
 
 
 

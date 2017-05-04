@@ -19,3 +19,7 @@ Feature: GUEST - REVIEW & PLACE ORDER PAGE - HEADER & FOOTER
     And uses "visa" card for payment
     And user presses the Shopping Cart icon
     Then user should be on cart page
+
+    # Need to change attribute at line 7 from "ship to home" to "Pick up in store"
+    # And remove lines: 17,18
+    # Also we don't need to input information about CC => can remove line 19

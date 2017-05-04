@@ -18,4 +18,6 @@ Feature: Guest - Shipping & Billing page
 
     Then user checks billing info for "qa user"
 
+    #Need rename from billing to shipping at 19 line
+
 

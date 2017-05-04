@@ -36,3 +36,6 @@ Feature: EXISTING ACCOUNT - REVIEW & PLACE ORDER PAGE
     And presses the "Place Order" button
     Then user should stay at "Payment & Review" tab
     And sees "FORM ERRORS" error message with text "Please review all inputs."
+
+    # Need to change attribute at line 7 from "ship to home" to "Pick up in store"
+    # And remove lines: 18,19

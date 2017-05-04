@@ -19,3 +19,6 @@ Feature: GUEST - REVIEW & PLACE ORDER PAGE - THANK YOU PAGE
     And user should be on thank you page
     Then presses the "Continue Shopping" button
     And user should be on main page
+
+    # Need to change attribute at line 7 from "ship to home" to "Pick up in store"
+    # And remove lines: 15, 16

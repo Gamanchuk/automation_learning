@@ -29,3 +29,5 @@ Feature: EXISTING ACCOUNT - REVIEW & PLACE ORDER PAGE
     Then user should be on "Payment & Review" tab
     And user checks billing info for "qa user3"
 
+    # We can make this test faster. Need to change attribute at line 7 from "Ship To Home" to "Pick Up In Store"
+    # With this option we can remove lines: 17, 18, 26, 27

@@ -36,3 +36,6 @@ Feature: GUEST - REVIEW & PLACE ORDER PAGE
     And presses the "Place Order" button
     Then user should stay at "Payment & Review" tab
     And sees "FORM ERRORS" error message with text "Please review all inputs."
+
+    # We can make this test faster. Need to change attribute at line 7 from "Ship To Home" to "Pick Up In Store"
+    # With this option we can remove lines: 17, 18

@@ -19,6 +19,8 @@ Feature: GUEST - REVIEW & PLACE ORDER PAGE
 #    Then user types billing info for "qa user"
     And checks Pick Up in Store info
 
+    # Need to rename title of Scenario to "Change store"
+
 
 
 

@@ -21,3 +21,5 @@ Feature: GUEST - DELIVERY METHOD PAGE - HEADER & FOOTER
     And user checks text "© Copyright 2017 - The Pep Boys" in footer
     And user presses the logo
     Then user should be on main page
+
+    # Line 19 can be deleted we don't need to set inforamtion about Delivery method at this case

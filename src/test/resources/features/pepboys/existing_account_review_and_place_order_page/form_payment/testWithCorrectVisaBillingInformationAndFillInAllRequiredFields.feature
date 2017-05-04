@@ -23,3 +23,6 @@ Feature: EXISTING ACCOUNT - REVIEW & PLACE ORDER PAGE
     And presses the "Place Order" button
     Then user should be on thank you page
 
+    # Need to change attribute at line 8 from "ship to home" to "Pick up in store"
+    # And remove lines: 19,20
+

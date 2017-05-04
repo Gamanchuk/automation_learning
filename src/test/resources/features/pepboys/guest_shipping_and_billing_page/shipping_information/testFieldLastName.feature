@@ -24,3 +24,6 @@ Feature: Guest - Shipping & Billing page
     Then user should stay at "Billing & Shipping" tab
     And sees "FORM ERRORS" error message with text "Last Name is invalid"
 
+    #Can't see here positive case where user input valid data and proceed
+    #to Delivery page and check that information is reflecting right
+

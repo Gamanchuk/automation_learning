@@ -19,3 +19,5 @@ Feature: EXPRESS PAYPAL - DELIVERY METHOD PAGE - HEADER & FOOTER
     And user checks text "© Copyright 2017 - The Pep Boys" in footer
     And user presses the logo
     Then user should be on main page
+
+    # Line 17 can be deleted we don't need to choose any Delivery method at this case

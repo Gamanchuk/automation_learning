@@ -15,4 +15,5 @@ Feature: Guest - Shipping & Billing page
     And chooses "Use Entered Address"
     Then user checks billing info for "qa user"
 
+    #We don't check billing info on Delivery page. Need to change option "Ship to Home" to "Pick up in store"
 

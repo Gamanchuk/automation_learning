@@ -21,3 +21,6 @@ Feature: GUEST - REVIEW & PLACE ORDER PAGE - THANK YOU PAGE
     Then user presses the Find out more link
     And user should be on rewards page
 
+    # Need to change attribute at line 7 from "ship to home" to "Pick up in store"
+    # And remove lines: 16, 17
+

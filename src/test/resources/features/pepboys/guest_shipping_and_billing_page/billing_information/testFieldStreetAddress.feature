@@ -32,3 +32,7 @@ Feature: Guest - Shipping & Billing page
     And presses the "Continue" button
     And chooses "Use Entered Address"
     Then user checks "Street Address" with value "!@$%^&*():_+" on "Delivery Method" tab
+
+    #We don't check billing info on Delivery page. Need to change option "Ship to Home" to "Pick up in store"
+    #When you done first comment, please, change "Delivery Method" to "Payment and Review page"
+    # It is lines 22, 28, 34

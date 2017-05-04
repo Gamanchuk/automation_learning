@@ -22,3 +22,5 @@ Feature: EXISTING ACCOUNT - DELIVERY METHOD PAGE - HEADER & FOOTER
     And user checks text "© Copyright 2017 - The Pep Boys" in footer
     And user presses the logo
     Then user should be on main page
+
+    #20 line can be deleted we don't need to chose Delivery method at this case

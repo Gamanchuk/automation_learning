@@ -21,3 +21,7 @@ Feature: EXISTING ACCOUNT - REVIEW & PLACE ORDER PAGE - HEADER & FOOTER
     And user presses the Shopping Cart icon
     Then user should be on cart page
 
+    # Change title of Scenario to "Check Shopping cart icon redirection"
+    # Need to change attribute at line 7 from "ship to home" to "Pick up in store"
+    # And remove lines: 18,19. Also we can remove 20 line because it isn't necessary to enter info about CC
+

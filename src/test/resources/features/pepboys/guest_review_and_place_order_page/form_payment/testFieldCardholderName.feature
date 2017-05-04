@@ -28,3 +28,6 @@ Feature: GUEST - REVIEW & PLACE ORDER PAGE
     And user types "!@#$%^&*())(*&^%$#@! !@#$%^&*())(*&^%$#@!" into "Cardholder Name" field of Card Form
     And presses the "Place Order" button
     Then sees modal error with text "Your order was declined"
+
+    # We can make this test faster. Need to change attribute at line 7 from "Ship To Home" to "Pick Up In Store"
+    # With this option we can remove lines: 18, 19

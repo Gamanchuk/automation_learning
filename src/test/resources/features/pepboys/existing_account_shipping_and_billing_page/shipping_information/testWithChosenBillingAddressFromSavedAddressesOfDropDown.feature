@@ -19,3 +19,5 @@ Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE - SHIPPING INFO
     And presses the "Continue" button
     And user should be on "Delivery Method" tab
     Then user checks shipping info for "qa user3"
+
+    # Need to change at title Scenario from "billing" to "shipping"

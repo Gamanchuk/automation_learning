@@ -20,3 +20,6 @@ Feature: GUEST - REVIEW & PLACE ORDER PAGE
     And uses "mastercard" card for payment
     And presses the "Place Order" button
     Then user should be on thank you page
+
+    # Need to change attribute at line 7 from "ship to home" to "Pick up in store"
+    # And remove lines: 17,18

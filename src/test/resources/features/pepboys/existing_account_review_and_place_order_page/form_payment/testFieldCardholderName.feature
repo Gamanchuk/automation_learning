@@ -27,3 +27,6 @@ Feature: EXISTING ACCOUNT - REVIEW & PLACE ORDER PAGE
     And user types "!@#$%^&*())(*&^%$#@! !@#$%^&*())(*&^%$#@!" into "Cardholder Name" field of Card Form
     And presses the "Place Order" button
     Then sees modal error with text "Your order was declined"
+
+    # Need to change attribute at line 7 from "ship to home" to "Pick up in store"
+    # And remove lines: 18,19
