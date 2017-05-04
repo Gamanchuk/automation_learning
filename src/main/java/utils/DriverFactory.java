@@ -4,6 +4,7 @@ import io.appium.java_client.remote.IOSMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
+import io.appium.java_client.service.local.flags.AndroidServerFlag;
 import io.appium.java_client.service.local.flags.GeneralServerFlag;
 import io.appium.java_client.service.local.flags.IOSServerFlag;
 import org.apache.commons.exec.CommandLine;
@@ -37,7 +38,11 @@ public class DriverFactory {
     private static EventFiringWebDriver driver;
     private static AppiumDriverLocalService service;
     private static WebDriverEventListener eventListener;
+
     private static Log log = LogFactory.getLog(DriverFactory.class);
+
+    private static final String IOS = "iOS";
+    private static final String ANDROID = "Android";
 
 
     public static WebDriver getDriver() {
@@ -78,7 +83,7 @@ public class DriverFactory {
                     desiredCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, deviceName);
                     desiredCapabilities.setCapability(MobileCapabilityType.UDID, deviceUdid);
 
-                    if (Config.PLATFORM_NAME.equals("iOS")) {
+                    if (Config.PLATFORM_NAME.equals(IOS)) {
                         desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
                         desiredCapabilities.setCapability("wdaLocalPort", Integer.parseInt(iproxyPort));
                         desiredCapabilities.setCapability("useNewWDA", true);
@@ -93,6 +98,11 @@ public class DriverFactory {
                         desiredCapabilities.setCapability("xcodeSigningId", "iPhone Developer");
                         desiredCapabilities.setCapability("updatedWDABundleId", "com.moovweb.WebDriverAgentRunner");
                     }
+
+                    //if (Config.PLATFORM_NAME.equals(ANDROID)) {
+                    //desiredCapabilities.setCapability("unlockType", "pin");
+                    //desiredCapabilities.setCapability("unlockKey", "1111");
+                    //}
 
                     eventListener = new MyWebDriverEventListener();
 
@@ -135,6 +145,11 @@ public class DriverFactory {
                 serviceBuilder.withArgument(IOSServerFlag.WEBKIT_DEBUG_PROXY_PORT, String.valueOf(proxyPort));
                 //serviceBuilder.withArgument(GeneralServerFlag.LOG_LEVEL, "warn");
                 serviceBuilder.withArgument(GeneralServerFlag.SESSION_OVERRIDE);
+            }
+
+            if (Config.PLATFORM_NAME.equals(ANDROID)) {
+                serviceBuilder.withArgument(AndroidServerFlag.CHROME_DRIVER_PORT, Config.CHROMEDRIVER_PORT);
+                serviceBuilder.withArgument(AndroidServerFlag.BOOTSTRAP_PORT_NUMBER, Config.BOOTSTRAP_PORT);
             }
 
             service = AppiumDriverLocalService.buildService(serviceBuilder);

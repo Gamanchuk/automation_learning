@@ -353,6 +353,12 @@
             </properties>
         </profile>
         <profile>
+            <id>device-Google-Nexus7</id>
+            <properties>
+                <props.file.name>nexus7</props.file.name>
+            </properties>
+        </profile>
+        <profile>
             <id>device-iPhone-6</id>
             <properties>
                 <props.file.name>iphone6</props.file.name>
