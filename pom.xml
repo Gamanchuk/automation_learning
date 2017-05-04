@@ -116,13 +116,20 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.4</version>
+            <version>3.5</version>
         </dependency>
         <dependency>
             <groupId>io.appium</groupId>
             <artifactId>java-client</artifactId>
             <version>3.4.1</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.5</version>
+        </dependency>
+
 
         <!-- https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp -->
         <dependency>
@@ -290,6 +297,12 @@
 
         <!--environments-->
         <profile>
+            <id>env-jenkins-sf</id>
+            <properties>
+                <testing.env>jenkins_sf</testing.env>
+            </properties>
+        </profile>
+        <profile>
             <id>env-eugene-local</id>
             <properties>
                 <testing.env>eugene_local</testing.env>
@@ -316,19 +329,47 @@
 
         <!--devices-->
         <profile>
+            <id>device-Samsung-edge6</id>
+            <properties>
+                <props.file.name>edge6</props.file.name>
+            </properties>
+        </profile>
+        <profile>
+            <id>device-Samsung-s5</id>
+            <properties>
+                <props.file.name>samsung_s5</props.file.name>
+            </properties>
+        </profile>
+        <profile>
+            <id>device-iPhone-7plus</id>
+            <properties>
+                <props.file.name>iphone7plus</props.file.name>
+            </properties>
+        </profile>
+        <profile>
+            <id>device-iPhone-5s</id>
+            <properties>
+                <props.file.name>iphone5s</props.file.name>
+            </properties>
+        </profile>
+        <profile>
+            <id>device-Google-Nexus7</id>
+            <properties>
+                <props.file.name>nexus7</props.file.name>
+            </properties>
+        </profile>
+        <profile>
             <id>device-iPhone-6</id>
             <properties>
                 <props.file.name>iphone6</props.file.name>
             </properties>
         </profile>
-
         <profile>
             <id>device-Nexus-5X</id>
             <properties>
                 <props.file.name>nexus_5x</props.file.name>
             </properties>
         </profile>
-
         <profile>
             <id>device-GalaxyS6</id>
             <properties>

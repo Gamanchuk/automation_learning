@@ -68,11 +68,11 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
             try {
                 File attachment = File.createTempFile("attachment", ".html");
                 FileUtils.writeStringToFile(attachment, dom);
-//                    JiraHelper.addAttachment(ticketId, attachment);
+                JiraHelper.addAttachment(ticketId, attachment);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            setTestResults(TestRailStatus.FAILED, errorMessage, ticketId);
+            setTestResults(TestRailStatus.FAILED, errorMessage, JiraHelper.doLinkToIssue(ticketId));
         }
 
         DriverFactory.quitDriver();
