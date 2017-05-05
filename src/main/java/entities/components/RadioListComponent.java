@@ -16,7 +16,7 @@ public class RadioListComponent extends BaseComponent {
             findElement(currentItem).click();
             CommonFunctions.attachScreenshot("List methods");
 
-            By itemDetails = By.cssSelector(".radio-list-option .radio-list-details");
+            By itemDetails = By.cssSelector(".radio-list-option .radio-list-details:contains('" + option + "')");
             List<WebElement> items = findElements(itemDetails);
             log.info("Size [listWebElement]: " + items.size());
 
