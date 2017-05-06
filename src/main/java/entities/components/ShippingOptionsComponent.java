@@ -11,7 +11,7 @@ public class ShippingOptionsComponent extends BaseComponent {
 
     public void selectShippingMethod(String shippingMethod) {
         waitForElementVisible(By.xpath("//h2[text()='Delivery Method']"));
-        assertTrue(radioListComponent.exists(), "Shipping Method Drop-Down doesn't exist");
+        assertTrue(radioListComponent.exists(), "Delivery Method Drop-Down doesn't exist");
         radioListComponent.select(shippingMethod);
     }
 
