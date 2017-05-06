@@ -5,12 +5,10 @@ import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import io.appium.java_client.service.local.flags.AndroidServerFlag;
-import io.appium.java_client.service.local.flags.GeneralServerFlag;
 import io.appium.java_client.service.local.flags.IOSServerFlag;
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecuteResultHandler;
 import org.apache.commons.exec.DefaultExecutor;
-import org.apache.commons.exec.PumpStreamHandler;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
@@ -25,7 +23,6 @@ import org.zeroturnaround.exec.ProcessResult;
 import org.zeroturnaround.process.PidProcess;
 import org.zeroturnaround.process.Processes;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
@@ -144,7 +141,7 @@ public class DriverFactory {
             AppiumServiceBuilder serviceBuilder = new AppiumServiceBuilder();
             serviceBuilder.usingPort(appiumPort);
 
-            serviceBuilder.withArgument(GeneralServerFlag.SESSION_OVERRIDE);
+            // serviceBuilder.withArgument(GeneralServerFlag.SESSION_OVERRIDE);
             //serviceBuilder.withArgument(GeneralServerFlag.LOG_LEVEL, "warn");
 
             if (Config.PLATFORM_NAME.equals("iOS")) {
