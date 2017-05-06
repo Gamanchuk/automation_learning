@@ -141,10 +141,12 @@ public class DriverFactory {
 
             AppiumServiceBuilder serviceBuilder = new AppiumServiceBuilder();
             serviceBuilder.usingPort(appiumPort);
+
+            serviceBuilder.withArgument(GeneralServerFlag.SESSION_OVERRIDE);
+            //serviceBuilder.withArgument(GeneralServerFlag.LOG_LEVEL, "warn");
+
             if (Config.PLATFORM_NAME.equals("iOS")) {
                 serviceBuilder.withArgument(IOSServerFlag.WEBKIT_DEBUG_PROXY_PORT, String.valueOf(proxyPort));
-                //serviceBuilder.withArgument(GeneralServerFlag.LOG_LEVEL, "warn");
-                serviceBuilder.withArgument(GeneralServerFlag.SESSION_OVERRIDE);
             }
 
             if (Config.PLATFORM_NAME.equals(ANDROID)) {
