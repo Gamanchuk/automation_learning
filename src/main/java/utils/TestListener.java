@@ -33,7 +33,10 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
 
     @Override
     public void onTestStart(ITestResult iTestResult) {
-        BrowserConsoleLogAggregator.startCapturing();
+
+        if (Config.DEVICE_NAME.equals("Android")) {
+            BrowserConsoleLogAggregator.startCapturing();
+        }
     }
 
     @Override
@@ -87,7 +90,7 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
     private void setTestResults(TestRailStatus status, String error, String issuesLink) {
         try {
             ArrayList<String> ids = (ArrayList<String>) TestGlobalsManager.getTestGlobal("testCaseIds");
-            if(ids != null) {
+            if (ids != null) {
                 for (String id : ids) {
                     TestRailRunHelper.getInstance().setTestResult(id, status, error, issuesLink);
                 }

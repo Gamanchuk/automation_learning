@@ -33,7 +33,7 @@ public class BrowserConsoleLogAggregator {
 
     private static void startAdbLogcat() {
         try {
-            ProcessBuilder builder = new ProcessBuilder("/bin/bash", "grep_android_logs.sh");
+            ProcessBuilder builder = new ProcessBuilder("/bin/bash", "grep_android_logs.sh " + Config.DEVICE_UID);
             adbLogcatProcess = builder.start();
 
             InputStream is = adbLogcatProcess.getInputStream();
