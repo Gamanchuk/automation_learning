@@ -33,11 +33,12 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
 
     @Override
     public void onTestStart(ITestResult iTestResult) {
-
+        BrowserConsoleLogAggregator.startCapturing();
     }
 
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
+        BrowserConsoleLogAggregator.stopCapturing();
         String caseName = (String) TestGlobalsManager.getTestGlobal("caseName");
         log.info("Test \"" + caseName + "\" completed in "
                 + countDuration(iTestResult.getEndMillis() - iTestResult.getStartMillis()));
@@ -56,6 +57,9 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
 
     @Override
     public void onTestFailure(ITestResult iTestResult) {
+        BrowserConsoleLogAggregator.stopCapturing();
+        File androidLog = new File("android_browser.log");
+
         String caseName = (String) TestGlobalsManager.getTestGlobal("caseName");
         String dom = CommonFunctions.attachDomThree(DriverFactory.getDriver().getPageSource());
         String errorMessage = String.valueOf(iTestResult.getThrowable().getMessage());
@@ -69,6 +73,7 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
                 File attachment = File.createTempFile("attachment", ".html");
                 FileUtils.writeStringToFile(attachment, dom);
                 JiraHelper.addAttachment(ticketId, attachment);
+                JiraHelper.addAttachment(ticketId, androidLog);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -112,12 +117,14 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
 
     @Override
     public void onTestSkipped(ITestResult iTestResult) {
+        BrowserConsoleLogAggregator.stopCapturing();
         log.info("Test \"" + iTestResult.getTestName() + "\" skipped");
         DriverFactory.quitDriver();
     }
 
     @Override
     public void onTestFailedButWithinSuccessPercentage(ITestResult iTestResult) {
+        BrowserConsoleLogAggregator.stopCapturing();
         DriverFactory.quitDriver();
     }
 

@@ -19,8 +19,8 @@ import java.util.Locale;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
-import static utils.CommonFunctions.attachScreeVideo;
-import static utils.DriverFactory.stopScreenVideo;
+import static utils.CommonFunctions.attachScreenVideo;
+import static utils.CommonFunctions.stopScreenVideo;
 
 public class PepBoysCheckoutSteps {
 
@@ -490,7 +490,7 @@ public class PepBoysCheckoutSteps {
     @After
     public void after() {
         stopScreenVideo();
-        attachScreeVideo("data");
+        attachScreenVideo("data");
     }
 
     @Then("^user should see \"([^\"]*)\" form$")
