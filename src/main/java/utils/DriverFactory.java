@@ -99,10 +99,10 @@ public class DriverFactory {
                         desiredCapabilities.setCapability("updatedWDABundleId", "com.moovweb.WebDriverAgentRunner");
                     }
 
-                    if (Config.PLATFORM_NAME.equals(ANDROID)) {
-                        desiredCapabilities.setCapability("unlockType", "pin");
-                        desiredCapabilities.setCapability("unlockKey", "");
-                    }
+//                    if (Config.PLATFORM_NAME.equals(ANDROID)) {
+//                        desiredCapabilities.setCapability("unlockType", "pin");
+//                        desiredCapabilities.setCapability("unlockKey", "");
+//                    }
 
                     eventListener = new MyWebDriverEventListener();
 
