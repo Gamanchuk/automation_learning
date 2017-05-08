@@ -15,8 +15,5 @@ Feature: EXISTING ACCOUNT - DELIVERY METHOD PAGE - HEADER & FOOTER
     And applies billing info for address "123 Mission Street, 10th Floor"
     And presses the "Continue" button
     And chooses "Use Recommended Address"
-    And chooses "Ground: 5-7 Days" shipping method
     And user presses the Shopping Cart icon
     Then user should be on cart page
-
-    # Can be deleted 18 line. We don't need to add any delivery method
