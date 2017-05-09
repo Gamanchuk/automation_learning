@@ -3,7 +3,7 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 
 
 @CucumberOptions(
-        features = "src/test/resources/features/",
+        features = "src/test/resources/features/pepboys/happy_path/",
         glue = "steps",
         tags = "@happyPath"
 )
