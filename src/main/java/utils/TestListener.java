@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class TestListener implements ITestListener, IAnnotationTransformer {
-    private static Log log = LogFactory.getLog(TestListener.class);
+    private static Log log = LogFactory.getLog(TestListener.class.getSimpleName());
     private Allure lifecycle = Allure.LIFECYCLE;
 
     public void transform(ITestAnnotation annotation, Class testClass,

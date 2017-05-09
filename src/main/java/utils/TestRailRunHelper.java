@@ -24,7 +24,7 @@ public class TestRailRunHelper {
 
     private static TestRailRunHelper ourInstance = null;
 
-    private static Log log = LogFactory.getLog(TestRailRunHelper.class);
+    private static Log log = LogFactory.getLog(TestRailRunHelper.class.getSimpleName());
 
     public static TestRailRunHelper getInstance() {
         if (ourInstance == null) {

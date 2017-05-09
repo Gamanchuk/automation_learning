@@ -15,7 +15,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CommonFunctions {
-    private static Log log = LogFactory.getLog(CommonFunctions.class);
+    private static Log log = LogFactory.getLog(CommonFunctions.class.getSimpleName());
 
     @Attachment("< {0} > message ")
     public static String log(Class clazz, String msg) {

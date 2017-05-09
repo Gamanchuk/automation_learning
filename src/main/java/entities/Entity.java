@@ -19,7 +19,7 @@ public abstract class Entity {
     private WebElement root = null;
     private WebDriver driver = DriverFactory.getDriver();
 
-    public Log log = LogFactory.getLog(this.getClass());
+    public Log log = LogFactory.getLog(this.getClass().getSimpleName());
 
     public Entity() {
 
@@ -54,7 +54,7 @@ public abstract class Entity {
     }
 
     public Log getLog() {
-        return LogFactory.getLog(this.getClass());
+        return LogFactory.getLog(this.getClass().getSimpleName());
     }
 
     public boolean isElementClickable(By element, int timeout) {
@@ -282,7 +282,7 @@ public abstract class Entity {
             new WebDriverWait(driver, timeout).until(webElementExpectedCondition);
             return true;
         } catch (TimeoutException e) {
-            log.info("Condition failed!\n" + e);
+            log.info("Condition failed!");
             return false;
         }
     }

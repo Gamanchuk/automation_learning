@@ -491,6 +491,7 @@ public class PepBoysCheckoutSteps {
     public void after() {
         stopScreenVideo();
         attachScreeVideo("data");
+
     }
 
     @Then("^user should see \"([^\"]*)\" form$")

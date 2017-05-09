@@ -21,7 +21,7 @@ public class Config {
     public static final String PROXY_PORT;
     public static final String IPROXY_PORT;
 
-    private static Log log = LogFactory.getLog(Config.class);
+    private static Log log = LogFactory.getLog(Config.class.getSimpleName());
 
     static {
         Properties props = new Properties();

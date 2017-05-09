@@ -37,7 +37,7 @@ public class DriverFactory {
     private static EventFiringWebDriver driver;
     private static AppiumDriverLocalService service;
     private static WebDriverEventListener eventListener;
-    private static Log log = LogFactory.getLog(DriverFactory.class);
+    private static Log log = LogFactory.getLog(DriverFactory.class.getSimpleName());
 
 
     public static WebDriver getDriver() {
@@ -124,7 +124,7 @@ public class DriverFactory {
             killAppiumServer(appiumPort);
 
             log.info("");
-            log.info("******************************* STARTING APPIUM SERVICE ***********************************");
+            log.info("******************************* STARTING APPIUM SERVICE ****************************");
             log.info("APPIUM PORT: " + appiumPort);
             log.info("IOS WEB PROXY PORT: " + proxyPort);
 
@@ -140,7 +140,7 @@ public class DriverFactory {
             service = AppiumDriverLocalService.buildService(serviceBuilder);
             service.start();
             log.info("APPIUM URL: " + service.getUrl());
-            log.info("*******************************************************************************************");
+            log.info("***********************************************************************************");
             log.info("");
         }
     }
