@@ -11,6 +11,7 @@ import org.apache.commons.exec.DefaultExecuteResultHandler;
 import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -99,6 +100,17 @@ public class DriverFactory {
                     driver = new EventFiringWebDriver(new RemoteWebDriver(new URL(String.valueOf(service.getUrl())), desiredCapabilities)).register(eventListener);
                     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
                     startVideoRecording();
+
+
+                    JavascriptExecutor js = driver;
+                    // Получаем время Load Event End (окончание загрузки страницы)
+                    long loadEventEnd = (Long) js.executeScript("return window.performance.timing.loadEventEnd;");
+                    log.info("loadEventEnd: " + loadEventEnd);
+                    // Получаем Navigation Event Start (начало перехода)
+                    long navigationStart = (Long) js.executeScript("return window.performance.timing.navigationStart;");
+                    log.info("navigationStart: " + navigationStart);
+                    // Разница между Load Event End и Navigation Event Start - это время загрузки страницы
+                    log.info("Page Load Time is " + (loadEventEnd - navigationStart) / 1000 + " seconds.");
                 }
 
             } catch (Exception e) {
