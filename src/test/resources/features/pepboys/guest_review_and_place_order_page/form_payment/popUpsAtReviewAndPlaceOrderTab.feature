@@ -23,3 +23,7 @@ Feature: GUEST - REVIEW & PLACE ORDER PAGE
 
     And user clicks Terms link
     Then user should see Terms modal with "APPLICABLE LAW AND ARBITRATION AGREEMENT"
+
+    # We can make this test faster. Need to change attribute at line 7 from "Ship To Home" to "Pick Up In Store"
+    # With this option we can remove lines: 18, 19
+    # Need to change title of Scenario to "Pop-ups at Review page"

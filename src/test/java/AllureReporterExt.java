@@ -2,10 +2,12 @@ import gherkin.formatter.model.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import ru.yandex.qatools.allure.cucumberjvm.AllureReporter;
+import utils.BrowserConsoleLogAggregator;
 import utils.CommonFunctions;
 import utils.DriverFactory;
 import utils.TestGlobalsManager;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import static utils.CommonFunctions.attachScreenshot;
@@ -42,6 +44,10 @@ public class AllureReporterExt extends AllureReporter {
             if (result.getStatus().equals("failed")) {
                 attachScreenshot("Failed screenshot: " + scenario.getName());
                 CommonFunctions.attachDomThree(DriverFactory.getDriver().getPageSource());
+
+                BrowserConsoleLogAggregator.stopCapturing();
+                File androidLog = new File("android_browser.log");
+                CommonFunctions.attachFile("Browser console log", androidLog);
             }
         }
         super.result(result);

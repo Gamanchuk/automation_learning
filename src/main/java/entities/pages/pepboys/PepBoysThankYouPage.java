@@ -7,7 +7,7 @@ import static org.testng.AssertJUnit.assertTrue;
 
 public class PepBoysThankYouPage extends PepBoysBasePage {
     public boolean isOnThankYouPage() {
-        return isElementPresent(By.xpath("//span[@class='thankmsg' and text()='Thank You for Your Order']"));
+        return isElementPresent(By.xpath("//div[@class='order-thank-you-header' and text()='Thank you for your order']"));
     }
 
     private By collapser = By.xpath("//a[contains(@class, 'arrow-collapser')]");

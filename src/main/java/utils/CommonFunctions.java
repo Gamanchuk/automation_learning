@@ -1,5 +1,12 @@
 package utils;
 
+import org.apache.commons.exec.CommandLine;
+import org.apache.commons.exec.DefaultExecuteResultHandler;
+import org.apache.commons.exec.DefaultExecutor;
+import org.apache.commons.exec.PumpStreamHandler;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.CharEncoding;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.OutputType;
@@ -7,10 +14,9 @@ import org.openqa.selenium.TakesScreenshot;
 import org.testng.Reporter;
 import ru.yandex.qatools.allure.annotations.Attachment;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -76,24 +82,29 @@ public class CommonFunctions {
 
 
     @Attachment(value = "Screen Recording Video", type = "video/mp4")
-    public static byte[] attachScreeVideo(String name) {
-
-        File file = new File(System.getProperty("user.dir") + "/" + Config.DEVICE_UID + ".mp4");
-
+    public static byte[] attachScreenVideo(String name) {
+        File file = new File(System.getProperty("user.dir") + "/target/" + Config.DEVICE_UID + ".mp4");
         log.info("screen file: " + file.getAbsolutePath());
+        return readFile(file);
+    }
 
+    @Attachment(value = "{0}", type = "text/plain")
+    public static byte[] attachFile(String attachmentName, File file) {
+        return readFile(file);
+    }
+
+    private static byte [] readFile(File file) {
         byte[] byteVideo = new byte[(int) file.length()];
         try {
             FileInputStream fileInputStream = new FileInputStream(file);
-            fileInputStream.read(byteVideo);
+            byteVideo = IOUtils.toByteArray(fileInputStream);
         } catch (FileNotFoundException e) {
-            log.error("File with video not found.");
+            log.error("File not found.");
         } catch (IOException e1) {
             log.error("Error reading the file.");
         }
 
         log.info(byteVideo);
-        file.delete();
         return byteVideo;
     }
 
@@ -114,5 +125,56 @@ public class CommonFunctions {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void saveOrder(String order) {
+        try {
+            FileUtils.writeStringToFile(new File("orders.txt"), order, CharEncoding.UTF_8, true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static int runShell(String command, String arguments) {
+        CommandLine commandLine = new CommandLine(command).addArguments(arguments);
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PumpStreamHandler streamHandler = new PumpStreamHandler(outputStream);
+
+        DefaultExecuteResultHandler executeResultHandler = new DefaultExecuteResultHandler();
+        DefaultExecutor executor = new DefaultExecutor();
+        executor.setStreamHandler(streamHandler);
+        executor.setExitValue(0);
+
+        try {
+            log.info(String.format("Running: %s %s", command, arguments));
+            executor.execute(commandLine, executeResultHandler);
+            executeResultHandler.waitFor();
+
+            int exitCode = executeResultHandler.getExitValue();
+            String output = outputStream.toString();
+
+            log.info("Command executed. Exit code: " + exitCode);
+            log.info("Message: " + output);
+
+            TestGlobalsManager.setTestGlobal("OUTPUT", output);
+        } catch (IOException | InterruptedException e) {
+            log.error("Cannot execute command: " + e.toString());
+        }
+
+        return executeResultHandler.getExitValue();
+    }
+
+    public static void startVideoRecording() {
+        String arguments = String.format("video -a start -p %s -u %s -e true", Config.PLATFORM_NAME.toLowerCase(), Config.DEVICE_UID);
+        CommonFunctions.runShell("/usr/local/bin/flick", arguments);
+    }
+
+    public static void stopScreenVideo() {
+        String arguments = String.format("video -a stop -p %s -u %s -e true -o %s -f mp4 -t",
+                Config.PLATFORM_NAME.toLowerCase(),
+                Config.DEVICE_UID,
+                System.getProperty("user.dir") + "/target");
+        CommonFunctions.runShell("/usr/local/bin/flick", arguments);
     }
 }

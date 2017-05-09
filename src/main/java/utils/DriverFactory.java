@@ -4,14 +4,13 @@ import io.appium.java_client.remote.IOSMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
-import io.appium.java_client.service.local.flags.GeneralServerFlag;
+import io.appium.java_client.service.local.flags.AndroidServerFlag;
 import io.appium.java_client.service.local.flags.IOSServerFlag;
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecuteResultHandler;
 import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -39,6 +38,9 @@ public class DriverFactory {
     private static AppiumDriverLocalService service;
     private static WebDriverEventListener eventListener;
     private static Log log = LogFactory.getLog(DriverFactory.class.getSimpleName());
+
+    private static final String IOS = "iOS";
+    private static final String ANDROID = "Android";
 
 
     public static WebDriver getDriver() {
@@ -79,7 +81,7 @@ public class DriverFactory {
                     desiredCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, deviceName);
                     desiredCapabilities.setCapability(MobileCapabilityType.UDID, deviceUdid);
 
-                    if (Config.PLATFORM_NAME.equals("iOS")) {
+                    if (Config.PLATFORM_NAME.equals(IOS)) {
                         desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
                         desiredCapabilities.setCapability("wdaLocalPort", Integer.parseInt(iproxyPort));
                         desiredCapabilities.setCapability("useNewWDA", true);
@@ -95,22 +97,16 @@ public class DriverFactory {
                         desiredCapabilities.setCapability("updatedWDABundleId", "com.moovweb.WebDriverAgentRunner");
                     }
 
+//                    if (Config.PLATFORM_NAME.equals(ANDROID)) {
+//                        desiredCapabilities.setCapability("unlockType", "pin");
+//                        desiredCapabilities.setCapability("unlockKey", "");
+//                    }
+
                     eventListener = new MyWebDriverEventListener();
 
                     driver = new EventFiringWebDriver(new RemoteWebDriver(new URL(String.valueOf(service.getUrl())), desiredCapabilities)).register(eventListener);
                     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-                    startVideoRecording();
-
-
-                    JavascriptExecutor js = driver;
-                    // Получаем время Load Event End (окончание загрузки страницы)
-                    long loadEventEnd = (Long) js.executeScript("return window.performance.timing.loadEventEnd;");
-                    log.info("loadEventEnd: " + loadEventEnd);
-                    // Получаем Navigation Event Start (начало перехода)
-                    long navigationStart = (Long) js.executeScript("return window.performance.timing.navigationStart;");
-                    log.info("navigationStart: " + navigationStart);
-                    // Разница между Load Event End и Navigation Event Start - это время загрузки страницы
-                    log.info("Page Load Time is " + (loadEventEnd - navigationStart) / 1000 + " seconds.");
+                    CommonFunctions.startVideoRecording();
                 }
 
             } catch (Exception e) {
@@ -143,10 +139,17 @@ public class DriverFactory {
 
             AppiumServiceBuilder serviceBuilder = new AppiumServiceBuilder();
             serviceBuilder.usingPort(appiumPort);
+
+            // serviceBuilder.withArgument(GeneralServerFlag.SESSION_OVERRIDE);
+            //serviceBuilder.withArgument(GeneralServerFlag.LOG_LEVEL, "warn");
+
             if (Config.PLATFORM_NAME.equals("iOS")) {
                 serviceBuilder.withArgument(IOSServerFlag.WEBKIT_DEBUG_PROXY_PORT, String.valueOf(proxyPort));
-                //serviceBuilder.withArgument(GeneralServerFlag.LOG_LEVEL, "warn");
-                serviceBuilder.withArgument(GeneralServerFlag.SESSION_OVERRIDE);
+            }
+
+            if (Config.PLATFORM_NAME.equals(ANDROID)) {
+                serviceBuilder.withArgument(AndroidServerFlag.CHROME_DRIVER_PORT, Config.CHROMEDRIVER_PORT);
+                serviceBuilder.withArgument(AndroidServerFlag.BOOTSTRAP_PORT_NUMBER, Config.BOOTSTRAP_PORT);
             }
 
             service = AppiumDriverLocalService.buildService(serviceBuilder);
@@ -167,7 +170,6 @@ public class DriverFactory {
             log.info("Look for the launched appium server on port: " + port);
             ProcessResult processResult = new ProcessExecutor().command("lsof", "-ti", "tcp:" + port)
                     .readOutput(true).execute();
-
 
             if (processResult.getExitValue() == 0) {
                 log.info("Killing Appium Server");
@@ -272,71 +274,6 @@ public class DriverFactory {
             service.stop();
             service = null;
         }
-    }
-
-    public static void startVideoRecording() {
-        CommandLine recorderStart = new CommandLine("/usr/local/bin/flick");
-        recorderStart.addArgument("video");
-        recorderStart.addArgument("-a");
-        recorderStart.addArgument("start");
-        recorderStart.addArgument("-p");
-        recorderStart.addArgument(Config.PLATFORM_NAME.toLowerCase());
-        recorderStart.addArgument("-u");
-        recorderStart.addArgument(Config.DEVICE_UID);
-        recorderStart.addArgument("-e");
-        recorderStart.addArgument("true");
-
-        DefaultExecuteResultHandler executeResultHandler = new DefaultExecuteResultHandler();
-        DefaultExecutor executor = new DefaultExecutor();
-        executor.setExitValue(0);
-
-        try {
-            log.info("Start video recording.");
-            log.info("Waiting for executing. Command: " + Arrays.toString(recorderStart.toStrings()));
-            executor.execute(recorderStart, executeResultHandler);
-            executeResultHandler.waitFor();
-            log.info("Command executed. Exit code: " + executeResultHandler.getExitValue());
-        } catch (InterruptedException | IOException e) {
-            log.error("Cannot execute command: " + Arrays.toString(recorderStart.toStrings()));
-        }
-    }
-
-    public static void stopScreenVideo() {
-        CommandLine recorderStop = new CommandLine("/usr/local/bin/flick");
-        recorderStop.addArgument("video");
-        recorderStop.addArgument("-a");
-        recorderStop.addArgument("stop");
-        recorderStop.addArgument("-p");
-        recorderStop.addArgument(Config.PLATFORM_NAME.toLowerCase());
-        recorderStop.addArgument("-u");
-        recorderStop.addArgument(Config.DEVICE_UID);
-        recorderStop.addArgument("-e");
-        recorderStop.addArgument("true");
-        recorderStop.addArgument("-o");
-        recorderStop.addArgument(System.getProperty("user.dir"));
-        recorderStop.addArgument("-f");
-        recorderStop.addArgument("mp4");
-        recorderStop.addArgument("-t");
-
-        DefaultExecuteResultHandler executeResultHandler = new DefaultExecuteResultHandler();
-        DefaultExecutor executor = new DefaultExecutor();
-        executor.setExitValue(0);
-
-        try {
-            log.info("Stop video recording. Move temp video file to: " + System.getProperty("user.dir"));
-            log.info("Waiting for executing. Command: " + Arrays.toString(recorderStop.toStrings()));
-            executor.execute(recorderStop, executeResultHandler);
-            executeResultHandler.waitFor();
-            log.info("Command executed. Exit code: " + executeResultHandler.getExitValue());
-        } catch (InterruptedException | IOException e) {
-            log.error("Cannot execute command: " + Arrays.toString(recorderStop.toStrings()));
-        }
-    }
-
-
-    //TODO: add functionality delete cookies
-    public static void deleteAllCookies() {
-
     }
 
     private static void initChromeDriver() {

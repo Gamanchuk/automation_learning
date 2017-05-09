@@ -25,3 +25,7 @@ Feature: GUEST - REVIEW & PLACE ORDER PAGE
     And chooses "Ground: 5-7 Days" shipping method
     And presses the "Continue" button
     And user checks billing info for "qa user2"
+
+    # We can make this test faster. Need to change attribute at line 7 from "Ship To Home" to "Pick Up In Store"
+    # With this option we can remove lines: 17, 18, 25, 26
+    # Need to change title of Scenario to "Edit Billing info"

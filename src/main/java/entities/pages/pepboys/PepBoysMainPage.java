@@ -8,7 +8,7 @@ public class PepBoysMainPage extends PepBoysBasePage {
 
     public boolean isPage() {
         waitForElementClickable(searchBox);
-        waitForElementVisible(By.xpath("//h2[text()='Popular Categories']"));
+        waitForElementVisible(By.xpath("//span[@class='mw_category_title' and text()='Tires']"));
         return true;
     }
 

@@ -24,7 +24,7 @@ public class RadioListComponent extends BaseComponent {
                 if (item.getText().contains(option)) {
                     log.info("Method contains: " + item.getText());
                     item.click();
-                    CommonFunctions.sleep(500);
+                    CommonFunctions.sleep(100);
                     break;
                 }
             }

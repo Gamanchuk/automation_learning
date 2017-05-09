@@ -15,3 +15,5 @@ Feature: EXPRESS PAYPAL - DELIVERY METHOD PAGE - HEADER & FOOTER
     And chooses "Ground: 5-7 Days" shipping method
     And user presses the Shopping Cart icon
     Then user should be on cart page
+
+    # Line 15 can be deleted we don't need to choose any Delivery method at this case

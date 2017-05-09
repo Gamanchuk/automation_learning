@@ -20,6 +20,8 @@ public class Config {
     public static final String APPIUM_PORT;
     public static final String PROXY_PORT;
     public static final String IPROXY_PORT;
+    public static final String BOOTSTRAP_PORT;
+    public static final String CHROMEDRIVER_PORT;
 
     private static Log log = LogFactory.getLog(Config.class.getSimpleName());
 
@@ -42,5 +44,7 @@ public class Config {
         APPIUM_PORT = props.getProperty("appium.port");
         PROXY_PORT = props.getProperty("proxy.port");
         IPROXY_PORT = props.getProperty("iproxy.port");
+        BOOTSTRAP_PORT = props.getProperty("bootstrap.port");
+        CHROMEDRIVER_PORT = props.getProperty("chromedriver.port");
     }
 }

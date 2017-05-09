@@ -21,6 +21,7 @@ public class JiraHelper {
     private final static String PROJECT_KEY = "AUTO";
 
     private static final MediaType MEDIA_TYPE_MARKDOWN = MediaType.parse("application/json");
+    private static final MediaType MEDIA_MULTIPART = MediaType.parse("multipart/form-data");
     private final static OkHttpClient client = new OkHttpClient();
 
     private static Log log = LogFactory.getLog(JiraHelper.class.getSimpleName());
@@ -57,27 +58,37 @@ public class JiraHelper {
         if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
 
         JSONObject resp = new JSONObject(response.body().string());
-        String issuesLink = JIRA_BASE_URL + "browse/" + resp.getString("key");      // URL to created Jira ticket
+        String issueKey = resp.getString("key");
+        String issueLink = doLinkToIssue(issueKey);   // URL to created Jira ticket
 
-        String issuesKey = resp.getString("key");
+        log.info("Created Jira Issue: " + issueLink);
+        attachIssuesLink(issueKey, issueLink);
 
-        log.info("Created Jira Issues: " + issuesLink);
+        return issueKey;
+    }
 
-        attachIssuesLink(issuesKey, issuesLink);
-
-        return issuesLink;
+    public static String doLinkToIssue(String ticketId) {
+        return JIRA_BASE_URL + "browse/" + ticketId;
     }
 
     public static void addAttachment(String issueKey, File file) throws IOException {
+        RequestBody requestBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("file", file.getAbsolutePath(), RequestBody.create(MEDIA_MULTIPART, file))
+                .build();
+
         Request request = new Request.Builder()
                 .url(JIRA_URL + "/issue/"+ issueKey +"/attachments")
                 .header("X-Atlassian-Token", "nocheck")
                 .header("Authorization", "Basic " + AUTH_HEADER)
-                .post(RequestBody.create(MEDIA_TYPE_MARKDOWN, file))
+                .post(requestBody)
                 .build();
 
         Response response = client.newCall(request).execute();
         if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+        log.info("Attached html source to " + issueKey);
+        log.info(response.body().string());
+
 }
 
 }

@@ -23,3 +23,7 @@ Feature: GUEST - REVIEW & PLACE ORDER PAGE - HEADER & FOOTER
     And user checks text "© Copyright 2017 - The Pep Boys" in footer
     And user presses the logo
     Then user should be on main page
+
+    # Need to change attribute at line 7 from "ship to home" to "Pick up in store"
+    # And remove lines: 19, 20
+    # Also we don't need to input information about CC => can remove line 21

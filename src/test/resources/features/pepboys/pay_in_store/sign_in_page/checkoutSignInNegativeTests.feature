@@ -43,3 +43,5 @@ Feature: PAY IN STORE - SIGN IN PAGE
 
     Given user presses the Proceed to Guest Checkout link
     Then user should be on "Billing" page
+
+    # We need to remove lines 44 and 45 because we have separate case for checking this functionality

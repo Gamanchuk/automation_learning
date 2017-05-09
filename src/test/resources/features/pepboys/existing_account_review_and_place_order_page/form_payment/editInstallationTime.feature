@@ -1,4 +1,4 @@
-@pepBoys
+@pepBoys @debug
 
 Feature: EXISTING ACCOUNT - REVIEW & PLACE ORDER PAGE
 
@@ -10,6 +10,7 @@ Feature: EXISTING ACCOUNT - REVIEW & PLACE ORDER PAGE
     And chooses "Pay Online" method with appointment details
 
   @TestCaseId("15467")
+  @Issue("MCCAT-5765")
   Scenario: Edit installation time
     Given user makes authorisation for "qa user"
     And applies billing info for address "123 Mission Street, 10th Floor"

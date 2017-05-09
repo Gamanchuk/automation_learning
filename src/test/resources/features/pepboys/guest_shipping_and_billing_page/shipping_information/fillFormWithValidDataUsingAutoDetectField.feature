@@ -16,4 +16,6 @@ Feature: Guest - Shipping & Billing page
     And chooses "Use Recommended Address"
     Then user checks billing info for "qa user"
 
+    #Need rename from billing to shipping at 17 line
+
 

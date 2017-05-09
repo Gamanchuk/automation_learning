@@ -1,6 +1,6 @@
-@pepBoys
+@pepBoys 
 
-Feature: PAY IN STORE - EXISTING ACCOUNT - SHIPPING & BILLING PAGE - BILLING INFO
+Feature: PAY IN STORE - EXISTING ACCOUNT - SHIPPING & BILLING PAGE
 
   Background:
     Given user makes appoint
@@ -9,7 +9,7 @@ Feature: PAY IN STORE - EXISTING ACCOUNT - SHIPPING & BILLING PAGE - BILLING INF
     And chooses "Pay in Store" method
 
   @TestCaseId("16632")
-  Scenario: Test field 'Address Street' with special symbols
+  Scenario: Test field 'Address Street'
     Given user makes authorisation for "Moovweb QA"
     And user should be on "Billing Address" page
     And selects "Enter a New Address"
@@ -17,4 +17,5 @@ Feature: PAY IN STORE - EXISTING ACCOUNT - SHIPPING & BILLING PAGE - BILLING INF
 
     And user types "!@$%^&*():_+" into the "Street Address" field of "Billing Address" address form
     And presses the "Place Order" button
+    And chooses "Use Entered Address"
     Then user should be on thank you page

@@ -19,8 +19,8 @@ import java.util.Locale;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
-import static utils.CommonFunctions.attachScreeVideo;
-import static utils.DriverFactory.stopScreenVideo;
+import static utils.CommonFunctions.attachScreenVideo;
+import static utils.CommonFunctions.stopScreenVideo;
 
 public class PepBoysCheckoutSteps {
 
@@ -158,6 +158,7 @@ public class PepBoysCheckoutSteps {
         assertTrue(pepBoysThankYouPage.isCollapsed(), "Order collapser not collapsed");
         pepBoysThankYouPage.openCollapser();
         CommonFunctions.attachScreenshot("Thank You Page");
+        CommonFunctions.saveOrder(thankYouPage.getOrder());
     }
 
     @And("^user presses the reschedule link$")
@@ -490,8 +491,7 @@ public class PepBoysCheckoutSteps {
     @After
     public void after() {
         stopScreenVideo();
-        attachScreeVideo("data");
-
+        attachScreenVideo("data");
     }
 
     @Then("^user should see \"([^\"]*)\" form$")

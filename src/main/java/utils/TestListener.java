@@ -34,10 +34,14 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
     @Override
     public void onTestStart(ITestResult iTestResult) {
 
+        if (Config.DEVICE_NAME.equals("Android")) {
+            BrowserConsoleLogAggregator.startCapturing();
+        }
     }
 
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
+        BrowserConsoleLogAggregator.stopCapturing();
         String caseName = (String) TestGlobalsManager.getTestGlobal("caseName");
         log.info("Test \"" + caseName + "\" completed in "
                 + countDuration(iTestResult.getEndMillis() - iTestResult.getStartMillis()));
@@ -56,6 +60,9 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
 
     @Override
     public void onTestFailure(ITestResult iTestResult) {
+        BrowserConsoleLogAggregator.stopCapturing();
+        File androidLog = new File("android_browser.log");
+
         String caseName = (String) TestGlobalsManager.getTestGlobal("caseName");
         String dom = CommonFunctions.attachDomThree(DriverFactory.getDriver().getPageSource());
         String errorMessage = String.valueOf(iTestResult.getThrowable().getMessage());
@@ -68,11 +75,12 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
             try {
                 File attachment = File.createTempFile("attachment", ".html");
                 FileUtils.writeStringToFile(attachment, dom);
-//                    JiraHelper.addAttachment(ticketId, attachment);
+                JiraHelper.addAttachment(ticketId, attachment);
+                JiraHelper.addAttachment(ticketId, androidLog);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            setTestResults(TestRailStatus.FAILED, errorMessage, ticketId);
+            setTestResults(TestRailStatus.FAILED, errorMessage, JiraHelper.doLinkToIssue(ticketId));
         }
 
         DriverFactory.quitDriver();
@@ -82,7 +90,7 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
     private void setTestResults(TestRailStatus status, String error, String issuesLink) {
         try {
             ArrayList<String> ids = (ArrayList<String>) TestGlobalsManager.getTestGlobal("testCaseIds");
-            if(ids != null) {
+            if (ids != null) {
                 for (String id : ids) {
                     TestRailRunHelper.getInstance().setTestResult(id, status, error, issuesLink);
                 }
@@ -112,12 +120,14 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
 
     @Override
     public void onTestSkipped(ITestResult iTestResult) {
+        BrowserConsoleLogAggregator.stopCapturing();
         log.info("Test \"" + iTestResult.getTestName() + "\" skipped");
         DriverFactory.quitDriver();
     }
 
     @Override
     public void onTestFailedButWithinSuccessPercentage(ITestResult iTestResult) {
+        BrowserConsoleLogAggregator.stopCapturing();
         DriverFactory.quitDriver();
     }
 

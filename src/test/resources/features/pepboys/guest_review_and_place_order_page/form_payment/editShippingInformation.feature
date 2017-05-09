@@ -27,3 +27,5 @@ Feature: GUEST - REVIEW & PLACE ORDER PAGE
     And presses the "Continue" button
     And user checks shipping info for "qa user2"
 
+    # Need to change title of Scenario to "Edit Shipping info"
+

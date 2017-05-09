@@ -22,3 +22,8 @@ Feature: Guest - Shipping & Billing page
     Then user should stay at "Billing & Shipping" tab
     And sees "FORM ERRORS" error message with text "Last Name is invalid"
 
+
+    #Here I don't see positive case where user proceed to the next page and checks that Last name reflected correctly
+    #We don't check billing info on Delivery page. Need to change option "Ship to Home" to "Pick up in store"
+    #And check all billing information at Payment and review page
+
