@@ -1,4 +1,4 @@
-@pepBoys @debug
+@pepBoys 
 
 Feature: EXISTING ACCOUNT - REVIEW & PLACE ORDER PAGE
 
