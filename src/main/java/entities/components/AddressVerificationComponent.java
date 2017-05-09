@@ -8,7 +8,7 @@ public class AddressVerificationComponent extends BaseComponent {
         By option = By.xpath("//label[@class='radio-list-option' and contains(., '" + addressType + "')]");
         if (isElementVisible(option, 5)) {
             try {
-                Thread.sleep(500);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
