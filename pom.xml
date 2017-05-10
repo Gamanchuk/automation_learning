@@ -419,7 +419,7 @@
                     <properties>
                         <allure.issues.tracker.pattern>https://moovweb.atlassian.net/browse/%s
                         </allure.issues.tracker.pattern>
-                        <allure.tests.management.pattern>https://moovweb.testrail.net/%s
+                        <allure.tests.management.pattern>https://moovweb.testrail.net/index.php?/cases/view/%s
                         </allure.tests.management.pattern>
                     </properties>
                 </configuration>
