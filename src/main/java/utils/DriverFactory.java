@@ -84,9 +84,12 @@ public class DriverFactory {
                     if (Config.PLATFORM_NAME.equals(IOS)) {
                         desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
                         desiredCapabilities.setCapability("wdaLocalPort", Integer.parseInt(iproxyPort));
-                        desiredCapabilities.setCapability("useNewWDA", true);
+                        desiredCapabilities.setCapability("useNewWDA", false);
                         //desiredCapabilities.setCapability("preventWDAAttachments", true);
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.LAUNCH_TIMEOUT, 500000);
+
+                        desiredCapabilities.setCapability("webkitResponseTimeout", 8000);
+                        desiredCapabilities.setCapability("simpleIsVisibleCheck", true);
 
                         //desiredCapabilities.setCapability("startIWDP", true);
                         //desiredCapabilities.setCapability("showXcodeLog", true);
@@ -142,6 +145,7 @@ public class DriverFactory {
 
             // serviceBuilder.withArgument(GeneralServerFlag.SESSION_OVERRIDE);
             //serviceBuilder.withArgument(GeneralServerFlag.LOG_LEVEL, "warn");
+
 
             if (Config.PLATFORM_NAME.equals("iOS")) {
                 serviceBuilder.withArgument(IOSServerFlag.WEBKIT_DEBUG_PROXY_PORT, String.valueOf(proxyPort));

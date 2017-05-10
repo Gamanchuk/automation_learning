@@ -473,7 +473,8 @@ public class PepBoysCheckoutSteps {
 
     @Then("^user should be on \"([^\"]*)\" tab$")
     public void userShouldBeOnTab(String tabName) {
-        breadcrumbWidget.waitForBreadcrumbActive(tabName);
+        //breadcrumbWidget.waitForBreadcrumbActive(tabName);
+        assertTrue(breadcrumbWidget.isBreadcrumbActive(tabName), "Tab " + tabName + " is not an active");
         assertTrue(breadcrumbWidget.isTabActive(tabName), "Tab " + tabName + " is not an active");
         CommonFunctions.attachScreenshot("User on [" + tabName + "] tab");
     }
