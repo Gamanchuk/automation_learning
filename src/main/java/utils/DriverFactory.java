@@ -5,6 +5,7 @@ import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import io.appium.java_client.service.local.flags.AndroidServerFlag;
+import io.appium.java_client.service.local.flags.GeneralServerFlag;
 import io.appium.java_client.service.local.flags.IOSServerFlag;
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecuteResultHandler;
@@ -142,7 +143,7 @@ public class DriverFactory {
             serviceBuilder.usingPort(appiumPort);
 
             // serviceBuilder.withArgument(GeneralServerFlag.SESSION_OVERRIDE);
-            //serviceBuilder.withArgument(GeneralServerFlag.LOG_LEVEL, "warn");
+            serviceBuilder.withArgument(GeneralServerFlag.LOG_LEVEL, "warn");
 
             if (Config.PLATFORM_NAME.equals("iOS")) {
                 serviceBuilder.withArgument(IOSServerFlag.WEBKIT_DEBUG_PROXY_PORT, String.valueOf(proxyPort));
