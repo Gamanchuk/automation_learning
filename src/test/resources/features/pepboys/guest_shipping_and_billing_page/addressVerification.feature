@@ -1,4 +1,4 @@
-@pepBoys
+@pepBoys @debug
 
 
 Feature: GUEST - SHIPPING & BILLING PAGE - ADDRESS VERIFICATION
