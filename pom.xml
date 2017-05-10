@@ -274,7 +274,7 @@
             </properties>
         </profile>
         <profile>
-            <id>suite-pepboys-regression</id>
+            <id>suite-happyPath</id>
             <properties>
                 <testng.suite>${basedir}/src/test/resources/testsuites/pepboys/pepboys_regression.xml</testng.suite>
                 <suite.id>95</suite.id>
