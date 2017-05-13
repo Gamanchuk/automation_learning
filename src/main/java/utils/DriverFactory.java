@@ -65,6 +65,7 @@ public class DriverFactory {
                     initChromeDriver();
                 } else {
 
+                    log.info("");
                     log.info("**************************** CREATING REMOTE WEB DRIVER ***************************");
                     log.info("PLATFORM NAME: " + platformName);
                     log.info("PLATFORM VERSION: " + platformVersion);
@@ -93,12 +94,13 @@ public class DriverFactory {
                         desiredCapabilities.setCapability("xcodeSigningId", "iPhone Developer");
                         desiredCapabilities.setCapability("updatedWDABundleId", "com.moovweb.WebDriverAgentRunner");
 
-                        //desiredCapabilities.setCapability("startIWDP", true);
-                        //desiredCapabilities.setCapability("preventWDAAttachments", true);
-
                         if (Boolean.valueOf(System.getProperty("verboseLogging"))) {
                             desiredCapabilities.setCapability("showXcodeLog", true);
                         }
+
+                        //desiredCapabilities.setCapability("startIWDP", true);
+                        //desiredCapabilities.setCapability("preventWDAAttachments", true);
+
                     }
 
 //                    if (Config.PLATFORM_NAME.equals(ANDROID)) {
