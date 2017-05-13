@@ -1,5 +1,6 @@
 package utils;
 
+import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.IOSMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
@@ -12,11 +13,9 @@ import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.events.WebDriverEventListener;
 import org.zeroturnaround.exec.ProcessExecutor;
 import org.zeroturnaround.exec.ProcessResult;
@@ -34,7 +33,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DriverFactory {
-    private static EventFiringWebDriver driver;
+    //private static EventFiringWebDriver driver;
+    private static IOSDriver<WebElement> driver;
     private static AppiumDriverLocalService service;
     private static WebDriverEventListener eventListener;
     private static Log log = LogFactory.getLog(DriverFactory.class.getSimpleName());
@@ -105,11 +105,23 @@ public class DriverFactory {
 //                        desiredCapabilities.setCapability("unlockKey", "");
 //                    }
 
-                    eventListener = new MyWebDriverEventListener();
+                    //  eventListener = new MyWebDriverEventListener();
 
-                    driver = new EventFiringWebDriver(new RemoteWebDriver(new URL(String.valueOf(service.getUrl())), desiredCapabilities)).register(eventListener);
+                    // driver = new EventFiringWebDriver(new RemoteWebDriver(new URL(String.valueOf(service.getUrl())), desiredCapabilities)).register(eventListener);
+
+
+                    driver = new IOSDriver<WebElement>(new URL(String.valueOf(service.getUrl())), desiredCapabilities);
+                    //driver = EventFiringWebDriverFactory.getEventFiringWebDriver(driver, new AlertListener(),
+                    //      new ElementListener());
+
+
+
                     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+
+
                     CommonFunctions.startVideoRecording();
+
+
                 }
 
             } catch (Exception e) {
@@ -291,7 +303,7 @@ public class DriverFactory {
         capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
         eventListener = new MyWebDriverEventListener();
 
-        driver = new EventFiringWebDriver(new ChromeDriver(capabilities)).register(eventListener);
+        //driver = new EventFiringWebDriver(new ChromeDriver(capabilities)).register(eventListener);
     }
 }
 
