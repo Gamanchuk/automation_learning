@@ -124,7 +124,7 @@ public abstract class Entity {
 
 
     public void waitForElementPresence(By element) {
-        this.waitForElementVisible(element, TIMEOUT_SECONDS);
+        this.waitForElementPresence(element, TIMEOUT_SECONDS);
     }
 
 
@@ -206,7 +206,12 @@ public abstract class Entity {
                 boolean result = false;
                 try {
                     JavascriptExecutor js = (JavascriptExecutor) driver;
-                    result = (Boolean) js.executeScript("return jQuery.active === 0 && jQuery.isReady && document.readyState == 'complete'");
+                    boolean hasJquery = (Boolean) js.executeScript("return typeof jQuery !== 'undefined'");
+                    if(hasJquery) {
+                        result = (Boolean) js.executeScript("return jQuery.active === 0 && jQuery.isReady && document.readyState == 'complete'");
+                    } else {
+                        result = (Boolean) js.executeScript("return document.readyState == 'complete'");
+                    }
                     log.info("jQuery not active: " + result);
                 } catch (JavascriptException js) {
                     log.info("waitForAjax: " + js.getMessage());

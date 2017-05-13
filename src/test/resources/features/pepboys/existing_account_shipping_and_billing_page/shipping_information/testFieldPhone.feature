@@ -13,7 +13,7 @@ Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE - SHIPPING INFO
     Given user makes authorisation for "Moovweb QA"
     And user should be on "Billing & Shipping" tab
     And selects "Enter a New Address" for shipping address
-    And user types billing info for "user at Spear street" and checks email
+    And user types shipping info for "user at Spear street"
 
     And user types " " into the "Phone Number" field of "Shipping Address" address form
     And presses the "Continue" button

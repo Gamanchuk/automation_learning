@@ -184,6 +184,7 @@ public class PepBoysCheckoutSteps {
         signInFormComponent.signIn(user.getEmail(), user.getPassword());
         CommonFunctions.attachScreenshot("Set [" + user.getEmail() + "] email and [" + user.getPassword() + "] password");
         buttonComponent.clickButton();
+//        signInFormComponent.waitForSpinner();
         TestGlobalsManager.setTestGlobal("authorised", true);
     }
 
