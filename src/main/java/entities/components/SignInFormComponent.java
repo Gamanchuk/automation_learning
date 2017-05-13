@@ -18,7 +18,7 @@ public class SignInFormComponent extends BaseComponent {
         passwordFieldEl.clear();
         passwordFieldEl.sendKeys(password);
 
-        focusOut();
+        focusOut(passwordFieldEl);
         CommonFunctions.attachScreenshot("Login page");
     }
 

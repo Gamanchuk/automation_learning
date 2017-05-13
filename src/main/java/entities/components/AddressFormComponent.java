@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
+import static org.testng.AssertJUnit.assertTrue;
+
 public class AddressFormComponent extends BaseComponent {
 
     private By nameField = By.cssSelector(".name-input input");
@@ -23,10 +25,9 @@ public class AddressFormComponent extends BaseComponent {
             waitForElementVisible(By.cssSelector("a.manual"));
             findElementWithTextBy(cityInfo, By.cssSelector("div.radio-list-details p.subtext")).click();
         } else {
-            if (isElementVisible(By.cssSelector("a.manual"))) {
-                click(By.cssSelector("a.manual"));
-                findElementWithTextBy("enter city", By.cssSelector("div.zip-message a")).click();
-            }
+            assertTrue("Input address manually link was not displayed", isElementVisible(By.cssSelector("a.manual")));
+            click(By.cssSelector("a.manual"));
+//            findElementWithTextBy("enter city", By.cssSelector("div.zip-message a")).click();
             fillField(cityField, city);
             fillField(zipField, zip);
             fillState(state);
