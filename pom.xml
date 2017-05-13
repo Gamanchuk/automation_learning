@@ -262,6 +262,13 @@
 
         <!--PepBoys Suites -->
         <profile>
+            <id>suite-pepboys-debug</id>
+            <properties>
+                <testng.suite>${basedir}/src/test/resources/testsuites/pepboys/pepboys_debug.xml</testng.suite>
+                <suite.id>93</suite.id>
+            </properties>
+        </profile>
+        <profile>
             <id>suite-pepboys-full</id>
             <properties>
                 <testng.suite>${basedir}/src/test/resources/testsuites/pepboys/pepboys_full.xml</testng.suite>
@@ -357,15 +364,6 @@
 
 
         <!--QVC Suite-->
-
-        <!--Base Suite-->
-        <profile>
-            <id>suite-debug</id>
-            <properties>
-                <testng.suite>${basedir}/src/test/resources/testsuites/debug.xml</testng.suite>
-                <suite.id>93</suite.id>
-            </properties>
-        </profile>
 
 
         <!--environments-->
