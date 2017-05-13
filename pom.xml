@@ -310,6 +310,34 @@
             </properties>
         </profile>
 
+        <profile>
+            <id>suite-pepboys-existingAccountShippingBillingPage</id>
+            <properties>
+                <testng.suite>
+                    ${basedir}/src/test/resources/testsuites/pepboys/pepboys_existing_account_shipping_billing_page.xml
+                </testng.suite>
+                <suite.id>93</suite.id>
+            </properties>
+        </profile>
+        <profile>
+            <id>suite-pepboys-existingAccountDeliveryMethodPage</id>
+            <properties>
+                <testng.suite>
+                    ${basedir}/src/test/resources/testsuites/pepboys/pepboys_existing_account_delivery_method_page.xml
+                </testng.suite>
+                <suite.id>93</suite.id>
+            </properties>
+        </profile>
+        <profile>
+            <id>suite-pepboys-existingAccountReviewAndPlaceOrderPage</id>
+            <properties>
+                <testng.suite>
+                    ${basedir}/src/test/resources/testsuites/pepboys/pepboys_existing_account_review_and_place_order_page.xml
+                </testng.suite>
+                <suite.id>93</suite.id>
+            </properties>
+        </profile>
+
         <!--QVC Suite-->
 
         <!--Base Suite-->
