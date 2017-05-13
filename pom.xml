@@ -259,13 +259,7 @@
         </profile>
 
         <!--test suites-->
-        <profile>
-            <id>suite-pepboys-full</id>
-            <properties>
-                <testng.suite>${basedir}/src/test/resources/testsuites/pepboys/pepboys_full.xml</testng.suite>
-                <suite.id>93</suite.id>
-            </properties>
-        </profile>
+
         <profile>
             <id>suite-pepboys-smoke</id>
             <properties>
@@ -273,18 +267,12 @@
                 <suite.id>94</suite.id>
             </properties>
         </profile>
+
+        <!--PepBoys Suites -->
         <profile>
-            <id>suite-pepboys-guestShippingBillingPage</id>
+            <id>suite-pepboys-full</id>
             <properties>
-                <testng.suite>${basedir}/src/test/resources/testsuites/pepboys/pepboys_guest_shipping_billing_page.xml
-                </testng.suite>
-                <suite.id>95</suite.id>
-            </properties>
-        </profile>
-        <profile>
-            <id>suite-debug</id>
-            <properties>
-                <testng.suite>${basedir}/src/test/resources/testsuites/debug.xml</testng.suite>
+                <testng.suite>${basedir}/src/test/resources/testsuites/pepboys/pepboys_full.xml</testng.suite>
                 <suite.id>93</suite.id>
             </properties>
         </profile>
@@ -295,6 +283,24 @@
                 <suite.id>93</suite.id>
             </properties>
         </profile>
+        <profile>
+            <id>suite-pepboys-guestShippingBillingPage</id>
+            <properties>
+                <testng.suite>${basedir}/src/test/resources/testsuites/pepboys/pepboys_guest_shipping_billing_page.xml
+                </testng.suite>
+                <suite.id>95</suite.id>
+            </properties>
+        </profile>
+
+
+        <profile>
+            <id>suite-debug</id>
+            <properties>
+                <testng.suite>${basedir}/src/test/resources/testsuites/debug.xml</testng.suite>
+                <suite.id>93</suite.id>
+            </properties>
+        </profile>
+
 
         <!--environments-->
         <profile>

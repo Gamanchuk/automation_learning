@@ -159,6 +159,13 @@ public class DriverFactory {
             log.info("APPIUM URL: " + service.getUrl());
             log.info("*******************************************************************************************");
             log.info("");
+
+            log.info("");
+            log.info("******************************** BASE TEST INFORMATION ************************************");
+            log.info("SUITE: " + System.getProperty("testng.suite"));
+            log.info("*******************************************************************************************");
+            log.info("");
+
         }
     }
 
