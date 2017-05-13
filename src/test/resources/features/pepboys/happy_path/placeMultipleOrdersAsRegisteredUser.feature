@@ -1,4 +1,4 @@
-@pepBoys @happyPath
+@pepBoys
 
 Feature: HAPPY PATH
 
