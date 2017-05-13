@@ -260,14 +260,6 @@
 
         <!--test suites-->
 
-        <profile>
-            <id>suite-pepboys-smoke</id>
-            <properties>
-                <testng.suite>${basedir}/src/test/resources/testsuites/pepboys/pepboys_smoke.xml</testng.suite>
-                <suite.id>94</suite.id>
-            </properties>
-        </profile>
-
         <!--PepBoys Suites -->
         <profile>
             <id>suite-pepboys-full</id>
@@ -304,6 +296,15 @@
             <properties>
                 <testng.suite>
                     ${basedir}/src/test/resources/testsuites/pepboys/pepboys_guest_review_and_place_order_page.xml
+                </testng.suite>
+                <suite.id>93</suite.id>
+            </properties>
+        </profile>
+        <profile>
+            <id>suite-pepboys-signInPage</id>
+            <properties>
+                <testng.suite>
+                    ${basedir}/src/test/resources/testsuites/pepboys/pepboys_sign_in_page.xml
                 </testng.suite>
                 <suite.id>93</suite.id>
             </properties>
