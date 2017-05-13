@@ -345,6 +345,15 @@
                 <suite.id>93</suite.id>
             </properties>
         </profile>
+        <profile>
+            <id>suite-pepboys-payInStore</id>
+            <properties>
+                <testng.suite>
+                    ${basedir}/src/test/resources/testsuites/pepboys/pepboys_payInStore.xml
+                </testng.suite>
+                <suite.id>93</suite.id>
+            </properties>
+        </profile>
 
 
         <!--QVC Suite-->
