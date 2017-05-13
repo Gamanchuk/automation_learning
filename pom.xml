@@ -274,9 +274,10 @@
             </properties>
         </profile>
         <profile>
-            <id>suite-pepboys-regression</id>
+            <id>suite-pepboys-guestShippingBillingPage</id>
             <properties>
-                <testng.suite>${basedir}/src/test/resources/testsuites/pepboys/pepboys_regression.xml</testng.suite>
+                <testng.suite>${basedir}/src/test/resources/testsuites/pepboys/pepboys_guest_shipping_billing_page.xml
+                </testng.suite>
                 <suite.id>95</suite.id>
             </properties>
         </profile>
@@ -288,9 +289,9 @@
             </properties>
         </profile>
         <profile>
-            <id>suite-happyPath</id>
+            <id>suite-pepboys-happyPath</id>
             <properties>
-                <testng.suite>${basedir}/src/test/resources/testsuites/happyPath.xml</testng.suite>
+                <testng.suite>${basedir}/src/test/resources/testsuites/pepboys/pepboys_happyPath.xml</testng.suite>
                 <suite.id>93</suite.id>
             </properties>
         </profile>

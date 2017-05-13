@@ -9,6 +9,6 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
         glue = "steps.pepboys",
         tags = "@regression"
 )
-class PepBoysRegressionCukesRunnerTest extends AbstractTestNGCucumberTests {
+class PepBoysGuestShippingBillingPageCukesRunnerTest extends AbstractTestNGCucumberTests {
 
 }

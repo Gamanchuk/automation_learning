@@ -9,6 +9,6 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
         glue = "steps",
         tags = "@pepBoys"
 )
-class HappyPathCukesRunnerTest extends AbstractTestNGCucumberTests {
+class PepBoysHappyPathCukesRunnerTest extends AbstractTestNGCucumberTests {
 
 }
