@@ -200,6 +200,7 @@
                         <environment.name>${testing.env}</environment.name>
                         <properties.file.name>${props.file.name}</properties.file.name>
                         <projectTracking>${projectTracking}</projectTracking>
+                        <verboseLogging>${verboseLogging}</verboseLogging>
                         <use.desktop.browser>${use.desktop.browser}</use.desktop.browser>
                         <suite.id>${suite.id}</suite.id>
                     </systemPropertyVariables>
@@ -247,6 +248,14 @@
             <id>Project-Tracking</id>
             <properties>
                 <projectTracking>true</projectTracking>
+            </properties>
+        </profile>
+
+        <!--project tracking-->
+        <profile>
+            <id>Verbose-Logging</id>
+            <properties>
+                <verboseLogging>true</verboseLogging>
             </properties>
         </profile>
 

@@ -87,16 +87,18 @@ public class DriverFactory {
                         desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
                         desiredCapabilities.setCapability("wdaLocalPort", Integer.parseInt(iproxyPort));
                         desiredCapabilities.setCapability("useNewWDA", true);
-                        //desiredCapabilities.setCapability("preventWDAAttachments", true);
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.LAUNCH_TIMEOUT, 500000);
-
-                        //desiredCapabilities.setCapability("startIWDP", true);
-                        //desiredCapabilities.setCapability("showXcodeLog", true);
-                        //desiredCapabilities.setCapability("xcodeConfigFile", "src/resources/Config.xcconfig");
 
                         desiredCapabilities.setCapability("xcodeOrgId", "Y95G5M3Q84");
                         desiredCapabilities.setCapability("xcodeSigningId", "iPhone Developer");
                         desiredCapabilities.setCapability("updatedWDABundleId", "com.moovweb.WebDriverAgentRunner");
+
+                        //desiredCapabilities.setCapability("startIWDP", true);
+                        //desiredCapabilities.setCapability("preventWDAAttachments", true);
+
+                        if (Boolean.valueOf(System.getProperty("verboseLogging"))) {
+                            desiredCapabilities.setCapability("showXcodeLog", true);
+                        }
                     }
 
 //                    if (Config.PLATFORM_NAME.equals(ANDROID)) {
@@ -138,12 +140,14 @@ public class DriverFactory {
             log.info("APPIUM PORT: " + appiumPort);
             log.info("IOS WEB PROXY PORT: " + proxyPort);
 
-
             AppiumServiceBuilder serviceBuilder = new AppiumServiceBuilder();
             serviceBuilder.usingPort(appiumPort);
 
             // serviceBuilder.withArgument(GeneralServerFlag.SESSION_OVERRIDE);
-            serviceBuilder.withArgument(GeneralServerFlag.LOG_LEVEL, "warn");
+
+            if (Boolean.valueOf(System.getProperty("verboseLogging"))) {
+                serviceBuilder.withArgument(GeneralServerFlag.LOG_LEVEL, "warn");
+            }
 
             if (Config.PLATFORM_NAME.equals("iOS")) {
                 serviceBuilder.withArgument(IOSServerFlag.WEBKIT_DEBUG_PROXY_PORT, String.valueOf(proxyPort));
@@ -156,16 +160,10 @@ public class DriverFactory {
 
             service = AppiumDriverLocalService.buildService(serviceBuilder);
             service.start();
+            
             log.info("APPIUM URL: " + service.getUrl());
             log.info("*******************************************************************************************");
             log.info("");
-
-            log.info("");
-            log.info("******************************** BASE TEST INFORMATION ************************************");
-            log.info("SUITE: " + System.getProperty("testng.suite"));
-            log.info("*******************************************************************************************");
-            log.info("");
-
         }
     }
 
