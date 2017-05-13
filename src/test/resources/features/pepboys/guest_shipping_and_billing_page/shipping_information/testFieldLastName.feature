@@ -1,7 +1,6 @@
 @pepBoys
 
-
-Feature: Guest - Shipping & Billing page
+Feature: GUEST - SHIPPING & BILLING PAGE - SHIPPING INFO
 
   Background:
     Given user makes appoint

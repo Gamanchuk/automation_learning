@@ -1,6 +1,6 @@
 @pepBoys
 
-Feature: Guest - Shipping & Billing page
+Feature: GUEST - SHIPPING & BILLING PAGE - BILLING INFO
 
   Background: Set Up preconditions for testing billing page
     Given user makes appoint

@@ -1,8 +1,8 @@
 @pepBoys
 
-Feature: Guest - Shipping & Billing page
+Feature: GUEST - SHIPPING & BILLING PAGE - SHIPPING INFO
 
-  Background: Set Up preconditions for testing billing page
+  Background:
     Given user makes appoint
     And user adds to cart product with id "8536868" with "Ship to Home" delivery option
     And user views cart
