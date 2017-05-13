@@ -136,16 +136,18 @@ public class DriverFactory {
             killAppiumServer(appiumPort);
 
             log.info("");
-            log.info("******************************* STARTING APPIUM SERVICE ***********************************");
+            log.info("*************************** STARTING APPIUM SERVICE *******************************");
             log.info("APPIUM PORT: " + appiumPort);
             log.info("IOS WEB PROXY PORT: " + proxyPort);
+            log.info("VERBOSE LOGGING: " + System.getProperty("verboseLogging"));
+            log.info("PROJECT TRACKING: " + System.getProperty("projectTracking"));
 
             AppiumServiceBuilder serviceBuilder = new AppiumServiceBuilder();
             serviceBuilder.usingPort(appiumPort);
 
             // serviceBuilder.withArgument(GeneralServerFlag.SESSION_OVERRIDE);
 
-            if (Boolean.valueOf(System.getProperty("verboseLogging"))) {
+            if (!Boolean.valueOf(System.getProperty("verboseLogging"))) {
                 serviceBuilder.withArgument(GeneralServerFlag.LOG_LEVEL, "warn");
             }
 
@@ -160,9 +162,9 @@ public class DriverFactory {
 
             service = AppiumDriverLocalService.buildService(serviceBuilder);
             service.start();
-            
+
             log.info("APPIUM URL: " + service.getUrl());
-            log.info("*******************************************************************************************");
+            log.info("***********************************************************************************");
             log.info("");
         }
     }
