@@ -288,11 +288,22 @@
             <properties>
                 <testng.suite>${basedir}/src/test/resources/testsuites/pepboys/pepboys_guest_shipping_billing_page.xml
                 </testng.suite>
-                <suite.id>95</suite.id>
+                <suite.id>93</suite.id>
+            </properties>
+        </profile>
+        <profile>
+            <id>suite-pepboys-guestDeliveryMethodPage</id>
+            <properties>
+                <testng.suite>${basedir}/src/test/resources/testsuites/pepboys/pepboys_guest_delivery_method_page.xml
+                </testng.suite>
+                <suite.id>93</suite.id>
             </properties>
         </profile>
 
 
+        <!--QVC Suite-->
+
+        <!--Base Suite-->
         <profile>
             <id>suite-debug</id>
             <properties>
