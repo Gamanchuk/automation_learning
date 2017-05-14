@@ -27,7 +27,7 @@ public class PepBoysProductPage extends PepBoysBasePage {
     public void setDeliveryOption(String deliveryOption) {
         CommonFunctions.sleep(10000);
         javascriptScroll(500);
-
+        CommonFunctions.attachScreenshot("allert");
         getDriver().switchTo().alert().accept();
 
 
