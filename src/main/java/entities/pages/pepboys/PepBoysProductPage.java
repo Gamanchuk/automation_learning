@@ -1,6 +1,7 @@
 package entities.pages.pepboys;
 
 import org.openqa.selenium.By;
+import utils.CommonFunctions;
 
 import static org.testng.Assert.assertTrue;
 
@@ -23,7 +24,9 @@ public class PepBoysProductPage extends PepBoysBasePage {
     }
 
     public void setDeliveryOption(String deliveryOption) {
+        CommonFunctions.sleep(5000);
         javascriptScroll(500);
+
 
         if (!deliveryOption.equals("Pick Up in Store")) {
             getDriver().findElement(By.xpath("//label[contains(., '" + deliveryOption + "')]")).click();
