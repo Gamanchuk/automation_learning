@@ -19,6 +19,9 @@
         <spring.version>4.3.6.RELEASE</spring.version>
         <environment.name>${testing.env}</environment.name>
         <properties.file.name>${props.file.name}</properties.file.name>
+        <base.url>${site.url}</base.url>
+        <cookies>${site.cookies}</cookies>
+        <site.name>${site.name}</site.name>
     </properties>
 
     <name>Moovweb Automation framework</name>
@@ -168,6 +171,11 @@
             <artifactId>httpclient</artifactId>
             <version>4.5.2</version>
         </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>RELEASE</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -202,6 +210,9 @@
                         <projectTracking>${projectTracking}</projectTracking>
                         <use.desktop.browser>${use.desktop.browser}</use.desktop.browser>
                         <suite.id>${suite.id}</suite.id>
+                        <site.name>${site.name}</site.name>
+                        <base.url>${site.url}</base.url>
+                        <cookies>${site.cookies}</cookies>
                     </systemPropertyVariables>
                 </configuration>
                 <dependencies>
@@ -479,7 +490,37 @@
                 <props.file.name>iphone6s</props.file.name>
             </properties>
         </profile>
+
+        <!--Sites-->
+        <profile>
+            <id>site-pepboys-send</id>
+            <properties>
+                <site.name>pepboys-send</site.name>
+                <site.url>https://mstage.stage.pepboys.com/</site.url>
+                <site.cookies>?var=b&amp;utm_expid=95483662-2.I0S4ga4uSlCoEu3KU2QnNw.1&amp;_mwexperienceid=75b123b0-6444-4893-9825-1303473bc59f</site.cookies>
+            </properties>
+        </profile>
+        <profile>
+            <id>site-pepboys-stage</id>
+            <properties>
+                <site.name>pepboys-stage</site.name>
+                <site.url>https://mstage.pepboys.com/</site.url>
+                <site.cookies>?_mwexperienceid=75b123b0-6444-4893-9825-1303473bc59f</site.cookies>
+            </properties>
+        </profile>
+        <profile>
+            <id>site-pepboys-prod</id>
+            <properties>
+                <site.name>pepboys-prod</site.name>
+                <site.url>http://m.pepboys.com/</site.url>
+                <site.cookies>?_mwexperienceid=eeba14c5-b4f0-4563-946a-07af28d2648e</site.cookies>
+            </properties>
+        </profile>
+
     </profiles>
+
+    <!--Sites-->
+
 
     <reporting>
         <excludeDefaults>true</excludeDefaults>
