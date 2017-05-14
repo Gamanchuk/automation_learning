@@ -44,6 +44,7 @@ public class BrowserConsoleLogAggregator {
             TestGlobalsManager.setTestGlobal("AGGREGATOR_PID", pid);
             log.info("adb logcat pid: " + pid);
         } catch (IOException e) {
+            log.info("adb logcat doesn't started. See error message: ");
             log.info(e.getMessage());
         }
 
