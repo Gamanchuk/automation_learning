@@ -1,6 +1,7 @@
 package entities.pages.pepboys;
 
 import org.openqa.selenium.By;
+import utils.CommonFunctions;
 
 import static org.testng.Assert.assertTrue;
 
@@ -26,7 +27,7 @@ public class PepBoysProductPage extends PepBoysBasePage {
         javascriptScroll(500);
 
         By shipToHome = By.id("radio-PHYSICAL_SHIP-" + productId);
-        waitForAjax();
+        CommonFunctions.sleep(1000);
         assertTrue(isElementClickable(shipToHome), "Delivery option is not clickable");
 
         if (!deliveryOption.equals("Pick Up in Store")) {
