@@ -3,14 +3,10 @@ package utils;
 import java.util.HashMap;
 
 public class TestGlobalsManager {
-    private static ThreadLocal<HashMap<String, Object>> testGlobals = new ThreadLocal<>();
+    private static HashMap<String, Object> testGlobals = new HashMap<>();
 
     private static HashMap<String, Object> getGlobals() {
-        return testGlobals.get();
-    }
-
-    private static void initTestGlobals() {
-        testGlobals.set(new HashMap<String, Object>());
+        return testGlobals;
     }
 
     public static Object getTestGlobal(String name) {
@@ -26,7 +22,6 @@ public class TestGlobalsManager {
     }
 
     public static void setTestGlobal(String name, Object value) {
-        if (null == getGlobals()) initTestGlobals();
         getGlobals().put(name, value);
     }
 

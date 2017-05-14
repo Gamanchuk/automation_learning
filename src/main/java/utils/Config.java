@@ -22,12 +22,15 @@ public class Config {
     public static final String IPROXY_PORT;
     public static final String BOOTSTRAP_PORT;
     public static final String CHROMEDRIVER_PORT;
+    public static final String BASE_URL;
+    public static final String COOKIES;
+    public static final String SITE_NAME;
 
     private static Log log = LogFactory.getLog(Config.class);
 
     static {
         Properties props = new Properties();
-        String propsPath = "./profiles/" + System.getProperty("environment.name") + "/" + System.getProperty("properties.file.name") + ".properties";
+        String propsPath = "./profiles/envs/" + System.getProperty("environment.name") + "/" + System.getProperty("properties.file.name") + ".properties";
         try {
             props = PropertiesLoaderUtils.loadAllProperties(propsPath);
         } catch (IOException e) {
@@ -46,5 +49,9 @@ public class Config {
         IPROXY_PORT = props.getProperty("iproxy.port");
         BOOTSTRAP_PORT = props.getProperty("bootstrap.port");
         CHROMEDRIVER_PORT = props.getProperty("chromedriver.port");
+
+        BASE_URL = System.getProperty("base.url");
+        COOKIES = System.getProperty("cookies");
+        SITE_NAME = System.getProperty("site.name");
     }
 }
