@@ -25,8 +25,10 @@ public class PepBoysProductPage extends PepBoysBasePage {
     }
 
     public void setDeliveryOption(String deliveryOption) {
-        CommonFunctions.sleep(5000);
+        CommonFunctions.sleep(10000);
         javascriptScroll(500);
+
+        getDriver().switchTo().alert().accept();
 
 
         if (!deliveryOption.equals("Pick Up in Store")) {
