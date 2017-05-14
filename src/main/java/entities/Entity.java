@@ -272,6 +272,11 @@ public abstract class Entity {
         ((JavascriptExecutor) getDriver()).executeScript("window.scrollBy(0," + ynum + ")", "");
     }
 
+    public void javascriptScroll(WebElement element) {
+        Actions builder = new Actions(driver);
+        builder.moveToElement(element).build().perform();
+    }
+
     public void switchToIframe(String iframeName) {
         waitForElementVisible(By.name(iframeName), 120);
         driver.switchTo().frame(iframeName);

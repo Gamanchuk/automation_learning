@@ -208,6 +208,7 @@
                         <environment.name>${testing.env}</environment.name>
                         <properties.file.name>${props.file.name}</properties.file.name>
                         <projectTracking>${projectTracking}</projectTracking>
+                        <verboseLogging>${verboseLogging}</verboseLogging>
                         <use.desktop.browser>${use.desktop.browser}</use.desktop.browser>
                         <suite.id>${suite.id}</suite.id>
                         <site.name>${site.name}</site.name>
@@ -261,6 +262,14 @@
             </properties>
         </profile>
 
+        <!--project tracking-->
+        <profile>
+            <id>Verbose-Logging</id>
+            <properties>
+                <verboseLogging>true</verboseLogging>
+            </properties>
+        </profile>
+
         <!--use desktop browser-->
         <profile>
             <id>use-desktop-browser</id>
@@ -272,6 +281,13 @@
         <!--test suites-->
 
         <!--PepBoys Suites -->
+        <profile>
+            <id>suite-pepboys-debug</id>
+            <properties>
+                <testng.suite>${basedir}/src/test/resources/testsuites/pepboys/pepboys_debug.xml</testng.suite>
+                <suite.id>93</suite.id>
+            </properties>
+        </profile>
         <profile>
             <id>suite-pepboys-full</id>
             <properties>
@@ -368,15 +384,6 @@
 
 
         <!--QVC Suite-->
-
-        <!--Base Suite-->
-        <profile>
-            <id>suite-debug</id>
-            <properties>
-                <testng.suite>${basedir}/src/test/resources/testsuites/debug.xml</testng.suite>
-                <suite.id>93</suite.id>
-            </properties>
-        </profile>
 
 
         <!--environments-->
