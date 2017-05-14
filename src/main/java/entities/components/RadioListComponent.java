@@ -12,12 +12,24 @@ public class RadioListComponent extends BaseComponent {
     public void select(String option) {
         By currentItemDetails = By.cssSelector(".radio-list-option-selected .radio-list-details");
 
+        By list = By.cssSelector(".radio-list-option");
+        WebElement listEl = findElement(list);
+        listEl.getAttribute("innerHTML");
+
+
+
+
+
+
+
+
         if (!findElement(currentItemDetails).getText().contains(option)) {
             findElement(currentItem).click();
             CommonFunctions.attachScreenshot("List methods");
 
             By itemDetails = By.cssSelector(".radio-list-option .radio-list-details");
             List<WebElement> items = findElements(itemDetails);
+
             log.info("Size [listWebElement]: " + items.size());
 
             for (WebElement item : items) {
