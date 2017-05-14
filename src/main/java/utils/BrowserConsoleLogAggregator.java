@@ -1,5 +1,6 @@
 package utils;
 
+import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import java.io.BufferedReader;
@@ -9,7 +10,7 @@ import java.io.InputStreamReader;
 
 public class BrowserConsoleLogAggregator {
 
-    private static org.apache.commons.logging.Log log = LogFactory.getLog(JiraHelper.class);
+    private static Log log = LogFactory.getLog("BrowserConsoleLogAggregator");
     private static Process adbLogcatProcess = null;
 
     public static void startCapturing() {
