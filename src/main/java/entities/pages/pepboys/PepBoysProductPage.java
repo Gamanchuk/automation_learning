@@ -27,11 +27,12 @@ public class PepBoysProductPage extends PepBoysBasePage {
     public void setDeliveryOption(String deliveryOption) {
         CommonFunctions.sleep(10000);
 
-        CommonFunctions.attachScreenshot("allert");
+
 
         By path = By.xpath("//label[contains(., '" + deliveryOption + "')]");
         WebElement element = getDriver().findElement(path);
-        javascriptScroll(800);
+        javascriptScroll(element);
+        CommonFunctions.attachScreenshot("allert");
         //getDriver().switchTo().alert().accept();
 
 

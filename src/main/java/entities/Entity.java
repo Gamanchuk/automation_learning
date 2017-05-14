@@ -9,7 +9,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.DriverFactory;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -274,10 +273,8 @@ public abstract class Entity {
     }
 
     public void javascriptScroll(WebElement element) {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        HashMap<String, String> scrollObject = new HashMap<String, String>();
-        scrollObject.put("direction", "down");
-        js.executeScript("mobile: scroll", scrollObject);
+        Actions builder = new Actions(driver);
+        builder.moveToElement(element).build().perform();
     }
 
     public void switchToIframe(String iframeName) {
