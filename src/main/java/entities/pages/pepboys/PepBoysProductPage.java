@@ -26,7 +26,8 @@ public class PepBoysProductPage extends PepBoysBasePage {
         javascriptScroll(500);
 
         if (!deliveryOption.equals("Pick Up in Store")) {
-            getDriver().findElement(By.xpath("//label[contains(., '" + deliveryOption + "')]")).click();
+            getDriver().findElement(By.id("radio-PHYSICAL_SHIP-" + productId)).click();
+            //  getDriver().findElement(By.xpath("//label[contains(., '" + deliveryOption + "')]")).click();
             waitForAjax();
         }
     }
