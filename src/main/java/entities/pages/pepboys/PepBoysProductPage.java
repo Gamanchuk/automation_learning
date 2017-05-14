@@ -31,7 +31,7 @@ public class PepBoysProductPage extends PepBoysBasePage {
 
         By path = By.xpath("//label[contains(., '" + deliveryOption + "')]");
         WebElement element = getDriver().findElement(path);
-        javascriptScroll(element);
+        javascriptScroll(800);
         //getDriver().switchTo().alert().accept();
 
 
