@@ -4,42 +4,34 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import utils.CommonFunctions;
 
-import java.util.List;
-
 public class RadioListComponent extends BaseComponent {
     private By currentItem = By.cssSelector(".radio-list-option-selected");
 
     public void select(String option) {
         By currentItemDetails = By.cssSelector(".radio-list-option-selected .radio-list-details");
+        String currentItemText = findElement(currentItemDetails).getText();
 
-        By list = By.cssSelector(".radio-list-option");
-        WebElement listEl = findElement(list);
-        listEl.getAttribute("innerHTML");
+        log.info("Actual item: " + currentItemText + " Expected item: " + option);
 
-
-
-
-
-
-
-
-        if (!findElement(currentItemDetails).getText().contains(option)) {
+        if (!currentItemText.contains(option)) {
             findElement(currentItem).click();
             CommonFunctions.attachScreenshot("List methods");
 
-            By itemDetails = By.cssSelector(".radio-list-option .radio-list-details");
-            List<WebElement> items = findElements(itemDetails);
+            WebElement listEl = findElement(By.cssSelector(".radio-list"));
+            String[] tempList = listEl.getText().split("\n");
 
-            log.info("Size [listWebElement]: " + items.size());
+            int index = 1;
 
-            for (WebElement item : items) {
-                if (item.getText().contains(option)) {
-                    log.info("Method contains: " + item.getText());
-                    item.click();
-                    CommonFunctions.sleep(100);
+            for (String item : tempList) {
+                log.info(item);
+                if (item.contains(option)) {
+                    log.info("Item Selected. ID: " + index);
                     break;
                 }
+                index++;
             }
+            findElement(By.cssSelector(".radio-list-option:nth-of-type(" + index + ")")).click();
+            CommonFunctions.sleep(500);
         }
     }
 
