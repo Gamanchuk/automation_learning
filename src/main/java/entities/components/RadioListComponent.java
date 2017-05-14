@@ -23,7 +23,6 @@ public class RadioListComponent extends BaseComponent {
             int index = 1;
 
             for (String item : tempList) {
-                log.info(item);
                 if (item.contains(option)) {
                     log.info("Item Selected. ID: " + index);
                     break;
