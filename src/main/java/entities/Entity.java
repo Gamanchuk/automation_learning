@@ -269,7 +269,7 @@ public abstract class Entity {
      *             Positive values will scroll down, while negative values scroll up
      */
     public void javascriptScroll(int ynum) {
-        //   ((JavascriptExecutor) getDriver()).executeScript("window.scrollBy(0," + ynum + ")", "");
+        ((JavascriptExecutor) getDriver()).executeScript("window.scrollBy(0," + ynum + ")", "");
     }
 
     public void javascriptScroll(WebElement element) {
