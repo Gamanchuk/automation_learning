@@ -1,4 +1,4 @@
-@pepBoys @debug
+@pepBoys @debug1
 
 Feature: SIGN IN PAGE
 

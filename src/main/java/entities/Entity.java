@@ -4,11 +4,13 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.DriverFactory;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -269,7 +271,15 @@ public abstract class Entity {
      *             Positive values will scroll down, while negative values scroll up
      */
     public void javascriptScroll(int ynum) {
-        ((JavascriptExecutor) getDriver()).executeScript("window.scrollBy(0," + ynum + ")", "");
+        //   ((JavascriptExecutor) getDriver()).executeScript("window.scrollBy(0," + ynum + ")", "");
+    }
+
+    public void javascriptScroll(WebElement element) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        HashMap<String, String> scrollObject = new HashMap<String, String>();
+        scrollObject.put("direction", "down");
+        scrollObject.put("element", ((RemoteWebElement) element).getId());
+        js.executeScript("mobile: scroll", scrollObject);
     }
 
     public void switchToIframe(String iframeName) {

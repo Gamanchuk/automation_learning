@@ -1,7 +1,7 @@
 package entities.pages.pepboys;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 import utils.CommonFunctions;
 
 import static org.testng.Assert.assertTrue;
@@ -26,13 +26,17 @@ public class PepBoysProductPage extends PepBoysBasePage {
 
     public void setDeliveryOption(String deliveryOption) {
         CommonFunctions.sleep(10000);
-        javascriptScroll(500);
+
         CommonFunctions.attachScreenshot("allert");
-        getDriver().switchTo().alert().accept();
+
+        By path = By.xpath("//label[contains(., '" + deliveryOption + "')]");
+        WebElement element = getDriver().findElement(path);
+        javascriptScroll(element);
+        //getDriver().switchTo().alert().accept();
 
 
         if (!deliveryOption.equals("Pick Up in Store")) {
-            getDriver().findElement(By.xpath("//label[contains(., '" + deliveryOption + "')]")).sendKeys(Keys.RETURN);
+            element.click();
             waitForAjax();
         }
     }
