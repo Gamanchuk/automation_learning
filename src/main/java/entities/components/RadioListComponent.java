@@ -20,15 +20,15 @@ public class RadioListComponent extends BaseComponent {
             WebElement listEl = findElement(By.cssSelector(".radio-list"));
             String[] tempList = listEl.getText().split("\n");
 
-            int index = 1;
+            int index;
 
-            for (String item : tempList) {
-                if (item.contains(option)) {
+            for (index = 1; index < tempList.length; index++) {
+                if (tempList[index].contains(option)) {
                     log.info("Item Selected. ID: " + index);
                     break;
                 }
-                index++;
             }
+
             findElement(By.cssSelector(".radio-list-option:nth-of-type(" + index + ")")).click();
             CommonFunctions.sleep(500);
         }
