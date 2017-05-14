@@ -25,8 +25,12 @@ public class PepBoysProductPage extends PepBoysBasePage {
     public void setDeliveryOption(String deliveryOption) {
         javascriptScroll(500);
 
+        By shipToHome = By.id("radio-PHYSICAL_SHIP-" + productId);
+        waitForAjax();
+        assertTrue(isElementClickable(shipToHome), "Delivery option is not clickable");
+
         if (!deliveryOption.equals("Pick Up in Store")) {
-            getDriver().findElement(By.id("radio-PHYSICAL_SHIP-" + productId)).click();
+            getDriver().findElement(shipToHome).click();
             //  getDriver().findElement(By.xpath("//label[contains(., '" + deliveryOption + "')]")).click();
             waitForAjax();
         }
