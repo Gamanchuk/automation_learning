@@ -127,6 +127,7 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
 
     @Override
     public void onTestFailedButWithinSuccessPercentage(ITestResult iTestResult) {
+        fireRetryTest("The test has been failed (within success percentage) then retried.", iTestResult);
         BrowserConsoleLogAggregator.stopCapturing();
         DriverFactory.quitDriver();
     }
