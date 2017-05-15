@@ -50,6 +50,9 @@ public class PepBoysMakeAppointmentPage extends PepBoysBasePage {
         try {
             fileContents = Files.toString(new File("src/main/java/api/pepboys/postNewStoreLocation.js"), Charsets.UTF_8);
             fileContents = fileContents.replaceAll("<URL>", BASE_URL);
+            fileContents = fileContents.replaceAll("<EXP>", COOKIES);
+            fileContents = fileContents.replaceAll("<KEY>", System.getProperty("store.key"));
+            log.info(fileContents.toString());
         } catch (IOException e) {
             log.warn("Cannot read file");
         }

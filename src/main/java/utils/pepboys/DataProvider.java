@@ -7,15 +7,13 @@ import utils.Config;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Component
 public class DataProvider {
-    private static String [] items = {
+    private static String[] items = {
             "787226",
             "787233",
             "785244",
@@ -109,7 +107,7 @@ public class DataProvider {
     }
 
     public static String getRandomItemId() {
-        List<String> items = getFileStrings( "./profiles/sites/" + Config.SITE_NAME + "/items.txt");
+        List<String> items = getFileStrings(System.getProperty("user.dir") + "/src/main/resources/profiles/sites/" + Config.SITE_NAME + "/items.txt");
         int itemNumber = ThreadLocalRandom.current().nextInt(0, items.size());
         return items.get(itemNumber);
     }
@@ -128,7 +126,7 @@ public class DataProvider {
 
     private static List<String> getFileStrings(String path) {
         try {
-            return FileUtils.readLines(new File("/path/filename"));
+            return FileUtils.readLines(new File(path), "UTF-8");
         } catch (IOException e) {
             e.printStackTrace();
         }

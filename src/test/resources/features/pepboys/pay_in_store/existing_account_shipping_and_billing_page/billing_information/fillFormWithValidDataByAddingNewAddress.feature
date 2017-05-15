@@ -1,4 +1,4 @@
-@pepBoys
+@pepBoys @debug
 
 Feature: PAY IN STORE - EXISTING ACCOUNT - SHIPPING & BILLING PAGE - BILLING INFO
 
@@ -11,7 +11,7 @@ Feature: PAY IN STORE - EXISTING ACCOUNT - SHIPPING & BILLING PAGE - BILLING INF
   @TestCaseId("16625")
   Scenario: Test with correct billing information and fill in all required fields (Add new address)
     Given user makes authorisation for "Moovweb QA"
-    And user should be on "Billing Address" page
+    And user should be on "Customer Information" page
     And selects "Enter a New Address"
     And user types billing info for "user at Spear street" and checks email
     And presses the "Place Order" button

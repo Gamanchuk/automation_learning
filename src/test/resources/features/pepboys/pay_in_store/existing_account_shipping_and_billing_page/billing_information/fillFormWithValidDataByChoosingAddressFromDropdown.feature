@@ -11,7 +11,7 @@ Feature: PAY IN STORE - EXISTING ACCOUNT - SHIPPING & BILLING PAGE - BILLING INF
   @TestCaseId("16626")
   Scenario: Test with correct billing information and fill in all required fields (Choose address from drop-down)
     Given user makes authorisation for "Moovweb QA"
-    And user should be on "Billing Address" page
+    And user should be on "Customer Information" page
     And applies billing info for address "8th avenue, Unit 1611"
     And user checks billing info for "qa user3"
 

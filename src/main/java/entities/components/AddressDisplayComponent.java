@@ -45,8 +45,8 @@ public class AddressDisplayComponent extends BaseComponent {
         String address = findElement(deliveryStreetAddress).getText();
         String apt = findElement(deliveryApt).getText();
         assertTrue("Unexpected apt. Expected: " + expectedApt
-                        + "Address: " + address
-                        + "Apt: " + apt,
+                        + " Address: " + address
+                        + " Apt: " + apt,
                 address.contains(expectedApt) || apt.contains(expectedApt));
     }
 

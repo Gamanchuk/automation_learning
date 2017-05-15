@@ -11,7 +11,7 @@ Feature: PAY IN STORE - EXISTING ACCOUNT - SHIPPING & BILLING PAGE - BILLING INF
   @TestCaseId("16632")
   Scenario: Test field 'Address Street' with numbers
     Given user makes authorisation for "Moovweb QA"
-    And user should be on "Billing Address" page
+    And user should be on "Customer Information" page
     And selects "Enter a New Address"
     And user types billing info for "qa user" and checks email
 

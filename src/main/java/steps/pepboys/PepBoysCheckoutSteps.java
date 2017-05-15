@@ -364,7 +364,7 @@ public class PepBoysCheckoutSteps {
 
     private void fillBillingInfo(String userName, boolean autoFill, boolean fillEmail) {
         BillingUser user = DataProvider.getUser(userName);
-        addressFormComponent.setRoot(BaseComponent.getContainerByTitle("Billing Address"));
+        addressFormComponent.setRoot(BaseComponent.getContainerByTitle("Customer Information"));
         fillAddressForm(user, autoFill);
 
         if (fillEmail) {
