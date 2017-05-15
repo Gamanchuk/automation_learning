@@ -194,7 +194,7 @@ public class DriverFactory {
 
                 PidProcess process = Processes.newPidProcess(PID);
                 process.destroyGracefully();
-                Thread.sleep(3000);
+                CommonFunctions.sleep(3000);
 
                 log.info("Appium Server killed");
             } else {
@@ -229,9 +229,9 @@ public class DriverFactory {
             try {
                 log.info("Execute command: " + Arrays.toString(iOSProxyCommand.toStrings()));
                 executor.execute(iOSProxyCommand, executeResultHandler);
-                Thread.sleep(2000);
+                CommonFunctions.sleep(2000);
                 log.info("iOS Proxy started.");
-            } catch (IOException | InterruptedException e) {
+            } catch (IOException e) {
                 log.error("Cannot execute command: " + Arrays.toString(iOSProxyCommand.toStrings()));
             }
         }
@@ -260,7 +260,7 @@ public class DriverFactory {
 
                 PidProcess process = Processes.newPidProcess(PID);
                 process.destroyGracefully();
-                Thread.sleep(700);
+                CommonFunctions.sleep(700);
 
                 log.info("iOS Proxy killed");
             } else {

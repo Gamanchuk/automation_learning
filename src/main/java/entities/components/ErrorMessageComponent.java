@@ -14,12 +14,7 @@ public class ErrorMessageComponent extends BaseComponent {
     public void checkError(String title, String message) {
         javascriptScroll(-300);
 
-        try {
-            Thread.sleep(1500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
+        CommonFunctions.sleep(1500);
         waitForElementVisible(errorMessageEl);
 
         String errorTitleText = getDriver().findElement(errorTitleEl).getText();
@@ -30,8 +25,6 @@ public class ErrorMessageComponent extends BaseComponent {
         assertEquals(errorTitleText, title, "Unexpected error title");
         assertEquals(errorMessageText, message, "Unexpected error message");
 
-
         javascriptScroll(300);
-
     }
 }

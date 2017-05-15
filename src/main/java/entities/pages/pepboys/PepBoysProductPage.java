@@ -2,6 +2,7 @@ package entities.pages.pepboys;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import utils.CommonFunctions;
 
 import static org.testng.Assert.assertTrue;
 
@@ -9,11 +10,7 @@ public class PepBoysProductPage extends PepBoysBasePage {
     private String productId;
 
     public boolean isPage() {
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        CommonFunctions.sleep(2000);
         return isElementVisible(By.xpath("//div[@class='mw-note-value' and text()='" + productId + "']"));
     }
 

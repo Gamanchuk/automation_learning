@@ -7,9 +7,8 @@ public class PepBoysMainPage extends PepBoysBasePage {
     private By searchBox = By.id("search-site");
 
     public boolean isPage() {
-        waitForElementClickable(searchBox);
-        waitForElementVisible(By.xpath("//span[@class='mw_category_title' and text()='Tires']"));
-        return true;
+        return isElementClickable(searchBox)
+                && isElementVisible(By.xpath("//span[@class='mw_category_title' and text()='Tires']"));
     }
 
     public void openPageWithCookies(){

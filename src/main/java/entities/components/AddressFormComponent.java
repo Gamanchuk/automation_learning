@@ -3,6 +3,7 @@ package entities.components;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+import utils.CommonFunctions;
 
 import static org.testng.AssertJUnit.assertTrue;
 
@@ -34,12 +35,8 @@ public class AddressFormComponent extends BaseComponent {
         }
 
         // Need to sleep for second to avoid selenium exception
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
+        CommonFunctions.sleep(1000);
         waitForElementVisible(apartmentField);
         fillField(apartmentField, apartment);
 

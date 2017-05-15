@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import utils.CommonFunctions;
 
+import static org.testng.Assert.assertTrue;
+
 public class SignInFormComponent extends BaseComponent {
     private By forgotPassword = By.xpath("//div[contains(@class,'login-buttons')]//a");
     private By emailField = By.id("shipping-email");
@@ -12,6 +14,7 @@ public class SignInFormComponent extends BaseComponent {
     public void signIn(String email, String password) {
         log.info("Email: " + email);
         log.info("Password: " + password);
+
         WebElement emailFieldEl = getDriver().findElement(emailField);
         emailFieldEl.clear();
         emailFieldEl.sendKeys(email);
@@ -25,13 +28,12 @@ public class SignInFormComponent extends BaseComponent {
     }
 
     public void pressForgotPasswordLink() {
-        waitForElementClickable(forgotPassword);
+        assertTrue(isElementClickable(forgotPassword), "Forgot password link not clickable. Or doesn't exist");
         CommonFunctions.attachScreenshot("Login page: Forgot Password");
         getDriver().findElement(forgotPassword).click();
     }
 
     public boolean exist() {
-        waitForElementVisible(passwordField);
-        return true;
+        return isElementVisible(passwordField);
     }
 }

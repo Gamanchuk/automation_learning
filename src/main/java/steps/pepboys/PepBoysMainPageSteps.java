@@ -33,11 +33,7 @@ public class PepBoysMainPageSteps {
         assertTrue(makeAppointmentPage.isPage(), "Appointment page was not opened");
         makeAppointmentPage.selectDifferentLocation(code);
 
-        try {
-            Thread.sleep(20000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        CommonFunctions.sleep(20000);
         CommonFunctions.attachScreenshot("Store: " + code + " selected");
     }
 
@@ -176,7 +172,7 @@ public class PepBoysMainPageSteps {
 
     @Then("^user should be on main page$")
     public void userShouldBeOnMainPage() {
-        assertTrue(mainPage.isPage(), "Main page was not opened");
+        assertTrue(mainPage.isPage(), "Main page was not opened. Or page have some problems with loading");
         CommonFunctions.attachScreenshot("Main page opened");
     }
 
