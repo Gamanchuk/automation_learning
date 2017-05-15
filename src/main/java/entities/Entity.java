@@ -7,6 +7,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.CommonFunctions;
 import utils.DriverFactory;
 
 import java.util.List;
@@ -275,6 +276,7 @@ public abstract class Entity {
     public void javascriptScroll(WebElement element) {
         Actions builder = new Actions(driver);
         builder.moveToElement(element).build().perform();
+        CommonFunctions.sleep(200);
     }
 
     public void switchToIframe(String iframeName) {

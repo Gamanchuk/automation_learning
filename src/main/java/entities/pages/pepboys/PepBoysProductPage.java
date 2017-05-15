@@ -1,6 +1,7 @@
 package entities.pages.pepboys;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import static org.testng.Assert.assertTrue;
 
@@ -23,10 +24,12 @@ public class PepBoysProductPage extends PepBoysBasePage {
     }
 
     public void setDeliveryOption(String deliveryOption) {
-        javascriptScroll(500);
+
+        WebElement deliveryOptionEl = getDriver().findElement(By.xpath("//label[contains(., '" + deliveryOption + "')]"));
+        javascriptScroll(deliveryOptionEl);
 
         if (!deliveryOption.equals("Pick Up in Store")) {
-            getDriver().findElement(By.xpath("//label[contains(., '" + deliveryOption + "')]")).click();
+            deliveryOptionEl.click();
             waitForAjax();
         }
     }

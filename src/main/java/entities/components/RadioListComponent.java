@@ -20,7 +20,6 @@ public class RadioListComponent extends BaseComponent {
             WebElement listEl = findElement(By.cssSelector(".radio-list"));
             String[] tempList = listEl.getText().split("\n");
 
-
             for (int i = 0; i < tempList.length; i++) {
                 if (tempList[i].contains(option)) {
                     log.info("Item Selected. ID: " + i);
@@ -29,6 +28,10 @@ public class RadioListComponent extends BaseComponent {
                     return true;
                 }
             }
+
+        } else if (currentItemText.contains(option)) {
+            log.info("Item selected by default: " + option);
+            return true;
         }
         return false;
     }
