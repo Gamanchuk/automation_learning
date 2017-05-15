@@ -1,4 +1,4 @@
-@pepBoys
+@pepBoys @debug
 
 Feature: SIGN IN PAGE
 
@@ -43,5 +43,3 @@ Feature: SIGN IN PAGE
 
     And user presses the Proceed to Guest Checkout link
     Then user should be on "Billing & Shipping" tab
-
-    # We need to remove lines 44 and 45 because we have separate case for checking this functionality

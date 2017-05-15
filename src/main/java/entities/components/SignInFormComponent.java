@@ -10,6 +10,8 @@ public class SignInFormComponent extends BaseComponent {
     private By passwordField = By.id("password");
 
     public void signIn(String email, String password) {
+        log.info("Email: " + email);
+        log.info("Password: " + password);
         WebElement emailFieldEl = getDriver().findElement(emailField);
         emailFieldEl.clear();
         emailFieldEl.sendKeys(email);

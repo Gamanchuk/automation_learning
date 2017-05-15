@@ -184,7 +184,6 @@ public class PepBoysCheckoutSteps {
         signInFormComponent.signIn(user.getEmail(), user.getPassword());
         CommonFunctions.attachScreenshot("Set [" + user.getEmail() + "] email and [" + user.getPassword() + "] password");
         buttonComponent.clickButton();
-//        signInFormComponent.waitForSpinner();
         TestGlobalsManager.setTestGlobal("authorised", true);
     }
 
@@ -192,7 +191,7 @@ public class PepBoysCheckoutSteps {
     public void appliesBillingInfo(String address) {
         assertTrue(radioListComponent.exists(), "Billing Address Drop-Down doesn't exist");
         radioListComponent.setRoot(BaseComponent.getContainerByTitle("Billing Address"));
-        radioListComponent.select(address);
+        assertTrue(radioListComponent.select(address), "'" + address + "' doesn't present in list");
         CommonFunctions.attachScreenshot("Billing info");
     }
 
@@ -201,14 +200,14 @@ public class PepBoysCheckoutSteps {
         assertTrue(radioListComponent.exists(), "Billing Address Drop-Down doesn't exist");
         checkboxRowComponent.check("Yes, shipping address and billing address are the same", false);
         radioListComponent.setRoot(BaseComponent.getContainerByTitle("Shipping Address"));
-        radioListComponent.select(address);
+        assertTrue(radioListComponent.select(address), "'" + address + "' doesn't present in list");
         CommonFunctions.attachScreenshot("Shipping info");
     }
 
     @And("^selects \"Enter a New Address\"$")
     public void entersNewAddress() {
         assertTrue(radioListComponent.exists(), "Billing Address Drop-Down doesn't exist");
-        radioListComponent.select("Enter a New Address");
+        assertTrue(radioListComponent.select("Enter a New Address"), "Item 'Enter a New Address' doesn't present in list");
         CommonFunctions.attachScreenshot("Entering new address");
     }
 
