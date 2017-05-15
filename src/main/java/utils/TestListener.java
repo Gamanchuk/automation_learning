@@ -4,6 +4,7 @@ package utils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jetbrains.annotations.NotNull;
 import org.testng.*;
 import org.testng.annotations.ITestAnnotation;
 import ru.yandex.qatools.allure.Allure;
@@ -51,6 +52,7 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
         DriverFactory.quitDriver();
     }
 
+    @NotNull
     private String countDuration(long milis) {
         int durationInSeconds = Math.round(milis / 1000);
         int minutes = Math.round(durationInSeconds / 60);
@@ -74,7 +76,7 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
             String ticketId = setJiraIssues(caseName, errorMessage);
             try {
                 File attachment = File.createTempFile("attachment", ".html");
-                FileUtils.writeStringToFile(attachment, dom);
+                FileUtils.writeStringToFile(attachment, dom, "UTF-8");
                 JiraHelper.addAttachment(ticketId, attachment);
                 JiraHelper.addAttachment(ticketId, androidLog);
             } catch (IOException e) {

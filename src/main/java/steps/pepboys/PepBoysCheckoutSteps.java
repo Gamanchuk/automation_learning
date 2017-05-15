@@ -162,13 +162,18 @@ public class PepBoysCheckoutSteps {
         pepBoysThankYouPage.openCollapser();
         CommonFunctions.attachScreenshot("Thank You Page");
 
-        String orderNumber = thankYouPage.getOrder();
-        String project = Config.SITE_NAME;
-        String cardHolder = (String) TestGlobalsManager.getTestGlobal("CARDHOLDER");
-        String cardInfo = (String) TestGlobalsManager.getTestGlobal("CARDINFO");
+        if (System.getProperty("site.name").equals("site-pepboys-stage") &&
+                System.getProperty("site.name").equals("site-pepboys-prod")) {
 
-        CommonFunctions.saveOrder(orderNumber);
-        GoogleSheetsHelper.appendOrder(project, orderNumber, cardHolder, cardInfo);
+            String orderNumber = thankYouPage.getOrder();
+            String project = Config.SITE_NAME;
+            String cardHolder = (String) TestGlobalsManager.getTestGlobal("CARDHOLDER");
+            String cardInfo = (String) TestGlobalsManager.getTestGlobal("CARDINFO");
+
+            CommonFunctions.saveOrder(orderNumber);
+            GoogleSheetsHelper.appendOrder(project, orderNumber, cardHolder, cardInfo);
+        }
+
     }
 
     @And("^user presses the reschedule link$")
