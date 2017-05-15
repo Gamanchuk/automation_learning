@@ -109,8 +109,8 @@ public class GoogleSheetsHelper {
         // Build a new authorized API client service.
         Sheets service = getSheetsService();
 
-        // https://docs.google.com/spreadsheets/d/1H6jmOpqyPUfXAjNwoRyMgUXSWcm9fqiK0kBdKzaCH4M/edit
-        String spreadsheetId = "1H6jmOpqyPUfXAjNwoRyMgUXSWcm9fqiK0kBdKzaCH4M";
+        // https://docs.google.com/spreadsheets/d/1X8iujEhzOkb3S7VzIrda30v8VvjdqHEtSFim--TCbzw/edit
+        String spreadsheetId = "1X8iujEhzOkb3S7VzIrda30v8VvjdqHEtSFim--TCbzw";
         String range = "'2017 Automation New Orders'!A2:H2";
 
         // Formatting current date to Google Sheets date format
