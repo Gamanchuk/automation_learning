@@ -7,6 +7,8 @@ import cucumber.api.java.en.Then;
 import entities.components.*;
 import entities.pages.pepboys.*;
 import utils.CommonFunctions;
+import utils.Config;
+import utils.GoogleSheetsHelper;
 import utils.TestGlobalsManager;
 import utils.pepboys.BillingUser;
 import utils.pepboys.CreditCard;
@@ -149,6 +151,8 @@ public class PepBoysCheckoutSteps {
                 card.getCvv(),
                 card.getCardholderName()
         );
+        TestGlobalsManager.setTestGlobal("CARDHOLDER", card.getCardholderName());
+        TestGlobalsManager.setTestGlobal("CARDINFO", card.getName() + " - " + card.getNumber());
     }
 
     @Then("^user should be on thank you page$")
@@ -157,7 +161,14 @@ public class PepBoysCheckoutSteps {
         assertTrue(pepBoysThankYouPage.isCollapsed(), "Order collapser not collapsed");
         pepBoysThankYouPage.openCollapser();
         CommonFunctions.attachScreenshot("Thank You Page");
-        CommonFunctions.saveOrder(thankYouPage.getOrder());
+
+        String orderNumber = thankYouPage.getOrder();
+        String project = Config.SITE_NAME;
+        String cardHolder = (String) TestGlobalsManager.getTestGlobal("CARDHOLDER");
+        String cardInfo = (String) TestGlobalsManager.getTestGlobal("CARDINFO");
+
+        CommonFunctions.saveOrder(orderNumber);
+        GoogleSheetsHelper.appendOrder(project, orderNumber, cardHolder, cardInfo);
     }
 
     @And("^user presses the reschedule link$")
@@ -221,6 +232,8 @@ public class PepBoysCheckoutSteps {
     public void usesPayPalForPayment() {
         paymentTypesComponent.purchaseWithPayPal();
         CommonFunctions.attachScreenshot("Purchase with PayPal");
+
+
     }
 
     @Given("^user types \"([^\"]*)\" into the \"([^\"]*)\" field of \"([^\"]*)\" address form$")

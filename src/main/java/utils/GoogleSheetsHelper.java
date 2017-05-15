@@ -93,14 +93,19 @@ public class GoogleSheetsHelper {
      * @return an authorized Sheets API client service
      * @throws IOException
      */
-    public static Sheets getSheetsService() throws IOException {
-        Credential credential = authorize();
-        return new Sheets.Builder(HTTP_TRANSPORT, JSON_FACTORY, credential)
-                .setApplicationName(APPLICATION_NAME)
-                .build();
+    public static Sheets getSheetsService() {
+        try {
+            Credential credential = authorize();
+            return new Sheets.Builder(HTTP_TRANSPORT, JSON_FACTORY, credential)
+                    .setApplicationName(APPLICATION_NAME)
+                    .build();
+        } catch (IOException e) {
+            log.error(e.toString());
+        }
+        return null;
     }
 
-    public static void appendOrder(String project, String orderNumber, String cardHolder, String cardInfo) throws IOException {
+    public static void appendOrder(String project, String orderNumber, String cardHolder, String cardInfo) {
         // Build a new authorized API client service.
         Sheets service = getSheetsService();
 
@@ -114,8 +119,13 @@ public class GoogleSheetsHelper {
         ValueRange values = new ValueRange().setValues(Arrays.asList(Arrays.asList(
                 project, dateFormat.format(new Date()), orderNumber, cardHolder, cardInfo)));
 
-        AppendValuesResponse response = service.spreadsheets().values().append(spreadsheetId, range, values).setValueInputOption("USER_ENTERED").execute();
-        log.info("Google API response: " + response.toString());
+        AppendValuesResponse response = null;
+        try {
+            response = service.spreadsheets().values().append(spreadsheetId, range, values).setValueInputOption("USER_ENTERED").execute();
+            log.info("Google API response: " + response.toString());
+        } catch (IOException e) {
+            log.error(e.toString());
+        }
     }
 
 //    public static void main(String[] args) throws IOException {
