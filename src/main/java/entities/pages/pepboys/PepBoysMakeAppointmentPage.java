@@ -52,7 +52,7 @@ public class PepBoysMakeAppointmentPage extends PepBoysBasePage {
             fileContents = fileContents.replaceAll("<URL>", BASE_URL);
             fileContents = fileContents.replaceAll("<EXP>", COOKIES);
             fileContents = fileContents.replaceAll("<KEY>", System.getProperty("store.key"));
-            log.info(fileContents.toString());
+            log.info("\n" + fileContents.toString() + "\n");
         } catch (IOException e) {
             log.warn("Cannot read file");
         }

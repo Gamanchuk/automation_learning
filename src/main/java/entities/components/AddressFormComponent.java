@@ -70,6 +70,7 @@ public class AddressFormComponent extends BaseComponent {
 
     public void fillState(String state) {
         WebElement stateEl = findElement(stateField);
+        javascriptScroll(stateEl);
         Select selectState = new Select(stateEl);
         selectState.selectByValue(state);
     }
@@ -97,6 +98,7 @@ public class AddressFormComponent extends BaseComponent {
 
     private void fillField(By field, String value) {
         WebElement element = findElement(field);
+        javascriptScroll(element);
         element.clear();
         element.sendKeys(value);
     }

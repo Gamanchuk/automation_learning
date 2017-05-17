@@ -1,4 +1,4 @@
-@pepBoys
+@pepBoys @debug
 
 Feature: PAY IN STORE - EXISTING ACCOUNT - SHIPPING & BILLING PAGE - BILLING INFO
 
@@ -15,6 +15,6 @@ Feature: PAY IN STORE - EXISTING ACCOUNT - SHIPPING & BILLING PAGE - BILLING INF
     And selects "Enter a New Address"
     And presses the "Place Order" button
 
-    And user should be on "Billing Address" page
+    And user should be on "Customer Information" page
     And sees "FORM ERRORS" error message with text "Please review all inputs."
 

@@ -14,6 +14,7 @@ Feature: PAY IN STORE - EXISTING ACCOUNT - SHIPPING & BILLING PAGE - BILLING INF
     And user should be on "Customer Information" page
     And selects "Enter a New Address"
     And user types billing info for "user at Spear street" and checks email
+
     And presses the "Place Order" button
     Then user checks billing info for "user at Spear street" on thank you page
 

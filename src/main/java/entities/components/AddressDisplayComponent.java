@@ -8,7 +8,7 @@ import java.text.ParseException;
 import java.util.concurrent.TimeUnit;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.AssertJUnit.assertTrue;
+import static org.testng.Assert.assertTrue;
 
 public class AddressDisplayComponent extends BaseComponent {
     private By deliveryApt = By.cssSelector("div.address-line2");
@@ -36,23 +36,23 @@ public class AddressDisplayComponent extends BaseComponent {
 
     public void checkStreetAddress(String expectedAddress) {
         String address = findElement(deliveryStreetAddress).getText();
-        assertTrue("Unexpected apt. Expected: " + expectedAddress
-                        + "Address: " + address,
-                address.contains(expectedAddress));
+        assertTrue(address.contains(expectedAddress), "Unexpected address. Expected apt: " + expectedAddress
+                + ". Actual address: " + address);
     }
 
     public void checkApt(String expectedApt) {
         String address = findElement(deliveryStreetAddress).getText();
         String apt = findElement(deliveryApt).getText();
-        assertTrue("Unexpected apt. Expected: " + expectedApt
-                        + " Address: " + address
-                        + " Apt: " + apt,
-                address.contains(expectedApt) || apt.contains(expectedApt));
+        assertTrue(address.contains(expectedApt) || apt.contains(expectedApt),
+                "Unexpected apt. Expected apt: " + expectedApt
+                        + ". Actual Address doesn't have apt : " + address
+                        + ". Actual Apt: " + apt);
+
     }
 
     public void checkFieldValue(String fieldName, String expectedValue) {
         By field = getFieldByName(fieldName);
-        if(isElementPresent(field, 1)) {
+        if (isElementPresent(field, 1)) {
             String fieldValue = findElement(field).getText();
             assertEquals(fieldValue, expectedValue, "Unexpected " + fieldName);
         }
