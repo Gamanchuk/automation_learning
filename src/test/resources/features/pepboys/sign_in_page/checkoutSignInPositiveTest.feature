@@ -10,6 +10,7 @@ Feature: SIGN IN PAGE
 
 
   @TestCaseId("15529")
+  @TestCaseId("15528")
   Scenario: User can sign in with valid email address and valid password
     Given user makes authorisation for "qa user"
     Then user should be on "Billing & Shipping" tab
