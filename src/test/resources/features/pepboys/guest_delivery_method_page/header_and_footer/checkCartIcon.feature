@@ -14,8 +14,5 @@ Feature: GUEST - DELIVERY METHOD PAGE - HEADER & FOOTER
     Given user types billing info for "qa user"
     And presses the "Continue" button
     And chooses "Use Recommended Address"
-    And chooses "Ground: 5-7 Days" shipping method
     And user presses the Shopping Cart icon
     Then user should be on cart page
-
-    # Line 17 can be deleted we don't need to set inforamtion about Delivery method at this case
