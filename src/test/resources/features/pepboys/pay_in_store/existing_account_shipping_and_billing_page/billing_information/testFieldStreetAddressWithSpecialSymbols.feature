@@ -9,7 +9,7 @@ Feature: PAY IN STORE - EXISTING ACCOUNT - SHIPPING & BILLING PAGE - BILLING INF
     And chooses "Pay in Store" method
 
   @TestCaseId("16632")
-  Scenario: Test field 'Address Street'
+  Scenario: Test field 'Address Street' special symbols
     Given user makes authorisation for "Moovweb QA"
     And user should be on "Customer Information" page
     And selects "Enter a New Address"
@@ -17,5 +17,4 @@ Feature: PAY IN STORE - EXISTING ACCOUNT - SHIPPING & BILLING PAGE - BILLING INF
 
     And user types "!@$%^&*():_+" into the "Street Address" field of "Customer Information" address form
     And presses the "Place Order" button
-    And chooses "Use Entered Address"
     Then user should be on thank you page

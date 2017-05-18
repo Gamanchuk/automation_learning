@@ -96,14 +96,14 @@ public class DriverFactory {
                         //desiredCapabilities.setCapability("xcodeConfigFile", "src/resources/Config.xcconfig");
 
                         //desiredCapabilities.setCapability("webkitResponseTimeout", 8000);
-                        desiredCapabilities.setCapability("simpleIsVisibleCheck", true);
+                        //desiredCapabilities.setCapability("simpleIsVisibleCheck", true);
 
                         desiredCapabilities.setCapability("xcodeOrgId", "Y95G5M3Q84");
                         desiredCapabilities.setCapability("xcodeSigningId", "iPhone Developer");
                         desiredCapabilities.setCapability("updatedWDABundleId", "com.moovweb.WebDriverAgentRunner");
 
                         if (Boolean.valueOf(System.getProperty("verboseLogging"))) {
-                            desiredCapabilities.setCapability("showXcodeLog", true);
+                            // desiredCapabilities.setCapability("showXcodeLog", true);
                         }
 
                         //desiredCapabilities.setCapability("startIWDP", true);

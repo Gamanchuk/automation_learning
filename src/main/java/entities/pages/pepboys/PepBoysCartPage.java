@@ -25,11 +25,17 @@ public class PepBoysCartPage extends PepBoysBasePage {
         waitForAjax();
 
         if (method.equals("Pay Online")) {
-            click(By.id("j-payOnline"));
+            assertTrue(isElementVisible(By.id("j-payOnline")), "Pay Online button doesn't present on page.");
+            getDriver().findElement(By.id("j-payOnline")).click();
+            //click(By.id("j-payOnline"));
         } else if (method.equals("PayPal")) {
-            click(By.id("j-payPalCheckout"));
+            assertTrue(isElementVisible(By.id("j-payPalCheckout")), "PayPal button doesn't present on page.");
+            getDriver().findElement(By.id("j-payPalCheckout")).click();
+            //click(By.id("j-payPalCheckout"));
         } else if (method.equals("Pay in Store")) {
-            click(payInStore);
+            assertTrue(isElementVisible(payInStore), "Pay in Store button doesn't present on page.");
+            getDriver().findElement(payInStore).click();
+            //click(payInStore);
         }
 
         CommonFunctions.attachScreenshot("Payment method");
@@ -140,7 +146,7 @@ public class PepBoysCartPage extends PepBoysBasePage {
         findElement(By.cssSelector("a.changeTargetStore")).click();
         waitForElementVisible(By.cssSelector("div.modal-dialog"));
         By chooseStoreButton = By.cssSelector("button.j-chooseStore");
-        if(isElementVisible(chooseStoreButton)) {
+        if (isElementVisible(chooseStoreButton)) {
             WebElement chooseStoreButtonEl = findElement(chooseStoreButton);
             String storeId = chooseStoreButtonEl.getAttribute("data-store");
             TestGlobalsManager.setTestGlobal("storeId", storeId);
