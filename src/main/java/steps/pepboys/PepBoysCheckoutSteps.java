@@ -75,6 +75,11 @@ public class PepBoysCheckoutSteps {
         fillBillingInfo(userName, true, false);
     }
 
+    @And("^user types сustomer info for \"([^\"]*)\" and checks email$")
+    public void typesСustomerInfoForAndChecksEmail(String userName) {
+        fillCustomerInfo(userName, true, false);
+    }
+
     @And("^user types manually billing info for \"([^\"]*)\" and checks email$")
     public void userTypesManuallyBillingInfoForAndChecksEmail(String userName) {
         fillBillingInfo(userName, false, false);
@@ -104,6 +109,21 @@ public class PepBoysCheckoutSteps {
     public void userChecksBillingInfoFor(String userName) {
         BillingUser user = DataProvider.getUser(userName);
         addressDisplayComponent.setRoot(BaseComponent.getContainerByTitle("Billing Address"));
+        addressDisplayComponent.checkInfo(
+                user.getFullName(),
+                user.getApartment(),
+                user.getFullAddress(),
+                user.getCity(),
+                user.getZipCode(),
+                user.getPhone()
+        );
+        addressDisplayComponent.checkFieldValue("Email", user.getEmail());
+    }
+
+    @Then("^user checks customer info for \"([^\"]*)\"$")
+    public void userChecksCustomerInfoFor(String userName) {
+        BillingUser user = DataProvider.getUser(userName);
+        addressDisplayComponent.setRoot(BaseComponent.getContainerByTitle("Customer Information"));
         addressDisplayComponent.checkInfo(
                 user.getFullName(),
                 user.getApartment(),
@@ -407,6 +427,21 @@ public class PepBoysCheckoutSteps {
         CommonFunctions.attachScreenshot("Billing info");
     }
 
+    private void fillCustomerInfo(String userName, boolean autoFill, boolean fillEmail) {
+        BillingUser user = DataProvider.getUser(userName);
+
+        addressFormComponent.setRoot(BaseComponent.getContainerByTitle("Customer Information"));
+        fillAddressForm(user, autoFill);
+
+        if (fillEmail) {
+            emailComponent.fillEmailField(user.getEmail());
+        } else {
+            assertEquals(user.getEmail(), emailComponent.getEmailDisplayValue(), "Unexpected email was used");
+        }
+
+        CommonFunctions.attachScreenshot("Billing info");
+    }
+
     private void fillShippingInfo(String userName, boolean autoFill) {
         BillingUser user = DataProvider.getUser(userName);
         addressFormComponent.setRoot(BaseComponent.getContainerByTitle("Shipping Address"));
@@ -613,4 +648,6 @@ public class PepBoysCheckoutSteps {
         discountComponent.fillDiscount(giftNumber, pinCode);
         CommonFunctions.attachScreenshot("Discount info");
     }
+
+
 }
