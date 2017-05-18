@@ -11,13 +11,13 @@ public class PepBoysProductPage extends PepBoysBasePage {
 
 //    public boolean isPage() {
 //        CommonFunctions.sleep(2000);
-//        return isElementVisible(By.xpath("//div[@data-sku='" + productId + "+']"));
+//        waitForAjax();
+//        return isElementVisible(By.xpath("//div[@class='mw-note-value' and text()='" + productId + "']"));
 //    }
-
     public boolean isPage() {
         CommonFunctions.sleep(2000);
         waitForAjax();
-        return isElementVisible(By.xpath("//div[@class='mw-note-value' and text()='" + productId + "'][1]"));
+        return isElementVisible(By.xpath("//button[text()='Add to cart']"));
     }
 
     public void openProductPage(String productId) {

@@ -194,14 +194,14 @@ public class PepBoysCheckoutSteps {
         pepBoysThankYouPage.openCollapser();
         CommonFunctions.attachScreenshot("Thank You Page");
 
-        if (System.getProperty("site.name").equals("site-pepboys-stage") &&
-                System.getProperty("site.name").equals("site-pepboys-prod")) {
+        String project = Config.SITE_NAME;
+
+        if (project.equals("pepboys-stage") && project.equals("pepboys-prod")) {
 
             String orderNumber = thankYouPage.getOrder();
-            String project = Config.SITE_NAME;
+
             String cardHolder = (String) TestGlobalsManager.getTestGlobal("CARDHOLDER");
             String cardInfo = (String) TestGlobalsManager.getTestGlobal("CARDINFO");
-
             CommonFunctions.saveOrder(orderNumber);
             GoogleSheetsHelper.appendOrder(project, orderNumber, cardHolder, cardInfo);
         }
