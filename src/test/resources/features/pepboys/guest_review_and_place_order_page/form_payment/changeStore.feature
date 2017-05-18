@@ -1,4 +1,4 @@
-@pepBoys @debug
+@pepBoys 
 
 Feature: GUEST - REVIEW & PLACE ORDER PAGE
 
@@ -8,6 +8,7 @@ Feature: GUEST - REVIEW & PLACE ORDER PAGE
     And user views cart
     And chooses "Pay in Store" method
 
+  @Issue("MCCAT-5562")
   @TestCaseId("15416")
   Scenario: Change Store
     Given user types customer info for "qa user"
@@ -15,8 +16,6 @@ Feature: GUEST - REVIEW & PLACE ORDER PAGE
     And user should be on cart page
     And user changes store
     And chooses "Pay in Store" method
-
-#    Then user types billing info for "qa user"
     And checks Pick Up in Store info
 
 

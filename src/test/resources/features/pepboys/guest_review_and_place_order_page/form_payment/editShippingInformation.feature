@@ -8,6 +8,7 @@ Feature: GUEST - REVIEW & PLACE ORDER PAGE
     And user views cart
     And chooses "Pay Online" method
 
+  @Issue("MCCAT-5848")
   @TestCaseId("15412")
   Scenario: Edit Shipping info
     Given user types billing info for "qa user"
