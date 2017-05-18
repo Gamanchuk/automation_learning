@@ -1,7 +1,7 @@
 @pepBoys
 
 
-Feature: GUEST - SHIPPING & BILLING PAGE - ADDRESS VERIFICATION
+Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE - ADDRESS VERIFICATION
 
   Background:
     Given user makes appoint
@@ -9,9 +9,14 @@ Feature: GUEST - SHIPPING & BILLING PAGE - ADDRESS VERIFICATION
     And user views cart
     And chooses "Pay Online" method
 
-  @TestCaseId("15526")
+  @TestCaseId("15540")
   Scenario: Check Address verification
-    Given user types manually billing info for "qa user"
+
+    Given user makes authorisation for "qa user"
+    And user should be on "Billing & Shipping" tab
+    And selects "Enter a New Address"
+
+    And user types manually billing info for "qa user" and checks email
     And user types "10th floor" into the "Apt, Bldg." field of "Billing Address" address form
     And presses the "Continue" button
     And chooses "Edit Address"
@@ -25,5 +30,10 @@ Feature: GUEST - SHIPPING & BILLING PAGE - ADDRESS VERIFICATION
     And presses the "Continue" button
     And chooses "Use Recommended Address"
     Then user should be on "Delivery Method" tab
+
+
+
+
+
 
 

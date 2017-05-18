@@ -38,8 +38,7 @@ public class DriverFactory {
     private static EventFiringWebDriver driver;
     private static AppiumDriverLocalService service;
     private static WebDriverEventListener eventListener;
-
-    private static Log log = LogFactory.getLog(DriverFactory.class);
+    private static Log log = LogFactory.getLog(DriverFactory.class.getSimpleName());
 
     private static final String IOS = "iOS";
     private static final String ANDROID = "Android";
@@ -59,7 +58,6 @@ public class DriverFactory {
             String deviceName = Config.DEVICE_NAME;
             String deviceUdid = Config.DEVICE_UID;
             String iproxyPort = Config.IPROXY_PORT;
-
 
             try {
                 if (Boolean.valueOf(System.getProperty("use.desktop.browser"))) {
@@ -90,6 +88,15 @@ public class DriverFactory {
                         desiredCapabilities.setCapability("wdaLocalPort", Integer.parseInt(iproxyPort));
                         desiredCapabilities.setCapability("useNewWDA", true);
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.LAUNCH_TIMEOUT, 500000);
+
+
+
+
+                        //desiredCapabilities.setCapability("showXcodeLog", true);
+                        //desiredCapabilities.setCapability("xcodeConfigFile", "src/resources/Config.xcconfig");
+
+                        //desiredCapabilities.setCapability("webkitResponseTimeout", 8000);
+                        desiredCapabilities.setCapability("simpleIsVisibleCheck", true);
 
                         desiredCapabilities.setCapability("xcodeOrgId", "Y95G5M3Q84");
                         desiredCapabilities.setCapability("xcodeSigningId", "iPhone Developer");
@@ -139,7 +146,7 @@ public class DriverFactory {
             killAppiumServer(appiumPort);
 
             log.info("");
-            log.info("*************************** STARTING APPIUM SERVICE *******************************");
+            log.info("******************************* STARTING APPIUM SERVICE ****************************");
             log.info("APPIUM PORT: " + appiumPort);
             log.info("IOS WEB PROXY PORT: " + proxyPort);
             log.info("VERBOSE LOGGING: " + System.getProperty("verboseLogging"));

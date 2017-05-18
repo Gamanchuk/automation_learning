@@ -14,6 +14,7 @@ import utils.pepboys.BillingUser;
 import utils.pepboys.CreditCard;
 import utils.pepboys.DataProvider;
 
+import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -50,6 +51,7 @@ public class PepBoysCheckoutSteps {
     private TitleComponent titleComponent = new TitleComponent();
     private ModalComponent modalComponent = new ModalComponent();
     private RewardsAccountComponent rewardsAccountComponent = new RewardsAccountComponent();
+    private DiscountComponent discountComponent = new DiscountComponent();
 
     private PepBoysThankYouPage pepBoysThankYouPage = new PepBoysThankYouPage();
 
@@ -71,6 +73,11 @@ public class PepBoysCheckoutSteps {
     @And("^user types billing info for \"([^\"]*)\" and checks email$")
     public void typesBillingInfoForUserAndChecksEmail(String userName) {
         fillBillingInfo(userName, true, false);
+    }
+
+    @And("^user types сustomer info for \"([^\"]*)\" and checks email$")
+    public void typesСustomerInfoForAndChecksEmail(String userName) {
+        fillCustomerInfo(userName, true, false);
     }
 
     @And("^user types manually billing info for \"([^\"]*)\" and checks email$")
@@ -102,6 +109,21 @@ public class PepBoysCheckoutSteps {
     public void userChecksBillingInfoFor(String userName) {
         BillingUser user = DataProvider.getUser(userName);
         addressDisplayComponent.setRoot(BaseComponent.getContainerByTitle("Billing Address"));
+        addressDisplayComponent.checkInfo(
+                user.getFullName(),
+                user.getApartment(),
+                user.getFullAddress(),
+                user.getCity(),
+                user.getZipCode(),
+                user.getPhone()
+        );
+        addressDisplayComponent.checkFieldValue("Email", user.getEmail());
+    }
+
+    @Then("^user checks customer info for \"([^\"]*)\"$")
+    public void userChecksCustomerInfoFor(String userName) {
+        BillingUser user = DataProvider.getUser(userName);
+        addressDisplayComponent.setRoot(BaseComponent.getContainerByTitle("Customer Information"));
         addressDisplayComponent.checkInfo(
                 user.getFullName(),
                 user.getApartment(),
@@ -219,6 +241,14 @@ public class PepBoysCheckoutSteps {
         radioListComponent.setRoot(BaseComponent.getContainerByTitle("Billing Address"));
         assertTrue(radioListComponent.select(address), "'" + address + "' doesn't present in list");
         CommonFunctions.attachScreenshot("Billing info");
+    }
+
+    @And("^applies customer info for address \"([^\"]*)\"$")
+    public void appliesCustomerInfo(String address) {
+        assertTrue(radioListComponent.exists(), "Customer Information Drop-Down doesn't exist");
+        radioListComponent.setRoot(BaseComponent.getContainerByTitle("Customer Information"));
+        assertTrue(radioListComponent.select(address), "'" + address + "' doesn't present in list");
+        CommonFunctions.attachScreenshot("Customer info");
     }
 
     @And("^applies shipping info for address \"([^\"]*)\"$")
@@ -405,6 +435,21 @@ public class PepBoysCheckoutSteps {
         CommonFunctions.attachScreenshot("Billing info");
     }
 
+    private void fillCustomerInfo(String userName, boolean autoFill, boolean fillEmail) {
+        BillingUser user = DataProvider.getUser(userName);
+
+        addressFormComponent.setRoot(BaseComponent.getContainerByTitle("Customer Information"));
+        fillAddressForm(user, autoFill);
+
+        if (fillEmail) {
+            emailComponent.fillEmailField(user.getEmail());
+        } else {
+            assertEquals(user.getEmail(), emailComponent.getEmailDisplayValue(), "Unexpected email was used");
+        }
+
+        CommonFunctions.attachScreenshot("Customer info");
+    }
+
     private void fillShippingInfo(String userName, boolean autoFill) {
         BillingUser user = DataProvider.getUser(userName);
         addressFormComponent.setRoot(BaseComponent.getContainerByTitle("Shipping Address"));
@@ -500,7 +545,8 @@ public class PepBoysCheckoutSteps {
 
     @Then("^user should be on \"([^\"]*)\" tab$")
     public void userShouldBeOnTab(String tabName) {
-        breadcrumbWidget.waitForBreadcrumbActive(tabName);
+        //breadcrumbWidget.waitForBreadcrumbActive(tabName);
+        assertTrue(breadcrumbWidget.isBreadcrumbActive(tabName), "Tab " + tabName + " is not an active");
         assertTrue(breadcrumbWidget.isTabActive(tabName), "Tab " + tabName + " is not an active");
         CommonFunctions.attachScreenshot("User on [" + tabName + "] tab");
     }
@@ -520,6 +566,9 @@ public class PepBoysCheckoutSteps {
     public void after() {
         stopScreenVideo();
         attachScreenVideo("data");
+
+        File webDriverEventLog = new File("logfile.log");
+        CommonFunctions.attachFile("webDriverEventLog", webDriverEventLog);
     }
 
     @Then("^user should see \"([^\"]*)\" form$")
@@ -598,6 +647,14 @@ public class PepBoysCheckoutSteps {
         String actualRewardsNumber = collapserComponent.getCollapserLinkText().split("# ")[1];
         assertEquals(actualRewardsNumber, user.getRewardsNumber(), "Unexpected Rewards Number");
         CommonFunctions.attachScreenshot("Rewards Number");
+    }
+
+
+    @And("^user types gift card with \"([^\"]*)\" number and \"([^\"]*)\" pin code$")
+    public void userTypesGiftCardWithNumberAndPinCode(String giftNumber, String pinCode) {
+        collapserComponent.openCollapser();
+        discountComponent.fillDiscount(giftNumber, pinCode);
+        CommonFunctions.attachScreenshot("Discount info");
     }
 
 

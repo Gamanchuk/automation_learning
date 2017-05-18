@@ -13,8 +13,8 @@ Feature: PAY IN STORE - EXISTING ACCOUNT - SHIPPING & BILLING PAGE - BILLING INF
     Given user makes authorisation for "Moovweb QA"
     And user should be on "Customer Information" page
     And selects "Enter a New Address"
-    And user types billing info for "qa user" and checks email
+    And user types сustomer info for "qa user" and checks email
 
-    And user types "12345" into the "Apt, Bldg." field of "Billing Address" address form
+    And user types "12345" into the "Apt, Bldg." field of "Customer Information" address form
     And presses the "Place Order" button
     Then user should be on thank you page

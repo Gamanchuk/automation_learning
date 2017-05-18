@@ -35,9 +35,8 @@ public class AddressFormComponent extends BaseComponent {
         }
 
         // Need to sleep for second to avoid selenium exception
-
         CommonFunctions.sleep(1000);
-        waitForElementVisible(apartmentField);
+        this.waitForElementVisible(apartmentField);
         fillField(apartmentField, apartment);
 
         // Need to send phone number digit by digit

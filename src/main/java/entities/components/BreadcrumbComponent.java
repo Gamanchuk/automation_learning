@@ -32,6 +32,11 @@ public class BreadcrumbComponent extends BaseComponent {
         waitForElementPresence(breadcrumb);
     }
 
+    public boolean isBreadcrumbActive(String breadcrumb) {
+        return isElementVisible(By.xpath(
+                "//a[contains(@class, 'breadcrumb') and contains(@class, 'active') and text()='" + breadcrumb + "']"));
+    }
+
     public String getActiveTab() {
         return findElement(By.cssSelector("a.breadcrumb.active")).getText();
     }

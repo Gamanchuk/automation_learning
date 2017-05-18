@@ -26,7 +26,7 @@ public class Config {
     public static final String COOKIES;
     public static final String SITE_NAME;
 
-    private static Log log = LogFactory.getLog(Config.class);
+    private static Log log = LogFactory.getLog(Config.class.getSimpleName());
 
     static {
         Properties props = new Properties();

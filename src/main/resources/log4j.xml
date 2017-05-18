@@ -7,20 +7,20 @@
         <param name="File" value="logfile.log"/>
         <param name="Append" value="false" />
         <layout class="org.apache.log4j.PatternLayout">
-            <param name="ConversionPattern" value="%d{HH:mm:ss}: %m%n" />
+            <param name="ConversionPattern" value="[%p]  %d{HH:mm:ss}: [%c{1}] %m%n"/>
         </layout>
     </appender>
 
-    <appender name="STDOUT" class="org.apache.log4j.ConsoleAppender">
-        <layout class="org.apache.log4j.PatternLayout">
-            <param name="ConversionPattern" value="%d{HH:mm:ss}: %m%n"/>
-        </layout>
-    </appender>
+    <!--<appender name="STDOUT" class="org.apache.log4j.ConsoleAppender">-->
+    <!--<layout class="org.apache.log4j.PatternLayout">-->
+    <!--<param name="ConversionPattern" value="%d{HH:mm:ss}: %m%n"/>-->
+    <!--</layout>-->
+    <!--</appender>-->
 
     <root>
         <level value="INFO"/>
         <appender-ref ref="fileAppender"/>
-        <appender-ref ref="STDOUT"/>
+        <!--<appender-ref ref="STDOUT"/>-->
     </root>
 
 </log4j:configuration>

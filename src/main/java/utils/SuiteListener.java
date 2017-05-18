@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.Date;
 
 public class SuiteListener implements ISuiteListener {
-    private static Log log = LogFactory.getLog(SuiteListener.class);
+    private static Log log = LogFactory.getLog(SuiteListener.class.getSimpleName());
 
     @Override
     public void onStart(ISuite iSuite) {

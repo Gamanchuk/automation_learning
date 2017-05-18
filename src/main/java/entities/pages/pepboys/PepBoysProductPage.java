@@ -39,6 +39,10 @@ public class PepBoysProductPage extends PepBoysBasePage {
         return isElementVisible(By.xpath("//h3[text()='Your item(s) have been added to the cart']"));
     }
 
+    public boolean isInfoDialogOpened(int timeout) {
+        return isElementVisible(By.xpath("//h3[text()='Your item(s) have been added to the cart']"), timeout);
+    }
+
     public void clickViewCartInAddToCartDialog() {
         click(By.xpath("//button[text()='View Cart']"));
     }
