@@ -14,6 +14,7 @@ import utils.pepboys.BillingUser;
 import utils.pepboys.CreditCard;
 import utils.pepboys.DataProvider;
 
+import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -50,6 +51,7 @@ public class PepBoysCheckoutSteps {
     private TitleComponent titleComponent = new TitleComponent();
     private ModalComponent modalComponent = new ModalComponent();
     private RewardsAccountComponent rewardsAccountComponent = new RewardsAccountComponent();
+    private DiscountComponent discountComponent = new DiscountComponent();
 
     private PepBoysThankYouPage pepBoysThankYouPage = new PepBoysThankYouPage();
 
@@ -500,7 +502,8 @@ public class PepBoysCheckoutSteps {
 
     @Then("^user should be on \"([^\"]*)\" tab$")
     public void userShouldBeOnTab(String tabName) {
-        breadcrumbWidget.waitForBreadcrumbActive(tabName);
+        //breadcrumbWidget.waitForBreadcrumbActive(tabName);
+        assertTrue(breadcrumbWidget.isBreadcrumbActive(tabName), "Tab " + tabName + " is not an active");
         assertTrue(breadcrumbWidget.isTabActive(tabName), "Tab " + tabName + " is not an active");
         CommonFunctions.attachScreenshot("User on [" + tabName + "] tab");
     }
@@ -520,6 +523,9 @@ public class PepBoysCheckoutSteps {
     public void after() {
         stopScreenVideo();
         attachScreenVideo("data");
+
+        File webDriverEventLog = new File("logfile.log");
+        CommonFunctions.attachFile("webDriverEventLog", webDriverEventLog);
     }
 
     @Then("^user should see \"([^\"]*)\" form$")
@@ -601,4 +607,10 @@ public class PepBoysCheckoutSteps {
     }
 
 
+    @And("^user types gift card with \"([^\"]*)\" number and \"([^\"]*)\" pin code$")
+    public void userTypesGiftCardWithNumberAndPinCode(String giftNumber, String pinCode) {
+        collapserComponent.openCollapser();
+        discountComponent.fillDiscount(giftNumber, pinCode);
+        CommonFunctions.attachScreenshot("Discount info");
+    }
 }

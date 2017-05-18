@@ -16,127 +16,44 @@ import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.events.WebDriverEventListener;
+import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
 
-public class MyWebDriverEventListener implements WebDriverEventListener {
+public class MyWebDriverEventListener extends AbstractWebDriverEventListener {
 
-    private Log log = LogFactory.getLog(this.getClass());
-
+    private Log log = LogFactory.getLog("WebDriverEvent");
 
     private By lastFindBy;
-    private String originalValue;
 
 
     @Override
-    public void beforeAlertAccept(WebDriver webDriver) {
-
-    }
-
-    @Override
-    public void afterAlertAccept(WebDriver webDriver) {
-
-    }
-
-    @Override
-    public void afterAlertDismiss(WebDriver webDriver) {
-
-    }
-
-    @Override
-    public void beforeAlertDismiss(WebDriver webDriver) {
-
-    }
-
-    @Override
-    public void beforeNavigateTo(String url, WebDriver webDriver) {
-        log.info("WebDriver navigating to: '" + url + "'");
-
+    public void afterNavigateTo(String url, WebDriver webDriver) {
+        log.info("Navigated to: " + url + "");
     }
 
     @Override
     public void beforeFindBy(By by, WebElement webElement, WebDriver webDriver) {
+        log.info("Trying to find Element By:  " + by.toString() + "");
         lastFindBy = by;
     }
 
+//    @Override
+//    public void afterFindBy(By by, WebElement webElement, WebDriver webDriver) {
+//        log.info("Found Element By: " + webElement.toString());
+//    }
+    
     @Override
-    public void afterFindBy(By by, WebElement webElement, WebDriver webDriver) {
-        log.info("WebDriver found element: " + lastFindBy);
+    public void beforeClickOn(WebElement webElement, WebDriver webDriver) {
+        log.info("Trying to click on: " + webElement.toString());
     }
 
-    @Override
-    public void beforeChangeValueOf(WebElement webElement, WebDriver webDriver, CharSequence[] charSequences) {
-        originalValue = webElement.getAttribute("value");
+    public void afterClickOn(WebElement webElement, WebDriver driver) {
+        log.info("Clicked on: " + webElement.toString());
     }
-
-    @Override
-    public void afterChangeValueOf(WebElement webElement, WebDriver webDriver, CharSequence[] charSequences) {
-        log.debug("WebDriver changing value in element found " + lastFindBy + " from '" + originalValue + "' to '" + webElement.getAttribute("value") + "'");
-    }
-
-    @Override
-    public void afterClickOn(WebElement webElement, WebDriver webDriver) {
-
-    }
-
-
 
     @Override
     public void onException(Throwable throwable, WebDriver webDriver) {
+        log.info("\n");
+        log.info("Exception occurred: \n" + throwable);
+        log.info("\n");
     }
-
-    @Override
-    public void beforeNavigateBack(WebDriver webDriver) {
-
-    }
-
-    @Override
-    public void beforeClickOn(WebElement webElement, WebDriver webDriver) {
-        log.info("Clicking element: " + webElement.toString());
-    }
-
-
-    @Override
-    public void afterNavigateBack(WebDriver webDriver) {
-
-    }
-
-    @Override
-    public void beforeNavigateForward(WebDriver webDriver) {
-
-    }
-
-    @Override
-    public void afterNavigateForward(WebDriver webDriver) {
-
-    }
-
-    @Override
-    public void beforeNavigateRefresh(WebDriver webDriver) {
-
-    }
-
-    @Override
-    public void afterNavigateTo(String s, WebDriver webDriver) {
-
-    }
-
-    @Override
-    public void afterNavigateRefresh(WebDriver webDriver) {
-
-    }
-
-    /*
-	 * non overridden methods of WebListener class
-	 */
-
-    @Override
-    public void beforeScript(String s, WebDriver webDriver) {
-
-    }
-
-    @Override
-    public void afterScript(String s, WebDriver webDriver) {
-
-    }
-
 }
