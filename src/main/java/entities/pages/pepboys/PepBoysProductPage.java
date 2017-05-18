@@ -51,6 +51,5 @@ public class PepBoysProductPage extends PepBoysBasePage {
         return !isElementPresent(By.xpath("//h4[contains(text(), 'Not Available')]"), 5) &&
                 !isElementPresent(By.xpath("//h4[contains(text(), 'Available tomorrow')]"), 5) &&
                 isElementPresent(By.xpath("//div[contains(text(), 'Pay in Store Available')]"), 5);
-
     }
 }

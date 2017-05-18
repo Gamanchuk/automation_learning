@@ -1,4 +1,4 @@
-@pepBoys
+@pepBoys @debug
 
 Feature: PAY IN STORE - EXISTING ACCOUNT - SHIPPING & BILLING PAGE - BILLING INFO
 
@@ -6,6 +6,7 @@ Feature: PAY IN STORE - EXISTING ACCOUNT - SHIPPING & BILLING PAGE - BILLING INF
     Given user makes appoint
     And user adds to cart product with "Pick Up in Store" delivery option
     And user views cart
+    And chooses "Pay in Store" methodh "Pick Up in Store" delivery option
     And chooses "Pay in Store" method
 
   @TestCaseId("16634")

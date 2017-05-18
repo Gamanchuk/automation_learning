@@ -177,6 +177,7 @@ public abstract class Entity {
 
     public void sendKeysOneByOne(By selector, String str) {
         WebElement el = findElement(selector);
+        javascriptScroll(el);
         for (char ch : str.toCharArray()) {
             el.sendKeys(ch + "");
         }
@@ -212,6 +213,7 @@ public abstract class Entity {
                         result = (Boolean) js.executeScript("return jQuery.active === 0 && jQuery.isReady && document.readyState == 'complete'");
                     } else {
                         result = (Boolean) js.executeScript("return document.readyState == 'complete'");
+                        log.info("readyState complete: " + result);
                     }
                     log.info("jQuery not active: " + result);
                 } catch (JavascriptException js) {
