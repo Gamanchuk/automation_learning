@@ -9,7 +9,7 @@ Feature: GUEST - REVIEW & PLACE ORDER PAGE
     And chooses "Pay Online" method
 
   @TestCaseId("15412")
-  Scenario: Test field "Card Number"
+  Scenario: Edit Shipping info
     Given user types billing info for "qa user"
     And user types shipping info for "qa user"
     And presses the "Continue" button
@@ -26,6 +26,4 @@ Feature: GUEST - REVIEW & PLACE ORDER PAGE
     And chooses "Ground: 5-7 Days" shipping method
     And presses the "Continue" button
     And user checks shipping info for "qa user2"
-
-    # Need to change title of Scenario to "Edit Shipping info"
 

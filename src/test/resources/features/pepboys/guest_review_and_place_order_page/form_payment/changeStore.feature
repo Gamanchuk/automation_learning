@@ -1,4 +1,4 @@
-@pepBoys
+@pepBoys @debug
 
 Feature: GUEST - REVIEW & PLACE ORDER PAGE
 
@@ -9,8 +9,8 @@ Feature: GUEST - REVIEW & PLACE ORDER PAGE
     And chooses "Pay in Store" method
 
   @TestCaseId("15416")
-  Scenario: Edit installation time
-    Given user types billing info for "qa user"
+  Scenario: Change Store
+    Given user types customer info for "qa user"
     And user clicks arrow for "Pick Up in Store"
     And user should be on cart page
     And user changes store
@@ -18,8 +18,6 @@ Feature: GUEST - REVIEW & PLACE ORDER PAGE
 
 #    Then user types billing info for "qa user"
     And checks Pick Up in Store info
-
-    # Need to rename title of Scenario to "Change store"
 
 
 

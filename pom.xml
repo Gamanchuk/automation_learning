@@ -21,7 +21,7 @@
         <properties.file.name>${props.file.name}</properties.file.name>
         <base.url>${site.url}</base.url>
         <cookies>${site.cookies}</cookies>
-        <site.name>${site.name}</site.name>
+        <site.name>${site.base.name}</site.name>
     </properties>
 
     <name>Moovweb Automation framework</name>
@@ -234,7 +234,7 @@
                         <verboseLogging>${verboseLogging}</verboseLogging>
                         <use.desktop.browser>${use.desktop.browser}</use.desktop.browser>
                         <suite.id>${suite.id}</suite.id>
-                        <site.name>${site.name}</site.name>
+                        <site.name>${site.base.name}</site.name>
                         <base.url>${site.url}</base.url>
                         <cookies>${site.cookies}</cookies>
                         <store.key>${store.key}</store.key>
@@ -526,7 +526,7 @@
         <profile>
             <id>site-pepboys-send</id>
             <properties>
-                <site.name>pepboys-send</site.name>
+                <site.base.name>pepboys-send</site.base.name>
                 <site.url>https://mstage.stage.pepboys.com/</site.url>
                 <site.cookies>?var=b&amp;utm_expid=95483662-2.I0S4ga4uSlCoEu3KU2QnNw.1&amp;_mwexperienceid=75b123b0-6444-4893-9825-1303473bc59f</site.cookies>
                 <store.key>07923</store.key>
@@ -535,7 +535,7 @@
         <profile>
             <id>site-pepboys-stage</id>
             <properties>
-                <site.name>pepboys-stage</site.name>
+                <site.base.name>pepboys-stage</site.base.name>
                 <site.url>https://mstage.pepboys.com/</site.url>
                 <site.cookies>?_mwexperienceid=75b123b0-6444-4893-9825-1303473bc59f</site.cookies>
                 <store.key>00847</store.key>
@@ -544,7 +544,7 @@
         <profile>
             <id>site-pepboys-prod</id>
             <properties>
-                <site.name>pepboys-prod</site.name>
+                <site.base.name>pepboys-prod</site.base.name>
                 <site.url>http://m.pepboys.com/</site.url>
                 <site.cookies>?_mwexperienceid=eeba14c5-b4f0-4563-946a-07af28d2648e</site.cookies>
                 <store.key></store.key>

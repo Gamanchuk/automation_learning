@@ -58,6 +58,16 @@ public class PepBoysCheckoutSteps {
         fillBillingInfo(userName, true, true);
     }
 
+    @And("^user types customer info for \"([^\"]*)\"$")
+    public void typesCustomerInfoFor(String userName) {
+        BillingUser user = DataProvider.getUser(userName);
+
+        addressFormComponent.setRoot(BaseComponent.getContainerByTitle("Customer Information"));
+        fillAddressForm(user, true);
+        emailComponent.fillEmailField(user.getEmail());
+        CommonFunctions.attachScreenshot("Customer info");
+    }
+
     @And("^user types billing info for \"([^\"]*)\" and checks email$")
     public void typesBillingInfoForUserAndChecksEmail(String userName) {
         fillBillingInfo(userName, true, false);
@@ -382,7 +392,8 @@ public class PepBoysCheckoutSteps {
 
     private void fillBillingInfo(String userName, boolean autoFill, boolean fillEmail) {
         BillingUser user = DataProvider.getUser(userName);
-        addressFormComponent.setRoot(BaseComponent.getContainerByTitle("Customer Information"));
+
+        addressFormComponent.setRoot(BaseComponent.getContainerByTitle("Billing Address"));
         fillAddressForm(user, autoFill);
 
         if (fillEmail) {

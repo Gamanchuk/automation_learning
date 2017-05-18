@@ -1,4 +1,4 @@
-@pepBoys
+@pepBoys 
 
 Feature: HAPPY PATH
 
@@ -13,8 +13,8 @@ Feature: HAPPY PATH
     Given user makes authorisation for "qa user"
     And applies billing info for address "201 SPEAR ST"
     And presses the "Continue" button
-    And chooses "Ground: 5-7 Days" shipping method
-    And presses the "Continue" button
+#    And chooses "Ground: 5-7 Days" shipping method
+#    And presses the "Continue" button
     And uses PayPal for payment
     And user confirms purchase as "qa user" with PayPal
     Then user should be on thank you page

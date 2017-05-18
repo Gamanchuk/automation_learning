@@ -12,13 +12,12 @@ Feature: EXPRESS PAYPAL - BREADCRUMB
   @TestCaseId("15553")
   Scenario: Breadcrumb links redirect user to correct page
     Given chooses "Ground: 5-7 Days" shipping method
+    And user presses "Payment & Review" breadcrumb tab
+    And user should be on "Delivery Method" tab
+
     And presses the "Continue" button
     And user should be on "Payment & Review" tab
     Then user navigates to "Delivery Method" breadcrumb
-
-
-    #Need to add this => ( And user presses "Payment & Review" breadcrumb tab ) after line 14
-
 
 
 

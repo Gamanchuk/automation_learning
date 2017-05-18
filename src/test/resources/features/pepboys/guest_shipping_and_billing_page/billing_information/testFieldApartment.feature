@@ -4,7 +4,7 @@ Feature: GUEST - SHIPPING & BILLING PAGE - BILLING INFO
 
   Background: Set Up preconditions for testing billing page
     Given user makes appoint
-    And user adds to cart product with id "8536868" with "Ship to Home" delivery option
+    And user adds to cart product with id "8536868" with "Pick Up in Store" delivery option
     And user views cart
     And chooses "Pay Online" method
 
