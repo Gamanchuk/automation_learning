@@ -124,7 +124,7 @@ public class GoogleSheetsHelper {
             response = service.spreadsheets().values().append(spreadsheetId, range, values).setValueInputOption("USER_ENTERED").execute();
             log.info("Google API response: " + response.toString());
         } catch (IOException e) {
-            log.error(e.toString());
+            log.error("Google API error: \n" + e.toString());
         }
     }
 

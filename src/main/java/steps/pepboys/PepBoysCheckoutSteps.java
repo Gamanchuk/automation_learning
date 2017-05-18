@@ -196,7 +196,8 @@ public class PepBoysCheckoutSteps {
 
         String project = Config.SITE_NAME;
 
-        if (project.equals("pepboys-stage") && project.equals("pepboys-prod")) {
+
+        if (project.equals("pepboys-stage") || project.equals("pepboys-prod")) {
 
             String orderNumber = thankYouPage.getOrder();
 
