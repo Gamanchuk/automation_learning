@@ -86,10 +86,16 @@ public class PepBoysMainPageSteps {
     public void userAddsToCartProductWithIdWithDeliveryOption(String id, String deliveryOption) {
         productPage.openProductPage(id);
         assertTrue(productPage.isPage(), "Product page was not opened");
+
         productPage.setDeliveryOption(deliveryOption);
         productPage.addToCart();
 
-        assertTrue(productPage.isInfoDialogOpened(), "Info dialog about adding item to cart was not displayed");
+        if (!productPage.isInfoDialogOpened(30)) {
+            productPage.addToCart();
+            assertTrue(productPage.isInfoDialogOpened(), "Info dialog about adding item to cart was not displayed");
+        }
+
+
         CommonFunctions.attachScreenshot("Info dialog about adding item to cart was opened");
     }
 
