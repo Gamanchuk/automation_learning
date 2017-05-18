@@ -13,6 +13,7 @@ import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -95,7 +96,7 @@ public class DriverFactory {
                         //desiredCapabilities.setCapability("xcodeConfigFile", "src/resources/Config.xcconfig");
 
                         //desiredCapabilities.setCapability("webkitResponseTimeout", 8000);
-                        //desiredCapabilities.setCapability("simpleIsVisibleCheck", true);
+                        desiredCapabilities.setCapability("simpleIsVisibleCheck", true);
 
                         desiredCapabilities.setCapability("xcodeOrgId", "Y95G5M3Q84");
                         desiredCapabilities.setCapability("xcodeSigningId", "iPhone Developer");

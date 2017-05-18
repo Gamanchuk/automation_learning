@@ -1,4 +1,4 @@
-@pepBoys @debug
+@pepBoys
 
 Feature: GUEST - REVIEW & PLACE ORDER PAGE - GIFT CARD
 

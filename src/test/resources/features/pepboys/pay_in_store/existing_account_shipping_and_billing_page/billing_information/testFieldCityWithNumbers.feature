@@ -15,7 +15,7 @@ Feature: PAY IN STORE - EXISTING ACCOUNT - SHIPPING & BILLING PAGE - BILLING INF
     And selects "Enter a New Address"
     And user types billing info for "qa user" and checks email
 
-    And user types "123456" into the "City" field of "Billing Address" address form
+    And user types "123456" into the "City" field of "Customer Information" address form
     And presses the "Place Order" button
     And chooses "Use Entered Address"
     Then user should be on thank you page

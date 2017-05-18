@@ -6,7 +6,6 @@ Feature: PAY IN STORE - EXISTING ACCOUNT - SHIPPING & BILLING PAGE - BILLING INF
     Given user makes appoint
     And user adds to cart product with "Pick Up in Store" delivery option
     And user views cart
-    And chooses "Pay in Store" methodh "Pick Up in Store" delivery option
     And chooses "Pay in Store" method
 
   @TestCaseId("16634")
@@ -16,7 +15,7 @@ Feature: PAY IN STORE - EXISTING ACCOUNT - SHIPPING & BILLING PAGE - BILLING INF
     And selects "Enter a New Address"
     And user types billing info for "qa user" and checks email
 
-    And user types "!@$%^&*():_+" into the "City" field of "Billing Address" address form
+    And user types "!@$%^&*():_+" into the "City" field of "Customer Information" address form
     And presses the "Place Order" button
     And chooses "Use Entered Address"
     Then user should be on thank you page
