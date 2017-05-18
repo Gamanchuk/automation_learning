@@ -155,7 +155,7 @@ public class DriverFactory {
             AppiumServiceBuilder serviceBuilder = new AppiumServiceBuilder();
             serviceBuilder.usingPort(appiumPort);
 
-            // serviceBuilder.withArgument(GeneralServerFlag.SESSION_OVERRIDE);
+            serviceBuilder.withArgument(GeneralServerFlag.SESSION_OVERRIDE);
 
             if (!Boolean.valueOf(System.getProperty("verboseLogging"))) {
                 serviceBuilder.withArgument(GeneralServerFlag.LOG_LEVEL, "warn");
