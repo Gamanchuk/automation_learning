@@ -22,7 +22,6 @@ Feature: PAY IN STORE - EXISTING ACCOUNT - SHIPPING & BILLING PAGE - BILLING INF
 
     And user types "Moovweb !@#&::!@#()" into the "Full Name" field of "Customer Information" address form
     And presses the "Place Order" button
-    And chooses "Use Entered Address"
     And user should be on "Customer Information" page
     And sees "FORM ERRORS" error message with text "Last Name is invalid"
 

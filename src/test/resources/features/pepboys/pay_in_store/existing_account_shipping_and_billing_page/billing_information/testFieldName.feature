@@ -27,5 +27,4 @@ Feature: PAY IN STORE - EXISTING ACCOUNT - SHIPPING & BILLING PAGE - BILLING INF
 
     And user types "Mr Donal Trump III" into the "Full Name" field of "Customer Information" address form
     And presses the "Place Order" button
-    And chooses "Use Entered Address"
     Then user should be on thank you page

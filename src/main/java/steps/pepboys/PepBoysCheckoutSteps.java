@@ -243,6 +243,14 @@ public class PepBoysCheckoutSteps {
         CommonFunctions.attachScreenshot("Billing info");
     }
 
+    @And("^applies customer info for address \"([^\"]*)\"$")
+    public void appliesCustomerInfo(String address) {
+        assertTrue(radioListComponent.exists(), "Customer Information Drop-Down doesn't exist");
+        radioListComponent.setRoot(BaseComponent.getContainerByTitle("Customer Information"));
+        assertTrue(radioListComponent.select(address), "'" + address + "' doesn't present in list");
+        CommonFunctions.attachScreenshot("Customer info");
+    }
+
     @And("^applies shipping info for address \"([^\"]*)\"$")
     public void appliesShippingInfoForAddress(String address) {
         assertTrue(radioListComponent.exists(), "Billing Address Drop-Down doesn't exist");
@@ -439,7 +447,7 @@ public class PepBoysCheckoutSteps {
             assertEquals(user.getEmail(), emailComponent.getEmailDisplayValue(), "Unexpected email was used");
         }
 
-        CommonFunctions.attachScreenshot("Billing info");
+        CommonFunctions.attachScreenshot("Customer info");
     }
 
     private void fillShippingInfo(String userName, boolean autoFill) {

@@ -54,8 +54,8 @@ public class PepBoysMainPageSteps {
     }
 
     @And("^adds it to the cart with \"([^\"]*)\" delivery option$")
-    public void userAddsItToTheCartWithDeliveryOption(String deliveryOPtion) {
-        productPage.setDeliveryOption(deliveryOPtion);
+    public void userAddsItToTheCartWithDeliveryOption(String deliveryOption) {
+        productPage.setDeliveryOption(deliveryOption);
         productPage.addToCart();
 
         if (!productPage.isInfoDialogOpened()) {
@@ -105,6 +105,14 @@ public class PepBoysMainPageSteps {
 
         productPage.setDeliveryOption(deliveryOption);
         productPage.addToCart();
+
+        if (!productPage.isInfoDialogOpened(20)) {
+            productPage.addToCart();
+            assertTrue(productPage.isInfoDialogOpened(), "Info dialog about adding item to cart was not displayed");
+        }
+
+        
+        CommonFunctions.attachScreenshot("Info dialog about adding item to cart was opened");
     }
 
     @And("^user adding vehicle \"([^\"]*)\"$")
