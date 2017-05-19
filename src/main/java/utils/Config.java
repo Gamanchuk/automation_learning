@@ -25,6 +25,7 @@ public class Config {
     public static final String BASE_URL;
     public static final String COOKIES;
     public static final String SITE_NAME;
+    public static final String STORE_ID;
 
     private static Log log = LogFactory.getLog(Config.class.getSimpleName());
 
@@ -53,5 +54,6 @@ public class Config {
         BASE_URL = System.getProperty("base.url");
         COOKIES = System.getProperty("cookies");
         SITE_NAME = System.getProperty("site.name");
+        STORE_ID = System.getProperty("store.key");
     }
 }

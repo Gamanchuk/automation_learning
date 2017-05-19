@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.ui.Select;
 import utils.CommonFunctions;
+import utils.Config;
 import utils.DriverFactory;
 import utils.pepboys.Vehicle;
 
@@ -51,7 +52,7 @@ public class PepBoysMakeAppointmentPage extends PepBoysBasePage {
             fileContents = Files.toString(new File("src/main/java/api/pepboys/postNewStoreLocation.js"), Charsets.UTF_8);
             fileContents = fileContents.replaceAll("<URL>", BASE_URL);
             fileContents = fileContents.replaceAll("<EXP>", COOKIES);
-            fileContents = fileContents.replaceAll("<KEY>", System.getProperty("store.key"));
+            fileContents = fileContents.replaceAll("<KEY>", Config.STORE_ID);
             log.info("\n" + fileContents.toString() + "\n");
         } catch (IOException e) {
             log.warn("Cannot read file");

@@ -101,11 +101,22 @@ public class PepBoysMainPageSteps {
 
     @And("^user adds to cart product with \"([^\"]*)\" delivery option$")
     public void userAddsToCartProductWithDeliveryOption(String deliveryOption) {
-        productPage.openProductPage(DataProvider.getRandomItemId());
+        StringBuilder scuGroup = new StringBuilder(DataProvider.getRandomItemId());
+        productPage.openProductPage(scuGroup.toString());
 
         if (deliveryOption.equals("Pick Up in Store")) {
+
+            int i = 0;
             while (!productPage.isAvailableInStore()) {
-                productPage.openProductPage(DataProvider.getRandomItemId());
+                if (i == 3) {
+                    assertTrue(false, "We get four random product: [" + scuGroup + "]. " +
+                            "But this products unavailable for Pick Up in Store");
+                }
+
+                String scu = DataProvider.getRandomItemId();
+                scuGroup.append(", ").append(scu);
+                productPage.openProductPage(scu);
+                i++;
             }
         }
 
@@ -116,7 +127,6 @@ public class PepBoysMainPageSteps {
             productPage.addToCart();
             assertTrue(productPage.isInfoDialogOpened(), "Info dialog about adding item to cart was not displayed");
         }
-
 
         CommonFunctions.attachScreenshot("Info dialog about adding item to cart was opened");
     }

@@ -2,9 +2,6 @@ package entities.components;
 
 import org.openqa.selenium.By;
 
-/**
- * Created by vmaksimenko on 05.04.17.
- */
 public class ModalComponent extends BaseComponent {
 
     private By modal = By.cssSelector("div.component.modal");

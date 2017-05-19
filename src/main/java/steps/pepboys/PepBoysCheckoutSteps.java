@@ -6,6 +6,8 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import entities.components.*;
 import entities.pages.pepboys.*;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import utils.CommonFunctions;
 import utils.Config;
 import utils.GoogleSheetsHelper;
@@ -15,6 +17,7 @@ import utils.pepboys.CreditCard;
 import utils.pepboys.DataProvider;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -54,6 +57,7 @@ public class PepBoysCheckoutSteps {
     private DiscountComponent discountComponent = new DiscountComponent();
 
     private PepBoysThankYouPage pepBoysThankYouPage = new PepBoysThankYouPage();
+    private static Log log = LogFactory.getLog(PepBoysCheckoutSteps.class.getSimpleName());
 
     @And("^user types billing info for \"([^\"]*)\"$")
     public void typesBillingInfoFor(String userName) {
@@ -570,6 +574,12 @@ public class PepBoysCheckoutSteps {
 
         File webDriverEventLog = new File("logfile.log");
         CommonFunctions.attachFile("webDriverEventLog", webDriverEventLog);
+        webDriverEventLog.delete();
+        try {
+            webDriverEventLog.createNewFile();
+        } catch (IOException e) {
+            log.info("Cannot create file: " + webDriverEventLog.getName() + ". Error: " + e.getMessage());
+        }
     }
 
     @Then("^user should see \"([^\"]*)\" form$")
@@ -657,6 +667,4 @@ public class PepBoysCheckoutSteps {
         discountComponent.fillDiscount(giftNumber, pinCode);
         CommonFunctions.attachScreenshot("Discount info");
     }
-
-
 }

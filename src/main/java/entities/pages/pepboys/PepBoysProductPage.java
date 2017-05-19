@@ -3,26 +3,27 @@ package entities.pages.pepboys;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import utils.CommonFunctions;
+import utils.Config;
 
 import static org.testng.Assert.assertTrue;
 
 public class PepBoysProductPage extends PepBoysBasePage {
     private String productId;
+    private By addToCart = By.xpath("//button[contains(@class, 'j-addItem')]");
 
-//    public boolean isPage() {
+    //    public boolean isPage() {
 //        CommonFunctions.sleep(2000);
 //        waitForAjax();
 //        return isElementVisible(By.xpath("//div[@class='mw-note-value' and text()='" + productId + "']"));
 //    }
     public boolean isPage() {
         CommonFunctions.sleep(2000);
-        waitForAjax();
-        return isElementVisible(By.xpath("//button[text()='Add to cart']"));
+        return isElementVisible(addToCart) && isElementClickable(addToCart);
     }
 
     public void openProductPage(String productId) {
         this.productId = productId;
-        getDriver().navigate().to(BASE_URL + "product/details/" + productId);
+        getDriver().navigate().to(BASE_URL + "product/details/" + productId + "/" + Config.STORE_ID);
         assertTrue(isPage(), "Product page was not opened");
     }
 
@@ -38,7 +39,7 @@ public class PepBoysProductPage extends PepBoysBasePage {
     }
 
     public void addToCart() {
-        click(By.xpath("//button[text()='Add to cart']"));
+        click(addToCart);
     }
 
     public boolean isInfoDialogOpened() {
@@ -60,6 +61,9 @@ public class PepBoysProductPage extends PepBoysBasePage {
     public boolean isAvailableInStore() {
         return !isElementPresent(By.xpath("//h4[contains(text(), 'Not Available')]"), 5) &&
                 !isElementPresent(By.xpath("//h4[contains(text(), 'Available tomorrow')]"), 5) &&
+                !isElementPresent(By.xpath("//h4[contains(text(), 'Available today after')]"), 5) &&
+                !isElementPresent(By.xpath("//h4[contains(text(), 'days after')]"), 5) &&
+                isElementPresent(By.xpath("//h4[contains(text(), 'Available today')]"), 5) &&
                 isElementPresent(By.xpath("//div[contains(text(), 'Pay in Store Available')]"), 5);
     }
 }
