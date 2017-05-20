@@ -103,7 +103,7 @@ public class DriverFactory {
                         desiredCapabilities.setCapability("updatedWDABundleId", "com.moovweb.WebDriverAgentRunner");
 
                         if (Boolean.valueOf(System.getProperty("verboseLogging"))) {
-                            // desiredCapabilities.setCapability("showXcodeLog", true);
+                            desiredCapabilities.setCapability("showXcodeLog", true);
                         }
 
                         //desiredCapabilities.setCapability("startIWDP", true);
