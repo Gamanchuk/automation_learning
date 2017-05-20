@@ -1,4 +1,4 @@
-@pepBoys
+@pepBoys @debug
 
 Feature: PAY IN STORE - GUEST - REVIEW & PLACE ORDER PAGE - THANK YOU PAGE
 
@@ -11,7 +11,7 @@ Feature: PAY IN STORE - GUEST - REVIEW & PLACE ORDER PAGE - THANK YOU PAGE
   @TestCaseId("16662")
   @TestCaseId("16661")
   Scenario: Check button Continue Shopping
-    Given user types billing info for "qa user"
+    Given user types customer info for "qa user"
     And presses the "Place Order" button
     And user should be on thank you page
     Then presses the "Continue Shopping" button

@@ -1,4 +1,4 @@
-@pepBoys
+@pepBoys @debug
 
 Feature: PAY IN STORE - GUEST - REVIEW & PLACE ORDER PAGE - THANK YOU PAGE
 
@@ -10,7 +10,7 @@ Feature: PAY IN STORE - GUEST - REVIEW & PLACE ORDER PAGE - THANK YOU PAGE
 
   @TestCaseId("16663")
   Scenario: Links at Thank you page
-    Given user types billing info for "qa user"
+    Given user types customer info for "qa user"
     And presses the "Place Order" button
     And user should be on thank you page
     Then user presses the Find out more link

@@ -1,4 +1,4 @@
-@pepBoys
+@pepBoys @debug
 
 Feature: PAY IN STORE - GUEST - MEMBERSHIP REWARDS
 
@@ -10,7 +10,7 @@ Feature: PAY IN STORE - GUEST - MEMBERSHIP REWARDS
 
   @TestCaseId("16656")
   Scenario: Test field "Rewards" when user enter Valid Rewards Account
-    Given user types billing info for "qa user"
+    Given user types customer info for "qa user"
     And user types rewards number "990298322581"
     And presses the "Place Order" button
     Then user should be on thank you page

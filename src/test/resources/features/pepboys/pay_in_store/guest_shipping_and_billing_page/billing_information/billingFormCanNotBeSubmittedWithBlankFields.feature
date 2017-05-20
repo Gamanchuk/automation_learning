@@ -1,4 +1,4 @@
-@pepBoys
+@pepBoys @debug
 
 Feature: PAY IN STORE - GUEST - SHIPPING & BILLING PAGE - BILLING INFO
 
@@ -11,6 +11,6 @@ Feature: PAY IN STORE - GUEST - SHIPPING & BILLING PAGE - BILLING INFO
   @TestCaseId("16642")
   Scenario: Test billing form with blank fields
     Given presses the "Continue" button
-    Then user should be on "Billing" page
+    Then user should be on "Customer Information" page
     And sees "FORM ERRORS" error message with text "Please review all inputs."
 

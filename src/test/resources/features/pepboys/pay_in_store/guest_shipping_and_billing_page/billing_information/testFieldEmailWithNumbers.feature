@@ -1,4 +1,4 @@
-@pepBoys
+@pepBoys @debug
 
 Feature: PAY IN STORE - GUEST - SHIPPING & BILLING PAGE - BILLING INFO
 
@@ -10,7 +10,7 @@ Feature: PAY IN STORE - GUEST - SHIPPING & BILLING PAGE - BILLING INFO
 
   @TestCaseId("16651")
   Scenario: Test field 'Email' with numbers
-    Given user types billing info for "qa user"
+    Given user types customer info for "qa user"
     And user types "123456@moovweb.com" into the email field
     And presses the "Place Order" button
     Then user checks "Email" with value "123456@moovweb.com" on thank you page
