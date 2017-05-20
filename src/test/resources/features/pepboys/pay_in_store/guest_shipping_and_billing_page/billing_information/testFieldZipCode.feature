@@ -13,7 +13,6 @@ Feature: PAY IN STORE - GUEST - SHIPPING & BILLING PAGE - BILLING INFO
     Given user types customer info for "qa user"
     And user types " " into the "City" field of "Customer Information" address form
     And presses the "Continue" button
-    And chooses "Use Entered Address"
     And sees "FORM ERRORS" error message with text "Please review all inputs."
 
     And user types "94105" into the "City" field of "Customer Information" address form
