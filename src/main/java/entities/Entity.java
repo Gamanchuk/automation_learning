@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 
 public abstract class Entity {
 
-    private final int TIMEOUT_SECONDS = 60;
+    public static final int TIMEOUT_SECONDS = 60;
 
     private WebElement root = null;
     private WebDriver driver = DriverFactory.getDriver();

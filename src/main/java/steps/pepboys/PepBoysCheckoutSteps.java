@@ -6,6 +6,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import entities.components.*;
 import entities.pages.pepboys.*;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import utils.CommonFunctions;
@@ -574,11 +575,11 @@ public class PepBoysCheckoutSteps {
 
         File webDriverEventLog = new File("logfile.log");
         CommonFunctions.attachFile("webDriverEventLog", webDriverEventLog);
-        webDriverEventLog.delete();
+
         try {
-            webDriverEventLog.createNewFile();
+            FileUtils.write(new File(webDriverEventLog.getPath()), "", "UTF-8");
         } catch (IOException e) {
-            log.info("Cannot create file: " + webDriverEventLog.getName() + ". Error: " + e.getMessage());
+            log.info("Problem with cleaning file: " + webDriverEventLog.getName() + ". Error: " + e.getMessage());
         }
     }
 
