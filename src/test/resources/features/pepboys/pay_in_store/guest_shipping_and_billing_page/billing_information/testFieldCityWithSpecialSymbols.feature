@@ -1,4 +1,4 @@
-@pepBoys
+@pepBoys @debug
 
 Feature: PAY IN STORE - GUEST - SHIPPING & BILLING PAGE - BILLING INFO
 
@@ -10,8 +10,8 @@ Feature: PAY IN STORE - GUEST - SHIPPING & BILLING PAGE - BILLING INFO
 
   @TestCaseId("16647")
   Scenario: Test field 'City' with special symbols
-    Given user types billing info for "qa user"
-    And user types "!@$%^&*():_+" into the "City" field of "Billing Address" address form
+    Given user types customer info for "qa user"
+    And user types "!@$%^&*():_+" into the "City" field of "Customer Information" address form
     And presses the "Place Order" button
     Then user checks city info with value "!@$%^&*():_+" on thank you page
 

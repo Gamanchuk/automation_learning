@@ -1,13 +1,12 @@
-@pepBoys
+@pepBoys @debug
 
 Feature: PAY IN STORE - SIGN IN PAGE
 
   Background:
     Given user makes appoint
-    And user adds to cart product with id "8536868" with "Pick Up in Store" delivery option
+    And user adds to cart product with "Pick Up in Store" delivery option
     And user views cart
     And chooses "Pay in Store" method
-    And user presses the signIn button
 
 
   @TestCaseId("16684")
@@ -42,6 +41,4 @@ Feature: PAY IN STORE - SIGN IN PAGE
     Then sees "FORM ERRORS" error message with text "Your login attempt was not successful, try again."
 
     Given user presses the Proceed to Guest Checkout link
-    Then user should be on "Billing" page
-
-    # We need to remove lines 44 and 45 because we have separate case for checking this functionality
+    Then user should be on "Customer Information" page

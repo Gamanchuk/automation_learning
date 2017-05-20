@@ -1,4 +1,4 @@
-@pepBoys
+@pepBoys @debug
 
 Feature: PAY IN STORE - GUEST - MEMBERSHIP REWARDS
 
@@ -11,21 +11,21 @@ Feature: PAY IN STORE - GUEST - MEMBERSHIP REWARDS
 
   @TestCaseId("16657")
   Scenario: Test field "Rewards" when user enter Invalid Rewards Account
-    Given user types billing info for "qa user"
+    Given user types customer info for "qa user"
 
     And user types rewards number "1212"
     And presses the "Place Order" button
-    Then user should be on "Billing" page
+    Then user should be on "Customer Information" page
     And sees "FORM ERRORS" error message with text "The Rewards Number you provided is not in the correct format."
 
     And user types rewards number "someText"
     And presses the "Place Order" button
-    Then user should be on "Billing" page
+    Then user should be on "Customer Information" page
     And sees "FORM ERRORS" error message with text "The Rewards Number you provided is not in the correct format."
 
     And user types rewards number "!@#$%^&*$$()"
     And presses the "Place Order" button
-    Then user should be on "Billing" page
+    Then user should be on "Customer Information" page
     And sees "FORM ERRORS" error message with text "The Rewards Number you provided is not in the correct format."
 
     And user types rewards number ""

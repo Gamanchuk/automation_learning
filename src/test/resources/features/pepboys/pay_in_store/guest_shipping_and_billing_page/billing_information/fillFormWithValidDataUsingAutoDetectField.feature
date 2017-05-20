@@ -1,4 +1,4 @@
-@pepBoys
+@pepBoys @debug
 
 Feature: PAY IN STORE - GUEST - SHIPPING & BILLING PAGE - BILLING INFO
 
@@ -10,7 +10,7 @@ Feature: PAY IN STORE - GUEST - SHIPPING & BILLING PAGE - BILLING INFO
 
   @TestCaseId("16641")
   Scenario: Test with correct billing information and fill in all required fields (Address chosen from auto-detect drop-down)
-    Given user types billing info for "qa user"
+    Given user types customer info for "qa user"
     And presses the "Continue" button
     Then user checks billing info for "qa user" on thank you page
 

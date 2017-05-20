@@ -1,4 +1,4 @@
-@pepBoys
+@pepBoys @debug
 
 Feature: PAY IN STORE - GUEST - SHIPPING & BILLING PAGE - BILLING INFO
 
@@ -10,15 +10,15 @@ Feature: PAY IN STORE - GUEST - SHIPPING & BILLING PAGE - BILLING INFO
 
   @TestCaseId("16643")
   Scenario: Test field 'Name'
-    Given user types billing info for "qa user"
-    And user types " " into the "Full Name" field of "Billing Address" address form
+    Given user types customer info for "qa user"
+    And user types " " into the "Full Name" field of "Customer Information" address form
     And presses the "Place Order" button
     And sees "FORM ERRORS" error message with text "Please review all inputs."
 
-    And user types "!@#&( !@#()" into the "Full Name" field of "Billing Address" address form
+    And user types "!@#&( !@#()" into the "Full Name" field of "Customer Information" address form
     And presses the "Place Order" button
     And sees "FORM ERRORS" error message with text "Please review all inputs."
 
-    And user types "Mr Donal Trump III" into the "Full Name" field of "Billing Address" address form
+    And user types "Mr Donal Trump III" into the "Full Name" field of "Customer Information" address form
     And presses the "Place Order" button
     Then user checks "Full Name" with value "Mr Donal Trump III" on thank you page

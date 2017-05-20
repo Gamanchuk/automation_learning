@@ -95,6 +95,11 @@ public class PepBoysCheckoutSteps {
         fillBillingInfo(userName, false, true);
     }
 
+    @Given("^user types manually customer info for \"([^\"]*)\"$")
+    public void userTypesManuallyCustomerInfoFor(String userName) {
+        fillCustomerInfo(userName, false, true);
+    }
+
     @Then("^user checks billing info for \"([^\"]*)\" on thank you page$")
     public void userChecksBillingInfoForOnThankYouPage(String userName) {
         this.userShouldBeOnThankYouPage();
@@ -668,4 +673,6 @@ public class PepBoysCheckoutSteps {
         discountComponent.fillDiscount(giftNumber, pinCode);
         CommonFunctions.attachScreenshot("Discount info");
     }
+
+
 }

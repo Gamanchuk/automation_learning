@@ -1,4 +1,4 @@
-@pepBoys
+@pepBoys @debug
 
 Feature: PAY IN STORE - GUEST - SHIPPING & BILLING PAGE - BILLING INFO
 
@@ -10,7 +10,7 @@ Feature: PAY IN STORE - GUEST - SHIPPING & BILLING PAGE - BILLING INFO
 
   @TestCaseId("16645")
   Scenario: Test field 'Address Street' with numbers
-    Given user types billing info for "qa user"
-    And user types "123456" into the "Street Address" field of "Billing Address" address form
+    Given user types customer info for "qa user"
+    And user types "123456" into the "Street Address" field of "Customer Information" address form
     And presses the "Place Order" button
     Then user checks "Street Address" with value "123456" on thank you page

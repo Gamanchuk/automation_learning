@@ -1,13 +1,12 @@
-@pepBoys
+@pepBoys @debug
 
 Feature: PAY IN STORE - SIGN IN PAGE
 
   Background:
     Given user makes appoint
-    And user adds to cart product with id "8536868" with "Pick Up in Store" delivery option
+    And user adds to cart product with "Pick Up in Store" delivery option
     And user views cart
     And chooses "Pay in Store" method
-
 
   @TestCaseId("16686")
   Scenario: User can click on Forgot Password link
