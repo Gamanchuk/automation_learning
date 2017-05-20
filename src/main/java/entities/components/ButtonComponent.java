@@ -11,4 +11,8 @@ public class ButtonComponent extends BaseComponent {
         getDriver().findElements(btn).get(0).sendKeys(Keys.RETURN);
     }
 
+    public boolean exists() {
+        return isElementVisible(btn) && isElementClickable(btn);
+    }
+
 }
