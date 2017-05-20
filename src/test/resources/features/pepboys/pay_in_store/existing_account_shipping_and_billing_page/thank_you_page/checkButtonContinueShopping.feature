@@ -1,4 +1,4 @@
-@pepBoys
+@pepBoys @debug
 
 Feature: PAY IN STORE - EXISTING ACCOUNT - REVIEW & PLACE ORDER PAGE - THANK YOU PAGE
 
@@ -12,7 +12,7 @@ Feature: PAY IN STORE - EXISTING ACCOUNT - REVIEW & PLACE ORDER PAGE - THANK YOU
   @TestCaseId("16673")
   Scenario: Check button Continue Shopping
     Given user makes authorisation for "qa user"
-    And applies billing info for address "201 SPEAR ST"
+    And applies customer info for address "201 SPEAR ST"
     And presses the "Place Order" button
     And user should be on thank you page
     Then presses the "Continue Shopping" button
