@@ -25,6 +25,7 @@ public class PepBoysMainPageSteps {
     private PepBoysMyAccountPage myAccountPage = new PepBoysMyAccountPage();
     private PepBoysThankYouPage thankYouPage = new PepBoysThankYouPage();
     private PepBoysTrackingPage trackingPage = new PepBoysTrackingPage();
+    private String DELIVERY_OPTIONS;
 
 
     @Given("^user makes appoint with code \"([^\"]*)\"$")
@@ -74,7 +75,14 @@ public class PepBoysMainPageSteps {
 
     @And("^chooses \"([^\"]*)\" method$")
     public void userChoosesMethod(String method) {
-        cartPage.payUsingPaymentMethod(method);
+        boolean result = cartPage.payUsingPaymentMethod(method);
+
+        if (!result) {
+            cartPage.clean();
+            userAddsToCartProductWithDeliveryOption(DELIVERY_OPTIONS);
+            userViewsCart();
+            cartPage.payUsingPaymentMethod(method);
+        }
     }
 
     @And("^chooses \"([^\"]*)\" method with appointment details$")
@@ -85,7 +93,7 @@ public class PepBoysMainPageSteps {
     @And("^user adds to cart product with id \"([^\"]*)\" with \"([^\"]*)\" delivery option$")
     public void userAddsToCartProductWithIdWithDeliveryOption(String id, String deliveryOption) {
         productPage.openProductPage(id);
-        assertTrue(productPage.isPage(), "Product page was not opened");
+        //  assertTrue(productPage.isPage(), "Product page was not opened");
 
         productPage.setDeliveryOption(deliveryOption);
         productPage.addToCart();
@@ -95,12 +103,12 @@ public class PepBoysMainPageSteps {
             assertTrue(productPage.isInfoDialogOpened(), "Info dialog about adding item to cart was not displayed");
         }
 
-
         CommonFunctions.attachScreenshot("Info dialog about adding item to cart was opened");
     }
 
     @And("^user adds to cart product with \"([^\"]*)\" delivery option$")
     public void userAddsToCartProductWithDeliveryOption(String deliveryOption) {
+        DELIVERY_OPTIONS = deliveryOption;
         StringBuilder scuGroup = new StringBuilder(DataProvider.getRandomItemId());
         productPage.openProductPage(scuGroup.toString());
 
