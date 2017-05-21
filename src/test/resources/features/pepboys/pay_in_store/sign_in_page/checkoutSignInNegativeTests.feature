@@ -7,7 +7,7 @@ Feature: PAY IN STORE - SIGN IN PAGE
     And user adds to cart product with "Pick Up in Store" delivery option
     And user views cart
     And chooses "Pay in Store" method
-
+    And user presses the signIn button
 
   @TestCaseId("16684")
   @TestCaseId("16681")
