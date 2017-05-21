@@ -6,7 +6,6 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import entities.components.*;
 import entities.pages.pepboys.*;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import utils.CommonFunctions;
@@ -18,7 +17,6 @@ import utils.pepboys.CreditCard;
 import utils.pepboys.DataProvider;
 
 import java.io.File;
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -580,12 +578,6 @@ public class PepBoysCheckoutSteps {
 
         File webDriverEventLog = new File("logfile.log");
         CommonFunctions.attachFile("webDriverEventLog", webDriverEventLog);
-
-        try {
-            FileUtils.write(new File(webDriverEventLog.getPath()), "", "UTF-8");
-        } catch (IOException e) {
-            log.info("Problem with cleaning file: " + webDriverEventLog.getName() + ". Error: " + e.getMessage());
-        }
     }
 
     @Then("^user should see \"([^\"]*)\" form$")

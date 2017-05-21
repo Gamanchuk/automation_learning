@@ -24,12 +24,14 @@ public class PepBoysProductPage extends PepBoysBasePage {
     public void openProductPage(String productId) {
         this.productId = productId;
         getDriver().navigate().to(BASE_URL + "product/details/" + productId + "/" + Config.STORE_ID);
-        assertTrue(isPage(), "Product page was not opened");
+        assertTrue(isPage(), "Product page was not opened.");
     }
 
     public void setDeliveryOption(String deliveryOption) {
+        By deliveryOptionXpath = By.xpath("//label[contains(., '" + deliveryOption + "')]");
 
-        WebElement deliveryOptionEl = getDriver().findElement(By.xpath("//label[contains(., '" + deliveryOption + "')]"));
+        assertTrue(isElementVisible(deliveryOptionXpath), "Delivery options " + deliveryOption + " doesn't present on page.");
+        WebElement deliveryOptionEl = getDriver().findElement(deliveryOptionXpath);
         javascriptScroll(deliveryOptionEl);
 
         if (!deliveryOption.equals("Pick Up in Store")) {

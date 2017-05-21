@@ -5,15 +5,20 @@ import org.openqa.selenium.WebElement;
 import utils.CommonFunctions;
 import utils.pepboys.BillingUser;
 
+import static org.testng.Assert.assertTrue;
+
 public class PayPalComponent extends BaseComponent {
 
     public void doLogin(BillingUser user) {
+        boolean isNewPayPal = isIframeExist("injectedUl");
+        By logInButton = isNewPayPal ? By.id("btnLogin") : By.id("login");
 
-        switchToIframe("injectedUl");
+        if (isNewPayPal) {
+            switchToIframe("injectedUl");
+        }
 
-        By logInButton = By.id("btnLogin");
-
-        waitForElementClickable(logInButton);
+        assertTrue(isElementVisible(logInButton) && isElementClickable(logInButton),
+                "PayPal Login button doesn't present on page or not clickable.");
 
         WebElement emailField = getDriver().findElement(By.id("email"));
         emailField.clear();
@@ -26,16 +31,19 @@ public class PayPalComponent extends BaseComponent {
         CommonFunctions.attachScreenshot("Login PayPal Page");
         getDriver().findElement(logInButton).click();
 
-        // waiting for spinner
-        switchToDefaultIframe();
-        waitForElementVisible(By.id("spinner"));
-        waitForElementInvisibility(By.id("spinner"));
+        if (isNewPayPal) {
+            // waiting for spinner
+            switchToDefaultIframe();
+            waitForElementVisible(By.id("spinner"));
+            waitForElementInvisibility(By.id("spinner"));
+        }
 
         CommonFunctions.attachScreenshot("Login PayPal Page after SignIn");
     }
 
     public void confirmationPay() {
-        waitForElementClickable(By.id("confirmButtonTop"));
+        assertTrue(isElementClickable(By.id("confirmButtonTop")),
+                "PayPal confirmation button doesn't present on page or not clickable.");
         getDriver().findElement(By.id("confirmButtonTop")).click();
     }
 

@@ -13,6 +13,8 @@ import utils.DriverFactory;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import static org.testng.Assert.assertTrue;
+
 public abstract class Entity {
 
     public static final int TIMEOUT_SECONDS = 60;
@@ -209,7 +211,7 @@ public abstract class Entity {
                 try {
                     JavascriptExecutor js = (JavascriptExecutor) driver;
                     boolean hasJquery = (Boolean) js.executeScript("return typeof jQuery !== 'undefined'");
-                    if(hasJquery) {
+                    if (hasJquery) {
                         result = (Boolean) js.executeScript("return jQuery.active === 0 && jQuery.isReady && document.readyState == 'complete'");
                     } else {
                         result = (Boolean) js.executeScript("return document.readyState == 'complete'");
@@ -282,9 +284,13 @@ public abstract class Entity {
     }
 
     public void switchToIframe(String iframeName) {
-        waitForElementVisible(By.name(iframeName), 120);
+        assertTrue(isElementVisible(By.name(iframeName), 120),
+                "PayPal login page doesn't present.");
         driver.switchTo().frame(iframeName);
+    }
 
+    public boolean isIframeExist(String iframeName) {
+        return isElementVisible(By.name(iframeName), 120);
     }
 
     public void switchToDefaultIframe() {
