@@ -9,7 +9,7 @@ Feature: EXISTING ACCOUNT - REVIEW & PLACE ORDER PAGE - THANK YOU PAGE
     And chooses "Pay Online" method
 
   @Issue("MCCAT-5505")
-  @TestCaseId("15422")
+  @TestCaseId("15474")
   Scenario: Links at Thank you page
     Given user makes authorisation for "qa user"
     And applies billing info for address "201 SPEAR ST"
