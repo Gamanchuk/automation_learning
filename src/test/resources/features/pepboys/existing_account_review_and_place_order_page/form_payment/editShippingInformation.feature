@@ -1,10 +1,10 @@
-@pepBoys
+@pepBoys @debug-
 
 Feature: EXISTING ACCOUNT - REVIEW & PLACE ORDER PAGE
 
   Background:
     Given user makes appoint
-    And user adds to cart product with "Pick Up in Store" delivery option
+    And user adds to cart product with "Ship to Home" delivery option
     And user views cart
     And chooses "Pay Online" method
 
