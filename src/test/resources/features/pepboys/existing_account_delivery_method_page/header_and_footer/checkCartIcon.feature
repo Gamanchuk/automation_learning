@@ -14,6 +14,6 @@ Feature: EXISTING ACCOUNT - DELIVERY METHOD PAGE - HEADER & FOOTER
     Given user makes authorisation for "qa user"
     And applies billing info for address "123 Mission Street, 10th Floor"
     And presses the "Continue" button
-    And chooses "Use Recommended Address"
+    And user should be on "Delivery Method" tab
     And user presses the Shopping Cart icon
     Then user should be on cart page
