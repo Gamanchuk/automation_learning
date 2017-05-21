@@ -8,6 +8,7 @@ Feature: EXISTING ACCOUNT - REVIEW & PLACE ORDER PAGE
     And user views cart
     And chooses "Pay Online" method
 
+  @Issue("MCCAT-5505")
   @TestCaseId("15459")
   @TestCaseId("15460")
   Scenario: Test field "Cardholder Name"

@@ -10,6 +10,7 @@ Feature: HAPPY PATH
 
   @Issue("MCCAT-5505")
   @TestCaseId("16248")
+  @TestCaseId("15373")
   Scenario: Place Order as a "Registered User" with Credit Card
     Given user makes authorisation for "qa user3"
     And applies billing info for address "8th avenue, Unit 1611"

@@ -9,7 +9,6 @@ Feature: EXISTING ACCOUNT - REVIEW & PLACE ORDER PAGE
     And chooses "Pay Online" method
 
   @TestCaseId("15404")
-
   Scenario: Test field "Expiration"
     Given user makes authorisation for "qa user"
     And applies billing info for address "123 Mission Street, 10th Floor"
