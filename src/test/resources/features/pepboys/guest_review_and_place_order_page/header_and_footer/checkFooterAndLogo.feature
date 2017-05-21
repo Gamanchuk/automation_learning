@@ -9,9 +9,9 @@ Feature: GUEST - REVIEW & PLACE ORDER PAGE - HEADER & FOOTER
     And chooses "Pay Online" method
 
 
-  @TestCaseId("15484")
-  @TestCaseId("15486")
-  @TestCaseId("15488")
+  @TestCaseId("15395")
+  @TestCaseId("15397")
+  @TestCaseId("15399")
   Scenario: Check footer and logo
     Given user types billing info for "qa user"
     And presses the "Continue" button

@@ -16,7 +16,6 @@ Feature: HAPPY PATH
   Scenario: Place Multiple Orders as a "Guest"
     Given user types billing info for "qa user"
     And presses the "Continue" button
-    And chooses "Use Recommended Address"
     And chooses "Ground: 5-7 Days" shipping method
     And presses the "Continue" button
     And uses "visa" card for payment

@@ -12,7 +12,7 @@ public class PepBoysPaymentAndReviewCheckoutPage extends PepBoysBasePage {
     }
 
     public void clickArrowFor(String componentName) {
-        waitForElementPresence(By.cssSelector("div.display-well-arrow"));
+        assertTrue(isElementClickable(By.cssSelector("div.display-well-arrow")), "Arrow for " + componentName + " was not clickable");
         BaseComponent.getComponentByTitle(componentName).findElement(By.cssSelector("div.display-well-arrow")).click();
     }
 

@@ -8,7 +8,7 @@ Feature: GUEST - SHIPPING & BILLING PAGE - BILLING INFO
     And user views cart
     And chooses "Pay Online" method
 
-  @TestCaseId("15420")
+  @TestCaseId("15495")
   Scenario: Test with correct billing information and do not fill in all required fields
     Given presses the "Continue" button
     Then user should stay at "Billing & Shipping" tab

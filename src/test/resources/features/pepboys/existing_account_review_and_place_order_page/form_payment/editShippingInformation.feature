@@ -10,7 +10,7 @@ Feature: EXISTING ACCOUNT - REVIEW & PLACE ORDER PAGE
 
   @TestCaseId("15465")
   Scenario: Test Shipping Information
-    Given user makes authorisation for "qa user"
+    Given user makes authorisation for "qa user3"
     And applies shipping info for address "123 Mission Street, 10th Floor"
     And presses the "Continue" button
 
