@@ -11,7 +11,7 @@ Feature: GUEST - SHIPPING & BILLING PAGE - BILLING INFO
   @TestCaseId("15496")
   Scenario: Test field 'Name'
     Given user types billing info for "qa user"
-    And user types "" into the "Full Name" field of "Billing Address" address form
+    And user types " " into the "Full Name" field of "Billing Address" address form
     And presses the "Continue" button
     Then user should stay at "Billing & Shipping" tab
     And sees "FORM ERRORS" error message with text "Please review all inputs."
@@ -23,7 +23,7 @@ Feature: GUEST - SHIPPING & BILLING PAGE - BILLING INFO
 
     And user types "Mr Donal Trump III" into the "Full Name" field of "Billing Address" address form
     And presses the "Continue" button
-    And chooses "Use Entered Address"
+   # And chooses "Use Entered Address"
     Then user checks "Full Name" with value "Mr Donal Trump III" on "Delivery Method" tab
 
     #We don't check billing info on Delivery page. Need to change option "Ship to Home" to "Pick up in store"

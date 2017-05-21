@@ -15,7 +15,7 @@ Feature: GUEST - SHIPPING & BILLING PAGE - SHIPPING INFO
     And presses the "Continue" button
     And chooses "Use Entered Address"
 
-    Then user checks billing info for "qa user"
+    Then user checks shipping info for "qa user"
 
     #Need rename from billing to shipping at 19 line
 

@@ -14,7 +14,7 @@ Feature: GUEST - MEMBERSHIP REWARDS
     Given user types billing info for "qa user"
     And user chooses don't have a reward number
     And presses the "Continue" button
-    And chooses "Use Recommended Address"
+   # And chooses "Use Recommended Address"
     And chooses "Ground: 5-7 Days" shipping method
     And uses "visa" card for payment
     And presses the "Place Order" button

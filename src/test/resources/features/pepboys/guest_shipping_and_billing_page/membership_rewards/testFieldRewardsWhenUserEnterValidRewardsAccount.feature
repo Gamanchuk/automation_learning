@@ -14,7 +14,7 @@ Feature: GUEST - MEMBERSHIP REWARDS
     Given user types billing info for "qa user"
     And user types rewards number "990298322581"
     And presses the "Continue" button
-    And chooses "Use Recommended Address"
+   # And chooses "Use Recommended Address"
     And user should be on "Delivery Method" tab
     Then user checks shipping info for "qa user"
 

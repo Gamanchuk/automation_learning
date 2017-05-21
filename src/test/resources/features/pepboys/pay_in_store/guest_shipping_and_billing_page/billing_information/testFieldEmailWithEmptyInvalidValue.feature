@@ -17,7 +17,7 @@ Feature: PAY IN STORE - GUEST - SHIPPING & BILLING PAGE - BILLING INFO
 
     And user types "#######@moovweb.com" into the email field
     And presses the "Place Order" button
-    And sees "FORM ERRORS" error message with text "Please review all inputs."
+    And sees "FORM ERRORS" error message with text "Email Address is invalid"
 
     And user types "qamoovweb.com" into the email field
     And presses the "Place Order" button

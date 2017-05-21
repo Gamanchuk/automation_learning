@@ -13,5 +13,6 @@ public class AddressVerificationComponent extends BaseComponent {
 
         getDriver().findElement(option).click();
         CommonFunctions.attachScreenshot("Choose address type");
+        CommonFunctions.sleep(2000);
     }
 }

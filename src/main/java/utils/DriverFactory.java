@@ -121,6 +121,7 @@ public class DriverFactory {
                     driver = new EventFiringWebDriver(new RemoteWebDriver(new URL(String.valueOf(service.getUrl())), desiredCapabilities)).register(eventListener);
                     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
                     CommonFunctions.startVideoRecording();
+                    TestGlobalsManager.setTestGlobal("authorised", null);
                 }
 
             } catch (Exception e) {

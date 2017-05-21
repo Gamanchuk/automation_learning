@@ -16,7 +16,7 @@ Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE - SHIPPING INFO
 
     And user types shipping info for "qa user"
 
-    And user types "" into the "City" field of "Shipping Address" address form
+    And user types " " into the "City" field of "Shipping Address" address form
     And presses the "Continue" button
     And chooses "Use Entered Address"
     Then user should stay at "Billing & Shipping" tab

@@ -361,7 +361,7 @@ public class PepBoysCheckoutSteps {
 
     @Then("^user checks zip code with value \"([^\"]*)\" on \"([^\"]*)\" tab$")
     public void userChecksZipWithValueOnTab(String value, String breadcrumb) {
-        breadcrumbWidget.waitForBreadcrumbActive(breadcrumb);
+        assertTrue(breadcrumbWidget.isBreadcrumbActive(breadcrumb), breadcrumb + " is not present on page.");
         addressDisplayComponent.checkZip(value);
         CommonFunctions.attachScreenshot("Checks information on " + breadcrumb);
     }
@@ -568,7 +568,9 @@ public class PepBoysCheckoutSteps {
 
     @Then("^user should be on \"([^\"]*)\" page$")
     public void userShouldBeOnPage(String pageName) {
-        assertTrue(titleComponent.exists(pageName), "Unexpected Page Title.");
+        assertTrue(titleComponent.exists(pageName),
+                "Unexpected Page Title. User should be on "
+                        + pageName + ". It looks like the page has not loaded");
     }
 
     @After

@@ -16,7 +16,7 @@ Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE - BILLING INFO
     And selects "Enter a New Address"
     And user types billing info for "qa user" and checks email
 
-    And user types "" into the "Apt, Bldg." field of "Billing Address" address form
+    And user types " " into the "Apt, Bldg." field of "Billing Address" address form
     And presses the "Continue" button
     Then user checks "Apt, Bldg." with value "" on "Payment & Review" tab
     And user navigates to "Billing & Shipping" breadcrumb

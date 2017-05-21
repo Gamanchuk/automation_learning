@@ -27,7 +27,7 @@ Feature: EXISTING ACCOUNT - REVIEW & PLACE ORDER PAGE
     Then user should stay at "Payment & Review" tab
     And sees "FORM ERRORS" error message with text "Please review all inputs."
 
-    And user types "" into "CVV" field of Card Form
+    And user types " " into "CVV" field of Card Form
     And sees error tooltip with text "Cvv can't be blank"
     And presses the "Place Order" button
     Then user should stay at "Payment & Review" tab

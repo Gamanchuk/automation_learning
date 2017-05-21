@@ -28,6 +28,6 @@ Feature: PAY IN STORE - GUEST - MEMBERSHIP REWARDS
     Then user should be on "Customer Information" page
     And sees "FORM ERRORS" error message with text "The Rewards Number you provided is not in the correct format."
 
-    And user types rewards number ""
+    And user types rewards number " "
     And presses the "Place Order" button
     Then user should be on thank you page

@@ -14,7 +14,7 @@ public class ErrorMessageComponent extends BaseComponent {
     public void checkError(String title, String message) {
         javascriptScroll(-300);
 
-        CommonFunctions.sleep(1500);
+        CommonFunctions.sleep(2500);
         waitForElementVisible(errorMessageEl);
 
         String errorTitleText = getDriver().findElement(errorTitleEl).getText();

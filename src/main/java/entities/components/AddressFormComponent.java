@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import utils.CommonFunctions;
 
-import static org.testng.AssertJUnit.assertTrue;
+import static org.testng.Assert.assertTrue;
 
 public class AddressFormComponent extends BaseComponent {
 
@@ -21,12 +21,14 @@ public class AddressFormComponent extends BaseComponent {
         fillField(nameField, fullName);
         fillField(addressField, address);
 
+        CommonFunctions.sleep(1000);
+
         if (autoFill) {
             // Waiting for dropdown
-            waitForElementVisible(By.cssSelector("a.manual"));
+            assertTrue(isElementVisible(By.cssSelector("a.manual")), "Input address manually link was not displayed");
             findElementWithTextBy(cityInfo, By.cssSelector("div.radio-list-details p.subtext")).click();
         } else {
-            assertTrue("Input address manually link was not displayed", isElementVisible(By.cssSelector("a.manual")));
+            assertTrue(isElementVisible(By.cssSelector("a.manual")), "Input address manually link was not displayed");
             click(By.cssSelector("a.manual"));
 //            findElementWithTextBy("enter city", By.cssSelector("div.zip-message a")).click();
             fillField(cityField, city);
