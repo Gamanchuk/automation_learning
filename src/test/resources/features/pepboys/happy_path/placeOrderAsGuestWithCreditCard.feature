@@ -8,6 +8,7 @@ Feature: HAPPY PATH
     And user views cart
     And chooses "Pay Online" method
 
+  @Issue("MCCAT-5505")
   @TestCaseId("16247")
   Scenario: Place Order as a "Guest" with Credit Card
     Given user types billing info for "qa user"

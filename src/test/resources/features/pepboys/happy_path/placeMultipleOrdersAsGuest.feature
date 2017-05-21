@@ -11,6 +11,7 @@ Feature: HAPPY PATH
     And user schedules installation time
     And chooses "Pay Online" method with appointment details
 
+  @Issue("MCCAT-5505")
   @TestCaseId("16252")
   Scenario: Place Multiple Orders as a "Guest"
     Given user types billing info for "qa user"

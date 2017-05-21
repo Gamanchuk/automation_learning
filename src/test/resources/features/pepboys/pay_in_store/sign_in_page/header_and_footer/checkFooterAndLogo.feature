@@ -1,4 +1,4 @@
-@pepBoys @debug
+@pepBoys 
 
 
 Feature: PAY IN STORE - SIGN IN PAGE - HEADER & FOOTER

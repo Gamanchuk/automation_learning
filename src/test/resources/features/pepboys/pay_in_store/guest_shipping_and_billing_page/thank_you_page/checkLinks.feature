@@ -1,4 +1,4 @@
-@pepBoys @debug
+@pepBoys 
 
 Feature: PAY IN STORE - GUEST - REVIEW & PLACE ORDER PAGE - THANK YOU PAGE
 
