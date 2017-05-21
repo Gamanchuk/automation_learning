@@ -1,4 +1,4 @@
-@pepBoys 
+@pepBoys
 
 Feature: PAY IN STORE - SIGN IN PAGE
 

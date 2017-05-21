@@ -35,14 +35,20 @@ public class AddressDisplayComponent extends BaseComponent {
     }
 
     public void checkStreetAddress(String expectedAddress) {
+        assertTrue(isElementVisible(deliveryStreetAddress, 1), "Field: StreetAddress doesn't present on page.");
         String address = findElement(deliveryStreetAddress).getText();
         assertTrue(address.contains(expectedAddress), "Unexpected address. Expected apt: " + expectedAddress
                 + ". Actual address: " + address);
     }
 
     public void checkApt(String expectedApt) {
+        assertTrue(isElementVisible(deliveryStreetAddress, 1)
+                        && isElementVisible(deliveryApt, 1),
+                "Field: StreetAddress or Apt doesn't present on page.");
+
         String address = findElement(deliveryStreetAddress).getText();
         String apt = findElement(deliveryApt).getText();
+
         assertTrue(address.contains(expectedApt) || apt.contains(expectedApt),
                 "Unexpected apt. Expected apt: " + expectedApt
                         + ". Actual Address doesn't have apt : " + address
@@ -52,19 +58,22 @@ public class AddressDisplayComponent extends BaseComponent {
 
     public void checkFieldValue(String fieldName, String expectedValue) {
         By field = getFieldByName(fieldName);
-        if (isElementPresent(field, 1)) {
-            String fieldValue = findElement(field).getText();
-            assertEquals(fieldValue, expectedValue, "Unexpected " + fieldName);
-        }
+        assertTrue(isElementPresent(field, 1), "Field: " + fieldName + " doesn't present on page.");
+        String fieldValue = findElement(field).getText();
+        assertEquals(fieldValue, expectedValue, "Unexpected " + fieldName);
+
+
     }
 
     public void checkCityInfo(String expectedCityInfo) {
+        assertTrue(isElementVisible(deliveryCityInfo, 1), "Field: City info doesn't present on page.");
 //        String cityInfo = getDriver().findElement(deliveryCityInfo).getText().split(" ");
         String cityInfo = findElement(deliveryCityInfo).getText();
         assertEquals(cityInfo.split(",")[0], expectedCityInfo, "Unexpected city");
     }
 
     public void checkZip(String expectedZip) {
+        assertTrue(isElementVisible(deliveryCityInfo, 1), "Field: City info doesn't present on page.");
 //        String cityInfo = getDriver().findElement(deliveryCityInfo).getText().split(" ");
         String cityInfo = findElement(deliveryCityInfo).getText();
         String[] split = cityInfo.split(",")[1].trim().split(" ");
@@ -73,6 +82,7 @@ public class AddressDisplayComponent extends BaseComponent {
     }
 
     public void checkPhone(String expectedPhone) {
+        assertTrue(isElementVisible(deliveryPhone, 1), "Field: Phone doesn't present on page.");
         String phone = findElement(deliveryPhone).getText();
         String result = null;
 

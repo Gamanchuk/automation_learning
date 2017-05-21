@@ -89,6 +89,7 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
         fireRetryTest("The test has been failed then retried.", iTestResult);
     }
 
+    @SuppressWarnings(value = "unchecked")
     private void setTestResults(TestRailStatus status, String error, String issuesLink) {
         try {
             ArrayList<String> ids = (ArrayList<String>) TestGlobalsManager.getTestGlobal("testCaseIds");
