@@ -1,6 +1,5 @@
 @pepBoys
 
-
 Feature: GUEST - SHIPPING & BILLING PAGE - ADDRESS VERIFICATION
 
   Background:

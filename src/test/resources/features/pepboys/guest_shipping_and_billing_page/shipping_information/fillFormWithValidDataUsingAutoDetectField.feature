@@ -8,6 +8,7 @@ Feature: GUEST - SHIPPING & BILLING PAGE - SHIPPING INFO
     And user views cart
     And chooses "Pay Online" method
 
+  @Issue("MCCAT-5848")
   @TestCaseId("15375")
   Scenario: Test with correct shipping information and fill in all existing fields (Address chosen from dropdown of auto-detect)
     Given user types billing info for "qa user"
@@ -16,6 +17,5 @@ Feature: GUEST - SHIPPING & BILLING PAGE - SHIPPING INFO
     And chooses "Use Recommended Address"
     Then user checks shipping info for "qa user"
 
-    #Need rename from billing to shipping at 17 line
 
 

@@ -310,7 +310,7 @@ public class PepBoysCheckoutSteps {
 
     @Then("^user checks \"([^\"]*)\" with value \"([^\"]*)\" on \"([^\"]*)\" tab$")
     public void userChecksWithValueOnTab(String field, String value, String breadcrumb) throws Throwable {
-        breadcrumbWidget.waitForBreadcrumbActive(breadcrumb);
+        assertTrue(breadcrumbWidget.isBreadcrumbActive(breadcrumb), breadcrumb + " is not present on page.");
         addressDisplayComponent.checkFieldValue(field, value);
         CommonFunctions.attachScreenshot("Checks " + field + " on " + breadcrumb + " tab");
     }
@@ -383,9 +383,17 @@ public class PepBoysCheckoutSteps {
     }
 
     @And("^user types rewards number \"([^\"]*)\"$")
-    public void userTypesRewardsNumber(String rewardsCode) {
+    public void userTypesRewardsNumber(String number) {
         collapserComponent.openCollapser();
-        rewardsAccountComponent.setRewards(rewardsCode);
+        rewardsAccountComponent.setRewards(number);
+        CommonFunctions.attachScreenshot("Rewards Number");
+    }
+
+    @And("^user types rewards number for \"([^\"]*)\"$")
+    public void userTypesRewardsNumberFor(String userName) throws Throwable {
+        collapserComponent.openCollapser();
+        BillingUser user = DataProvider.getUser(userName);
+        rewardsAccountComponent.setRewards(user.getRewardsNumber());
         CommonFunctions.attachScreenshot("Rewards Number");
     }
 

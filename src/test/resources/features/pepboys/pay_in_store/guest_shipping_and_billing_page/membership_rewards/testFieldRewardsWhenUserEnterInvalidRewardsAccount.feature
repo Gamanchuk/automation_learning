@@ -14,6 +14,7 @@ Feature: PAY IN STORE - GUEST - MEMBERSHIP REWARDS
     Given user types customer info for "qa user"
 
     And user types rewards number "1212"
+    And user types rewards number for "1212"
     And presses the "Place Order" button
     Then user should be on "Customer Information" page
     And sees "FORM ERRORS" error message with text "The Rewards Number you provided is not in the correct format."

@@ -8,25 +8,10 @@ Feature: GUEST - SHIPPING & BILLING PAGE - BILLING INFO
     And user views cart
     And chooses "Pay Online" method
 
-
-  # This Scenario is ignored, because we can check input values with Selenium
-  # Invalid data will be filled into phone field
-
-
   @TestCaseId("15503")
   Scenario: Test field 'Phone'
     Given user types billing info for "qa user"
     And user types " " into the "Phone Number" field of "Billing Address" address form
-    And presses the "Continue" button
-    Then user should stay at "Billing & Shipping" tab
-    And sees "FORM ERRORS" error message with text "Please review all inputs."
-
-    And user types "phoneNumber" into the "Phone Number" field of "Billing Address" address form
-    And presses the "Continue" button
-    Then user should stay at "Billing & Shipping" tab
-    And sees "FORM ERRORS" error message with text "Please review all inputs."
-
-    And user types "!@$%^&*():_" into the "Phone Number" field of "Billing Address" address form
     And presses the "Continue" button
     Then user should stay at "Billing & Shipping" tab
     And sees "FORM ERRORS" error message with text "Please review all inputs."
