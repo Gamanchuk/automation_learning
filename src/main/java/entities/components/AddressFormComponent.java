@@ -22,10 +22,12 @@ public class AddressFormComponent extends BaseComponent {
         fillField(addressField, address);
 
         CommonFunctions.sleep(1000);
+        waitForAjax();
 
         if (autoFill) {
             // Waiting for dropdown
             assertTrue(isElementVisible(By.cssSelector("a.manual")), "Input address manually link was not displayed");
+            CommonFunctions.attachScreenshot("drop Down");
             findElementWithTextBy(cityInfo, By.cssSelector("div.radio-list-details p.subtext")).click();
         } else {
             assertTrue(isElementVisible(By.cssSelector("a.manual")), "Input address manually link was not displayed");
