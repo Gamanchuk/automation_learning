@@ -22,7 +22,6 @@ Feature: EXISTING ACCOUNT - BREADCRUMB
     And user presses "Payment & Review" breadcrumb tab
     And user navigates to "Billing & Shipping" breadcrumb
     And presses the "Continue" button
-    And chooses "Use Recommended Address"
 
     And chooses "Ground: 5-7 Days" shipping method
     And presses the "Continue" button

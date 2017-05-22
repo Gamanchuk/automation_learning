@@ -9,7 +9,7 @@ Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE - SHIPPING INFO
     And user views cart
     And chooses "Pay Online" method
 
-
+  @Issue("MCCAT-5848")
   @TestCaseId("15436")
   Scenario: Test field 'Apartment'
     Given user makes authorisation for "Moovweb QA"
@@ -19,25 +19,21 @@ Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE - SHIPPING INFO
 
     And user types " " into the "Apt, Bldg." field of "Shipping Address" address form
     And presses the "Continue" button
-    And chooses "Use Entered Address"
     Then user checks "Apt, Bldg." with value "" on "Delivery Method" tab
     And user navigates to "Billing & Shipping" breadcrumb
 
     And user types "12345" into the "Apt, Bldg." field of "Shipping Address" address form
     And presses the "Continue" button
-    And chooses "Use Entered Address"
     Then user checks "Apt, Bldg." with value "12345" on "Delivery Method" tab
     And user navigates to "Billing & Shipping" breadcrumb
 
     And user types "Some Apartment" into the "Apt, Bldg." field of "Shipping Address" address form
     And presses the "Continue" button
-    And chooses "Use Entered Address"
     Then user checks "Apt, Bldg." with value "Some Apartment" on "Delivery Method" tab
     And user navigates to "Billing & Shipping" breadcrumb
 
     And user types "!#&@()" into the "Apt, Bldg." field of "Shipping Address" address form
     And presses the "Continue" button
-    And chooses "Use Entered Address"
     Then user checks "Apt, Bldg." with value "!#&@()" on "Delivery Method" tab
 
 

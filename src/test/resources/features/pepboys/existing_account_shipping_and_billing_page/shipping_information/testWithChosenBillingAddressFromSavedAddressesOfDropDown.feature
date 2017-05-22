@@ -8,6 +8,7 @@ Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE - SHIPPING INFO
     And user views cart
     And chooses "Pay Online" method
 
+  @Issue("MCCAT-5848")
   @TestCaseId("91891")
   Scenario: Test with chosen shipping address from saved addresses of drop-down
     Given user makes authorisation for "Moovweb QA"
