@@ -114,7 +114,7 @@ public class DriverFactory {
                     if (Config.PLATFORM_NAME.equals(ANDROID)) {
                         // desiredCapabilities.setCapability("unlockType", "pin");
                         // desiredCapabilities.setCapability("unlockKey", "");
-                        //   desiredCapabilities.setCapability("automationName", "uiautomator2");
+                        desiredCapabilities.setCapability("automationName", "uiautomator2");
                     }
 
                     eventListener = new MyWebDriverEventListener();
