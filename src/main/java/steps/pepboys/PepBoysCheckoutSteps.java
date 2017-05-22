@@ -110,7 +110,6 @@ public class PepBoysCheckoutSteps {
                 user.getZipCode(),
                 user.getPhone()
         );
-        addressDisplayComponent.checkFieldValue("Email", user.getEmail());
     }
 
     @Then("^user checks billing info for \"([^\"]*)\"$")
