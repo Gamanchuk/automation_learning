@@ -13,7 +13,6 @@ Feature: GUEST - REVIEW & PLACE ORDER PAGE
   Scenario: Test with correct Visa billing information and fill in all required fields
     Given user types billing info for "qa user"
     And presses the "Continue" button
-    And chooses "Use Recommended Address"
 
     And uses "visa" card for payment
     And presses the "Place Order" button

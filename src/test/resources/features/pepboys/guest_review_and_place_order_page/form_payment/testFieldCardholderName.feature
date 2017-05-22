@@ -1,4 +1,4 @@
-@pepBoys
+@pepBoys @debug
 
 Feature: GUEST - REVIEW & PLACE ORDER PAGE
 
@@ -14,7 +14,6 @@ Feature: GUEST - REVIEW & PLACE ORDER PAGE
   Scenario: Test field "Cardholder Name"
     Given user types billing info for "qa user"
     And presses the "Continue" button
-    And chooses "Use Recommended Address"
 
     And uses "visa" card for payment
     And user types " " into "Cardholder Name" field of Card Form

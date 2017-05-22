@@ -1,4 +1,4 @@
-@pepBoys
+@pepBoys @debug
 
 Feature: GUEST - REVIEW & PLACE ORDER PAGE
 
@@ -13,7 +13,6 @@ Feature: GUEST - REVIEW & PLACE ORDER PAGE
   Scenario: Pop-ups at Review page
     Given user types billing info for "qa user"
     And presses the "Continue" button
-    And chooses "Use Recommended Address"
 
     And user should be on "Payment & Review" tab
     And user can expand and collapse Order summary

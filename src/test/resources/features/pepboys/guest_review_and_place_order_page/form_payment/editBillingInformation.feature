@@ -1,4 +1,4 @@
-@pepBoys
+@pepBoys @debug
 
 Feature: GUEST - REVIEW & PLACE ORDER PAGE
 
@@ -12,7 +12,6 @@ Feature: GUEST - REVIEW & PLACE ORDER PAGE
   Scenario: Edit Billing info
     Given user types billing info for "qa user"
     And presses the "Continue" button
-    And chooses "Use Recommended Address"
 
     And user clicks arrow for "Billing Address"
     And user types manually billing info for "qa user2"
