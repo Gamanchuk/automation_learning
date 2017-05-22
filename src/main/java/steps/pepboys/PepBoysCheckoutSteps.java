@@ -610,7 +610,7 @@ public class PepBoysCheckoutSteps {
 
     @And("^sees modal error with text \"([^\"]*)\"$")
     public void seesModalErrorWithText(String text) {
-        modalComponent.waitForModalToOpen();
+        assertTrue(modalComponent.isModalOpen(), "Modal error doesn't present on page.");
         assertTrue(modalComponent.hasMessageWithText(text), "Unexpected text was displayed");
         CommonFunctions.attachScreenshot("Error Modal opened");
     }
@@ -622,7 +622,7 @@ public class PepBoysCheckoutSteps {
 
     @Then("^user should see Terms modal with \"([^\"]*)\"$")
     public void userShouldSeeTermsModalWith(String text) throws Throwable {
-        modalComponent.waitForModalToOpen();
+        modalComponent.isModalOpen();
         assertTrue(modalComponent.hasText(text), "Unexpected Terms");
         CommonFunctions.attachScreenshot("Terms Modal opened");
     }

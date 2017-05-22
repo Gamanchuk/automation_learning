@@ -1,10 +1,10 @@
-@pepBoys
+@pepBoys @debug
 
 Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE - BILLING INFO
 
   Background:
     Given user makes appoint
-    And user adds to cart product with "Pick Up in Store" delivery option
+    And user adds to cart product with id "8076476" with "Ship to Home" delivery option
     And user views cart
     And chooses "Pay Online" method
 
@@ -28,5 +28,5 @@ Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE - BILLING INFO
 
     And user types "4152011234" into the "Phone Number" field of "Billing Address" address form
     And presses the "Continue" button
-    Then user checks phone with value "4152011234" on "Payment & Review" tab
+    Then user checks phone with value "4152011234" on "Delivery Method" tab
 

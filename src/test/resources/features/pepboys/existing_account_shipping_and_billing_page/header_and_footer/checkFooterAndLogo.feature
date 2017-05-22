@@ -14,7 +14,7 @@ Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE - HEADER & FOOTER
   @TestCaseId("15428")
   Scenario: Check footer and logo
     Given user makes authorisation for "qa user"
-    And user should be on "Billing" page
+    And user should be on "Billing & Shipping" tab
     And user checks support number with label "1-800-PEP-BOYS (737-2697)" and number "18007372697"
     And user checks text "© Copyright 2017 - The Pep Boys" in footer
     And user presses the logo
