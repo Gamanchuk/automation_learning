@@ -1,4 +1,4 @@
-@pepBoys
+@pepBoys @debug
 
 Feature: EXISTING ACCOUNT - DELIVERY METHOD PAGE - HEADER & FOOTER
 
