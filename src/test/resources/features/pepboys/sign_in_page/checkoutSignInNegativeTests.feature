@@ -20,16 +20,16 @@ Feature: SIGN IN PAGE
   @TestCaseId("15527")
   Scenario: User can't sign in with incorrect/invalid/empty email address and password
 
-    Given user makes authorisation with "" email and "invalid" password
+    Given user makes authorisation with " " email and "invalid" password
     Then sees "FORM ERRORS" error message with text "Please review all inputs."
 
-    Given user makes authorisation with "" email and "" password
+    Given user makes authorisation with " " email and "" password
     Then sees "FORM ERRORS" error message with text "Please review all inputs."
 
-    Given user makes authorisation with "" email and "Spear201!" password
+    Given user makes authorisation with " " email and "Spear201!" password
     Then sees "FORM ERRORS" error message with text "Please review all inputs."
 
-    Given user makes authorisation with "notqa@moovweb.com" email and "" password
+    Given user makes authorisation with "notqa@moovweb.com" email and " " password
     Then sees "FORM ERRORS" error message with text "Please review all inputs."
 
     Given user makes authorisation with "notqa@moovweb.com" email and "Spear201!" password

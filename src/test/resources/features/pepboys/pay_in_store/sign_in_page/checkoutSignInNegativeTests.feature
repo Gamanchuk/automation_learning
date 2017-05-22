@@ -28,13 +28,13 @@ Feature: PAY IN STORE - SIGN IN PAGE
     Given user makes authorisation with " " email and "Spear201!" password
     Then sees "FORM ERRORS" error message with text "Please review all inputs."
 
-    Given user makes authorisation with "notqa@moovweb.com" email and "" password
+    Given user makes authorisation with "notqa@moovweb.com" email and " " password
     Then sees "FORM ERRORS" error message with text "Please review all inputs."
 
     Given user makes authorisation with "notqa@moovweb.com" email and "Spear201!" password
     Then sees "FORM ERRORS" error message with text "Your login attempt was not successful, try again."
 
-    Given user makes authorisation with "qa@moovweb.com" email and "" password
+    Given user makes authorisation with "qa@moovweb.com" email and " " password
     Then sees "FORM ERRORS" error message with text "Please review all inputs."
 
     Given user makes authorisation with "qa@moovweb.com" email and "invalid" password
