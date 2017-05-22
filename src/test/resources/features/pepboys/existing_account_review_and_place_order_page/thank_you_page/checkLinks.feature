@@ -4,7 +4,7 @@ Feature: EXISTING ACCOUNT - REVIEW & PLACE ORDER PAGE - THANK YOU PAGE
 
   Background:
     Given user makes appoint
-    And user adds to cart product with "Pick Up in Store" delivery option
+    And user adds to cart product with id "8076476" with "Ship to Home" delivery option
     And user views cart
     And chooses "Pay Online" method
 
@@ -15,7 +15,9 @@ Feature: EXISTING ACCOUNT - REVIEW & PLACE ORDER PAGE - THANK YOU PAGE
     And applies billing info for address "201 SPEAR ST"
     And presses the "Continue" button
 
-    And user should be on "Payment & Review" tab
+    And chooses "Ground: 5-7 Days" shipping method
+    And presses the "Continue" button
+    
     And uses "visa" card for payment
     And presses the "Place Order" button
     And user should be on thank you page
