@@ -8,7 +8,7 @@ Feature: GUEST - REVIEW & PLACE ORDER PAGE - GIFT CARD
     And user views cart
     And chooses "Pay Online" method
 
-  @TestCaseId("")
+  @TestCaseId("15393")
   Scenario: Test field "Gift Card" when user enter Invalid Gift Card
     Given user types billing info for "qa user"
     And presses the "Continue" button
