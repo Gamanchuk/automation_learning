@@ -445,7 +445,7 @@
         <profile>
             <id>env-george</id>
             <properties>
-                <testing.env>jenkins</testing.env>
+                <testing.env>george_local</testing.env>
             </properties>
         </profile>
 
