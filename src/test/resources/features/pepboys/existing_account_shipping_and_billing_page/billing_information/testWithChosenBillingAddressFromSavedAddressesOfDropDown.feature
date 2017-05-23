@@ -1,4 +1,4 @@
-@pepBoys @debug
+@pepBoys
 
 Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE - BILLING INFO
 
@@ -13,7 +13,7 @@ Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE - BILLING INFO
     Given user makes authorisation for "Moovweb QA"
     And user should be on "Billing & Shipping" tab
 
-    And applies billing info for address "8th avenue, Unit 1611"
+    And applies shipping info for address "8th avenue, Unit 1611"
     And presses the "Continue" button
 
     And chooses "Ground: 5-7 Days" shipping method

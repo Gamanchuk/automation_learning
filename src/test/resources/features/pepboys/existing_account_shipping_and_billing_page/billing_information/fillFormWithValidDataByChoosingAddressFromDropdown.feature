@@ -1,4 +1,4 @@
-@pepBoys @debug
+@pepBoys
 
 Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE - BILLING INFO
 
@@ -12,8 +12,12 @@ Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE - BILLING INFO
   Scenario: Test with correct billing information and fill in all required fields (Choose street from drop-down)
     Given user makes authorisation for "Moovweb QA"
     And user should be on "Billing & Shipping" tab
+
     And applies billing info for address "8th avenue, Unit 1611"
-    And user checks billing info for "qa user3"
+    And presses the "Continue" button
+
+    And chooses "Ground: 5-7 Days" shipping method
+    And user checks shipping info for "qa user3"
     And presses the "Continue" button
 
     And user should be on "Payment & Review" tab

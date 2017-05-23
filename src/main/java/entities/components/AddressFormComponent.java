@@ -103,6 +103,8 @@ public class AddressFormComponent extends BaseComponent {
         WebElement element = findElement(field);
         javascriptScroll(element);
         element.clear();
-        element.sendKeys(value);
+
+        if (!value.equals(" "))
+            element.sendKeys(value);
     }
 }
