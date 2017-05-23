@@ -22,7 +22,6 @@ public class AddressFormComponent extends BaseComponent {
         fillField(addressField, address);
 
         CommonFunctions.sleep(1000);
-        waitForAjax();
 
         // Waiting for dropdown
         assertTrue(isElementVisible(By.cssSelector("a.manual")), "Input address manually link was not displayed");
