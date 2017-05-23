@@ -18,6 +18,6 @@ Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE - BILLING INFO
     And presses the "Continue" button
 
     And user should be on "Payment & Review" tab
-    Then user checks billing info for "user at Spear street"
+    Then user checks billing info for "user at Spear street" on thank you page
 
 
