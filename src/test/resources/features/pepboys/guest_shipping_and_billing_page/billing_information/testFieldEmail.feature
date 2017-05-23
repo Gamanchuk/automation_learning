@@ -12,7 +12,7 @@ Feature: GUEST - SHIPPING & BILLING PAGE - BILLING INFO
   Scenario: Test field 'Email'
     Given user types billing info for "qa user"
 
-    And user types " " into the email field
+    And user types "" into the email field
     And presses the "Continue" button
    # And chooses "Use Entered Address"
     Then user should stay at "Billing & Shipping" tab

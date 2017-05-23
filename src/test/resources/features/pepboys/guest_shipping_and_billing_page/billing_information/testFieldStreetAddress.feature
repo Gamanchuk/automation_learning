@@ -11,7 +11,7 @@ Feature: GUEST - SHIPPING & BILLING PAGE - BILLING INFO
   @TestCaseId("15498")
   Scenario: Test field 'Address Street'
     Given user types billing info for "qa user"
-    And user types " " into the "Street Address" field of "Billing Address" address form
+    And user types "" into the "Street Address" field of "Billing Address" address form
     And presses the "Continue" button
     Then user should stay at "Billing & Shipping" tab
     And sees "FORM ERRORS" error message with text "Please review all inputs."

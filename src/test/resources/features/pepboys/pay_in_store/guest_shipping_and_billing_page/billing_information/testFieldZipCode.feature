@@ -11,7 +11,7 @@ Feature: PAY IN STORE - GUEST - SHIPPING & BILLING PAGE - BILLING INFO
   @TestCaseId("16649")
   Scenario: Test field 'Zip Code'
     Given user types customer info for "qa user"
-    And user types " " into the "City" field of "Customer Information" address form
+    And user types "" into the "City" field of "Customer Information" address form
     And presses the "Continue" button
     And sees "FORM ERRORS" error message with text "Please review all inputs."
 

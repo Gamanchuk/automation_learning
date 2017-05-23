@@ -12,7 +12,8 @@ Feature: GUEST - SHIPPING & BILLING PAGE - BILLING INFO
   Scenario: Test with correct billing information and fill in all required fields (Address inputted manually)
     Given user types manually billing info for "qa user"
     And presses the "Continue" button
+
     Then user should be on "Delivery Method" tab
-    Then user checks shipping info for "qa user"
+    And user checks shipping info for "qa user"
 
 

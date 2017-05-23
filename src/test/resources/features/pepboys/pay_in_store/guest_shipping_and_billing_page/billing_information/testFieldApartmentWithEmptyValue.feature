@@ -11,7 +11,7 @@ Feature: PAY IN STORE - GUEST - SHIPPING & BILLING PAGE - BILLING INFO
   @TestCaseId("16646")
   Scenario: Test field 'Apartment' with empty value
     Given user types customer info for "qa user"
-    And user types " " into the "Apt, Bldg." field of "Customer Information" address form
+    And user types "" into the "Apt, Bldg." field of "Customer Information" address form
     And presses the "Place Order" button
     Then user checks "Apt, Bldg." with value "" on thank you page
 

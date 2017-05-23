@@ -12,8 +12,10 @@ Feature: GUEST - MEMBERSHIP REWARDS
   @TestCaseId("15389")
   Scenario: Test field "Rewards" when user enter Valid Rewards Account
     Given user types billing info for "qa user"
+
     And user types rewards number for "qa user"
     And presses the "Continue" button
+
     And user should be on "Delivery Method" tab
     Then user checks shipping info for "qa user"
 

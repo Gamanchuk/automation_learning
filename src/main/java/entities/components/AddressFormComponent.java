@@ -24,15 +24,15 @@ public class AddressFormComponent extends BaseComponent {
         CommonFunctions.sleep(1000);
         waitForAjax();
 
+        // Waiting for dropdown
+        assertTrue(isElementVisible(By.cssSelector("a.manual")), "Input address manually link was not displayed");
+
         if (autoFill) {
-            // Waiting for dropdown
-            assertTrue(isElementVisible(By.cssSelector("a.manual")), "Input address manually link was not displayed");
             CommonFunctions.attachScreenshot("drop Down");
             findElementWithTextBy(cityInfo, By.cssSelector("div.radio-list-details p.subtext")).click();
         } else {
-            assertTrue(isElementVisible(By.cssSelector("a.manual")), "Input address manually link was not displayed");
             click(By.cssSelector("a.manual"));
-//            findElementWithTextBy("enter city", By.cssSelector("div.zip-message a")).click();
+            //findElementWithTextBy("enter city", By.cssSelector("div.zip-message a")).click();
             fillField(cityField, city);
             fillField(zipField, zip);
             fillState(state);
@@ -40,7 +40,7 @@ public class AddressFormComponent extends BaseComponent {
 
         // Need to sleep for second to avoid selenium exception
         CommonFunctions.sleep(1000);
-        this.waitForElementVisible(apartmentField);
+        assertTrue(isElementVisible(apartmentField), "Apartment field doesn't present on page.");
         fillField(apartmentField, apartment);
 
         // Need to send phone number digit by digit
@@ -103,8 +103,6 @@ public class AddressFormComponent extends BaseComponent {
         WebElement element = findElement(field);
         javascriptScroll(element);
         element.clear();
-
-        if (!value.equals(" "))
-            element.sendKeys(value);
+        element.sendKeys(value);
     }
 }

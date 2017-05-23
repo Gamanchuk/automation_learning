@@ -11,7 +11,7 @@ Feature: PAY IN STORE - GUEST - SHIPPING & BILLING PAGE - BILLING INFO
   @TestCaseId("16643")
   Scenario: Test field 'Name'
     Given user types customer info for "qa user"
-    And user types " " into the "Full Name" field of "Customer Information" address form
+    And user types "" into the "Full Name" field of "Customer Information" address form
     And presses the "Place Order" button
     And sees "FORM ERRORS" error message with text "Please review all inputs."
 
