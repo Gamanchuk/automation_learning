@@ -36,6 +36,8 @@ public class BreadcrumbComponent extends BaseComponent {
             javascriptScroll(findElement(getBreadcrumbByName(breadcrumb)));
         }
 
+        waitForAjax();
+
         return isElementVisible(By.xpath(
                 "//a[contains(@class, 'breadcrumb') and contains(@class, 'active') and text()='" + breadcrumb + "']"));
     }

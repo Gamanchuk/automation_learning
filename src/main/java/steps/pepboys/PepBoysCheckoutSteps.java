@@ -331,7 +331,7 @@ public class PepBoysCheckoutSteps {
 
     @Then("^user checks city info with value \"([^\"]*)\" on \"([^\"]*)\" tab$")
     public void userChecksCityInfoWithValueOnTab(String value, String breadcrumb) {
-        breadcrumbWidget.waitForBreadcrumbActive(breadcrumb);
+        assertTrue(breadcrumbWidget.isBreadcrumbActive(breadcrumb), breadcrumb + " is not present on page.");
         addressDisplayComponent.checkCityInfo(value);
         CommonFunctions.attachScreenshot("Checks information on " + breadcrumb);
     }

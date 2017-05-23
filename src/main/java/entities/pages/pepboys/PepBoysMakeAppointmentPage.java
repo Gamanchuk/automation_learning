@@ -13,6 +13,8 @@ import utils.pepboys.Vehicle;
 import java.io.File;
 import java.io.IOException;
 
+import static org.testng.Assert.assertTrue;
+
 public class PepBoysMakeAppointmentPage extends PepBoysBasePage {
     public final String STORE_PATH = "eserve/appointment/";
 
@@ -21,7 +23,7 @@ public class PepBoysMakeAppointmentPage extends PepBoysBasePage {
 
 
     public boolean isPage() {
-        waitForElementVisible(By.id("locationForm"));
+        assertTrue(isElementVisible(By.id("locationForm")), "Location button on main page doesn't present on page.");
         waitForAjax();
         return true;
     }

@@ -8,6 +8,7 @@ Feature: EXISTING ACCOUNT - REVIEW & PLACE ORDER PAGE
     And user views cart
     And chooses "Pay Online" method
 
+  @Issue("MCCAT-5848")
   @TestCaseId("15465")
   Scenario: Test Shipping Information
     Given user makes authorisation for "qa user3"
