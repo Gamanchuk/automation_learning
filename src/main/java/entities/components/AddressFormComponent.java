@@ -26,9 +26,8 @@ public class AddressFormComponent extends BaseComponent {
 
         // Waiting for dropdown
         assertTrue(isElementVisible(By.cssSelector("a.manual")), "Input address manually link was not displayed");
-
+        CommonFunctions.attachScreenshot("drop Down");
         if (autoFill) {
-            CommonFunctions.attachScreenshot("drop Down");
             findElementWithTextBy(cityInfo, By.cssSelector("div.radio-list-details p.subtext")).click();
         } else {
             click(By.cssSelector("a.manual"));
