@@ -442,6 +442,13 @@
             </properties>
         </profile>
 
+        <profile>
+            <id>env-george</id>
+            <properties>
+                <testing.env>jenkins</testing.env>
+            </properties>
+        </profile>
+
         <!--devices-->
         <profile>
             <id>device-Samsung-edge6</id>
@@ -477,6 +484,12 @@
             <id>device-iPhone-6</id>
             <properties>
                 <props.file.name>iphone6</props.file.name>
+            </properties>
+        </profile>
+        <profile>
+            <id>device-iPhone-7</id>
+            <properties>
+                <props.file.name>iphone7</props.file.name>
             </properties>
         </profile>
         <profile>
