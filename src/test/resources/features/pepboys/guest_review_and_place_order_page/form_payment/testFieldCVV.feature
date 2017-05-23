@@ -4,13 +4,16 @@ Feature: GUEST - REVIEW & PLACE ORDER PAGE
 
   Background:
     Given user makes appoint
-    And user adds to cart product with id "8076476" with "Pick Up in Store" delivery option
+    And user adds to cart product with id "8076476" with "Ship to Home" delivery option
     And user views cart
     And chooses "Pay Online" method
 
   @TestCaseId("15405")
   Scenario: Test field "CVV"
     Given user types billing info for "qa user"
+    And presses the "Continue" button
+
+    And chooses "Ground: 5-7 Days" shipping method
     And presses the "Continue" button
     And uses "visa" card for payment
 
