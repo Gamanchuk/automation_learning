@@ -23,5 +23,8 @@ Feature: EXISTING ACCOUNT - REVIEW & PLACE ORDER PAGE
     And applies billing info for address "8th avenue, Unit 1611"
     And presses the "Continue" button
 
+    And chooses "Ground: 5-7 Days" shipping method
+    And presses the "Continue" button
+
     Then user should be on "Payment & Review" tab
     And user checks billing info for "qa user3"

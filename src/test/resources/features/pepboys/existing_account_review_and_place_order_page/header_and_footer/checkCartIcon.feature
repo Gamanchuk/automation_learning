@@ -18,8 +18,6 @@ Feature: EXISTING ACCOUNT - REVIEW & PLACE ORDER PAGE - HEADER & FOOTER
     And chooses "Ground: 5-7 Days" shipping method
     And presses the "Continue" button
 
-    And chooses "Use Recommended Address"
-
     And user should be on "Payment & Review" tab
 
     And user presses the Shopping Cart icon
