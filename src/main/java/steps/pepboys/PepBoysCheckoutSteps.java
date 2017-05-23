@@ -167,6 +167,9 @@ public class PepBoysCheckoutSteps {
     public void pressesTheButton(String confirmationMethod) {
         buttonComponent.javascriptScroll(200);
         buttonComponent.clickButton();
+
+        // Experiment. Trying to fix the problem with "Element is no longer attached to DOM"
+        CommonFunctions.sleep(500);
     }
 
     @And("^chooses \"([^\"]*)\"$")
