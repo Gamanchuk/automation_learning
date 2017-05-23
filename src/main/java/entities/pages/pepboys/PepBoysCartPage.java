@@ -165,7 +165,9 @@ public class PepBoysCartPage extends PepBoysBasePage {
     }
 
     public void changeLocation() {
-        findElement(By.cssSelector("a.changeTargetStore")).click();
+        WebElement changeStore = findElement(By.cssSelector("a.changeTargetStore"));
+        javascriptScroll(changeStore);
+        changeStore.click();
         waitForElementVisible(By.cssSelector("div.modal-dialog"));
         By chooseStoreButton = By.cssSelector("button.j-chooseStore");
         if (isElementVisible(chooseStoreButton)) {

@@ -16,20 +16,17 @@ Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE - SHIPPING INFO
     And selects "Enter a New Address" for shipping address
     And user types shipping info for "user at Spear street"
 
-    And user types " " into the "Phone Number" field of "Shipping Address" address form
+    And user types "" into the "Phone Number" field of "Shipping Address" address form
     And presses the "Continue" button
-    And chooses "Use Entered Address"
     Then user should stay at "Billing & Shipping" tab
     And sees "FORM ERRORS" error message with text "Please review all inputs."
 
     And user types "#+*###" into the "Phone Number" field of "Shipping Address" address form
     And presses the "Continue" button
-    And chooses "Use Entered Address"
     Then user should stay at "Billing & Shipping" tab
     And sees "FORM ERRORS" error message with text "Please review all inputs."
 
     And user types "4152011234" into the "Phone Number" field of "Shipping Address" address form
     And presses the "Continue" button
-    And chooses "Use Entered Address"
     Then user checks phone with value "4152011234" on "Delivery Method" tab
 

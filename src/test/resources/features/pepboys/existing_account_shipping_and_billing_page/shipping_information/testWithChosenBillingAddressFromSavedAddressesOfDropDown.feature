@@ -17,6 +17,7 @@ Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE - SHIPPING INFO
     And applies shipping info for address "8th avenue, Unit 1611"
     And user checks shipping info for "qa user3"
 
+
     And presses the "Continue" button
     And user should be on "Delivery Method" tab
     Then user checks shipping info for "qa user3"

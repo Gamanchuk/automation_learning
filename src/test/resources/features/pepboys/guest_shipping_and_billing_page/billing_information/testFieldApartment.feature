@@ -12,7 +12,7 @@ Feature: GUEST - SHIPPING & BILLING PAGE - BILLING INFO
   @TestCaseId("15499")
   Scenario: Test field 'Apartment'
     Given user types billing info for "qa user"
-    And user types " " into the "Apt, Bldg." field of "Billing Address" address form
+    And user types "" into the "Apt, Bldg." field of "Billing Address" address form
     And presses the "Continue" button
     Then user checks "Apt, Bldg." with value "" on "Delivery Method" tab
     And user navigates to "Billing & Shipping" breadcrumb

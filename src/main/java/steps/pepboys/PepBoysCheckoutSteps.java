@@ -561,7 +561,6 @@ public class PepBoysCheckoutSteps {
 
     @Then("^user should be on \"([^\"]*)\" tab$")
     public void userShouldBeOnTab(String tabName) {
-        //breadcrumbWidget.waitForBreadcrumbActive(tabName);
         assertTrue(breadcrumbWidget.isBreadcrumbActive(tabName), "Tab " + tabName + " is not an active");
         assertTrue(breadcrumbWidget.isTabActive(tabName), "Tab " + tabName + " is not an active");
         CommonFunctions.attachScreenshot("User on [" + tabName + "] tab");
@@ -610,7 +609,7 @@ public class PepBoysCheckoutSteps {
 
     @And("^sees modal error with text \"([^\"]*)\"$")
     public void seesModalErrorWithText(String text) {
-        modalComponent.waitForModalToOpen();
+        assertTrue(modalComponent.isModalOpen(), "Modal error doesn't present on page.");
         assertTrue(modalComponent.hasMessageWithText(text), "Unexpected text was displayed");
         CommonFunctions.attachScreenshot("Error Modal opened");
     }
@@ -622,7 +621,7 @@ public class PepBoysCheckoutSteps {
 
     @Then("^user should see Terms modal with \"([^\"]*)\"$")
     public void userShouldSeeTermsModalWith(String text) throws Throwable {
-        modalComponent.waitForModalToOpen();
+        modalComponent.isModalOpen();
         assertTrue(modalComponent.hasText(text), "Unexpected Terms");
         CommonFunctions.attachScreenshot("Terms Modal opened");
     }

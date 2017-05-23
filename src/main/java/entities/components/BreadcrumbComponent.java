@@ -2,8 +2,6 @@ package entities.components;
 
 import org.openqa.selenium.By;
 
-import java.util.concurrent.TimeUnit;
-
 public class BreadcrumbComponent extends BaseComponent {
 
     public boolean isTabActive(String tabName) {
@@ -33,8 +31,17 @@ public class BreadcrumbComponent extends BaseComponent {
     }
 
     public boolean isBreadcrumbActive(String breadcrumb) {
+
+        if (isElementVisible(getBreadcrumbByName(breadcrumb))) {
+            javascriptScroll(findElement(getBreadcrumbByName(breadcrumb)));
+        }
+
         return isElementVisible(By.xpath(
                 "//a[contains(@class, 'breadcrumb') and contains(@class, 'active') and text()='" + breadcrumb + "']"));
+    }
+
+    public void witFor() {
+        waitForAjax();
     }
 
     public String getActiveTab() {

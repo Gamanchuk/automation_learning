@@ -1,4 +1,4 @@
-@pepBoys @debug
+@pepBoys
 
 Feature: GUEST - REVIEW & PLACE ORDER PAGE
 
@@ -16,7 +16,7 @@ Feature: GUEST - REVIEW & PLACE ORDER PAGE
     And presses the "Continue" button
 
     And uses "visa" card for payment
-    And user types " " into "Cardholder Name" field of Card Form
+    And user types "" into "Cardholder Name" field of Card Form
     And presses the "Place Order" button
     Then user should stay at "Payment & Review" tab
     And sees "FORM ERRORS" error message with text "Please review all inputs."

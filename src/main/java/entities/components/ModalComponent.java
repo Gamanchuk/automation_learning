@@ -6,8 +6,8 @@ public class ModalComponent extends BaseComponent {
 
     private By modal = By.cssSelector("div.component.modal");
 
-    public void waitForModalToOpen() {
-        waitForElementVisible(modal);
+    public boolean isModalOpen() {
+        return isElementVisible(modal);
     }
 
     public boolean hasMessageWithText(String text) {

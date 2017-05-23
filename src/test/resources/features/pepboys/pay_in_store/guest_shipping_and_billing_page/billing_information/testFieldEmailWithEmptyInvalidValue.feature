@@ -11,7 +11,7 @@ Feature: PAY IN STORE - GUEST - SHIPPING & BILLING PAGE - BILLING INFO
   @TestCaseId("16651")
   Scenario: Test field 'Email' with empty/invalid value
     Given user types customer info for "qa user"
-    And user types " " into the email field
+    And user types "" into the email field
     And presses the "Place Order" button
     And sees "FORM ERRORS" error message with text "Please review all inputs."
 

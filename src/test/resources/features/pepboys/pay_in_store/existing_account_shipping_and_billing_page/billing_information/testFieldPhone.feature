@@ -16,7 +16,7 @@ Feature: PAY IN STORE - EXISTING ACCOUNT - SHIPPING & BILLING PAGE - BILLING INF
     And selects "Enter a New Address"
     And user types сustomer info for "user at Spear street" and checks email
 
-    And user types " " into the "Phone Number" field of "Customer Information" address form
+    And user types "" into the "Phone Number" field of "Customer Information" address form
     And presses the "Continue" button
     And user should be on "Customer Information" page
     And sees "FORM ERRORS" error message with text "Please review all inputs."
