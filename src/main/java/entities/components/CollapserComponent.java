@@ -14,12 +14,15 @@ public class CollapserComponent extends BaseComponent {
 
         if (collapser.getAttribute("class").contains("collapsed")) {
             javascriptScroll(collapser);
-            CommonFunctions.sleep(1000);
             collapser.click();
-//            collapser = findElement(By.cssSelector("a.collapser-link"));
-//            if (collapser.getAttribute("class").contains("collapsed")) {
-//                collapser.click();
-//            }
+
+            // Need sleep for check collapser again
+            CommonFunctions.sleep(500);
+
+            collapser = findElement(By.cssSelector("a.collapser-link"));
+            if (collapser.getAttribute("class").contains("collapsed")) {
+                collapser.click();
+            }
             //click(By.cssSelector("a.collapser-link"));
         }
     }
