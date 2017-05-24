@@ -13,7 +13,8 @@ public class CollapserComponent extends BaseComponent {
 
         if (collapser.getAttribute("class").contains("collapsed")) {
             javascriptScroll(collapser);
-            click(By.cssSelector("a.collapser-link"));
+            collapser.click();
+            //click(By.cssSelector("a.collapser-link"));
         }
     }
 
