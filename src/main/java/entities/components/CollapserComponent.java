@@ -3,6 +3,7 @@ package entities.components;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import utils.CommonFunctions;
 
 public class CollapserComponent extends BaseComponent {
 
@@ -13,13 +14,12 @@ public class CollapserComponent extends BaseComponent {
 
         if (collapser.getAttribute("class").contains("collapsed")) {
             javascriptScroll(collapser);
+            CommonFunctions.sleep(1000);
             collapser.click();
-
-            WebElement collapser2 = findElement(By.cssSelector("a.collapser-link"));
-            if (collapser.getAttribute("class").contains("collapsed")) {
-                collapser2.click();
-            }
-
+//            collapser = findElement(By.cssSelector("a.collapser-link"));
+//            if (collapser.getAttribute("class").contains("collapsed")) {
+//                collapser.click();
+//            }
             //click(By.cssSelector("a.collapser-link"));
         }
     }

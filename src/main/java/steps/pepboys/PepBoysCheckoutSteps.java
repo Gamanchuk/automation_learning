@@ -672,7 +672,6 @@ public class PepBoysCheckoutSteps {
 
     @And("^user types gift card with \"([^\"]*)\" number and \"([^\"]*)\" pin code$")
     public void userTypesGiftCardWithNumberAndPinCode(String giftNumber, String pinCode) {
-        collapserComponent.setRoot(null);
         collapserComponent.openCollapser();
         discountComponent.fillDiscount(giftNumber, pinCode);
         CommonFunctions.attachScreenshot("Discount info");
