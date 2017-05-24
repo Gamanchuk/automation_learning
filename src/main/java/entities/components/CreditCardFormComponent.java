@@ -28,7 +28,7 @@ public class CreditCardFormComponent extends BaseComponent {
             fillField(ccName, cardholderName);
         }
 
-//        focusOut();
+        focusOut();
         CommonFunctions.attachScreenshot("Payment details");
     }
 
