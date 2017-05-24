@@ -11,7 +11,6 @@ import utils.CommonFunctions;
 import utils.DriverFactory;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import static org.testng.Assert.assertTrue;
 
@@ -252,7 +251,8 @@ public abstract class Entity {
 
     public void focusOut() {
         driver.findElement(By.cssSelector("body")).click();
-        driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
+        CommonFunctions.sleep(500);
+        //driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
     }
 
     public void focusOut(WebElement element) {
