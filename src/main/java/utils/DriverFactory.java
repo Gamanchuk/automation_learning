@@ -112,6 +112,9 @@ public class DriverFactory {
                     }
 
                     if (Config.PLATFORM_NAME.equals(ANDROID)) {
+
+                        desiredCapabilities.setCapability("unicodeKeyboard", true);
+                        desiredCapabilities.setCapability("resetKeyboard", true);
                         // desiredCapabilities.setCapability("unlockType", "pin");
                         // desiredCapabilities.setCapability("unlockKey", "");
                         //desiredCapabilities.setCapability("automationName", "uiautomator2");
