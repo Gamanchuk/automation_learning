@@ -8,11 +8,11 @@ for (int i = 0; i < devices.length; i++) {
 	stage(device) {
 	  build job: "device_run", parameters: [
 	  	[$class: 'StringParameterValue', name: 'DEVICE', value: device],
-	  	[$class: 'StringParameterValue', name: 'ENV', value: $ENV],
-	  	[$class: 'StringParameterValue', name: 'SITE', value: $SITE],
-	  	[$class: 'com.cwctravel.hudson.plugins.extended_choice_parameter.ExtendedChoiceParameterValue', name: 'SUITES', value: $DEVICE],
-	  	[$class: 'BooleanParameterValue', name: 'PROJECT_TRACKING', value: $PROJECT_TRACKING],
-	  	[$class: 'GitParameterValue', name: 'SHA', value: $SHA]
+	  	[$class: 'StringParameterValue', name: 'ENV', value: ${ENV}],
+	  	[$class: 'StringParameterValue', name: 'SITE', value: ${SITE}],
+	  	[$class: 'com.cwctravel.hudson.plugins.extended_choice_parameter.ExtendedChoiceParameterValue', name: 'SUITES', value: ${DEVICE}],
+	  	[$class: 'BooleanParameterValue', name: 'PROJECT_TRACKING', value: ${PROJECT_TRACKING}],
+	  	[$class: 'GitParameterValue', name: 'SHA', value: ${SHA}]
 	  ]
 	}
   }
