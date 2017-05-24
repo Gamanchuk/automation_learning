@@ -9,7 +9,7 @@ public class CollapserComponent extends BaseComponent {
     // TODO: update this method to use collapser name
     public void openCollapser() {
 
-        WebElement collapser = findElement(By.cssSelector("a.collapser-link"));
+        WebElement collapser = findElements(By.cssSelector("a.collapser-link")).get(0);
 
         if (collapser.getAttribute("class").contains("collapsed")) {
             javascriptScroll(collapser);
