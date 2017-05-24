@@ -18,18 +18,29 @@ public class AddressFormComponent extends BaseComponent {
     private By zipField = By.cssSelector(".zip-input input");
 
     public void fillAddressForm(String fullName, String address, String cityInfo, String city, String apartment, String phone, String state, String zip, boolean autoFill) {
+
+        boolean apartmentPresent = isElementVisible(apartmentField, 3);
+
         fillField(nameField, fullName);
         fillField(addressField, address);
 
         CommonFunctions.sleep(1000);
 
-        // Waiting for dropdown
-        assertTrue(isElementVisible(By.cssSelector("a.manual")), "Input address manually link was not displayed");
-        CommonFunctions.attachScreenshot("drop Down");
+        if (!apartmentPresent) {
+            // Waiting for dropdown
+            assertTrue(isElementVisible(By.cssSelector("a.manual")), "Input address manually link was not displayed");
+            CommonFunctions.attachScreenshot("drop Down");
+
+            // Need wait. Sometimes we have NoSuchElement
+            CommonFunctions.sleep(1000);
+        }
+
         if (autoFill) {
             findElementWithTextBy(cityInfo, By.cssSelector("div.radio-list-details p.subtext")).click();
         } else {
-            click(By.cssSelector("a.manual"));
+            if (!apartmentPresent) {
+                click(By.cssSelector("a.manual"));
+            }
             //findElementWithTextBy("enter city", By.cssSelector("div.zip-message a")).click();
             fillField(cityField, city);
             fillField(zipField, zip);

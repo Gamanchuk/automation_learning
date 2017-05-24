@@ -14,7 +14,6 @@ Feature: GUEST - SHIPPING & BILLING PAGE - SHIPPING INFO
     Given user types billing info for "qa user"
     And user types shipping info for "qa user"
     And presses the "Continue" button
-    And chooses "Use Recommended Address"
     Then user checks shipping info for "qa user"
 
 
