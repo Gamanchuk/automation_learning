@@ -16,6 +16,7 @@ Feature: GUEST - REVIEW & PLACE ORDER PAGE
 
     And chooses "Ground: 5-7 Days" shipping method
     And presses the "Continue" button
+
     And uses "visa" card for payment
     And presses the "Place Order" button
     Then user should be on thank you page
