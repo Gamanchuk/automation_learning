@@ -34,6 +34,8 @@ import java.util.concurrent.TimeoutException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static utils.CommonFunctions.stopScreenVideo;
+
 public class DriverFactory {
     private static EventFiringWebDriver driver;
     private static AppiumDriverLocalService service;
@@ -90,8 +92,6 @@ public class DriverFactory {
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.LAUNCH_TIMEOUT, 500000);
 
 
-
-
                         //desiredCapabilities.setCapability("showXcodeLog", true);
                         //desiredCapabilities.setCapability("xcodeConfigFile", "src/resources/Config.xcconfig");
 
@@ -140,6 +140,8 @@ public class DriverFactory {
      */
     private static void startAppiumService() {
         if (service == null) {
+
+            stopScreenVideo();
 
             int appiumPort = Integer.parseInt(Config.APPIUM_PORT);
             int proxyPort = Integer.parseInt(Config.PROXY_PORT);
