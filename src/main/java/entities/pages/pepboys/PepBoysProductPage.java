@@ -35,9 +35,10 @@ public class PepBoysProductPage extends PepBoysBasePage {
     public void setDeliveryOption(String deliveryOption) {
         By deliveryOptionXpath = By.xpath("//label[contains(., '" + deliveryOption + "')]");
 
+        javascriptScroll(getDriver().findElement(addToCart));
+
         assertTrue(isElementVisible(deliveryOptionXpath), "Delivery options " + deliveryOption + " doesn't present on page.");
         WebElement deliveryOptionEl = getDriver().findElement(deliveryOptionXpath);
-        javascriptScroll(deliveryOptionEl);
 
         if (!deliveryOption.equals("Pick Up in Store")) {
             deliveryOptionEl.click();
