@@ -10,12 +10,13 @@ import static org.testng.Assert.assertTrue;
 public class PayPalComponent extends BaseComponent {
 
     public void doLogin(BillingUser user) {
-        boolean isNewPayPal = isIframeExist("injectedUl");
+        //boolean isNewPayPal = isIframeExist("injectedUl");
+        boolean isNewPayPal = isElementVisible(By.id("btnLogin"));
         By logInButton = isNewPayPal ? By.id("btnLogin") : By.id("login");
 
-        if (isNewPayPal) {
-            switchToIframe("injectedUl");
-        }
+//        if (isNewPayPal) {
+//            switchToIframe("injectedUl");
+//        }
 
         assertTrue(isElementVisible(logInButton) && isElementClickable(logInButton),
                 "PayPal Login button doesn't present on page or not clickable.");

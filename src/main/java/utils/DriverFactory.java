@@ -91,13 +91,6 @@ public class DriverFactory {
                         desiredCapabilities.setCapability("useNewWDA", true);
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.LAUNCH_TIMEOUT, 500000);
 
-
-                        //desiredCapabilities.setCapability("showXcodeLog", true);
-                        //desiredCapabilities.setCapability("xcodeConfigFile", "src/resources/Config.xcconfig");
-
-                        //desiredCapabilities.setCapability("webkitResponseTimeout", 8000);
-                        //desiredCapabilities.setCapability("simpleIsVisibleCheck", true);
-
                         desiredCapabilities.setCapability("xcodeOrgId", "Y95G5M3Q84");
                         desiredCapabilities.setCapability("xcodeSigningId", "iPhone Developer");
                         desiredCapabilities.setCapability("updatedWDABundleId", "com.moovweb.WebDriverAgentRunner");
@@ -106,18 +99,14 @@ public class DriverFactory {
                             desiredCapabilities.setCapability("showXcodeLog", true);
                         }
 
+                        //desiredCapabilities.setCapability("simpleIsVisibleCheck", true);
                         //desiredCapabilities.setCapability("startIWDP", true);
                         //desiredCapabilities.setCapability("preventWDAAttachments", true);
-
                     }
 
                     if (Config.PLATFORM_NAME.equals(ANDROID)) {
-
                         desiredCapabilities.setCapability("unicodeKeyboard", true);
                         desiredCapabilities.setCapability("resetKeyboard", true);
-                        // desiredCapabilities.setCapability("unlockType", "pin");
-                        // desiredCapabilities.setCapability("unlockKey", "");
-                        //desiredCapabilities.setCapability("automationName", "uiautomator2");
                     }
 
                     eventListener = new MyWebDriverEventListener();
@@ -257,7 +246,7 @@ public class DriverFactory {
      *
      * @param port for communication with "proxy"
      */
-    public static void killiOSProxy(int port) {
+    static void killiOSProxy(int port) {
         log.info("Look for the launched iOS proxy on port: " + port);
         try {
             ProcessResult processResult = new ProcessExecutor().command("lsof", "-ti", "tcp:" + port)
@@ -287,14 +276,14 @@ public class DriverFactory {
         }
     }
 
-    public static void quitDriver() {
+    static void quitDriver() {
         log.info("DELETE DRIVER");
         driver.close();
         driver.quit();
         driver = null;
     }
 
-    public static void killAppium() {
+    static void killAppium() {
         if (service != null) {
             log.info("DELETE APPIUM");
             service.stop();
@@ -304,10 +293,10 @@ public class DriverFactory {
 
     private static void initChromeDriver() {
         System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver");
-        Map<String, String> mobileEmulation = new HashMap<String, String>();
+        HashMap<String, String> mobileEmulation = new HashMap<>();
         mobileEmulation.put("deviceName", "Google Nexus 5");
 
-        Map<String, Object> chromeOptions = new HashMap<String, Object>();
+        Map<String, Object> chromeOptions = new HashMap<>();
         chromeOptions.put("mobileEmulation", mobileEmulation);
         DesiredCapabilities capabilities = DesiredCapabilities.chrome();
         capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);

@@ -24,7 +24,11 @@ public class PepBoysProductPage extends PepBoysBasePage {
     public void openProductPage(String productId) {
         this.productId = productId;
         getDriver().navigate().to(BASE_URL + "product/details/" + productId + "/" + Config.STORE_ID);
-        assertTrue(isPage(), "Product page was not opened.");
+
+        if (isPage()) {
+            assertTrue(isPage(), "Product page was not opened.");
+        }
+
         waitForAjax();
     }
 
