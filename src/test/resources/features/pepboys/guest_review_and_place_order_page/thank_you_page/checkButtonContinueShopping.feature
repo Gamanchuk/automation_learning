@@ -8,7 +8,7 @@ Feature: GUEST - REVIEW & PLACE ORDER PAGE - THANK YOU PAGE
     And user views cart
     And chooses "Pay Online" method
 
-
+  @Issue("MCCAT-5505")
   @TestCaseId("15421")
   Scenario: Check button Continue Shopping
     Given user types billing info for "qa user"

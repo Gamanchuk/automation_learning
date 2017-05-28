@@ -8,6 +8,7 @@ Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE - BILLING INFO
     And user views cart
     And chooses "Pay Online" method
 
+  @Issue("MCCAT-5848")
   @TestCaseId("15520")
   Scenario: Test field 'Zip Code'
     Given user makes authorisation for "Moovweb QA"

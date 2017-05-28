@@ -9,6 +9,7 @@ Feature: GUEST - MEMBERSHIP REWARDS
     And user views cart
     And chooses "Pay Online" method
 
+  @Issue("MCCAT-5848")
   @TestCaseId("15390")
   Scenario: Test field "Rewards" when user enter Invalid Rewards Account
     Given user types billing info for "qa user"

@@ -8,6 +8,7 @@ Feature: GUEST - SHIPPING & BILLING PAGE - BILLING INFO
     And user views cart
     And chooses "Pay Online" method
 
+  @Issue("MCCAT-5848")
   @TestCaseId("15500")
   Scenario: Test field 'City'
     Given user types billing info for "qa user"
