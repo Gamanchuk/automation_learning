@@ -12,7 +12,7 @@ Feature: GUEST - SHIPPING & BILLING PAGE - BILLING INFO
   # This Scenario is ignored, because we can check input values with Selenium
   # Invalid data will be filled into phone field
 
-
+  @Issue("MCCAT-5848")
   @TestCaseId("15385")
   Scenario: Test field 'Phone'
     Given user types billing info for "qa user"

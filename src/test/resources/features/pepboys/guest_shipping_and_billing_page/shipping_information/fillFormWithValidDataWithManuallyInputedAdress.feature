@@ -16,6 +16,7 @@ Feature: GUEST - SHIPPING & BILLING PAGE - SHIPPING INFO
     And user types manually shipping info for "qa user"
     And presses the "Continue" button
 
+    And chooses "Use Entered Address"
     Then user should be on "Delivery Method" tab
     And user checks shipping info for "qa user"
 

@@ -8,6 +8,7 @@ Feature: GUEST - REVIEW & PLACE ORDER PAGE - THANK YOU PAGE
     And user views cart
     And chooses "Pay Online" method
 
+  @Issue("MCCAT-5505")
   @TestCaseId("15422")
   Scenario: Links at Thank you page
     Given user types billing info for "qa user"

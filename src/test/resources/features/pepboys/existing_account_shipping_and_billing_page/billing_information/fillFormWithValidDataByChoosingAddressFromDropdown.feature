@@ -1,4 +1,4 @@
-@pepBoys
+@pepBoys @debug1542115421
 
 Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE - BILLING INFO
 
@@ -17,7 +17,7 @@ Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE - BILLING INFO
     And presses the "Continue" button
 
     And chooses "Ground: 5-7 Days" shipping method
-    And user checks shipping info for "qa user3"
+#    And user checks shipping info for "qa user3"
     And presses the "Continue" button
 
     And user should be on "Payment & Review" tab

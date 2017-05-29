@@ -8,6 +8,7 @@ Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE - BILLING INFO
     And user views cart
     And chooses "Pay Online" method
 
+  @Issue("MCCAT-5505")
   @TestCaseId("15509")
   Scenario: Test with correct billing information and fill in all required fields (Add new address manually)
     Given user makes authorisation for "Moovweb QA"
@@ -20,10 +21,10 @@ Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE - BILLING INFO
     And chooses "Use Entered Address"
 
     And chooses "Ground: 5-7 Days" shipping method
-    Then user checks shipping info for "user at Spear street"
-    #And presses the "Continue" button
+#    Then user checks shipping info for "user at Spear street"
+    And presses the "Continue" button
 
-    #And user should be on "Payment & Review" tab
-    #Then user checks billing info for "user at Spear street" on thank you page
+    And user should be on "Payment & Review" tab
+    Then user checks billing info for "user at Spear street" on thank you page
 
 

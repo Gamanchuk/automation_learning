@@ -11,6 +11,7 @@
 #    And user schedules installation time
 #    And chooses "Pay Online" method with appointment details
 #
+#  @Issue("MCCAT-5505")
 #  @TestCaseId("15420")
 #  Scenario: Installation of detail for car
 #    Given user types billing info for "qa user"
