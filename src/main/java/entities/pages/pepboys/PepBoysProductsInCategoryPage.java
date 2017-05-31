@@ -1,11 +1,12 @@
 package entities.pages.pepboys;
 
+import entities.pages.BasePage;
 import org.openqa.selenium.By;
 import utils.TestGlobalsManager;
 
 import java.util.concurrent.TimeUnit;
 
-public class PepBoysProductsInCategoryPage extends PepBoysBasePage {
+public class PepBoysProductsInCategoryPage extends BasePage {
 
     // opens first product with matching name
     public void openProductByName(String productName) {

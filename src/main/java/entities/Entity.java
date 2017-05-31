@@ -278,7 +278,6 @@ public abstract class Entity {
     public void navigateWithCookies(String url, String cookies) {
         driver.navigate().to(url + cookies);
         waitForRedirect(url + cookies);
-        // waitForAjax();
     }
 
     public void waitForAjax() {

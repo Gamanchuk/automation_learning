@@ -1,9 +1,10 @@
 package entities.pages.pepboys;
 
+import entities.pages.BasePage;
 import org.openqa.selenium.By;
 import utils.Config;
 
-public class PepBoysCheckoutPage extends PepBoysBasePage {
+public class PepBoysCheckoutPage extends BasePage {
     public void waitForPepBoysPage() {
         waitForElementVisible(By.xpath("//*[contains(text(), 'The Pep Boys')]"));
     }

@@ -1,12 +1,13 @@
 package entities.pages.pepboys;
 
+import entities.pages.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 import utils.CommonFunctions;
 import utils.Config;
 import utils.pepboys.Vehicle;
 
-public class PepBoysTiresPage extends PepBoysBasePage {
+public class PepBoysTiresPage extends BasePage {
 
     //private final String TIRES_URL = "https://mstage.stage.pepboys.com/tires/details/Hankook/Dynapro%2520RA33/1158139/07923/2015/CHEVROLET/CAPTIVA/0/4-146%2520%25202.4L%2520DOHC/4WD/1/";
     private final String TIRES_URL = Config.BASE_URL + "/tires/details/Falken/ZIEX%2520ZE950/1006386/07923/2015/CHEVROLET/CAPTIVA/0/4-146%2520%25202.4L%2520DOHC/4WD/1";

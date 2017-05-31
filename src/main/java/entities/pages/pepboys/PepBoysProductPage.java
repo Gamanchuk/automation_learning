@@ -1,5 +1,6 @@
 package entities.pages.pepboys;
 
+import entities.pages.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import utils.CommonFunctions;
@@ -7,7 +8,7 @@ import utils.Config;
 
 import static org.testng.Assert.assertTrue;
 
-public class PepBoysProductPage extends PepBoysBasePage {
+public class PepBoysProductPage extends BasePage {
     private String productId;
     private By addToCart = By.xpath("//button[contains(@class, 'j-addItem')]");
 

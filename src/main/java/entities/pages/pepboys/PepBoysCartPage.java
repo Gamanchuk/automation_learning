@@ -3,6 +3,7 @@ package entities.pages.pepboys;
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
 import entities.components.ButtonComponent;
+import entities.pages.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -19,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 
 import static org.testng.Assert.assertTrue;
 
-public class PepBoysCartPage extends PepBoysBasePage {
+public class PepBoysCartPage extends BasePage {
     private By payOnline = By.id("j-payOnline");
     private By payInStore = By.id("j-payInStore");
     private By payPal = By.id("j-payPalCheckout");

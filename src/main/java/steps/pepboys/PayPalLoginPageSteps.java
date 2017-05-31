@@ -3,7 +3,6 @@ package steps.pepboys;
 
 import cucumber.api.java.en.And;
 import entities.components.PayPalComponent;
-import entities.pages.pepboys.PepBoysBasePage;
 import entities.pages.pepboys.PepBoysCheckoutPage;
 import utils.TestGlobalsManager;
 import utils.pepboys.BillingUser;

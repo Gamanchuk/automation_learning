@@ -2,6 +2,7 @@ package entities.pages.pepboys;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
+import entities.pages.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.ui.Select;
@@ -15,7 +16,7 @@ import java.io.IOException;
 
 import static org.testng.Assert.assertTrue;
 
-public class PepBoysMakeAppointmentPage extends PepBoysBasePage {
+public class PepBoysMakeAppointmentPage extends BasePage {
     public final String STORE_PATH = "eserve/appointment/";
 
     private By img = By.cssSelector("img.storeButtonImage");

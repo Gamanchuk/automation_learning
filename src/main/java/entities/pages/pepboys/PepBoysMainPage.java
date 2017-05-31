@@ -1,8 +1,9 @@
 package entities.pages.pepboys;
 
+import entities.pages.BasePage;
 import org.openqa.selenium.By;
 
-public class PepBoysMainPage extends PepBoysBasePage {
+public class PepBoysMainPage extends BasePage {
 
     private By searchBox = By.id("search-site");
 

@@ -28,5 +28,6 @@ Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE - BILLING INFO
 
     And user types "4152011234" into the "Phone Number" field of "Billing Address" address form
     And presses the "Continue" button
+    And chooses "Use Entered Address"
     Then user checks phone with value "4152011234" on "Delivery Method" tab
 
