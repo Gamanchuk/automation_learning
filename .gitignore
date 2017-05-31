@@ -52,3 +52,5 @@ fabric.properties
 
 orders.txt
 android_browser.log
+/.credentials/
+
