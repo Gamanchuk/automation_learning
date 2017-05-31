@@ -11,6 +11,7 @@ import utils.CommonFunctions;
 import utils.DriverFactory;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import static org.testng.Assert.assertTrue;
 
@@ -70,7 +71,11 @@ public abstract class Entity {
 
     public boolean isElementVisible(By element, int timeout) {
         log.info("Checking if element: '" + element + "' visible");
-        return this.waitForCondition(ExpectedConditions.visibilityOfElementLocated(element), timeout);
+        if(this.root == null) {
+            return this.waitForCondition(ExpectedConditions.visibilityOfElementLocated(element), timeout);
+        } else {
+            return isElementVisible(element, this.root, timeout);
+        }
     }
 
     public boolean isElementVisible(By element) {
@@ -79,7 +84,11 @@ public abstract class Entity {
 
     public boolean isElementPresent(By element, int timeout) {
         log.info("Checking if element: '" + element + "' presence");
-        return this.waitForCondition(ExpectedConditions.presenceOfElementLocated(element), timeout);
+        if(this.root == null) {
+            return this.waitForCondition(ExpectedConditions.presenceOfElementLocated(element), timeout);
+        } else {
+            return isElementPresent(element, this.root, timeout);
+        }
     }
 
     public boolean isElementPresent(By element) {
@@ -104,8 +113,12 @@ public abstract class Entity {
 
     public void waitForElementVisible(By element, int timeout) {
         log.info("Waiting " + timeout + "s for element: '" + element + "' visible");
-        new WebDriverWait(driver, timeout)
-                .until(ExpectedConditions.visibilityOfElementLocated(element));
+        if(root == null) {
+            new WebDriverWait(driver, timeout)
+                    .until(ExpectedConditions.visibilityOfElementLocated(element));
+        } else {
+            waitForElementVisible(element, this.root, timeout);
+        }
     }
 
     public void waitForAttributeVisible(By element, String attribute, String value) {
@@ -120,15 +133,17 @@ public abstract class Entity {
 
     public void waitForElementPresence(By element, int timeout) {
         log.info("Waiting " + timeout + "s for element: '" + element + "' presence");
-        new WebDriverWait(driver, TIMEOUT_SECONDS)
-                .until(ExpectedConditions.presenceOfElementLocated(element));
+        if(this.root == null) {
+            new WebDriverWait(driver, TIMEOUT_SECONDS)
+                    .until(ExpectedConditions.presenceOfElementLocated(element));
+        } else {
+            waitForElementPresence(element, root, timeout);
+        }
     }
-
 
     public void waitForElementPresence(By element) {
         this.waitForElementPresence(element, TIMEOUT_SECONDS);
     }
-
 
     public void waitForElementHidden(By element) {
         this.waitForElementVisible(element, TIMEOUT_SECONDS);
@@ -138,6 +153,69 @@ public abstract class Entity {
         log.info("Waiting " + timeout + "s for element: '" + element + "' hidden");
         new WebDriverWait(driver, TIMEOUT_SECONDS)
                 .until(ExpectedConditions.invisibilityOfElementLocated(element));
+    }
+
+    public boolean isElementVisible(By element, WebElement parent) {
+        return isElementVisible(element, parent, TIMEOUT_SECONDS);
+    }
+
+    public boolean isElementVisible(By element, WebElement parent, int timeout) {
+        log.info("Waiting " + timeout + "s for element visible: '" + element + " with parent " + parent + "' presence");
+
+        // As far as we can't use WebDriverWait for element in scope of other element
+        // we'll have to create custom wait with black-jack and girls
+        int timeout_milis = timeout * 1000;
+        for (int delay = 0; delay < timeout_milis; delay += 500) {
+            try {
+                if(parent.findElement(element).isDisplayed() && parent.findElement(element).isEnabled()) {
+                    return true;
+                }
+            } catch (Exception e) {
+                driver.manage().timeouts().implicitlyWait(delay, TimeUnit.MILLISECONDS);
+            }
+        }
+        return false;
+    }
+
+    public void waitForElementVisible(By element, WebElement parent) {
+        waitForElementVisible(element, parent, TIMEOUT_SECONDS);
+    }
+
+    public void waitForElementVisible(By element, WebElement parent, int timeout) {
+        if(!isElementVisible(element, parent, timeout)) {
+            throw new NoSuchElementException("Failed to find element: " + element + " for " + timeout + "s");
+        }
+    }
+
+    public boolean isElementPresent(By element, WebElement parent) {
+        return isElementPresent(element, parent, TIMEOUT_SECONDS);
+    }
+
+    public boolean isElementPresent(By element, WebElement parent, int timeout) {
+        log.info("Waiting " + timeout + "s for element presence: '" + element + " with parent " + parent + "' presence");
+
+        // As far as we can't use WebDriverWait for element in scope of other element
+        // we'll have to create custom wait with black-jack and girls
+        int timeout_milis = timeout * 1000;
+        for (int delay = 0; delay < timeout_milis; delay += 500) {
+            try {
+                parent.findElement(element);
+                return true;
+            } catch (NoSuchElementException | InvalidElementStateException e) {
+                driver.manage().timeouts().implicitlyWait(delay, TimeUnit.MILLISECONDS);
+            }
+        }
+        return false;
+    }
+
+    public void waitForElementPresence(By element, WebElement parent) {
+        waitForElementPresence(element, parent, TIMEOUT_SECONDS);
+    }
+
+    public void waitForElementPresence(By element, WebElement parent, int timeout) {
+        if(!isElementPresent(element, parent, timeout)) {
+            throw new NoSuchElementException("Failed to find element: " + element + " for " + TIMEOUT_SECONDS + "s");
+        }
     }
 
     public void waitForImageLoaded(By image) {
