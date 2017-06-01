@@ -7,7 +7,7 @@ public class QVCCartPage extends BasePage {
     private By checkout = By.id("checkoutBtn");
 
     public boolean isPage() {
-        return isElementVisible(checkout) || isElementClickable(checkout);
+        return isElementVisible(By.id("divShoppingCart"));
     }
 
     public void processToCheckout() {
