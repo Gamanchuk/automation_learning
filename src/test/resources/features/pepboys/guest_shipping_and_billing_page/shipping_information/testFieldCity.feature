@@ -1,4 +1,4 @@
-@pepBoys @debug
+@pepBoys
 
 Feature: GUEST - SHIPPING & BILLING PAGE - SHIPPING INFO
 
