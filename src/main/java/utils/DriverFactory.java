@@ -1,5 +1,6 @@
 package utils;
 
+import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.IOSMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
@@ -87,26 +88,29 @@ public class DriverFactory {
 
                     if (Config.PLATFORM_NAME.equals(IOS)) {
                         desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
-                        desiredCapabilities.setCapability("wdaLocalPort", Integer.parseInt(iproxyPort));
-                        desiredCapabilities.setCapability("useNewWDA", true);
+                        desiredCapabilities.setCapability(IOSMobileCapabilityType.WDA_LOCAL_PORT, Integer.parseInt(iproxyPort));
+                        desiredCapabilities.setCapability(IOSMobileCapabilityType.USE_NEW_WDA, true);
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.LAUNCH_TIMEOUT, 500000);
 
-                        desiredCapabilities.setCapability("xcodeOrgId", "Y95G5M3Q84");
-                        desiredCapabilities.setCapability("xcodeSigningId", "iPhone Developer");
-                        desiredCapabilities.setCapability("updatedWDABundleId", "com.moovweb.WebDriverAgentRunner");
+                        desiredCapabilities.setCapability(IOSMobileCapabilityType.XCODE_ORG_ID, "Y95G5M3Q84");
+                        desiredCapabilities.setCapability(IOSMobileCapabilityType.XCODE_SIGNING_ID, "iPhone Developer");
+                        desiredCapabilities.setCapability(IOSMobileCapabilityType.UPDATE_WDA_BUNDLEID, "com.moovweb.WebDriverAgentRunner");
 
                         if (Boolean.valueOf(System.getProperty("verboseLogging"))) {
-                            desiredCapabilities.setCapability("showXcodeLog", true);
+                            desiredCapabilities.setCapability(IOSMobileCapabilityType.SHOW_IOS_LOG, true);
                         }
 
+                        desiredCapabilities.setCapability("webkitResponseTimeout", 10000);
+                        desiredCapabilities.setCapability("clearSystemFiles", true);
+
                         //desiredCapabilities.setCapability("simpleIsVisibleCheck", true);
-                        //desiredCapabilities.setCapability("startIWDP", true);
-                        //desiredCapabilities.setCapability("preventWDAAttachments", true);
+                        //desiredCapabilities.setCapability(IOSMobileCapabilityType.START_IWDP, true);
+                        //desiredCapabilities.setCapability(IOSMobileCapabilityType.PREVENT_WDAATTACHMENTS, true);
                     }
 
                     if (Config.PLATFORM_NAME.equals(ANDROID)) {
-                        desiredCapabilities.setCapability("unicodeKeyboard", true);
-                        desiredCapabilities.setCapability("resetKeyboard", true);
+                        desiredCapabilities.setCapability(AndroidMobileCapabilityType.UNICODE_KEYBOARD, true);
+                        desiredCapabilities.setCapability(AndroidMobileCapabilityType.RESET_KEYBOARD, true);
                     }
 
                     eventListener = new MyWebDriverEventListener();
@@ -135,7 +139,7 @@ public class DriverFactory {
             int appiumPort = Integer.parseInt(Config.APPIUM_PORT);
             int proxyPort = Integer.parseInt(Config.PROXY_PORT);
 
-            if (Config.PLATFORM_NAME.equals("iOS")) {
+            if (Config.PLATFORM_NAME.equals(IOS)) {
                 iOSProxyRunner(proxyPort);
             }
 
@@ -157,7 +161,7 @@ public class DriverFactory {
                 serviceBuilder.withArgument(GeneralServerFlag.LOG_LEVEL, "warn");
             }
 
-            if (Config.PLATFORM_NAME.equals("iOS")) {
+            if (Config.PLATFORM_NAME.equals(IOS)) {
                 serviceBuilder.withArgument(IOSServerFlag.WEBKIT_DEBUG_PROXY_PORT, String.valueOf(proxyPort));
             }
 
@@ -211,6 +215,8 @@ public class DriverFactory {
     }
 
     /**
+     * Function for creating ios_webkit_debug_proxy service
+     *
      * The ios_webkit_debug_proxy (aka iwdp) proxies requests from usbmuxd daemon over a websocket connection,
      * allowing developers to send commands to MobileSafari and UIWebViews on real and simulated iOS devices.
      *

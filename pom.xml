@@ -124,7 +124,7 @@
         <dependency>
             <groupId>io.appium</groupId>
             <artifactId>java-client</artifactId>
-            <version>3.4.1</version>
+            <version>5.0.0-BETA8</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
         <dependency>
@@ -408,6 +408,13 @@
 
 
         <!--QVC Suite-->
+        <profile>
+            <id>suite-qvc-debug</id>
+            <properties>
+                <testng.suite>${basedir}/src/test/resources/testsuites/qvc/qvc_debug.xml</testng.suite>
+                <suite.id>93</suite.id>
+            </properties>
+        </profile>
 
 
         <!--environments-->
@@ -536,6 +543,7 @@
         </profile>
 
         <!--Sites-->
+        <!--PepBoys-->
         <profile>
             <id>site-pepboys-send</id>
             <properties>
@@ -564,9 +572,17 @@
             </properties>
         </profile>
 
-    </profiles>
+        <!--QVC-->
+        <profile>
+            <id>site-qvc-stage</id>
+            <properties>
+                <site.base.name>qvc-stage</site.base.name>
+                <site.url>https://qa.qvc.com/</site.url>
+                <site.cookies>?_mwexperienceid=cfc47413-d158-4114-a4b2-f5cf32d253fd</site.cookies>
 
-    <!--Sites-->
+            </properties>
+        </profile>
+    </profiles>
 
 
     <reporting>
