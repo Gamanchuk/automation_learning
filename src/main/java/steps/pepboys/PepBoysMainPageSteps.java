@@ -23,8 +23,6 @@ public class PepBoysMainPageSteps {
     private PepBoysForgotPasswordPage forgotPasswordPage = new PepBoysForgotPasswordPage();
     private PepBoysRewardsPage rewardsPage = new PepBoysRewardsPage();
     private PepBoysMyAccountPage myAccountPage = new PepBoysMyAccountPage();
-    private PepBoysThankYouPage thankYouPage = new PepBoysThankYouPage();
-    private PepBoysTrackingPage trackingPage = new PepBoysTrackingPage();
     private String DELIVERY_OPTIONS;
 
 
@@ -163,7 +161,6 @@ public class PepBoysMainPageSteps {
     public void userAddsToCartAnyTiresWithDeliveryOptionFor(String deliveryOption, String vehicle) {
         tiresPage.openTiresPage();
         productPage.addToCart();
-
     }
 
     @And("^user schedules installation time$")

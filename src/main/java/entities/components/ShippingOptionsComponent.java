@@ -11,6 +11,7 @@ public class ShippingOptionsComponent extends BaseComponent {
 
     public void selectShippingMethod(String shippingMethod) {
         assertTrue(isElementVisible(By.xpath("//h2[text()='Delivery Method']")), "Delivery Method tab doesn't opened");
+        radioListComponent.setRoot(getDriver().findElement(By.xpath("//div[contains(@class, 'shipping-options')]")));
         assertTrue(radioListComponent.exists(), "Delivery Method Drop-Down doesn't exist");
         assertTrue(radioListComponent.select(shippingMethod), "'" + shippingMethod + "' doesn't present in list");
     }

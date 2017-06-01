@@ -287,8 +287,13 @@ public class PepBoysCheckoutSteps {
     public void usesPayPalForPayment() {
         paymentTypesComponent.purchaseWithPayPal();
         CommonFunctions.attachScreenshot("Purchase with PayPal");
+    }
 
-
+    @And("^uses \"([^\"]*)\" for payment$")
+    public void usesForPayment(String type) {
+        paymentTypesComponent.purchasePayment();
+        CommonFunctions.attachScreenshot("Payment types");
+        paymentTypesComponent.choisePaymentType(type);
     }
 
     @Given("^user types \"([^\"]*)\" into the \"([^\"]*)\" field of \"([^\"]*)\" address form$")
@@ -320,7 +325,7 @@ public class PepBoysCheckoutSteps {
 
     @Then("^user checks phone with value \"([^\"]*)\" on \"([^\"]*)\" tab$")
     public void userChecksPhoneWithValueOnTab(String phone, String breadcrumb) {
-        breadcrumbWidget.waitForBreadcrumbActive(breadcrumb);
+        assertTrue(breadcrumbWidget.isBreadcrumbActive(breadcrumb), breadcrumb + " is not present on page.");
         addressDisplayComponent.checkPhone(phone);
         CommonFunctions.attachScreenshot("Checks phone on " + breadcrumb + " tab");
     }
@@ -677,5 +682,21 @@ public class PepBoysCheckoutSteps {
         CommonFunctions.attachScreenshot("Discount info");
     }
 
+    @And("^user continue checkout as guest$")
+    public void userContinueCheckoutAsGuest() {
+        emailComponent.fillEmailField("automationQA@automationQA.com");
+        CommonFunctions.attachScreenshot("Checkout as guest");
+    }
 
+    @And("^user continue checkout as \"([^\"]*)\"$")
+    public void userContinueCheckoutAs(String userName) {
+        BillingUser user = DataProvider.getUser(userName);
+        assertTrue(signInFormComponent.exist(), "Sign In form component doesn't present");
+
+        signInFormComponent.fillEmail(user.getEmail());
+        buttonComponent.clickButton();
+        signInFormComponent.fillPassword(user.getPassword());
+        CommonFunctions.attachScreenshot("Checkout as existing user");
+
+    }
 }

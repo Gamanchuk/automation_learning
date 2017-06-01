@@ -11,19 +11,16 @@ public class SignInFormComponent extends BaseComponent {
     private By emailField = By.id("shipping-email");
     private By passwordField = By.id("password");
 
+    final static String EMAIL = "email";
+    final static String PASSWORD = "password";
+
+
     public void signIn(String email, String password) {
-        log.info("Email: " + email);
-        log.info("Password: " + password);
 
-        WebElement emailFieldEl = getDriver().findElement(emailField);
-        emailFieldEl.clear();
-        emailFieldEl.sendKeys(email);
+        fillEmail(email);
+        fillPassword(password);
 
-        WebElement passwordFieldEl = getDriver().findElement(passwordField);
-        passwordFieldEl.clear();
-        passwordFieldEl.sendKeys(password);
-
-        focusOut(passwordFieldEl);
+        //focusOut(passwordFieldEl);
         CommonFunctions.attachScreenshot("Login page");
     }
 
@@ -34,6 +31,22 @@ public class SignInFormComponent extends BaseComponent {
     }
 
     public boolean exist() {
-        return isElementVisible(passwordField);
+        return isElementVisible(emailField);
+    }
+
+
+    public void fillEmail(String value) {
+        fillField(emailField, value);
+    }
+
+    public void fillPassword(String value) {
+        fillField(passwordField, value);
+    }
+
+    private void fillField(By field, String value) {
+        assertTrue(isElementVisible(field), "Field " + field.toString() + " doesn't present on page.");
+        WebElement element = getDriver().findElement(field);
+        element.clear();
+        element.sendKeys(value);
     }
 }
