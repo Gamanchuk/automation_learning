@@ -7,6 +7,7 @@ import entities.pages.qvc.QVCProductPage;
 import utils.CommonFunctions;
 import utils.pepboys.DataProvider;
 
+import static entities.Entity.TIMEOUT_SECONDS;
 import static org.testng.Assert.assertTrue;
 
 public class QVCPageSteps {
@@ -27,9 +28,10 @@ public class QVCPageSteps {
         CommonFunctions.attachScreenshot("Color selected: " + color);
 
         productPage.addToCart();
-        assertTrue(cartPage.isPage(), "Cart page");
+        assertTrue(cartPage.isPage(), "Cart page doesn't present.");
 
         cartPage.processToCheckout();
-        assertTrue(buttonComponent.exists(), "Cart page");
+        assertTrue(buttonComponent.exists(), "Button component doesn't present on page. " +
+                "It seems that the checkout did not boot for " + TIMEOUT_SECONDS + " seconds");
     }
 }

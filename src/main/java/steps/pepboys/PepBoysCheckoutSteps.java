@@ -684,7 +684,7 @@ public class PepBoysCheckoutSteps {
 
     @And("^user continue checkout as guest$")
     public void userContinueCheckoutAsGuest() {
-        emailComponent.fillEmailField("automationQA@automationQA.com");
+        signInFormComponent.fillEmail("automationQA@automationQA.com");
         CommonFunctions.attachScreenshot("Checkout as guest");
     }
 
