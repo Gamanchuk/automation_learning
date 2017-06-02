@@ -1,14 +1,14 @@
-@qvc @debug
+@qvc
 
 Feature: HAPPY PATH
 
- # Background: Add product to card and process to checkout
-
+  Background: Add product to card and process to checkout
+    Given user adds to cart product
 
 
   @TestCaseId("")
   Scenario: Place Order as a "Registered User" with Credit Card
-    Given user adds to cart product
+
     Given user continue checkout as "qa user"
     And presses the "Continue" button
 

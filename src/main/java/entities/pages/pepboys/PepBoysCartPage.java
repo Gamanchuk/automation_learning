@@ -126,7 +126,7 @@ public class PepBoysCartPage extends BasePage {
     }
 
     public void cleanUpCart() {
-        String script = null;
+        String script;
         try {
             script = Files.toString(new File("src/main/java/api/pepboys/postRemoveItemFromCart.js"), Charsets.UTF_8);
             script = script.replaceAll("<URL>", BASE_URL);
