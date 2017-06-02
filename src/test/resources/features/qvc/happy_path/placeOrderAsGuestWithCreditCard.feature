@@ -1,4 +1,4 @@
-@qvc
+@qvc @debug
 
 Feature: HAPPY PATH
 
@@ -6,7 +6,7 @@ Feature: HAPPY PATH
     Given user adds to cart product
 
 
-  @TestCaseId("16252")
+  @TestCaseId("102219")
   Scenario: Place Order as a "Guest" with Credit Card
 
     Given user continue checkout as guest
@@ -26,4 +26,3 @@ Feature: HAPPY PATH
     And presses the "Place Order" button
 
     Then user should be on thank you page
-    #TODO: finish this case after meeting; Now we have problem with credit cards

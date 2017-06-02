@@ -1,4 +1,4 @@
-@qvc
+@qvc @debug
 
 Feature: HAPPY PATH
 
@@ -6,7 +6,7 @@ Feature: HAPPY PATH
     Given user adds to cart product
 
 
-  @TestCaseId("")
+  @TestCaseId("102220")
   Scenario: Place Order as a "Registered User" with Credit Card
 
     Given user continue checkout as "qa user"
@@ -18,7 +18,7 @@ Feature: HAPPY PATH
     And chooses "UPS Ground: $4.47" shipping method
     And presses the "Continue" button
 
-    And uses "Pay with Check / Money Order" for payment
+    And uses "visa" card for payment
     And presses the "Continue" button
 
     And user should be on "Review" tab
