@@ -2,17 +2,28 @@ package entities.components;
 
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import utils.CommonFunctions;
 
 public class CollapserComponent extends BaseComponent {
 
     // TODO: update this method to use collapser name
     public void openCollapser() {
 
-        if (findElement(By.cssSelector("a.collapser-link"))
-                .getAttribute("class")
-                .contains("collapsed")) {
-            javascriptScroll(300);
-            click(By.cssSelector("a.collapser-link"));
+        WebElement collapser = findElement(By.cssSelector("a.collapser-link"));
+
+        if (collapser.getAttribute("class").contains("collapsed")) {
+            javascriptScroll(collapser);
+            collapser.click();
+
+            // Need sleep for check collapser again
+            CommonFunctions.sleep(500);
+
+            collapser = findElement(By.cssSelector("a.collapser-link"));
+            if (collapser.getAttribute("class").contains("collapsed")) {
+                collapser.click();
+            }
+            //click(By.cssSelector("a.collapser-link"));
         }
     }
 

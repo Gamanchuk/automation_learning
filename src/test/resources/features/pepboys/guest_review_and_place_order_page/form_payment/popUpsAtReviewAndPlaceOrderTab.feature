@@ -10,10 +10,9 @@ Feature: GUEST - REVIEW & PLACE ORDER PAGE
 
   @TestCaseId("15411")
   @TestCaseId("15414")
-  Scenario: Test field "Card Number"
+  Scenario: Pop-ups at Review page
     Given user types billing info for "qa user"
     And presses the "Continue" button
-    And chooses "Use Recommended Address"
 
     And chooses "Ground: 5-7 Days" shipping method
     And presses the "Continue" button

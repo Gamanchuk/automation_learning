@@ -8,5 +8,4 @@ public class TitleComponent extends BaseComponent {
         return isElementVisible(By.xpath("//div[contains(@class, 'title-component')]" +
                 "//div[@class='title-left']//h2[contains(text(), '" + title + "')]"));
     }
-
 }

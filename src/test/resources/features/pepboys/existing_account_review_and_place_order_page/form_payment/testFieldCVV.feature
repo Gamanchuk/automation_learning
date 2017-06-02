@@ -16,6 +16,7 @@ Feature: EXISTING ACCOUNT - REVIEW & PLACE ORDER PAGE
 
     And chooses "Ground: 5-7 Days" shipping method
     And presses the "Continue" button
+
     And uses "visa" card for payment
 
     And user types "01" into "CVV" field of Card Form

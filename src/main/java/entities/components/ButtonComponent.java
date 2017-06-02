@@ -11,12 +11,8 @@ public class ButtonComponent extends BaseComponent {
         getDriver().findElements(btn).get(0).sendKeys(Keys.RETURN);
     }
 
-
-    public void clickTotalCost() {
-        getDriver().findElement(By.xpath("//div[contains(@class, 'total-cost')]")).click();
+    public boolean exists() {
+        return isElementVisible(btn) && isElementClickable(btn);
     }
 
-    public boolean isOverlayDisplayed() {
-        return isElementVisible(By.className("spinner-container"), 2);
-    }
 }

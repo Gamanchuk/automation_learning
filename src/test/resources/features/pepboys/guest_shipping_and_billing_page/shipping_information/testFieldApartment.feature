@@ -1,14 +1,14 @@
 @pepBoys
 
-Feature: Guest - Shipping & Billing page
+Feature: GUEST - SHIPPING & BILLING PAGE - SHIPPING INFO
 
-  Background: Set Up preconditions for testing billing page
+  Background:
     Given user makes appoint
     And user adds to cart product with id "8536868" with "Ship to Home" delivery option
     And user views cart
     And chooses "Pay Online" method
 
-
+  @Issue("MCCAT-5848")
   @TestCaseId("15381")
   Scenario: Test field 'Apartment'
     Given user types billing info for "qa user"

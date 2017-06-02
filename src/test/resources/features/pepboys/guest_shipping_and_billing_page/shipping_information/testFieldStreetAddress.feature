@@ -1,7 +1,6 @@
 @pepBoys
 
-
-Feature: Guest - Shipping & Billing page
+Feature: GUEST - SHIPPING & BILLING PAGE - SHIPPING INFO
 
   Background:
     Given user makes appoint
@@ -9,6 +8,7 @@ Feature: Guest - Shipping & Billing page
     And user views cart
     And chooses "Pay Online" method
 
+  @Issue("MCCAT-5848")
   @TestCaseId("15380")
   Scenario: Test field 'Address Street'
     Given user types billing info for "qa user"

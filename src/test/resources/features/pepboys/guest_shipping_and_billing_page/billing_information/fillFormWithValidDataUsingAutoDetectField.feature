@@ -1,6 +1,6 @@
 @pepBoys
 
-Feature: Guest - Shipping & Billing page
+Feature: GUEST - SHIPPING & BILLING PAGE - BILLING INFO
 
   Background:
     Given user makes appoint
@@ -12,7 +12,6 @@ Feature: Guest - Shipping & Billing page
   Scenario: Test with correct billing information and fill in all required fields (Address chosen from auto-detect drop-down)
     Given user types billing info for "qa user"
     And presses the "Continue" button
-    And chooses "Use Recommended Address"
-    Then user checks billing info for "qa user"
+    Then user should be on "Delivery Method" tab
 
 

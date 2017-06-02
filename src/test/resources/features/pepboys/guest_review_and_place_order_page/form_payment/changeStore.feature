@@ -8,15 +8,14 @@ Feature: GUEST - REVIEW & PLACE ORDER PAGE
     And user views cart
     And chooses "Pay in Store" method
 
+  @Issue("MCCAT-5562")
   @TestCaseId("15416")
-  Scenario: Edit installation time
-    Given user types billing info for "qa user"
+  Scenario: Change Store
+    Given user types customer info for "qa user"
     And user clicks arrow for "Pick Up in Store"
     And user should be on cart page
     And user changes store
     And chooses "Pay in Store" method
-
-#    Then user types billing info for "qa user"
     And checks Pick Up in Store info
 
 

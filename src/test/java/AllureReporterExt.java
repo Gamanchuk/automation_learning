@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import static utils.CommonFunctions.attachScreenshot;
 
 public class AllureReporterExt extends AllureReporter {
-    private static Log log = LogFactory.getLog(DriverFactory.class);
+    private static Log log = LogFactory.getLog(DriverFactory.class.getSimpleName());
     private Scenario scenario;
     private Background background;
 
@@ -26,7 +26,9 @@ public class AllureReporterExt extends AllureReporter {
     public void scenario(Scenario scenario) {
         this.scenario = scenario;
         if(scenario != null) {
-            getTestCaseIDs();
+            if (Boolean.valueOf(System.getProperty("projectTracking"))) {
+                getTestCaseIDs();
+            }
             TestGlobalsManager.setTestGlobal("caseName", scenario.getName());
         }
     }
@@ -52,6 +54,7 @@ public class AllureReporterExt extends AllureReporter {
     }
 
     private ArrayList<String> getTestCaseIDs() {
+
         ArrayList<String> ids = new ArrayList<>();
         for (Tag tag : scenario.getTags()) {
             if (tag.getName().contains("@TestCaseId"))

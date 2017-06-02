@@ -8,20 +8,20 @@ Feature: GUEST - REVIEW & PLACE ORDER PAGE
     And user views cart
     And chooses "Pay Online" method
 
+  @Issue("MCCAT-5848")
   @TestCaseId("15413")
-  Scenario: Test field "Card Number"
+  Scenario: Edit Billing info
     Given user types billing info for "qa user"
     And presses the "Continue" button
-    And chooses "Use Recommended Address"
 
     And chooses "Ground: 5-7 Days" shipping method
     And presses the "Continue" button
 
     And user clicks arrow for "Billing Address"
+    And user should be on "Billing & Shipping" tab
+
     And user types manually billing info for "qa user2"
     And presses the "Continue" button
-    And chooses "Use Recommended Address"
 
     And chooses "Ground: 5-7 Days" shipping method
-    And presses the "Continue" button
-    And user checks billing info for "qa user2"
+    Then user checks shipping info for "qa user2"

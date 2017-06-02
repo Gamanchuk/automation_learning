@@ -23,8 +23,7 @@ public class PepBoysMainPageSteps {
     private PepBoysForgotPasswordPage forgotPasswordPage = new PepBoysForgotPasswordPage();
     private PepBoysRewardsPage rewardsPage = new PepBoysRewardsPage();
     private PepBoysMyAccountPage myAccountPage = new PepBoysMyAccountPage();
-    private PepBoysThankYouPage thankYouPage = new PepBoysThankYouPage();
-    private PepBoysTrackingPage trackingPage = new PepBoysTrackingPage();
+    private String DELIVERY_OPTIONS;
 
 
     @Given("^user makes appoint with code \"([^\"]*)\"$")
@@ -33,11 +32,7 @@ public class PepBoysMainPageSteps {
         assertTrue(makeAppointmentPage.isPage(), "Appointment page was not opened");
         makeAppointmentPage.selectDifferentLocation(code);
 
-        try {
-            Thread.sleep(20000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        CommonFunctions.sleep(20000);
         CommonFunctions.attachScreenshot("Store: " + code + " selected");
     }
 
@@ -58,9 +53,14 @@ public class PepBoysMainPageSteps {
     }
 
     @And("^adds it to the cart with \"([^\"]*)\" delivery option$")
-    public void userAddsItToTheCartWithDeliveryOption(String deliveryOPtion) {
-        productPage.setDeliveryOption(deliveryOPtion);
+    public void userAddsItToTheCartWithDeliveryOption(String deliveryOption) {
+        productPage.setDeliveryOption(deliveryOption);
         productPage.addToCart();
+
+        if (!productPage.isInfoDialogOpened()) {
+            productPage.addToCart();
+        }
+
         assertTrue(productPage.isInfoDialogOpened(), "Info dialog about adding item to cart was not displayed");
         CommonFunctions.attachScreenshot("Info dialog about adding item to cart was opened");
     }
@@ -73,7 +73,14 @@ public class PepBoysMainPageSteps {
 
     @And("^chooses \"([^\"]*)\" method$")
     public void userChoosesMethod(String method) {
-        cartPage.payUsingPaymentMethod(method);
+        boolean result = cartPage.payUsingPaymentMethod(method);
+
+        if (!result) {
+            cartPage.clean();
+            userAddsToCartProductWithDeliveryOption(DELIVERY_OPTIONS);
+            userViewsCart();
+            cartPage.payUsingPaymentMethod(method);
+        }
     }
 
     @And("^chooses \"([^\"]*)\" method with appointment details$")
@@ -84,26 +91,49 @@ public class PepBoysMainPageSteps {
     @And("^user adds to cart product with id \"([^\"]*)\" with \"([^\"]*)\" delivery option$")
     public void userAddsToCartProductWithIdWithDeliveryOption(String id, String deliveryOption) {
         productPage.openProductPage(id);
-        assertTrue(productPage.isPage(), "Product page was not opened");
+
         productPage.setDeliveryOption(deliveryOption);
         productPage.addToCart();
 
-        assertTrue(productPage.isInfoDialogOpened(), "Info dialog about adding item to cart was not displayed");
+        if (!productPage.isInfoDialogOpened(30)) {
+            productPage.addToCart();
+            assertTrue(productPage.isInfoDialogOpened(), "Info dialog about adding item to cart was not displayed");
+        }
+
         CommonFunctions.attachScreenshot("Info dialog about adding item to cart was opened");
     }
 
     @And("^user adds to cart product with \"([^\"]*)\" delivery option$")
     public void userAddsToCartProductWithDeliveryOption(String deliveryOption) {
-        productPage.openProductPage(DataProvider.getRandomItemId());
+        DELIVERY_OPTIONS = deliveryOption;
+        StringBuilder scuGroup = new StringBuilder(DataProvider.getRandomItemId());
+        productPage.openProductPage(scuGroup.toString());
 
         if (deliveryOption.equals("Pick Up in Store")) {
+
+            int i = 0;
             while (!productPage.isAvailableInStore()) {
-                productPage.openProductPage(DataProvider.getRandomItemId());
+                if (i == 3) {
+                    assertTrue(false, "We get four random product: [" + scuGroup + "]. " +
+                            "But this products unavailable for Pick Up in Store");
+                }
+
+                String scu = DataProvider.getRandomItemId();
+                scuGroup.append(", ").append(scu);
+                productPage.openProductPage(scu);
+                i++;
             }
         }
 
         productPage.setDeliveryOption(deliveryOption);
         productPage.addToCart();
+
+        if (!productPage.isInfoDialogOpened(30)) {
+            productPage.addToCart();
+            assertTrue(productPage.isInfoDialogOpened(), "Info dialog about adding item to cart was not displayed");
+        }
+
+        CommonFunctions.attachScreenshot("Info dialog about adding item to cart was opened");
     }
 
     @And("^user adding vehicle \"([^\"]*)\"$")
@@ -131,7 +161,6 @@ public class PepBoysMainPageSteps {
     public void userAddsToCartAnyTiresWithDeliveryOptionFor(String deliveryOption, String vehicle) {
         tiresPage.openTiresPage();
         productPage.addToCart();
-
     }
 
     @And("^user schedules installation time$")
@@ -171,7 +200,7 @@ public class PepBoysMainPageSteps {
 
     @Then("^user should be on main page$")
     public void userShouldBeOnMainPage() {
-        assertTrue(mainPage.isPage(), "Main page was not opened");
+        assertTrue(mainPage.isPage(), "Main page was not opened. Or page have some problems with loading");
         CommonFunctions.attachScreenshot("Main page opened");
     }
 

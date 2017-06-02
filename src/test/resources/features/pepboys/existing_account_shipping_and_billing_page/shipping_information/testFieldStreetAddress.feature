@@ -1,6 +1,6 @@
-@pepBoys 
+@pepBoys
 
-Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE
+Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE - SHIPPING INFO
 
   Background:
     Given user makes appoint
@@ -8,6 +8,7 @@ Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE
     And user views cart
     And chooses "Pay Online" method
 
+  @Issue("MCCAT-5848")
   @TestCaseId("15435")
   Scenario: Test field 'Address Street'
     Given user makes authorisation for "Moovweb QA"

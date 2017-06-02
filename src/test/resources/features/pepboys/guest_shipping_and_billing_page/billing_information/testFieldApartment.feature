@@ -1,6 +1,6 @@
 @pepBoys
 
-Feature: Guest - Shipping & Billing page
+Feature: GUEST - SHIPPING & BILLING PAGE - BILLING INFO
 
   Background: Set Up preconditions for testing billing page
     Given user makes appoint
@@ -8,7 +8,7 @@ Feature: Guest - Shipping & Billing page
     And user views cart
     And chooses "Pay Online" method
 
-
+  @Issue("MCCAT-5848")
   @TestCaseId("15499")
   Scenario: Test field 'Apartment'
     Given user types billing info for "qa user"
@@ -30,7 +30,5 @@ Feature: Guest - Shipping & Billing page
     And user types "!#&@()" into the "Apt, Bldg." field of "Billing Address" address form
     And presses the "Continue" button
     Then user checks "Apt, Bldg." with value "!#&@()" on "Delivery Method" tab
-
-
 
 

@@ -8,8 +8,7 @@ Feature: EXISTING ACCOUNT - REVIEW & PLACE ORDER PAGE
     And user views cart
     And chooses "Pay Online" method
 
-  @TestCaseId("15404")
-
+  @TestCaseId("15458")
   Scenario: Test field "Expiration"
     Given user makes authorisation for "qa user"
     And applies billing info for address "123 Mission Street, 10th Floor"
@@ -17,6 +16,7 @@ Feature: EXISTING ACCOUNT - REVIEW & PLACE ORDER PAGE
 
     And chooses "Ground: 5-7 Days" shipping method
     And presses the "Continue" button
+
     And uses "visa" card for payment
 
     And user types "01" into "Expiration" field of Card Form

@@ -2,6 +2,8 @@ package entities.pages.pepboys;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
+import entities.components.ButtonComponent;
+import entities.pages.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -18,28 +20,50 @@ import java.util.concurrent.TimeUnit;
 
 import static org.testng.Assert.assertTrue;
 
-public class PepBoysCartPage extends PepBoysBasePage {
+public class PepBoysCartPage extends BasePage {
+    private By payOnline = By.id("j-payOnline");
+    private By payInStore = By.id("j-payInStore");
+    private By payPal = By.id("j-payPalCheckout");
 
-    public void payUsingPaymentMethod(String method) {
+    private ButtonComponent buttonComponent = new ButtonComponent();
+    private int RETRY_COUNT = 1;
+
+    public boolean payUsingPaymentMethod(String method) {
         waitForAjax();
 
-        if (method.equals("Pay Online")) {
-            click(By.id("j-payOnline"));
-        } else if (method.equals("PayPal")) {
-            click(By.id("j-payPalCheckout"));
-        } else if (method.equals("Pay in Store")) {
-            click(By.id("j-payInStore"));
+        switch (method) {
+            case "Pay Online":
+                assertTrue(isElementVisible(payOnline), "Pay Online button doesn't present on page.");
+                CommonFunctions.attachScreenshot("Payment method");
+                getDriver().findElement(payOnline).click();
+                assertTrue(buttonComponent.exists(), "Button component doesn't present on page. " +
+                        "It seems that the checkout did not boot for " + TIMEOUT_SECONDS + " seconds");
+                break;
+            case "Pay in Store":
+                int MAX_RETRY_COUNT = 2;
+                if (!isElementVisible(payInStore) && RETRY_COUNT <= MAX_RETRY_COUNT) {
+                    CommonFunctions.attachScreenshot("Pay In Store button is missing");
+                    log.info("Pay in Store button doesn't present on page. Retrying search products #[ " + RETRY_COUNT + "] .");
+                    RETRY_COUNT++;
+                    return false;
+                } else {
+                    assertTrue(isElementVisible(payInStore), "Pay in Store button doesn't present on page.");
+                    CommonFunctions.attachScreenshot("Payment method");
+                    getDriver().findElement(payInStore).click();
+                    RETRY_COUNT = 1;
+                    assertTrue(buttonComponent.exists(), "Button component doesn't present on page. " +
+                            "It seems that the checkout did not boot for " + TIMEOUT_SECONDS + " seconds");
+                    return true;
+                }
+            case "PayPal":
+                assertTrue(isElementVisible(payPal), "PayPal button doesn't present on page.");
+                CommonFunctions.attachScreenshot("Payment method");
+                getDriver().findElement(payPal).click();
+                break;
+            default:
+                assertTrue(false, "Error in code. Framework doesn't support this Payment Method: " + method);
         }
-
-        CommonFunctions.attachScreenshot("Payment method");
-
-        if (method.equals("Pay Online")) {
-            waitForElementVisible(By.xpath("//button[text()='Continue']"));
-            waitForElementClickable(By.xpath("//button[text()='Continue']"));
-        } else if (method.equals("Pay in Store")) {
-            waitForElementVisible(By.xpath("//button[text()='Place Order']"));
-            waitForElementClickable(By.xpath("//button[text()='Place Order']"));
-        }
+        return true;
     }
 
     public void waitForInstallationDialogToOpen() {
@@ -127,6 +151,12 @@ public class PepBoysCartPage extends PepBoysBasePage {
         assertTrue(isPage(), "Shopping Cart not opened");
     }
 
+    public void clean() {
+        getDriver().navigate().to(BASE_URL + "cart/empty");
+        CommonFunctions.sleep(5000);
+        assertTrue(isPage(), "Cart page doesn't present after cleaning.");
+    }
+
     public boolean isPage() {
         return isElementVisible(By.xpath("//h1[@class='cartTitle']"));
     }
@@ -136,10 +166,12 @@ public class PepBoysCartPage extends PepBoysBasePage {
     }
 
     public void changeLocation() {
-        findElement(By.cssSelector("a.changeTargetStore")).click();
+        WebElement changeStore = findElement(By.cssSelector("a.changeTargetStore"));
+        javascriptScroll(changeStore);
+        changeStore.click();
         waitForElementVisible(By.cssSelector("div.modal-dialog"));
         By chooseStoreButton = By.cssSelector("button.j-chooseStore");
-        if(isElementVisible(chooseStoreButton)) {
+        if (isElementVisible(chooseStoreButton)) {
             WebElement chooseStoreButtonEl = findElement(chooseStoreButton);
             String storeId = chooseStoreButtonEl.getAttribute("data-store");
             TestGlobalsManager.setTestGlobal("storeId", storeId);

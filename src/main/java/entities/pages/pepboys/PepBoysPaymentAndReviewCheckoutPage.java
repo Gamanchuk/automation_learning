@@ -1,18 +1,20 @@
 package entities.pages.pepboys;
 
 import entities.components.BaseComponent;
+import entities.pages.BasePage;
 import org.openqa.selenium.By;
 import utils.TestGlobalsManager;
 
 import static org.testng.Assert.assertTrue;
 
-public class PepBoysPaymentAndReviewCheckoutPage extends PepBoysBasePage {
+public class PepBoysPaymentAndReviewCheckoutPage extends BasePage {
     public void clickTerms() {
         click(By.xpath("//a[text()='Terms']"));
     }
 
     public void clickArrowFor(String componentName) {
-        waitForElementPresence(By.cssSelector("div.display-well-arrow"));
+        javascriptScroll(500);
+        assertTrue(isElementClickable(By.cssSelector("div.display-well-arrow")), "Arrow for " + componentName + " was not clickable");
         BaseComponent.getComponentByTitle(componentName).findElement(By.cssSelector("div.display-well-arrow")).click();
     }
 

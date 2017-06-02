@@ -2,17 +2,21 @@ package entities.pages.pepboys;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
+import entities.pages.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.ui.Select;
 import utils.CommonFunctions;
+import utils.Config;
 import utils.DriverFactory;
 import utils.pepboys.Vehicle;
 
 import java.io.File;
 import java.io.IOException;
 
-public class PepBoysMakeAppointmentPage extends PepBoysBasePage {
+import static org.testng.Assert.assertTrue;
+
+public class PepBoysMakeAppointmentPage extends BasePage {
     public final String STORE_PATH = "eserve/appointment/";
 
     private By img = By.cssSelector("img.storeButtonImage");
@@ -20,7 +24,7 @@ public class PepBoysMakeAppointmentPage extends PepBoysBasePage {
 
 
     public boolean isPage() {
-        waitForElementVisible(By.id("locationForm"));
+        assertTrue(isElementVisible(By.id("locationForm")), "Location button on main page doesn't present on page.");
         waitForAjax();
         return true;
     }
@@ -50,6 +54,9 @@ public class PepBoysMakeAppointmentPage extends PepBoysBasePage {
         try {
             fileContents = Files.toString(new File("src/main/java/api/pepboys/postNewStoreLocation.js"), Charsets.UTF_8);
             fileContents = fileContents.replaceAll("<URL>", BASE_URL);
+            fileContents = fileContents.replaceAll("<EXP>", COOKIES);
+            fileContents = fileContents.replaceAll("<KEY>", Config.STORE_ID);
+            log.info("\n" + fileContents.toString() + "\n");
         } catch (IOException e) {
             log.warn("Cannot read file");
         }

@@ -11,7 +11,7 @@ Feature: PAY IN STORE - GUEST - MEMBERSHIP REWARDS
   @Issue("MCCAT-5331")
   @TestCaseId("16658")
   Scenario: Test checkbox "Don't have a reward number"
-    Given user types billing info for "qa user"
+    Given user types customer info for "qa user"
     And user chooses don't have a reward number
     And presses the "Place Order" button
     Then user should be on thank you page

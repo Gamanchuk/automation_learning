@@ -4,6 +4,7 @@ package utils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jetbrains.annotations.NotNull;
 import org.testng.*;
 import org.testng.annotations.ITestAnnotation;
 import ru.yandex.qatools.allure.Allure;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class TestListener implements ITestListener, IAnnotationTransformer {
-    private static Log log = LogFactory.getLog(TestListener.class);
+    private static Log log = LogFactory.getLog(TestListener.class.getSimpleName());
     private Allure lifecycle = Allure.LIFECYCLE;
 
     public void transform(ITestAnnotation annotation, Class testClass,
@@ -33,7 +34,10 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
 
     @Override
     public void onTestStart(ITestResult iTestResult) {
-        BrowserConsoleLogAggregator.startCapturing();
+
+        if (Config.DEVICE_NAME.equals("Android")) {
+            BrowserConsoleLogAggregator.startCapturing();
+        }
     }
 
     @Override
@@ -48,6 +52,7 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
         DriverFactory.quitDriver();
     }
 
+    @NotNull
     private String countDuration(long milis) {
         int durationInSeconds = Math.round(milis / 1000);
         int minutes = Math.round(durationInSeconds / 60);
@@ -71,7 +76,7 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
             String ticketId = setJiraIssues(caseName, errorMessage);
             try {
                 File attachment = File.createTempFile("attachment", ".html");
-                FileUtils.writeStringToFile(attachment, dom);
+                FileUtils.writeStringToFile(attachment, dom, "UTF-8");
                 JiraHelper.addAttachment(ticketId, attachment);
                 JiraHelper.addAttachment(ticketId, androidLog);
             } catch (IOException e) {
@@ -84,10 +89,11 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
         fireRetryTest("The test has been failed then retried.", iTestResult);
     }
 
+    @SuppressWarnings(value = "unchecked")
     private void setTestResults(TestRailStatus status, String error, String issuesLink) {
         try {
             ArrayList<String> ids = (ArrayList<String>) TestGlobalsManager.getTestGlobal("testCaseIds");
-            if(ids != null) {
+            if (ids != null) {
                 for (String id : ids) {
                     TestRailRunHelper.getInstance().setTestResult(id, status, error, issuesLink);
                 }
@@ -124,6 +130,7 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
 
     @Override
     public void onTestFailedButWithinSuccessPercentage(ITestResult iTestResult) {
+        fireRetryTest("The test has been failed (within success percentage) then retried.", iTestResult);
         BrowserConsoleLogAggregator.stopCapturing();
         DriverFactory.quitDriver();
     }

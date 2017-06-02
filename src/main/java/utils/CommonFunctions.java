@@ -15,13 +15,11 @@ import org.testng.Reporter;
 import ru.yandex.qatools.allure.annotations.Attachment;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CommonFunctions {
-    private static Log log = LogFactory.getLog(CommonFunctions.class);
+    private static Log log = LogFactory.getLog(CommonFunctions.class.getSimpleName());
 
     @Attachment("< {0} > message ")
     public static String log(Class clazz, String msg) {
@@ -167,7 +165,7 @@ public class CommonFunctions {
 
     public static void startVideoRecording() {
         String arguments = String.format("video -a start -p %s -u %s -e true", Config.PLATFORM_NAME.toLowerCase(), Config.DEVICE_UID);
-        CommonFunctions.runShell("/usr/local/bin/flick", arguments);
+        CommonFunctions.runShell("flick", arguments);
     }
 
     public static void stopScreenVideo() {
@@ -175,6 +173,6 @@ public class CommonFunctions {
                 Config.PLATFORM_NAME.toLowerCase(),
                 Config.DEVICE_UID,
                 System.getProperty("user.dir") + "/target");
-        CommonFunctions.runShell("/usr/local/bin/flick", arguments);
+        CommonFunctions.runShell("flick", arguments);
     }
 }

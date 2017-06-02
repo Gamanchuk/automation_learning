@@ -24,7 +24,7 @@ public class JiraHelper {
     private static final MediaType MEDIA_MULTIPART = MediaType.parse("multipart/form-data");
     private final static OkHttpClient client = new OkHttpClient();
 
-    private static Log log = LogFactory.getLog(JiraHelper.class);
+    private static Log log = LogFactory.getLog(JiraHelper.class.getSimpleName());
 
     public static String publishJira(String title, String description, String environment, String expectedResult, String actualResult) throws JSONException, IOException {
 

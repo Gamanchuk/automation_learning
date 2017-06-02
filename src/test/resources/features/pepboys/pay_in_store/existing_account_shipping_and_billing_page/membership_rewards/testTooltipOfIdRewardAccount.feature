@@ -12,5 +12,5 @@ Feature: PAY IN STORE - EXISTING ACCOUNT - MEMBERSHIP REWARDS
   @TestCaseId("16624")
   Scenario: Tooltip of ID reward account must be present
     Given user makes authorisation for "qa user"
-    And user should be on "Billing" page
+    And user should be on "Customer Information" page
     Then user checks rewards number for "qa user"

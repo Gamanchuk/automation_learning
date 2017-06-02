@@ -12,11 +12,9 @@ Feature: GUEST - REVIEW & PLACE ORDER PAGE
   Scenario: Test field "Expiration"
     Given user types billing info for "qa user"
     And presses the "Continue" button
-    And chooses "Use Recommended Address"
 
     And chooses "Ground: 5-7 Days" shipping method
     And presses the "Continue" button
-
     And uses "visa" card for payment
 
     And user types "01" into "Expiration" field of Card Form

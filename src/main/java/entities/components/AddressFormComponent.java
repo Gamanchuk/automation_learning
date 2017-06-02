@@ -3,6 +3,9 @@ package entities.components;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+import utils.CommonFunctions;
+
+import static org.testng.Assert.assertTrue;
 
 public class AddressFormComponent extends BaseComponent {
 
@@ -15,31 +18,38 @@ public class AddressFormComponent extends BaseComponent {
     private By zipField = By.cssSelector(".zip-input input");
 
     public void fillAddressForm(String fullName, String address, String cityInfo, String city, String apartment, String phone, String state, String zip, boolean autoFill) {
+
+        boolean apartmentPresent = isElementVisible(apartmentField, 3);
+
         fillField(nameField, fullName);
         fillField(addressField, address);
 
-        if (autoFill) {
+        CommonFunctions.sleep(1000);
+
+        if (!apartmentPresent) {
             // Waiting for dropdown
-            waitForElementVisible(By.cssSelector("a.manual"));
+            assertTrue(isElementVisible(By.cssSelector("a.manual")), "Input address manually link was not displayed");
+            CommonFunctions.attachScreenshot("drop Down");
+
+            // Need wait. Sometimes we have NoSuchElement
+            CommonFunctions.sleep(1000);
+        }
+
+        if (autoFill) {
             findElementWithTextBy(cityInfo, By.cssSelector("div.radio-list-details p.subtext")).click();
         } else {
-            if (isElementVisible(By.cssSelector("a.manual"), 1)) {
+            if (!apartmentPresent) {
                 click(By.cssSelector("a.manual"));
-                findElementWithTextBy("enter city", By.cssSelector("div.zip-message a")).click();
             }
+            //findElementWithTextBy("enter city", By.cssSelector("div.zip-message a")).click();
             fillField(cityField, city);
             fillField(zipField, zip);
             fillState(state);
         }
 
         // Need to sleep for second to avoid selenium exception
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        waitForElementVisible(apartmentField);
+        CommonFunctions.sleep(1000);
+        assertTrue(isElementVisible(apartmentField), "Apartment field doesn't present on page.");
         fillField(apartmentField, apartment);
 
         // Need to send phone number digit by digit
@@ -72,6 +82,7 @@ public class AddressFormComponent extends BaseComponent {
 
     public void fillState(String state) {
         WebElement stateEl = findElement(stateField);
+        javascriptScroll(stateEl);
         Select selectState = new Select(stateEl);
         selectState.selectByValue(state);
     }
@@ -99,6 +110,7 @@ public class AddressFormComponent extends BaseComponent {
 
     private void fillField(By field, String value) {
         WebElement element = findElement(field);
+        javascriptScroll(element);
         element.clear();
         element.sendKeys(value);
     }

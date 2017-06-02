@@ -1,14 +1,14 @@
-@pepBoys 
+@pepBoys
 
-Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE
+Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE - BILLING INFO
 
   Background: Set Up preconditions for testing billing page
     Given user makes appoint
-    And user adds to cart product with id "8536868" with "Ship to Home" delivery option
+    And user adds to cart product with id "8076476" with "Ship to Home" delivery option
     And user views cart
     And chooses "Pay Online" method
-
-
+    
+  @Issue("MCCAT-5505")
   @TestCaseId("15517")
   Scenario: Test field 'Apartment'
     Given user makes authorisation for "Moovweb QA"

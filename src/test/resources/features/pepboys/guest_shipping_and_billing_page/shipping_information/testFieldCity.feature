@@ -1,6 +1,6 @@
 @pepBoys
 
-Feature: Guest - Shipping & Billing page
+Feature: GUEST - SHIPPING & BILLING PAGE - SHIPPING INFO
 
   Background:
     Given user makes appoint
@@ -14,9 +14,8 @@ Feature: Guest - Shipping & Billing page
     And user types shipping info for "qa user"
     And user types "" into the "City" field of "Shipping Address" address form
     And presses the "Continue" button
-    And chooses "Use Entered Address"
     Then user should stay at "Billing & Shipping" tab
-    And sees "FORM ERRORS" error message with text "City is required"
+    And sees "FORM ERRORS" error message with text "Please review all inputs."
 
     And user types "SanFrancisco" into the "City" field of "Shipping Address" address form
     And presses the "Continue" button

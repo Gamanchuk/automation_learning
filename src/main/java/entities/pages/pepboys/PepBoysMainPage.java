@@ -1,15 +1,15 @@
 package entities.pages.pepboys;
 
+import entities.pages.BasePage;
 import org.openqa.selenium.By;
 
-public class PepBoysMainPage extends PepBoysBasePage {
+public class PepBoysMainPage extends BasePage {
 
     private By searchBox = By.id("search-site");
 
     public boolean isPage() {
-        waitForElementClickable(searchBox);
-        waitForElementVisible(By.xpath("//h2[text()='Popular Categories']"));
-        return true;
+        return isElementClickable(searchBox)
+                && isElementVisible(By.xpath("//span[@class='mw_category_title' and text()='Tires']"));
     }
 
     public void openPageWithCookies(){

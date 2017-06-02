@@ -1,48 +1,66 @@
 package entities.pages.pepboys;
 
+import entities.pages.BasePage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
+import utils.CommonFunctions;
+import utils.Config;
 
 import static org.testng.Assert.assertTrue;
 
-public class PepBoysProductPage extends PepBoysBasePage {
+public class PepBoysProductPage extends BasePage {
     private String productId;
+    private By addToCart = By.xpath("//button[contains(@class, 'j-addItem')]");
 
+    //    public boolean isPage() {
+//        CommonFunctions.sleep(2000);
+//        waitForAjax();
+//        return isElementVisible(By.xpath("//div[@class='mw-note-value' and text()='" + productId + "']"));
+//    }
     public boolean isPage() {
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return isElementVisible(By.xpath("//div[@class='mw-note-value' and text()='" + productId + "']"));
+        CommonFunctions.sleep(2000);
+        return isElementVisible(addToCart) && isElementClickable(addToCart);
     }
 
     public void openProductPage(String productId) {
         this.productId = productId;
-        getDriver().navigate().to(BASE_URL + "product/details/" + productId);
-        assertTrue(isPage(), "Product page was not opened");
+        getDriver().navigate().to(BASE_URL + "product/details/" + productId + "/" + Config.STORE_ID);
+
+        if (isPage()) {
+            assertTrue(isPage(), "Product page was not opened.");
+        }
+
+        waitForAjax();
     }
 
     public void setDeliveryOption(String deliveryOption) {
-        ((JavascriptExecutor) getDriver()).executeScript("window.scrollBy(0,500)", "");
+        By deliveryOptionXpath = By.xpath("//label[contains(., '" + deliveryOption + "')]");
+
+        javascriptScroll(getDriver().findElement(addToCart));
+
+        assertTrue(isElementVisible(deliveryOptionXpath), "Delivery options " + deliveryOption + " doesn't present on page.");
+        WebElement deliveryOptionEl = getDriver().findElement(deliveryOptionXpath);
 
         if (!deliveryOption.equals("Pick Up in Store")) {
-            getDriver().findElement(By.xpath("//label[contains(., '" + deliveryOption + "')]")).click();
+            deliveryOptionEl.click();
             waitForAjax();
         }
     }
 
     public void addToCart() {
-        click(By.xpath("//button[text()='Add to cart']"));
+        click(addToCart);
     }
 
     public boolean isInfoDialogOpened() {
         return isElementVisible(By.xpath("//h3[text()='Your item(s) have been added to the cart']"));
     }
 
+    public boolean isInfoDialogOpened(int timeout) {
+        return isElementVisible(By.xpath("//h3[text()='Your item(s) have been added to the cart']"), timeout);
+    }
+
     public void clickViewCartInAddToCartDialog() {
         click(By.xpath("//button[text()='View Cart']"));
-//        assertTrue(isElementClickable(By.xpath("//a[text()='Pay Online']")));
     }
 
     public void clickContinueInAddToCartDialog() {
@@ -50,6 +68,11 @@ public class PepBoysProductPage extends PepBoysBasePage {
     }
 
     public boolean isAvailableInStore() {
-        return isElementPresent(By.xpath("//div[contains(text(), 'Pay in Store Available')]"));
+        return !isElementPresent(By.xpath("//h4[contains(text(), 'Not Available')]"), 5) &&
+                !isElementPresent(By.xpath("//h4[contains(text(), 'Available tomorrow')]"), 5) &&
+                !isElementPresent(By.xpath("//h4[contains(text(), 'Available today after')]"), 5) &&
+                !isElementPresent(By.xpath("//h4[contains(text(), 'days after')]"), 5) &&
+                isElementPresent(By.xpath("//h4[contains(text(), 'Available today')]"), 5) &&
+                isElementPresent(By.xpath("//div[contains(text(), 'Pay in Store Available')]"), 5);
     }
 }

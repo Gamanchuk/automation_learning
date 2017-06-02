@@ -1,6 +1,5 @@
 @pepBoys
 
-
 Feature: EXISTING ACCOUNT - REVIEW & PLACE ORDER PAGE
 
   Background:
@@ -9,7 +8,7 @@ Feature: EXISTING ACCOUNT - REVIEW & PLACE ORDER PAGE
     And user views cart
     And chooses "Pay Online" method
 
-  @TestCaseId("15400")
+  @TestCaseId("15453")
   @Issue("MCCAT-5505")
   Scenario: Test with correct Visa billing information and fill in all required fields
     Given user makes authorisation for "qa user"
@@ -22,4 +21,3 @@ Feature: EXISTING ACCOUNT - REVIEW & PLACE ORDER PAGE
     And uses "visa" card for payment
     And presses the "Place Order" button
     Then user should be on thank you page
-

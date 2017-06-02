@@ -2,15 +2,12 @@ package entities.components;
 
 import org.openqa.selenium.By;
 
-/**
- * Created by vmaksimenko on 05.04.17.
- */
 public class ModalComponent extends BaseComponent {
 
     private By modal = By.cssSelector("div.component.modal");
 
-    public void waitForModalToOpen() {
-        waitForElementVisible(modal);
+    public boolean isModalOpen() {
+        return isElementVisible(modal);
     }
 
     public boolean hasMessageWithText(String text) {

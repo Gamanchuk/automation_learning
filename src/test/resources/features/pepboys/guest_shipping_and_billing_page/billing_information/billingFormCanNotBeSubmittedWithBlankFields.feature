@@ -1,6 +1,6 @@
 @pepBoys
 
-Feature: Guest - Shipping & Billing page
+Feature: GUEST - SHIPPING & BILLING PAGE - BILLING INFO
 
   Background:
     Given user makes appoint
@@ -8,8 +8,8 @@ Feature: Guest - Shipping & Billing page
     And user views cart
     And chooses "Pay Online" method
 
-  @TestCaseId("15420")
-  Scenario: Installation of detail for car
+  @TestCaseId("15495")
+  Scenario: Test with correct billing information and do not fill in all required fields
     Given presses the "Continue" button
     Then user should stay at "Billing & Shipping" tab
     And sees "FORM ERRORS" error message with text "Please review all inputs."

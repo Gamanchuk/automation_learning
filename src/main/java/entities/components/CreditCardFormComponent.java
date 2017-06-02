@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import utils.CommonFunctions;
 import utils.TestGlobalsManager;
 
-import static org.testng.AssertJUnit.assertTrue;
+import static org.testng.Assert.assertTrue;
 
 public class CreditCardFormComponent extends BaseComponent {
 
@@ -15,11 +15,9 @@ public class CreditCardFormComponent extends BaseComponent {
     private By ccName = By.id("-cc-name");
 
     public void inputPaymentDetails(String name, String number, String expDate, String cvv, String cardholderName) {
-        waitForElementVisible(ccNumber);
-         fillField(ccNumber, number);
-
-        assertTrue("Card icon was not displayed or incorrect",
-                findElement(By.cssSelector("div.credit-card-number-input")).getAttribute("class").contains(name));
+        assertTrue(isElementVisible(ccNumber), "Card number field doesn't present on page.");
+        fillField(ccNumber, number);
+        assertTrue(findElement(By.cssSelector("div.credit-card-number-input")).getAttribute("class").contains(name), "Card icon was not displayed or incorrect");
 
         fillField(exp, expDate);
         fillField(csc, cvv);
@@ -30,7 +28,7 @@ public class CreditCardFormComponent extends BaseComponent {
             fillField(ccName, cardholderName);
         }
 
-//        focusOut();
+        focusOut();
         CommonFunctions.attachScreenshot("Payment details");
     }
 
