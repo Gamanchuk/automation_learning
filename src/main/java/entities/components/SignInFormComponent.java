@@ -2,7 +2,11 @@ package entities.components;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.logging.LogType;
 import utils.CommonFunctions;
+
+import java.util.List;
 
 import static org.testng.Assert.assertTrue;
 
@@ -37,6 +41,13 @@ public class SignInFormComponent extends BaseComponent {
 
     public void fillEmail(String value) {
         fillField(emailField, value);
+        List<LogEntry> entries = getDriver().manage().logs().get(LogType.PERFORMANCE).getAll();
+
+        log.info("Perf logs");
+        for (LogEntry logEntry : entries) {
+            log.info(logEntry.getMessage());
+        }
+
     }
 
     public void fillPassword(String value) {

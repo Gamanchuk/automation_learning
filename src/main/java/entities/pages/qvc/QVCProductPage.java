@@ -38,6 +38,7 @@ public class QVCProductPage extends BasePage {
     }
 
     public void addToCart() {
+
         try {
             JavascriptExecutor js = (JavascriptExecutor) getDriver();
             String result = (String) js.executeScript("checkForColorSize('A', document.getElementsByClassName(\"btnAddToCart\"))");

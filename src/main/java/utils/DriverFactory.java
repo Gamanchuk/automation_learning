@@ -16,6 +16,9 @@ import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.logging.LogType;
+import org.openqa.selenium.logging.LoggingPreferences;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
@@ -32,6 +35,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -86,6 +90,8 @@ public class DriverFactory {
                     desiredCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, deviceName);
                     desiredCapabilities.setCapability(MobileCapabilityType.UDID, deviceUdid);
 
+                    desiredCapabilities.setCapability("enablePerformanceLogging", true);
+
                     if (Config.PLATFORM_NAME.equals(IOS)) {
                         desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.WDA_LOCAL_PORT, Integer.parseInt(iproxyPort));
@@ -100,12 +106,14 @@ public class DriverFactory {
                             desiredCapabilities.setCapability(IOSMobileCapabilityType.SHOW_IOS_LOG, true);
                         }
 
-                        desiredCapabilities.setCapability("webkitResponseTimeout", 10000);
+                        desiredCapabilities.setCapability("webkitResponseTimeout", 20000);
                         desiredCapabilities.setCapability("clearSystemFiles", true);
+
 
                         //desiredCapabilities.setCapability("simpleIsVisibleCheck", true);
                         //desiredCapabilities.setCapability(IOSMobileCapabilityType.START_IWDP, true);
                         //desiredCapabilities.setCapability(IOSMobileCapabilityType.PREVENT_WDAATTACHMENTS, true);
+
                     }
 
                     if (Config.PLATFORM_NAME.equals(ANDROID)) {
@@ -113,8 +121,14 @@ public class DriverFactory {
                         desiredCapabilities.setCapability(AndroidMobileCapabilityType.RESET_KEYBOARD, true);
                     }
 
-                    eventListener = new MyWebDriverEventListener();
+                    LoggingPreferences logPrefs = new LoggingPreferences();
+                    logPrefs.enable(LogType.BROWSER, Level.ALL);
+                    logPrefs.enable(LogType.PERFORMANCE, Level.INFO);
+                    desiredCapabilities.setCapability(CapabilityType.LOGGING_PREFS, logPrefs);
 
+
+
+                    eventListener = new MyWebDriverEventListener();
                     driver = new EventFiringWebDriver(new RemoteWebDriver(new URL(String.valueOf(service.getUrl())), desiredCapabilities)).register(eventListener);
                     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
                     CommonFunctions.startVideoRecording();
