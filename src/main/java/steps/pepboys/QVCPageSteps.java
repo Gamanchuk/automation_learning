@@ -24,6 +24,7 @@ public class QVCPageSteps {
         productPage.openPage(scuGroup.toString());
         CommonFunctions.attachScreenshot("Product Page");
 
+        //TODO: return color
         String color = productPage.selectRandomColor();
         CommonFunctions.attachScreenshot("Color selected: " + color);
 
