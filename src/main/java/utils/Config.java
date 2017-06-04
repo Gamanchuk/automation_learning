@@ -27,6 +27,8 @@ public class Config {
     public static final String SITE_NAME;
     public static final String STORE_ID;
 
+    public static final String ANALYTICS_URL = "http://mc-events.moovweb.net";
+
     private static Log log = LogFactory.getLog(Config.class.getSimpleName());
 
     static {

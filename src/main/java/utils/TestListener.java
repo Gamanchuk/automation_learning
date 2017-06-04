@@ -74,17 +74,32 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
 
         if (Boolean.valueOf(System.getProperty("projectTracking"))) {
             String ticketId = setJiraIssues(caseName, errorMessage);
+
+            // Attaching video
             try {
                 File video = new File(System.getProperty("user.dir") + "/target/" + Config.DEVICE_UID + ".mp4");
-                File attachment = File.createTempFile("attachment", ".html");
-                FileUtils.writeStringToFile(attachment, dom, "UTF-8");
-
-                JiraHelper.addAttachment(ticketId, attachment);
-                JiraHelper.addAttachment(ticketId, androidLog);
                 JiraHelper.addAttachment(ticketId, video);
             } catch (IOException e) {
-                e.printStackTrace();
+                log.error(e.getMessage());
             }
+
+            // Attaching DOM tree
+            try {
+                File attachment = File.createTempFile("attachment", ".html");
+                FileUtils.writeStringToFile(attachment, dom, "UTF-8");
+                JiraHelper.addAttachment(ticketId, attachment);
+            } catch (IOException e) {
+                log.error(e.getMessage());
+            }
+
+            // Attaching browser log
+            try {
+                JiraHelper.addAttachment(ticketId, androidLog);
+            } catch (IOException e) {
+                log.error(e.getMessage());
+            }
+
+
             setTestResults(TestRailStatus.FAILED, errorMessage, JiraHelper.doLinkToIssue(ticketId));
         }
 
