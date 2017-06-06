@@ -6,20 +6,19 @@ Feature: HAPPY PATH
     Given user adds to cart product
 
 
-  @TestCaseId("102219")
-  Scenario: Place Order as a "Guest" with Credit Card
+  @TestCaseId("102221")
+  Scenario: Place Order with Paypal Credit from Payment page
 
-    Given user continue checkout as guest
+    Given user continue checkout as "qa paypal"
     And presses the "Continue" button
-    And user should be on "Address" tab
 
-    And user types billing info for "qa user"
+    And user should be on "Address" tab
     And presses the "Continue" button
 
     And chooses "UPS Ground: $4.47" shipping method
     And presses the "Continue" button
 
-    And uses "visa" card for payment
+    And uses "(formerly Bill Me Later®)" for payment
     And presses the "Continue" button
 
     And user should be on "Review" tab

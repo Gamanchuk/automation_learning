@@ -6,8 +6,8 @@ Feature: HAPPY PATH
     Given user adds to cart product
 
 
-  @TestCaseId("102219")
-  Scenario: Place Order as a "Guest" with Credit Card
+  @TestCaseId("10222")
+  Scenario: Place Money Order as Guest
 
     Given user continue checkout as guest
     And presses the "Continue" button
@@ -19,7 +19,7 @@ Feature: HAPPY PATH
     And chooses "UPS Ground: $4.47" shipping method
     And presses the "Continue" button
 
-    And uses "visa" card for payment
+    And uses "Pay with Check / Money Order" for payment
     And presses the "Continue" button
 
     And user should be on "Review" tab

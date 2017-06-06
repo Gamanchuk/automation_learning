@@ -1,4 +1,4 @@
-@qvc @debug
+@qvc
 
 Feature: HAPPY PATH
 
@@ -18,7 +18,8 @@ Feature: HAPPY PATH
     And chooses "UPS Ground: $4.47" shipping method
     And presses the "Continue" button
 
-    And uses "visa" card for payment
+    And user should be on "Payment" tab
+    And uses saved "visa" card for payment
     And presses the "Continue" button
 
     And user should be on "Review" tab
