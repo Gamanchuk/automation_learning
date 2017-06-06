@@ -197,6 +197,20 @@ public class PepBoysCheckoutSteps {
         TestGlobalsManager.setTestGlobal("CARDINFO", card.getName() + " - " + card.getNumber());
     }
 
+    @And("^uses saved \"([^\"]*)\" card for payment$")
+    public void usesSavedCardForPayment(String cardName) {
+        CreditCard card = DataProvider.getCard(cardName);
+        CommonFunctions.sleep(2000);
+
+        //Select card uses 4 last symbols
+        radioListComponent.select(card.getSecureCardData());
+        creditCardFormComponent.inputValueIntoField(card.getCvv(), "CVV");
+
+        CommonFunctions.attachScreenshot("Card selected");
+        TestGlobalsManager.setTestGlobal("CARDHOLDER", card.getCardholderName());
+        TestGlobalsManager.setTestGlobal("CARDINFO", card.getName() + " - " + card.getNumber());
+    }
+
     @Then("^user should be on thank you page$")
     public void userShouldBeOnThankYouPage() {
         assertTrue(thankYouPage.isOnThankYouPage(), "User is not on \"Thank You\" page");
@@ -207,7 +221,7 @@ public class PepBoysCheckoutSteps {
         String project = Config.SITE_NAME;
 
 
-        if (project.equals("pepboys-stage") || project.equals("pepboys-prod")) {
+        if (project.equals("pepboys-stage") || project.equals("pepboys-prod") || project.equals("pepboys-qcv")) {
 
             String orderNumber = thankYouPage.getOrder();
 

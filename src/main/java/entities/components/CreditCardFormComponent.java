@@ -61,6 +61,7 @@ public class CreditCardFormComponent extends BaseComponent {
         element.sendKeys(value);
     }
 
+
     public boolean hasErrorTooltipWithMessage(String error) {
         waitForElementVisible(By.cssSelector("div.tooltip.error"));
 

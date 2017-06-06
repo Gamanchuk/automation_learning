@@ -11,7 +11,7 @@ public class RadioListComponent extends BaseComponent {
         By currentItemDetails = By.cssSelector(".radio-list-option-selected .radio-list-details");
         String currentItemText = findElement(currentItemDetails).getText();
 
-        log.info("Actual item: " + currentItemText + " Expected item: " + option);
+        log.info("Actual item: " + currentItemText + ". Expected item: " + option);
 
         if (!currentItemText.contains(option)) {
             findElement(currentItem).click();
