@@ -583,8 +583,15 @@ public class PepBoysCheckoutSteps {
 
     @Then("^user should be on \"([^\"]*)\" tab$")
     public void userShouldBeOnTab(String tabName) {
-        assertTrue(breadcrumbWidget.isBreadcrumbActive(tabName), "Tab " + tabName + " is not an active");
+
+        if (tabName.equals("Delivery")) {
+            assertTrue(radioListComponent.exists(), "Delivery Method Drop-Down doesn't exist");
+        } else {
+            assertTrue(breadcrumbWidget.isBreadcrumbActive(tabName), "Tab " + tabName + " is not an active");
+        }
+
         assertTrue(breadcrumbWidget.isTabActive(tabName), "Tab " + tabName + " is not an active");
+
         CommonFunctions.attachScreenshot("User on [" + tabName + "] tab");
     }
 
@@ -698,7 +705,7 @@ public class PepBoysCheckoutSteps {
 
     @And("^user continue checkout as guest$")
     public void userContinueCheckoutAsGuest() {
-        signInFormComponent.fillEmail("automationQA@automationQA.com");
+        signInFormComponent.fillEmail((Math.random() * 500000 + 1) + "@gmail.com");
         CommonFunctions.attachScreenshot("Checkout as guest");
     }
 

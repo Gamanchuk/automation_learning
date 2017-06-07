@@ -3,24 +3,24 @@
 Feature: HAPPY PATH
 
   Background: Add product to card and process to checkout
-    Given user adds to cart product
+    Given user adds to cart "4" products
 
-  @Issue("MCCAT-6001")
-  @TestCaseId("102220")
-  Scenario: Place Order as a "Registered User" with Credit Card
 
-    Given user continue checkout as "qa user"
+  @TestCaseId("102222")
+  Scenario: Place multiple Orders
+
+    Given user continue checkout as guest
     And presses the "Continue" button
-
     And user should be on "Address" tab
+
+    And user types billing info for "qa user"
     And presses the "Continue" button
 
     # ignore delivery method choice
     And user should be on "Delivery" tab
     And presses the "Continue" button
 
-    And user should be on "Payment" tab
-    And uses saved "visa" card for payment
+    And uses "mastercard" card for payment
     And presses the "Continue" button
 
     And user should be on "Review" tab
