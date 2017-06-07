@@ -5,7 +5,7 @@ Feature: HAPPY PATH
   Background: Add product to card and process to checkout
     Given user adds to cart product
 
-  @Issue("MCCAT-")
+  @Issue("MCCAT-6010")
   @TestCaseId("102225")
   Scenario: Place Order with Q-CARD
 
