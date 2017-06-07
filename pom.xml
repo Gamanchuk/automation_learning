@@ -412,7 +412,15 @@
             <id>suite-qvc-debug</id>
             <properties>
                 <testng.suite>${basedir}/src/test/resources/testsuites/qvc/qvc_debug.xml</testng.suite>
-                <suite.id>93</suite.id>
+                <suite.id>359</suite.id>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>suite-qvc-happyPath</id>
+            <properties>
+                <testng.suite>${basedir}/src/test/resources/testsuites/qvc/qvc_happyPath.xml</testng.suite>
+                <suite.id>359</suite.id>
             </properties>
         </profile>
 
