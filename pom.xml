@@ -478,7 +478,7 @@
             </properties>
         </profile>
         <profile>
-            <id>device-motorola</id>
+            <id>device-Motorola</id>
             <properties>
                 <props.file.name>motorola</props.file.name>
             </properties>
