@@ -6,8 +6,8 @@ Feature: GUEST CHECKOUT
     Given user adds to cart product
 
 
-  @TestCaseId("102436")
-  Scenario: 'Sign In' to existing account only default 'Email Address' section is appearing
-    Given user continue checkout as guest
+  @TestCaseId("102437")
+  Scenario: Ensure that when proceeding with register/unregistered email id, password filed will appear
+    Given user continue checkout as "qa user"
     And presses the "Continue" button
     Then user should be on "Address" tab

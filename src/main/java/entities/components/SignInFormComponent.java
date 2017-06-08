@@ -8,19 +8,24 @@ import static org.testng.Assert.assertTrue;
 
 public class SignInFormComponent extends BaseComponent {
     private By forgotPassword = By.xpath("//div[contains(@class,'login-buttons')]//a");
+    private By whereMyPassword = By.xpath("//div[@class='message-button']");
+    private By whereMyPasswordContent = By.xpath("//div[@class='message-content']");
+
     private By emailField = By.id("shipping-email");
     private By passwordField = By.id("password");
 
     final static String EMAIL = "email";
     final static String PASSWORD = "password";
 
+    public boolean exist() {
+        return isElementVisible(emailField);
+    }
 
     public void signIn(String email, String password) {
 
         fillEmail(email);
         fillPassword(password);
 
-        //focusOut(passwordFieldEl);
         CommonFunctions.attachScreenshot("Login page");
     }
 
@@ -30,11 +35,6 @@ public class SignInFormComponent extends BaseComponent {
         getDriver().findElement(forgotPassword).click();
     }
 
-    public boolean exist() {
-        return isElementVisible(emailField);
-    }
-
-
     public void fillEmail(String value) {
         fillField(emailField, value);
     }
@@ -43,10 +43,22 @@ public class SignInFormComponent extends BaseComponent {
         fillField(passwordField, value);
     }
 
+    public void pressWhereDoIEnterMyPassword() {
+        assertTrue(isElementClickable(whereMyPassword), "'Where do I enter my password' link not clickable. Or doesn't exist");
+        getDriver().findElement(whereMyPassword).click();
+    }
+
+    public String getContentAboutPasswordFill() {
+        assertTrue(isElementVisible(whereMyPasswordContent, 5), "'Where do I enter my password' content doesn't exist.");
+        return getDriver().findElement(whereMyPasswordContent).getText();
+    }
+
     private void fillField(By field, String value) {
         assertTrue(isElementVisible(field), "Field " + field.toString() + " doesn't present on page.");
         WebElement element = getDriver().findElement(field);
         element.clear();
         element.sendKeys(value);
     }
+
+
 }
