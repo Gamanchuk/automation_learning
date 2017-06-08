@@ -15,7 +15,6 @@ Feature: HAPPY PATH
     And user should be on "Address" tab
     And presses the "Continue" button
 
-    # ignore delivery method choice
     And user should be on "Delivery" tab
     And presses the "Continue" button
 

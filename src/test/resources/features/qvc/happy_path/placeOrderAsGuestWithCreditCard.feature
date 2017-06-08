@@ -16,7 +16,6 @@ Feature: HAPPY PATH
     And user types billing info for "qa user"
     And presses the "Continue" button
 
-    # ignore delivery method choice
     And user should be on "Delivery" tab
     And presses the "Continue" button
 

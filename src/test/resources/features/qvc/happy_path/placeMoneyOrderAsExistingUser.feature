@@ -15,7 +15,7 @@ Feature: HAPPY PATH
     And user should be on "Address" tab
     And presses the "Continue" button
 
-    And chooses "UPS Ground: $4.47" shipping method
+    And user should be on "Delivery" tab
     And presses the "Continue" button
 
     And uses "Pay with Check / Money Order" for payment
