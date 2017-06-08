@@ -63,11 +63,12 @@ public class QVCProductPage extends BasePage { //span[contains(@class, 'wrapBtnc
     }
 
     public boolean isAgeVerificationCheckBoxVisible() {
-        return isElementClickable(age, 20);
+        waitForDocumentReady();
+        return isElementVisible(age, 20) && isElementClickable(age, 20);
     }
 
     public void confirmAge() {
-        getDriver().findElement(age).click();
+        getDriver().findElement(age).sendKeys(Keys.RETURN);
         getDriver().findElement(By.xpath("//span[contains(@class, 'wrapBtncontinue')]//input")).sendKeys(Keys.RETURN);
     }
 }
