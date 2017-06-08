@@ -478,6 +478,12 @@
             </properties>
         </profile>
         <profile>
+            <id>device-motorola</id>
+            <properties>
+                <props.file.name>motorola</props.file.name>
+            </properties>
+        </profile>
+        <profile>
             <id>device-iPhone-7plus</id>
             <properties>
                 <props.file.name>iphone7plus</props.file.name>
