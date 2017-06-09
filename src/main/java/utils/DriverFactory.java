@@ -95,13 +95,16 @@ public class DriverFactory {
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.XCODE_ORG_ID, "Y95G5M3Q84");
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.XCODE_SIGNING_ID, "iPhone Developer");
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.UPDATE_WDA_BUNDLEID, "com.moovweb.WebDriverAgentRunner");
+                      
+                        desiredCapabilities.setCapability("webkitResponseTimeout", 30000);
+                        desiredCapabilities.setCapability("clearSystemFiles", true);
 
                         if (Boolean.valueOf(System.getProperty("verboseLogging"))) {
-                            desiredCapabilities.setCapability(IOSMobileCapabilityType.SHOW_IOS_LOG, true);
+                            // desiredCapabilities.setCapability(IOSMobileCapabilityType.SHOW_IOS_LOG, true);
                         }
 
-                        desiredCapabilities.setCapability("webkitResponseTimeout", 20000);
-                        desiredCapabilities.setCapability("clearSystemFiles", true);
+
+                        
 
                         //desiredCapabilities.setCapability("simpleIsVisibleCheck", true);
                         //desiredCapabilities.setCapability(IOSMobileCapabilityType.START_IWDP, true);
@@ -161,6 +164,7 @@ public class DriverFactory {
             serviceBuilder.usingPort(appiumPort);
 
             serviceBuilder.withArgument(GeneralServerFlag.SESSION_OVERRIDE);
+            serviceBuilder.withArgument(GeneralServerFlag.LOG_TIMESTAMP);
 
             if (!Boolean.valueOf(System.getProperty("verboseLogging"))) {
                 serviceBuilder.withArgument(GeneralServerFlag.LOG_LEVEL, "warn");

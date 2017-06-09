@@ -5,9 +5,9 @@ Feature: HAPPY PATH
   Background: Add product to card and process to checkout
     Given user adds to cart product
 
-  @Issue("MCCAT-6001")
-  @TestCaseId("102220")
-  Scenario: Place Order as a "Registered User" with Credit Card
+
+  @TestCaseId("102224")
+  Scenario: Place Money Order as Existing User
 
     Given user continue checkout as "qa user"
     And presses the "Continue" button
@@ -18,8 +18,7 @@ Feature: HAPPY PATH
     And user should be on "Delivery" tab
     And presses the "Continue" button
 
-    And user should be on "Payment" tab
-    And uses saved "visa" card for payment
+    And uses "Pay with Check / Money Order" for payment
     And presses the "Continue" button
 
     And user should be on "Review" tab
