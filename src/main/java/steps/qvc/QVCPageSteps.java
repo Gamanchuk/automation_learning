@@ -1,9 +1,13 @@
-package steps.pepboys;
+package steps.qvc;
 
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
 import entities.components.ButtonComponent;
 import entities.pages.qvc.QVCCartPage;
+import entities.pages.qvc.QVCMainPage;
 import entities.pages.qvc.QVCProductPage;
+import org.openqa.selenium.By;
 import utils.CommonFunctions;
 import utils.pepboys.DataProvider;
 
@@ -16,11 +20,13 @@ public class QVCPageSteps {
 
     QVCProductPage productPage = new QVCProductPage();
     QVCCartPage cartPage = new QVCCartPage();
+    QVCMainPage mainPage = new QVCMainPage();
 
     @Given("^user adds to cart product$")
     public void userAddsToCartProduct() {
         StringBuilder scuGroup = new StringBuilder(DataProvider.getRandomItemId());
         productPage.setCookies();
+        assertTrue(mainPage.isPage(), "Main page doesn't opened");
         productPage.openPage(scuGroup.toString());
         CommonFunctions.attachScreenshot("Product Page");
 
@@ -33,5 +39,16 @@ public class QVCPageSteps {
         cartPage.processToCheckout();
         assertTrue(buttonComponent.exists(), "Button component doesn't present on page. " +
                 "It seems that the checkout did not boot for " + TIMEOUT_SECONDS + " seconds");
+    }
+
+    @And("^user should be on QVC cart page$")
+    public void userShouldBeOnCartPage() {
+        assertTrue(cartPage.isPage(), "Cart page was not opened");
+    }
+
+    @Then("^user should be on QVC main page$")
+    public void userShouldBeOnMainPage() {
+        assertTrue(mainPage.isPage(), "Main page was not opened. Or page have some problems with loading");
+        CommonFunctions.attachScreenshot("Main page opened");
     }
 }
