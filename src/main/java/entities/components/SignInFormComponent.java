@@ -12,7 +12,8 @@ public class SignInFormComponent extends BaseComponent {
     private By whereMyPasswordContent = By.xpath("//div[@class='message-content']");
 
     private By emailField = By.id("shipping-email");
-    private By passwordField = By.id("password");
+    //private By passwordField = By.id("password");
+    private By passwordField = By.xpath("//input[@id='password' or @id='current-password']");
 
     final static String EMAIL = "email";
     final static String PASSWORD = "password";

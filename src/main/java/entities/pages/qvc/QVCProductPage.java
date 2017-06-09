@@ -27,11 +27,11 @@ public class QVCProductPage extends BasePage {
     }
 
     public String selectRandomColor() {
+        javascriptScroll(500);
         assertTrue(isElementVisible(colorList), "Color list doesn't on page");
         List<WebElement> colorsListElements = getDriver().findElements(colorList);
         WebElement randomColor = colorsListElements.get(new Random().nextInt(colorsListElements.size()));
-        String colorName = randomColor.getText();
-        javascriptScroll(randomColor);
+        String colorName = randomColor.getAttribute("data-original-title");
         randomColor.click();
         waitForAjax();
         return colorName;

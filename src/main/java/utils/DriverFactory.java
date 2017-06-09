@@ -100,7 +100,7 @@ public class DriverFactory {
                             desiredCapabilities.setCapability(IOSMobileCapabilityType.SHOW_IOS_LOG, true);
                         }
 
-                        desiredCapabilities.setCapability("webkitResponseTimeout", 10000);
+                        desiredCapabilities.setCapability("webkitResponseTimeout", 20000);
                         desiredCapabilities.setCapability("clearSystemFiles", true);
 
                         //desiredCapabilities.setCapability("simpleIsVisibleCheck", true);
@@ -109,6 +109,11 @@ public class DriverFactory {
                     }
 
                     if (Config.PLATFORM_NAME.equals(ANDROID)) {
+
+                        ChromeOptions options = new ChromeOptions();
+                        options.addArguments("disable-translate");
+                        desiredCapabilities.setCapability(ChromeOptions.CAPABILITY, options);
+
                         desiredCapabilities.setCapability(AndroidMobileCapabilityType.UNICODE_KEYBOARD, true);
                         desiredCapabilities.setCapability(AndroidMobileCapabilityType.RESET_KEYBOARD, true);
                     }

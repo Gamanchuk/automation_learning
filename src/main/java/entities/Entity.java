@@ -352,6 +352,7 @@ public abstract class Entity {
      */
     public void javascriptScroll(int ynum) {
         ((JavascriptExecutor) getDriver()).executeScript("window.scrollBy(0," + ynum + ")", "");
+        CommonFunctions.sleep(200);
     }
 
     public void javascriptScroll(WebElement element) {
