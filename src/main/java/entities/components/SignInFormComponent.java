@@ -27,6 +27,7 @@ public class SignInFormComponent extends BaseComponent {
         fillEmail(email);
         fillPassword(password);
 
+        //focusOut(passwordFieldEl);
         CommonFunctions.attachScreenshot("Login page");
     }
 
@@ -60,6 +61,4 @@ public class SignInFormComponent extends BaseComponent {
         element.clear();
         element.sendKeys(value);
     }
-
-
 }
