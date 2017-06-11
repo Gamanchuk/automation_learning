@@ -131,7 +131,7 @@ public class DriverFactory {
      */
     private static void startAppiumService() {
         if (service == null) {
-            
+
             int appiumPort = Integer.parseInt(Config.APPIUM_PORT);
             int proxyPort = Integer.parseInt(Config.PROXY_PORT);
 
