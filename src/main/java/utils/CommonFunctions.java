@@ -113,7 +113,7 @@ public class CommonFunctions {
             String currency = matcher.group(1);
             return Float.parseFloat(currency);
         } else {
-            throw new Error("Can't get currency from string \'" + str + "\"");
+            throw new Error("Can't get currency from string " + str + "");
         }
     }
 
