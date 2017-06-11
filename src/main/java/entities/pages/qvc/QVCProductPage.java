@@ -56,10 +56,6 @@ public class QVCProductPage extends BasePage {
 
     public void setCookies() {
         getDriver().get(BASE_URL + COOKIES);
-        CommonFunctions.sleep(2000);
-        waitForDocumentReady();
-        assertTrue(isElementVisible(By.id("txtMastheadSearch")), "Main page doesn't opened");
-
     }
 
     public boolean isAgeVerificationCheckBoxVisible() {
