@@ -1,7 +1,10 @@
 package entities.pages.qvc;
 
 import entities.pages.BasePage;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptException;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 
 import java.util.List;
 import java.util.Random;
@@ -63,7 +66,8 @@ public class QVCProductPage extends BasePage {
     }
 
     public void confirmAge() {
-        getDriver().findElement(age).sendKeys(Keys.RETURN);
+        getDriver().findElement(age).click();
+        waitForAjax();
         getDriver().findElement(By.xpath("//span[contains(@class, 'wrapBtncontinue')]//input")).click();
     }
 }
