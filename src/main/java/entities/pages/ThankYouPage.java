@@ -1,4 +1,4 @@
-package entities.pages.pepboys;
+package entities.pages;
 
 import entities.pages.BasePage;
 import org.openqa.selenium.By;
@@ -6,7 +6,7 @@ import utils.CommonFunctions;
 
 import static org.testng.AssertJUnit.assertTrue;
 
-public class PepBoysThankYouPage extends BasePage {
+public class ThankYouPage extends BasePage {
     public boolean isOnThankYouPage() {
         return isElementPresent(By.xpath("//div[@class='order-thank-you-header' and text()='Thank you for your order']"));
     }

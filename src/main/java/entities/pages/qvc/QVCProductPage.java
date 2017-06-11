@@ -1,10 +1,7 @@
 package entities.pages.qvc;
 
 import entities.pages.BasePage;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptException;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import utils.CommonFunctions;
 
 import java.util.List;
@@ -14,8 +11,9 @@ import static org.testng.Assert.assertTrue;
 
 public class QVCProductPage extends BasePage {
 
-    By addToCart = By.xpath("//button[contains(@class, 'btnAddToCart')]");
-    By colorList = By.cssSelector("li.selectColor");
+    private By addToCart = By.xpath("//button[contains(@class, 'btnAddToCart')]");
+    private By colorList = By.cssSelector("li.selectColor");
+    private By age = By.id("cbAge");
 
     public void openPage(String productUrl) {
         getDriver().navigate().to(BASE_URL + productUrl);
@@ -27,7 +25,6 @@ public class QVCProductPage extends BasePage {
     }
 
     public String selectRandomColor() {
-        assertTrue(isElementVisible(colorList), "Color list doesn't on page");
         List<WebElement> colorsListElements = getDriver().findElements(colorList);
         WebElement randomColor = colorsListElements.get(new Random().nextInt(colorsListElements.size()));
         String colorName = randomColor.getText();
@@ -37,7 +34,13 @@ public class QVCProductPage extends BasePage {
         return colorName;
     }
 
+    public boolean isColorListExist(int timeout) {
+        return isElementVisible(colorList, timeout);
+    }
+
     public void addToCart() {
+        waitForAjax();
+
         try {
             JavascriptExecutor js = (JavascriptExecutor) getDriver();
             String result = (String) js.executeScript("checkForColorSize('A', document.getElementsByClassName(\"btnAddToCart\"))");
@@ -57,5 +60,15 @@ public class QVCProductPage extends BasePage {
         waitForDocumentReady();
         assertTrue(isElementVisible(By.id("txtMastheadSearch")), "Main page doesn't opened");
 
+    }
+
+    public boolean isAgeVerificationCheckBoxVisible() {
+        waitForDocumentReady();
+        return isElementVisible(age, 20) && isElementClickable(age, 20);
+    }
+
+    public void confirmAge() {
+        getDriver().findElement(age).sendKeys(Keys.RETURN);
+        getDriver().findElement(By.xpath("//span[contains(@class, 'wrapBtncontinue')]//input")).sendKeys(Keys.RETURN);
     }
 }
