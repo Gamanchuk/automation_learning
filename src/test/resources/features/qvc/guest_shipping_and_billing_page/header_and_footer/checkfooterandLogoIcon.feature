@@ -6,9 +6,14 @@ Feature: GUEST - SHIPPING & BILLING ADDRESS PAGE - HEADER & FOOTER
     Given user adds to cart product
 
 
+  @TestCaseId("102361")
+  @TestCaseId("102362")
+  @TestCaseId("102363")
+  @TestCaseId("102364")
   @TestCaseId("102356")
   @TestCaseId("102358")
   @TestCaseId("102359")
+  @TestCaseId("102543")
   Scenario: Check footer and Logo Icon
 
     Given user continue checkout as guest
