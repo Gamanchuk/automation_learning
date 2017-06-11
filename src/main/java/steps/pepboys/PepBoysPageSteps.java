@@ -4,6 +4,7 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import entities.pages.ThankYouPage;
 import entities.pages.pepboys.*;
 import utils.CommonFunctions;
 import utils.TestGlobalsManager;
@@ -11,7 +12,7 @@ import utils.pepboys.DataProvider;
 
 import static org.testng.Assert.assertTrue;
 
-public class PepBoysMainPageSteps {
+public class PepBoysPageSteps {
 
     private PepBoysMakeAppointmentPage makeAppointmentPage = new PepBoysMakeAppointmentPage();
     private PepBoysMainPage mainPage = new PepBoysMainPage();

@@ -19,12 +19,15 @@ public class CreditCardFormComponent extends BaseComponent {
         fillField(ccNumber, number);
         assertTrue(findElement(By.cssSelector("div.credit-card-number-input")).getAttribute("class").contains(name), "Card icon was not displayed or incorrect");
 
-        fillField(exp, expDate);
-        fillField(csc, cvv);
+
+        if (!name.equals("qcard")) {
+            fillField(exp, expDate);
+            fillField(csc, cvv);
+        }
 
         // Element must be displayed if you pay as registered user
         Object authorised = TestGlobalsManager.getTestGlobal("authorised");
-        if (authorised != null && (boolean)authorised) {
+        if (authorised != null && (boolean) authorised) {
             fillField(ccName, cardholderName);
         }
 
@@ -59,6 +62,7 @@ public class CreditCardFormComponent extends BaseComponent {
         focusOut(element);
         element.clear();
         element.sendKeys(value);
+        focusOut(element);
     }
 
 
