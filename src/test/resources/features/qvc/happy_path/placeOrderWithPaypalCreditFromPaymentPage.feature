@@ -5,11 +5,11 @@ Feature: HAPPY PATH
   Background: Add product to card and process to checkout
     Given user adds to cart product
 
-  @Issue("MCCAT-6001")
-  @TestCaseId("102220")
-  Scenario: Place Order as a "Registered User" with Credit Card
+  @Issue("MCCAT-6011")
+  @TestCaseId("102221")
+  Scenario: Place Order with Paypal Credit from Payment page
 
-    Given user continue checkout as "qa user"
+    Given user continue checkout as "qa paypal"
     And presses the "Continue" button
 
     And user should be on "Address" tab
@@ -18,8 +18,7 @@ Feature: HAPPY PATH
     And user should be on "Delivery" tab
     And presses the "Continue" button
 
-    And user should be on "Payment" tab
-    And uses saved "visa" card for payment
+    And uses "(formerly Bill Me Later®)" for payment
     And presses the "Continue" button
 
     And user should be on "Review" tab

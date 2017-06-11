@@ -1,4 +1,4 @@
-package entities.pages.pepboys;
+package entities.pages;
 
 import entities.components.BaseComponent;
 import entities.pages.BasePage;
@@ -7,7 +7,7 @@ import utils.TestGlobalsManager;
 
 import static org.testng.Assert.assertTrue;
 
-public class PepBoysPaymentAndReviewCheckoutPage extends BasePage {
+public class PaymentAndReviewCheckoutPage extends BasePage {
     public void clickTerms() {
         click(By.xpath("//a[text()='Terms']"));
     }
