@@ -9,11 +9,11 @@ import java.util.Random;
 
 import static org.testng.Assert.assertTrue;
 
-public class QVCProductPage extends BasePage { //span[contains(@class, 'wrapBtncontinue')]
+public class QVCProductPage extends BasePage {
 
     private By addToCart = By.xpath("//button[contains(@class, 'btnAddToCart')]");
     private By colorList = By.cssSelector("li.selectColor");
-    By age = By.id("cbAge");
+    private By age = By.id("cbAge");
 
     public void openPage(String productUrl) {
         getDriver().navigate().to(BASE_URL + productUrl);

@@ -6,7 +6,7 @@ Feature: HAPPY PATH
     Given user adds to cart product
 
   @Issue("MCCAT-6011")
-  @TestCaseId("10222")
+  @TestCaseId("102223")
   Scenario: Place Money Order as Guest
 
     Given user continue checkout as guest

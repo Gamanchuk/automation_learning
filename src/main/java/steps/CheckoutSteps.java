@@ -1,11 +1,14 @@
-package steps.pepboys;
+package steps;
 
 import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import entities.components.*;
+import entities.pages.PaymentAndReviewCheckoutPage;
+import entities.pages.ThankYouPage;
 import entities.pages.pepboys.*;
+import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import utils.CommonFunctions;
@@ -27,10 +30,10 @@ import static org.testng.Assert.assertTrue;
 import static utils.CommonFunctions.attachScreenVideo;
 import static utils.CommonFunctions.stopScreenVideo;
 
-public class PepBoysCheckoutSteps {
+public class CheckoutSteps {
 
-    private PepBoysThankYouPage thankYouPage = new PepBoysThankYouPage();
-    private PepBoysPaymentAndReviewCheckoutPage paymentAndReviewPage = new PepBoysPaymentAndReviewCheckoutPage();
+    private ThankYouPage thankYouPage = new ThankYouPage();
+    private PaymentAndReviewCheckoutPage paymentAndReviewPage = new PaymentAndReviewCheckoutPage();
 
     private AddressFormComponent addressFormComponent = new AddressFormComponent();
     private AddressDisplayComponent addressDisplayComponent = new AddressDisplayComponent();
@@ -55,8 +58,7 @@ public class PepBoysCheckoutSteps {
     private RewardsAccountComponent rewardsAccountComponent = new RewardsAccountComponent();
     private DiscountComponent discountComponent = new DiscountComponent();
 
-    private PepBoysThankYouPage pepBoysThankYouPage = new PepBoysThankYouPage();
-    private static Log log = LogFactory.getLog(PepBoysCheckoutSteps.class.getSimpleName());
+    private static Log log = LogFactory.getLog(CheckoutSteps.class.getSimpleName());
 
     @And("^user types billing info for \"([^\"]*)\"$")
     public void typesBillingInfoFor(String userName) {
@@ -214,8 +216,8 @@ public class PepBoysCheckoutSteps {
     @Then("^user should be on thank you page$")
     public void userShouldBeOnThankYouPage() {
         assertTrue(thankYouPage.isOnThankYouPage(), "User is not on \"Thank You\" page");
-        assertTrue(pepBoysThankYouPage.isCollapsed(), "Order collapser not collapsed");
-        pepBoysThankYouPage.openCollapser();
+        assertTrue(thankYouPage.isCollapsed(), "Order collapser not collapsed");
+        thankYouPage.openCollapser();
         CommonFunctions.attachScreenshot("Thank You Page");
 
         String project = Config.SITE_NAME;
@@ -237,7 +239,7 @@ public class PepBoysCheckoutSteps {
     public void userPressesTheRescheduleLink() {
         PepBoysTrackingPage trackingPage = new PepBoysTrackingPage();
         PepBoysMyAccountPage myAccountPage = new PepBoysMyAccountPage();
-        pepBoysThankYouPage.clickOnReschedule();
+        thankYouPage.clickOnReschedule();
         CommonFunctions.attachScreenshot("Click on Reschedule Link");
 
         if (TestGlobalsManager.getTestGlobal("authorised") != null) {
@@ -705,7 +707,7 @@ public class PepBoysCheckoutSteps {
 
     @And("^user continue checkout as guest$")
     public void userContinueCheckoutAsGuest() {
-        signInFormComponent.fillEmail((Math.random() * 500000 + 1) + "@gmail.com");
+        signInFormComponent.fillEmail(RandomStringUtils.randomAlphabetic(10) + "@automationQA.com");
         CommonFunctions.attachScreenshot("Checkout as guest");
     }
 
