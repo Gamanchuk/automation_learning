@@ -1,4 +1,4 @@
-package steps.pepboys;
+package steps.qvc;
 
 import cucumber.api.java.en.Given;
 import entities.components.ButtonComponent;
