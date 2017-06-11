@@ -9,7 +9,7 @@ import static org.testng.Assert.assertTrue;
 public class SignInFormComponent extends BaseComponent {
     private By forgotPassword = By.xpath("//div[contains(@class,'login-buttons')]//a");
     private By emailField = By.id("shipping-email");
-    private By passwordField = By.id("password");
+    private By passwordField = By.xpath("//input[@type='password']");  // By.id("password");
 
     final static String EMAIL = "email";
     final static String PASSWORD = "password";
