@@ -415,7 +415,13 @@
                 <suite.id>93</suite.id>
             </properties>
         </profile>
-
+        <profile>
+            <id>suite-qvc-header-and-footer</id>
+            <properties>
+                <testng.suite>${basedir}/src/test/resources/testsuites/qvc/qvc_header_and_footer_section.xml</testng.suite>
+                <suite.id>359</suite.id>
+            </properties>
+        </profile>
 
         <!--environments-->
         <profile>
