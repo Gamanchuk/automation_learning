@@ -13,7 +13,6 @@ Feature: GUEST - SHIPPING & BILLING ADDRESS PAGE - HEADER & FOOTER
   Scenario: Check footer and Logo Icon
 
     Given user continue checkout as guest
-
     And presses the "Continue" button
     And user should be on "Address" tab
 

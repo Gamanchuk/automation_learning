@@ -14,10 +14,11 @@ public class AddressFormComponent extends BaseComponent {
     private By apartmentField = By.cssSelector(".address-line2 input");
     private By phoneField = By.cssSelector(".phone-input input");
     private By cityField = By.cssSelector(".city-input input");
-    private By stateField = By.cssSelector(".state-input select");
+    private By stateSelect = By.cssSelector(".state-input select");
+    private By stateField = By.cssSelector(".state-input input");
     private By zipField = By.cssSelector(".zip-input input");
 
-    public void fillAddressForm(String fullName, String address, String cityInfo, String city, String apartment, String phone, String state, String zip, boolean autoFill) {
+    public void fillAddressForm(String fullName, String address, String cityInfo, String city, String apartment, String phone, String state, String zip, boolean autoFill, boolean international) {
 
         boolean apartmentPresent = isElementVisible(apartmentField, 3);
 
@@ -44,7 +45,7 @@ public class AddressFormComponent extends BaseComponent {
             //findElementWithTextBy("enter city", By.cssSelector("div.zip-message a")).click();
             fillField(cityField, city);
             fillField(zipField, zip);
-            fillState(state);
+            fillState(state, international);
         }
 
         // Need to sleep for second to avoid selenium exception
@@ -80,11 +81,19 @@ public class AddressFormComponent extends BaseComponent {
         focusOut(findElement(phoneField));
     }
 
-    public void fillState(String state) {
-        WebElement stateEl = findElement(stateField);
-        javascriptScroll(stateEl);
-        Select selectState = new Select(stateEl);
-        selectState.selectByValue(state);
+    public void fillState(String state, boolean international) {
+        WebElement stateEl;
+
+        if (international) {
+            stateEl = findElement(stateField);
+            javascriptScroll(stateEl);
+            stateEl.sendKeys(state);
+        } else {
+            stateEl = findElement(stateSelect);
+            javascriptScroll(stateEl);
+            Select selectState = new Select(stateEl);
+            selectState.selectByValue(state);
+        }
     }
 
     private By getFieldByName(String name) {
@@ -98,7 +107,7 @@ public class AddressFormComponent extends BaseComponent {
             case "City":
                 return cityField;
             case "State":
-                return stateField;
+                return stateSelect;
             case "Zip Code":
                 return zipField;
             case "Phone Number":
