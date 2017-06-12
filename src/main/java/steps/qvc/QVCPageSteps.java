@@ -7,7 +7,6 @@ import entities.components.ButtonComponent;
 import entities.pages.qvc.QVCCartPage;
 import entities.pages.qvc.QVCMainPage;
 import entities.pages.qvc.QVCProductPage;
-import org.openqa.selenium.By;
 import utils.CommonFunctions;
 import utils.pepboys.DataProvider;
 

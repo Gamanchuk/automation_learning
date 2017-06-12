@@ -55,6 +55,10 @@ public class SignInFormComponent extends BaseComponent {
         return getDriver().findElement(whereMyPasswordContent).getText();
     }
 
+    public boolean isPasswordFieldVisible() {
+        return isElementVisible(passwordField, 5);
+    }
+
     private void fillField(By field, String value) {
         assertTrue(isElementVisible(field), "Field " + field.toString() + " doesn't present on page.");
         WebElement element = getDriver().findElement(field);
