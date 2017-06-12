@@ -5,9 +5,10 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 
 @CucumberOptions(
         features = "src/test/resources/features/qvc/guest_shipping_and_billing_page/header_and_footer",
-        glue = "steps"
+        glue = "steps",
+        tags = "@qvc"
 )
-class QVCHeaderAndFooterSectionRunnerTest extends AbstractTestNGCucumberTests {
+class QVCGuestShippingBillingPageCukesRunnerTest extends AbstractTestNGCucumberTests {
 
 }
 

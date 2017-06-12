@@ -433,9 +433,20 @@
         </profile>
 
         <profile>
-            <id>suite-qvc-header-and-footer</id>
+            <id>suite-qvc-guestShippingBillingPage</id>
             <properties>
-                <testng.suite>${basedir}/src/test/resources/testsuites/qvc/qvc_header_and_footer_section.xml</testng.suite>
+                <testng.suite>${basedir}/src/test/resources/testsuites/qvc/qvc_guest_shipping_billing_page.xml
+                </testng.suite>
+                <suite.id>359</suite.id>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>suite-qvc-signInPage</id>
+            <properties>
+                <testng.suite>
+                    ${basedir}/src/test/resources/testsuites/qvc/qvc_sign_in_page.xml
+                </testng.suite>
                 <suite.id>359</suite.id>
             </properties>
         </profile>

@@ -7,7 +7,6 @@ import entities.components.ButtonComponent;
 import entities.pages.qvc.QVCCartPage;
 import entities.pages.qvc.QVCMainPage;
 import entities.pages.qvc.QVCProductPage;
-import org.openqa.selenium.By;
 import utils.CommonFunctions;
 import utils.pepboys.DataProvider;
 
@@ -55,18 +54,16 @@ public class QVCPageSteps {
 
         //TODO: return color
 
-        if (productPage.isColorListExist(3)) {
-            String color = productPage.selectRandomColor();
-            CommonFunctions.attachScreenshot("Color selected: " + color);
-        }
+        assertTrue(productPage.isColorListExist(), "Color list doesn't present on product page.");
+        String color = productPage.selectRandomColor();
+        CommonFunctions.attachScreenshot("Color selected: " + color);
+
 
         productPage.addToCart();
-
-        if (productPage.isAgeVerificationCheckBoxVisible()) {
-            productPage.confirmAge();
-            CommonFunctions.attachScreenshot("Confirm Age");
-        }
-
+//        if (productPage.isAgeVerificationCheckBoxVisible()) {
+//            productPage.confirmAge();
+//            CommonFunctions.attachScreenshot("Confirm Age");
+//        }
         assertTrue(cartPage.isPage(), "Cart page doesn't present.");
     }
 

@@ -5,7 +5,7 @@
 <suite name="All Tests">
     <test name="All tests">
         <classes>
-            <class name="tests.qvc.QVCHeaderAndFooterSectionRunnerTest"/>
+            <class name="tests.qvc.QVCGuestShippingBillingPageCukesRunnerTest"/>
         </classes>
     </test>
 </suite> <!-- Suite -->
