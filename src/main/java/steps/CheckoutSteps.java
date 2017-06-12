@@ -7,7 +7,10 @@ import cucumber.api.java.en.Then;
 import entities.components.*;
 import entities.pages.PaymentAndReviewCheckoutPage;
 import entities.pages.ThankYouPage;
-import entities.pages.pepboys.*;
+import entities.pages.pepboys.PepBoysLoginPage;
+import entities.pages.pepboys.PepBoysMainPage;
+import entities.pages.pepboys.PepBoysMyAccountPage;
+import entities.pages.pepboys.PepBoysTrackingPage;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -57,12 +60,19 @@ public class CheckoutSteps {
     private ModalComponent modalComponent = new ModalComponent();
     private RewardsAccountComponent rewardsAccountComponent = new RewardsAccountComponent();
     private DiscountComponent discountComponent = new DiscountComponent();
+    private CountrySelectorComponent countrySelectorComponent = new CountrySelectorComponent();
 
     private static Log log = LogFactory.getLog(CheckoutSteps.class.getSimpleName());
 
     @And("^user types billing info for \"([^\"]*)\"$")
     public void typesBillingInfoFor(String userName) {
-        fillBillingInfo(userName, true, true);
+        fillBillingInfo(userName, true, true, false);
+    }
+
+    @And("^user types billing info for \"([^\"]*)\" without email$")
+    public void userTypesBillingInfoForWithoutEmail(String userName) {
+        fillBillingInfo(userName, true, false, false);
+
     }
 
     @And("^user types customer info for \"([^\"]*)\"$")
@@ -77,7 +87,7 @@ public class CheckoutSteps {
 
     @And("^user types billing info for \"([^\"]*)\" and checks email$")
     public void typesBillingInfoForUserAndChecksEmail(String userName) {
-        fillBillingInfo(userName, true, false);
+        fillBillingInfo(userName, true, false, true);
     }
 
     @And("^user types сustomer info for \"([^\"]*)\" and checks email$")
@@ -87,12 +97,12 @@ public class CheckoutSteps {
 
     @And("^user types manually billing info for \"([^\"]*)\" and checks email$")
     public void userTypesManuallyBillingInfoForAndChecksEmail(String userName) {
-        fillBillingInfo(userName, false, false);
+        fillBillingInfo(userName, false, false, true);
     }
 
     @Given("^user types manually billing info for \"([^\"]*)\"$")
     public void userTypesManuallyBillingInfoFor(String userName) {
-        fillBillingInfo(userName, false, true);
+        fillBillingInfo(userName, false, true, false);
     }
 
     @Given("^user types manually customer info for \"([^\"]*)\"$")
@@ -183,6 +193,12 @@ public class CheckoutSteps {
     public void choosesShippingMethod(String shippingMethod) {
         shippingOptionsComponent.selectShippingMethod(shippingMethod);
         CommonFunctions.attachScreenshot("Shipping method");
+    }
+
+    @And("^chooses \"([^\"]*)\" country$")
+    public void choosesCountry(String country) {
+        countrySelectorComponent.select(country);
+        CommonFunctions.attachScreenshot("Country selected: " + country);
     }
 
     @And("^uses \"([^\"]*)\" card for payment$")
@@ -460,7 +476,7 @@ public class CheckoutSteps {
     }
 
 
-    private void fillBillingInfo(String userName, boolean autoFill, boolean fillEmail) {
+    private void fillBillingInfo(String userName, boolean autoFill, boolean fillEmail, boolean checkEmail) {
         BillingUser user = DataProvider.getUser(userName);
 
         addressFormComponent.setRoot(BaseComponent.getContainerByTitle("Billing Address"));
@@ -468,7 +484,9 @@ public class CheckoutSteps {
 
         if (fillEmail) {
             emailComponent.fillEmailField(user.getEmail());
-        } else {
+        }
+
+        if (checkEmail) {
             assertEquals(user.getEmail(), emailComponent.getEmailDisplayValue(), "Unexpected email was used");
         }
 
@@ -518,8 +536,8 @@ public class CheckoutSteps {
 
     @Given("^user presses the logo$")
     public void userPressesTheLogo() {
-        headerComponent.pressLogoLink();
         CommonFunctions.attachScreenshot("Press the logo link");
+        headerComponent.pressLogoLink();
     }
 
     @And("^user logs out from checkout$")
@@ -586,7 +604,7 @@ public class CheckoutSteps {
     @Then("^user should be on \"([^\"]*)\" tab$")
     public void userShouldBeOnTab(String tabName) {
 
-        if (tabName.equals("Delivery")) {
+        if (tabName.contains("Delivery")) {
             assertTrue(radioListComponent.exists(), "Delivery Method Drop-Down doesn't exist");
         } else {
             assertTrue(breadcrumbWidget.isBreadcrumbActive(tabName), "Tab " + tabName + " is not an active");
@@ -729,4 +747,6 @@ public class CheckoutSteps {
         CommonFunctions.attachScreenshot("Where do I enter my password");
         assertEquals(signInFormComponent.getContentAboutPasswordFill(), "If you have a QVC Password, you'll enter it on the next screen. If not, you'll enter your address.");
     }
+
+
 }

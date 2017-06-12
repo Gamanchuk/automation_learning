@@ -9,7 +9,7 @@ Feature: GUEST - SHIPPING & BILLING PAGE - BILLING INFO
     And chooses "Pay Online" method
 
   @TestCaseId("15495")
-  Scenario: Test with correct billing information and do not fill in all required fields
+  Scenario: Test with do not fill in all required fields
     Given presses the "Continue" button
     Then user should stay at "Billing & Shipping" tab
     And sees "FORM ERRORS" error message with text "Please review all inputs."

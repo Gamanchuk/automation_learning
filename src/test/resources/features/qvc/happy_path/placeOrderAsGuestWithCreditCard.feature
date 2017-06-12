@@ -13,7 +13,7 @@ Feature: HAPPY PATH
     And presses the "Continue" button
     And user should be on "Address" tab
 
-    And user types billing info for "qa user"
+    And user types billing info for "qa user" without email
     And presses the "Continue" button
 
     And user should be on "Delivery" tab
