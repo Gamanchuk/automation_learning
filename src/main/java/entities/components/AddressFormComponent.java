@@ -54,8 +54,10 @@ public class AddressFormComponent extends BaseComponent {
         fillField(apartmentField, apartment);
 
         // Need to send phone number digit by digit
-        fillPhone(phone);
-        focusOut(findElement(phoneField));
+        if(isElementPresent(phoneField, 1)) {
+            fillPhone(phone);
+            focusOut(findElement(phoneField));
+        }
     }
 
 //    public void checkPaymentResult() {
