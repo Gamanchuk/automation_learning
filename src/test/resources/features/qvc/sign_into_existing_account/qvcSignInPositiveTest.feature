@@ -1,4 +1,4 @@
-@pepBoys
+@qvc
 
 Feature: SIGN IN PAGE
 
