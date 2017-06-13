@@ -1,4 +1,4 @@
-@qvc @ignore
+@qvc @debug
 
 Feature: GUEST - SHIPPING & BILLING ADDRESS PAGE
 
@@ -8,12 +8,17 @@ Feature: GUEST - SHIPPING & BILLING ADDRESS PAGE
     And presses the "Continue" button
     Then user should be on "Address" tab
 
-  # Ship to Canada is unavailable
   @TestCaseId("102319")
   Scenario: Test with correct shipping information and fill in all existing fields
     Given chooses "Canada" country
-    And user types manually international billing info for "qa canada" without email
-    And user types shipping info for "qa canada"
+    And user types billing info for "qa canada" without email
+    And user types international shipping info for "qa user"
     And presses the "Continue" button
-    Then user checks shipping info for "qa canada"
 
+    And user should be on "Delivery" tab
+    And presses the "Continue" button
+    And user should be on "Payment" tab
+    And uses "discover" card for payment
+    And presses the "Continue" button
+    And user should be on "Review" tab
+    Then user checks shipping info for "qa user"

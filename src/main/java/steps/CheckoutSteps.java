@@ -481,11 +481,15 @@ public class CheckoutSteps {
     }
 
     @Given("^user types shipping info for \"([^\"]*)\"$")
-    public void userTypesShippingInfoFor(String userName) throws Throwable {
+    public void userTypesShippingInfoFor(String userName) {
         checkboxRowComponent.check("Yes, shipping address and billing address are the same", false);
         fillShippingInfo(userName, true);
     }
 
+    @Given("^user types international shipping info for \"([^\"]*)\"$")
+    public void userTypesInternationalShippingInfoFor(String userName) {
+        fillShippingInfo(userName, true);
+    }
 
     private void fillBillingInfo(String userName, boolean autoFill, boolean fillEmail, boolean checkEmail, boolean international) {
         BillingUser user = DataProvider.getUser(userName);
