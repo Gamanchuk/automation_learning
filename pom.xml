@@ -415,7 +415,15 @@
                 <suite.id>359</suite.id>
             </properties>
         </profile>
-
+     
+        <profile>
+            <id>suite-qvc-guestCheckout</id>
+            <properties>
+                <testng.suite>${basedir}/src/test/resources/testsuites/qvc/qvc_guest_checkout.xml</testng.suite>
+                <suite.id>359</suite.id>
+            </properties>
+        </profile>
+      
         <profile>
             <id>suite-qvc-guestCheckout</id>
             <properties>
@@ -440,17 +448,16 @@
                 <suite.id>359</suite.id>
             </properties>
         </profile>
-
-        <profile>
+      
+           <profile>
             <id>suite-qvc-signInPage</id>
             <properties>
-                <testng.suite>
-                    ${basedir}/src/test/resources/testsuites/qvc/qvc_sign_in_page.xml
+                <testng.suite>${basedir}/src/test/resources/testsuites/qvc/qvc_sign_in_page.xml
                 </testng.suite>
                 <suite.id>359</suite.id>
             </properties>
         </profile>
-
+      
         <!--environments-->
         <profile>
             <id>env-jenkins-sf</id>

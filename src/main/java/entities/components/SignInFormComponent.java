@@ -5,9 +5,11 @@ import org.openqa.selenium.WebElement;
 import utils.CommonFunctions;
 
 import static org.testng.Assert.assertTrue;
+import static org.testng.FileAssert.fail;
 
 public class SignInFormComponent extends BaseComponent {
-    private By forgotPassword = By.xpath("//div[contains(@class,'login-buttons')]//a");
+//    private By forgotPassword = By.xpath("//div[contains(@class,'login-buttons')]//a");
+    private By forgotPassword = By.cssSelector("a.forgot-password-link");
     private By whereMyPassword = By.xpath("//div[@class='message-button']");
     private By whereMyPasswordContent = By.xpath("//div[@class='message-content']");
 
@@ -53,6 +55,10 @@ public class SignInFormComponent extends BaseComponent {
     public String getContentAboutPasswordFill() {
         assertTrue(isElementVisible(whereMyPasswordContent, 5), "'Where do I enter my password' content doesn't exist.");
         return getDriver().findElement(whereMyPasswordContent).getText();
+    }
+
+    public boolean isPasswordFieldVisible() {
+        return isElementVisible(passwordField, 5);
     }
 
     private void fillField(By field, String value) {
