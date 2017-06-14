@@ -41,8 +41,8 @@ public class QVCProductPage extends BasePage {
       return colorName;
     }
 
-    public boolean isColorListExist(int timeout) {
-        return isElementVisible(colorList, timeout);
+    public boolean isColorListExist() {
+        return isElementVisible(colorList);
     }
 
     public void addToCart() {

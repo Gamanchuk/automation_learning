@@ -8,6 +8,7 @@ import static org.testng.Assert.assertTrue;
 import static org.testng.FileAssert.fail;
 
 public class SignInFormComponent extends BaseComponent {
+//    private By forgotPassword = By.xpath("//div[contains(@class,'login-buttons')]//a");
     private By forgotPassword = By.cssSelector("a.forgot-password-link");
     private By whereMyPassword = By.xpath("//div[@class='message-button']");
     private By whereMyPasswordContent = By.xpath("//div[@class='message-content']");
