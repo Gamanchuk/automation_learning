@@ -1,5 +1,6 @@
 package steps;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -721,5 +722,33 @@ public class CheckoutSteps {
         signInFormComponent.fillPassword(user.getPassword());
         CommonFunctions.attachScreenshot("Checkout as existing user");
 
+    }
+
+    @And("^user presses the Where do I enter my password link$")
+    public void userPressesTheWhereDoIEnterMyPasswordLink() {
+        signInFormComponent.pressWhereDoIEnterMyPassword();
+        CommonFunctions.attachScreenshot("Where do I enter my password");
+        assertEquals(signInFormComponent.getContentAboutPasswordFill(), "If you have a QVC Password, you'll enter it on the next screen. If not, you'll enter your address.");
+    }
+
+    @Given("^user fills email field with \"([^\"]*)\"$")
+    public void userFillsEmailFieldWith(String email) throws Throwable {
+        signInFormComponent.fillEmail(email);
+    }
+
+    @Then("^user should see password field$")
+    public void userShouldSeePasswordField() throws Throwable {
+        assertTrue(signInFormComponent.isPasswordFieldVisible(), "Password field was not displayed");
+        CommonFunctions.attachScreenshot("Password field displayed");
+    }
+
+    @And("^user fills password field with \"([^\"]*)\"$")
+    public void userFillsPasswordFieldWith(String password) throws Throwable {
+        signInFormComponent.fillPassword(password);
+    }
+
+    @And("^user checks \"([^\"]*)\" checkbox$")
+    public void userChecksCheckbox(String label) {
+        checkboxRowComponent.check(label, true);
     }
 }

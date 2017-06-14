@@ -93,13 +93,16 @@ public class DriverFactory {
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.XCODE_ORG_ID, "Y95G5M3Q84");
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.XCODE_SIGNING_ID, "iPhone Developer");
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.UPDATE_WDA_BUNDLEID, "com.moovweb.WebDriverAgentRunner");
+                      
+                        desiredCapabilities.setCapability("webkitResponseTimeout", 30000);
+                        desiredCapabilities.setCapability("clearSystemFiles", true);
 
                         if (Boolean.valueOf(System.getProperty("verboseLogging"))) {
                             // desiredCapabilities.setCapability(IOSMobileCapabilityType.SHOW_IOS_LOG, true);
                         }
 
-                        desiredCapabilities.setCapability("webkitResponseTimeout", 30000);
-                        desiredCapabilities.setCapability("clearSystemFiles", true);
+
+                        
 
                         //desiredCapabilities.setCapability("simpleIsVisibleCheck", true);
                         //desiredCapabilities.setCapability(IOSMobileCapabilityType.START_IWDP, true);
@@ -107,6 +110,11 @@ public class DriverFactory {
                     }
 
                     if (Config.PLATFORM_NAME.equals(ANDROID)) {
+
+                        ChromeOptions options = new ChromeOptions();
+                        options.addArguments("disable-translate");
+                        desiredCapabilities.setCapability(ChromeOptions.CAPABILITY, options);
+
                         desiredCapabilities.setCapability(AndroidMobileCapabilityType.UNICODE_KEYBOARD, true);
                         desiredCapabilities.setCapability(AndroidMobileCapabilityType.RESET_KEYBOARD, true);
                     }
