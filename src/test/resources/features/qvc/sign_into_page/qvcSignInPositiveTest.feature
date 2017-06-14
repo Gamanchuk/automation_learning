@@ -2,7 +2,7 @@
 
 Feature: SIGN IN PAGE
 
-  Background:
+  Background: Add product to card and process to checkout
     Given user adds to cart product
 
 
