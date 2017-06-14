@@ -6,6 +6,7 @@ Feature: GUEST - SHIPPING & BILLING PAGE - BILLING INFO - INTERNATIONAL
     Given user adds to cart product
 
   @TestCaseId("102388")
+  @TestCaseId("102400")
   Scenario: Test with do not fill all required fields
     Given user continue checkout as guest
     And presses the "Continue" button

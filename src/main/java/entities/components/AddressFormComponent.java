@@ -17,8 +17,9 @@ public class AddressFormComponent extends BaseComponent {
     private By stateSelect = By.cssSelector(".state-input select");
     private By stateField = By.cssSelector(".state-input input");
     private By zipField = By.cssSelector(".zip-input input");
+    private By title = By.xpath("//div[contains(@class, 'component-input')]//select");
 
-    public void fillAddressForm(String fullName, String address, String cityInfo, String city, String apartment, String phone, String state, String zip, boolean autoFill, boolean international) {
+    public void fillAddressForm(String fullName, String address, String cityInfo, String city, String apartment, String phone, String state, String zip, boolean autoFill, boolean international, boolean fillPnone) {
 
         boolean apartmentPresent = isElementVisible(apartmentField, 3);
 
@@ -53,9 +54,12 @@ public class AddressFormComponent extends BaseComponent {
         assertTrue(isElementVisible(apartmentField), "Apartment field doesn't present on page.");
         fillField(apartmentField, apartment);
 
-        // Need to send phone number digit by digit
-        fillPhone(phone);
-        focusOut(findElement(phoneField));
+
+        if (fillPnone) {
+            // Need to send phone number digit by digit
+            fillPhone(phone);
+            focusOut(findElement(phoneField));
+        }
     }
 
 //    public void checkPaymentResult() {
@@ -73,6 +77,15 @@ public class AddressFormComponent extends BaseComponent {
         By fieldEl = getFieldByName(field);
         fillField(fieldEl, value);
         focusOut(findElement(fieldEl));
+    }
+
+    public void inputValueIntoStreetAddressUsingAutodetect(String value) {
+        fillField(addressField, value);
+
+        assertTrue(isElementVisible(By.cssSelector("a.manual")), "Input address manually link was not displayed");
+        CommonFunctions.attachScreenshot("drop Down");
+
+        findElementWithTextBy(value, By.cssSelector("div.radio-list-details p.subtext")).click();
     }
 
     public void fillPhone(String phone) {
@@ -122,5 +135,12 @@ public class AddressFormComponent extends BaseComponent {
         javascriptScroll(element);
         element.clear();
         element.sendKeys(value);
+    }
+
+    public void selectTitle(String value) {
+        WebElement titleEl = findElement(title);
+        javascriptScroll(titleEl);
+        Select selectState = new Select(titleEl);
+        selectState.selectByVisibleText(value);
     }
 }

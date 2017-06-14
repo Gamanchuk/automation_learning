@@ -64,6 +64,14 @@ public class CheckoutSteps {
 
     private static Log log = LogFactory.getLog(CheckoutSteps.class.getSimpleName());
 
+
+    @And("^user chooses \"([^\"]*)\" title$")
+    public void userChoosesRandomTitle(String title) {
+        addressFormComponent.selectTitle(title);
+        CommonFunctions.attachScreenshot("Title");
+
+    }
+
     @And("^user types billing info for \"([^\"]*)\"$")
     public void typesBillingInfoFor(String userName) {
         fillBillingInfo(userName, true, true, false, false);
@@ -90,7 +98,7 @@ public class CheckoutSteps {
         BillingUser user = DataProvider.getUser(userName);
 
         addressFormComponent.setRoot(BaseComponent.getContainerByTitle("Customer Information"));
-        fillAddressForm(user, true, false);
+        fillAddressForm(user, true, false, true);
         emailComponent.fillEmailField(user.getEmail());
         CommonFunctions.attachScreenshot("Customer info");
     }
@@ -345,6 +353,14 @@ public class CheckoutSteps {
         CommonFunctions.attachScreenshot(String.format("Input '%s' into '%s'", value, field));
     }
 
+    @And("^user types \"([^\"]*)\" into the Street Address field of \"([^\"]*)\" address form using autodetect$")
+    public void userTypesIntoTheFieldOfAddressFormUsingAutodetect(String value, String formTitle) {
+        addressFormComponent.setRoot(BaseComponent.getContainerByTitle(formTitle));
+        addressFormComponent.inputValueIntoStreetAddressUsingAutodetect(value);
+        CommonFunctions.attachScreenshot(String.format("Input '%s' into 'Street Address'", value));
+    }
+
+
     @And("^user navigates to \"([^\"]*)\" breadcrumb$")
     public void userNavigatesToBreadcrumb(String breadcrumb) {
         this.userPressesBreadcrumbTab(breadcrumb);
@@ -464,7 +480,8 @@ public class CheckoutSteps {
                 user.getState(),
                 user.getZipCode(),
                 autoFill,
-                false
+                false,
+                true
         );
         CommonFunctions.attachScreenshot("Shipping info");
     }
@@ -472,7 +489,7 @@ public class CheckoutSteps {
     @Given("^user types manually shipping info for \"([^\"]*)\"$")
     public void userTypesManuallyShippingInfoFor(String userName) {
         checkboxRowComponent.check("Yes, shipping address and billing address are the same", false);
-        fillShippingInfo(userName, false);
+        fillShippingInfo(userName, false, true);
     }
 
     @And("^unset checkbox \"([^\"]*)\"$")
@@ -481,9 +498,14 @@ public class CheckoutSteps {
     }
 
     @Given("^user types shipping info for \"([^\"]*)\"$")
-    public void userTypesShippingInfoFor(String userName) throws Throwable {
+    public void userTypesShippingInfoFor(String userName) {
         checkboxRowComponent.check("Yes, shipping address and billing address are the same", false);
-        fillShippingInfo(userName, true);
+        fillShippingInfo(userName, true, true);
+    }
+
+    @And("^user types domestics shipping info for \"([^\"]*)\" without phone$")
+    public void userTypesDomesticsShippingInfoFor(String userName) {
+        fillShippingInfo(userName, true, false);
     }
 
 
@@ -491,7 +513,7 @@ public class CheckoutSteps {
         BillingUser user = DataProvider.getUser(userName);
 
         addressFormComponent.setRoot(BaseComponent.getContainerByTitle("Billing Address"));
-        fillAddressForm(user, autoFill, international);
+        fillAddressForm(user, autoFill, international, true);
 
         if (fillEmail) {
             emailComponent.fillEmailField(user.getEmail());
@@ -508,7 +530,7 @@ public class CheckoutSteps {
         BillingUser user = DataProvider.getUser(userName);
 
         addressFormComponent.setRoot(BaseComponent.getContainerByTitle("Customer Information"));
-        fillAddressForm(user, autoFill, false);
+        fillAddressForm(user, autoFill, false, true);
 
         if (fillEmail) {
             emailComponent.fillEmailField(user.getEmail());
@@ -519,14 +541,14 @@ public class CheckoutSteps {
         CommonFunctions.attachScreenshot("Customer info");
     }
 
-    private void fillShippingInfo(String userName, boolean autoFill) {
+    private void fillShippingInfo(String userName, boolean autoFill, boolean fillPhone) {
         BillingUser user = DataProvider.getUser(userName);
         addressFormComponent.setRoot(BaseComponent.getContainerByTitle("Shipping Address"));
-        fillAddressForm(user, autoFill, false);
+        fillAddressForm(user, autoFill, false, fillPhone);
         CommonFunctions.attachScreenshot("Shipping info");
     }
 
-    private void fillAddressForm(BillingUser user, boolean autoFill, boolean international) {
+    private void fillAddressForm(BillingUser user, boolean autoFill, boolean international, boolean fillPhone) {
         addressFormComponent.fillAddressForm(
                 user.getFullName(),
                 user.getFullAddress(),
@@ -537,7 +559,8 @@ public class CheckoutSteps {
                 user.getState(),
                 user.getZipCode(),
                 autoFill,
-                international
+                international,
+                fillPhone
         );
     }
 
@@ -759,6 +782,4 @@ public class CheckoutSteps {
         CommonFunctions.attachScreenshot("Where do I enter my password");
         assertEquals(signInFormComponent.getContentAboutPasswordFill(), "If you have a QVC Password, you'll enter it on the next screen. If not, you'll enter your address.");
     }
-
-
 }
