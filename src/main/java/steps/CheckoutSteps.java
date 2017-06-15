@@ -525,6 +525,10 @@ public class CheckoutSteps {
         fillShippingInfo(userName, true, false);
     }
 
+    @Given("^user types international shipping info for \"([^\"]*)\"$")
+    public void userTypesInternationalShippingInfoFor(String userName) {
+        fillShippingInfo(userName, true);
+    }
 
     private void fillBillingInfo(String userName, boolean autoFill, boolean fillEmail, boolean checkEmail, boolean international) {
         BillingUser user = DataProvider.getUser(userName);

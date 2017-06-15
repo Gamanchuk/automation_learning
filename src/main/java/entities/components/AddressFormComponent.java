@@ -54,6 +54,11 @@ public class AddressFormComponent extends BaseComponent {
         assertTrue(isElementVisible(apartmentField), "Apartment field doesn't present on page.");
         fillField(apartmentField, apartment);
 
+        // Need to send phone number digit by digit
+        if(isElementPresent(phoneField, 1)) {
+            fillPhone(phone);
+            focusOut(findElement(phoneField));
+        }
 
         if (fillPnone) {
             // Need to send phone number digit by digit
@@ -77,15 +82,6 @@ public class AddressFormComponent extends BaseComponent {
         By fieldEl = getFieldByName(field);
         fillField(fieldEl, value);
         focusOut(findElement(fieldEl));
-    }
-
-    public void inputValueIntoStreetAddressUsingAutodetect(String value) {
-        fillField(addressField, value);
-
-        assertTrue(isElementVisible(By.cssSelector("a.manual")), "Input address manually link was not displayed");
-        CommonFunctions.attachScreenshot("drop Down");
-
-        findElementWithTextBy(value, By.cssSelector("div.radio-list-details p.subtext")).click();
     }
 
     public void fillPhone(String phone) {
