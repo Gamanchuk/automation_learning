@@ -72,12 +72,13 @@ public class QVCPageSteps {
     @And("^user should be on QVC cart page$")
     public void userShouldBeOnCartPage() {
         assertTrue(cartPage.isPage(), "Cart page was not opened");
+        CommonFunctions.attachScreenshot("Cart page opened");
     }
 
     @Then("^user should be on QVC main page$")
     public void userShouldBeOnMainPage() {
         assertTrue(mainPage.isPage(), "Main page was not opened. Or page have some problems with loading");
-        CommonFunctions.attachScreenshot("Main page opened");
+        CommonFunctions.attachScreenshot("QVC Main page opened");
     }
 
     @Then("^user should be on QVC forgot password page$")
