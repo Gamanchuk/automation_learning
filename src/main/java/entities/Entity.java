@@ -380,7 +380,8 @@ public abstract class Entity {
             new WebDriverWait(driver, timeout).until(webElementExpectedCondition);
             return true;
         } catch (TimeoutException e) {
-            log.info("Condition failed!");
+            log.error("Condition failed!");
+            log.error(e.getMessage());
             return false;
         }
     }
