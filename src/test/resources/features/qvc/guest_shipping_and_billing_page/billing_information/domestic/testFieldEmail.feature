@@ -1,6 +1,6 @@
-@qvc @debug1
+@qvc
 
-Feature: GUEST - SHIPPING & BILLING PAGE - BILLING INFO
+Feature: GUEST - SHIPPING & BILLING PAGE - BILLING INFO - DOMESTIC
 
   Background: Add product to card and process to checkout
     Given user adds to cart product
@@ -17,17 +17,17 @@ Feature: GUEST - SHIPPING & BILLING PAGE - BILLING INFO
     Then user should stay at "Address" tab
     And sees "FORM ERRORS" error message with text "Please review all inputs."
 
-    And user types "#######@moovweb.com" into the email field
-    And presses the "Continue" button
-    Then user should stay at "Address" tab
-    And sees "FORM ERRORS" error message with text "Email Address is invalid"
-
     And user types "qamoovweb.com" into the email field
     And presses the "Continue" button
     Then user should stay at "Address" tab
     And sees "FORM ERRORS" error message with text "Please review all inputs."
 
     And user types "123456@moovweb.com" into the email field
+    And presses the "Continue" button
+    Then user should be on "Delivery" tab
+    And user navigates to "Address" breadcrumb
+
+    And user types "#######@moovweb.com" into the email field
     And presses the "Continue" button
     Then user should be on "Delivery" tab
     And user navigates to "Address" breadcrumb

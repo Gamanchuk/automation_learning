@@ -1,6 +1,6 @@
-@qvc @debug1
+@qvc
 
-Feature: GUEST - SHIPPING & BILLING PAGE - SHIPPING INFO
+Feature: GUEST - SHIPPING & BILLING PAGE - BILLING INFO - DOMESTIC
 
   Background: Add product to card and process to checkout
     Given user adds to cart product

@@ -1,6 +1,6 @@
-@qvc @debug1
+@qvc
 
-Feature: GUEST - SHIPPING & BILLING PAGE - BILLING INFO
+Feature: GUEST - SHIPPING & BILLING PAGE - BILLING INFO - DOMESTIC
 
   Background: Add product to card and process to checkout
     Given user adds to cart product
@@ -20,8 +20,7 @@ Feature: GUEST - SHIPPING & BILLING PAGE - BILLING INFO
 
     And user types "Moovweb !@#&::!@#()" into the "Full Name" field of "Billing Address" address form
     And presses the "Continue" button
-    And user should be on "Address" tab
-    And sees "FORM ERRORS" error message with text "Last Name is invalid"
+    Then user should be on "Delivery" tab
 
 
 

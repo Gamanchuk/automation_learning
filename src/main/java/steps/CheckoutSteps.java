@@ -61,6 +61,7 @@ public class CheckoutSteps {
     private RewardsAccountComponent rewardsAccountComponent = new RewardsAccountComponent();
     private DiscountComponent discountComponent = new DiscountComponent();
     private CountrySelectorComponent countrySelectorComponent = new CountrySelectorComponent();
+    private ProductListComponent productListComponent = new ProductListComponent();
 
     private static Log log = LogFactory.getLog(CheckoutSteps.class.getSimpleName());
 
@@ -211,6 +212,20 @@ public class CheckoutSteps {
     public void choosesShippingMethod(String shippingMethod) {
         shippingOptionsComponent.selectShippingMethod(shippingMethod);
         CommonFunctions.attachScreenshot("Shipping method");
+    }
+
+
+    @And("^user remove product$")
+    public void userRemoveProduct() {
+        assertTrue(radioListComponent.exists(), "Delivery Method Drop-Down doesn't exist");
+        productListComponent.removeProduct();
+    }
+
+    @And("^chooses \"([^\"]*)\" item quantity$")
+    public void choosesItemQuantity(String quantity) {
+        assertTrue(radioListComponent.exists(), "Item quantity Drop-Down doesn't exist");
+        radioListComponent.select(quantity);
+
     }
 
     @And("^chooses \"([^\"]*)\" country$")

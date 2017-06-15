@@ -13,6 +13,12 @@ public class ButtonComponent extends BaseComponent {
         getDriver().findElements(btn).get(0).sendKeys(Keys.RETURN);
     }
 
+    public void clickButton(String text) {
+        By btnWithText = By.xpath("//div[contains(@class, 'submit-button')]//button[contains(text(),'" + text + "')]");
+        CommonFunctions.sleep(500);
+        getDriver().findElement(btnWithText).sendKeys(Keys.RETURN);
+    }
+
     public boolean exists() {
         return isElementVisible(btn) && isElementClickable(btn);
     }

@@ -1,7 +1,6 @@
 @qvc
 
 
-
 Feature: GUEST - BREADCRUMB
 
   Background: Add product to card and process to checkout
