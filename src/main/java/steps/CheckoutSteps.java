@@ -62,6 +62,7 @@ public class CheckoutSteps {
     private DiscountComponent discountComponent = new DiscountComponent();
     private CountrySelectorComponent countrySelectorComponent = new CountrySelectorComponent();
     private ProductListComponent productListComponent = new ProductListComponent();
+    private NoteComponent noteComponent = new NoteComponent();
 
     private static Log log = LogFactory.getLog(CheckoutSteps.class.getSimpleName());
 
@@ -219,13 +220,14 @@ public class CheckoutSteps {
     public void userRemoveProduct() {
         assertTrue(radioListComponent.exists(), "Delivery Method Drop-Down doesn't exist");
         productListComponent.removeProduct();
+        CommonFunctions.attachScreenshot("Remove product");
     }
 
     @And("^chooses \"([^\"]*)\" item quantity$")
     public void choosesItemQuantity(String quantity) {
         assertTrue(radioListComponent.exists(), "Item quantity Drop-Down doesn't exist");
         radioListComponent.select(quantity);
-
+        CommonFunctions.attachScreenshot("Change item quantity: " + quantity);
     }
 
     @And("^chooses \"([^\"]*)\" country$")
@@ -796,5 +798,12 @@ public class CheckoutSteps {
         signInFormComponent.pressWhereDoIEnterMyPassword();
         CommonFunctions.attachScreenshot("Where do I enter my password");
         assertEquals(signInFormComponent.getContentAboutPasswordFill(), "If you have a QVC Password, you'll enter it on the next screen. If not, you'll enter your address.");
+    }
+
+    @And("^user clicks \"([^\"]*)\" link in note$")
+    public void userClicksLinkInNote(String linkText) {
+        noteComponent.clickLink(linkText);
+        CommonFunctions.attachScreenshot(linkText);
+
     }
 }

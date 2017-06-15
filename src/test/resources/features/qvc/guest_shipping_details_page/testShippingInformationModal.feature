@@ -6,8 +6,8 @@ Feature: GUEST - SHIPPING DETAILS PAGE
     Given user adds to cart product
 
 
-  @TestCaseId("102353")
-  Scenario: Test Deleting a product from Shipping Detail Page
+  @TestCaseId("102354")
+  Scenario: Test Shipping Information Modal
 
     Given user continue checkout as guest
     And presses the "Continue" button
@@ -17,5 +17,6 @@ Feature: GUEST - SHIPPING DETAILS PAGE
     And presses the "Continue" button
 
     And user remove product
-    Then sees modal error with text "There are no items in your Shopping Cart. Please select the items you would like to purchase, and place your order."
+    And user clicks "Shipping Information" link in note
+    And user should see Terms modal with "How will my order ship"
 

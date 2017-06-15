@@ -1,6 +1,7 @@
 package entities.components;
 
 import org.openqa.selenium.By;
+import utils.CommonFunctions;
 
 public class ModalComponent extends BaseComponent {
 
@@ -11,7 +12,8 @@ public class ModalComponent extends BaseComponent {
     }
 
     public boolean hasMessageWithText(String text) {
-        String message = findElement(modal).findElement(By.cssSelector("div.message-body p")).getText();
+        CommonFunctions.sleep(4000);
+        String message = getDriver().findElement(modal).findElement(By.cssSelector("div.message-body")).getText();
         return message.contains(text);
     }
 
