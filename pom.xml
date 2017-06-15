@@ -552,6 +552,12 @@
             </properties>
         </profile>
         <profile>
+            <id>device-GalaxyS7</id>
+            <properties>
+                <props.file.name>galaxy_s7</props.file.name>
+            </properties>
+        </profile>
+        <profile>
             <id>device-GalaxyS5</id>
             <properties>
                 <props.file.name>galaxy_s5</props.file.name>
