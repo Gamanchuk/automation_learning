@@ -360,7 +360,7 @@ public class CheckoutSteps {
     public void usesForPayment(String type) {
         paymentTypesComponent.purchasePayment();
         CommonFunctions.attachScreenshot("Payment types");
-        paymentTypesComponent.choisePaymentType(type);
+        paymentTypesComponent.choicePaymentType(type);
     }
 
     @Given("^user types \"([^\"]*)\" into the \"([^\"]*)\" field of \"([^\"]*)\" address form$")
