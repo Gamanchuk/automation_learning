@@ -370,14 +370,6 @@ public class CheckoutSteps {
         CommonFunctions.attachScreenshot(String.format("Input '%s' into '%s'", value, field));
     }
 
-    @And("^user types \"([^\"]*)\" into the Street Address field of \"([^\"]*)\" address form using autodetect$")
-    public void userTypesIntoTheFieldOfAddressFormUsingAutodetect(String value, String formTitle) {
-        addressFormComponent.setRoot(BaseComponent.getContainerByTitle(formTitle));
-        addressFormComponent.inputValueIntoStreetAddressUsingAutodetect(value);
-        CommonFunctions.attachScreenshot(String.format("Input '%s' into 'Street Address'", value));
-    }
-
-
     @And("^user navigates to \"([^\"]*)\" breadcrumb$")
     public void userNavigatesToBreadcrumb(String breadcrumb) {
         this.userPressesBreadcrumbTab(breadcrumb);
@@ -527,7 +519,7 @@ public class CheckoutSteps {
 
     @Given("^user types international shipping info for \"([^\"]*)\"$")
     public void userTypesInternationalShippingInfoFor(String userName) {
-        fillShippingInfo(userName, true);
+        fillShippingInfo(userName, true, false);
     }
 
     private void fillBillingInfo(String userName, boolean autoFill, boolean fillEmail, boolean checkEmail, boolean international) {
