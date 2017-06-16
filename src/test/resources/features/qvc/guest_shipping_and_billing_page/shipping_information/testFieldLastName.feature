@@ -1,4 +1,4 @@
-@qvc @debug
+@qvc
 
 Feature: GUEST - SHIPPING & BILLING PAGE - SHIPPING INFO
 
@@ -20,7 +20,7 @@ Feature: GUEST - SHIPPING & BILLING PAGE - SHIPPING INFO
 
     And user types "Moovweb !@#&::!@#()" into the "Full Name" field of "Shipping Address" address form
     And presses the "Continue" button
-    Then user should stay at "Address" tab
-    And sees "FORM ERRORS" error message with text "Last Name is invalid"
+    Then user should be on "Delivery" tab
+
 
 

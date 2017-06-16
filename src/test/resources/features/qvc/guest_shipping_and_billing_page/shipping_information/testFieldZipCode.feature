@@ -1,4 +1,4 @@
-@qvc @debug
+@qvc
 
 Feature: GUEST - SHIPPING & BILLING PAGE - SHIPPING INFO
 
@@ -22,4 +22,4 @@ Feature: GUEST - SHIPPING & BILLING PAGE - SHIPPING INFO
 
     And user types "94105" into the "Zip Code" field of "Shipping Address" address form
     And presses the "Continue" button
-    And user should be on "Delivery" tab
+    Then user should be on "Delivery" tab

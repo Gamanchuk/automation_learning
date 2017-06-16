@@ -1,4 +1,4 @@
-@qvc @Ignored @debug
+@qvc @Ignored 
 
 Feature: GUEST - SHIPPING & BILLING PAGE - SHIPPING INFO
 
@@ -14,11 +14,5 @@ Feature: GUEST - SHIPPING & BILLING PAGE - SHIPPING INFO
     And user types billing info for "qa canada" without email
     And user types international shipping info for "qa user"
     And presses the "Continue" button
-
     And user should be on "Delivery" tab
-    And presses the "Continue" button
-    And user should be on "Payment" tab
-    And uses "discover" card for payment
-    And presses the "Continue" button
-    And user should be on "Review" tab
-    Then user checks shipping info for "qa user"
+

@@ -6,7 +6,7 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 @CucumberOptions(
         features = "src/test/resources/features/qvc/guest_checkout/",
         glue = "steps",
-        tags = "@qvc"
+        tags = {"@qvc", "~@Ignored"}
 )
 class QVCGuestCheckoutCukesRunnerTest extends AbstractTestNGCucumberTests {
 

@@ -1,4 +1,4 @@
-@qvc @debug
+@qvc
 
 Feature: GUEST - SHIPPING & BILLING PAGE - SHIPPING INFO
 
@@ -21,16 +21,16 @@ Feature: GUEST - SHIPPING & BILLING PAGE - SHIPPING INFO
     And user types "Mission Street" into the "Street Address" field of "Shipping Address" address form
     And presses the "Continue" button
     And chooses "Use Entered Address"
-    And user should be on "Delivery" tab
+    Then user should be on "Delivery" tab
 
     And user navigates to "Address" breadcrumb
     And user types "123456" into the "Street Address" field of "Shipping Address" address form
     And presses the "Continue" button
     And chooses "Use Entered Address"
-    And user should be on "Delivery" tab
+    Then user should be on "Delivery" tab
 
     And user navigates to "Address" breadcrumb
     And user types "!@$%^&*():_+" into the "Street Address" field of "Shipping Address" address form
     And presses the "Continue" button
     And chooses "Use Entered Address"
-    And user should be on "Delivery" tab
+    Then user should be on "Delivery" tab

@@ -1,4 +1,4 @@
-@qvc @debug
+@qvc
 
 Feature: GUEST - SHIPPING & BILLING PAGE - SHIPPING INFO
 
@@ -25,10 +25,4 @@ Feature: GUEST - SHIPPING & BILLING PAGE - SHIPPING INFO
 
     And user types "Mr Donal Trump III" into the "Full Name" field of "Shipping Address" address form
     And presses the "Continue" button
-    And user should be on "Delivery" tab
-    And presses the "Continue" button
-    And user should be on "Payment" tab
-    And uses "discover" card for payment
-    And presses the "Continue" button
-    And user should be on "Review" tab
-    Then user checks "Full Name" with value "Mr Donal Trump III" on "Review" tab
+    Then user should be on "Delivery" tab

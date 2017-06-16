@@ -1,4 +1,4 @@
-@qvc @debug
+@qvc
 
 Feature: GUEST - SHIPPING & BILLING PAGE - SHIPPING INFO
 
@@ -21,37 +21,16 @@ Feature: GUEST - SHIPPING & BILLING PAGE - SHIPPING INFO
     And user types "SanFrancisco" into the "City" field of "Shipping Address" address form
     And presses the "Continue" button
     And chooses "Use Entered Address"
-    And user should be on "Delivery" tab
-    And presses the "Continue" button
-    And user should be on "Payment" tab
-    And uses "discover" card for payment
-    And presses the "Continue" button
-    And user should be on "Review" tab
-    Then user checks city info with value "SanFrancisco" on "Review" tab
+    Then user should be on "Delivery" tab
 
     And user navigates to "Address" breadcrumb
     And user types "123456" into the "City" field of "Shipping Address" address form
     And presses the "Continue" button
     And chooses "Use Entered Address"
-    And user should be on "Delivery" tab
-    And presses the "Continue" button
-    And user should be on "Payment" tab
-    And uses "discover" card for payment
-    And presses the "Continue" button
-    And user should be on "Review" tab
-    Then user checks city info with value "123456" on "Review" tab
+    Then user should be on "Delivery" tab
 
     And user navigates to "Address" breadcrumb
     And user types "!@$%^&*():_+" into the "City" field of "Shipping Address" address form
     And presses the "Continue" button
     And chooses "Use Entered Address"
-    And user should be on "Delivery" tab
-    And presses the "Continue" button
-    And user should be on "Payment" tab
-    And uses "discover" card for payment
-    And presses the "Continue" button
-    And user should be on "Review" tab
-    And chooses "Use Entered Address"
-    Then user checks city info with value "!@$%^&*():_+" on "Delivery Method" tab
-
-
+    Then user should be on "Delivery" tab
