@@ -1,6 +1,6 @@
-@qvc @ignore
+@qvc @Ignored @debug
 
-Feature: GUEST - SHIPPING & BILLING ADDRESS PAGE
+Feature: GUEST - SHIPPING & BILLING PAGE - SHIPPING INFO
 
   Background:
     Given user adds to cart product

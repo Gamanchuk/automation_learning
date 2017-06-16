@@ -1,4 +1,4 @@
-@qvc @debug
+@qvc
 
 Feature: GUEST - SHIPPING DETAILS PAGE
 

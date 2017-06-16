@@ -1,6 +1,6 @@
-@qvc
+@qvc @debug
 
-Feature: GUEST - SHIPPING & BILLING ADDRESS PAGE
+Feature: GUEST - SHIPPING & BILLING PAGE - SHIPPING INFO
 
   Background:
     Given user adds to cart product
@@ -14,7 +14,7 @@ Feature: GUEST - SHIPPING & BILLING ADDRESS PAGE
     Given user types billing info for "qa user"
     And unset checkbox "Yes, shipping address and billing address are the same"
     And presses the "Continue" button
-    Then user should stay at "Billing & Shipping" tab
+    Then user should stay at "Address" tab
     And sees "FORM ERRORS" error message with text "Please review all inputs."
 
 

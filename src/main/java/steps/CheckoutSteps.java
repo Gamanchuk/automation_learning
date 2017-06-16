@@ -12,8 +12,6 @@ import entities.pages.pepboys.PepBoysMainPage;
 import entities.pages.pepboys.PepBoysMyAccountPage;
 import entities.pages.pepboys.PepBoysTrackingPage;
 import org.apache.commons.lang.RandomStringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import utils.CommonFunctions;
 import utils.Config;
 import utils.GoogleSheetsHelper;
@@ -28,8 +26,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 import static utils.CommonFunctions.attachScreenVideo;
 import static utils.CommonFunctions.stopScreenVideo;
 
@@ -64,7 +61,7 @@ public class CheckoutSteps {
     private ProductListComponent productListComponent = new ProductListComponent();
     private NoteComponent noteComponent = new NoteComponent();
 
-    private static Log log = LogFactory.getLog(CheckoutSteps.class.getSimpleName());
+    //private static Log log = LogFactory.getLog(CheckoutSteps.class.getSimpleName());
 
 
     @And("^user chooses \"([^\"]*)\" title$")
@@ -76,23 +73,44 @@ public class CheckoutSteps {
 
     @And("^user types billing info for \"([^\"]*)\"$")
     public void typesBillingInfoFor(String userName) {
-        fillBillingInfo(userName, true, true, false, false);
+        fillBillingInfo(userName, true, true, false);
     }
 
     @And("^user types billing info for \"([^\"]*)\" without email$")
     public void userTypesBillingInfoForWithoutEmail(String userName) {
-        fillBillingInfo(userName, true, false, false, false);
+        fillBillingInfo(userName, true, false, false);
 
     }
 
     @And("^user types manually billing info for \"([^\"]*)\" without email$")
     public void userTypesManuallyBillingInfoForWithoutEmail(String userName) {
-        fillBillingInfo(userName, false, false, false, false);
+        fillBillingInfo(userName, false, false, false);
+    }
+
+    @And("^user types shipping address for \"([^\"]*)\"$")
+    public void userTypesShippingInfoForWithoutPhone(String userName) {
+        checkboxRowComponent.check("Yes, shipping address and billing address are the same", false);
+        fillShippingAddress(userName, true);
+        CommonFunctions.attachScreenshot("Shipping address form");
+    }
+
+    @And("^user types manually shipping address for \"([^\"]*)\"$")
+    public void userTypesManuallyShippingInfoForWithoutPhone(String userName) {
+        checkboxRowComponent.check("Yes, shipping address and billing address are the same", false);
+        fillShippingAddress(userName, false);
+        CommonFunctions.attachScreenshot("Shipping address form");
+    }
+
+    @Given("^user types manually shipping info for \"([^\"]*)\"$")
+    public void userTypesManuallyShippingInfoFor(String userName) {
+        checkboxRowComponent.check("Yes, shipping address and billing address are the same", false);
+        fillShippingAddress(userName, false);
+        CommonFunctions.attachScreenshot("Shipping address form");
     }
 
     @And("^user types manually international billing info for \"([^\"]*)\" without email$")
     public void userTypesManuallyInternationalBillingInfoForWithoutEmail(String userName) {
-        fillBillingInfo(userName, false, false, false, true);
+        fillBillingInfo(userName, false, false, false);
     }
 
     @And("^user types customer info for \"([^\"]*)\"$")
@@ -100,14 +118,14 @@ public class CheckoutSteps {
         BillingUser user = DataProvider.getUser(userName);
 
         addressFormComponent.setRoot(BaseComponent.getContainerByTitle("Customer Information"));
-        fillAddressForm(user, true, false, true);
+        fillAddressForm(user, true);
         emailComponent.fillEmailField(user.getEmail());
         CommonFunctions.attachScreenshot("Customer info");
     }
 
     @And("^user types billing info for \"([^\"]*)\" and checks email$")
     public void typesBillingInfoForUserAndChecksEmail(String userName) {
-        fillBillingInfo(userName, true, false, true, false);
+        fillBillingInfo(userName, true, false, true);
     }
 
     @And("^user types сustomer info for \"([^\"]*)\" and checks email$")
@@ -117,12 +135,12 @@ public class CheckoutSteps {
 
     @And("^user types manually billing info for \"([^\"]*)\" and checks email$")
     public void userTypesManuallyBillingInfoForAndChecksEmail(String userName) {
-        fillBillingInfo(userName, false, false, true, false);
+        fillBillingInfo(userName, false, false, true);
     }
 
     @Given("^user types manually billing info for \"([^\"]*)\"$")
     public void userTypesManuallyBillingInfoFor(String userName) {
-        fillBillingInfo(userName, false, true, false, false);
+        fillBillingInfo(userName, false, true, false);
     }
 
     @Given("^user types manually customer info for \"([^\"]*)\"$")
@@ -195,6 +213,7 @@ public class CheckoutSteps {
         );
     }
 
+    @SuppressWarnings("unused")
     @And("^presses the \"([^\"]*)\" button$")
     public void pressesTheButton(String confirmationMethod) {
         buttonComponent.javascriptScroll(200);
@@ -378,6 +397,7 @@ public class CheckoutSteps {
 
     @And("^user presses \"([^\"]*)\" breadcrumb tab$")
     public void userPressesBreadcrumbTab(String breadcrumb) {
+        CommonFunctions.sleep(1500);
         breadcrumbWidget.clickBreadcrumb(breadcrumb);
         CommonFunctions.attachScreenshot("Click Breadcrumb: " + breadcrumb);
     }
@@ -476,31 +496,6 @@ public class CheckoutSteps {
         payPalWellComponent.checkPayPalAccount(DataProvider.getUser(userName).getPaypalEmail());
     }
 
-    private void fillShipping(String userName, boolean autoFill) {
-        addressFormComponent.setRoot(BaseComponent.getContainerByTitle("Shipping Address"));
-        BillingUser user = DataProvider.getUser(userName);
-        addressFormComponent.fillAddressForm(
-                user.getFullName(),
-                user.getFullAddress(),
-                user.getCityInfo(),
-                user.getCity(),
-                user.getApartment(),
-                user.getPhone(),
-                user.getState(),
-                user.getZipCode(),
-                autoFill,
-                false,
-                true
-        );
-        CommonFunctions.attachScreenshot("Shipping info");
-    }
-
-    @Given("^user types manually shipping info for \"([^\"]*)\"$")
-    public void userTypesManuallyShippingInfoFor(String userName) {
-        checkboxRowComponent.check("Yes, shipping address and billing address are the same", false);
-        fillShippingInfo(userName, false, true);
-    }
-
     @And("^unset checkbox \"([^\"]*)\"$")
     public void unsetCheckbox(String label) {
         checkboxRowComponent.check(label, false);
@@ -509,24 +504,24 @@ public class CheckoutSteps {
     @Given("^user types shipping info for \"([^\"]*)\"$")
     public void userTypesShippingInfoFor(String userName) {
         checkboxRowComponent.check("Yes, shipping address and billing address are the same", false);
-        fillShippingInfo(userName, true, true);
+        fillShippingInfo(userName, true);
     }
 
     @And("^user types domestics shipping info for \"([^\"]*)\" without phone$")
     public void userTypesDomesticsShippingInfoFor(String userName) {
-        fillShippingInfo(userName, true, false);
+        fillShippingInfo(userName, true);
     }
 
     @Given("^user types international shipping info for \"([^\"]*)\"$")
     public void userTypesInternationalShippingInfoFor(String userName) {
-        fillShippingInfo(userName, true, false);
+        fillShippingInfo(userName, true);
     }
 
-    private void fillBillingInfo(String userName, boolean autoFill, boolean fillEmail, boolean checkEmail, boolean international) {
+    private void fillBillingInfo(String userName, boolean autoFill, boolean fillEmail, boolean checkEmail) {
         BillingUser user = DataProvider.getUser(userName);
 
         addressFormComponent.setRoot(BaseComponent.getContainerByTitle("Billing Address"));
-        fillAddressForm(user, autoFill, international, true);
+        fillAddressForm(user, autoFill);
 
         if (fillEmail) {
             emailComponent.fillEmailField(user.getEmail());
@@ -543,7 +538,7 @@ public class CheckoutSteps {
         BillingUser user = DataProvider.getUser(userName);
 
         addressFormComponent.setRoot(BaseComponent.getContainerByTitle("Customer Information"));
-        fillAddressForm(user, autoFill, false, true);
+        fillAddressForm(user, autoFill);
 
         if (fillEmail) {
             emailComponent.fillEmailField(user.getEmail());
@@ -554,14 +549,30 @@ public class CheckoutSteps {
         CommonFunctions.attachScreenshot("Customer info");
     }
 
-    private void fillShippingInfo(String userName, boolean autoFill, boolean fillPhone) {
+    private void fillShippingInfo(String userName, boolean autoFill) {
         BillingUser user = DataProvider.getUser(userName);
         addressFormComponent.setRoot(BaseComponent.getContainerByTitle("Shipping Address"));
-        fillAddressForm(user, autoFill, false, fillPhone);
+        fillAddressForm(user, autoFill);
         CommonFunctions.attachScreenshot("Shipping info");
     }
 
-    private void fillAddressForm(BillingUser user, boolean autoFill, boolean international, boolean fillPhone) {
+    private void fillShippingAddress(String userName, boolean autoFill) {
+        BillingUser user = DataProvider.getUser(userName);
+        addressFormComponent.setRoot(BaseComponent.getContainerByTitle("Shipping Address"));
+        addressFormComponent.fillAddress(
+                user.getFullName(),
+                user.getFullAddress(),
+                user.getCityInfo(),
+                user.getCity(),
+                user.getApartment(),
+                user.getState(),
+                user.getZipCode(),
+                autoFill
+        );
+    }
+
+
+    private void fillAddressForm(BillingUser user, boolean autoFill) {
         addressFormComponent.fillAddressForm(
                 user.getFullName(),
                 user.getFullAddress(),
@@ -571,15 +582,13 @@ public class CheckoutSteps {
                 user.getPhone(),
                 user.getState(),
                 user.getZipCode(),
-                autoFill,
-                international,
-                fillPhone
+                autoFill
         );
     }
 
     @Given("^failed step$")
     public void failedStep() {
-        assertTrue(false);
+        fail("Fail for debug");
     }
 
     @Given("^user presses the logo$")
@@ -605,9 +614,6 @@ public class CheckoutSteps {
     @Given("^user checks support number with label \"([^\"]*)\" and number \"([^\"]*)\"$")
     public void userChecksSupportNumberWithLabelAndNumber(String phoneLabel, String phoneNumber) {
         footerComponent.checkPhoneNumber(phoneLabel, phoneNumber);
-        //TODO: need found solution for check text in native alert
-        //  footerComponent.pressCall();
-        //footerComponent.checkCallAlert(phoneNumber);
     }
 
     @And("^user presses the Shopping Cart icon$")
@@ -802,4 +808,6 @@ public class CheckoutSteps {
         CommonFunctions.attachScreenshot(linkText);
 
     }
+
+
 }

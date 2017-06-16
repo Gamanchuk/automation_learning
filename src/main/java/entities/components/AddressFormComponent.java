@@ -19,7 +19,7 @@ public class AddressFormComponent extends BaseComponent {
     private By zipField = By.cssSelector(".zip-input input");
     private By title = By.xpath("//div[contains(@class, 'component-input')]//select");
 
-    public void fillAddressForm(String fullName, String address, String cityInfo, String city, String apartment, String phone, String state, String zip, boolean autoFill, boolean international, boolean fillPnone) {
+    public void fillAddressForm(String fullName, String address, String cityInfo, String city, String apartment, String phone, String state, String zip, boolean autoFill) {
 
         boolean apartmentPresent = isElementVisible(apartmentField, 3);
 
@@ -46,7 +46,7 @@ public class AddressFormComponent extends BaseComponent {
             //findElementWithTextBy("enter city", By.cssSelector("div.zip-message a")).click();
             fillField(cityField, city);
             fillField(zipField, zip);
-            fillState(state, international);
+            fillState(state);
         }
 
         // Need to sleep for second to avoid selenium exception
@@ -60,23 +60,46 @@ public class AddressFormComponent extends BaseComponent {
             focusOut(findElement(phoneField));
         }
 
-        if (fillPnone) {
             // Need to send phone number digit by digit
             fillPhone(phone);
             focusOut(findElement(phoneField));
-        }
     }
 
-//    public void checkPaymentResult() {
-//        By thanksMsg = By.xpath("//div[@class='order-thank-you inset-all']/div");
-//        waitForElementVisible(thanksMsg, 100);
-//
-//        String message = getDriver().findElement(thanksMsg).getText().toLowerCase();
-//        assertTrue(message.contains("thank you for your order"));
-//
-//        CommonFunctions.attachScreenshot("Thank You Page");
-//    }
-//
+    public void fillAddress(String fullName, String address, String cityInfo, String city, String apartment, String state, String zip, boolean autoFill) {
+
+        boolean apartmentPresent = isElementVisible(apartmentField, 3);
+
+        fillField(nameField, fullName);
+        fillField(addressField, address);
+
+        CommonFunctions.sleep(1000);
+
+        if (!apartmentPresent) {
+            // Waiting for dropdown
+            assertTrue(isElementVisible(By.cssSelector("a.manual")), "Input address manually link was not displayed");
+            CommonFunctions.attachScreenshot("drop Down");
+
+            // Need wait. Sometimes we have NoSuchElement
+            CommonFunctions.sleep(1000);
+        }
+
+        if (autoFill) {
+            findElementWithTextBy(cityInfo, By.cssSelector("div.radio-list-details p.subtext")).click();
+        } else {
+            if (!apartmentPresent) {
+                click(By.cssSelector("a.manual"));
+            }
+
+            fillField(cityField, city);
+            fillField(zipField, zip);
+            fillState(state);
+        }
+
+        // Need to sleep for second to avoid selenium exception
+        CommonFunctions.sleep(1000);
+        assertTrue(isElementVisible(apartmentField), "Apartment field doesn't present on page.");
+        fillField(apartmentField, apartment);
+    }
 
     public void inputValueIntoField(String value, String field) {
         By fieldEl = getFieldByName(field);
@@ -90,19 +113,19 @@ public class AddressFormComponent extends BaseComponent {
         focusOut(findElement(phoneField));
     }
 
-    public void fillState(String state, boolean international) {
+    public void fillState(String state) {
         WebElement stateEl;
 
-        if (international) {
-            stateEl = findElement(stateField);
-            javascriptScroll(stateEl);
-            stateEl.sendKeys(state);
-        } else {
+//        if (international) {
+//            stateEl = findElement(stateField);
+//            javascriptScroll(stateEl);
+//            stateEl.sendKeys(state);
+//        } else {
             stateEl = findElement(stateSelect);
             javascriptScroll(stateEl);
             Select selectState = new Select(stateEl);
             selectState.selectByValue(state);
-        }
+        // }
     }
 
     private By getFieldByName(String name) {

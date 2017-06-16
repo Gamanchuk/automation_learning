@@ -1,6 +1,6 @@
-@qvc 
+@qvc @debug
 
-Feature: GUEST - SHIPPING & BILLING ADDRESS PAGE
+Feature: GUEST - SHIPPING & BILLING PAGE - SHIPPING INFO
 
   Background:
     Given user adds to cart product
@@ -11,7 +11,7 @@ Feature: GUEST - SHIPPING & BILLING ADDRESS PAGE
   @TestCaseId("102324")
   Scenario: Test field 'Name'
     Given user types manually billing info for "qa user" without email
-    And user types shipping info for "qa user"
+    And user types shipping address for "qa user"
 
     And user types "" into the "Full Name" field of "Shipping Address" address form
     And presses the "Continue" button

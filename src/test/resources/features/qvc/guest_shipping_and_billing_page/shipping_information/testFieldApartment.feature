@@ -1,6 +1,6 @@
-@qvc
+@qvc @debug
 
-Feature: GUEST - SHIPPING & BILLING ADDRESS PAGE
+Feature: GUEST - SHIPPING & BILLING PAGE - SHIPPING INFO
 
   Background:
     Given user adds to cart product
@@ -11,53 +11,27 @@ Feature: GUEST - SHIPPING & BILLING ADDRESS PAGE
   @TestCaseId("102327")
   Scenario: Test field 'Apartment'
     Given user types manually billing info for "qa user" without email
-    And user types shipping info for "qa user"
+    And user types shipping address for "qa user"
 
     And user types "" into the "Apt, Bldg." field of "Shipping Address" address form
     And presses the "Continue" button
     And user should be on "Delivery" tab
-    And presses the "Continue" button
-    And user should be on "Payment" tab
-    And uses "discover" card for payment
-    And presses the "Continue" button
-    And user should be on "Review" tab
-    Then user checks "Apt, Bldg." with value "" on "Review" tab
-
 
     And user navigates to "Address" breadcrumb
     And user types "12345" into the "Apt, Bldg." field of "Shipping Address" address form
     And presses the "Continue" button
     And user should be on "Delivery" tab
-    And presses the "Continue" button
-    And user should be on "Payment" tab
-    And uses "discover" card for payment
-    And presses the "Continue" button
-    And user should be on "Review" tab
-    Then user checks "Apt, Bldg." with value "12345" on "Review" tab
-
 
     And user navigates to "Address" breadcrumb
     And user types "Some Apartment" into the "Apt, Bldg." field of "Shipping Address" address form
     And presses the "Continue" button
     And user should be on "Delivery" tab
-    And presses the "Continue" button
-    And user should be on "Payment" tab
-    And uses "discover" card for payment
-    And presses the "Continue" button
-    And user should be on "Review" tab
-    Then user checks "Apt, Bldg." with value "Some Apartment" on "Review" tab
-
 
     And user navigates to "Address" breadcrumb
     And user types "!#&@()" into the "Apt, Bldg." field of "Shipping Address" address form
     And presses the "Continue" button
     And user should be on "Delivery" tab
-    And presses the "Continue" button
-    And user should be on "Payment" tab
-    And uses "discover" card for payment
-    And presses the "Continue" button
-    And user should be on "Review" tab
-    Then user checks "Apt, Bldg." with value "!#&@()" on "Review" tab
+
 
 
 
