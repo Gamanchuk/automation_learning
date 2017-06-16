@@ -2,10 +2,10 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 
-<suite name="Guest checkout">
+<suite name="All Tests">
     <test name="All tests">
         <classes>
-            <class name="tests.qvc.QVCGuestCheckoutCukesRunnerTest"/>
+            <class name="tests.qvc.QVCGuestShippingBillingPageCukesRunnerTest"/>
         </classes>
     </test>
 </suite> <!-- Suite -->

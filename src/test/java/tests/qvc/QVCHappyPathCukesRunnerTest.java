@@ -7,7 +7,7 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 @CucumberOptions(
         features = "src/test/resources/features/qvc/happy_path/",
         glue = "steps",
-        tags = "@qvc"
+        tags = {"@qvc", "~@Ignored"}
 )
 class QVCHappyPathCukesRunnerTest extends AbstractTestNGCucumberTests {
 
