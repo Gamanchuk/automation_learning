@@ -5,6 +5,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import entities.components.ButtonComponent;
 import entities.pages.qvc.QVCCartPage;
+import entities.pages.qvc.QVCForgotPasswordPage;
 import entities.pages.qvc.QVCMainPage;
 import entities.pages.qvc.QVCProductPage;
 import utils.CommonFunctions;
@@ -19,6 +20,7 @@ public class QVCPageSteps {
     private QVCProductPage qvcProductPage = new QVCProductPage();
 
     private ButtonComponent buttonComponent = new ButtonComponent();
+    private QVCForgotPasswordPage forgotPasswordPage = new QVCForgotPasswordPage();
 
     @Given("^user adds to cart product$")
     public void userAddsToCartProduct() {
@@ -69,5 +71,11 @@ public class QVCPageSteps {
         qvcProductPage.addToCart();
 
         assertTrue(qvcCartPage.isPage(), "Cart page doesn't present.");
+    }
+
+    @Then("^user should be on QVC forgot password page$")
+    public void userShouldBeOnForgotPasswordPage() {
+        assertTrue(forgotPasswordPage.isPage(), "Forgot password page was not opened. Or page have some problems with loading");
+        CommonFunctions.attachScreenshot("Forgot Password page opened");
     }
 }
