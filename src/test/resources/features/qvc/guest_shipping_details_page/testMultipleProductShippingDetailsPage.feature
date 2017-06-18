@@ -15,5 +15,4 @@ Feature: GUEST - SHIPPING DETAILS PAGE
 
     And user types billing info for "qa user" without email
     And presses the "Continue" button
-
-    And user should be on "Delivery" tab
+    Then user should be on "Delivery" tab

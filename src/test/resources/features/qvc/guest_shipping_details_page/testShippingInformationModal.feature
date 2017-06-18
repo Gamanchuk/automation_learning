@@ -18,5 +18,5 @@ Feature: GUEST - SHIPPING DETAILS PAGE
 
     And user should be on "Delivery" tab
     And user clicks "Shipping Information" link in note
-    And user should see Terms modal with "How will my order ship"
+    And user should see Terms modal with "How is a product delivered?"
 
