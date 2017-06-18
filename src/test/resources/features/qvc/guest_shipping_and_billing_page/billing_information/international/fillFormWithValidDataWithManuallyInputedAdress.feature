@@ -18,4 +18,3 @@ Feature: GUEST - SHIPPING & BILLING PAGE - BILLING INFO - INTERNATIONAL
     Then user should be on "Delivery" tab
 
 
-    #TODO: PROBLEM WITH CANADA. NEED Help with this testCase
