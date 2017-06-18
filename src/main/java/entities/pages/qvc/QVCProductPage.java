@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import utils.CommonFunctions;
 
 import java.util.List;
 import java.util.Random;
@@ -63,6 +64,8 @@ public class QVCProductPage extends BasePage {
 
     public void setCookies() {
         getDriver().get(BASE_URL + COOKIES);
+        // Need sleep because sometimes exp_id doesn't set in cookies
+        CommonFunctions.sleep(2000);
     }
 
     public boolean isAgeVerificationCheckBoxVisible() {

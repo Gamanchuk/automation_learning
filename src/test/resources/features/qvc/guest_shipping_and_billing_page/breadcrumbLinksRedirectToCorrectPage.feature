@@ -1,4 +1,4 @@
-@qvc
+@qvc @debug
 
 
 Feature: GUEST - BREADCRUMB
@@ -8,50 +8,44 @@ Feature: GUEST - BREADCRUMB
 
   @TestCaseId("102317")
   Scenario: Breadcrumb links redirect user to correct page
+
     Given user continue checkout as guest
     And presses the "Continue" button
-    And user should be on "Address" tab
-    And user types billing info for "qa user" without email
+    Then user should be on "Address" tab
 
-    # Check from Delivery tab
-    Then user presses "Delivery" breadcrumb tab
+    When user types billing info for "qa user" without email
+
+    # Check from Address tab
+    And user presses "Delivery" breadcrumb tab
     And user presses "Payment" breadcrumb tab
     And user presses "Review" breadcrumb tab
     And presses the "Continue" button
-    And user should be on "Delivery" tab
+    Then user should be on "Delivery" tab
 
-    # Check from Payment tab
-    Then user presses "Payment" breadcrumb tab
-    And user presses "Review" breadcrumb tab
+    # Check return back From Delivery to Address
     And user navigates to "Address" breadcrumb
     And presses the "Continue" button
     And user should be on "Delivery" tab
-    And presses the "Continue" button
-    And user should be on "Payment" tab
-    Then user navigates to "Delivery" breadcrumb
-    And presses the "Continue" button
-    And user should be on "Payment" tab
-    Then user navigates to "Address" breadcrumb
-    And user navigates to "Payment" breadcrumb
 
+    # Check from Delivery tab
+    And user presses "Payment" breadcrumb tab
+    And user presses "Review" breadcrumb tab
+    And presses the "Continue" button
+    Then user should be on "Payment" tab
+
+    # Check return back From Payment to Delivery
+    And user navigates to "Delivery" breadcrumb
+    And presses the "Continue" button
+    And user should be on "Payment" tab
+
+    # Check from Payment tab
+    And user presses "Review" breadcrumb tab
     And uses "mastercard" card for payment
     And presses the "Continue" button
+    Then user should be on "Review" tab
 
-
-    # Check from Review tab
+    # Check return back From Payment to Delivery
     Then user navigates to "Payment" breadcrumb
-    And user navigates to "Review" breadcrumb
-
-    Then user navigates to "Delivery" breadcrumb
-    And user navigates to "Review" breadcrumb
-
-    Then user navigates to "Address" breadcrumb
-    And user navigates to "Review" breadcrumb
-
-
-
-#TODO:Have a bug. Need debug after fix problem
-
 
 
 
