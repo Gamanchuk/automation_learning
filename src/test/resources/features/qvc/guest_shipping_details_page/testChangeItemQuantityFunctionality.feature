@@ -16,8 +16,8 @@ Feature: GUEST - SHIPPING DETAILS PAGE
     And user types billing info for "qa user" without email
     And presses the "Continue" button
 
+    And user should be on "Delivery" tab
     And chooses "3" item quantity
-    And user remove product
     And presses the "Continue" button
 
     Then user should be on "Payment" tab

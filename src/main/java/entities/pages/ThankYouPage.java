@@ -1,6 +1,5 @@
 package entities.pages;
 
-import entities.pages.BasePage;
 import org.openqa.selenium.By;
 import utils.CommonFunctions;
 

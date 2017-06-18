@@ -14,67 +14,60 @@ import static entities.Entity.TIMEOUT_SECONDS;
 import static org.testng.Assert.assertTrue;
 
 public class QVCPageSteps {
+    private QVCCartPage qvcCartPage = new QVCCartPage();
+    private QVCMainPage qvcMainPage = new QVCMainPage();
+    private QVCProductPage qvcProductPage = new QVCProductPage();
 
-    ButtonComponent buttonComponent = new ButtonComponent();
-
-    QVCProductPage productPage = new QVCProductPage();
-    QVCCartPage cartPage = new QVCCartPage();
-    QVCMainPage mainPage = new QVCMainPage();
+    private ButtonComponent buttonComponent = new ButtonComponent();
 
     @Given("^user adds to cart product$")
     public void userAddsToCartProduct() {
-        productPage.setCookies();
-        assertTrue(mainPage.isPage(), "Main page doesn't opened");
+        qvcProductPage.setCookies();
+        assertTrue(qvcMainPage.isPage(), "Main page doesn't opened");
 
-        addProduct();
+        this.addProduct();
 
-        cartPage.processToCheckout();
+        qvcCartPage.processToCheckout();
         assertTrue(buttonComponent.exists(), "Button component doesn't present on page. " +
                 "It seems that the checkout did not boot for " + TIMEOUT_SECONDS + " seconds");
     }
 
     @Given("^user adds to cart \"([^\"]*)\" products$")
     public void userAddsToCartProducts(int count) {
-        productPage.setCookies();
+        qvcProductPage.setCookies();
+        assertTrue(qvcMainPage.isPage(), "Main page doesn't opened");
 
         for (int i = 0; i < count; i++) {
-            addProduct();
+            this.addProduct();
         }
 
-        cartPage.processToCheckout();
+        qvcCartPage.processToCheckout();
         assertTrue(buttonComponent.exists(), "Button component doesn't present on page. " +
                 "It seems that the checkout did not boot for " + TIMEOUT_SECONDS + " seconds");
 
     }
 
-    private void addProduct() {
-        StringBuilder scuGroup = new StringBuilder(DataProvider.getRandomItemId());
-        productPage.openPage(scuGroup.toString());
-        CommonFunctions.attachScreenshot("Product Page");
-
-        //TODO: return color
-
-        assertTrue(productPage.isColorListExist(), "Color list doesn't present on product page.");
-        String color = productPage.selectRandomColor();
-        CommonFunctions.attachScreenshot("Color selected: " + color);
-
-
-        productPage.addToCart();
-//        if (productPage.isAgeVerificationCheckBoxVisible()) {
-//            productPage.confirmAge();
-//            CommonFunctions.attachScreenshot("Confirm Age");
-//        }
-        assertTrue(cartPage.isPage(), "Cart page doesn't present.");
-    }
-
     @And("^user should be on QVC cart page$")
     public void userShouldBeOnCartPage() {
-        assertTrue(cartPage.isPage(), "Cart page was not opened");
+        assertTrue(qvcCartPage.isPage(), "Cart page was not opened");
     }
 
     @Then("^user should be on QVC main page$")
     public void userShouldBeOnMainPage() {
-        assertTrue(mainPage.isPage(), "Main page was not opened. Or page have some problems with loading");
+        assertTrue(qvcMainPage.isPage(), "Main page was not opened. Or page have some problems with loading");
         CommonFunctions.attachScreenshot("Main page opened");
+    }
+
+    private void addProduct() {
+        qvcProductPage.openPage(DataProvider.getRandomItem());
+        CommonFunctions.attachScreenshot("Product Page");
+
+        assertTrue(qvcProductPage.isColorListExist(), "Color list doesn't present on product page.");
+        String color = qvcProductPage.selectRandomColor();
+        CommonFunctions.attachScreenshot("Color selected: " + color);
+
+        qvcProductPage.addToCart();
+
+        assertTrue(qvcCartPage.isPage(), "Cart page doesn't present.");
     }
 }

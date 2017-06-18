@@ -36,4 +36,5 @@ public class PayPalLoginPageSteps {
     public void userConfirmsPurchaseWithPayPal() {
         payPalComponent.confirmationPay();
     }
+
 }

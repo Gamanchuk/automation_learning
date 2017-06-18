@@ -35,40 +35,37 @@ public class CheckoutSteps {
     private ThankYouPage thankYouPage = new ThankYouPage();
     private PaymentAndReviewCheckoutPage paymentAndReviewPage = new PaymentAndReviewCheckoutPage();
 
-    private AddressFormComponent addressFormComponent = new AddressFormComponent();
-    private AddressDisplayComponent addressDisplayComponent = new AddressDisplayComponent();
-    private AddressVerificationComponent addressVerificationComponent = new AddressVerificationComponent();
+    private NoteComponent noteComponent = new NoteComponent();
     private EmailComponent emailComponent = new EmailComponent();
-    private ButtonComponent buttonComponent = new ButtonComponent();
-    private ErrorMessageComponent errorMessageComponent = new ErrorMessageComponent();
-    private BreadcrumbComponent breadcrumbWidget = new BreadcrumbComponent();
-    private ShippingOptionsComponent shippingOptionsComponent = new ShippingOptionsComponent();
-    private CreditCardFormComponent creditCardFormComponent = new CreditCardFormComponent();
-    private HeaderComponent headerComponent = new HeaderComponent();
-    private FooterComponent footerComponent = new FooterComponent();
-    private SignInFormComponent signInFormComponent = new SignInFormComponent();
-    private RadioListComponent radioListComponent = new RadioListComponent();
-    private PaymentTypesComponent paymentTypesComponent = new PaymentTypesComponent();
-    private PayPalWellComponent payPalWellComponent = new PayPalWellComponent();
-    private CollapserComponent collapserComponent = new CollapserComponent();
-    private CheckboxRowComponent checkboxRowComponent = new CheckboxRowComponent();
-    private RewardSummaryComponent rewardSummaryComponent = new RewardSummaryComponent();
     private TitleComponent titleComponent = new TitleComponent();
     private ModalComponent modalComponent = new ModalComponent();
-    private RewardsAccountComponent rewardsAccountComponent = new RewardsAccountComponent();
+    private ButtonComponent buttonComponent = new ButtonComponent();
+    private HeaderComponent headerComponent = new HeaderComponent();
+    private FooterComponent footerComponent = new FooterComponent();
     private DiscountComponent discountComponent = new DiscountComponent();
-    private CountrySelectorComponent countrySelectorComponent = new CountrySelectorComponent();
+    private CollapserComponent collapserComponent = new CollapserComponent();
+    private RadioListComponent radioListComponent = new RadioListComponent();
+    private BreadcrumbComponent breadcrumbWidget = new BreadcrumbComponent();
+    private SignInFormComponent signInFormComponent = new SignInFormComponent();
+    private PayPalWellComponent payPalWellComponent = new PayPalWellComponent();
+    private CheckboxRowComponent checkboxRowComponent = new CheckboxRowComponent();
     private ProductListComponent productListComponent = new ProductListComponent();
-    private NoteComponent noteComponent = new NoteComponent();
-
-    //private static Log log = LogFactory.getLog(CheckoutSteps.class.getSimpleName());
+    private AddressFormComponent addressFormComponent = new AddressFormComponent();
+    private ErrorMessageComponent errorMessageComponent = new ErrorMessageComponent();
+    private PaymentTypesComponent paymentTypesComponent = new PaymentTypesComponent();
+    private RewardSummaryComponent rewardSummaryComponent = new RewardSummaryComponent();
+    private AddressDisplayComponent addressDisplayComponent = new AddressDisplayComponent();
+    private CreditCardFormComponent creditCardFormComponent = new CreditCardFormComponent();
+    private RewardsAccountComponent rewardsAccountComponent = new RewardsAccountComponent();
+    private ShippingOptionsComponent shippingOptionsComponent = new ShippingOptionsComponent();
+    private CountrySelectorComponent countrySelectorComponent = new CountrySelectorComponent();
+    private AddressVerificationComponent addressVerificationComponent = new AddressVerificationComponent();
 
 
     @And("^user chooses \"([^\"]*)\" title$")
     public void userChoosesRandomTitle(String title) {
         addressFormComponent.selectTitle(title);
         CommonFunctions.attachScreenshot("Title");
-
     }
 
     @And("^user types billing info for \"([^\"]*)\"$")
@@ -682,15 +679,6 @@ public class CheckoutSteps {
                         + pageName + ". It looks like the page has not loaded");
     }
 
-    @After
-    public void after() {
-        stopScreenVideo();
-        attachScreenVideo("data");
-
-        File webDriverEventLog = new File("logfile.log");
-        CommonFunctions.attachFile("webDriverEventLog", webDriverEventLog);
-    }
-
     @Then("^user should see \"([^\"]*)\" form$")
     public void userShouldSeeForm(String formTitle) {
         assertTrue(BaseComponent.getContainerByTitle(formTitle).isDisplayed(),
@@ -809,5 +797,12 @@ public class CheckoutSteps {
 
     }
 
+    @After
+    public void after() {
+        stopScreenVideo();
+        attachScreenVideo("data");
 
+        File webDriverEventLog = new File("logfile.log");
+        CommonFunctions.attachFile("webDriverEventLog", webDriverEventLog);
+    }
 }
