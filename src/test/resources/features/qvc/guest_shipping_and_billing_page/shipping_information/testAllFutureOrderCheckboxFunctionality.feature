@@ -10,8 +10,8 @@ Feature: GUEST - SHIPPING & BILLING PAGE - SHIPPING INFO
 
 
   # TODO: ask, if we should check this case
-  @TestCaseId("")
-  Scenario: Test field 'Zip Code'
+  @TestCaseId("102330")
+  Scenario: Test All Future Order checkbox functionality
     Given user types billing info for "qa user"
     And user types shipping info for "qa user"
     And user types "" into the "Zip Code" field of "Shipping Address" address form

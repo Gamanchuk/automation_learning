@@ -12,7 +12,7 @@
         <selenium.version>3.2.0</selenium.version>
         <selendroid.version>0.17.0</selendroid.version>
         <aspectj.version>1.8.9</aspectj.version>
-        <allure.version>1.5.2</allure.version>
+        <allure.version>1.5.4</allure.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring.config>**/**/admin-context.xml</spring.config>
@@ -90,6 +90,7 @@
             <artifactId>allure-cucumber-jvm-adaptor</artifactId>
             <version>1.6.2</version>
         </dependency>
+
         <dependency>
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-testng</artifactId>
@@ -200,6 +201,7 @@
 
 
     </dependencies>
+
 
     <build>
         <!--<pluginManagement>-->

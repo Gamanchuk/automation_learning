@@ -18,7 +18,7 @@ public class PaymentTypesComponent extends BaseComponent {
         getDriver().findElement(payment).click();
     }
 
-    public void choisePaymentType(String type) {
+    public void choicePaymentType(String type) {
         setRoot(null);
         By paymentType = By.xpath("//div[contains(@class, 'payment-methods-dropdown-item') and contains(.,'" + type + "')]");
         assertTrue(isElementVisible(paymentType), "Payment type '" + type + "'  doesn't present on page.");
