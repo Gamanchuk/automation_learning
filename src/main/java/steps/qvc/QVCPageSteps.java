@@ -9,9 +9,16 @@ import entities.pages.qvc.QVCForgotPasswordPage;
 import entities.pages.qvc.QVCMainPage;
 import entities.pages.qvc.QVCProductPage;
 import utils.CommonFunctions;
+import utils.Config;
+import utils.DriverFactory;
+import utils.HTTPLogger;
 import utils.pepboys.DataProvider;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+
 import static entities.Entity.TIMEOUT_SECONDS;
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class QVCPageSteps {
@@ -77,5 +84,18 @@ public class QVCPageSteps {
     public void userShouldBeOnForgotPasswordPage() {
         assertTrue(forgotPasswordPage.isPage(), "Forgot password page was not opened. Or page have some problems with loading");
         CommonFunctions.attachScreenshot("Forgot Password page opened");
+    }
+
+    @And("^\"([^\"]*)\" event should arrive to Analytics$")
+    public void eventShouldArriveToAnalytics(String event) throws UnsupportedEncodingException {
+        String message = HTTPLogger.getMessageForURL(Config.ANALYTICS_URL);
+
+        assertTrue(message != null, "Log message for " + Config.ANALYTICS_URL + " not found");
+        assertEquals(HTTPLogger.getEndPoint(HTTPLogger.getURLFromMessage(message)), event, "Unexpected event");
+
+        String puParam = HTTPLogger.getRequestParameter(HTTPLogger.getURLFromMessage(message), "pu");
+        puParam = URLDecoder.decode(puParam, "UTF-8");
+
+        assertEquals(puParam, DriverFactory.getDriver().getCurrentUrl(), "Unexpected event: " + event);
     }
 }
