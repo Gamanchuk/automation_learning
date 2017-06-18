@@ -12,7 +12,7 @@
         <selenium.version>3.2.0</selenium.version>
         <selendroid.version>0.17.0</selendroid.version>
         <aspectj.version>1.8.9</aspectj.version>
-        <allure.version>1.5.2</allure.version>
+        <allure.version>1.5.4</allure.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring.config>**/**/admin-context.xml</spring.config>
@@ -90,6 +90,7 @@
             <artifactId>allure-cucumber-jvm-adaptor</artifactId>
             <version>1.6.2</version>
         </dependency>
+
         <dependency>
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-testng</artifactId>
@@ -200,6 +201,7 @@
 
 
     </dependencies>
+
 
     <build>
         <!--<pluginManagement>-->
@@ -412,10 +414,53 @@
             <id>suite-qvc-debug</id>
             <properties>
                 <testng.suite>${basedir}/src/test/resources/testsuites/qvc/qvc_debug.xml</testng.suite>
-                <suite.id>93</suite.id>
+                <suite.id>359</suite.id>
             </properties>
         </profile>
 
+        <profile>
+            <id>suite-qvc-guestCheckout</id>
+            <properties>
+                <testng.suite>${basedir}/src/test/resources/testsuites/qvc/qvc_guest_checkout.xml</testng.suite>
+                <suite.id>359</suite.id>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>suite-qvc-happyPath</id>
+            <properties>
+                <testng.suite>${basedir}/src/test/resources/testsuites/qvc/qvc_happyPath.xml</testng.suite>
+                <suite.id>359</suite.id>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>suite-qvc-guestShippingBillingPage</id>
+            <properties>
+                <testng.suite>${basedir}/src/test/resources/testsuites/qvc/qvc_guest_shipping_billing_page.xml
+                </testng.suite>
+                <suite.id>359</suite.id>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>suite-qvc-guestShippingDetailsPage</id>
+            <properties>
+                <testng.suite>${basedir}/src/test/resources/testsuites/qvc/qvc_guest_shipping_details_page.xml
+                </testng.suite>
+                <suite.id>359</suite.id>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>suite-qvc-signInPage</id>
+            <properties>
+                <testng.suite>
+                    ${basedir}/src/test/resources/testsuites/qvc/qvc_sign_in_page.xml
+                </testng.suite>
+                <suite.id>359</suite.id>
+            </properties>
+        </profile>
 
         <!--environments-->
         <profile>
@@ -470,6 +515,12 @@
             </properties>
         </profile>
         <profile>
+            <id>device-Motorola</id>
+            <properties>
+                <props.file.name>motorola</props.file.name>
+            </properties>
+        </profile>
+        <profile>
             <id>device-iPhone-7plus</id>
             <properties>
                 <props.file.name>iphone7plus</props.file.name>
@@ -509,6 +560,12 @@
             <id>device-GalaxyS6</id>
             <properties>
                 <props.file.name>galaxy_s6</props.file.name>
+            </properties>
+        </profile>
+        <profile>
+            <id>device-GalaxyS7</id>
+            <properties>
+                <props.file.name>galaxy_s7</props.file.name>
             </properties>
         </profile>
         <profile>

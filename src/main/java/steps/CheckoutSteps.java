@@ -1,13 +1,17 @@
-package steps.pepboys;
+package steps;
 
 import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import entities.components.*;
-import entities.pages.pepboys.*;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import entities.pages.PaymentAndReviewCheckoutPage;
+import entities.pages.ThankYouPage;
+import entities.pages.pepboys.PepBoysLoginPage;
+import entities.pages.pepboys.PepBoysMainPage;
+import entities.pages.pepboys.PepBoysMyAccountPage;
+import entities.pages.pepboys.PepBoysTrackingPage;
+import org.apache.commons.lang.RandomStringUtils;
 import utils.CommonFunctions;
 import utils.Config;
 import utils.GoogleSheetsHelper;
@@ -22,45 +26,88 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 import static utils.CommonFunctions.attachScreenVideo;
 import static utils.CommonFunctions.stopScreenVideo;
 
-public class PepBoysCheckoutSteps {
+public class CheckoutSteps {
 
-    private PepBoysThankYouPage thankYouPage = new PepBoysThankYouPage();
-    private PepBoysPaymentAndReviewCheckoutPage paymentAndReviewPage = new PepBoysPaymentAndReviewCheckoutPage();
+    private ThankYouPage thankYouPage = new ThankYouPage();
+    private PaymentAndReviewCheckoutPage paymentAndReviewPage = new PaymentAndReviewCheckoutPage();
 
-    private AddressFormComponent addressFormComponent = new AddressFormComponent();
-    private AddressDisplayComponent addressDisplayComponent = new AddressDisplayComponent();
-    private AddressVerificationComponent addressVerificationComponent = new AddressVerificationComponent();
+    private NoteComponent noteComponent = new NoteComponent();
     private EmailComponent emailComponent = new EmailComponent();
-    private ButtonComponent buttonComponent = new ButtonComponent();
-    private ErrorMessageComponent errorMessageComponent = new ErrorMessageComponent();
-    private BreadcrumbComponent breadcrumbWidget = new BreadcrumbComponent();
-    private ShippingOptionsComponent shippingOptionsComponent = new ShippingOptionsComponent();
-    private CreditCardFormComponent creditCardFormComponent = new CreditCardFormComponent();
-    private HeaderComponent headerComponent = new HeaderComponent();
-    private FooterComponent footerComponent = new FooterComponent();
-    private SignInFormComponent signInFormComponent = new SignInFormComponent();
-    private RadioListComponent radioListComponent = new RadioListComponent();
-    private PaymentTypesComponent paymentTypesComponent = new PaymentTypesComponent();
-    private PayPalWellComponent payPalWellComponent = new PayPalWellComponent();
-    private CollapserComponent collapserComponent = new CollapserComponent();
-    private CheckboxRowComponent checkboxRowComponent = new CheckboxRowComponent();
-    private RewardSummaryComponent rewardSummaryComponent = new RewardSummaryComponent();
     private TitleComponent titleComponent = new TitleComponent();
     private ModalComponent modalComponent = new ModalComponent();
-    private RewardsAccountComponent rewardsAccountComponent = new RewardsAccountComponent();
+    private ButtonComponent buttonComponent = new ButtonComponent();
+    private HeaderComponent headerComponent = new HeaderComponent();
+    private FooterComponent footerComponent = new FooterComponent();
     private DiscountComponent discountComponent = new DiscountComponent();
+    private CollapserComponent collapserComponent = new CollapserComponent();
+    private RadioListComponent radioListComponent = new RadioListComponent();
+    private BreadcrumbComponent breadcrumbWidget = new BreadcrumbComponent();
+    private SignInFormComponent signInFormComponent = new SignInFormComponent();
+    private PayPalWellComponent payPalWellComponent = new PayPalWellComponent();
+    private CheckboxRowComponent checkboxRowComponent = new CheckboxRowComponent();
+    private ProductListComponent productListComponent = new ProductListComponent();
+    private AddressFormComponent addressFormComponent = new AddressFormComponent();
+    private ErrorMessageComponent errorMessageComponent = new ErrorMessageComponent();
+    private PaymentTypesComponent paymentTypesComponent = new PaymentTypesComponent();
+    private RewardSummaryComponent rewardSummaryComponent = new RewardSummaryComponent();
+    private AddressDisplayComponent addressDisplayComponent = new AddressDisplayComponent();
+    private CreditCardFormComponent creditCardFormComponent = new CreditCardFormComponent();
+    private RewardsAccountComponent rewardsAccountComponent = new RewardsAccountComponent();
+    private ShippingOptionsComponent shippingOptionsComponent = new ShippingOptionsComponent();
+    private CountrySelectorComponent countrySelectorComponent = new CountrySelectorComponent();
+    private AddressVerificationComponent addressVerificationComponent = new AddressVerificationComponent();
 
-    private PepBoysThankYouPage pepBoysThankYouPage = new PepBoysThankYouPage();
-    private static Log log = LogFactory.getLog(PepBoysCheckoutSteps.class.getSimpleName());
+
+    @And("^user chooses \"([^\"]*)\" title$")
+    public void userChoosesRandomTitle(String title) {
+        addressFormComponent.selectTitle(title);
+        CommonFunctions.attachScreenshot("Title");
+    }
 
     @And("^user types billing info for \"([^\"]*)\"$")
     public void typesBillingInfoFor(String userName) {
-        fillBillingInfo(userName, true, true);
+        fillBillingInfo(userName, true, true, false);
+    }
+
+    @And("^user types billing info for \"([^\"]*)\" without email$")
+    public void userTypesBillingInfoForWithoutEmail(String userName) {
+        fillBillingInfo(userName, true, false, false);
+
+    }
+
+    @And("^user types manually billing info for \"([^\"]*)\" without email$")
+    public void userTypesManuallyBillingInfoForWithoutEmail(String userName) {
+        fillBillingInfo(userName, false, false, false);
+    }
+
+    @And("^user types shipping address for \"([^\"]*)\"$")
+    public void userTypesShippingInfoForWithoutPhone(String userName) {
+        checkboxRowComponent.check("Yes, shipping address and billing address are the same", false);
+        fillShippingAddress(userName, true);
+        CommonFunctions.attachScreenshot("Shipping address form");
+    }
+
+    @And("^user types manually shipping address for \"([^\"]*)\"$")
+    public void userTypesManuallyShippingInfoForWithoutPhone(String userName) {
+        checkboxRowComponent.check("Yes, shipping address and billing address are the same", false);
+        fillShippingAddress(userName, false);
+        CommonFunctions.attachScreenshot("Shipping address form");
+    }
+
+    @Given("^user types manually shipping info for \"([^\"]*)\"$")
+    public void userTypesManuallyShippingInfoFor(String userName) {
+        checkboxRowComponent.check("Yes, shipping address and billing address are the same", false);
+        fillShippingAddress(userName, false);
+        CommonFunctions.attachScreenshot("Shipping address form");
+    }
+
+    @And("^user types manually international billing info for \"([^\"]*)\" without email$")
+    public void userTypesManuallyInternationalBillingInfoForWithoutEmail(String userName) {
+        fillBillingInfo(userName, false, false, false);
     }
 
     @And("^user types customer info for \"([^\"]*)\"$")
@@ -75,7 +122,7 @@ public class PepBoysCheckoutSteps {
 
     @And("^user types billing info for \"([^\"]*)\" and checks email$")
     public void typesBillingInfoForUserAndChecksEmail(String userName) {
-        fillBillingInfo(userName, true, false);
+        fillBillingInfo(userName, true, false, true);
     }
 
     @And("^user types сustomer info for \"([^\"]*)\" and checks email$")
@@ -85,12 +132,12 @@ public class PepBoysCheckoutSteps {
 
     @And("^user types manually billing info for \"([^\"]*)\" and checks email$")
     public void userTypesManuallyBillingInfoForAndChecksEmail(String userName) {
-        fillBillingInfo(userName, false, false);
+        fillBillingInfo(userName, false, false, true);
     }
 
     @Given("^user types manually billing info for \"([^\"]*)\"$")
     public void userTypesManuallyBillingInfoFor(String userName) {
-        fillBillingInfo(userName, false, true);
+        fillBillingInfo(userName, false, true, false);
     }
 
     @Given("^user types manually customer info for \"([^\"]*)\"$")
@@ -163,6 +210,7 @@ public class PepBoysCheckoutSteps {
         );
     }
 
+    @SuppressWarnings("unused")
     @And("^presses the \"([^\"]*)\" button$")
     public void pressesTheButton(String confirmationMethod) {
         buttonComponent.javascriptScroll(200);
@@ -183,6 +231,27 @@ public class PepBoysCheckoutSteps {
         CommonFunctions.attachScreenshot("Shipping method");
     }
 
+
+    @And("^user remove product$")
+    public void userRemoveProduct() {
+        assertTrue(radioListComponent.exists(), "Delivery Method Drop-Down doesn't exist");
+        productListComponent.removeProduct();
+        CommonFunctions.attachScreenshot("Remove product");
+    }
+
+    @And("^chooses \"([^\"]*)\" item quantity$")
+    public void choosesItemQuantity(String quantity) {
+        assertTrue(radioListComponent.exists(), "Item quantity Drop-Down doesn't exist");
+        radioListComponent.select(quantity);
+        CommonFunctions.attachScreenshot("Change item quantity: " + quantity);
+    }
+
+    @And("^chooses \"([^\"]*)\" country$")
+    public void choosesCountry(String country) {
+        countrySelectorComponent.select(country);
+        CommonFunctions.attachScreenshot("Country selected: " + country);
+    }
+
     @And("^uses \"([^\"]*)\" card for payment$")
     public void usesCardForPayment(String cardName) {
         CreditCard card = DataProvider.getCard(cardName);
@@ -197,17 +266,31 @@ public class PepBoysCheckoutSteps {
         TestGlobalsManager.setTestGlobal("CARDINFO", card.getName() + " - " + card.getNumber());
     }
 
+    @And("^uses saved \"([^\"]*)\" card for payment$")
+    public void usesSavedCardForPayment(String cardName) {
+        CreditCard card = DataProvider.getCard(cardName);
+        CommonFunctions.sleep(2000);
+
+        //Select card uses 4 last symbols
+        radioListComponent.select(card.getSecureCardData());
+        creditCardFormComponent.inputValueIntoField(card.getCvv(), "CVV");
+
+        CommonFunctions.attachScreenshot("Card selected");
+        TestGlobalsManager.setTestGlobal("CARDHOLDER", card.getCardholderName());
+        TestGlobalsManager.setTestGlobal("CARDINFO", card.getName() + " - " + card.getNumber());
+    }
+
     @Then("^user should be on thank you page$")
     public void userShouldBeOnThankYouPage() {
         assertTrue(thankYouPage.isOnThankYouPage(), "User is not on \"Thank You\" page");
-        assertTrue(pepBoysThankYouPage.isCollapsed(), "Order collapser not collapsed");
-        pepBoysThankYouPage.openCollapser();
+        assertTrue(thankYouPage.isCollapsed(), "Order collapser not collapsed");
+        thankYouPage.openCollapser();
         CommonFunctions.attachScreenshot("Thank You Page");
 
         String project = Config.SITE_NAME;
 
 
-        if (project.equals("pepboys-stage") || project.equals("pepboys-prod")) {
+        if (project.equals("pepboys-stage") || project.equals("pepboys-prod") || project.equals("pepboys-qcv")) {
 
             String orderNumber = thankYouPage.getOrder();
 
@@ -223,7 +306,7 @@ public class PepBoysCheckoutSteps {
     public void userPressesTheRescheduleLink() {
         PepBoysTrackingPage trackingPage = new PepBoysTrackingPage();
         PepBoysMyAccountPage myAccountPage = new PepBoysMyAccountPage();
-        pepBoysThankYouPage.clickOnReschedule();
+        thankYouPage.clickOnReschedule();
         CommonFunctions.attachScreenshot("Click on Reschedule Link");
 
         if (TestGlobalsManager.getTestGlobal("authorised") != null) {
@@ -293,7 +376,7 @@ public class PepBoysCheckoutSteps {
     public void usesForPayment(String type) {
         paymentTypesComponent.purchasePayment();
         CommonFunctions.attachScreenshot("Payment types");
-        paymentTypesComponent.choisePaymentType(type);
+        paymentTypesComponent.choicePaymentType(type);
     }
 
     @Given("^user types \"([^\"]*)\" into the \"([^\"]*)\" field of \"([^\"]*)\" address form$")
@@ -311,6 +394,7 @@ public class PepBoysCheckoutSteps {
 
     @And("^user presses \"([^\"]*)\" breadcrumb tab$")
     public void userPressesBreadcrumbTab(String breadcrumb) {
+        CommonFunctions.sleep(1500);
         breadcrumbWidget.clickBreadcrumb(breadcrumb);
         CommonFunctions.attachScreenshot("Click Breadcrumb: " + breadcrumb);
     }
@@ -409,42 +493,28 @@ public class PepBoysCheckoutSteps {
         payPalWellComponent.checkPayPalAccount(DataProvider.getUser(userName).getPaypalEmail());
     }
 
-    private void fillShipping(String userName, boolean autoFill) {
-        addressFormComponent.setRoot(BaseComponent.getContainerByTitle("Shipping Address"));
-        BillingUser user = DataProvider.getUser(userName);
-        addressFormComponent.fillAddressForm(
-                user.getFullName(),
-                user.getFullAddress(),
-                user.getCityInfo(),
-                user.getCity(),
-                user.getApartment(),
-                user.getPhone(),
-                user.getState(),
-                user.getZipCode(),
-                autoFill
-        );
-        CommonFunctions.attachScreenshot("Shipping info");
-    }
-
-    @Given("^user types manually shipping info for \"([^\"]*)\"$")
-    public void userTypesManuallyShippingInfoFor(String userName) {
-        checkboxRowComponent.check("Yes, shipping address and billing address are the same", false);
-        fillShippingInfo(userName, false);
-    }
-
     @And("^unset checkbox \"([^\"]*)\"$")
     public void unsetCheckbox(String label) {
         checkboxRowComponent.check(label, false);
     }
 
     @Given("^user types shipping info for \"([^\"]*)\"$")
-    public void userTypesShippingInfoFor(String userName) throws Throwable {
+    public void userTypesShippingInfoFor(String userName) {
         checkboxRowComponent.check("Yes, shipping address and billing address are the same", false);
         fillShippingInfo(userName, true);
     }
 
+    @And("^user types domestics shipping info for \"([^\"]*)\" without phone$")
+    public void userTypesDomesticsShippingInfoFor(String userName) {
+        fillShippingInfo(userName, true);
+    }
 
-    private void fillBillingInfo(String userName, boolean autoFill, boolean fillEmail) {
+    @Given("^user types international shipping info for \"([^\"]*)\"$")
+    public void userTypesInternationalShippingInfoFor(String userName) {
+        fillShippingInfo(userName, true);
+    }
+
+    private void fillBillingInfo(String userName, boolean autoFill, boolean fillEmail, boolean checkEmail) {
         BillingUser user = DataProvider.getUser(userName);
 
         addressFormComponent.setRoot(BaseComponent.getContainerByTitle("Billing Address"));
@@ -452,7 +522,9 @@ public class PepBoysCheckoutSteps {
 
         if (fillEmail) {
             emailComponent.fillEmailField(user.getEmail());
-        } else {
+        }
+
+        if (checkEmail) {
             assertEquals(user.getEmail(), emailComponent.getEmailDisplayValue(), "Unexpected email was used");
         }
 
@@ -481,6 +553,22 @@ public class PepBoysCheckoutSteps {
         CommonFunctions.attachScreenshot("Shipping info");
     }
 
+    private void fillShippingAddress(String userName, boolean autoFill) {
+        BillingUser user = DataProvider.getUser(userName);
+        addressFormComponent.setRoot(BaseComponent.getContainerByTitle("Shipping Address"));
+        addressFormComponent.fillAddress(
+                user.getFullName(),
+                user.getFullAddress(),
+                user.getCityInfo(),
+                user.getCity(),
+                user.getApartment(),
+                user.getState(),
+                user.getZipCode(),
+                autoFill
+        );
+    }
+
+
     private void fillAddressForm(BillingUser user, boolean autoFill) {
         addressFormComponent.fillAddressForm(
                 user.getFullName(),
@@ -497,13 +585,13 @@ public class PepBoysCheckoutSteps {
 
     @Given("^failed step$")
     public void failedStep() {
-        assertTrue(false);
+        fail("Fail for debug");
     }
 
     @Given("^user presses the logo$")
     public void userPressesTheLogo() {
-        headerComponent.pressLogoLink();
         CommonFunctions.attachScreenshot("Press the logo link");
+        headerComponent.pressLogoLink();
     }
 
     @And("^user logs out from checkout$")
@@ -523,9 +611,6 @@ public class PepBoysCheckoutSteps {
     @Given("^user checks support number with label \"([^\"]*)\" and number \"([^\"]*)\"$")
     public void userChecksSupportNumberWithLabelAndNumber(String phoneLabel, String phoneNumber) {
         footerComponent.checkPhoneNumber(phoneLabel, phoneNumber);
-        //TODO: need found solution for check text in native alert
-        //  footerComponent.pressCall();
-        //footerComponent.checkCallAlert(phoneNumber);
     }
 
     @And("^user presses the Shopping Cart icon$")
@@ -569,8 +654,15 @@ public class PepBoysCheckoutSteps {
 
     @Then("^user should be on \"([^\"]*)\" tab$")
     public void userShouldBeOnTab(String tabName) {
-        assertTrue(breadcrumbWidget.isBreadcrumbActive(tabName), "Tab " + tabName + " is not an active");
+
+        if (tabName.contains("Delivery")) {
+            assertTrue(radioListComponent.exists(), "Delivery Method Drop-Down doesn't exist");
+        } else {
+            assertTrue(breadcrumbWidget.isBreadcrumbActive(tabName), "Tab " + tabName + " is not an active");
+        }
+
         assertTrue(breadcrumbWidget.isTabActive(tabName), "Tab " + tabName + " is not an active");
+
         CommonFunctions.attachScreenshot("User on [" + tabName + "] tab");
     }
 
@@ -585,15 +677,6 @@ public class PepBoysCheckoutSteps {
         assertTrue(titleComponent.exists(pageName),
                 "Unexpected Page Title. User should be on "
                         + pageName + ". It looks like the page has not loaded");
-    }
-
-    @After
-    public void after() {
-        stopScreenVideo();
-        attachScreenVideo("data");
-
-        File webDriverEventLog = new File("logfile.log");
-        CommonFunctions.attachFile("webDriverEventLog", webDriverEventLog);
     }
 
     @Then("^user should see \"([^\"]*)\" form$")
@@ -684,7 +767,7 @@ public class PepBoysCheckoutSteps {
 
     @And("^user continue checkout as guest$")
     public void userContinueCheckoutAsGuest() {
-        signInFormComponent.fillEmail("automationQA@automationQA.com");
+        signInFormComponent.fillEmail(RandomStringUtils.randomAlphabetic(10) + "@automationQA.com");
         CommonFunctions.attachScreenshot("Checkout as guest");
     }
 
@@ -698,5 +781,28 @@ public class PepBoysCheckoutSteps {
         signInFormComponent.fillPassword(user.getPassword());
         CommonFunctions.attachScreenshot("Checkout as existing user");
 
+    }
+
+    @And("^user presses the Where do I enter my password link$")
+    public void userPressesTheWhereDoIEnterMyPasswordLink() {
+        signInFormComponent.pressWhereDoIEnterMyPassword();
+        CommonFunctions.attachScreenshot("Where do I enter my password");
+        assertEquals(signInFormComponent.getContentAboutPasswordFill(), "If you have a QVC Password, you'll enter it on the next screen. If not, you'll enter your address.");
+    }
+
+    @And("^user clicks \"([^\"]*)\" link in note$")
+    public void userClicksLinkInNote(String linkText) {
+        noteComponent.clickLink(linkText);
+        CommonFunctions.attachScreenshot(linkText);
+
+    }
+
+    @After
+    public void after() {
+        stopScreenVideo();
+        attachScreenVideo("data");
+
+        File webDriverEventLog = new File("logfile.log");
+        CommonFunctions.attachFile("webDriverEventLog", webDriverEventLog);
     }
 }

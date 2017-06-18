@@ -6,17 +6,17 @@ Feature: HAPPY PATH
     Given user adds to cart product
 
 
-  @TestCaseId("16252")
+  @TestCaseId("102219")
   Scenario: Place Order as a "Guest" with Credit Card
 
     Given user continue checkout as guest
     And presses the "Continue" button
     And user should be on "Address" tab
 
-    And user types billing info for "qa user"
+    And user types billing info for "qa user" without email
     And presses the "Continue" button
 
-    And chooses "UPS Ground: $4.47" shipping method
+    And user should be on "Delivery" tab
     And presses the "Continue" button
 
     And uses "visa" card for payment
@@ -26,4 +26,3 @@ Feature: HAPPY PATH
     And presses the "Place Order" button
 
     Then user should be on thank you page
-    #TODO: finish this case after meeting; Now we have problem with credit cards

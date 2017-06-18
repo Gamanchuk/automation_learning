@@ -71,7 +71,7 @@ public abstract class Entity {
 
     public boolean isElementVisible(By element, int timeout) {
         log.info("Checking if element: '" + element + "' visible");
-        if(this.root == null) {
+        if (this.root == null) {
             return this.waitForCondition(ExpectedConditions.visibilityOfElementLocated(element), timeout);
         } else {
             return isElementVisible(element, this.root, timeout);
@@ -84,7 +84,7 @@ public abstract class Entity {
 
     public boolean isElementPresent(By element, int timeout) {
         log.info("Checking if element: '" + element + "' presence");
-        if(this.root == null) {
+        if (this.root == null) {
             return this.waitForCondition(ExpectedConditions.presenceOfElementLocated(element), timeout);
         } else {
             return isElementPresent(element, this.root, timeout);
@@ -113,7 +113,7 @@ public abstract class Entity {
 
     public void waitForElementVisible(By element, int timeout) {
         log.info("Waiting " + timeout + "s for element: '" + element + "' visible");
-        if(root == null) {
+        if (root == null) {
             new WebDriverWait(driver, timeout)
                     .until(ExpectedConditions.visibilityOfElementLocated(element));
         } else {
@@ -133,7 +133,7 @@ public abstract class Entity {
 
     public void waitForElementPresence(By element, int timeout) {
         log.info("Waiting " + timeout + "s for element: '" + element + "' presence");
-        if(this.root == null) {
+        if (this.root == null) {
             new WebDriverWait(driver, TIMEOUT_SECONDS)
                     .until(ExpectedConditions.presenceOfElementLocated(element));
         } else {
@@ -167,7 +167,7 @@ public abstract class Entity {
         int timeout_milis = timeout * 1000;
         for (int delay = 0; delay < timeout_milis; delay += 500) {
             try {
-                if(parent.findElement(element).isDisplayed() && parent.findElement(element).isEnabled()) {
+                if (parent.findElement(element).isDisplayed() && parent.findElement(element).isEnabled()) {
                     return true;
                 }
             } catch (Exception e) {
@@ -182,7 +182,7 @@ public abstract class Entity {
     }
 
     public void waitForElementVisible(By element, WebElement parent, int timeout) {
-        if(!isElementVisible(element, parent, timeout)) {
+        if (!isElementVisible(element, parent, timeout)) {
             throw new NoSuchElementException("Failed to find element: " + element + " for " + timeout + "s");
         }
     }
@@ -213,7 +213,7 @@ public abstract class Entity {
     }
 
     public void waitForElementPresence(By element, WebElement parent, int timeout) {
-        if(!isElementPresent(element, parent, timeout)) {
+        if (!isElementPresent(element, parent, timeout)) {
             throw new NoSuchElementException("Failed to find element: " + element + " for " + TIMEOUT_SECONDS + "s");
         }
     }
@@ -315,15 +315,46 @@ public abstract class Entity {
         });
     }
 
-    protected void waitForRedirect(String url) {
-        new WebDriverWait(driver, TIMEOUT_SECONDS).until(new ExpectedCondition<Boolean>() {
-            public Boolean apply(WebDriver driver) {
+//    private void waitForRedirect(String url) {
+//         new WebDriverWait(driver, TIMEOUT_SECONDS).until(new ExpectedCondition<Boolean>() {
+//            public Boolean apply(WebDriver driver) {
+//                String currentUrl = driver.getCurrentUrl();
+//                boolean result = currentUrl.equals(url);
+//                log.info("Browser url changed: " + result + ". Current url: " + currentUrl);
+//                return result;
+//            }
+//
+//        });
+//    }
+
+
+    private boolean waitForRedirect(String url, int timeout) {
+        log.info("Waiting " + timeout + "s for URL changed");
+
+        int timeout_milis = timeout * 1000;
+        for (int delay = 0; delay < timeout_milis; delay += 500) {
+            try {
                 String currentUrl = driver.getCurrentUrl();
                 boolean result = currentUrl.equals(url);
                 log.info("Browser url changed: " + result + ". Current url: " + currentUrl);
-                return result;
+
+                if (!result) throw new Exception();
+                else return true;
+
+            } catch (Exception e) {
+                driver.manage().timeouts().implicitlyWait(delay, TimeUnit.MILLISECONDS);
             }
-        });
+        }
+        return false;
+
+    }
+
+    protected boolean waitForRedirect(String url) {
+        return this.waitForRedirect(url, TIMEOUT_SECONDS);
+    }
+
+    protected boolean isUrlChanged(String url, int timeout) {
+        return this.waitForRedirect(url, TIMEOUT_SECONDS);
     }
 
     public void focusOut() {
@@ -352,6 +383,7 @@ public abstract class Entity {
      */
     public void javascriptScroll(int ynum) {
         ((JavascriptExecutor) getDriver()).executeScript("window.scrollBy(0," + ynum + ")", "");
+        CommonFunctions.sleep(200);
     }
 
     public void javascriptScroll(WebElement element) {
@@ -379,7 +411,8 @@ public abstract class Entity {
             new WebDriverWait(driver, timeout).until(webElementExpectedCondition);
             return true;
         } catch (TimeoutException e) {
-            log.info("Condition failed!");
+            log.error("Condition failed!");
+            log.error(e.getMessage());
             return false;
         }
     }

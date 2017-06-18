@@ -106,7 +106,7 @@ public class DataProvider {
         );
     }
 
-    public static String getRandomItemId() {
+    public static String getRandomItem() {
         List<String> items = getFileStrings(System.getProperty("user.dir") + "/src/main/resources/profiles/sites/" + Config.SITE_NAME + "/items.txt");
         int itemNumber = ThreadLocalRandom.current().nextInt(0, items.size());
         return items.get(itemNumber);
