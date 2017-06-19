@@ -60,9 +60,6 @@ public class DriverFactory {
             String deviceUdid = Config.DEVICE_UID;
             String iproxyPort = Config.IPROXY_PORT;
 
-            String adbReconnect = String.format("-s %s reconnect", deviceUdid);
-            CommonFunctions.runShell("adb", adbReconnect);
-
             try {
                 if (Boolean.valueOf(System.getProperty("use.desktop.browser"))) {
                     initChromeDriver();
@@ -110,6 +107,9 @@ public class DriverFactory {
                     }
 
                     if (Config.PLATFORM_NAME.equals(ANDROID)) {
+
+                        String adbReconnect = String.format("-s %s reconnect", deviceUdid);
+                        CommonFunctions.runShell("adb", adbReconnect);
 
                         ChromeOptions options = new ChromeOptions();
                         options.addArguments("disable-translate");

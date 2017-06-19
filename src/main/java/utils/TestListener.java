@@ -69,7 +69,7 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
         String dom = CommonFunctions.attachDomThree(DriverFactory.getDriver().getPageSource());
         String errorMessage = String.valueOf(iTestResult.getThrowable().getMessage());
 
-        log.info("Test \"" + iTestResult.getName() + "\" failed in "
+        log.info("Test \"" + caseName + "\" failed in "
                 + countDuration(iTestResult.getEndMillis() - iTestResult.getStartMillis()));
 
         if (Boolean.valueOf(System.getProperty("projectTracking"))) {
