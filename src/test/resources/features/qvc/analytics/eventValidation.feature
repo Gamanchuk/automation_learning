@@ -1,4 +1,4 @@
-@qvc @debug
+@qvc @Ignored @debug
 
 Feature: HAPPY PATH
 

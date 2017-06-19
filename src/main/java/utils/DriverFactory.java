@@ -60,6 +60,9 @@ public class DriverFactory {
             String deviceUdid = Config.DEVICE_UID;
             String iproxyPort = Config.IPROXY_PORT;
 
+            String adbReconnect = String.format("-s %s reconnect", deviceUdid);
+            CommonFunctions.runShell("adb", adbReconnect);
+
             try {
                 if (Boolean.valueOf(System.getProperty("use.desktop.browser"))) {
                     initChromeDriver();
@@ -93,7 +96,7 @@ public class DriverFactory {
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.XCODE_ORG_ID, "Y95G5M3Q84");
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.XCODE_SIGNING_ID, "iPhone Developer");
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.UPDATE_WDA_BUNDLEID, "com.moovweb.WebDriverAgentRunner");
-                      
+
                         desiredCapabilities.setCapability("webkitResponseTimeout", 30000);
                         desiredCapabilities.setCapability("clearSystemFiles", true);
 
@@ -218,7 +221,7 @@ public class DriverFactory {
 
     /**
      * Function for creating ios_webkit_debug_proxy service
-     *
+     * <p>
      * The ios_webkit_debug_proxy (aka iwdp) proxies requests from usbmuxd daemon over a websocket connection,
      * allowing developers to send commands to MobileSafari and UIWebViews on real and simulated iOS devices.
      *
