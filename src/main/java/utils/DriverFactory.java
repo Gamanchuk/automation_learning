@@ -116,7 +116,6 @@ public class DriverFactory {
                         desiredCapabilities.setCapability(ChromeOptions.CAPABILITY, options);
 
                         desiredCapabilities.setCapability(AndroidMobileCapabilityType.UNICODE_KEYBOARD, true);
-                        desiredCapabilities.setCapability(AndroidMobileCapabilityType.ADB_PORT, Config.ADB_PORT);
                         desiredCapabilities.setCapability(AndroidMobileCapabilityType.RESET_KEYBOARD, true);
                     }
 
