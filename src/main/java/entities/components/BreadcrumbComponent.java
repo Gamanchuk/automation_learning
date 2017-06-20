@@ -38,7 +38,7 @@ public class BreadcrumbComponent extends BaseComponent {
 
         waitForAjax();
 
-        return isElementVisible(By.xpath(
+        return isElementPresent(By.xpath(
                 "//a[contains(@class, 'breadcrumb') and contains(@class, 'active') and text()='" + breadcrumb + "']"));
     }
 
