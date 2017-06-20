@@ -6,7 +6,7 @@ Feature: GUEST - REVIEW PAGE - HEADER & FOOTER
     Given user adds to cart product
 
 
-  @TestCaseId("102380")
+  @TestCaseId("102374")
   Scenario: Check Cart Icon
 
     Given user continue checkout as guest

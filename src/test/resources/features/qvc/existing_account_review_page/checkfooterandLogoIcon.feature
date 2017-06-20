@@ -1,4 +1,4 @@
-@qvc @debug
+@qvc
 
 Feature: EXISTING ACCOUNT - REVIEW PAGE - HEADER & FOOTER
 
