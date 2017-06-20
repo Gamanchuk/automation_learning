@@ -62,6 +62,27 @@ public class CheckoutSteps {
     private AddressVerificationComponent addressVerificationComponent = new AddressVerificationComponent();
 
 
+    @Given("^user fills email field with \"([^\"]*)\"$")
+    public void userFillsEmailFieldWith(String email) {
+        signInFormComponent.fillEmail(email);
+    }
+
+    @Then("^user should see password field$")
+    public void userShouldSeePasswordField() throws Throwable {
+        assertTrue(signInFormComponent.isPasswordFieldVisible(), "Password field was not displayed");
+        CommonFunctions.attachScreenshot("Password field displayed");
+    }
+
+    @And("^user fills password field with \"([^\"]*)\"$")
+    public void userFillsPasswordFieldWith(String password) throws Throwable {
+        signInFormComponent.fillPassword(password);
+    }
+
+    @And("^user checks \"([^\"]*)\" checkbox$")
+    public void userChecksCheckbox(String label) {
+        checkboxRowComponent.check(label, true);
+    }
+
     @And("^user chooses \"([^\"]*)\" title$")
     public void userChoosesRandomTitle(String title) {
         addressFormComponent.selectTitle(title);
