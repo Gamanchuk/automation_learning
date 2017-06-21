@@ -453,6 +453,16 @@
         </profile>
 
         <profile>
+            <id>suite-qvc-existingAccountShippingBillingPage</id>
+            <properties>
+                <testng.suite>
+                    ${basedir}/src/test/resources/testsuites/qvc/qvc_existing_account_shipping_billing_page.xml
+                </testng.suite>
+                <suite.id>359</suite.id>
+            </properties>
+        </profile>
+
+        <profile>
             <id>suite-qvc-guestReviewPage</id>
             <properties>
                 <testng.suite>${basedir}/src/test/resources/testsuites/qvc/guest_review_page.xml
