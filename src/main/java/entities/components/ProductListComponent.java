@@ -9,5 +9,6 @@ public class ProductListComponent extends BaseComponent {
         getDriver().findElement(By.xpath("//a[text()='Remove']")).click();
         waitForAjax();
         buttonComponent.clickButton("Yes");
+        waitForAjax();
     }
 }

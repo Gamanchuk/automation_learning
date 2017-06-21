@@ -1,4 +1,4 @@
-@qvc @Ignored @debug
+@qvc @Ignored
 
 Feature: HAPPY PATH
 
@@ -29,4 +29,3 @@ Feature: HAPPY PATH
 #    And presses the "Place Order" button
 #
 #    Then user should be on thank you page
-    #TODO: finish this case after meeting; Now we have problem with credit cards
