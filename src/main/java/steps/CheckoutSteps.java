@@ -684,14 +684,15 @@ public class CheckoutSteps {
 
     @Then("^user should be on \"([^\"]*)\" tab$")
     public void userShouldBeOnTab(String tabName) {
-//        if (tabName.contains("Delivery")) {
-//            assertTrue(radioListComponent.exists(), "Delivery Method Drop-Down doesn't exist");
-//        } else {
-//            assertTrue(breadcrumbWidget.isBreadcrumbActive(tabName), "Tab " + tabName + " is not an active");
-//        }
         assertTrue(breadcrumbWidget.active(tabName), "Tab " + tabName + " is not an active");
-
-        CommonFunctions.attachScreenshot("User on [" + tabName + "] tab");
+     //   if (tabName.contains("Delivery")) {
+     //       assertTrue(radioListComponent.exists(), "Delivery Method Drop-Down doesn't exist");
+       // } else {
+         //   assertTrue(breadcrumbWidget.isBreadcrumbActive(tabName), "Tab " + tabName + " is not an active");
+       // }
+        //assertTrue(breadcrumbWidget.isTabActive(tabName), "Tab " + tabName + " is not an active");
+        
+      CommonFunctions.attachScreenshot("User on [" + tabName + "] tab");
     }
 
     @And("^user checks \"([^\"]*)\" shipping method$")

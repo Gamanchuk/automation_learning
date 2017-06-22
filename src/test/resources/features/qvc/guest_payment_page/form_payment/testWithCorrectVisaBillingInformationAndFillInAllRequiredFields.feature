@@ -1,6 +1,6 @@
 @qvc
 
-Feature: GUEST - REVIEW & PLACE ORDER PAGE
+Feature: GUEST - PAYMENT PAGE
 
   Background: Add product to card and process to checkout
     Given user adds to cart product

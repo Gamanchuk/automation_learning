@@ -17,7 +17,10 @@ Feature: GUEST - REVIEW PAGE - HEADER & FOOTER
     And user should be on "Review" tab
     Then user should see "Billing Address" form
 
-  @TestCaseId("")
+  @TestCaseId("102371")
+  @TestCaseId("102372")
+  @TestCaseId("102373")
+  @TestCaseId("102375")
   Scenario: Check Footer and Logo Icon
 
     Given user checks support number with label "1-888-345-5788" and number "1-888-345-5788"

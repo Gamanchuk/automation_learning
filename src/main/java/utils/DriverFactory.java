@@ -60,6 +60,7 @@ public class DriverFactory {
             String deviceUdid = Config.DEVICE_UID;
             String iproxyPort = Config.IPROXY_PORT;
 
+
             try {
                 if (Boolean.valueOf(System.getProperty("use.desktop.browser"))) {
                     initChromeDriver();
