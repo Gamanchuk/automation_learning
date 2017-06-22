@@ -107,10 +107,6 @@ public class DriverFactory {
                     }
 
                     if (Config.PLATFORM_NAME.equals(ANDROID)) {
-
-                        String adbReconnect = String.format("-s %s reconnect", deviceUdid);
-                        CommonFunctions.runShell("adb", adbReconnect);
-
                         ChromeOptions options = new ChromeOptions();
                         options.addArguments("disable-translate");
                         desiredCapabilities.setCapability(ChromeOptions.CAPABILITY, options);
