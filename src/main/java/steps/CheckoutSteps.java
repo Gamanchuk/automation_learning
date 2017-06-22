@@ -682,6 +682,7 @@ public class CheckoutSteps {
             assertTrue(breadcrumbWidget.isBreadcrumbActive(tabName), "Tab " + tabName + " is not an active");
         }
 
+
         assertTrue(breadcrumbWidget.isTabActive(tabName), "Tab " + tabName + " is not an active");
 
         CommonFunctions.attachScreenshot("User on [" + tabName + "] tab");
