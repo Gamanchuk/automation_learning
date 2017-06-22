@@ -7,6 +7,7 @@ Feature: GUEST - BREADCRUMB
     Given user adds to cart product
 
   @TestCaseId("102317")
+  @TestCaseId("102351")
   Scenario: Breadcrumb links redirect user to correct page
 
     Given user continue checkout as guest

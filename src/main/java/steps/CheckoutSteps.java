@@ -195,6 +195,20 @@ public class CheckoutSteps {
         addressDisplayComponent.checkFieldValue("Email", user.getEmail());
     }
 
+    @Then("^user checks billing info for \"([^\"]*)\" without email$")
+    public void userChecksBillingInfoForWithoutEmail(String userName) {
+        BillingUser user = DataProvider.getUser(userName);
+        addressDisplayComponent.setRoot(BaseComponent.getContainerByTitle("Billing Address"));
+        addressDisplayComponent.checkInfo(
+                user.getFullName(),
+                user.getApartment(),
+                user.getFullAddress(),
+                user.getCity(),
+                user.getZipCode(),
+                user.getPhone()
+        );
+    }
+
     @Then("^user checks customer info for \"([^\"]*)\"$")
     public void userChecksCustomerInfoFor(String userName) {
         BillingUser user = DataProvider.getUser(userName);
@@ -213,14 +227,7 @@ public class CheckoutSteps {
     @Then("^user checks shipping info for \"([^\"]*)\"$")
     public void userChecksShippingInfoFor(String userName) {
         BillingUser user = DataProvider.getUser(userName);
-        String currentTab = breadcrumbWidget.getActiveTab();
-
-        if (currentTab.equals("Delivery Method") || currentTab.equals("Billing & Shipping")) {
-            addressDisplayComponent.setRoot(BaseComponent.getContainerByTitle("Shipping Address"));
-        } else {
-            addressDisplayComponent.setRoot(BaseComponent.getComponentByTitle("Shipping Address"));
-        }
-
+        addressFormComponent.setRoot(BaseComponent.getNextComponentByTitle("Shipping Address"));
         addressDisplayComponent.checkInfo(
                 user.getFullName(),
                 user.getApartment(),
@@ -229,6 +236,8 @@ public class CheckoutSteps {
                 user.getZipCode(),
                 user.getPhone()
         );
+
+
     }
 
     @SuppressWarnings("unused")
