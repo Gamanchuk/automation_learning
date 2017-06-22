@@ -1,19 +1,17 @@
 @qvc
 
 
-Feature: GUEST - BREADCRUMB
+Feature: EXISTING ACCOUNT - BREADCRUMB
 
   Background: Add product to card and process to checkout
     Given user adds to cart product
 
-  @TestCaseId("102039")
+  @TestCaseId("101976")
   Scenario: Breadcrumb links redirect user to correct page
 
-    Given user continue checkout as guest
+    Given user continue checkout as "qa user"
     And presses the "Continue" button
     Then user should be on "Address" tab
-
-    When user types billing info for "qa user" without email
 
     # Check from Address tab
     And user presses "Delivery" breadcrumb tab
