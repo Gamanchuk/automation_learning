@@ -93,7 +93,7 @@ public class DriverFactory {
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.XCODE_ORG_ID, "Y95G5M3Q84");
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.XCODE_SIGNING_ID, "iPhone Developer");
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.UPDATE_WDA_BUNDLEID, "com.moovweb.WebDriverAgentRunner");
-                      
+
                         desiredCapabilities.setCapability("webkitResponseTimeout", 30000);
                         desiredCapabilities.setCapability("clearSystemFiles", true);
 
@@ -107,7 +107,6 @@ public class DriverFactory {
                     }
 
                     if (Config.PLATFORM_NAME.equals(ANDROID)) {
-
                         ChromeOptions options = new ChromeOptions();
                         options.addArguments("disable-translate");
                         desiredCapabilities.setCapability(ChromeOptions.CAPABILITY, options);
@@ -218,7 +217,7 @@ public class DriverFactory {
 
     /**
      * Function for creating ios_webkit_debug_proxy service
-     *
+     * <p>
      * The ios_webkit_debug_proxy (aka iwdp) proxies requests from usbmuxd daemon over a websocket connection,
      * allowing developers to send commands to MobileSafari and UIWebViews on real and simulated iOS devices.
      *

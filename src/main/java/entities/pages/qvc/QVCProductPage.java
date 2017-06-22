@@ -21,11 +21,11 @@ public class QVCProductPage extends BasePage {
         String fullPath = BASE_URL + productUrl;
 
         getDriver().navigate().to(fullPath);
-        waitForAjax();
+        waitForDocumentReady();
 
         if (!isUrlChanged(fullPath, 5)) {
             getDriver().navigate().to(fullPath);
-            waitForAjax();
+            waitForDocumentReady();
         }
 
 
