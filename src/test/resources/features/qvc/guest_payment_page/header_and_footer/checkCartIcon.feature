@@ -11,13 +11,9 @@ Feature: GUEST - REVIEW PAGE - HEADER & FOOTER
     And presses the "Continue" button
     And user should be on "Delivery" tab
     And presses the "Continue" button
-    And user should be on "Payment" tab
-    And uses "Pay with Check / Money Order" for payment
-    And presses the "Continue" button
-    And user should be on "Review" tab
-    Then user should see "Billing Address" form
+    Then user should be on "Payment" tab
 
-  @TestCaseId("102374")
+  @TestCaseId("102349")
   Scenario: Check Cart Icon
 
     Given user presses the Shopping Cart icon

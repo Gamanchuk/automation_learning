@@ -31,7 +31,7 @@ public class AddressDisplayComponent extends BaseComponent {
         checkPhone(phone);
         checkZip(zip);
 
-        CommonFunctions.attachScreenshot("Billing info");
+        CommonFunctions.attachScreenshot("Info");
     }
 
     public void checkStreetAddress(String expectedAddress) {

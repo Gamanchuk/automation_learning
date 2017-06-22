@@ -30,8 +30,7 @@ public class CreditCardFormComponent extends BaseComponent {
         if (authorised != null && (boolean) authorised) {
             fillField(ccName, cardholderName);
         }
-
-        focusOut();
+        
         CommonFunctions.attachScreenshot("Payment details");
     }
 

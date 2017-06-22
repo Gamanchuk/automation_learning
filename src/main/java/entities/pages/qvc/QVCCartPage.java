@@ -8,7 +8,7 @@ public class QVCCartPage extends BasePage {
     private By cart = By.id("divShoppingCart");
 
     public boolean isPage() {
-        return isElementVisible(cart) && isElementPresent(cart);
+        return isElementVisible(cart, 110) && isElementPresent(cart);
 
     }
 
