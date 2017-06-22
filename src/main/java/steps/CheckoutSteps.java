@@ -377,7 +377,7 @@ public class CheckoutSteps {
 
     @And("^applies shipping info for address \"([^\"]*)\"$")
     public void appliesShippingInfoForAddress(String address) {
-        assertTrue(radioListComponent.exists(), "Billing Address Drop-Down doesn't exist");
+        //assertTrue(radioListComponent.exists(), "Billing Address Drop-Down doesn't exist");
         checkboxRowComponent.check("Yes, shipping address and billing address are the same", false);
         radioListComponent.setRoot(BaseComponent.getContainerByTitle("Shipping Address"));
         assertTrue(radioListComponent.select(address), "'" + address + "' doesn't present in list");
@@ -684,17 +684,15 @@ public class CheckoutSteps {
 
     @Then("^user should be on \"([^\"]*)\" tab$")
     public void userShouldBeOnTab(String tabName) {
-
-        if (tabName.contains("Delivery")) {
-            assertTrue(radioListComponent.exists(), "Delivery Method Drop-Down doesn't exist");
-        } else {
-            assertTrue(breadcrumbWidget.isBreadcrumbActive(tabName), "Tab " + tabName + " is not an active");
-        }
-
-
-        assertTrue(breadcrumbWidget.isTabActive(tabName), "Tab " + tabName + " is not an active");
-
-        CommonFunctions.attachScreenshot("User on [" + tabName + "] tab");
+        assertTrue(breadcrumbWidget.active(tabName), "Tab " + tabName + " is not an active");
+     //   if (tabName.contains("Delivery")) {
+     //       assertTrue(radioListComponent.exists(), "Delivery Method Drop-Down doesn't exist");
+       // } else {
+         //   assertTrue(breadcrumbWidget.isBreadcrumbActive(tabName), "Tab " + tabName + " is not an active");
+       // }
+        //assertTrue(breadcrumbWidget.isTabActive(tabName), "Tab " + tabName + " is not an active");
+        
+      CommonFunctions.attachScreenshot("User on [" + tabName + "] tab");
     }
 
     @And("^user checks \"([^\"]*)\" shipping method$")

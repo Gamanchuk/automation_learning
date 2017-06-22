@@ -5,7 +5,6 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 
 @CucumberOptions(
         features = "src/test/resources/features/qvc/",
-        monochrome = true,
         glue = "steps",
         tags = {"@debug", "~@Ignored"}
 )

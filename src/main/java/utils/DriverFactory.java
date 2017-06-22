@@ -170,6 +170,7 @@ public class DriverFactory {
             if (Config.PLATFORM_NAME.equals(ANDROID)) {
                 serviceBuilder.withArgument(AndroidServerFlag.CHROME_DRIVER_PORT, Config.CHROMEDRIVER_PORT);
                 serviceBuilder.withArgument(AndroidServerFlag.BOOTSTRAP_PORT_NUMBER, Config.BOOTSTRAP_PORT);
+
             }
 
             service = AppiumDriverLocalService.buildService(serviceBuilder);
