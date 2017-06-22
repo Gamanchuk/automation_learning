@@ -13,7 +13,8 @@ Feature: EXISTING ACCOUNT - REVIEW PAGE - HEADER & FOOTER
     Then user should be on "Payment" tab
     And uses "Pay with Check / Money Order" for payment
     And presses the "Continue" button
-    Then user should be on "Review" tab
+    And user should be on "Review" tab
+    Then user should see "Billing Address" form
 
   @TestCaseId("102377")
   @TestCaseId("102378")
