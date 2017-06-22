@@ -7,6 +7,7 @@ Feature: HAPPY PATH
 
   @Issue("MCCAT-6011")
   @TestCaseId("102221")
+  @TestCaseId("102278")
   Scenario: Place Order with Paypal Credit from Payment page
 
     Given user continue checkout as "qa paypal"

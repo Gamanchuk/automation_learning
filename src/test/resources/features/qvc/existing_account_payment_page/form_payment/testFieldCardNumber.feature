@@ -11,6 +11,7 @@ Feature: EXISTING ACCOUNT - PAYMENT PAGE
     Then user should be on "Delivery" tab
     And presses the "Continue" button
 
+  @TestCaseId("102272")
   @TestCaseId("102275")
   Scenario: Test field "Card Number"
     Given user should be on "Payment" tab

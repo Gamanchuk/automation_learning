@@ -6,6 +6,7 @@ Feature: HAPPY PATH
     Given user adds to cart product
 
   @TestCaseId("102224")
+  @TestCaseId("102279")
   Scenario: Place Money Order as Existing User
 
     Given user continue checkout as "qa user"

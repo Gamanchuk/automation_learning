@@ -13,7 +13,7 @@ Feature: EXISTING ACCOUNT - PAYMENT PAGE
 
 
   @TestCaseId("102271")
-  @Issue("MCCAT-5505")
+  @Issue("MCCAT-6001")
   Scenario: Test with correct Mastercard billing information and fill in all required fields
     Given user should be on "Payment" tab
     And selects "Enter a New Card"

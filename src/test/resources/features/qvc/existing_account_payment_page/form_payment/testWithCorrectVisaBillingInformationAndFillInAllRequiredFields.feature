@@ -12,7 +12,7 @@ Feature: EXISTING ACCOUNT - PAYMENT PAGE
     And presses the "Continue" button
 
   @TestCaseId("102271")
-  @Issue("MCCAT-5505")
+  @Issue("MCCAT-6001")
   Scenario: Test with correct Visa billing information and fill in all required fields
     Given user should be on "Payment" tab
     And selects "Enter a New Card"
