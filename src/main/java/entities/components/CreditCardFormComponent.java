@@ -62,7 +62,7 @@ public class CreditCardFormComponent extends BaseComponent {
         focusOut(element);
         element.clear();
         element.sendKeys(value);
-        focusOut(element);
+//        focusOut(element);
     }
 
 
