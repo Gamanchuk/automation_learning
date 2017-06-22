@@ -26,6 +26,7 @@ public class Config {
     public static final String COOKIES;
     public static final String SITE_NAME;
     public static final String STORE_ID;
+    ;
 
     public static final String ANALYTICS_URL = "http://mc-events.moovweb.net";
 
@@ -37,8 +38,8 @@ public class Config {
         try {
             props = PropertiesLoaderUtils.loadAllProperties(propsPath);
         } catch (IOException e) {
-            System.out.println("'" + propsPath + "' was not found");
-            e.printStackTrace();
+            log.error("'" + propsPath + "' was not found");
+            log.error(e.getMessage());
         }
 
 

@@ -60,8 +60,8 @@ public class DriverFactory {
             String deviceUdid = Config.DEVICE_UID;
             String iproxyPort = Config.IPROXY_PORT;
 
-            String adbReconnect = String.format("-s %s reconnect", deviceUdid);
-            CommonFunctions.runShell("adb", adbReconnect);
+            //String adbReconnect = String.format("-s %s reconnect", deviceUdid);
+            // CommonFunctions.runShell("adb", adbReconnect);
 
             try {
                 if (Boolean.valueOf(System.getProperty("use.desktop.browser"))) {
@@ -173,6 +173,7 @@ public class DriverFactory {
             if (Config.PLATFORM_NAME.equals(ANDROID)) {
                 serviceBuilder.withArgument(AndroidServerFlag.CHROME_DRIVER_PORT, Config.CHROMEDRIVER_PORT);
                 serviceBuilder.withArgument(AndroidServerFlag.BOOTSTRAP_PORT_NUMBER, Config.BOOTSTRAP_PORT);
+
             }
 
             service = AppiumDriverLocalService.buildService(serviceBuilder);
