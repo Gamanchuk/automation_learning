@@ -6,11 +6,11 @@ Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE - HEADER & FOOTER
     Given user adds to cart product
     And user continue checkout as "qa user"
     And presses the "Continue" button
-    And user should be on "Address" tab
+    Then user should be on "Address" tab
 
   @TestCaseId("102311")
   Scenario: Check Cart Icon
 
-    When user presses the Shopping Cart icon
+    Given user presses the Shopping Cart icon
     Then user should be on QVC cart page
 

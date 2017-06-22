@@ -5,13 +5,12 @@ Feature: GUEST - BREADCRUMB
 
   Background: Add product to card and process to checkout
     Given user adds to cart product
+    And user continue checkout as guest
+    And presses the "Continue" button
+    Then user should be on "Address" tab
 
   @TestCaseId("102039")
   Scenario: Breadcrumb links redirect user to correct page
-
-    Given user continue checkout as guest
-    And presses the "Continue" button
-    Then user should be on "Address" tab
 
     When user types billing info for "qa user" without email
 

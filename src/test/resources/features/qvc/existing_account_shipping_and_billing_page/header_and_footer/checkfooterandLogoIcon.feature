@@ -14,7 +14,7 @@ Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE - HEADER & FOOTER
   @TestCaseId("102312")
   Scenario: Check footer and Logo Icon
 
-    When user checks support number with label "1-888-345-5788" and number "1-888-345-5788"
+    Given user checks support number with label "1-888-345-5788" and number "1-888-345-5788"
     And user checks text "©1995-2017 QVC, Inc. All rights reserved." in footer
     And user presses the logo
     Then user should be on QVC main page
