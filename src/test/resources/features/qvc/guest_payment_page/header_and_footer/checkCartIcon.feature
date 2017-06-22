@@ -1,6 +1,6 @@
 @qvc
 
-Feature: GUEST - REVIEW PAGE - HEADER & FOOTER
+Feature: GUEST - PAYMENT PAGE - HEADER & FOOTER
 
   Background: Add product to card and process to checkout
     Given user adds to cart product
