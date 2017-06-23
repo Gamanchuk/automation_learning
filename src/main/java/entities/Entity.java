@@ -256,7 +256,7 @@ public abstract class Entity {
 
     public void sendKeysOneByOne(By selector, String str) {
         WebElement el = findElement(selector);
-        javascriptScroll(el);
+        scroll(el);
         for (char ch : str.toCharArray()) {
             el.sendKeys(ch + "");
         }
@@ -386,7 +386,7 @@ public abstract class Entity {
         CommonFunctions.sleep(200);
     }
 
-    public void javascriptScroll(WebElement element) {
+    public void scroll(WebElement element) {
         Actions builder = new Actions(driver);
         builder.moveToElement(element).build().perform();
         CommonFunctions.sleep(200);

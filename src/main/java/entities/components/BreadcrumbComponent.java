@@ -33,7 +33,7 @@ public class BreadcrumbComponent extends BaseComponent {
     public boolean isBreadcrumbActive(String breadcrumb) {
 
         if (isElementVisible(getBreadcrumbByName(breadcrumb))) {
-            javascriptScroll(getDriver().findElement(getBreadcrumbByName(breadcrumb)));
+            scroll(getDriver().findElement(getBreadcrumbByName(breadcrumb)));
         }
 
         waitForAjax();

@@ -118,11 +118,11 @@ public class AddressFormComponent extends BaseComponent {
 
 //        if (international) {
 //            stateEl = findElement(stateField);
-//            javascriptScroll(stateEl);
+//            scroll(stateEl);
 //            stateEl.sendKeys(state);
 //        } else {
             stateEl = findElement(stateSelect);
-            javascriptScroll(stateEl);
+        scroll(stateEl);
             Select selectState = new Select(stateEl);
             selectState.selectByValue(state);
         // }
@@ -151,14 +151,14 @@ public class AddressFormComponent extends BaseComponent {
 
     private void fillField(By field, String value) {
         WebElement element = findElement(field);
-        javascriptScroll(element);
+        scroll(element);
         element.clear();
         element.sendKeys(value);
     }
 
     public void selectTitle(String value) {
         WebElement titleEl = findElement(title);
-        javascriptScroll(titleEl);
+        scroll(titleEl);
         Select selectState = new Select(titleEl);
         selectState.selectByVisibleText(value);
     }

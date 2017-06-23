@@ -25,7 +25,7 @@ public class RadioListComponent extends BaseComponent {
                     log.info("Item Selected. ID: " + i);
                     findElement(By.cssSelector(".radio-list-option:nth-of-type(" + (i + 1) + ")")).click();
                     CommonFunctions.sleep(500);
-                    javascriptScroll(listEl);
+                    scroll(listEl);
                     return true;
                 }
             }
