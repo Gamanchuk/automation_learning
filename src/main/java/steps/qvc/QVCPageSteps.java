@@ -1,5 +1,6 @@
 package steps.qvc;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -97,5 +98,12 @@ public class QVCPageSteps {
         puParam = URLDecoder.decode(puParam, "UTF-8");
 
         assertEquals(puParam, DriverFactory.getDriver().getCurrentUrl(), "Unexpected event: " + event);
+    }
+
+    @Then("^user should be see error message on QVC cart page with text \"([^\"]*)\"$")
+    public void userShouldBeSeeErrorMessageOnQVCCartPageWithText(String errorMessage) {
+        assertTrue(qvcCartPage.isPage(), "Cart page doesn't present.");
+        assertEquals(qvcCartPage.getErrorMessage(), errorMessage, "Unexpected error message on QVC cart page");
+        CommonFunctions.attachScreenshot("Error message");
     }
 }

@@ -8,7 +8,9 @@ Feature: SIGN IN PAGE
 
   @TestCaseId("102435")
   Scenario: Registered user is redirected to order summary page when on checking "Using your default shipping and payment information? .........Order Summary" check box.
-    Given user continue checkout as "qa user2"
-    And user checks "Using your default shipping and payment information?" checkbox
+    Given user fills email field with "manytu3@i.ua"
     And presses the "Continue" button
-    Then user should be on "Address" tab
+    And user checks "Using your default shipping and payment information?" checkbox
+    And user fills password field with "q1q1w1w1"
+    And presses the "Continue" button
+    Then user should be on "Payment" tab

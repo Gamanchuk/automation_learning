@@ -65,22 +65,24 @@ public class CheckoutSteps {
     @Given("^user fills email field with \"([^\"]*)\"$")
     public void userFillsEmailFieldWith(String email) {
         signInFormComponent.fillEmail(email);
+        CommonFunctions.attachScreenshot("Fill email");
     }
 
     @Then("^user should see password field$")
     public void userShouldSeePasswordField() throws Throwable {
         assertTrue(signInFormComponent.isPasswordFieldVisible(), "Password field was not displayed");
-        CommonFunctions.attachScreenshot("Password field displayed");
     }
 
     @And("^user fills password field with \"([^\"]*)\"$")
     public void userFillsPasswordFieldWith(String password) throws Throwable {
         signInFormComponent.fillPassword(password);
+        CommonFunctions.attachScreenshot("Fill password");
     }
 
     @And("^user checks \"([^\"]*)\" checkbox$")
     public void userChecksCheckbox(String label) {
         checkboxRowComponent.check(label, true);
+        CommonFunctions.attachScreenshot("Checkbox");
     }
 
     @And("^user chooses \"([^\"]*)\" title$")
@@ -741,8 +743,8 @@ public class CheckoutSteps {
     }
 
     @Then("^user should see Terms modal with \"([^\"]*)\"$")
-    public void userShouldSeeTermsModalWith(String text) throws Throwable {
-        modalComponent.isModalOpen();
+    public void userShouldSeeTermsModalWith(String text) {
+        assertTrue(modalComponent.isModalOpen(), "Modal error doesn't present on page.");
         assertTrue(modalComponent.hasText(text), "Unexpected Terms");
         CommonFunctions.attachScreenshot("Terms Modal opened");
     }
@@ -827,6 +829,11 @@ public class CheckoutSteps {
 
     }
 
+    @And("^selects \"Enter a New Card\"$")
+    public void selectsEnterANewCard() {
+        radioListComponent.select("Enter a New Card");
+    }
+
     @After
     public void after() {
         stopScreenVideo();
@@ -834,5 +841,10 @@ public class CheckoutSteps {
 
         File webDriverEventLog = new File("logfile.log");
         CommonFunctions.attachFile("webDriverEventLog", webDriverEventLog);
+    }
+
+    @Then("^user should see \"([^\"]*)\" products$")
+    public void userShouldSeeProducts(int count) {
+        assertEquals(productListComponent.getCountProducts(), count, "Unexpected count product");
     }
 }
