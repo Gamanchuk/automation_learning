@@ -12,7 +12,6 @@ Feature: EXISTING ACCOUNT - SHIPPING DETAILS PAGE - HEADER & FOOTER
     Then user should be on "Delivery" tab
 
 
-  @TestCaseId("")
   Scenario: Check footer and Logo Icon
 
     Given user checks support number with label "1-888-345-5788" and number "1-888-345-5788"
