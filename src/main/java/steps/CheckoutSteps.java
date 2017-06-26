@@ -7,7 +7,6 @@ import cucumber.api.java.en.Then;
 import entities.components.*;
 import entities.pages.PaymentAndReviewCheckoutPage;
 import entities.pages.ThankYouPage;
-import entities.pages.pepboys.PepBoysLoginPage;
 import entities.pages.pepboys.PepBoysMainPage;
 import entities.pages.pepboys.PepBoysMyAccountPage;
 import entities.pages.pepboys.PepBoysTrackingPage;
@@ -304,6 +303,7 @@ public class CheckoutSteps {
         CommonFunctions.sleep(2000);
 
         //Select card uses 4 last symbols
+        assertTrue(radioListComponent.exists(), "Card Drop-Down doesn't present");
         radioListComponent.select(card.getSecureCardData());
         creditCardFormComponent.inputValueIntoField(card.getCvv(), "CVV");
 
@@ -679,8 +679,7 @@ public class CheckoutSteps {
 
     @And("^user presses the Proceed to Guest Checkout link$")
     public void userPressesTheProceedToGuestCheckoutLink() {
-        PepBoysLoginPage loginPage = new PepBoysLoginPage();
-        loginPage.proceedToGuestCheckout();
+        signInFormComponent.proceedToGuestCheckout();
 
     }
 

@@ -1,6 +1,5 @@
 package steps.qvc;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -38,6 +37,18 @@ public class QVCPageSteps {
         this.addProduct();
 
         qvcCartPage.processToCheckout();
+        assertTrue(buttonComponent.exists(), "Button component doesn't present on page. " +
+                "It seems that the checkout did not boot for " + TIMEOUT_SECONDS + " seconds");
+    }
+
+    @Given("^user adds to cart product and speed buy$")
+    public void userAddsToCartProductAndSpeedBuy() {
+        qvcProductPage.setCookies();
+        assertTrue(qvcMainPage.isPage(), "Main page doesn't opened");
+
+        this.addProduct();
+
+        qvcCartPage.processToSpeedBuy();
         assertTrue(buttonComponent.exists(), "Button component doesn't present on page. " +
                 "It seems that the checkout did not boot for " + TIMEOUT_SECONDS + " seconds");
     }
