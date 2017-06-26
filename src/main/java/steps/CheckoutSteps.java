@@ -828,6 +828,11 @@ public class CheckoutSteps {
 
     }
 
+    @And("^selects \"Enter a New Card\"$")
+    public void selectsEnterANewCard() {
+        radioListComponent.select("Enter a New Card");
+    }
+
     @After
     public void after() {
         stopScreenVideo();
