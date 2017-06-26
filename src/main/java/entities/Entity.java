@@ -201,7 +201,7 @@ public abstract class Entity {
             try {
                 parent.findElement(element);
                 return true;
-            } catch (NoSuchElementException | InvalidElementStateException e) {
+            } catch (Exception e) {
                 driver.manage().timeouts().implicitlyWait(delay, TimeUnit.MILLISECONDS);
             }
         }
@@ -281,27 +281,31 @@ public abstract class Entity {
     }
 
     public void waitForAjax() {
-        new WebDriverWait(driver, TIMEOUT_SECONDS).until(new ExpectedCondition<Boolean>() {
-            public Boolean apply(WebDriver driver) {
-                boolean result = false;
-                try {
-                    JavascriptExecutor js = (JavascriptExecutor) driver;
-                    boolean hasJquery = (Boolean) js.executeScript("return typeof jQuery !== 'undefined'");
-                    if (hasJquery) {
-                        result = (Boolean) js.executeScript("return jQuery.active === 0 && jQuery.isReady && document.readyState == 'complete'");
-                    } else {
-                        result = (Boolean) js.executeScript("return document.readyState == 'complete'");
-                        log.info("readyState complete: " + result);
+        try {
+            new WebDriverWait(driver, TIMEOUT_SECONDS).until(new ExpectedCondition<Boolean>() {
+                public Boolean apply(WebDriver driver) {
+                    boolean result = false;
+                    try {
+                        JavascriptExecutor js = (JavascriptExecutor) driver;
+                        boolean hasJquery = (Boolean) js.executeScript("return typeof jQuery !== 'undefined'");
+                        if (hasJquery) {
+                            result = (Boolean) js.executeScript("return jQuery.active === 0 && jQuery.isReady && document.readyState == 'complete'");
+                        } else {
+                            result = (Boolean) js.executeScript("return document.readyState == 'complete'");
+                            log.info("readyState complete: " + result);
+                        }
+                        log.info("jQuery not active: " + result);
+                    } catch (JavascriptException js) {
+                        log.error("JavascriptException: " + js.getMessage());
+                        return false;
                     }
-                    log.info("jQuery not active: " + result);
-                } catch (JavascriptException js) {
-                    log.info("waitForAjax: " + js.getMessage());
-                    return false;
-                }
 
-                return result;
-            }
-        });
+                    return result;
+                }
+            });
+        } catch (TimeoutException e) {
+            log.error("ReadyState is not complete or Ajax process is not finished  within " + TIMEOUT_SECONDS + " seconds");
+        }
     }
 
     protected void waitForDocumentReady() {
@@ -314,19 +318,6 @@ public abstract class Entity {
             }
         });
     }
-
-//    private void waitForRedirect(String url) {
-//         new WebDriverWait(driver, TIMEOUT_SECONDS).until(new ExpectedCondition<Boolean>() {
-//            public Boolean apply(WebDriver driver) {
-//                String currentUrl = driver.getCurrentUrl();
-//                boolean result = currentUrl.equals(url);
-//                log.info("Browser url changed: " + result + ". Current url: " + currentUrl);
-//                return result;
-//            }
-//
-//        });
-//    }
-
 
     private boolean waitForRedirect(String url, int timeout) {
         log.info("Waiting " + timeout + "s for URL changed");
@@ -408,12 +399,18 @@ public abstract class Entity {
 
     private boolean waitForCondition(ExpectedCondition<WebElement> webElementExpectedCondition, int timeout) {
         try {
-            new WebDriverWait(driver, timeout).until(webElementExpectedCondition);
+            new WebDriverWait(driver, timeout, 1000).until(webElementExpectedCondition);
             return true;
         } catch (TimeoutException e) {
             log.error("Condition failed!");
             log.error(e.getMessage());
             return false;
+        } catch (Exception e) {
+            log.error("Strange error");
+            log.error(e.getMessage());
+            log.error(e.getClass());
+            new WebDriverWait(driver, timeout, 1000).until(webElementExpectedCondition);
+            return true;
         }
     }
 }

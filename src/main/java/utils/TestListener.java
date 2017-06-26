@@ -69,7 +69,7 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
         String dom = CommonFunctions.attachDomThree(DriverFactory.getDriver().getPageSource());
         String errorMessage = String.valueOf(iTestResult.getThrowable().getMessage());
 
-        log.info("Test \"" + iTestResult.getName() + "\" failed in "
+        log.error("Test \"" + caseName + "\" failed in "
                 + countDuration(iTestResult.getEndMillis() - iTestResult.getStartMillis()));
 
         if (Boolean.valueOf(System.getProperty("projectTracking"))) {
@@ -117,7 +117,7 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("Problem with setting test result. Error: " + e.getMessage());
         }
     }
 
@@ -133,7 +133,7 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
                     result);
 
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("Problem with creating jira issue. Error: " + e.getMessage());
         }
 
         return ticketId;

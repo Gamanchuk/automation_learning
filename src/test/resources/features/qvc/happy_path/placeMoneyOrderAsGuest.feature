@@ -7,6 +7,7 @@ Feature: HAPPY PATH
 
   @Issue("MCCAT-6011")
   @TestCaseId("102223")
+  @TestCaseId("102339")
   Scenario: Place Money Order as Guest
 
     Given user continue checkout as guest

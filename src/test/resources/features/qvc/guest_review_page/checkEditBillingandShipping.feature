@@ -6,7 +6,7 @@ Feature: GUEST - REVIEW PAGE
     Given user adds to cart product
 
 
-  @TestCaseId("")
+  @TestCaseId("102334")
   Scenario: Check Edit Billing and Shipping address
 
     Given user continue checkout as guest
@@ -24,6 +24,6 @@ Feature: GUEST - REVIEW PAGE
     And presses the "Continue" button
 
     And user should be on "Review" tab
-    And user checks "UPS Ground:" shipping method
+    Then user should see "Billing Address" form
     And user clicks arrow for "Billing Address"
     Then user should be on "Address" tab

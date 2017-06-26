@@ -107,7 +107,6 @@ public class DriverFactory {
                     }
 
                     if (Config.PLATFORM_NAME.equals(ANDROID)) {
-
                         ChromeOptions options = new ChromeOptions();
                         options.addArguments("disable-translate");
                         desiredCapabilities.setCapability(ChromeOptions.CAPABILITY, options);

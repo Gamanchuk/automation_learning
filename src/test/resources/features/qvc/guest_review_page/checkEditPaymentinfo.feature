@@ -24,6 +24,6 @@ Feature: GUEST - REVIEW PAGE
     And presses the "Continue" button
 
     And user should be on "Review" tab
-    And user checks "UPS Ground:" shipping method
+    Then user should see "Billing Address" form
     And user clicks arrow for "Payment Method"
     Then user should be on "Payment" tab

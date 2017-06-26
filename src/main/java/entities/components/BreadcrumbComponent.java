@@ -1,6 +1,7 @@
 package entities.components;
 
 import org.openqa.selenium.By;
+import utils.CommonFunctions;
 
 public class BreadcrumbComponent extends BaseComponent {
 
@@ -18,7 +19,7 @@ public class BreadcrumbComponent extends BaseComponent {
 
     public void clickBreadcrumb(String breadcrumb) {
         By breadcrumbPath = getBreadcrumbByName(breadcrumb);
-        findElement(breadcrumbPath).click();
+        getDriver().findElement(breadcrumbPath).click();
     }
 
     public void waitForBreadcrumbActive(String breadcrumbName) {
@@ -38,12 +39,21 @@ public class BreadcrumbComponent extends BaseComponent {
 
         waitForAjax();
 
-        return isElementVisible(By.xpath(
+        return isElementPresent(By.xpath(
                 "//a[contains(@class, 'breadcrumb') and contains(@class, 'active') and text()='" + breadcrumb + "']"));
     }
 
-    public void witFor() {
-        waitForAjax();
+    public boolean active(String tabName) {
+        boolean status;
+        try {
+            status = isElementVisible(By.xpath(
+                    "//a[contains(@class, 'breadcrumb') and contains(@class, 'active') and text()='" + tabName + "']"));
+        } catch (Exception e) {
+            status = isElementVisible(By.xpath(
+                    "//a[contains(@class, 'breadcrumb') and contains(@class, 'active') and text()='" + tabName + "']"));
+        }
+        CommonFunctions.sleep(2000);
+        return status;
     }
 
     public String getActiveTab() {
