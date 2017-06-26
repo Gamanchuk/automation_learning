@@ -53,6 +53,15 @@ public class QVCPageSteps {
                 "It seems that the checkout did not boot for " + TIMEOUT_SECONDS + " seconds");
     }
 
+    @Given("^user speed buy product$")
+    public void userSpeedBuyProduct() {
+        qvcProductPage.setCookies();
+        assertTrue(qvcMainPage.isPage(), "Main page doesn't opened");
+        this.speedBuyProduct();
+        assertTrue(buttonComponent.exists(), "Button component doesn't present on page. " +
+                "It seems that the checkout did not boot for " + TIMEOUT_SECONDS + " seconds");
+    }
+
     @Given("^user adds to cart \"([^\"]*)\" products$")
     public void userAddsToCartProducts(int count) {
         qvcProductPage.setCookies();
@@ -80,16 +89,23 @@ public class QVCPageSteps {
     }
 
     private void addProduct() {
+        this.openProduct();
+        qvcProductPage.addToCart();
+        assertTrue(qvcCartPage.isPage(), "Cart page doesn't present.");
+    }
+
+    private void speedBuyProduct() {
+        this.openProduct();
+        qvcProductPage.speedBuy();
+    }
+
+    private void openProduct() {
         qvcProductPage.openPage(DataProvider.getRandomItem());
         CommonFunctions.attachScreenshot("Product Page");
 
         assertTrue(qvcProductPage.isColorListExist(), "Color list doesn't present on product page.");
         String color = qvcProductPage.selectRandomColor();
         CommonFunctions.attachScreenshot("Color selected: " + color);
-
-        qvcProductPage.addToCart();
-
-        assertTrue(qvcCartPage.isPage(), "Cart page doesn't present.");
     }
 
     @Then("^user should be on QVC forgot password page$")
@@ -117,4 +133,6 @@ public class QVCPageSteps {
         assertEquals(qvcCartPage.getErrorMessage(), errorMessage, "Unexpected error message on QVC cart page");
         CommonFunctions.attachScreenshot("Error message");
     }
+
+
 }
