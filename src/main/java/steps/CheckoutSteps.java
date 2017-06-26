@@ -652,12 +652,13 @@ public class CheckoutSteps {
 
     @Then("^user presses the Find out more link$")
     public void userPressesTheFindOutMoreLink() {
+        assertTrue(rewardSummaryComponent.exists(), "Find out more link doesn't present");
         rewardSummaryComponent.clickFindOutMore();
         CommonFunctions.attachScreenshot("Find Out More");
     }
 
     @Given("^user makes authorisation with \"([^\"]*)\" email and \"([^\"]*)\" password$")
-    public void userMakesAuthorisationWithEmailAndPassword(String email, String password) throws Throwable {
+    public void userMakesAuthorisationWithEmailAndPassword(String email, String password) {
         signInFormComponent.signIn(email, password);
         CommonFunctions.attachScreenshot("Set [" + email + "] email and [" + password + "] password");
         buttonComponent.clickButton();
@@ -685,14 +686,14 @@ public class CheckoutSteps {
     @Then("^user should be on \"([^\"]*)\" tab$")
     public void userShouldBeOnTab(String tabName) {
         assertTrue(breadcrumbWidget.active(tabName), "Tab " + tabName + " is not an active");
-     //   if (tabName.contains("Delivery")) {
-     //       assertTrue(radioListComponent.exists(), "Delivery Method Drop-Down doesn't exist");
-       // } else {
-         //   assertTrue(breadcrumbWidget.isBreadcrumbActive(tabName), "Tab " + tabName + " is not an active");
-       // }
+        //   if (tabName.contains("Delivery")) {
+        //       assertTrue(radioListComponent.exists(), "Delivery Method Drop-Down doesn't exist");
+        // } else {
+        //   assertTrue(breadcrumbWidget.isBreadcrumbActive(tabName), "Tab " + tabName + " is not an active");
+        // }
         //assertTrue(breadcrumbWidget.isTabActive(tabName), "Tab " + tabName + " is not an active");
-        
-      CommonFunctions.attachScreenshot("User on [" + tabName + "] tab");
+
+        CommonFunctions.attachScreenshot("User on [" + tabName + "] tab");
     }
 
     @And("^user checks \"([^\"]*)\" shipping method$")
