@@ -1,13 +1,13 @@
 @qvc
 
-Feature: GUEST - REVIEW PAGE
+Feature: GUEST - PAYMENT PAGE
 
   Background: Add product to card and process to checkout
     Given user adds to cart product
 
 
-  @TestCaseId("102334")
-  Scenario: Check Edit Billing and Shipping address
+  @TestCaseId("102332")
+  Scenario: Test with correct billing information and do not fill in all required fields
 
     Given user continue checkout as guest
     And presses the "Continue" button
@@ -20,10 +20,8 @@ Feature: GUEST - REVIEW PAGE
     And presses the "Continue" button
 
     And user should be on "Payment" tab
-    And uses "Pay with Check / Money Order" for payment
     And presses the "Continue" button
 
-    And user should be on "Review" tab
-    Then user should see "Billing Address" form
-    And user clicks arrow for "Billing Address"
-    Then user should be on "Address" tab
+    Then user should stay at "Payment" tab
+    And sees "FORM ERRORS" error message with text "Please review all inputs."
+

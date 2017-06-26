@@ -59,7 +59,7 @@ public class DriverFactory {
             String deviceName = Config.DEVICE_NAME;
             String deviceUdid = Config.DEVICE_UID;
             String iproxyPort = Config.IPROXY_PORT;
-          
+
             try {
                 if (Boolean.valueOf(System.getProperty("use.desktop.browser"))) {
                     initChromeDriver();
@@ -107,7 +107,6 @@ public class DriverFactory {
                     }
 
                     if (Config.PLATFORM_NAME.equals(ANDROID)) {
-
                         ChromeOptions options = new ChromeOptions();
                         options.addArguments("disable-translate");
                         desiredCapabilities.setCapability(ChromeOptions.CAPABILITY, options);

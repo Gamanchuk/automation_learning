@@ -1,6 +1,7 @@
 package entities.components;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import utils.CommonFunctions;
 
 import static org.testng.Assert.assertTrue;
@@ -17,12 +18,12 @@ public class ShippingOptionsComponent extends BaseComponent {
     }
 
     public void checkShippingOptions(String expectedOption) {
-        javascriptScroll(600);
         By shippingOption = By.xpath("//div[contains(@class, 'shipping-option-display')]");
         assertTrue(isElementVisible(shippingOption), "Shipping option doesn't present on page.");
 
-        String actualOption = getDriver()
-                .findElement(shippingOption).getText();
+        WebElement deliveryOptionsEl = getDriver().findElement(shippingOption);
+        scroll(deliveryOptionsEl);
+        String actualOption = deliveryOptionsEl.getText();
 
         assertTrue(actualOption.contains(expectedOption), "Expected option: [" + expectedOption + "]" +
                 " doesn't contains Actual option: [" + actualOption + "]");

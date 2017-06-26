@@ -10,8 +10,6 @@ Feature: EXISTING ACCOUNT - SHIPPING DETAILS PAGE - HEADER & FOOTER
     And presses the "Continue" button
     Then user should be on "Delivery" tab
 
-
-  @TestCaseId("")
   Scenario: Check Cart Icon
     Given user presses the Shopping Cart icon
     Then user should be on QVC cart page

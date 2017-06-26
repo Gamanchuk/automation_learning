@@ -1,6 +1,7 @@
 package entities.components;
 
 import org.openqa.selenium.By;
+import utils.CommonFunctions;
 
 import static org.testng.Assert.assertTrue;
 
@@ -22,6 +23,7 @@ public class PaymentTypesComponent extends BaseComponent {
         setRoot(null);
         By paymentType = By.xpath("//div[contains(@class, 'payment-methods-dropdown-item') and contains(.,'" + type + "')]");
         assertTrue(isElementVisible(paymentType), "Payment type '" + type + "'  doesn't present on page.");
+        CommonFunctions.sleep(1000);
         getDriver().findElement(paymentType).click();
     }
 }

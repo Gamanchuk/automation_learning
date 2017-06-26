@@ -151,8 +151,8 @@ public class AddressFormComponent extends BaseComponent {
 
     private void fillField(By field, String value) {
         WebElement element = findElement(field);
-        CommonFunctions.sleep(500);
         scroll(element);
+        CommonFunctions.sleep(500);
         element.clear();
         CommonFunctions.sleep(500);
         element.sendKeys(value);

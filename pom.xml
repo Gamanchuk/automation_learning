@@ -457,6 +457,15 @@
             <properties>
                 <testng.suite>
                     ${basedir}/src/test/resources/testsuites/qvc/qvc_existing_account_shipping_billing_page.xml
+                 </testng.suite>
+                <suite.id>359</suite.id>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>suite-qvc-guestPaymentPage</id>
+            <properties>
+                <testng.suite>${basedir}/src/test/resources/testsuites/qvc/qvc_guest_payment_page.xml
                 </testng.suite>
                 <suite.id>359</suite.id>
             </properties>
@@ -475,7 +484,7 @@
         <profile>
             <id>suite-qvc-guestReviewPage</id>
             <properties>
-                <testng.suite>${basedir}/src/test/resources/testsuites/qvc/guest_review_page.xml
+                <testng.suite>${basedir}/src/test/resources/testsuites/qvc/qvc_guest_review_page.xml
                 </testng.suite>
                 <suite.id>359</suite.id>
             </properties>
@@ -493,6 +502,16 @@
 
 
         <profile>
+            <id>suite-qvc-existingAccountReviewPage</id>
+            <properties>
+                <testng.suite>
+                    ${basedir}/src/test/resources/testsuites/qvc/qvc_existing_account_review_page.xml
+                </testng.suite>
+                <suite.id>359</suite.id>
+            </properties>
+        </profile>
+                  
+          <profile>
             <id>suite-qvc-existingAccountShippingDetailsPage</id>
             <properties>
                 <testng.suite>
