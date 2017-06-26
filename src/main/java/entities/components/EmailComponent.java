@@ -10,7 +10,7 @@ public class EmailComponent extends BaseComponent {
 
     public void fillEmailField(String email) {
         WebElement emailEl = findElement(emailField);
-        javascriptScroll(emailEl);
+        scroll(emailEl);
         emailEl.clear();
         emailEl.sendKeys(email);
         focusOut(emailEl);

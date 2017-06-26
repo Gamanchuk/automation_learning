@@ -24,7 +24,7 @@ public class RadioListComponent extends BaseComponent {
                 if (tempList[i].contains(option)) {
                     log.info("Item Selected. ID: " + i);
                     findElement(By.cssSelector(".radio-list-option:nth-of-type(" + (i + 1) + ")")).click();
-                    CommonFunctions.sleep(500);
+                    CommonFunctions.sleep(1000);
                     return true;
                 }
             }

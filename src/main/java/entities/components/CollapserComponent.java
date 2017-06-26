@@ -13,7 +13,7 @@ public class CollapserComponent extends BaseComponent {
         WebElement collapser = findElement(By.cssSelector("a.collapser-link"));
 
         if (collapser.getAttribute("class").contains("collapsed")) {
-            javascriptScroll(collapser);
+            scroll(collapser);
             collapser.click();
 
             // Need sleep for check collapser again

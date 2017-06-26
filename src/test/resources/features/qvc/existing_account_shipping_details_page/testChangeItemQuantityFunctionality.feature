@@ -1,6 +1,6 @@
 @qvc
 
-Feature: GUEST - SHIPPING DETAILS PAGE
+Feature: EXISTING ACCOUNT - SHIPPING DETAILS PAGE
 
   Background: Add product to card and process to checkout
     Given user adds to cart product

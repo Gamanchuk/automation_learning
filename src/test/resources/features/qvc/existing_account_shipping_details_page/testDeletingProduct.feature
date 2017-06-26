@@ -1,6 +1,6 @@
-@qvc @debug
+@qvc
 
-Feature: GUEST - SHIPPING DETAILS PAGE
+Feature: EXISTING ACCOUNT - SHIPPING DETAILS PAGE
 
   Background: Add product to card and process to checkout
     Given user adds to cart product
@@ -16,3 +16,6 @@ Feature: GUEST - SHIPPING DETAILS PAGE
 
     Given user remove product
     Then sees modal error with text "There are no items in your Shopping Cart. Please select the items you would like to purchase, and place your order."
+    And presses the "Continue" button
+    Then user should be on QVC cart page
+    And user should be see error message on QVC cart page with text "There are no items in your Shopping Cart. Please select the items you would like to purchase, and place your order."

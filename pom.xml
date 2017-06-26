@@ -491,6 +491,17 @@
             </properties>
         </profile>
 
+
+        <profile>
+            <id>suite-qvc-existingAccountShippingDetailsPage</id>
+            <properties>
+                <testng.suite>
+                    ${basedir}/src/test/resources/testsuites/qvc/qvc_existing_account_shipping_details_page.xml
+                </testng.suite>
+                <suite.id>359</suite.id>
+            </properties>
+        </profile>
+
         <!--environments-->
         <profile>
             <id>env-jenkins-sf</id>
