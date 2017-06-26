@@ -1,6 +1,6 @@
 @qvc
 
-Feature: EXISTING ACCOUNT - SHIPPING DETAILS PAGE - HEADER & FOOTER
+Feature: EXISTING ACCOUNT - SHIPPING DETAILS PAGE
 
   Background: Add product to card and process to checkout
     Given user adds to cart product
@@ -10,6 +10,10 @@ Feature: EXISTING ACCOUNT - SHIPPING DETAILS PAGE - HEADER & FOOTER
     And presses the "Continue" button
     Then user should be on "Delivery" tab
 
-  Scenario: Check Cart Icon
-    Given user presses the Shopping Cart icon
-    Then user should be on QVC cart page
+
+  @TestCaseId("102304")
+  Scenario: Test Change item Quantity Functionality
+
+    Given chooses "3" item quantity
+    And presses the "Continue" button
+    Then user should be on "Payment" tab

@@ -1,4 +1,4 @@
-@qvc @debug
+@qvc
 
 Feature: EXISTING - REVIEW PAGE - HEADER & FOOTER
 
