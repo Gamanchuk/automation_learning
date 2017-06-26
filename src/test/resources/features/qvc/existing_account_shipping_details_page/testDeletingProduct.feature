@@ -1,17 +1,17 @@
 @qvc
 
-Feature: GUEST - SHIPPING DETAILS PAGE
+Feature: EXISTING ACCOUNT - SHIPPING DETAILS PAGE
 
   Background: Add product to card and process to checkout
     Given user adds to cart product
-    And user continue checkout as guest
+    And user continue checkout as "qa user"
     And presses the "Continue" button
     And user should be on "Address" tab
-    Then user types billing info for "qa user" without email
     And presses the "Continue" button
+    Then user should be on "Delivery" tab
 
 
-  @TestCaseId("102353")
+  @TestCaseId("102305")
   Scenario: Test Deleting a product from Shipping Detail Page
 
     Given user remove product

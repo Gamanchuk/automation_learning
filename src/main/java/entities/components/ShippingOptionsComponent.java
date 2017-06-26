@@ -22,7 +22,7 @@ public class ShippingOptionsComponent extends BaseComponent {
         assertTrue(isElementVisible(shippingOption), "Shipping option doesn't present on page.");
 
         WebElement deliveryOptionsEl = getDriver().findElement(shippingOption);
-        javascriptScroll(deliveryOptionsEl);
+        scroll(deliveryOptionsEl);
         String actualOption = deliveryOptionsEl.getText();
 
         assertTrue(actualOption.contains(expectedOption), "Expected option: [" + expectedOption + "]" +

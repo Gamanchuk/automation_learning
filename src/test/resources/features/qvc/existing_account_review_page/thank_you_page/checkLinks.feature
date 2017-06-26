@@ -1,7 +1,8 @@
 @qvc @debug
+
 Feature: EXISTING ACCOUNT - REVIEW & PLACE ORDER PAGE - THANK YOU PAGE
 
-  Background: test thank you page as existing user
+  Background: Add product to card and process to checkout
     Given user adds to cart product
     And user continue checkout as "qa user"
     And presses the "Continue" button
@@ -13,7 +14,7 @@ Feature: EXISTING ACCOUNT - REVIEW & PLACE ORDER PAGE - THANK YOU PAGE
     And uses "Pay with Check / Money Order" for payment
     And presses the "Continue" button
     And user should be on "Review" tab
-    And presses the "Place Order" button
+    Then presses the "Place Order" button
 
   @TestCaseId("102009")
   Scenario: Links at Thank you page

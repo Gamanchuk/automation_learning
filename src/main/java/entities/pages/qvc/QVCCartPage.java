@@ -17,4 +17,7 @@ public class QVCCartPage extends BasePage {
     }
 
 
+    public String getErrorMessage() {
+        return getDriver().findElement(By.xpath("//p[contains(@class, 'idleMessageBottom')]")).getText();
+    }
 }

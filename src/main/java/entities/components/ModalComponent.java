@@ -1,6 +1,7 @@
 package entities.components;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import utils.CommonFunctions;
 
 public class ModalComponent extends BaseComponent {
@@ -8,12 +9,15 @@ public class ModalComponent extends BaseComponent {
     private By modal = By.cssSelector("div.component.modal");
 
     public boolean isModalOpen() {
-        return isElementVisible(modal);
+        return isElementPresent(modal);
     }
 
     public boolean hasMessageWithText(String text) {
+        // Need hard sleep. iPhone have problems
+        // Sometimes Element is no longer attached to the DOM
         CommonFunctions.sleep(4000);
-        String message = getDriver().findElement(modal).findElement(By.cssSelector("div.message-body")).getText();
+        WebElement modalEl = getDriver().findElement(modal);
+        String message = modalEl.findElement(By.cssSelector("div.message-body")).getText();
         return message.contains(text);
     }
 
