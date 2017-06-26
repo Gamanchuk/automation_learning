@@ -6,7 +6,7 @@ Feature: EXISTING - REVIEW PAGE - HEADER & FOOTER
     Given user adds to cart product
 
 
-  @TestCaseId("")
+  @TestCaseId("102274")
   Scenario: Check Edit Billing and Shipping info
 
     Given user continue checkout as "qa user"
