@@ -21,6 +21,6 @@ Feature: GUEST - REVIEW & PLACE ORDER PAGE - THANK YOU PAGE
     Given user should be on thank you page
 
     #TODO: Finish this case when credit cards or qCards work again
-    And user should be on thank you page
-    Then user presses the Find out more link
-    And user should be on rewards page
+    Then user presses the Check the status of your order link
+    Then user should be on "Order Status" page
+

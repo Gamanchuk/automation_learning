@@ -656,6 +656,13 @@ public class CheckoutSteps {
         CommonFunctions.attachScreenshot("Find Out More");
     }
 
+    @Then("^user presses the Check the status of your order link$")
+    public void userPressesTheOrderStatusLink() {
+        thankYouPage.clickOnOrderStatus();
+        CommonFunctions.attachScreenshot("Check the status of your order");
+    }
+
+
     @Given("^user makes authorisation with \"([^\"]*)\" email and \"([^\"]*)\" password$")
     public void userMakesAuthorisationWithEmailAndPassword(String email, String password) throws Throwable {
         signInFormComponent.signIn(email, password);
@@ -703,9 +710,17 @@ public class CheckoutSteps {
 
     @Then("^user should be on \"([^\"]*)\" page$")
     public void userShouldBeOnPage(String pageName) {
-        assertTrue(titleComponent.exists(pageName),
-                "Unexpected Page Title. User should be on "
-                        + pageName + ". It looks like the page has not loaded");
+
+        if (pageName.contains("Order Status")) {
+            assertTrue(titleComponent.existsQVC(pageName),
+                    "Unexpected Page Title. User should be on "
+                            + pageName + ". It looks like the page has not loaded");
+        }else{
+            assertTrue(titleComponent.exists(pageName),
+                    "Unexpected Page Title. User should be on "
+                            + pageName + ". It looks like the page has not loaded");
+        }
+
     }
 
     @Then("^user should see \"([^\"]*)\" form$")
