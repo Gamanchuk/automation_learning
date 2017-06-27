@@ -60,7 +60,19 @@ public class QVCProductPage extends BasePage {
             String result = (String) js.executeScript("checkForColorSize('A', document.getElementsByClassName(\"btnAddToCart\"))");
             log.info("Add to cart status: " + result);
         } catch (JavascriptException js) {
-            log.info("Add to cart: " + js.getMessage());
+            log.error("Add to cart: " + js.getMessage());
+        }
+    }
+
+    public void speedBuy() {
+        waitForAjax();
+
+        try {
+            JavascriptExecutor js = (JavascriptExecutor) getDriver();
+            String result = (String) js.executeScript("checkForColorSize('S', document.getElementsByClassName(\"btnSpeedBuy\"))");
+            log.info("Add to cart status: " + result);
+        } catch (JavascriptException js) {
+            log.error("Add to cart: " + js.getMessage());
         }
     }
 
