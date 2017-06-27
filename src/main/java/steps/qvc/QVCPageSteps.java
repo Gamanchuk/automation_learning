@@ -1,14 +1,10 @@
 package steps.qvc;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import entities.components.ButtonComponent;
-import entities.pages.qvc.QVCCartPage;
-import entities.pages.qvc.QVCForgotPasswordPage;
-import entities.pages.qvc.QVCMainPage;
-import entities.pages.qvc.QVCProductPage;
+import entities.pages.qvc.*;
 import utils.CommonFunctions;
 import utils.Config;
 import utils.DriverFactory;
@@ -26,9 +22,11 @@ public class QVCPageSteps {
     private QVCCartPage qvcCartPage = new QVCCartPage();
     private QVCMainPage qvcMainPage = new QVCMainPage();
     private QVCProductPage qvcProductPage = new QVCProductPage();
+    private QVCOrderStatusPage qvcOrderStatusPage = new QVCOrderStatusPage();
+    private QVCForgotPasswordPage forgotPasswordPage = new QVCForgotPasswordPage();
 
     private ButtonComponent buttonComponent = new ButtonComponent();
-    private QVCForgotPasswordPage forgotPasswordPage = new QVCForgotPasswordPage();
+
 
     @Given("^user adds to cart product$")
     public void userAddsToCartProduct() {
@@ -64,7 +62,7 @@ public class QVCPageSteps {
 
     @Then("^user should be on QVC main page$")
     public void userShouldBeOnMainPage() {
-        assertTrue(qvcMainPage.isPage(), "Main page was not opened. Or page have some problems with loading");
+        assertTrue(qvcMainPage.isPage(), "Main page was not opened. Maybe page have some problems with loading");
         CommonFunctions.attachScreenshot("Main page opened");
     }
 
@@ -105,5 +103,12 @@ public class QVCPageSteps {
         assertTrue(qvcCartPage.isPage(), "Cart page doesn't present.");
         assertEquals(qvcCartPage.getErrorMessage(), errorMessage, "Unexpected error message on QVC cart page");
         CommonFunctions.attachScreenshot("Error message");
+    }
+
+    @Then("^user should be on Order Status page$")
+    public void userShouldBeOnOrderStatusPage() {
+        assertTrue(qvcOrderStatusPage.isPage(), "Order Status page was not opened. Maybe page have some problems with loading");
+        CommonFunctions.attachScreenshot("Order Status page opened");
+
     }
 }

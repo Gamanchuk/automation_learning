@@ -713,17 +713,9 @@ public class CheckoutSteps {
 
     @Then("^user should be on \"([^\"]*)\" page$")
     public void userShouldBeOnPage(String pageName) {
-
-        if (pageName.contains("Order Status")) {
-            assertTrue(titleComponent.existsQVC(pageName),
-                    "Unexpected Page Title. User should be on "
-                            + pageName + ". It looks like the page has not loaded");
-        }else{
-            assertTrue(titleComponent.exists(pageName),
-                    "Unexpected Page Title. User should be on "
-                            + pageName + ". It looks like the page has not loaded");
-        }
-
+        assertTrue(titleComponent.exists(pageName),
+                "Unexpected Page Title. User should be on "
+                        + pageName + ". It looks like the page has not loaded");
     }
 
     @Then("^user should see \"([^\"]*)\" form$")
@@ -861,5 +853,12 @@ public class CheckoutSteps {
     @Then("^user should see \"([^\"]*)\" products$")
     public void userShouldSeeProducts(int count) {
         assertEquals(productListComponent.getCountProducts(), count, "Unexpected count product");
+        CommonFunctions.attachScreenshot("Product count");
+    }
+
+    @Given("^user presses the \"([^\"]*)\" link$")
+    public void userPressesTheLink(String linkTitle) {
+        thankYouPage.clickLinkByTitle(linkTitle);
+        CommonFunctions.attachScreenshot("Clicked on link: " + linkTitle);
     }
 }
