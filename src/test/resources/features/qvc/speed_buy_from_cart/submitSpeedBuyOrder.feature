@@ -7,7 +7,7 @@ Feature: SPEED BUY FROM CART
 
   @TestCaseId("")
   Scenario: Submit speed buy order
-    Given user makes authorisation with "manytu3@i.ua" email and "q1q1w1w1" password
+    Given user makes authorisation with "gamanchuk.aleksey@moovweb.com" email and "asdffdsA1" password
     And user should be on "Payment" tab
     And uses saved "visa" card for payment
     And presses the "Continue" button
