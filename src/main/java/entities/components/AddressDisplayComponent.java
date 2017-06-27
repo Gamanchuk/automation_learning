@@ -105,13 +105,10 @@ public class AddressDisplayComponent extends BaseComponent {
                 return deliveryStreetAddress;
             case "Apt, Bldg.":
                 return deliveryApt;
-            // Add handle state popup
-//            case "state":
-//                break;
             case "Email":
                 return deliveryEmail;
             default:
-                throw new Error("Unknown field");
+                throw new Error("Address display component: Unknown field");
         }
     }
 }

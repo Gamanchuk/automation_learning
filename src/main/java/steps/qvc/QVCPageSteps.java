@@ -4,6 +4,7 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import entities.components.ButtonComponent;
+import entities.components.SignInFormComponent;
 import entities.pages.qvc.QVCCartPage;
 import entities.pages.qvc.QVCForgotPasswordPage;
 import entities.pages.qvc.QVCMainPage;
@@ -25,9 +26,11 @@ public class QVCPageSteps {
     private QVCCartPage qvcCartPage = new QVCCartPage();
     private QVCMainPage qvcMainPage = new QVCMainPage();
     private QVCProductPage qvcProductPage = new QVCProductPage();
+    private QVCForgotPasswordPage forgotPasswordPage = new QVCForgotPasswordPage();
 
     private ButtonComponent buttonComponent = new ButtonComponent();
-    private QVCForgotPasswordPage forgotPasswordPage = new QVCForgotPasswordPage();
+    private SignInFormComponent signInFormComponent = new SignInFormComponent();
+
 
     @Given("^user adds to cart product$")
     public void userAddsToCartProduct() {
@@ -74,7 +77,6 @@ public class QVCPageSteps {
         qvcCartPage.processToCheckout();
         assertTrue(buttonComponent.exists(), "Button component doesn't present on page. " +
                 "It seems that the checkout did not boot for " + TIMEOUT_SECONDS + " seconds");
-
     }
 
     @And("^user should be on QVC cart page$")
@@ -86,26 +88,6 @@ public class QVCPageSteps {
     public void userShouldBeOnMainPage() {
         assertTrue(qvcMainPage.isPage(), "Main page was not opened. Or page have some problems with loading");
         CommonFunctions.attachScreenshot("Main page opened");
-    }
-
-    private void addProduct() {
-        this.openProduct();
-        qvcProductPage.addToCart();
-        assertTrue(qvcCartPage.isPage(), "Cart page doesn't present.");
-    }
-
-    private void speedBuyProduct() {
-        this.openProduct();
-        qvcProductPage.speedBuy();
-    }
-
-    private void openProduct() {
-        qvcProductPage.openPage(DataProvider.getRandomItem());
-        CommonFunctions.attachScreenshot("Product Page");
-
-        assertTrue(qvcProductPage.isColorListExist(), "Color list doesn't present on product page.");
-        String color = qvcProductPage.selectRandomColor();
-        CommonFunctions.attachScreenshot("Color selected: " + color);
     }
 
     @Then("^user should be on QVC forgot password page$")
@@ -132,6 +114,33 @@ public class QVCPageSteps {
         assertTrue(qvcCartPage.isPage(), "Cart page doesn't present.");
         assertEquals(qvcCartPage.getErrorMessage(), errorMessage, "Unexpected error message on QVC cart page");
         CommonFunctions.attachScreenshot("Error message");
+    }
+
+    @And("^user presses the Where do I enter my password link$")
+    public void userPressesTheWhereDoIEnterMyPasswordLink() {
+        signInFormComponent.pressWhereDoIEnterMyPassword();
+        CommonFunctions.attachScreenshot("Where do I enter my password");
+        assertEquals(signInFormComponent.getContentAboutPasswordFill(), "If you have a QVC Password, you'll enter it on the next screen. If not, you'll enter your address.");
+    }
+
+    private void addProduct() {
+        this.openProduct();
+        qvcProductPage.addToCart();
+        assertTrue(qvcCartPage.isPage(), "Cart page doesn't present.");
+    }
+
+    private void openProduct() {
+        qvcProductPage.openPage(DataProvider.getRandomItem());
+        CommonFunctions.attachScreenshot("Product Page");
+
+        assertTrue(qvcProductPage.isColorListExist(), "Color list doesn't present on product page.");
+        String color = qvcProductPage.selectRandomColor();
+        CommonFunctions.attachScreenshot("Color selected: " + color);
+    }
+
+    private void speedBuyProduct() {
+        this.openProduct();
+        qvcProductPage.speedBuy();
     }
 
 

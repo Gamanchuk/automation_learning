@@ -813,13 +813,6 @@ public class CheckoutSteps {
 
     }
 
-    @And("^user presses the Where do I enter my password link$")
-    public void userPressesTheWhereDoIEnterMyPasswordLink() {
-        signInFormComponent.pressWhereDoIEnterMyPassword();
-        CommonFunctions.attachScreenshot("Where do I enter my password");
-        assertEquals(signInFormComponent.getContentAboutPasswordFill(), "If you have a QVC Password, you'll enter it on the next screen. If not, you'll enter your address.");
-    }
-
     @And("^user clicks \"([^\"]*)\" link in note$")
     public void userClicksLinkInNote(String linkText) {
         noteComponent.clickLink(linkText);
