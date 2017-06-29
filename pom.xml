@@ -541,6 +541,16 @@
             </properties>
         </profile>
 
+        <profile>
+            <id>suite-qvc-expressCheckout</id>
+            <properties>
+                <testng.suite>
+                    ${basedir}/src/test/resources/testsuites/qvc/qvc_express_checkout.xml
+                </testng.suite>
+                <suite.id>359</suite.id>
+            </properties>
+        </profile>
+
         <!--environments-->
         <profile>
             <id>env-jenkins-sf</id>

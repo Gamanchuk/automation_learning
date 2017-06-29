@@ -237,8 +237,6 @@ public class CheckoutSteps {
                 user.getZipCode(),
                 user.getPhone()
         );
-
-
     }
 
     @SuppressWarnings("unused")
@@ -303,6 +301,7 @@ public class CheckoutSteps {
         CommonFunctions.sleep(2000);
 
         //Select card uses 4 last symbols
+        radioListComponent.setRoot(null);
         assertTrue(radioListComponent.exists(), "Card Drop-Down doesn't present");
         radioListComponent.select(card.getSecureCardData());
 
@@ -861,4 +860,6 @@ public class CheckoutSteps {
         thankYouPage.clickLinkByTitle(linkTitle);
         CommonFunctions.attachScreenshot("Clicked on link: " + linkTitle);
     }
+
+
 }

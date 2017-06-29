@@ -28,7 +28,11 @@ public class AddressDisplayComponent extends BaseComponent {
         checkStreetAddress(streetAddress);
         checkApt(apt);
         checkCityInfo(cityInfo);
-        checkPhone(phone);
+
+        if (isElementPresent(deliveryPhone, 3)) {
+            checkPhone(phone);
+        }
+
         checkZip(zip);
 
         CommonFunctions.attachScreenshot("Info");
