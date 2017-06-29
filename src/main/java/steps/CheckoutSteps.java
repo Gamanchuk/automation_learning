@@ -654,12 +654,13 @@ public class CheckoutSteps {
 
     @Then("^user presses the Find out more link$")
     public void userPressesTheFindOutMoreLink() {
+        assertTrue(rewardSummaryComponent.exists(), "Find out more link doesn't present");
         rewardSummaryComponent.clickFindOutMore();
         CommonFunctions.attachScreenshot("Find Out More");
     }
 
     @Given("^user makes authorisation with \"([^\"]*)\" email and \"([^\"]*)\" password$")
-    public void userMakesAuthorisationWithEmailAndPassword(String email, String password) throws Throwable {
+    public void userMakesAuthorisationWithEmailAndPassword(String email, String password) {
         signInFormComponent.signIn(email, password);
         CommonFunctions.attachScreenshot("Set [" + email + "] email and [" + password + "] password");
         buttonComponent.clickButton();
@@ -686,14 +687,14 @@ public class CheckoutSteps {
     @Then("^user should be on \"([^\"]*)\" tab$")
     public void userShouldBeOnTab(String tabName) {
         assertTrue(breadcrumbWidget.active(tabName), "Tab " + tabName + " is not an active");
-     //   if (tabName.contains("Delivery")) {
-     //       assertTrue(radioListComponent.exists(), "Delivery Method Drop-Down doesn't exist");
-       // } else {
-         //   assertTrue(breadcrumbWidget.isBreadcrumbActive(tabName), "Tab " + tabName + " is not an active");
-       // }
+        //   if (tabName.contains("Delivery")) {
+        //       assertTrue(radioListComponent.exists(), "Delivery Method Drop-Down doesn't exist");
+        // } else {
+        //   assertTrue(breadcrumbWidget.isBreadcrumbActive(tabName), "Tab " + tabName + " is not an active");
+        // }
         //assertTrue(breadcrumbWidget.isTabActive(tabName), "Tab " + tabName + " is not an active");
-        
-      CommonFunctions.attachScreenshot("User on [" + tabName + "] tab");
+
+        CommonFunctions.attachScreenshot("User on [" + tabName + "] tab");
     }
 
     @And("^user checks \"([^\"]*)\" shipping method$")
@@ -813,6 +814,18 @@ public class CheckoutSteps {
 
     }
 
+    @And("^user presses the Where do I enter my password link$")
+    public void userPressesTheWhereDoIEnterMyPasswordLink() {
+        signInFormComponent.pressWhereDoIEnterMyPassword();
+        CommonFunctions.attachScreenshot("Where do I enter my password");
+    }
+
+    @Then("^user checks notes with text \"([^\"]*)\"$")
+    public void userChecksNotesWithText(String note) {
+        assertEquals(signInFormComponent.getContentAboutPasswordFill(), note);
+        CommonFunctions.attachScreenshot("Content");
+    }
+
     @And("^user clicks \"([^\"]*)\" link in note$")
     public void userClicksLinkInNote(String linkText) {
         noteComponent.clickLink(linkText);
@@ -837,5 +850,12 @@ public class CheckoutSteps {
     @Then("^user should see \"([^\"]*)\" products$")
     public void userShouldSeeProducts(int count) {
         assertEquals(productListComponent.getCountProducts(), count, "Unexpected count product");
+        CommonFunctions.attachScreenshot("Product count");
+    }
+
+    @Given("^user presses the \"([^\"]*)\" link$")
+    public void userPressesTheLink(String linkTitle) {
+        thankYouPage.clickLinkByTitle(linkTitle);
+        CommonFunctions.attachScreenshot("Clicked on link: " + linkTitle);
     }
 }

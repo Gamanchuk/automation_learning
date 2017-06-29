@@ -68,7 +68,9 @@ public class SignInFormComponent extends BaseComponent {
     private void fillField(By field, String value) {
         assertTrue(isElementVisible(field), "Field " + field.toString() + " doesn't present on page.");
         WebElement element = getDriver().findElement(field);
+        CommonFunctions.sleep(500);
         element.clear();
+        CommonFunctions.sleep(500);
         element.sendKeys(value);
     }
 }
