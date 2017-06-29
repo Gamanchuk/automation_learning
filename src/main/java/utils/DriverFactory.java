@@ -46,7 +46,8 @@ public class DriverFactory {
 
 
     public static WebDriver getDriver() {
-
+        log.info("PR NUMBER: " + System.getProperty("mw.pr.number"));
+        log.info("PR LOADER: " + System.getProperty("mw.pr.loader"));
         if (!Boolean.valueOf(System.getProperty("use.desktop.browser"))) {
             startAppiumService();
         }
