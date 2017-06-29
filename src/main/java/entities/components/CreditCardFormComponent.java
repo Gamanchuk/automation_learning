@@ -17,10 +17,10 @@ public class CreditCardFormComponent extends BaseComponent {
     public void inputPaymentDetails(String name, String number, String expDate, String cvv, String cardholderName) {
         assertTrue(isElementVisible(ccNumber), "Card number field doesn't present on page.");
         fillField(ccNumber, number);
-        assertTrue(findElement(By.cssSelector("div.credit-card-number-input")).getAttribute("class").contains(name), "Card icon was not displayed or incorrect");
+        assertTrue(findElement(By.cssSelector("div.credit-card-number-input")).getAttribute("class").contains(name.toLowerCase()), "Card icon was not displayed or incorrect");
 
 
-        if (!name.equals("qcard")) {
+        if (!name.toLowerCase().equals("qcard")) {
             fillField(exp, expDate);
             fillField(csc, cvv);
         }
