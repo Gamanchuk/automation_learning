@@ -324,7 +324,7 @@ public class CheckoutSteps {
         String project = Config.SITE_NAME;
 
 
-        if (project.equals("pepboys-stage") || project.equals("pepboys-prod") || project.equals("pepboys-qcv")) {
+        if (project.equals("pepboys-stage") || project.equals("pepboys-prod") || project.equals("qvc-prod") || project.equals("qvc-stage")) {
 
             String orderNumber = thankYouPage.getOrder();
 
