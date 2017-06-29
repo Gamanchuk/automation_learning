@@ -81,6 +81,7 @@ public class QVCProductPage extends BasePage {
     }
 
     public void setCookies() {
+        log.info("PR NUMBER: " + System.getProperty("pr.number"));
         getDriver().get(BASE_URL + COOKIES);
     }
 }

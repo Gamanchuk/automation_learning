@@ -730,6 +730,11 @@
         </profile>
     </profiles>
 
+    <properties>
+        <pr.number></pr.number>
+        <lp.number></lp.number>
+    </properties>
+
 
     <reporting>
         <excludeDefaults>true</excludeDefaults>
