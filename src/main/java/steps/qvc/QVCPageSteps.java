@@ -122,8 +122,6 @@ public class QVCPageSteps {
     }
 
     private void addProduct() {
-        qvcProductPage.setCookies();
-        assertTrue(qvcMainPage.isPage(), "Main page doesn't opened");
 
         this.openProduct();
 

@@ -61,10 +61,10 @@ public class CreditCard {
         if (cardNumberLength == 16) {
             secureCardNumber = String.format("%s: **** **** **** %s (%s)", cardName, lastFourNumbers, modifiedDate);
 
-        } else if (cardNumberLength == 12) {
-            secureCardNumber = String.format("%s: **** **** %s (%s)", cardName, lastFourNumbers, modifiedDate);
+        } else if (cardNumberLength == 15) {
+            secureCardNumber = String.format("%s: **** **** **** %s", cardName, lastFourNumbers);
         } else {
-            fail("Card number length doesn't equals 16 or 12. Please select another card");
+            fail("Card number length doesn't equals 16 or 15. Please select another card");
         }
 
         log.info("Secure card number: " + cardNumberLength);

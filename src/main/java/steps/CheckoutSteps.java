@@ -305,7 +305,10 @@ public class CheckoutSteps {
         //Select card uses 4 last symbols
         assertTrue(radioListComponent.exists(), "Card Drop-Down doesn't present");
         radioListComponent.select(card.getSecureCardData());
-        creditCardFormComponent.inputValueIntoField(card.getCvv(), "CVV");
+
+        if (!card.getName().equals("qCard")) {
+            creditCardFormComponent.inputValueIntoField(card.getCvv(), "CVV");
+        }
 
         CommonFunctions.attachScreenshot("Card selected");
         TestGlobalsManager.setTestGlobal("CARDHOLDER", card.getCardholderName());
