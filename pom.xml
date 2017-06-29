@@ -22,7 +22,8 @@
         <base.url>${site.url}</base.url>
         <cookies>${site.cookies}</cookies>
         <site.name>${site.base.name}</site.name>
-        <pr.number></pr.number>
+        <mw.pr.number></mw.pr.number>
+        <mw.pr.loader></mw.pr.loader>
     </properties>
 
     <name>Moovweb Automation framework</name>
