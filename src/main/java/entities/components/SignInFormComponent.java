@@ -15,6 +15,7 @@ public class SignInFormComponent extends BaseComponent {
     private By emailField = By.id("shipping-email");
     //private By passwordField = By.id("password");
     private By passwordField = By.xpath("//input[@id='password' or @id='current-password']");
+    private By toGuestCheckoutLink = By.xpath("//a[text()='Proceed to Guest Checkout']");
 
     final static String EMAIL = "email";
     final static String PASSWORD = "password";
@@ -28,8 +29,12 @@ public class SignInFormComponent extends BaseComponent {
         fillEmail(email);
         fillPassword(password);
 
-        //focusOut(passwordFieldEl);
         CommonFunctions.attachScreenshot("Login page");
+    }
+
+    public void proceedToGuestCheckout() {
+        assertTrue(isElementClickable(toGuestCheckoutLink), "Proceed to guest checkout not clickable. Or doesn't exist");
+        getDriver().findElement(toGuestCheckoutLink).click();
     }
 
     public void pressForgotPasswordLink() {
@@ -40,8 +45,6 @@ public class SignInFormComponent extends BaseComponent {
 
     public void fillEmail(String value) {
         fillField(emailField, value);
-
-
     }
 
     public void fillPassword(String value) {

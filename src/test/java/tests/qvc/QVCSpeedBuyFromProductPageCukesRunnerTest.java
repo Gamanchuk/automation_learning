@@ -5,10 +5,10 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 
 
 @CucumberOptions(
-        features = "src/test/resources/features/qvc/existing_account_shipping_details_page/",
+        features = "src/test/resources/features/qvc/speed_buy_from_product_page/",
         glue = "steps",
         tags = {"@qvc", "~@Ignored"}
 )
-class QVCExistingAccountShippingDetailsPageCukesRunnerTest extends AbstractTestNGCucumberTests {
+class QVCSpeedBuyFromProductPageCukesRunnerTest extends AbstractTestNGCucumberTests {
 
 }

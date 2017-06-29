@@ -4,6 +4,7 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import entities.components.ButtonComponent;
+import entities.components.SignInFormComponent;
 import entities.pages.qvc.*;
 import utils.CommonFunctions;
 import utils.Config;
@@ -26,6 +27,7 @@ public class QVCPageSteps {
     private QVCForgotPasswordPage forgotPasswordPage = new QVCForgotPasswordPage();
 
     private ButtonComponent buttonComponent = new ButtonComponent();
+    private SignInFormComponent signInFormComponent = new SignInFormComponent();
 
 
     @Given("^user adds to cart product$")
@@ -36,6 +38,27 @@ public class QVCPageSteps {
         this.addProduct();
 
         qvcCartPage.processToCheckout();
+        assertTrue(buttonComponent.exists(), "Button component doesn't present on page. " +
+                "It seems that the checkout did not boot for " + TIMEOUT_SECONDS + " seconds");
+    }
+
+    @Given("^user adds to cart product and speed buy$")
+    public void userAddsToCartProductAndSpeedBuy() {
+        qvcProductPage.setCookies();
+        assertTrue(qvcMainPage.isPage(), "Main page doesn't opened");
+
+        this.addProduct();
+
+        qvcCartPage.processToSpeedBuy();
+        assertTrue(buttonComponent.exists(), "Button component doesn't present on page. " +
+                "It seems that the checkout did not boot for " + TIMEOUT_SECONDS + " seconds");
+    }
+
+    @Given("^user speed buy product$")
+    public void userSpeedBuyProduct() {
+        qvcProductPage.setCookies();
+        assertTrue(qvcMainPage.isPage(), "Main page doesn't opened");
+        this.speedBuyProduct();
         assertTrue(buttonComponent.exists(), "Button component doesn't present on page. " +
                 "It seems that the checkout did not boot for " + TIMEOUT_SECONDS + " seconds");
     }
@@ -52,7 +75,6 @@ public class QVCPageSteps {
         qvcCartPage.processToCheckout();
         assertTrue(buttonComponent.exists(), "Button component doesn't present on page. " +
                 "It seems that the checkout did not boot for " + TIMEOUT_SECONDS + " seconds");
-
     }
 
     @And("^user should be on QVC cart page$")
@@ -107,6 +129,33 @@ public class QVCPageSteps {
         assertTrue(qvcCartPage.isPage(), "Cart page doesn't present.");
         assertEquals(qvcCartPage.getErrorMessage(), errorMessage, "Unexpected error message on QVC cart page");
         CommonFunctions.attachScreenshot("Error message");
+    }
+
+    @And("^user presses the Where do I enter my password link$")
+    public void userPressesTheWhereDoIEnterMyPasswordLink() {
+        signInFormComponent.pressWhereDoIEnterMyPassword();
+        CommonFunctions.attachScreenshot("Where do I enter my password");
+        assertEquals(signInFormComponent.getContentAboutPasswordFill(), "If you have a QVC Password, you'll enter it on the next screen. If not, you'll enter your address.");
+    }
+
+    private void addProduct() {
+        this.openProduct();
+        qvcProductPage.addToCart();
+        assertTrue(qvcCartPage.isPage(), "Cart page doesn't present.");
+    }
+
+    private void openProduct() {
+        qvcProductPage.openPage(DataProvider.getRandomItem());
+        CommonFunctions.attachScreenshot("Product Page");
+
+        assertTrue(qvcProductPage.isColorListExist(), "Color list doesn't present on product page.");
+        String color = qvcProductPage.selectRandomColor();
+        CommonFunctions.attachScreenshot("Color selected: " + color);
+    }
+
+    private void speedBuyProduct() {
+        this.openProduct();
+        qvcProductPage.speedBuy();
     }
 
     @Then("^user should be on Order Status page$")
