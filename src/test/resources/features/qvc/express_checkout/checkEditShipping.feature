@@ -1,4 +1,4 @@
-@qvc @Ignored
+@qvc
 
 Feature: EXISTING - REVIEW PAGE - HEADER & FOOTER
 
@@ -9,10 +9,11 @@ Feature: EXISTING - REVIEW PAGE - HEADER & FOOTER
     And user checks "Using your default shipping and payment information?" checkbox
     And user fills password field with "q1q1w1w1"
     And presses the "Continue" button
-    Then user should be on "Payment" tab
+    Then user should be on "Review" tab
 
 
   @TestCaseId("")
   Scenario: Check Edit Shipping info
 
-    #TODO: Need finish after George answer
+    And user clicks arrow for "Billing Address"
+    Then user should be on "Address" tab

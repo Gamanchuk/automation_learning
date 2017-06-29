@@ -1,6 +1,5 @@
 @qvc
 
-
 Feature: EXPRESS CHECKOUT - BREADCRUMB
 
   Background: Add product to card and process to checkout
@@ -10,7 +9,7 @@ Feature: EXPRESS CHECKOUT - BREADCRUMB
     And user checks "Using your default shipping and payment information?" checkbox
     And user fills password field with "q1q1w1w1"
     And presses the "Continue" button
-    Then user should be on "Payment" tab
+    Then user should be on "Review" tab
     And user navigates to "Address" breadcrumb
 
   @TestCaseId("")

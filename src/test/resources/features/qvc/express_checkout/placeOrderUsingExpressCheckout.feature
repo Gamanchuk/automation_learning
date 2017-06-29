@@ -1,4 +1,4 @@
-@qvc @debug
+@qvc
 
 Feature: EXPRESS CHECKOUT
 
@@ -9,13 +9,10 @@ Feature: EXPRESS CHECKOUT
     And user checks "Using your default shipping and payment information?" checkbox
     And user fills password field with "q1q1w1w1"
     And presses the "Continue" button
-    Then user should be on "Payment" tab
+    Then user should be on "Review" tab
 
   @TestCaseId("")
   Scenario: Place order using express checkout
 
-    Given uses saved "visa" card for payment
-    And presses the "Continue" button
-    Then user should be on "Review" tab
-    And presses the "Place Order" button
+    Given presses the "Place Order" button
     Then user should be on thank you page
