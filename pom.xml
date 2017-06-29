@@ -22,6 +22,7 @@
         <base.url>${site.url}</base.url>
         <cookies>${site.cookies}</cookies>
         <site.name>${site.base.name}</site.name>
+        <pr.number></pr.number>
     </properties>
 
     <name>Moovweb Automation framework</name>
@@ -729,11 +730,6 @@
             </properties>
         </profile>
     </profiles>
-
-    <properties>
-        <pr.number></pr.number>
-        <lp.number></lp.number>
-    </properties>
 
 
     <reporting>
