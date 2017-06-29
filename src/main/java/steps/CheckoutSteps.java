@@ -659,13 +659,6 @@ public class CheckoutSteps {
         CommonFunctions.attachScreenshot("Find Out More");
     }
 
-    @Then("^user presses the Check the status of your order link$")
-    public void userPressesTheOrderStatusLink() {
-        thankYouPage.clickOnOrderStatus();
-        CommonFunctions.attachScreenshot("Check the status of your order");
-    }
-
-
     @Given("^user makes authorisation with \"([^\"]*)\" email and \"([^\"]*)\" password$")
     public void userMakesAuthorisationWithEmailAndPassword(String email, String password) {
         signInFormComponent.signIn(email, password);
@@ -827,6 +820,7 @@ public class CheckoutSteps {
         signInFormComponent.pressWhereDoIEnterMyPassword();
         CommonFunctions.attachScreenshot("Where do I enter my password");
         assertEquals(signInFormComponent.getContentAboutPasswordFill(), "If you have a QVC Password, you'll enter it on the next screen. If not, you'll enter your address.");
+        CommonFunctions.attachScreenshot("Content");
     }
 
     @And("^user clicks \"([^\"]*)\" link in note$")

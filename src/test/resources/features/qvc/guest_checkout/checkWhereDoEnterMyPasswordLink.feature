@@ -1,4 +1,4 @@
-@qvc
+@qvc @debug
 
 Feature: GUEST CHECKOUT
 

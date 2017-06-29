@@ -44,8 +44,4 @@ public class ThankYouPage extends BasePage {
     public void clickOnReschedule() {
         getDriver().findElement(By.xpath("//a[contains(@class, 'edit-installation-link')]")).click();
     }
-
-    public void clickOnOrderStatus() {
-        getDriver().findElement(By.xpath("//a[text()='Check the status of your order now']")).click();
-    }
 }

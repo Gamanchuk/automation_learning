@@ -1,4 +1,4 @@
-@qvc @debug
+@qvc
 
 Feature: EXISTING ACCOUNT - REVIEW & PLACE ORDER PAGE - THANK YOU PAGE
 
@@ -11,7 +11,7 @@ Feature: EXISTING ACCOUNT - REVIEW & PLACE ORDER PAGE - THANK YOU PAGE
     And user should be on "Delivery" tab
     And presses the "Continue" button
     And user should be on "Payment" tab
-    And uses "Pay with Check / Money Order" for payment
+    And uses saved "visa" card for payment
     And presses the "Continue" button
     And user should be on "Review" tab
     And presses the "Place Order" button

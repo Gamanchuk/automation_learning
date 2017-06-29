@@ -1,4 +1,4 @@
-@qvc @debug
+@qvc
 
 Feature: GUEST - REVIEW & PLACE ORDER PAGE - THANK YOU PAGE
 
@@ -6,21 +6,19 @@ Feature: GUEST - REVIEW & PLACE ORDER PAGE - THANK YOU PAGE
     Given user adds to cart product
     And user continue checkout as guest
     And presses the "Continue" button
+    And user should be on "Address" tab
     And user types billing info for "qa user" without email
     And presses the "Continue" button
     And user should be on "Delivery" tab
     And presses the "Continue" button
-    And user should be on "Payment" tab
-    And uses "visa" card for payment
+    And uses "Pay with Check / Money Order" for payment
     And presses the "Continue" button
     And user should be on "Review" tab
-    Then presses the "Place Order" button
+    And presses the "Place Order" button
+    Then user should be on thank you page
 
   @TestCaseId("102037")
   Scenario: Links at Thank you page
-    Given user should be on thank you page
 
-    #TODO: Finish this case when credit cards or qCards work again
-    Then user presses the Check the status of your order link
-    Then user should be on "Order Status" page
-
+    Given user presses the "Check the status of your order now" link
+    Then user should be on Order Status page

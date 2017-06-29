@@ -1,4 +1,4 @@
-@qvc @debug
+@qvc
 
 Feature: GUEST - REVIEW & PLACE ORDER PAGE - THANK YOU PAGE
 
@@ -6,20 +6,21 @@ Feature: GUEST - REVIEW & PLACE ORDER PAGE - THANK YOU PAGE
     Given user adds to cart product
     And user continue checkout as guest
     And presses the "Continue" button
+    And user should be on "Address" tab
     And user types billing info for "qa user" without email
     And presses the "Continue" button
     And user should be on "Delivery" tab
     And presses the "Continue" button
-    And user should be on "Payment" tab
-    And uses "visa" card for payment
+    And uses "Pay with Check / Money Order" for payment
     And presses the "Continue" button
     And user should be on "Review" tab
-    Then presses the "Place Order" button
+    And presses the "Place Order" button
+    Then user should be on thank you page
+
 
   @TestCaseId("102038")
   Scenario: Check button Continue Shopping
 
     #TODO: Test this case when credit cards or qCards work again to confirm
-    Given user should be on thank you page
-    Then presses the "Continue Shopping" button
-    And user should be on QVC main page
+    Given presses the "Continue Shopping" button
+    Then user should be on QVC main page

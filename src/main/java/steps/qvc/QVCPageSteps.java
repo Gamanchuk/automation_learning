@@ -76,6 +76,10 @@ public class QVCPageSteps {
 
         qvcProductPage.addToCart();
 
+        if (!qvcCartPage.isPage()) {
+            qvcProductPage.addToCart();
+        }
+
         assertTrue(qvcCartPage.isPage(), "Cart page doesn't present.");
     }
 
