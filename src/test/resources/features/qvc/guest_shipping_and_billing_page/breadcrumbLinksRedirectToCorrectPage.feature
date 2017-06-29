@@ -39,7 +39,7 @@ Feature: GUEST - BREADCRUMB
 
     # Check from Payment tab
     And user presses "Review" breadcrumb tab
-    And uses "mastercard" card for payment
+    And uses "Pay with Check / Money Order" for payment
     And presses the "Continue" button
     Then user should be on "Review" tab
 
