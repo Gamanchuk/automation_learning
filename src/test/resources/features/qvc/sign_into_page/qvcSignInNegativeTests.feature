@@ -31,7 +31,7 @@ Feature: SIGN IN PAGE
     And presses the "Continue" button
     Then sees "FORM ERRORS" error message with text "Please review all inputs."
 
-    Given user fills email field with " "
+    Given user fills email field with ""
     And user fills password field with "Spear201!"
     And presses the "Continue" button
     Then sees "FORM ERRORS" error message with text "Please review all inputs."
@@ -40,12 +40,12 @@ Feature: SIGN IN PAGE
     And user fills password field with ""
     Then sees "FORM ERRORS" error message with text "Please review all inputs."
 
-    Given user fills email field with " "
+    Given user fills email field with ""
     And user fills password field with "invalid"
     Then sees "FORM ERRORS" error message with text "Please review all inputs."
 
     Given user fills email field with "invalid"
-    And user fills password field with " "
+    And user fills password field with ""
     Then sees "FORM ERRORS" error message with text "Please review all inputs."
 
 

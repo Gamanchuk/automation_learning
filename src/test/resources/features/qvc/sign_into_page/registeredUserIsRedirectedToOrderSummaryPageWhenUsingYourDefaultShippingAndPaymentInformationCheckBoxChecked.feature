@@ -13,4 +13,4 @@ Feature: SIGN IN PAGE
     And user checks "Using your default shipping and payment information?" checkbox
     And user fills password field with "q1q1w1w1"
     And presses the "Continue" button
-    Then user should be on "Payment" tab
+    Then user should be on "Review" tab
