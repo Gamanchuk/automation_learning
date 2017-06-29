@@ -29,7 +29,6 @@ public class QVCPageSteps {
     private ButtonComponent buttonComponent = new ButtonComponent();
     private SignInFormComponent signInFormComponent = new SignInFormComponent();
 
-
     @Given("^user adds to cart product$")
     public void userAddsToCartProduct() {
         qvcProductPage.setCookies();
@@ -38,27 +37,6 @@ public class QVCPageSteps {
         this.addProduct();
 
         qvcCartPage.processToCheckout();
-        assertTrue(buttonComponent.exists(), "Button component doesn't present on page. " +
-                "It seems that the checkout did not boot for " + TIMEOUT_SECONDS + " seconds");
-    }
-
-    @Given("^user adds to cart product and speed buy$")
-    public void userAddsToCartProductAndSpeedBuy() {
-        qvcProductPage.setCookies();
-        assertTrue(qvcMainPage.isPage(), "Main page doesn't opened");
-
-        this.addProduct();
-
-        qvcCartPage.processToSpeedBuy();
-        assertTrue(buttonComponent.exists(), "Button component doesn't present on page. " +
-                "It seems that the checkout did not boot for " + TIMEOUT_SECONDS + " seconds");
-    }
-
-    @Given("^user speed buy product$")
-    public void userSpeedBuyProduct() {
-        qvcProductPage.setCookies();
-        assertTrue(qvcMainPage.isPage(), "Main page doesn't opened");
-        this.speedBuyProduct();
         assertTrue(buttonComponent.exists(), "Button component doesn't present on page. " +
                 "It seems that the checkout did not boot for " + TIMEOUT_SECONDS + " seconds");
     }
@@ -77,32 +55,37 @@ public class QVCPageSteps {
                 "It seems that the checkout did not boot for " + TIMEOUT_SECONDS + " seconds");
     }
 
+    @Given("^user speed buy product$")
+    public void userSpeedBuyProduct() {
+        qvcProductPage.setCookies();
+        assertTrue(qvcMainPage.isPage(), "Main page doesn't opened");
+        this.speedBuyProduct();
+        assertTrue(buttonComponent.exists(), "Button component doesn't present on page. " +
+                "It seems that the checkout did not boot for " + TIMEOUT_SECONDS + " seconds");
+    }
+
+    @Given("^user adds to cart product and speed buy$")
+    public void userAddsToCartProductAndSpeedBuy() {
+        qvcProductPage.setCookies();
+        assertTrue(qvcMainPage.isPage(), "Main page doesn't opened");
+
+        this.addProduct();
+
+        qvcCartPage.processToSpeedBuy();
+        assertTrue(buttonComponent.exists(), "Button component doesn't present on page. " +
+                "It seems that the checkout did not boot for " + TIMEOUT_SECONDS + " seconds");
+    }
+
     @And("^user should be on QVC cart page$")
     public void userShouldBeOnCartPage() {
         assertTrue(qvcCartPage.isPage(), "Cart page was not opened");
+        CommonFunctions.attachScreenshot("Cart page opened");
     }
 
     @Then("^user should be on QVC main page$")
     public void userShouldBeOnMainPage() {
         assertTrue(qvcMainPage.isPage(), "Main page was not opened. Maybe page have some problems with loading");
         CommonFunctions.attachScreenshot("Main page opened");
-    }
-
-    private void addProduct() {
-        qvcProductPage.openPage(DataProvider.getRandomItem());
-        CommonFunctions.attachScreenshot("Product Page");
-
-        assertTrue(qvcProductPage.isColorListExist(), "Color list doesn't present on product page.");
-        String color = qvcProductPage.selectRandomColor();
-        CommonFunctions.attachScreenshot("Color selected: " + color);
-
-        qvcProductPage.addToCart();
-
-        if (!qvcCartPage.isPage()) {
-            qvcProductPage.addToCart();
-        }
-
-        assertTrue(qvcCartPage.isPage(), "Cart page doesn't present.");
     }
 
     @Then("^user should be on QVC forgot password page$")
@@ -131,16 +114,25 @@ public class QVCPageSteps {
         CommonFunctions.attachScreenshot("Error message");
     }
 
-    @And("^user presses the Where do I enter my password link$")
-    public void userPressesTheWhereDoIEnterMyPasswordLink() {
-        signInFormComponent.pressWhereDoIEnterMyPassword();
-        CommonFunctions.attachScreenshot("Where do I enter my password");
-        assertEquals(signInFormComponent.getContentAboutPasswordFill(), "If you have a QVC Password, you'll enter it on the next screen. If not, you'll enter your address.");
+    @Then("^user should be on Order Status page$")
+    public void userShouldBeOnOrderStatusPage() {
+        assertTrue(qvcOrderStatusPage.isPage(), "Order Status page was not opened. Maybe page have some problems with loading");
+        CommonFunctions.attachScreenshot("Order Status page opened");
+
     }
 
     private void addProduct() {
+        qvcProductPage.setCookies();
+        assertTrue(qvcMainPage.isPage(), "Main page doesn't opened");
+
         this.openProduct();
+
         qvcProductPage.addToCart();
+
+        if (!qvcCartPage.isPage()) {
+            qvcProductPage.addToCart();
+        }
+
         assertTrue(qvcCartPage.isPage(), "Cart page doesn't present.");
     }
 
@@ -154,14 +146,10 @@ public class QVCPageSteps {
     }
 
     private void speedBuyProduct() {
+        qvcProductPage.setCookies();
+        assertTrue(qvcMainPage.isPage(), "Main page doesn't opened");
+
         this.openProduct();
         qvcProductPage.speedBuy();
-    }
-
-    @Then("^user should be on Order Status page$")
-    public void userShouldBeOnOrderStatusPage() {
-        assertTrue(qvcOrderStatusPage.isPage(), "Order Status page was not opened. Maybe page have some problems with loading");
-        CommonFunctions.attachScreenshot("Order Status page opened");
-
     }
 }

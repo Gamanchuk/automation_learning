@@ -818,7 +818,11 @@ public class CheckoutSteps {
     public void userPressesTheWhereDoIEnterMyPasswordLink() {
         signInFormComponent.pressWhereDoIEnterMyPassword();
         CommonFunctions.attachScreenshot("Where do I enter my password");
-        assertEquals(signInFormComponent.getContentAboutPasswordFill(), "If you have a QVC Password, you'll enter it on the next screen. If not, you'll enter your address.");
+    }
+
+    @Then("^user checks notes with text \"([^\"]*)\"$")
+    public void userChecksNotesWithText(String note) {
+        assertEquals(signInFormComponent.getContentAboutPasswordFill(), note);
         CommonFunctions.attachScreenshot("Content");
     }
 
