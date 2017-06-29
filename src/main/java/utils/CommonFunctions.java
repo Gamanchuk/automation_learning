@@ -9,6 +9,8 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.CharEncoding;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openqa.selenium.JavascriptException;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.testng.Reporter;
@@ -17,6 +19,8 @@ import ru.yandex.qatools.allure.annotations.Attachment;
 import java.io.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static utils.DriverFactory.getDriver;
 
 public class CommonFunctions {
     private static Log log = LogFactory.getLog(CommonFunctions.class.getSimpleName());
@@ -75,7 +79,7 @@ public class CommonFunctions {
 
     @Attachment(value = "{0}", type = "image/png")
     public static byte[] attachScreenshot(String name) {
-        return ((TakesScreenshot) DriverFactory.getDriver()).getScreenshotAs(OutputType.BYTES);
+        return ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.BYTES);
     }
 
 
@@ -174,5 +178,16 @@ public class CommonFunctions {
                 Config.DEVICE_UID,
                 System.getProperty("user.dir") + "/target");
         CommonFunctions.runShell("flick", arguments);
+    }
+
+    public static void executeJavaScript(String command) {
+        try {
+            JavascriptExecutor js = (JavascriptExecutor) getDriver();
+            String result = (String) js.executeScript(command);
+            log.info("Execute JS result: " + result);
+        } catch (JavascriptException js) {
+            log.error("Execute JS error: " + js.getMessage());
+        }
+
     }
 }
