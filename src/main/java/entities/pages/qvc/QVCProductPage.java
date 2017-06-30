@@ -49,7 +49,7 @@ public class QVCProductPage extends BasePage {
     }
 
     public boolean isColorListExist() {
-        return isElementVisible(colorList);
+        return isElementPresent(colorList);
     }
 
     public void addToCart() {
