@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 
-<suite name="EXISTING ACCOUNT - SHIPPING DETAILS PAGE">
+<suite name="QVC EXISTING ACCOUNT - SHIPPING DETAILS PAGE">
     <test name="All tests">
         <classes>
             <class name="tests.qvc.QVCExistingAccountShippingDetailsPageCukesRunnerTest"/>

@@ -31,8 +31,7 @@ public class QVCPageSteps {
 
     @Given("^user adds to cart product$")
     public void userAddsToCartProduct() {
-        qvcProductPage.setCookies();
-        assertTrue(qvcMainPage.isPage(), "Main page doesn't opened");
+        this.setCookies();
 
         this.addProduct();
 
@@ -43,8 +42,7 @@ public class QVCPageSteps {
 
     @Given("^user adds to cart \"([^\"]*)\" products$")
     public void userAddsToCartProducts(int count) {
-        qvcProductPage.setCookies();
-        assertTrue(qvcMainPage.isPage(), "Main page doesn't opened");
+        this.setCookies();
 
         for (int i = 0; i < count; i++) {
             this.addProduct();
@@ -57,8 +55,8 @@ public class QVCPageSteps {
 
     @Given("^user speed buy product$")
     public void userSpeedBuyProduct() {
-        qvcProductPage.setCookies();
-        assertTrue(qvcMainPage.isPage(), "Main page doesn't opened");
+        this.setCookies();
+
         this.speedBuyProduct();
         assertTrue(buttonComponent.exists(), "Button component doesn't present on page. " +
                 "It seems that the checkout did not boot for " + TIMEOUT_SECONDS + " seconds");
@@ -66,8 +64,7 @@ public class QVCPageSteps {
 
     @Given("^user adds to cart product and speed buy$")
     public void userAddsToCartProductAndSpeedBuy() {
-        qvcProductPage.setCookies();
-        assertTrue(qvcMainPage.isPage(), "Main page doesn't opened");
+        this.setCookies();
 
         this.addProduct();
 
@@ -119,6 +116,16 @@ public class QVCPageSteps {
         assertTrue(qvcOrderStatusPage.isPage(), "Order Status page was not opened. Maybe page have some problems with loading");
         CommonFunctions.attachScreenshot("Order Status page opened");
 
+    }
+
+    private void setCookies() {
+        qvcProductPage.setCookies();
+
+        if (qvcMainPage.isPage()) {
+            qvcProductPage.setCookies();
+        }
+
+        assertTrue(qvcMainPage.isPage(), "Main page doesn't opened");
     }
 
     private void addProduct() {

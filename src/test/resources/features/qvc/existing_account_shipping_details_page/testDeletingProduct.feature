@@ -11,6 +11,7 @@ Feature: EXISTING ACCOUNT - SHIPPING DETAILS PAGE
     Then user should be on "Delivery" tab
 
   @Issue("MCCAT-6168")
+  @Issue("MCCAT-6198")
   @TestCaseId("102305")
   Scenario: Test Deleting a product from Shipping Detail Page
 

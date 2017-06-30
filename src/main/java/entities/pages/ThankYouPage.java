@@ -21,9 +21,10 @@ public class ThankYouPage extends BasePage {
     }
 
     public void openCollapser() {
-        if (isCollapsed()) {
-            getDriver().findElement(collapser).click();
-
+        if (isElementVisible(collapser, 5)) {
+            if (isCollapsed()) {
+                getDriver().findElement(collapser).click();
+            }
         }
     }
 

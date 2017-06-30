@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 
-<suite name="GUEST PAYMENT PAGE">
+<suite name="QVC GUEST - PAYMENT PAGE">
     <test name="All tests">
         <classes>
             <class name="tests.qvc.QVCGuestPaymentPageCukesRunnerTest"/>
