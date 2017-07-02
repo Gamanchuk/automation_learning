@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import utils.CommonFunctions;
 
 import java.util.List;
 import java.util.Random;
@@ -18,7 +19,7 @@ public class QVCProductPage extends BasePage {
     private By age = By.id("cbAge");
 
     public void openPage(String productUrl) {
-        String fullPath = BASE_URL + productUrl;
+        String fullPath = String.format("%s%s", BASE_URL, productUrl);
 
         getDriver().navigate().to(fullPath);
         waitForDocumentReady();
@@ -28,13 +29,14 @@ public class QVCProductPage extends BasePage {
             waitForDocumentReady();
         }
 
-
         assertTrue(isPage(), "Product page was not opened.");
-
     }
 
     public String selectRandomColor() {
         javascriptScroll(500);
+
+        // need sleep after scroll
+        CommonFunctions.sleep(1000);
         assertTrue(isElementVisible(colorList), "Color list doesn't on page");
 
         List<WebElement> colorsListElements = getDriver().findElements(colorList);
@@ -54,6 +56,7 @@ public class QVCProductPage extends BasePage {
 
     public void addToCart() {
         waitForAjax();
+        waitForDocumentReady();
 
         try {
             JavascriptExecutor js = (JavascriptExecutor) getDriver();
