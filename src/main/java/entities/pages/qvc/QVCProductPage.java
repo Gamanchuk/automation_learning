@@ -4,11 +4,7 @@ import entities.pages.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptException;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
 import utils.CommonFunctions;
-
-import java.util.List;
-import java.util.Random;
 
 import static org.testng.Assert.assertTrue;
 
@@ -32,22 +28,15 @@ public class QVCProductPage extends BasePage {
         assertTrue(isPage(), "Product page was not opened.");
     }
 
-    public String selectRandomColor() {
+    public void selectRandomColor() {
         javascriptScroll(500);
 
         // need sleep after scroll
         CommonFunctions.sleep(1000);
         assertTrue(isElementVisible(colorList), "Color list doesn't on page");
 
-        List<WebElement> colorsListElements = getDriver().findElements(colorList);
-        WebElement randomColor = colorsListElements.get(new Random().nextInt(colorsListElements.size()));
-
-        String colorName = randomColor.getAttribute("data-original-title");
-
-        randomColor.click();
+        getDriver().findElement(colorList).click();
         waitForAjax();
-
-        return colorName;
     }
 
     public boolean isColorListExist() {

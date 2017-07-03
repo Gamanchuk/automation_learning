@@ -138,8 +138,9 @@ public class QVCPageSteps {
 
         CommonFunctions.sleep(2000);
         assertTrue(qvcProductPage.isColorListExist(), "Color list doesn't present on product page.");
-        String color = qvcProductPage.selectRandomColor();
-        CommonFunctions.attachScreenshot("Color selected: " + color);
+        //String color =
+        qvcProductPage.selectRandomColor();
+        CommonFunctions.attachScreenshot("Color selected: ");
     }
 
     private void speedBuyProduct() {
