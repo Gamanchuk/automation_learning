@@ -11,7 +11,6 @@ Feature: EXISTING ACCOUNT - REVIEW & PLACE ORDER PAGE - THANK YOU PAGE
     And user should be on "Delivery" tab
     And presses the "Continue" button
     And user should be on "Payment" tab
-    And uses saved "visa" card for payment
     And presses the "Continue" button
     And user should be on "Review" tab
     And presses the "Place Order" button
