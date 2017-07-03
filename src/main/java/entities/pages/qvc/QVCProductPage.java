@@ -86,7 +86,7 @@ public class QVCProductPage extends BasePage {
         log.info("PR NUMBER: " + prNumber);
         log.info("PR LOADER: " + prLoader);
         String URL = BASE_URL + COOKIES + prNumber + prLoader;
-        log.info(URL);
+        log.error(URL);
         getDriver().get(URL);
         // getDriver().get(String.format("%s%s%s%s", BASE_URL, COOKIES, prNumber, prLoader));
     }
