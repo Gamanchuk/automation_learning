@@ -26,7 +26,7 @@ public class Config {
     public static final String COOKIES;
     public static final String SITE_NAME;
     public static final String STORE_ID;
-    ;
+    
 
     public static final String ANALYTICS_URL = "http://mc-events.moovweb.net";
 
