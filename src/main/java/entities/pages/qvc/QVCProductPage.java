@@ -85,6 +85,9 @@ public class QVCProductPage extends BasePage {
         String prLoader = System.getProperty("mw.pr.loader");
         log.info("PR NUMBER: " + prNumber);
         log.info("PR LOADER: " + prLoader);
+        log.info(BASE_URL);
+        log.info(COOKIES);
+      
         String URL = BASE_URL + COOKIES + prNumber + prLoader;
         log.error(URL);
         getDriver().get(URL);
