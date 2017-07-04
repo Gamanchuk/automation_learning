@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 
-<suite name="SPEED BUY FROM CART">
+<suite name="QVC SPEED BUY FROM CART">
     <test name="All tests">
         <classes>
             <class name="tests.qvc.QVCSpeedBuyFromCartCukesRunnerTest"/>

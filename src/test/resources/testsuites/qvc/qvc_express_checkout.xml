@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 
-<suite name="EXPRESS CHECKOUT">
+<suite name="QVC EXPRESS CHECKOUT">
     <test name="All tests">
         <classes>
             <class name="tests.qvc.QVCExpressCheckoutCukesRunnerTest"/>

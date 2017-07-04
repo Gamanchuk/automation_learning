@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 
-<suite name="All Tests">
+<suite name="PEPBOYS - EXISTING ACCOUNT - SHIPPING AND BILLING PAGE">
     <test name="All tests">
         <classes>
             <class name="tests.pepboys.PepBoysExistingAccountShippingBillingPageCukesRunnerTest"/>
