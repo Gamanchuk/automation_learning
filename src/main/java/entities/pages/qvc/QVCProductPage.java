@@ -18,13 +18,12 @@ public class QVCProductPage extends BasePage {
         String fullPath = String.format("%s%s", BASE_URL, productUrl);
 
         getDriver().navigate().to(fullPath);
-        CommonFunctions.sleep(3000);
-        //waitForDocumentReady();
+        waitForDocumentReady();
 
         if (!isUrlChanged(fullPath, 5)) {
             log.info("URL not changed. Retry navigate on page");
             getDriver().navigate().to(fullPath);
-            //  waitForDocumentReady();
+            waitForDocumentReady();
         }
 
         assertTrue(isPage(), "Product page was not opened.");
@@ -46,16 +45,7 @@ public class QVCProductPage extends BasePage {
     }
 
     public void addToCart() {
-        waitForAjax();
-        waitForDocumentReady();
-
-        try {
-            JavascriptExecutor js = (JavascriptExecutor) getDriver();
-            String result = (String) js.executeScript("checkForColorSize('A', document.getElementsByClassName(\"btnAddToCart\"))");
-            log.info("Add to cart status: " + result);
-        } catch (JavascriptException js) {
-            log.error("Add to cart: " + js.getMessage());
-        }
+        getDriver().findElement(addToCart).click();
     }
 
     public void speedBuy() {
@@ -72,9 +62,5 @@ public class QVCProductPage extends BasePage {
 
     boolean isPage() {
         return isElementVisible(addToCart);
-    }
-
-    public void setCookies() {
-        getDriver().get(BASE_URL + COOKIES);
     }
 }

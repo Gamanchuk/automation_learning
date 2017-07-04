@@ -304,19 +304,23 @@ public abstract class Entity {
                 }
             });
         } catch (TimeoutException e) {
-            log.error("ReadyState is not complete or Ajax process is not finished  within " + TIMEOUT_SECONDS + " seconds");
+            log.error("ReadyState is not complete or Ajax process is not finished in " + TIMEOUT_SECONDS + " seconds");
         }
     }
 
     protected void waitForDocumentReady() {
-        new WebDriverWait(driver, TIMEOUT_SECONDS).until(new ExpectedCondition<Boolean>() {
-            public Boolean apply(WebDriver driver) {
-                JavascriptExecutor js = (JavascriptExecutor) driver;
-                boolean result = (Boolean) js.executeScript("return document.readyState").toString().equals("complete");
-                log.info("document.readyState: " + result);
-                return result;
-            }
-        });
+        try {
+            new WebDriverWait(driver, TIMEOUT_SECONDS).until(new ExpectedCondition<Boolean>() {
+                public Boolean apply(WebDriver driver) {
+                    JavascriptExecutor js = (JavascriptExecutor) driver;
+                    boolean result = (Boolean) js.executeScript("return document.readyState").toString().equals("complete");
+                    log.info("document.readyState: " + result);
+                    return result;
+                }
+            });
+        } catch (TimeoutException e) {
+            log.error("ReadyState is not complete in " + TIMEOUT_SECONDS + " seconds");
+        }
     }
 
     private boolean waitForRedirect(String url, int timeout) {

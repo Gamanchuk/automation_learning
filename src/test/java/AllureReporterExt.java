@@ -2,10 +2,7 @@ import gherkin.formatter.model.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import ru.yandex.qatools.allure.cucumberjvm.AllureReporter;
-import utils.BrowserConsoleLogAggregator;
-import utils.CommonFunctions;
-import utils.DriverFactory;
-import utils.TestGlobalsManager;
+import utils.*;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -25,8 +22,8 @@ public class AllureReporterExt extends AllureReporter {
     @Override
     public void scenario(Scenario scenario) {
         this.scenario = scenario;
-        if (scenario != null) {
-            if (Boolean.valueOf(System.getProperty("projectTracking"))) {
+        if(scenario != null) {
+            if (Config.PROJECT_TRACKING) {
                 getTestCaseIDs();
             }
             TestGlobalsManager.setTestGlobal("caseName", scenario.getName());

@@ -22,6 +22,11 @@
         <base.url>${site.url}</base.url>
         <cookies>${site.cookies}</cookies>
         <site.name>${site.base.name}</site.name>
+        <mw.pr.number></mw.pr.number>
+        <mw.pr.loader></mw.pr.loader>
+        <xcode.logs></xcode.logs>
+        <appium.logs></appium.logs>
+        <project.tracking></project.tracking>
     </properties>
 
     <name>Moovweb Automation framework</name>
@@ -232,8 +237,6 @@
                     <systemPropertyVariables>
                         <environment.name>${testing.env}</environment.name>
                         <properties.file.name>${props.file.name}</properties.file.name>
-                        <projectTracking>${projectTracking}</projectTracking>
-                        <verboseLogging>${verboseLogging}</verboseLogging>
                         <use.desktop.browser>${use.desktop.browser}</use.desktop.browser>
                         <suite.id>${suite.id}</suite.id>
                         <site.name>${site.base.name}</site.name>
@@ -280,21 +283,6 @@
     </build>
 
     <profiles>
-        <!--project tracking-->
-        <profile>
-            <id>Project-Tracking</id>
-            <properties>
-                <projectTracking>true</projectTracking>
-            </properties>
-        </profile>
-
-        <!--project tracking-->
-        <profile>
-            <id>Verbose-Logging</id>
-            <properties>
-                <verboseLogging>true</verboseLogging>
-            </properties>
-        </profile>
 
         <!--use desktop browser-->
         <profile>
