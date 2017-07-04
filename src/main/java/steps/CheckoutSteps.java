@@ -59,6 +59,7 @@ public class CheckoutSteps {
     private ShippingOptionsComponent shippingOptionsComponent = new ShippingOptionsComponent();
     private CountrySelectorComponent countrySelectorComponent = new CountrySelectorComponent();
     private AddressVerificationComponent addressVerificationComponent = new AddressVerificationComponent();
+    private SavedOptionPickerComponent savedOptionPickerComponent = new SavedOptionPickerComponent();
 
 
     @Given("^user fills email field with \"([^\"]*)\"$")
@@ -301,9 +302,9 @@ public class CheckoutSteps {
         CommonFunctions.sleep(2000);
 
         //Select card uses 4 last symbols
-        radioListComponent.setRoot(null);
-        assertTrue(radioListComponent.exists(), "Card Drop-Down doesn't present");
-        radioListComponent.select(card.getSecureCardData());
+        //radioListComponent.setRoot(null);
+        assertTrue(savedOptionPickerComponent.exists(), "Drop-down with saved cards doesn't present");
+        savedOptionPickerComponent.selectCard(card.getSecureCardData());
 
         if (!card.getName().equals("qCard")) {
             creditCardFormComponent.inputValueIntoField(card.getCvv(), "CVV");
@@ -837,7 +838,20 @@ public class CheckoutSteps {
 
     @And("^selects \"Enter a New Card\"$")
     public void selectsEnterANewCard() {
-        radioListComponent.select("Enter a New Card");
+        savedOptionPickerComponent.selectCard("Enter a New Card");
+    }
+
+    @And("^user selects \"([^\"]*)\" Payment Option$")
+    public void userSelectsPaymentOption(String options) {
+        this.userShouldBeSeePaymentOption();
+        radioListComponent.select(options);
+        CommonFunctions.attachScreenshot("Payment Options");
+    }
+
+    @And("^user should be see Payment Option$")
+    public void userShouldBeSeePaymentOption() {
+        radioListComponent.setRoot(BaseComponent.getNextElementByTitle("Payment Options"));
+        assertTrue(radioListComponent.exists(), "Payment Options radio list doesn't present on page");
     }
 
     @After

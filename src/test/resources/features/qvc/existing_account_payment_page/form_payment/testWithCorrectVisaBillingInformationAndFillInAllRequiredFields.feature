@@ -1,10 +1,10 @@
-@qvc
+@qvc @debug
 
 Feature: EXISTING ACCOUNT - PAYMENT PAGE
 
   Background:
     Given user adds to cart product
-    And user continue checkout as "qa user"
+    And user continue checkout as "qa paypal"
     And presses the "Continue" button
     And user should be on "Address" tab
     And presses the "Continue" button
