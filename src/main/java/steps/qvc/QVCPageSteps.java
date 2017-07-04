@@ -31,7 +31,7 @@ public class QVCPageSteps {
 
     @Given("^user adds to cart product$")
     public void userAddsToCartProduct() {
-        qvcProductPage.setCookies();
+        qvcCartPage.setCookies();
         assertTrue(qvcMainPage.isPage(), "Main page doesn't opened");
 
         this.addProduct();

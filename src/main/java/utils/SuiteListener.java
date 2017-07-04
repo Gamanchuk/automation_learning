@@ -15,7 +15,7 @@ public class SuiteListener implements ISuiteListener {
     @Override
     public void onStart(ISuite iSuite) {
         log.info(iSuite.getName());
-        if (Boolean.valueOf(System.getProperty("projectTracking"))) {
+        if (Config.PROJECT_TRACKING) {
 
             String runName = "Run on " + Config.DEVICE_NAME + " - " + new Date().toString();
             try {

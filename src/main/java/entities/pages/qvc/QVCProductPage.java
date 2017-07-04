@@ -79,18 +79,4 @@ public class QVCProductPage extends BasePage {
     boolean isPage() {
         return isElementVisible(addToCart);
     }
-
-    public void setCookies() {
-        String prNumber = System.getProperty("mw.pr.number");
-        String prLoader = System.getProperty("mw.pr.loader");
-        log.info("PR NUMBER: " + prNumber);
-        log.info("PR LOADER: " + prLoader);
-        log.info(BASE_URL);
-        log.info(COOKIES);
-
-        String URL = BASE_URL + COOKIES + prNumber + prLoader;
-        log.error(URL);
-        getDriver().get(URL);
-        // getDriver().get(String.format("%s%s%s%s", BASE_URL, COOKIES, prNumber, prLoader));
-    }
 }

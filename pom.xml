@@ -24,6 +24,9 @@
         <site.name>${site.base.name}</site.name>
         <mw.pr.number></mw.pr.number>
         <mw.pr.loader></mw.pr.loader>
+        <xcode.log></xcode.log>
+        <appium.log></appium.log>
+        <project.tracking></project.tracking>
     </properties>
 
     <name>Moovweb Automation framework</name>

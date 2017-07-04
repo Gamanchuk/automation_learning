@@ -43,6 +43,7 @@ public class DriverFactory {
 
     private static final String IOS = "iOS";
     private static final String ANDROID = "Android";
+    private static final String XCUITEST = "XCUITest";
 
 
     public static WebDriver getDriver() {
@@ -59,6 +60,7 @@ public class DriverFactory {
             String deviceName = Config.DEVICE_NAME;
             String deviceUdid = Config.DEVICE_UID;
             String iproxyPort = Config.IPROXY_PORT;
+
 
             try {
                 if (Boolean.valueOf(System.getProperty("use.desktop.browser"))) {
@@ -83,23 +85,21 @@ public class DriverFactory {
                     desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, platformName);
                     desiredCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, deviceName);
                     desiredCapabilities.setCapability(MobileCapabilityType.UDID, deviceUdid);
+                    desiredCapabilities.setCapability("clearSystemFiles", true);
 
                     if (Config.PLATFORM_NAME.equals(IOS)) {
-                        desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
+                        desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, XCUITEST);
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.WDA_LOCAL_PORT, Integer.parseInt(iproxyPort));
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.USE_NEW_WDA, true);
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.LAUNCH_TIMEOUT, 500000);
+                        desiredCapabilities.setCapability(IOSMobileCapabilityType.SHOW_IOS_LOG, Config.XCODE_LOGS);
 
+                        /* Capabilities for automatically sinning WebDriverAgentRunner */
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.XCODE_ORG_ID, "Y95G5M3Q84");
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.XCODE_SIGNING_ID, "iPhone Developer");
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.UPDATE_WDA_BUNDLEID, "com.moovweb.WebDriverAgentRunner");
 
                         desiredCapabilities.setCapability("webkitResponseTimeout", 50000);
-                        desiredCapabilities.setCapability("clearSystemFiles", true);
-
-                        if (Boolean.valueOf(System.getProperty("verboseLogging"))) {
-                            // desiredCapabilities.setCapability(IOSMobileCapabilityType.SHOW_IOS_LOG, true);
-                        }
 
                         //desiredCapabilities.setCapability("simpleIsVisibleCheck", true);
                         //desiredCapabilities.setCapability(IOSMobileCapabilityType.START_IWDP, true);
@@ -149,8 +149,9 @@ public class DriverFactory {
             log.info("******************************* STARTING APPIUM SERVICE ****************************");
             log.info("APPIUM PORT: " + appiumPort);
             log.info("IOS WEB PROXY PORT: " + proxyPort);
-            log.info("VERBOSE LOGGING: " + System.getProperty("verboseLogging"));
-            log.info("PROJECT TRACKING: " + System.getProperty("projectTracking"));
+            log.info("XCODE LOGS: " + Config.XCODE_LOGS);
+            log.info("APPIUM LOGS: " + Config.APPIUM_LOGS);
+            log.info("PROJECT TRACKING: " + Config.PROJECT_TRACKING);
 
             AppiumServiceBuilder serviceBuilder = new AppiumServiceBuilder();
             serviceBuilder.usingPort(appiumPort);
@@ -158,7 +159,7 @@ public class DriverFactory {
             serviceBuilder.withArgument(GeneralServerFlag.SESSION_OVERRIDE);
             serviceBuilder.withArgument(GeneralServerFlag.LOG_TIMESTAMP);
 
-            if (!Boolean.valueOf(System.getProperty("verboseLogging"))) {
+            if (!Config.APPIUM_LOGS) {
                 serviceBuilder.withArgument(GeneralServerFlag.LOG_LEVEL, "warn");
             }
 

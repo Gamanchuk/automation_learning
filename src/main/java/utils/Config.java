@@ -22,11 +22,16 @@ public class Config {
     public static final String IPROXY_PORT;
     public static final String BOOTSTRAP_PORT;
     public static final String CHROMEDRIVER_PORT;
+
     public static final String BASE_URL;
     public static final String COOKIES;
     public static final String SITE_NAME;
     public static final String STORE_ID;
-    
+
+    public static final boolean XCODE_LOGS;
+    public static final boolean APPIUM_LOGS;
+    public static final boolean PROJECT_TRACKING;
+
 
     public static final String ANALYTICS_URL = "http://mc-events.moovweb.net";
 
@@ -53,6 +58,10 @@ public class Config {
         IPROXY_PORT = props.getProperty("iproxy.port");
         BOOTSTRAP_PORT = props.getProperty("bootstrap.port");
         CHROMEDRIVER_PORT = props.getProperty("chromedriver.port");
+
+        XCODE_LOGS = Boolean.parseBoolean(System.getProperty("xcode.log"));
+        APPIUM_LOGS = Boolean.parseBoolean(System.getProperty("appium.log"));
+        PROJECT_TRACKING = Boolean.parseBoolean(System.getProperty("project.tracking"));
 
         BASE_URL = System.getProperty("base.url");
         COOKIES = System.getProperty("cookies");
