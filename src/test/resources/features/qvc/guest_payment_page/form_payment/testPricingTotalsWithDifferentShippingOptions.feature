@@ -83,7 +83,7 @@ Feature: GUEST - PAYMENT PAGE
     And uses "Pay with Check / Money Order" for payment
     And presses the "Continue" button
     And user should be on "Review" tab
-    Then user checks "UPS Premium (Red)" shipping method
+    Then user checks "UPS Premium" shipping method
 
 
 

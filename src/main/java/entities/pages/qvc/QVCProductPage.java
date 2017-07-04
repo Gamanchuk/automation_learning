@@ -4,10 +4,7 @@ import entities.pages.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptException;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
-
-import java.util.List;
-import java.util.Random;
+import utils.CommonFunctions;
 
 import static org.testng.Assert.assertTrue;
 
@@ -18,50 +15,37 @@ public class QVCProductPage extends BasePage {
     private By age = By.id("cbAge");
 
     public void openPage(String productUrl) {
-        String fullPath = BASE_URL + productUrl;
+        String fullPath = String.format("%s%s", BASE_URL, productUrl);
 
         getDriver().navigate().to(fullPath);
         waitForDocumentReady();
 
         if (!isUrlChanged(fullPath, 5)) {
+            log.info("URL not changed. Retry navigate on page");
             getDriver().navigate().to(fullPath);
             waitForDocumentReady();
         }
 
-
         assertTrue(isPage(), "Product page was not opened.");
-
     }
 
-    public String selectRandomColor() {
+    public void selectRandomColor() {
         javascriptScroll(500);
+
+        // need sleep after scroll
+        CommonFunctions.sleep(1000);
         assertTrue(isElementVisible(colorList), "Color list doesn't on page");
 
-        List<WebElement> colorsListElements = getDriver().findElements(colorList);
-        WebElement randomColor = colorsListElements.get(new Random().nextInt(colorsListElements.size()));
-
-        String colorName = randomColor.getAttribute("data-original-title");
-
-        randomColor.click();
+        getDriver().findElement(colorList).click();
         waitForAjax();
-
-        return colorName;
     }
 
     public boolean isColorListExist() {
-        return isElementVisible(colorList);
+        return isElementPresent(colorList);
     }
 
     public void addToCart() {
-        waitForAjax();
-
-        try {
-            JavascriptExecutor js = (JavascriptExecutor) getDriver();
-            String result = (String) js.executeScript("checkForColorSize('A', document.getElementsByClassName(\"btnAddToCart\"))");
-            log.info("Add to cart status: " + result);
-        } catch (JavascriptException js) {
-            log.error("Add to cart: " + js.getMessage());
-        }
+        getDriver().findElement(addToCart).click();
     }
 
     public void speedBuy() {
@@ -78,9 +62,5 @@ public class QVCProductPage extends BasePage {
 
     boolean isPage() {
         return isElementVisible(addToCart);
-    }
-
-    public void setCookies() {
-        getDriver().get(BASE_URL + COOKIES);
     }
 }
