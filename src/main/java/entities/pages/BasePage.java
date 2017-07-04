@@ -10,7 +10,6 @@ public abstract class BasePage extends Entity {
     public final String BASE_URL = Config.BASE_URL;
     public final String COOKIES = Config.COOKIES;
 
-
     public void clickLinkByTitle(String linkTitle) {
         assertTrue(isElementVisible(By.linkText(linkTitle)), "Link with text '" + linkTitle + "' doesn't present on page");
         getDriver().findElement(By.linkText(linkTitle)).click();
@@ -18,8 +17,16 @@ public abstract class BasePage extends Entity {
 
     public void setCookies() {
         showUrlData();
+        String url = String.format("%s%s", BASE_URL, COOKIES);
 
-        String url = String.format("%s%s%s%s", BASE_URL, COOKIES, Config.PR_NUMBER, Config.PR_LOADER);
+        if (!Config.PR_NUMBER.isEmpty()) {
+            url += String.format("%s", Config.PR_NUMBER);
+        }
+
+        if (!Config.PR_LOADER.isEmpty()) {
+            url += String.format("%s", Config.PR_LOADER);
+        }
+
         log.info("Modified url: " + url);
 
         getDriver().get(url);
