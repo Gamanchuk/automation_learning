@@ -29,9 +29,7 @@ public class QVCPageSteps {
 
     @Given("^user adds to cart product$")
     public void userAddsToCartProduct() {
-        qvcCartPage.setCookies();
-        assertTrue(qvcMainPage.isPage(), "Main page doesn't opened");
-      
+        this.setCookies();
         this.addProduct();
 
         qvcCartPage.processToCheckout();
@@ -64,7 +62,6 @@ public class QVCPageSteps {
     @Given("^user adds to cart product and speed buy$")
     public void userAddsToCartProductAndSpeedBuy() {
         this.setCookies();
-
         this.addProduct();
 
         qvcCartPage.processToSpeedBuy();
@@ -150,9 +147,7 @@ public class QVCPageSteps {
     }
 
     private void speedBuyProduct() {
-        qvcProductPage.setCookies();
-        assertTrue(qvcMainPage.isPage(), "Main page doesn't opened");
-
+        this.setCookies();
         this.openProduct();
         qvcProductPage.speedBuy();
     }
