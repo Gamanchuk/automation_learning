@@ -21,7 +21,6 @@ public class QVCProductPage extends BasePage {
         String fullPath = BASE_URL + productUrl;
 
         getDriver().navigate().to(fullPath);
-        waitForDocumentReady();
 
         if (!isUrlChanged(fullPath, 5)) {
             getDriver().navigate().to(fullPath);
@@ -53,15 +52,7 @@ public class QVCProductPage extends BasePage {
     }
 
     public void addToCart() {
-        waitForAjax();
-
-        try {
-            JavascriptExecutor js = (JavascriptExecutor) getDriver();
-            String result = (String) js.executeScript("checkForColorSize('A', document.getElementsByClassName(\"btnAddToCart\"))");
-            log.info("Add to cart status: " + result);
-        } catch (JavascriptException js) {
-            log.error("Add to cart: " + js.getMessage());
-        }
+        getDriver().findElement(addToCart).click();
     }
 
     public void speedBuy() {

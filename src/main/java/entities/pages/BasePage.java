@@ -19,11 +19,11 @@ public abstract class BasePage extends Entity {
         showUrlData();
         String url = String.format("%s%s", BASE_URL, COOKIES);
 
-        if (!Config.PR_NUMBER.isEmpty()) {
+        if (Config.PR_NUMBER != null && !Config.PR_NUMBER.isEmpty()) {
             url += String.format("%s", Config.PR_NUMBER);
         }
 
-        if (!Config.PR_LOADER.isEmpty()) {
+        if (Config.PR_NUMBER != null && !Config.PR_LOADER.isEmpty()) {
             url += String.format("%s", Config.PR_LOADER);
         }
 
