@@ -18,13 +18,12 @@ public class QVCProductPage extends BasePage {
         String fullPath = String.format("%s%s", BASE_URL, productUrl);
 
         getDriver().navigate().to(fullPath);
-        CommonFunctions.sleep(3000);
-        //waitForDocumentReady();
+        waitForDocumentReady();
 
         if (!isUrlChanged(fullPath, 5)) {
             log.info("URL not changed. Retry navigate on page");
             getDriver().navigate().to(fullPath);
-              waitForDocumentReady();
+            waitForDocumentReady();
         }
 
         assertTrue(isPage(), "Product page was not opened.");
