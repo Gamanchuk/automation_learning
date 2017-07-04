@@ -32,6 +32,10 @@ public class Config {
     public static final boolean APPIUM_LOGS;
     public static final boolean PROJECT_TRACKING;
 
+    public static final String PR_NUMBER;
+    public static final String PR_LOADER;
+
+
 
     public static final String ANALYTICS_URL = "http://mc-events.moovweb.net";
 
@@ -59,9 +63,12 @@ public class Config {
         BOOTSTRAP_PORT = props.getProperty("bootstrap.port");
         CHROMEDRIVER_PORT = props.getProperty("chromedriver.port");
 
-        XCODE_LOGS = Boolean.parseBoolean(System.getProperty("xcode.log"));
-        APPIUM_LOGS = Boolean.parseBoolean(System.getProperty("appium.log"));
+        XCODE_LOGS = Boolean.parseBoolean(System.getProperty("xcode.logs"));
+        APPIUM_LOGS = Boolean.parseBoolean(System.getProperty("appium.logs"));
         PROJECT_TRACKING = Boolean.parseBoolean(System.getProperty("project.tracking"));
+
+        PR_NUMBER = System.getProperty("mw.pr.number");
+        PR_LOADER = System.getProperty("mw.pr.loader");
 
         BASE_URL = System.getProperty("base.url");
         COOKIES = System.getProperty("cookies");

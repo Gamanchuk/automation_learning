@@ -9,8 +9,7 @@ import static org.testng.Assert.assertTrue;
 public abstract class BasePage extends Entity {
     public final String BASE_URL = Config.BASE_URL;
     public final String COOKIES = Config.COOKIES;
-    public final String PR_NUMBER = System.getProperty("mw.pr.number");
-    public final String PR_LOADER = System.getProperty("mw.pr.loader");
+
 
     public void clickLinkByTitle(String linkTitle) {
         assertTrue(isElementVisible(By.linkText(linkTitle)), "Link with text '" + linkTitle + "' doesn't present on page");
@@ -20,7 +19,7 @@ public abstract class BasePage extends Entity {
     public void setCookies() {
         showUrlData();
 
-        String url = String.format("%s%s%s%s", BASE_URL, COOKIES, PR_NUMBER, PR_LOADER);
+        String url = String.format("%s%s%s%s", BASE_URL, COOKIES, Config.PR_NUMBER, Config.PR_LOADER);
         log.info("Modified url: " + url);
 
         getDriver().get(url);
@@ -30,7 +29,7 @@ public abstract class BasePage extends Entity {
         log.info("URL data:");
         log.info("Base url: " + BASE_URL);
         log.info("Experience id: " + COOKIES);
-        log.info("PR number: " + PR_NUMBER);
-        log.info("PR loader: " + PR_LOADER);
+        log.info("PR number: " + Config.PR_NUMBER);
+        log.info("PR loader: " + Config.PR_LOADER);
     }
 }
