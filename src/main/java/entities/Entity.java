@@ -345,7 +345,7 @@ public abstract class Entity {
     }
 
     protected boolean isUrlChanged(String url, int timeout) {
-        return this.waitForRedirect(url, TIMEOUT_SECONDS);
+        return this.waitForRedirect(url, timeout);
     }
 
     public void focusOut() {

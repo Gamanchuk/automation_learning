@@ -9,6 +9,7 @@ Feature: HAPPY PATH
   @TestCaseId("102279")
   Scenario: Place Money Order as Existing User
 
+
     Given user continue checkout as "qa user"
     And presses the "Continue" button
 
