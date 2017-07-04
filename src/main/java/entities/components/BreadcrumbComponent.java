@@ -52,7 +52,7 @@ public class BreadcrumbComponent extends BaseComponent {
             status = isElementVisible(By.xpath(
                     "//a[contains(@class, 'breadcrumb') and contains(@class, 'active') and text()='" + tabName + "']"));
         }
-        CommonFunctions.sleep(2000);
+        CommonFunctions.sleep(4000);
         return status;
     }
 

@@ -14,7 +14,7 @@ Feature: GUEST - PAYMENT PAGE
     And user types billing info for "qa user" without email
     And presses the "Continue" button
 
-    And chooses "UPS Ground: $4.47" shipping method
+    And chooses "UPS Ground" shipping method
     And presses the "Continue" button
     And user should be on "Payment" tab
     And uses "Pay with Check / Money Order" for payment
@@ -23,7 +23,7 @@ Feature: GUEST - PAYMENT PAGE
     Then user checks "UPS Ground" shipping method
     And user navigates to "Delivery" breadcrumb
 
-    And chooses "US Mail: $5.97" shipping method
+    And chooses "US Mail" shipping method
     And presses the "Continue" button
     And user should be on "Payment" tab
     And uses "Pay with Check / Money Order" for payment
@@ -41,7 +41,7 @@ Feature: GUEST - PAYMENT PAGE
     Then user checks "Standard Delivery" shipping method
     And user navigates to "Delivery" breadcrumb
 
-    And chooses "Priority US Mail: $8.72" shipping method
+    And chooses "Priority US Mail" shipping method
     And presses the "Continue" button
     And user should be on "Payment" tab
     And uses "Pay with Check / Money Order" for payment
@@ -50,7 +50,7 @@ Feature: GUEST - PAYMENT PAGE
     Then user checks "Priority US Mail" shipping method
     And user navigates to "Delivery" breadcrumb
 
-    And chooses "UPS Express (Blue): $10.97" shipping method
+    And chooses "UPS Express" shipping method
     And presses the "Continue" button
     And user should be on "Payment" tab
     And uses "Pay with Check / Money Order" for payment
@@ -77,7 +77,7 @@ Feature: GUEST - PAYMENT PAGE
     Then user checks "Premium Delivery" shipping method
     And user navigates to "Delivery" breadcrumb
 
-    And chooses "UPS Premium (Red): $19.47" shipping method
+    And chooses "UPS Premium" shipping method
     And presses the "Continue" button
     And user should be on "Payment" tab
     And uses "Pay with Check / Money Order" for payment

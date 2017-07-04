@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 
-<suite name="EXISTING ACCOUNT - REVIEW PAGE">
+<suite name="QVC EXISTING ACCOUNT - REVIEW PAGE">
     <test name="All tests">
         <classes>
             <class name="tests.qvc.QVCExistingAccountReviewPageCukesRunnerTest"/>

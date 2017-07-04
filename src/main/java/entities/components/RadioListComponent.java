@@ -37,6 +37,6 @@ public class RadioListComponent extends BaseComponent {
     }
 
     public boolean exists() {
-        return isElementPresent(currentItem);
+        return isElementVisible(currentItem) && isElementPresent(currentItem);
     }
 }
