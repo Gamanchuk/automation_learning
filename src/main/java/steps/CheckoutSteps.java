@@ -839,6 +839,7 @@ public class CheckoutSteps {
     @And("^selects \"Enter a New Card\"$")
     public void selectsEnterANewCard() {
         savedOptionPickerComponent.selectCard("Enter a New Card");
+
     }
 
     @And("^user selects \"([^\"]*)\" Payment Option$")

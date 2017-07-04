@@ -2,6 +2,7 @@ package entities.components;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import utils.CommonFunctions;
 
 public class SavedOptionPickerComponent extends BaseComponent {
     private By savedPicker = By.xpath("//div[contains(@class, 'saved-option-picker')]");
@@ -14,6 +15,7 @@ public class SavedOptionPickerComponent extends BaseComponent {
         radioListComponent.setRoot(savedPickerEl);
         scroll(savedPickerEl);
         radioListComponent.select(payment);
+        CommonFunctions.attachScreenshot("Selected");
     }
 
     public boolean exists() {
