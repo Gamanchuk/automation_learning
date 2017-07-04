@@ -4,7 +4,6 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import entities.components.ButtonComponent;
-import entities.components.SignInFormComponent;
 import entities.pages.qvc.*;
 import utils.CommonFunctions;
 import utils.Config;
@@ -27,7 +26,6 @@ public class QVCPageSteps {
     private QVCForgotPasswordPage forgotPasswordPage = new QVCForgotPasswordPage();
 
     private ButtonComponent buttonComponent = new ButtonComponent();
-    private SignInFormComponent signInFormComponent = new SignInFormComponent();
 
     @Given("^user adds to cart product$")
     public void userAddsToCartProduct() {
