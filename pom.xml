@@ -713,9 +713,18 @@
                 <site.base.name>qvc-stage</site.base.name>
                 <site.url>https://qa.qvc.com/</site.url>
                 <site.cookies>?_mwexperienceid=cfc47413-d158-4114-a4b2-f5cf32d253fd</site.cookies>
-
             </properties>
         </profile>
+
+        <profile>
+            <id>site-qvc-prod</id>
+            <properties>
+                <site.base.name>qvc-prod</site.base.name>
+                <site.url>http://qvc.com/</site.url>
+                <site.cookies>?_mwexperienceid=2ff5947d-47f4-46cf-ae88-4e6b0b661967</site.cookies>
+            </properties>
+        </profile>
+
     </profiles>
 
 

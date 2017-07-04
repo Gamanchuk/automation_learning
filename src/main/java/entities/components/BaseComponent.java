@@ -18,6 +18,10 @@ public class BaseComponent extends Entity {
         return DriverFactory.getDriver().findElement(By.xpath("//div[contains(@class, 'title-component') and contains(.,'" + title + "')]/following-sibling::node()"));
     }
 
+    public static WebElement getNextElementByTitle(String title) {
+        return DriverFactory.getDriver().findElement(By.xpath("//*[@class='title' and text()='" + title + "']/following-sibling::node()"));
+    }
+
     public void waitForSpinner() {
         // waiting for spinner
         waitForElementPresence(By.cssSelector("div.spinner-container"));

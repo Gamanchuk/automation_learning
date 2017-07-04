@@ -101,7 +101,7 @@ public class DriverFactory {
 
                         desiredCapabilities.setCapability("webkitResponseTimeout", 50000);
 
-                        //desiredCapabilities.setCapability("simpleIsVisibleCheck", true);
+                        desiredCapabilities.setCapability("simpleIsVisibleCheck", true);
                         //desiredCapabilities.setCapability(IOSMobileCapabilityType.START_IWDP, true);
                         //desiredCapabilities.setCapability(IOSMobileCapabilityType.PREVENT_WDAATTACHMENTS, true);
                     }

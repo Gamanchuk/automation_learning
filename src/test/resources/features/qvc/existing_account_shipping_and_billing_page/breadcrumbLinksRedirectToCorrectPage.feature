@@ -37,7 +37,6 @@ Feature: EXISTING ACCOUNT - BREADCRUMB
 
     # Check from Payment tab
     And user presses "Review" breadcrumb tab
-    And uses saved "visa" card for payment
     And presses the "Continue" button
 
     Then user should be on "Review" tab
