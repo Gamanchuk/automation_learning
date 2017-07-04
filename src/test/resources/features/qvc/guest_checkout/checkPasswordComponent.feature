@@ -11,4 +11,3 @@ Feature: GUEST CHECKOUT
     Given user continue checkout as "qa user"
     And presses the "Continue" button
     Then user should be on "Address" tab
-#
