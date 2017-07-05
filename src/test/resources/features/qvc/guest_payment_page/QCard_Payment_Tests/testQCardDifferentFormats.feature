@@ -1,4 +1,4 @@
-@qvc @debug
+@qvc
 
 Feature: GUEST - PAYMENT PAGE - QCARD
 
@@ -24,18 +24,8 @@ Feature: GUEST - PAYMENT PAGE - QCARD
 
     And uses "qcardNEW" card for payment
     And presses the "Continue" button
-    Then user should be on "Review" tab
-    And user presses "Payment" breadcrumb tab
-    Then user should be on "Payment" tab
 
-    Then user should see "Payment Options" form
-    And selects "Enter a New Card"
-    And uses "qcard" card for payment
-    #TODO remember to use an easy pay item for easy pay cases!
-    # And user should be on "Payment Options" page
-
-    And presses the "Continue" button
-    Then user should be on "Review" tab
+    And sees "FORM ERRORS" error message with text "We are sorry. The system encountered an error processing this request. You may have entered an invalid credit card number. Please review your entry to ensure all fields are numeric. Letters and dashes cannot be accepted. If you are sure you entered the number correctly, the credit card may already be on file on another account. For assistance, please contact Customer Service at 1-888-345-5788"
 
 
 

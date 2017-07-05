@@ -5,7 +5,7 @@
 <suite name="QVC EXISTING ACCOUNT - PAYMENT PAGE">
     <test name="All tests">
         <classes>
-            <class name="tests.qvc.QVCExistingAccountShippingBillingPageCukesRunnerTest"/>
+            <class name="tests.qvc.QVCExistingAccountPaymentPageCukesRunnerTest"/>
         </classes>
     </test>
 </suite>
