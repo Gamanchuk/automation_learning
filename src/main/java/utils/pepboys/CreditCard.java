@@ -47,7 +47,9 @@ public class CreditCard {
         String secureCardNumber = null;
         int cardNumberLength = this.number.length();
         String lastFourNumbers = StringUtils.right(this.number, 4);
+        log.info(this.expDate);
         String[] temp = this.expDate.split("/");
+        log.info(temp[0] + " - " + temp[1]);
         String modifiedDate = temp[0] + "/" + "20" + temp[1];
         String cardName = firstUpperCase(name);
 
@@ -71,6 +73,10 @@ public class CreditCard {
 
         // return **** **** **** 4657 (02/12)
         return secureCardNumber;
+    }
+
+    private void printCard() {
+
     }
 
     private String firstUpperCase(String word) {

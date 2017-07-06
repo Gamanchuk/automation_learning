@@ -18,7 +18,7 @@ Feature: HAPPY PATH
     And presses the "Continue" button
 
     And user should be on "Payment" tab
-    And uses saved "qcard" card for payment
+    And uses saved "qcard2" card for payment
     And presses the "Continue" button
 
     And user should be on "Review" tab
