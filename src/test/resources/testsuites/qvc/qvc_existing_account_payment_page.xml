@@ -8,4 +8,4 @@
             <class name="tests.qvc.QVCExistingAccountPaymentPageCukesRunnerTest"/>
         </classes>
     </test>
-</suite>
+</suite> <!-- Suite -->
