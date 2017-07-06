@@ -15,4 +15,4 @@ Feature: EXISTING ACCOUNT - SHIPPING DETAILS PAGE
   Scenario: Test Shipping Information Modal
 
     Given user clicks "Shipping Information" link in note
-    Then user should see Terms modal with "How is a product delivered?"
+    Then user should see Terms modal with "How will my order ship?"

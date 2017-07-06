@@ -4,7 +4,6 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import entities.components.ButtonComponent;
-import entities.components.SignInFormComponent;
 import entities.pages.qvc.*;
 import utils.CommonFunctions;
 import utils.Config;
@@ -27,12 +26,10 @@ public class QVCPageSteps {
     private QVCForgotPasswordPage forgotPasswordPage = new QVCForgotPasswordPage();
 
     private ButtonComponent buttonComponent = new ButtonComponent();
-    private SignInFormComponent signInFormComponent = new SignInFormComponent();
 
     @Given("^user adds to cart product$")
     public void userAddsToCartProduct() {
         this.setCookies();
-
         this.addProduct();
 
         qvcCartPage.processToCheckout();
@@ -65,7 +62,6 @@ public class QVCPageSteps {
     @Given("^user adds to cart product and speed buy$")
     public void userAddsToCartProductAndSpeedBuy() {
         this.setCookies();
-
         this.addProduct();
 
         qvcCartPage.processToSpeedBuy();
@@ -145,15 +141,15 @@ public class QVCPageSteps {
         qvcProductPage.openPage(DataProvider.getRandomItem());
         CommonFunctions.attachScreenshot("Product Page");
 
+        CommonFunctions.sleep(2000);
         assertTrue(qvcProductPage.isColorListExist(), "Color list doesn't present on product page.");
-        String color = qvcProductPage.selectRandomColor();
-        CommonFunctions.attachScreenshot("Color selected: " + color);
+        //String color =
+        qvcProductPage.selectRandomColor();
+        CommonFunctions.attachScreenshot("Color selected: ");
     }
 
     private void speedBuyProduct() {
-        qvcProductPage.setCookies();
-        assertTrue(qvcMainPage.isPage(), "Main page doesn't opened");
-
+        this.setCookies();
         this.openProduct();
         qvcProductPage.speedBuy();
     }

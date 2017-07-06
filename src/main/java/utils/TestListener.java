@@ -46,7 +46,7 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
         String caseName = (String) TestGlobalsManager.getTestGlobal("caseName");
         log.info("Test \"" + caseName + "\" completed in "
                 + countDuration(iTestResult.getEndMillis() - iTestResult.getStartMillis()));
-        if (Boolean.valueOf(System.getProperty("projectTracking"))) {
+        if (Config.PROJECT_TRACKING) {
             setTestResults(TestRailStatus.PASSED, "", "");
         }
         DriverFactory.quitDriver();
@@ -72,7 +72,7 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
         log.error("Test \"" + caseName + "\" failed in "
                 + countDuration(iTestResult.getEndMillis() - iTestResult.getStartMillis()));
 
-        if (Boolean.valueOf(System.getProperty("projectTracking"))) {
+        if (Config.PROJECT_TRACKING) {
             String ticketId = setJiraIssues(caseName, errorMessage);
 
             // Attaching video

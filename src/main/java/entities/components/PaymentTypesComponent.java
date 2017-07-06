@@ -6,6 +6,7 @@ import utils.CommonFunctions;
 import static org.testng.Assert.assertTrue;
 
 public class PaymentTypesComponent extends BaseComponent {
+
     By payment = By.xpath("//div[contains(@class, 'payment-types')]//span//a");
 
     public void purchaseWithPayPal() {
@@ -26,4 +27,5 @@ public class PaymentTypesComponent extends BaseComponent {
         CommonFunctions.sleep(1000);
         getDriver().findElement(paymentType).click();
     }
+
 }
