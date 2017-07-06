@@ -12,6 +12,11 @@ public class QVCMainPage extends BasePage {
         return isElementVisible(By.id("pageContent"));
     }
 
+    public boolean isPage(int timeout) {
+        CommonFunctions.sleep(2000);
+        waitForDocumentReady();
+        return isElementVisible(By.id("pageContent"), timeout);
+    }
 }
 
 

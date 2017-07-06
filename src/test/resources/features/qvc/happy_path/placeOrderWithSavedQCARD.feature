@@ -1,4 +1,4 @@
-@qvc
+@qvc @debug
 
 Feature: HAPPY PATH
 
@@ -8,7 +8,7 @@ Feature: HAPPY PATH
   @TestCaseId("")
   Scenario: Place Order with saved Q-CARD
 
-    Given user continue checkout as "qa savedQCARD"
+    Given user continue checkout as "qa user"
     And presses the "Continue" button
 
     And user should be on "Address" tab
@@ -18,7 +18,7 @@ Feature: HAPPY PATH
     And presses the "Continue" button
 
     And user should be on "Payment" tab
-    And uses saved "qcard2" card for payment
+    And uses saved "qcard" card for payment
     And presses the "Continue" button
 
     And user should be on "Review" tab

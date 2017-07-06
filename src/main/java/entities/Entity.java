@@ -337,7 +337,7 @@ public abstract class Entity {
                 else return true;
 
             } catch (Exception e) {
-                driver.manage().timeouts().implicitlyWait(delay, TimeUnit.MILLISECONDS);
+                CommonFunctions.sleep(500);
             }
         }
         return false;
