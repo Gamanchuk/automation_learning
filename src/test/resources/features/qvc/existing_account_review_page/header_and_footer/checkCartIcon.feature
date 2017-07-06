@@ -11,6 +11,7 @@ Feature: EXISTING ACCOUNT - REVIEW PAGE - HEADER & FOOTER
     And user should be on "Delivery" tab
     And presses the "Continue" button
     Then user should be on "Payment" tab
+    And user selects "1 payment" Payment Option
     And uses "Pay with Check / Money Order" for payment
     And presses the "Continue" button
     And user should be on "Review" tab
