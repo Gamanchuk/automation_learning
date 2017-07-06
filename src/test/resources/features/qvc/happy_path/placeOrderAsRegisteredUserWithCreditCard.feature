@@ -19,7 +19,7 @@ Feature: HAPPY PATH
     And presses the "Continue" button
 
     And user should be on "Payment" tab
-
+    And user selects "1 payment" Payment Option
     And uses saved "mastercard" card for payment
     And presses the "Continue" button
 
@@ -28,4 +28,3 @@ Feature: HAPPY PATH
 
     Then user should be on thank you page
 
-    #And user selects "1 payment" Payment Option
