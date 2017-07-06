@@ -1,5 +1,6 @@
 package steps;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -11,6 +12,7 @@ import entities.pages.pepboys.PepBoysMainPage;
 import entities.pages.pepboys.PepBoysMyAccountPage;
 import entities.pages.pepboys.PepBoysTrackingPage;
 import org.apache.commons.lang.RandomStringUtils;
+import org.openqa.selenium.By;
 import utils.CommonFunctions;
 import utils.Config;
 import utils.GoogleSheetsHelper;
@@ -877,4 +879,8 @@ public class CheckoutSteps {
     }
 
 
+    @And("^user should see payment option component$")
+    public void userShouldSeePaymentOptionComponent() {
+        assertTrue(radioListComponent.exists(), "Radio List Does Not Present On Page");
+    }
 }
