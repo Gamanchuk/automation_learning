@@ -1,6 +1,5 @@
 package steps;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -12,7 +11,6 @@ import entities.pages.pepboys.PepBoysMainPage;
 import entities.pages.pepboys.PepBoysMyAccountPage;
 import entities.pages.pepboys.PepBoysTrackingPage;
 import org.apache.commons.lang.RandomStringUtils;
-import org.openqa.selenium.By;
 import utils.CommonFunctions;
 import utils.Config;
 import utils.GoogleSheetsHelper;
@@ -841,7 +839,6 @@ public class CheckoutSteps {
     @And("^selects \"Enter a New Card\"$")
     public void selectsEnterANewCard() {
         savedOptionPickerComponent.selectCard("Enter a New Card");
-
     }
 
     @And("^user selects \"([^\"]*)\" Payment Option$")

@@ -15,17 +15,18 @@ public class QVCProductPage extends BasePage {
     private By age = By.id("cbAge");
 
     public void openPage(String productUrl) {
-        String fullPath = String.format("%s%s", BASE_URL, productUrl);
+        String fullPath = BASE_URL + productUrl;
 
+        log.info("Full path: " + fullPath);
+        CommonFunctions.sleep(1000);
         getDriver().navigate().to(fullPath);
-        waitForDocumentReady();
 
-        if (!isUrlChanged(fullPath, 5)) {
-            log.info("URL not changed. Retry navigate on page");
-            getDriver().navigate().to(fullPath);
-            waitForDocumentReady();
-        }
-
+//        if (!isUrlChanged(fullPath, 15)) {
+//            log.info("URL not changed. Retry navigate on page");
+//            getDriver().navigate().to(fullPath);
+//            waitForDocumentReady();
+//        }
+        javascriptScroll(500);
         assertTrue(isPage(), "Product page was not opened.");
     }
 

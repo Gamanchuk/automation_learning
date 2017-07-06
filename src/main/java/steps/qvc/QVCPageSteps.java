@@ -115,12 +115,12 @@ public class QVCPageSteps {
     }
 
     private void setCookies() {
-        qvcProductPage.setCookies();
+        qvcMainPage.setCookies();
 
-        if (qvcMainPage.isPage()) {
-            qvcProductPage.setCookies();
+        if (!qvcMainPage.isPage()) {
+            qvcMainPage.setCookies();
         }
-
+        
         assertTrue(qvcMainPage.isPage(), "Main page doesn't opened");
     }
 

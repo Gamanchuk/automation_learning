@@ -1,6 +1,6 @@
 @qvc
 
-Feature: EXISTING - REVIEW PAGE - HEADER & FOOTER
+Feature: EXISTING ACCOUNT - REVIEW PAGE
 
   Background: Add product to card and process to checkout
     Given user adds to cart product
@@ -18,6 +18,7 @@ Feature: EXISTING - REVIEW PAGE - HEADER & FOOTER
     And presses the "Continue" button
 
     And user should be on "Payment" tab
+    And user selects "1 payment" Payment Option
     And uses "Pay with Check / Money Order" for payment
     And presses the "Continue" button
 

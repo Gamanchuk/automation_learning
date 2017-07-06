@@ -8,6 +8,7 @@ public class RadioListComponent extends BaseComponent {
     private By currentItem = By.cssSelector(".radio-list-option-selected");
 
     public boolean select(String option) {
+
         By currentItemDetails = By.cssSelector(".radio-list-option-selected .radio-list-details");
         String currentItemText = findElement(currentItemDetails).getText();
 
@@ -21,7 +22,7 @@ public class RadioListComponent extends BaseComponent {
             String[] tempList = listEl.getText().split("\n");
 
             for (int i = 0; i < tempList.length; i++) {
-                if (tempList[i].contains(option)) {
+                if (tempList[i].toLowerCase().contains(option.toLowerCase())) {
                     log.info("Item Selected. ID: " + i);
                     findElement(By.cssSelector(".radio-list-option:nth-of-type(" + (i + 1) + ")")).click();
                     CommonFunctions.sleep(1000);
@@ -33,6 +34,9 @@ public class RadioListComponent extends BaseComponent {
             log.info("Item selected by default: " + option);
             return true;
         }
+
+        //fail("Item (credit card / street) doesn't present on page")
+
         return false;
     }
 
