@@ -1,4 +1,4 @@
-@qvc
+@qvc @Ignored
 
 Feature: GUEST - PAYMENT PAGE
 
