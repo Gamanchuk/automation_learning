@@ -8,12 +8,11 @@ Feature: GUEST - SHIPPING RESTRICTIONS
     And user continue checkout as guest
     Then presses the "Continue" button
 
-  @TestCaseId("101816")
+  @TestCaseId("101817")
   Scenario: Canadian billing address to Canadian
 
     Given user should be on "Address" tab
     And user types billing info for "qa user" without email
-    #And user types shipping address for "qa user"
     And presses the "Continue" button
     And chooses "Use Entered Address"
 
