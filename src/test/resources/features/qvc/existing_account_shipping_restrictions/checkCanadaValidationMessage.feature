@@ -15,4 +15,3 @@ Feature: EXISTING ACCOUNT - SHIPPING RESTRICTIONS
     And unset checkbox "Yes, shipping address and billing address are the same"
     And selects "Enter a New Address" for shipping address
     Then chooses "Canada" country
-    Then failed step

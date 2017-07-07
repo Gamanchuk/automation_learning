@@ -18,7 +18,7 @@ public class CountrySelectorComponent extends BaseComponent {
         if (!itemName.equals(actualItem)) {
             selectedCountryEl.click();
             CommonFunctions.sleep(1000);
-            assertTrue(isElementVisible(countryList), "Looks like country drop-down doesn't have Country: " + itemName)
+            assertTrue(isElementVisible(countryList), "Looks like country drop-down doesn't have Country: " + itemName);
             getDriver().findElement(countryList).click();
         } else {
             log.info("Item selected by default: " + itemName);
