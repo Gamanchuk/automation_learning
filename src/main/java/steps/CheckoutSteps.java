@@ -264,7 +264,7 @@ public class CheckoutSteps {
 
     @And("^user remove product$")
     public void userRemoveProduct() {
-        assertTrue(radioListComponent.exists(), "Delivery Method Drop-Down doesn't exist");
+        assertTrue(radioListComponent.exists(), "Looks like delivery Method Drop-Down doesn't exist");
         productListComponent.removeProduct();
         CommonFunctions.attachScreenshot("Remove product");
     }
@@ -280,6 +280,12 @@ public class CheckoutSteps {
     public void choosesCountry(String country) {
         countrySelectorComponent.select(country);
         CommonFunctions.attachScreenshot("Country selected: " + country);
+    }
+
+    @And("^user should see \"([^\"]*)\" shipping country$")
+    public void userShouldSeeShippingCountry(String countryTitle) {
+        assertTrue(countrySelectorComponent.exists(), "Looks like shipping country drop-down doesn't present on page");
+        assertEquals(countrySelectorComponent.getSelectedCountry(), countryTitle, "Default shipping country incorrect.");
     }
 
     @And("^uses \"([^\"]*)\" card for payment$")
@@ -303,7 +309,7 @@ public class CheckoutSteps {
 
         //Select card uses 4 last symbols
         //radioListComponent.setRoot(null);
-        assertTrue(savedOptionPickerComponent.exists(), "Drop-down with saved cards doesn't present");
+        assertTrue(savedOptionPickerComponent.exists(), "Looks like drop-down with saved cards doesn't present");
         savedOptionPickerComponent.selectCard(card.getSecureCardData());
 
         if (!card.getName().equals("qCard")) {
@@ -874,7 +880,6 @@ public class CheckoutSteps {
         thankYouPage.clickLinkByTitle(linkTitle);
         CommonFunctions.attachScreenshot("Clicked on link: " + linkTitle);
     }
-
 
     @And("^user should see payment option component$")
     public void userShouldSeePaymentOptionComponent() {

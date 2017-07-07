@@ -24,4 +24,8 @@ public class CountrySelectorComponent extends BaseComponent {
     public boolean exists() {
         return isElementVisible(selectedCountry);
     }
+
+    public String getSelectedCountry() {
+        return getDriver().findElement(selectedCountry).getText();
+    }
 }
