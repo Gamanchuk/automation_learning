@@ -1,4 +1,4 @@
-@qvc
+@qvc @debug
 
 Feature: GUEST - SHIPPING RESTRICTIONS
 
@@ -9,8 +9,9 @@ Feature: GUEST - SHIPPING RESTRICTIONS
     Then presses the "Continue" button
 
   @TestCaseId("101815")
-  Scenario: Check Canada validation message
+  Scenario: Canadian billing address
 
     Given user should be on "Address" tab
     And chooses "Canada" country
+    And user types Canadian billing address for "qa canada" without email
     Then user should be see country note with text "We're sorry, shipping to Canada is not available."
