@@ -384,7 +384,7 @@ public abstract class Entity {
     public void scroll(WebElement element) {
         Actions builder = new Actions(driver);
         builder.moveToElement(element).build().perform();
-        CommonFunctions.sleep(200);
+        CommonFunctions.sleep(500);
     }
 
     public void switchToIframe(String iframeName) {
