@@ -15,6 +15,7 @@ Feature: EXISTING ACCOUNT - PAYMENT PAGE
   @Issue("MCCAT-6001")
   Scenario: Test with correct Discover billing information and fill in all required fields
     Given user should be on "Payment" tab
+    And user selects "1 payment" Payment Option
     And selects "Enter a New Card"
     And uses "discover" card for payment
     And presses the "Place Order" button

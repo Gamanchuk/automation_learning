@@ -285,6 +285,7 @@ public class CheckoutSteps {
     @And("^uses \"([^\"]*)\" card for payment$")
     public void usesCardForPayment(String cardName) {
         CreditCard card = DataProvider.getCard(cardName);
+        creditCardFormComponent.setRoot(null);
         creditCardFormComponent.inputPaymentDetails(
                 card.getName(),
                 card.getNumber(),
