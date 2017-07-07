@@ -61,7 +61,6 @@ public class CheckoutSteps {
     private AddressVerificationComponent addressVerificationComponent = new AddressVerificationComponent();
     private SavedOptionPickerComponent savedOptionPickerComponent = new SavedOptionPickerComponent();
 
-
     @Given("^user fills email field with \"([^\"]*)\"$")
     public void userFillsEmailFieldWith(String email) {
         signInFormComponent.fillEmail(email);

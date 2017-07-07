@@ -1,4 +1,4 @@
-@qvc
+@qvc @debug
 
 Feature: EXISTING ACCOUNT - PAYMENT PAGE
 
@@ -15,7 +15,12 @@ Feature: EXISTING ACCOUNT - PAYMENT PAGE
   @Issue("MCCAT-6001")
   Scenario: Test with correct Amex billing information and fill in all required fields
     Given user should be on "Payment" tab
-    And selects "Enter a New Card"
-    And uses "amex" card for payment
+    And user selects "1 payment" Payment Option
+    And uses saved "amex-saved" card for payment
+    # And uses QVC "americanexpress" for payment
+   # And selects "Enter a New Card"
+   # And uses "amex" card for payment
     And presses the "Place Order" button
     Then user should be on thank you page
+
+    

@@ -20,6 +20,7 @@ Feature: HAPPY PATH
     And presses the "Continue" button
 
     And uses "Pay with Check / Money Order" for payment
+    And user selects "1 payment" Payment Option
     And presses the "Continue" button
 
     And user should be on "Review" tab
