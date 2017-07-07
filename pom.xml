@@ -445,7 +445,7 @@
             <properties>
                 <testng.suite>
                     ${basedir}/src/test/resources/testsuites/qvc/qvc_existing_account_shipping_billing_page.xml
-                 </testng.suite>
+                </testng.suite>
                 <suite.id>359</suite.id>
             </properties>
         </profile>
@@ -500,8 +500,8 @@
                 <suite.id>359</suite.id>
             </properties>
         </profile>
-                  
-          <profile>
+
+        <profile>
             <id>suite-qvc-existingAccountShippingDetailsPage</id>
             <properties>
                 <testng.suite>
@@ -536,6 +536,26 @@
             <properties>
                 <testng.suite>
                     ${basedir}/src/test/resources/testsuites/qvc/qvc_express_checkout.xml
+                </testng.suite>
+                <suite.id>359</suite.id>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>suite-qvc-guestShippingRestriction</id>
+            <properties>
+                <testng.suite>
+                    ${basedir}/src/test/resources/testsuites/qvc/qvc_guest_shipping_restriction.xml
+                </testng.suite>
+                <suite.id>359</suite.id>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>suite-qvc-existingAccountShippingRestriction</id>
+            <properties>
+                <testng.suite>
+                    ${basedir}/src/test/resources/testsuites/qvc/qvc_existing_account_shipping_restriction.xml
                 </testng.suite>
                 <suite.id>359</suite.id>
             </properties>

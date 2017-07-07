@@ -93,23 +93,38 @@ public class CheckoutSteps {
 
     @And("^user types billing info for \"([^\"]*)\"$")
     public void typesBillingInfoFor(String userName) {
-        fillBillingInfo(userName, true, true, false);
+        fillBillingInfo(userName, true, true, false, false);
     }
 
     @And("^user types billing info for \"([^\"]*)\" without email$")
     public void userTypesBillingInfoForWithoutEmail(String userName) {
-        fillBillingInfo(userName, true, false, false);
+        fillBillingInfo(userName, true, false, false, false);
+    }
 
+    @And("^user types Canadian billing address for \"([^\"]*)\" without email$")
+    public void userTypesCanadianBillingAddressForWithoutEmail(String userName) throws Throwable {
+        fillBillingInfo(userName, true, false, false, true);
+    }
+
+    @And("^user types manually Canadian billing address for \"([^\"]*)\" without email$")
+    public void userTypesManuallyCanadianBillingAddressForWithoutEmail(String userName) {
+        fillBillingInfo(userName, false, false, false, true);
     }
 
     @And("^user types manually billing info for \"([^\"]*)\" without email$")
     public void userTypesManuallyBillingInfoForWithoutEmail(String userName) {
-        fillBillingInfo(userName, false, false, false);
+        fillBillingInfo(userName, false, false, false, false);
     }
 
     @And("^user types shipping address for \"([^\"]*)\"$")
     public void userTypesShippingInfoForWithoutPhone(String userName) {
-        checkboxRowComponent.check("Yes, shipping address and billing address are the same", false);
+
+        String checkBox = "Yes, shipping address and billing address are the same";
+
+        if (checkboxRowComponent.exists(checkBox, 5)) {
+            checkboxRowComponent.check(checkBox, false);
+        }
+
         fillShippingAddress(userName, true);
         CommonFunctions.attachScreenshot("Shipping address form");
     }
@@ -130,7 +145,7 @@ public class CheckoutSteps {
 
     @And("^user types manually international billing info for \"([^\"]*)\" without email$")
     public void userTypesManuallyInternationalBillingInfoForWithoutEmail(String userName) {
-        fillBillingInfo(userName, false, false, false);
+        fillBillingInfo(userName, false, false, false, false);
     }
 
     @And("^user types customer info for \"([^\"]*)\"$")
@@ -138,14 +153,14 @@ public class CheckoutSteps {
         BillingUser user = DataProvider.getUser(userName);
 
         addressFormComponent.setRoot(BaseComponent.getContainerByTitle("Customer Information"));
-        fillAddressForm(user, true);
+        fillAddressForm(user, true, false);
         emailComponent.fillEmailField(user.getEmail());
         CommonFunctions.attachScreenshot("Customer info");
     }
 
     @And("^user types billing info for \"([^\"]*)\" and checks email$")
     public void typesBillingInfoForUserAndChecksEmail(String userName) {
-        fillBillingInfo(userName, true, false, true);
+        fillBillingInfo(userName, true, false, true, false);
     }
 
     @And("^user types сustomer info for \"([^\"]*)\" and checks email$")
@@ -155,12 +170,12 @@ public class CheckoutSteps {
 
     @And("^user types manually billing info for \"([^\"]*)\" and checks email$")
     public void userTypesManuallyBillingInfoForAndChecksEmail(String userName) {
-        fillBillingInfo(userName, false, false, true);
+        fillBillingInfo(userName, false, false, true, false);
     }
 
     @Given("^user types manually billing info for \"([^\"]*)\"$")
     public void userTypesManuallyBillingInfoFor(String userName) {
-        fillBillingInfo(userName, false, true, false);
+        fillBillingInfo(userName, false, true, false, false);
     }
 
     @Given("^user types manually customer info for \"([^\"]*)\"$")
@@ -264,7 +279,7 @@ public class CheckoutSteps {
 
     @And("^user remove product$")
     public void userRemoveProduct() {
-        assertTrue(radioListComponent.exists(), "Delivery Method Drop-Down doesn't exist");
+        assertTrue(radioListComponent.exists(), "Looks like delivery Method Drop-Down doesn't exist");
         productListComponent.removeProduct();
         CommonFunctions.attachScreenshot("Remove product");
     }
@@ -278,8 +293,20 @@ public class CheckoutSteps {
 
     @And("^chooses \"([^\"]*)\" country$")
     public void choosesCountry(String country) {
+        countrySelectorComponent.setRoot(null);
         countrySelectorComponent.select(country);
         CommonFunctions.attachScreenshot("Country selected: " + country);
+    }
+
+    @And("^user should see \"([^\"]*)\" shipping country$")
+    public void userShouldSeeShippingCountry(String countryTitle) {
+        assertTrue(countrySelectorComponent.exists(), "Looks like shipping country drop-down doesn't present on page");
+        assertEquals(countrySelectorComponent.getSelectedCountry(), countryTitle, "Default shipping country incorrect.");
+    }
+
+    @Then("^user should be see country note with text \"([^\"]*)\"$")
+    public void userShouldBeSeeCountryNoteWithText(String note) {
+        assertEquals(countrySelectorComponent.getCountryNote(), note, "Country note incorrect.");
     }
 
     @And("^uses \"([^\"]*)\" card for payment$")
@@ -304,7 +331,7 @@ public class CheckoutSteps {
 
         //Select card uses 4 last symbols
         //radioListComponent.setRoot(null);
-        assertTrue(savedOptionPickerComponent.exists(), "Drop-down with saved cards doesn't present");
+        assertTrue(savedOptionPickerComponent.exists(), "Looks like drop-down with saved cards doesn't present");
         savedOptionPickerComponent.selectCard(card.getSecureCardData());
 
         if (!card.getName().equals("qCard")) {
@@ -550,11 +577,11 @@ public class CheckoutSteps {
         fillShippingInfo(userName, true);
     }
 
-    private void fillBillingInfo(String userName, boolean autoFill, boolean fillEmail, boolean checkEmail) {
+    private void fillBillingInfo(String userName, boolean autoFill, boolean fillEmail, boolean checkEmail, boolean canadian) {
         BillingUser user = DataProvider.getUser(userName);
 
         addressFormComponent.setRoot(BaseComponent.getContainerByTitle("Billing Address"));
-        fillAddressForm(user, autoFill);
+        fillAddressForm(user, autoFill, canadian);
 
         if (fillEmail) {
             emailComponent.fillEmailField(user.getEmail());
@@ -571,7 +598,7 @@ public class CheckoutSteps {
         BillingUser user = DataProvider.getUser(userName);
 
         addressFormComponent.setRoot(BaseComponent.getContainerByTitle("Customer Information"));
-        fillAddressForm(user, autoFill);
+        fillAddressForm(user, autoFill, false);
 
         if (fillEmail) {
             emailComponent.fillEmailField(user.getEmail());
@@ -585,12 +612,13 @@ public class CheckoutSteps {
     private void fillShippingInfo(String userName, boolean autoFill) {
         BillingUser user = DataProvider.getUser(userName);
         addressFormComponent.setRoot(BaseComponent.getContainerByTitle("Shipping Address"));
-        fillAddressForm(user, autoFill);
+        fillAddressForm(user, autoFill, false);
         CommonFunctions.attachScreenshot("Shipping info");
     }
 
     private void fillShippingAddress(String userName, boolean autoFill) {
         BillingUser user = DataProvider.getUser(userName);
+        addressDisplayComponent.javascriptScroll(300);
         addressFormComponent.setRoot(BaseComponent.getContainerByTitle("Shipping Address"));
         addressFormComponent.fillAddress(
                 user.getFullName(),
@@ -605,7 +633,7 @@ public class CheckoutSteps {
     }
 
 
-    private void fillAddressForm(BillingUser user, boolean autoFill) {
+    private void fillAddressForm(BillingUser user, boolean autoFill, boolean canadian) {
         addressFormComponent.fillAddressForm(
                 user.getFullName(),
                 user.getFullAddress(),
@@ -615,7 +643,8 @@ public class CheckoutSteps {
                 user.getPhone(),
                 user.getState(),
                 user.getZipCode(),
-                autoFill
+                autoFill,
+                canadian
         );
     }
 
@@ -691,13 +720,6 @@ public class CheckoutSteps {
     @Then("^user should be on \"([^\"]*)\" tab$")
     public void userShouldBeOnTab(String tabName) {
         assertTrue(breadcrumbWidget.active(tabName), "Tab " + tabName + " is not an active");
-        //   if (tabName.contains("Delivery")) {
-        //       assertTrue(radioListComponent.exists(), "Delivery Method Drop-Down doesn't exist");
-        // } else {
-        //   assertTrue(breadcrumbWidget.isBreadcrumbActive(tabName), "Tab " + tabName + " is not an active");
-        // }
-        //assertTrue(breadcrumbWidget.isTabActive(tabName), "Tab " + tabName + " is not an active");
-
         CommonFunctions.attachScreenshot("User on [" + tabName + "] tab");
     }
 
@@ -876,9 +898,10 @@ public class CheckoutSteps {
         CommonFunctions.attachScreenshot("Clicked on link: " + linkTitle);
     }
 
-
     @And("^user should see payment option component$")
     public void userShouldSeePaymentOptionComponent() {
         assertTrue(radioListComponent.exists(), "Radio List Does Not Present On Page");
     }
+
+
 }

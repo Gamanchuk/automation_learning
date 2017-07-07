@@ -19,7 +19,7 @@ public class AddressFormComponent extends BaseComponent {
     private By zipField = By.cssSelector(".zip-input input");
     private By title = By.xpath("//div[contains(@class, 'component-input')]//select");
 
-    public void fillAddressForm(String fullName, String address, String cityInfo, String city, String apartment, String phone, String state, String zip, boolean autoFill) {
+    public void fillAddressForm(String fullName, String address, String cityInfo, String city, String apartment, String phone, String state, String zip, boolean autoFill, boolean canadian) {
 
         boolean apartmentPresent = isElementVisible(apartmentField, 3);
 
@@ -38,7 +38,7 @@ public class AddressFormComponent extends BaseComponent {
         }
 
         if (autoFill) {
-            findElementWithTextBy(cityInfo, By.cssSelector("div.radio-list-details p.subtext")).click();
+            findElementWithTextBy(city, By.cssSelector("div.radio-list-details p.subtext")).click();
         } else {
             if (!apartmentPresent) {
                 click(By.cssSelector("a.manual"));
@@ -46,7 +46,12 @@ public class AddressFormComponent extends BaseComponent {
             //findElementWithTextBy("enter city", By.cssSelector("div.zip-message a")).click();
             fillField(cityField, city);
             fillField(zipField, zip);
-            fillState(state);
+
+            if (canadian) {
+                fillField(stateField, state);
+            } else {
+                fillState(state);
+            }
         }
 
         // Need to sleep for second to avoid selenium exception
@@ -59,10 +64,6 @@ public class AddressFormComponent extends BaseComponent {
             fillPhone(phone);
             focusOut(findElement(phoneField));
         }
-
-            // Need to send phone number digit by digit
-            fillPhone(phone);
-            focusOut(findElement(phoneField));
     }
 
     public void fillAddress(String fullName, String address, String cityInfo, String city, String apartment, String state, String zip, boolean autoFill) {
