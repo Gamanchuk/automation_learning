@@ -1,4 +1,4 @@
-@qvc @debug
+@qvc
 
 Feature: EXISTING ACCOUNT - SHIPPING RESTRICTIONS
 
@@ -15,3 +15,4 @@ Feature: EXISTING ACCOUNT - SHIPPING RESTRICTIONS
     And unset checkbox "Yes, shipping address and billing address are the same"
     And selects "Enter a New Address" for shipping address
     Then chooses "Canada" country
+    Then user should be see country note with text "We're sorry, shipping to Canada is not available."

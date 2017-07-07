@@ -1,4 +1,4 @@
-@qvc
+@qvc @debug
 
 Feature: GUEST - SHIPPING RESTRICTIONS
 
@@ -12,4 +12,5 @@ Feature: GUEST - SHIPPING RESTRICTIONS
   Scenario: Check Canada validation message
 
     Given user should be on "Address" tab
-    Then chooses "Canada" country
+    And chooses "Canada" country
+    Then user should be see country note with text "We're sorry, shipping to Canada is not available."

@@ -8,6 +8,7 @@ import static org.testng.Assert.assertTrue;
 
 public class CountrySelectorComponent extends BaseComponent {
     private By selectedCountry = By.xpath("//div[@class='selected-country']");
+    private By countryNote = By.xpath("//div[contains(@class, 'invalid-country-note')]");
 
     public void select(String itemName) {
         By countryList = By.xpath("//div[@class='country' and text()='" + itemName + "']");
@@ -31,5 +32,10 @@ public class CountrySelectorComponent extends BaseComponent {
 
     public String getSelectedCountry() {
         return getDriver().findElement(selectedCountry).getText();
+    }
+
+    public String getCountryNote() {
+        assertTrue(isElementVisible(countryNote), "Looks like country note doesn't present on page");
+        return getDriver().findElement(countryNote).getText();
     }
 }

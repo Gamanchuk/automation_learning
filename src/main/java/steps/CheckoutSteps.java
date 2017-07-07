@@ -289,6 +289,11 @@ public class CheckoutSteps {
         assertEquals(countrySelectorComponent.getSelectedCountry(), countryTitle, "Default shipping country incorrect.");
     }
 
+    @Then("^user should be see country note with text \"([^\"]*)\"$")
+    public void userShouldBeSeeCountryNoteWithText(String note) {
+        assertEquals(countrySelectorComponent.getSelectedCountry(), note, "Country note incorrect.");
+    }
+
     @And("^uses \"([^\"]*)\" card for payment$")
     public void usesCardForPayment(String cardName) {
         CreditCard card = DataProvider.getCard(cardName);
@@ -879,4 +884,5 @@ public class CheckoutSteps {
     public void userShouldSeePaymentOptionComponent() {
         assertTrue(radioListComponent.exists(), "Radio List Does Not Present On Page");
     }
+
 }
