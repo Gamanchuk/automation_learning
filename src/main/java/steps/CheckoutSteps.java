@@ -113,7 +113,13 @@ public class CheckoutSteps {
 
     @And("^user types shipping address for \"([^\"]*)\"$")
     public void userTypesShippingInfoForWithoutPhone(String userName) {
-        checkboxRowComponent.check("Yes, shipping address and billing address are the same", false);
+
+        String checkBox = "Yes, shipping address and billing address are the same";
+
+        if (checkboxRowComponent.exists(checkBox, 5)) {
+            checkboxRowComponent.check(checkBox, false);
+        }
+
         fillShippingAddress(userName, true);
         CommonFunctions.attachScreenshot("Shipping address form");
     }

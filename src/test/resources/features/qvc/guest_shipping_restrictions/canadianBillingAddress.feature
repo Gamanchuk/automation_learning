@@ -15,3 +15,7 @@ Feature: GUEST - SHIPPING RESTRICTIONS
     And chooses "Canada" country
     And user types Canadian billing address for "qa canada" without email
     Then user should be see country note with text "We're sorry, shipping to Canada is not available."
+    And user types shipping address for "qa user"
+    And presses the "Continue" button
+    And chooses "Use Entered Address"
+    Then user should be on "Delivery" tab
