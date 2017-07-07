@@ -35,9 +35,9 @@ public class QVCProductPage extends BasePage {
 
         // need sleep after scroll
         CommonFunctions.sleep(1000);
-        assertTrue(isElementVisible(colorList), "Color list doesn't on page");
+        assertTrue(isElementVisible(colorList) && isElementClickable(colorList), "Color list doesn't on page");
 
-        getDriver().findElement(colorList).click();
+        getDriver().findElements(colorList).get(0).click();
         waitForAjax();
     }
 
