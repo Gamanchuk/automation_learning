@@ -8,8 +8,8 @@ Feature: GUEST - SHIPPING RESTRICTIONS
     And user continue checkout as guest
     Then presses the "Continue" button
 
-  @TestCaseId("101814")
-  Scenario: Check default shipping country
+  @TestCaseId("101815")
+  Scenario: Check Canada validation message
 
     Given user should be on "Address" tab
-    Then user should see "United States" shipping country
+    Then chooses "Canada" country

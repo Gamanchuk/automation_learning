@@ -278,6 +278,7 @@ public class CheckoutSteps {
 
     @And("^chooses \"([^\"]*)\" country$")
     public void choosesCountry(String country) {
+        countrySelectorComponent.setRoot(null);
         countrySelectorComponent.select(country);
         CommonFunctions.attachScreenshot("Country selected: " + country);
     }
@@ -696,13 +697,6 @@ public class CheckoutSteps {
     @Then("^user should be on \"([^\"]*)\" tab$")
     public void userShouldBeOnTab(String tabName) {
         assertTrue(breadcrumbWidget.active(tabName), "Tab " + tabName + " is not an active");
-        //   if (tabName.contains("Delivery")) {
-        //       assertTrue(radioListComponent.exists(), "Delivery Method Drop-Down doesn't exist");
-        // } else {
-        //   assertTrue(breadcrumbWidget.isBreadcrumbActive(tabName), "Tab " + tabName + " is not an active");
-        // }
-        //assertTrue(breadcrumbWidget.isTabActive(tabName), "Tab " + tabName + " is not an active");
-
         CommonFunctions.attachScreenshot("User on [" + tabName + "] tab");
     }
 

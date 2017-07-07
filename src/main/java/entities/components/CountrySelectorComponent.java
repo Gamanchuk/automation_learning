@@ -2,6 +2,9 @@ package entities.components;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import utils.CommonFunctions;
+
+import static org.testng.Assert.assertTrue;
 
 public class CountrySelectorComponent extends BaseComponent {
     private By selectedCountry = By.xpath("//div[@class='selected-country']");
@@ -14,7 +17,8 @@ public class CountrySelectorComponent extends BaseComponent {
         log.info("Actual item: " + actualItem + ". Expected item: " + itemName);
         if (!itemName.equals(actualItem)) {
             selectedCountryEl.click();
-            waitForAjax();
+            CommonFunctions.sleep(1000);
+            assertTrue(isElementVisible(countryList), "Looks like country drop-down doesn't have Country: " + itemName)
             getDriver().findElement(countryList).click();
         } else {
             log.info("Item selected by default: " + itemName);
