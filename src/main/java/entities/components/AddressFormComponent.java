@@ -46,7 +46,12 @@ public class AddressFormComponent extends BaseComponent {
             //findElementWithTextBy("enter city", By.cssSelector("div.zip-message a")).click();
             fillField(cityField, city);
             fillField(zipField, zip);
-            fillState(state);
+
+            if (canadian) {
+                fillField(stateField, state);
+            } else {
+                fillState(state);
+            }
         }
 
         // Need to sleep for second to avoid selenium exception

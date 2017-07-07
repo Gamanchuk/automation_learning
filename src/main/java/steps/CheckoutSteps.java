@@ -106,6 +106,11 @@ public class CheckoutSteps {
         fillBillingInfo(userName, true, false, false, true);
     }
 
+    @And("^user types manually Canadian billing address for \"([^\"]*)\" without email$")
+    public void userTypesManuallyCanadianBillingAddressForWithoutEmail(String userName) {
+        fillBillingInfo(userName, false, false, false, true);
+    }
+
     @And("^user types manually billing info for \"([^\"]*)\" without email$")
     public void userTypesManuallyBillingInfoForWithoutEmail(String userName) {
         fillBillingInfo(userName, false, false, false, false);
@@ -612,6 +617,7 @@ public class CheckoutSteps {
 
     private void fillShippingAddress(String userName, boolean autoFill) {
         BillingUser user = DataProvider.getUser(userName);
+        addressDisplayComponent.javascriptScroll(300);
         addressFormComponent.setRoot(BaseComponent.getContainerByTitle("Shipping Address"));
         addressFormComponent.fillAddress(
                 user.getFullName(),
@@ -895,4 +901,6 @@ public class CheckoutSteps {
     public void userShouldSeePaymentOptionComponent() {
         assertTrue(radioListComponent.exists(), "Radio List Does Not Present On Page");
     }
+
+
 }
