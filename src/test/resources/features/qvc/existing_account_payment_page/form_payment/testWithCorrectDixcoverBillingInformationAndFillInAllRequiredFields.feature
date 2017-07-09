@@ -1,4 +1,4 @@
-@qvc
+@qvc @debug
 
 Feature: EXISTING ACCOUNT - PAYMENT PAGE
 
@@ -17,6 +17,8 @@ Feature: EXISTING ACCOUNT - PAYMENT PAGE
     Given user should be on "Payment" tab
     And user selects "1 payment" Payment Option
     And selects "Enter a New Card"
-    And uses "discover" card for payment
+    And uses saved "discover-saved" card for payment
+    And presses the "Continue" button
+    And user should be on "Review" tab
     And presses the "Place Order" button
     Then user should be on thank you page
