@@ -1,4 +1,4 @@
-@qvc
+@qvc @Ignored
 
 Feature: EXISTING ACCOUNT - PAYMENT PAGE
 
@@ -17,7 +17,6 @@ Feature: EXISTING ACCOUNT - PAYMENT PAGE
   Scenario: Test with correct Mastercard billing information and fill in all required fields
     Given user should be on "Payment" tab
     And user selects "1 payment" Payment Option
-    And selects "Enter a New Card"
     And uses saved "mastercard" card for payment
     And presses the "Continue" button
     And user should be on "Review" tab

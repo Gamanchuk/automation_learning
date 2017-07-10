@@ -79,6 +79,12 @@ public class CreditCard {
         return secureCardNumber;
     }
 
+    public String getFourLastNumbers() {
+        String number = StringUtils.right(this.number, 4);
+        log.info("Card: " + this.getName() + " with numbers: " + number);
+        return number;
+    }
+
     private void printCard() {
 
     }

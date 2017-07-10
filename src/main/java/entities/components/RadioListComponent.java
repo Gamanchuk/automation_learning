@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import utils.CommonFunctions;
 
+import static org.testng.Assert.fail;
+
 public class RadioListComponent extends BaseComponent {
     private By currentItem = By.cssSelector(".radio-list-option-selected");
 
@@ -35,7 +37,7 @@ public class RadioListComponent extends BaseComponent {
             return true;
         }
 
-        //fail("Item (credit card / street) doesn't present on page")
+        fail("Item " + option + " (credit card / street) doesn't present on page.");
 
         return false;
     }

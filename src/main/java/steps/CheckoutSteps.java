@@ -303,7 +303,7 @@ public class CheckoutSteps {
         //Select card uses 4 last symbols
         //radioListComponent.setRoot(null);
         assertTrue(savedOptionPickerComponent.exists(), "Drop-down with saved cards doesn't present");
-        savedOptionPickerComponent.selectCard(card.getSecureCardData());
+        savedOptionPickerComponent.selectCard(card.getFourLastNumbers());
 
         if (!card.getName().equals("qCard")) {
             creditCardFormComponent.inputValueIntoField(card.getCvv(), "CVV");
