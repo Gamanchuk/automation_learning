@@ -24,4 +24,5 @@ Feature: GUEST - SHIPPING & BILLING PAGE - BILLING INFO - DOMESTIC
 
     When user types "Mr Donal Trump III" into the "Full Name" field of "Billing Address" address form
     And presses the "Continue" button
+    And chooses "Use Entered Address"
     Then user should be on "Delivery" tab

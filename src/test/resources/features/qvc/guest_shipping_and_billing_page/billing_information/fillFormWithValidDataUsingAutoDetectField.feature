@@ -16,5 +16,6 @@ Feature: GUEST - SHIPPING & BILLING PAGE - BILLING INFO - DOMESTIC
     When user chooses "Miss" title
     And user types billing info for "qa user" without email
     And presses the "Continue" button
+    And chooses "Use Entered Address"
     Then user should be on "Delivery" tab
 
