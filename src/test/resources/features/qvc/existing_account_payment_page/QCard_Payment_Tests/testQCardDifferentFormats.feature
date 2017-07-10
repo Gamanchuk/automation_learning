@@ -23,7 +23,7 @@ Feature: EXISTING ACCOUNT - PAYMENT PAGE - QCARD
     And presses the "Continue" button
     And sees "FORM ERRORS" error message with text "Please review all inputs."
 
-    And uses "qcard" card for payment
+    And uses saved "qcard" card for payment
     And presses the "Continue" button
 
     And sees "FORM ERRORS" error message with text "Please review all inputs."

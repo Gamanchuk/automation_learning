@@ -61,7 +61,6 @@ public class CheckoutSteps {
     private AddressVerificationComponent addressVerificationComponent = new AddressVerificationComponent();
     private SavedOptionPickerComponent savedOptionPickerComponent = new SavedOptionPickerComponent();
 
-
     @Given("^user fills email field with \"([^\"]*)\"$")
     public void userFillsEmailFieldWith(String email) {
         signInFormComponent.fillEmail(email);
@@ -332,7 +331,7 @@ public class CheckoutSteps {
         //Select card uses 4 last symbols
         //radioListComponent.setRoot(null);
         assertTrue(savedOptionPickerComponent.exists(), "Looks like drop-down with saved cards doesn't present");
-        savedOptionPickerComponent.selectCard(card.getSecureCardData());
+        savedOptionPickerComponent.selectCard(card.getFourLastNumbers());
 
         if (!card.getName().equals("qCard")) {
             creditCardFormComponent.inputValueIntoField(card.getCvv(), "CVV");
@@ -902,6 +901,4 @@ public class CheckoutSteps {
     public void userShouldSeePaymentOptionComponent() {
         assertTrue(radioListComponent.exists(), "Radio List Does Not Present On Page");
     }
-
-
 }

@@ -46,6 +46,7 @@ public class CreditCard {
     public String getSecureCardData() {
         String secureCardNumber = null;
         int cardNumberLength = this.number.length();
+        int cardCVVnumber = this.cvv.length();
         String lastFourNumbers = StringUtils.right(this.number, 4);
         log.info(this.expDate);
         String[] temp = this.expDate.split("/");
@@ -65,6 +66,9 @@ public class CreditCard {
 
         } else if (cardNumberLength == 15) {
             secureCardNumber = String.format("%s: **** **** **** %s", cardName, lastFourNumbers);
+
+        } else if (cardCVVnumber == 4) {
+            secureCardNumber = String.format("%s: **** ****** **" + "%s", cardName, lastFourNumbers);
         } else {
             fail("Card number length doesn't equals 16 or 15. Please select another card");
         }
@@ -73,6 +77,12 @@ public class CreditCard {
 
         // return **** **** **** 4657 (02/12)
         return secureCardNumber;
+    }
+
+    public String getFourLastNumbers() {
+        String number = StringUtils.right(this.number, 4);
+        log.info("Card: " + this.getName() + " with numbers: " + number);
+        return number;
     }
 
     private void printCard() {
