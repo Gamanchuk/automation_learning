@@ -24,11 +24,13 @@ Feature: GUEST - SHIPPING & BILLING PAGE - BILLING INFO - DOMESTIC
 
     When user types "123456@moovweb.com" into the email field
     And presses the "Continue" button
+    And chooses "Use Entered Address"
     Then user should be on "Delivery" tab
     And user navigates to "Address" breadcrumb
 
     When user types "#######@moovweb.com" into the email field
     And presses the "Continue" button
+    And chooses "Use Entered Address"
     Then user should be on "Delivery" tab
     And user navigates to "Address" breadcrumb
 

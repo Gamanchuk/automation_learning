@@ -19,16 +19,19 @@ Feature: GUEST - SHIPPING & BILLING PAGE - BILLING INFO - DOMESTIC
 
     When user types "12345" into the "Apt, Bldg." field of "Billing Address" address form
     And presses the "Continue" button
+    And chooses "Use Entered Address"
     And user should be on "Delivery" tab
     And user navigates to "Address" breadcrumb
 
     When user types "Some Apartment" into the "Apt, Bldg." field of "Billing Address" address form
     And presses the "Continue" button
+    And chooses "Use Entered Address"
     Then user should be on "Delivery" tab
     And user navigates to "Address" breadcrumb
 
     When user types "!#&@()" into the "Apt, Bldg." field of "Billing Address" address form
     And presses the "Continue" button
+    And chooses "Use Entered Address"
     Then user should be on "Delivery" tab
 
 
