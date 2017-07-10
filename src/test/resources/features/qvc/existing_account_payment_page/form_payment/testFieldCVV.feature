@@ -14,6 +14,7 @@ Feature: EXISTING ACCOUNT - PAYMENT PAGE
   @TestCaseId("102276")
   Scenario: Test field "CVV"
     Given user should be on "Payment" tab
+    And user selects "1 payment" Payment Option
     And selects "Enter a New Card"
     And uses "visa" card for payment
 

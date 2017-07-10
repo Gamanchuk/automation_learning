@@ -21,9 +21,4 @@ Feature: EXISTING ACCOUNT - PAYMENT PAGE
 
     And user should be on "Review" tab
     And presses the "Place Order" button
-    # And uses QVC "americanexpress" for payment
-   # And selects "Enter a New Card"
-   # And uses "amex" card for payment
     Then user should be on thank you page
-
-    

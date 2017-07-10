@@ -15,6 +15,7 @@ Feature: EXISTING ACCOUNT - PAYMENT PAGE
   @TestCaseId("102275")
   Scenario: Test field "Card Number"
     Given user should be on "Payment" tab
+    And user selects "1 payment" Payment Option
     And selects "Enter a New Card"
     And uses "visa2" card for payment
 

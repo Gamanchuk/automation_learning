@@ -17,10 +17,11 @@ Feature: HAPPY PATH
     And presses the "Continue" button
     And chooses "Use Entered Address"
 
+    And chooses "Use Entered Address"
     And user should be on "Delivery" tab
     And presses the "Continue" button
 
-    And uses "mastercard" card for payment
+    And uses "visa" card for payment
     And presses the "Continue" button
 
     And user should be on "Review" tab
