@@ -19,11 +19,13 @@ Feature: GUEST - BREADCRUMB
     And user presses "Payment" breadcrumb tab
     And user presses "Review" breadcrumb tab
     And presses the "Continue" button
+    And chooses "Use Entered Address"
     Then user should be on "Delivery" tab
 
     # Check return back From Delivery to Address
     And user navigates to "Address" breadcrumb
     And presses the "Continue" button
+    And chooses "Use Entered Address"
     And user should be on "Delivery" tab
 
     # Check from Delivery tab

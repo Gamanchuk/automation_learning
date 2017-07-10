@@ -9,17 +9,15 @@ Feature: GUEST - SHIPPING & BILLING PAGE - BILLING INFO - DOMESTIC
     And user should be on "Address" tab
     Then user types billing info for "qa user" without email
 
-  @TestCaseId("102395")
-  Scenario: Test field 'Last name'
+  @TestCaseId("102402")
+  Scenario: Test field 'Phone'
 
-    When user types "Moovweb" into the "Full Name" field of "Billing Address" address form
+    When user types "" into the "Phone Number" field of "Billing Address" address form
     And presses the "Continue" button
-    Then user should be on "Address" tab
+    Then user should stay at "Address" tab
     And sees "FORM ERRORS" error message with text "Please review all inputs."
 
-    When user types "Moovweb !@#&::!@#()" into the "Full Name" field of "Billing Address" address form
+    When user types "4152011234" into the "Phone Number" field of "Billing Address" address form
     And presses the "Continue" button
+    And chooses "Use Entered Address"
     Then user should be on "Delivery" tab
-
-
-
