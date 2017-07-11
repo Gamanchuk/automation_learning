@@ -1,6 +1,6 @@
 @saatva
 
-Feature: CONTACT PAGE
+Feature: SHIPPING PAGE
 
   Background: Add product to card and process to checkout
     Given user adds to cart product from Saatva
