@@ -58,8 +58,9 @@ public class CheckoutSteps {
     private RewardsAccountComponent rewardsAccountComponent = new RewardsAccountComponent();
     private ShippingOptionsComponent shippingOptionsComponent = new ShippingOptionsComponent();
     private CountrySelectorComponent countrySelectorComponent = new CountrySelectorComponent();
-    private AddressVerificationComponent addressVerificationComponent = new AddressVerificationComponent();
     private SavedOptionPickerComponent savedOptionPickerComponent = new SavedOptionPickerComponent();
+    private AddressVerificationComponent addressVerificationComponent = new AddressVerificationComponent();
+
 
     @Given("^user fills email field with \"([^\"]*)\"$")
     public void userFillsEmailFieldWith(String email) {
@@ -68,12 +69,12 @@ public class CheckoutSteps {
     }
 
     @Then("^user should see password field$")
-    public void userShouldSeePasswordField() throws Throwable {
+    public void userShouldSeePasswordField() {
         assertTrue(signInFormComponent.isPasswordFieldVisible(), "Password field was not displayed");
     }
 
     @And("^user fills password field with \"([^\"]*)\"$")
-    public void userFillsPasswordFieldWith(String password) throws Throwable {
+    public void userFillsPasswordFieldWith(String password) {
         signInFormComponent.fillPassword(password);
         CommonFunctions.attachScreenshot("Fill password");
     }
