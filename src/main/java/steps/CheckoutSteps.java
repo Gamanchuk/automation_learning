@@ -751,7 +751,6 @@ public class CheckoutSteps {
     public void userTypesIntoFieldOfCardForm(String value, String field) {
         creditCardFormComponent.inputValueIntoField(value, field);
         CommonFunctions.attachScreenshot(String.format("Input '%s' into '%s'", value, field));
-
     }
 
     @And("^sees error tooltip with text \"([^\"]*)\"$")
