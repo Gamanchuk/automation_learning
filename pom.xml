@@ -747,6 +747,17 @@
             </properties>
         </profile>
 
+        <!--SAATVA-->
+        <profile>
+            <id>site-saatva-stage</id>
+            <properties>
+                <site.base.name>saatva-stage</site.base.name>
+                <site.url>http://moov.saatvadev.com/</site.url>
+                <site.cookies>?_mwexperienceid=f1d7959b-90e5-4ab6-a903-a864759bfb6f</site.cookies>
+            </properties>
+        </profile>
+
+
     </profiles>
 
 

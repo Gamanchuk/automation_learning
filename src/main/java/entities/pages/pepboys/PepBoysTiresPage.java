@@ -64,4 +64,9 @@ public class PepBoysTiresPage extends BasePage {
         CommonFunctions.attachScreenshot("Tires page");
 //        click(By.xpath("//button[text()='Add to cart']"));
     }
+
+    @Override
+    public boolean isPage() {
+        return false;
+    }
 }

@@ -22,7 +22,7 @@ public class PepBoysProductPage extends BasePage {
         return isElementVisible(addToCart) && isElementClickable(addToCart);
     }
 
-    public void openProductPage(String productId) {
+    public void openProduct(String productId) {
         this.productId = productId;
         getDriver().navigate().to(BASE_URL + "product/details/" + productId + "/" + Config.STORE_ID);
 

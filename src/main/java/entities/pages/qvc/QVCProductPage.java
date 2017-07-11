@@ -21,11 +21,6 @@ public class QVCProductPage extends BasePage {
         CommonFunctions.sleep(1000);
         getDriver().navigate().to(fullPath);
 
-//        if (!isUrlChanged(fullPath, 15)) {
-//            log.info("URL not changed. Retry navigate on page");
-//            getDriver().navigate().to(fullPath);
-//            waitForDocumentReady();
-//        }
         javascriptScroll(500);
         assertTrue(isPage(), "Product page was not opened.");
     }
@@ -58,7 +53,8 @@ public class QVCProductPage extends BasePage {
         }
     }
 
-    boolean isPage() {
+    @Override
+    public boolean isPage() {
         return isElementVisible(addToCart);
     }
 }
