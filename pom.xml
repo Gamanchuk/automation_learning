@@ -561,6 +561,27 @@
             </properties>
         </profile>
 
+        <!--SAATVA Suite-->
+        <profile>
+            <id>suite-saatva-contactPage</id>
+            <properties>
+                <testng.suite>
+                    ${basedir}/src/test/resources/testsuites/saatva/saatva_contact_page.xml
+                </testng.suite>
+                <suite.id>356</suite.id>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>suite-saatva-debug</id>
+            <properties>
+                <testng.suite>
+                    ${basedir}/src/test/resources/testsuites/saatva/saatva_debug.xml
+                </testng.suite>
+                <suite.id>356</suite.id>
+            </properties>
+        </profile>
+
         <!--environments-->
         <profile>
             <id>env-jenkins-sf</id>
@@ -746,6 +767,17 @@
                 <site.cookies>?_mwexperienceid=2ff5947d-47f4-46cf-ae88-4e6b0b661967</site.cookies>
             </properties>
         </profile>
+
+        <!--SAATVA-->
+        <profile>
+            <id>site-saatva-stage</id>
+            <properties>
+                <site.base.name>saatva-stage</site.base.name>
+                <site.url>http://moov.saatvadev.com/</site.url>
+                <site.cookies>?_mwexperienceid=f1d7959b-90e5-4ab6-a903-a864759bfb6f</site.cookies>
+            </properties>
+        </profile>
+
 
     </profiles>
 

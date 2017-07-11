@@ -45,4 +45,9 @@ public class ThankYouPage extends BasePage {
     public void clickOnReschedule() {
         getDriver().findElement(By.xpath("//a[contains(@class, 'edit-installation-link')]")).click();
     }
+
+    @Override
+    public boolean isPage() {
+        return false;
+    }
 }

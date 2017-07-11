@@ -91,7 +91,7 @@ public class PepBoysPageSteps {
 
     @And("^user adds to cart product with id \"([^\"]*)\" with \"([^\"]*)\" delivery option$")
     public void userAddsToCartProductWithIdWithDeliveryOption(String id, String deliveryOption) {
-        pepBoysProductPage.openProductPage(id);
+        pepBoysProductPage.openProduct(id);
 
         pepBoysProductPage.setDeliveryOption(deliveryOption);
         pepBoysProductPage.addToCart();
@@ -108,7 +108,7 @@ public class PepBoysPageSteps {
     public void userAddsToCartProductWithDeliveryOption(String deliveryOption) {
         DELIVERY_OPTIONS = deliveryOption;
         StringBuilder scuGroup = new StringBuilder(DataProvider.getRandomItem());
-        pepBoysProductPage.openProductPage(scuGroup.toString());
+        pepBoysProductPage.openProduct(scuGroup.toString());
 
         if (deliveryOption.equals("Pick Up in Store")) {
 
@@ -121,7 +121,7 @@ public class PepBoysPageSteps {
 
                 String scu = DataProvider.getRandomItem();
                 scuGroup.append(", ").append(scu);
-                pepBoysProductPage.openProductPage(scu);
+                pepBoysProductPage.openProduct(scu);
                 i++;
             }
         }

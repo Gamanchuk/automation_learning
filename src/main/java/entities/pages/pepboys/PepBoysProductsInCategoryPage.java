@@ -28,4 +28,8 @@ public class PepBoysProductsInCategoryPage extends BasePage {
     }
 
 
+    @Override
+    public boolean isPage() {
+        return false;
+    }
 }

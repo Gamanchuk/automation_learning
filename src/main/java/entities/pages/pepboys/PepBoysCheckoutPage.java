@@ -15,4 +15,9 @@ public class PepBoysCheckoutPage extends BasePage {
             getDriver().get(Config.BASE_URL + endpoint);
         }
     }
+
+    @Override
+    public boolean isPage() {
+        return false;
+    }
 }

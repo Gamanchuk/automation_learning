@@ -8,4 +8,9 @@ public class PepBoysCategoriesPage extends BasePage {
         By category = By.xpath("//*[text()='" + categoryName + "']");
         click(category);
     }
+
+    @Override
+    public boolean isPage() {
+        return false;
+    }
 }
