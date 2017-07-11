@@ -17,7 +17,6 @@ Feature: HAPPY PATH
     And presses the "Continue" button
     And chooses "Use Entered Address"
 
-    And chooses "Use Entered Address"
     And user should be on "Delivery" tab
     And presses the "Continue" button
 
