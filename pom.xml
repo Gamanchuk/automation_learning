@@ -561,6 +561,17 @@
             </properties>
         </profile>
 
+        <!--SAATVA Suite-->
+        <profile>
+            <id>suite-qvc-contactPage</id>
+            <properties>
+                <testng.suite>
+                    ${basedir}/src/test/resources/testsuites/qvc/qvc_existing_account_shipping_restriction.xml
+                </testng.suite>
+                <suite.id>359</suite.id>
+            </properties>
+        </profile>
+
         <!--environments-->
         <profile>
             <id>env-jenkins-sf</id>

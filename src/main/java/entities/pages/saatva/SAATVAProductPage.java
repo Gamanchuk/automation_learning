@@ -22,5 +22,9 @@ public class SAATVAProductPage extends BasePage {
         assertTrue(isPage(), "Looks like product page was not opened.");
     }
 
+    public void addToCart() {
+        getDriver().findElement(addToCart);
+    }
+
 
 }
