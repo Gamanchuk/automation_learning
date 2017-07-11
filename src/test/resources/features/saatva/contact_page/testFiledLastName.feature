@@ -6,7 +6,7 @@ Feature: CONTACT PAGE
     Given user adds to cart product from Saatva
 
 
-  @TestCaseId("101058")
+  @TestCaseId("101242")
   Scenario: Test field 'Last name'
 
     Given user should be on "Contact" tab
