@@ -21,7 +21,7 @@ Feature: HAPPY PATH
     And user should be on "Delivery" tab
     And presses the "Continue" button
 
-    And uses "visa" card for payment
+    And uses "mastercard" card for payment
     And presses the "Continue" button
 
     And user should be on "Review" tab
