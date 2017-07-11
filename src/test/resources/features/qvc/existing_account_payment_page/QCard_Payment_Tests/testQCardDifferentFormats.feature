@@ -26,7 +26,7 @@ Feature: EXISTING ACCOUNT - PAYMENT PAGE - QCARD
     And uses saved "qcard" card for payment
     And presses the "Continue" button
 
-    And sees "FORM ERRORS" error message with text "Please review all inputs."
+    Then user should be on "Review" tab
 
 
 

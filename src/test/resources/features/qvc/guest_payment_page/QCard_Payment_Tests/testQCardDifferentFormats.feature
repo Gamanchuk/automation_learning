@@ -26,7 +26,6 @@ Feature: GUEST - PAYMENT PAGE - QCARD
     And uses "qcard2" card for payment
     And presses the "Continue" button
 
-    And sees "FORM ERRORS" error message with text "We are sorry. The system encountered an error processing this request. You may have entered an invalid credit card number. Please review your entry to ensure all fields are numeric. Letters and dashes cannot be accepted. If you are sure you entered the number correctly, the credit card may already be on file on another account. For assistance, please contact Customer Service at 1-888-345-5788"
-
+    And user should be on "Review" tab
 
 

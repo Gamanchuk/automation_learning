@@ -9,7 +9,7 @@ Feature: GUEST - SHIPPING & BILLING PAGE - SHIPPING INFO
     Then user should be on "Address" tab
 
   @TestCaseId("102326")
-  Scenario: Test field 'Address Street'
+  Scenario: Test field 'Street Address'
     Given user types manually billing info for "qa user" without email
     And user types shipping address for "qa user"
 
