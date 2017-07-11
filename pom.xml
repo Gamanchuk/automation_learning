@@ -563,12 +563,22 @@
 
         <!--SAATVA Suite-->
         <profile>
-            <id>suite-qvc-contactPage</id>
+            <id>suite-saatva-contactPage</id>
             <properties>
                 <testng.suite>
-                    ${basedir}/src/test/resources/testsuites/qvc/qvc_existing_account_shipping_restriction.xml
+                    ${basedir}/src/test/resources/testsuites/saatva/saatva_contact_page.xml
                 </testng.suite>
-                <suite.id>359</suite.id>
+                <suite.id>356</suite.id>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>suite-saatva-debug</id>
+            <properties>
+                <testng.suite>
+                    ${basedir}/src/test/resources/testsuites/saatva/saatva_debug.xml
+                </testng.suite>
+                <suite.id>356</suite.id>
             </properties>
         </profile>
 

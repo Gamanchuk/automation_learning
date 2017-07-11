@@ -23,7 +23,7 @@ public class SAATVAProductPage extends BasePage {
     }
 
     public void addToCart() {
-        getDriver().findElement(addToCart);
+        getDriver().findElement(addToCart).click();
     }
 
 

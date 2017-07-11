@@ -5,7 +5,7 @@
 <suite name="SAATVA DEBUG">
     <test name="All tests">
         <classes>
-            <class name="tests.qvc.QVCDebugCukesRunnerTest"/>
+            <class name="tests.saatva.SAATVADebugCukesRunnerTest"/>
         </classes>
     </test>
 </suite> <!-- Suite -->

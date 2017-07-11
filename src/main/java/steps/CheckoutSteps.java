@@ -448,6 +448,12 @@ public class CheckoutSteps {
         CommonFunctions.attachScreenshot(String.format("Input '%s' into '%s'", value, field));
     }
 
+    @And("^user types \"([^\"]*)\" into the \"([^\"]*)\" field$")
+    public void userTypesIntoTheField(String value, String field) {
+        addressFormComponent.inputValueIntoField(value, field);
+        CommonFunctions.attachScreenshot(String.format("Input '%s' into '%s'", value, field));
+    }
+
     @And("^user navigates to \"([^\"]*)\" breadcrumb$")
     public void userNavigatesToBreadcrumb(String breadcrumb) {
         this.userPressesBreadcrumbTab(breadcrumb);
@@ -837,6 +843,15 @@ public class CheckoutSteps {
         signInFormComponent.fillPassword(user.getPassword());
         CommonFunctions.attachScreenshot("Checkout as existing user");
 
+    }
+
+    @Given("^user fill contact details as \"([^\"]*)\"$")
+    public void userFillContactDetails(String userName) {
+
+        BillingUser user = DataProvider.getUser(userName);
+        addressFormComponent.inputValueIntoField(user.getFullName(), "Full Name");
+        emailComponent.fillEmailField(user.getEmail());
+        CommonFunctions.attachScreenshot("Contact information");
     }
 
     @And("^user presses the Where do I enter my password link$")

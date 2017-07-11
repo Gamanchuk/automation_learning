@@ -1,7 +1,6 @@
 package entities.pages;
 
 import entities.components.BaseComponent;
-import entities.pages.BasePage;
 import org.openqa.selenium.By;
 import utils.TestGlobalsManager;
 
@@ -28,5 +27,10 @@ public class PaymentAndReviewCheckoutPage extends BasePage {
         String address = findElement(By.cssSelector("div.review-ship-to-store div.address-recipient")).getText();
         String storeId = (String) TestGlobalsManager.getTestGlobal("storeId");
         assertTrue(address.contains(storeId), "Store info does not contains expected store id. \nExpected: " + storeId + "\nGot: " + address);
+    }
+
+    @Override
+    public boolean isPage() {
+        return false;
     }
 }

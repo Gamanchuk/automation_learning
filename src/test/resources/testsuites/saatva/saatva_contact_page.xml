@@ -5,7 +5,7 @@
 <suite name="SAATVA - CONTACT PAGE">
     <test name="Tests for contact page">
         <classes>
-            <class name="tests.saatva."/>
+            <class name="tests.saatva.SAATVAContactPageCukesRunnerTest"/>
         </classes>
     </test>
 </suite> <!-- Suite -->

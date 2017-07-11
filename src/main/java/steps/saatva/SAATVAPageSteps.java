@@ -21,6 +21,7 @@ public class SAATVAPageSteps extends BaseSteps {
     public void userAddsToCartProductFromSaatva() {
         this.setCookies();
         this.addProduct();
+        CommonFunctions.attachScreenshot("Cart with product");
 
         saatvaCartPage.processToCheckout();
         waitForCheckout();
