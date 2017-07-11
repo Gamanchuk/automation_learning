@@ -18,7 +18,7 @@ public class SAATVAPageSteps extends BaseSteps {
     private SAATVAMainPage saatvaMainPage = new SAATVAMainPage();
     private SAATVAProductPage saatvaProductPage = new SAATVAProductPage();
 
-    @Given("^user adds to cart product from Saatva$")
+    @Given("^user adds product to cart from Saatva$")
     public void userAddsToCartProductFromSaatva() {
         this.setCookies();
         this.addProduct();

@@ -3,8 +3,8 @@
 Feature: CONTACT PAGE
 
   Background: Add product to card and process to checkout
-    Given user adds to cart product from Saatva
-
+    Given user adds product to cart from Saatva
+    And chooses "Checkout" method on Saatva cart page
 
   @TestCaseId("101242")
   Scenario: Test field 'Last name'
