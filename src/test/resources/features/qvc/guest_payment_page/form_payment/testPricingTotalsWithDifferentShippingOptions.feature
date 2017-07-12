@@ -1,4 +1,4 @@
-@qvc
+@qvc @Ignored
 
 Feature: GUEST - PAYMENT PAGE
 
@@ -13,6 +13,7 @@ Feature: GUEST - PAYMENT PAGE
 
     And user types billing info for "qa user" without email
     And presses the "Continue" button
+    And chooses "Use Entered Address"
 
     And chooses "UPS Ground" shipping method
     And presses the "Continue" button
