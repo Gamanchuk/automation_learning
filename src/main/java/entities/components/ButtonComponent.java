@@ -22,5 +22,4 @@ public class ButtonComponent extends BaseComponent {
     public boolean exists() {
         return isElementVisible(btn) && isElementClickable(btn);
     }
-
 }

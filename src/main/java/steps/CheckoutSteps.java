@@ -259,7 +259,7 @@ public class CheckoutSteps {
     @And("^presses the \"([^\"]*)\" button$")
     public void pressesTheButton(String confirmationMethod) {
         buttonComponent.javascriptScroll(200);
-        buttonComponent.clickButton();
+        buttonComponent.clickButton(confirmationMethod);
 
         // Experiment. Trying to fix the problem with "Element is no longer attached to DOM"
         CommonFunctions.sleep(500);
@@ -279,14 +279,14 @@ public class CheckoutSteps {
 
     @And("^user remove product$")
     public void userRemoveProduct() {
-        assertTrue(radioListComponent.exists(), "Looks like delivery Method Drop-Down doesn't exist");
+        assertTrue(radioListComponent.exists(), "Looks like delivery Method Drop-Down doesn't exists");
         productListComponent.removeProduct();
         CommonFunctions.attachScreenshot("Remove product");
     }
 
     @And("^chooses \"([^\"]*)\" item quantity$")
     public void choosesItemQuantity(String quantity) {
-        assertTrue(radioListComponent.exists(), "Item quantity Drop-Down doesn't exist");
+        assertTrue(radioListComponent.exists(), "Item quantity Drop-Down doesn't exists");
         radioListComponent.select(quantity);
         CommonFunctions.attachScreenshot("Change item quantity: " + quantity);
     }
@@ -385,7 +385,7 @@ public class CheckoutSteps {
     public void userMakesAuthorisationFor(String userName) {
         BillingUser user = DataProvider.getUser(userName);
         headerComponent.pressSignInButton();
-        assertTrue(signInFormComponent.exist(), "Sign In form component doesn't present");
+        assertTrue(signInFormComponent.exists(), "Sign In form component doesn't present");
         signInFormComponent.signIn(user.getEmail(), user.getPassword());
         CommonFunctions.attachScreenshot("Set [" + user.getEmail() + "] email and [" + user.getPassword() + "] password");
         buttonComponent.clickButton();
@@ -394,7 +394,7 @@ public class CheckoutSteps {
 
     @And("^applies billing info for address \"([^\"]*)\"$")
     public void appliesBillingInfo(String address) {
-        assertTrue(radioListComponent.exists(), "Billing Address Drop-Down doesn't exist");
+        assertTrue(radioListComponent.exists(), "Billing Address Drop-Down doesn't exists");
         radioListComponent.setRoot(BaseComponent.getContainerByTitle("Billing Address"));
         assertTrue(radioListComponent.select(address), "'" + address + "' doesn't present in list");
         CommonFunctions.attachScreenshot("Billing info");
@@ -402,7 +402,7 @@ public class CheckoutSteps {
 
     @And("^applies customer info for address \"([^\"]*)\"$")
     public void appliesCustomerInfo(String address) {
-        assertTrue(radioListComponent.exists(), "Customer Information Drop-Down doesn't exist");
+        assertTrue(radioListComponent.exists(), "Customer Information Drop-Down doesn't exists");
         radioListComponent.setRoot(BaseComponent.getContainerByTitle("Customer Information"));
         assertTrue(radioListComponent.select(address), "'" + address + "' doesn't present in list");
         CommonFunctions.attachScreenshot("Customer info");
@@ -410,7 +410,7 @@ public class CheckoutSteps {
 
     @And("^applies shipping info for address \"([^\"]*)\"$")
     public void appliesShippingInfoForAddress(String address) {
-        //assertTrue(radioListComponent.exists(), "Billing Address Drop-Down doesn't exist");
+        //assertTrue(radioListComponent.exists(), "Billing Address Drop-Down doesn't exists");
         checkboxRowComponent.check("Yes, shipping address and billing address are the same", false);
         radioListComponent.setRoot(BaseComponent.getContainerByTitle("Shipping Address"));
         assertTrue(radioListComponent.select(address), "'" + address + "' doesn't present in list");
@@ -419,7 +419,7 @@ public class CheckoutSteps {
 
     @And("^selects \"Enter a New Address\"$")
     public void entersNewAddress() {
-        assertTrue(radioListComponent.exists(), "Billing Address Drop-Down doesn't exist");
+        assertTrue(radioListComponent.exists(), "Billing Address Drop-Down doesn't exists");
         assertTrue(radioListComponent.select("Enter a New Address"), "Item 'Enter a New Address' doesn't present in list");
         CommonFunctions.attachScreenshot("Entering new address");
     }
@@ -708,7 +708,7 @@ public class CheckoutSteps {
     @And("^user presses the signIn button$")
     public void userPressesTheSignInButton() {
         headerComponent.pressSignInButton();
-        assertTrue(signInFormComponent.exist(), "SignIn form component doesn't present");
+        assertTrue(signInFormComponent.exists(), "SignIn form component doesn't present");
     }
 
     @And("^user presses the Forgot Password link$")
@@ -836,7 +836,7 @@ public class CheckoutSteps {
     @And("^user continue checkout as \"([^\"]*)\"$")
     public void userContinueCheckoutAs(String userName) {
         BillingUser user = DataProvider.getUser(userName);
-        assertTrue(signInFormComponent.exist(), "Sign In form component doesn't present");
+        assertTrue(signInFormComponent.exists(), "Sign In form component doesn't present");
 
         signInFormComponent.fillEmail(user.getEmail());
         buttonComponent.clickButton();

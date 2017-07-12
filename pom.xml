@@ -582,6 +582,20 @@
             </properties>
         </profile>
 
+
+        <!--SHOE Suite-->
+
+        <profile>
+            <id>suite-shoe-debug</id>
+            <properties>
+                <testng.suite>
+                    ${basedir}/src/test/resources/testsuites/shoe/shoe_debug.xml
+                </testng.suite>
+                <suite.id>100</suite.id>
+            </properties>
+        </profile>
+
+
         <!--environments-->
         <profile>
             <id>env-jenkins-sf</id>
@@ -720,6 +734,7 @@
         </profile>
 
         <!--Sites-->
+
         <!--PepBoys-->
         <profile>
             <id>site-pepboys-send</id>
@@ -730,6 +745,7 @@
                 <store.key>07923</store.key>
             </properties>
         </profile>
+
         <profile>
             <id>site-pepboys-stage</id>
             <properties>
@@ -739,6 +755,7 @@
                 <store.key>00847</store.key>
             </properties>
         </profile>
+
         <profile>
             <id>site-pepboys-prod</id>
             <properties>
@@ -775,6 +792,16 @@
                 <site.base.name>saatva-stage</site.base.name>
                 <site.url>http://moov.saatvadev.com/</site.url>
                 <site.cookies>?_mwexperienceid=f1d7959b-90e5-4ab6-a903-a864759bfb6f</site.cookies>
+            </properties>
+        </profile>
+
+        <!--SHOE-->
+        <profile>
+            <id>site-shoe-prod</id>
+            <properties>
+                <site.base.name>shoe-prod</site.base.name>
+                <site.url>http://shoecarnival.com/</site.url>
+                <site.cookies>_mwexperienceid=7c7e252e-ec74-400d-abe5-47a43d0fbbba</site.cookies>
             </properties>
         </profile>
 
