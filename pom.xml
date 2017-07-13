@@ -595,6 +595,16 @@
             </properties>
         </profile>
 
+        <profile>
+            <id>suite-shoe-signInPage</id>
+            <properties>
+                <testng.suite>
+                    ${basedir}/src/test/resources/testsuites/shoe/shoe_sign_in_page.xml
+                </testng.suite>
+                <suite.id>100</suite.id>
+            </properties>
+        </profile>
+
 
         <!--environments-->
         <profile>

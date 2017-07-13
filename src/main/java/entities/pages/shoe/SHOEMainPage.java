@@ -12,7 +12,7 @@ public class SHOEMainPage extends BasePage {
     public boolean isPage() {
         CommonFunctions.sleep(2000);
         waitForDocumentReady();
-        return isElementPresent(logo) && isElementClickable(logo);
+        return isElementPresent(logo);
     }
 
 }
