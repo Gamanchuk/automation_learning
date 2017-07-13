@@ -1,7 +1,6 @@
 package entities.components;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import utils.CommonFunctions;
 
 import static org.testng.Assert.assertTrue;
@@ -20,7 +19,7 @@ public class SignInFormComponent extends BaseComponent {
     final static String EMAIL = "email";
     final static String PASSWORD = "password";
 
-    public boolean exist() {
+    public boolean exists() {
         return isElementVisible(emailField);
     }
 
@@ -33,12 +32,12 @@ public class SignInFormComponent extends BaseComponent {
     }
 
     public void proceedToGuestCheckout() {
-        assertTrue(isElementClickable(toGuestCheckoutLink), "Proceed to guest checkout not clickable. Or doesn't exist");
+        assertTrue(isElementClickable(toGuestCheckoutLink), "Proceed to guest checkout not clickable. Or doesn't exists");
         getDriver().findElement(toGuestCheckoutLink).click();
     }
 
     public void pressForgotPasswordLink() {
-        assertTrue(isElementClickable(forgotPassword), "Forgot password link not clickable. Or doesn't exist");
+        assertTrue(isElementClickable(forgotPassword), "Forgot password link not clickable. Or doesn't exists");
         CommonFunctions.attachScreenshot("Login page: Forgot Password");
         getDriver().findElement(forgotPassword).click();
     }
@@ -52,12 +51,12 @@ public class SignInFormComponent extends BaseComponent {
     }
 
     public void pressWhereDoIEnterMyPassword() {
-        assertTrue(isElementClickable(whereMyPassword), "'Where do I enter my password' link not clickable. Or doesn't exist");
+        assertTrue(isElementClickable(whereMyPassword), "'Where do I enter my password' link not clickable. Or doesn't exists");
         getDriver().findElement(whereMyPassword).click();
     }
 
     public String getContentAboutPasswordFill() {
-        assertTrue(isElementVisible(whereMyPasswordContent, 5), "'Where do I enter my password' content doesn't exist.");
+        assertTrue(isElementVisible(whereMyPasswordContent, 5), "'Where do I enter my password' content doesn't exists.");
         return getDriver().findElement(whereMyPasswordContent).getText();
     }
 
@@ -66,11 +65,21 @@ public class SignInFormComponent extends BaseComponent {
     }
 
     private void fillField(By field, String value) {
+
+        //Need sleep because sometimes we catch element longer not attached
+        CommonFunctions.sleep(5000);
+
+        waitForDocumentReady();
         assertTrue(isElementVisible(field), "Field " + field.toString() + " doesn't present on page.");
-        WebElement element = getDriver().findElement(field);
         CommonFunctions.sleep(500);
-        element.clear();
+        getDriver().findElement(field).clear();
         CommonFunctions.sleep(500);
-        element.sendKeys(value);
+        getDriver().findElement(field).sendKeys(value);
+
+//        WebElement element = getDriver().findElement(field);
+//        CommonFunctions.sleep(500);
+//        element.clear();
+//        CommonFunctions.sleep(500);
+//        element.sendKeys(value);
     }
 }
