@@ -1,5 +1,6 @@
 package steps;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -915,5 +916,12 @@ public class CheckoutSteps {
     @And("^user should see payment option component$")
     public void userShouldSeePaymentOptionComponent() {
         assertTrue(radioListComponent.exists(), "Radio List Does Not Present On Page");
+    }
+
+    @And("^user types shipping address for \"([^\"]*)\" with phone number$")
+    public void userTypesShippingAddressForWithPhoneNumber(String userName) {
+        // Write code here that turns the phrase above into concrete actions
+        //throw new PendingException();
+        fillShippingInfo(userName, true);
     }
 }
