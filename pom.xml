@@ -573,6 +573,16 @@
         </profile>
 
         <profile>
+            <id>suite-saatva-ShippingBillingPage</id>
+            <properties>
+                <testng.suite>
+                    ${basedir}/src/test/resources/testsuites/saatva/saatva_shipping_billing_page.xml
+                </testng.suite>
+                <suite.id>356</suite.id>
+            </properties>
+        </profile>
+
+        <profile>
             <id>suite-saatva-debug</id>
             <properties>
                 <testng.suite>
