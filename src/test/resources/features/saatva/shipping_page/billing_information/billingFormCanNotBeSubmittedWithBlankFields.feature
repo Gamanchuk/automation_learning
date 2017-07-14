@@ -9,8 +9,9 @@ Feature: SHIPPING PAGE - Billing Info
     And user fill contact details as "qa user"
     Then presses the "Continue" button
 
-  @TestCaseId("")
-  @TestCaseId("")
+  @TestCaseId("102576")
+  @TestCaseId("100980")
+  @TestCaseId("100981")
   Scenario: Test with correct shipping information and do not fill in all required fields (error message should be displayed)
     Given user types shipping address for "qa user" with phone number
     And unset checkbox "Yes, billing address and shipping address are the same"

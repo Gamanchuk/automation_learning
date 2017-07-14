@@ -9,8 +9,7 @@ Feature: SHIPPING PAGE - Shipping Info
     And user fill contact details as "qa user"
     Then presses the "Continue" button
 
-  @TestCaseId("")
-  @TestCaseId("")
+  @TestCaseId("101031")
   Scenario: Test with correct shipping information and do not fill in all required fields (error message should be displayed)
     And presses the "Continue" button
     And user should stay at "Shipping" tab

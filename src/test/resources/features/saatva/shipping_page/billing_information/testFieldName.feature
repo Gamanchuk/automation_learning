@@ -1,6 +1,6 @@
 @saatva
 
-Feature: SHIPPING PAGE - Shipping Info
+Feature: SHIPPING PAGE - Billing Info
 
   Background: Add product to card and process to checkout
     Given user adds product to cart from Saatva
@@ -10,7 +10,8 @@ Feature: SHIPPING PAGE - Shipping Info
     Then presses the "Continue" button
 
   @Issues("MCCAT-6309")
-  @TestCaseId("")
+  @TestCaseId("100982")
+  @TestCaseId("101015")
   Scenario: Test field 'Name'
     Given user types shipping address for "qa user" with phone number
     And unset checkbox "Yes, billing address and shipping address are the same"

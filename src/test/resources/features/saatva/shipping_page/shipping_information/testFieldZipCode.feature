@@ -11,7 +11,8 @@ Feature: SHIPPING PAGE - Shipping Info
 
 
   # TODO: ask, if we should check this case
-  @TestCaseId("")
+  @TestCaseId("101038")
+  @TestCaseId("101015")
   Scenario: Test field 'Zip Code'
     Given user types shipping address for "qa user" with phone number
 

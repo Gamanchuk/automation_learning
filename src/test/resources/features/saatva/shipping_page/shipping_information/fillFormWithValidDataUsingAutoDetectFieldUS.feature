@@ -9,8 +9,8 @@ Feature: SHIPPING PAGE - Shipping Info
     And user fill contact details as "qa user"
     Then presses the "Continue" button
 
-  @TestCaseId("")
-  @TestCaseId("")
+  @TestCaseId("101030")
+  @TestCaseId("101015")
   Scenario: Test with correct shipping information and fill in all required fields (US Only)
     And user types shipping address for "qa user" with phone number
     And presses the "Continue" button

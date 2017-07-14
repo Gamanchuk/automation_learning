@@ -10,7 +10,8 @@ Feature: SHIPPING PAGE - Billing Info
     Then presses the "Continue" button
 
   @Issues("MCCAT-6309")
-  @TestCaseId("")
+  @TestCaseId("100978")
+  @TestCaseId("101015")
   Scenario: Test with correct shipping information and fill in all required fields (Address input manually)
     Given user types shipping address for "qa user" with phone number
     And unset checkbox "Yes, billing address and shipping address are the same"
