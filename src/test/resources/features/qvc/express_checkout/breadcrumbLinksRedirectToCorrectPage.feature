@@ -4,7 +4,7 @@ Feature: EXPRESS CHECKOUT - BREADCRUMB
 
   Background: Add product to card and process to checkout
     Given user adds to cart product
-    And user fills email field with "qa67890@moovweb.com"
+    And user fills email field with "yelena.poghosyan@moovweb.com"
     And presses the "Continue" button
     And user checks "Using your default shipping and payment information?" checkbox
     And user fills password field with "Spear160!"
@@ -41,7 +41,7 @@ Feature: EXPRESS CHECKOUT - BREADCRUMB
     # Check from Payment tab
     And user presses "Review" breadcrumb tab
     And user selects "1 payment" Payment Option
-    And uses saved "visa" card for payment
+    And uses saved "mastercard" card for payment
     And presses the "Continue" button
 
     Then user should be on "Review" tab
