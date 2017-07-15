@@ -3,7 +3,8 @@
 Feature: CONTACT PAGE
 
   Background: Add product to card and process to checkout
-    Given user adds to cart product from Saatva
+    Given user adds product to cart from Saatva
+    And chooses "Checkout" method on Saatva cart page
 
   @TestCaseId("101241")
   Scenario: Breadcrumb links redirect user to correct page

@@ -11,20 +11,18 @@ import utils.CommonFunctions;
 import utils.pepboys.DataProvider;
 
 import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.fail;
 
 public class SAATVAPageSteps extends BaseSteps {
     private SAATVACartPage saatvaCartPage = new SAATVACartPage();
     private SAATVAMainPage saatvaMainPage = new SAATVAMainPage();
     private SAATVAProductPage saatvaProductPage = new SAATVAProductPage();
 
-    @Given("^user adds to cart product from Saatva$")
+    @Given("^user adds product to cart from Saatva$")
     public void userAddsToCartProductFromSaatva() {
         this.setCookies();
         this.addProduct();
         CommonFunctions.attachScreenshot("Cart with product");
-
-        saatvaCartPage.processToCheckout();
-        waitForCheckout();
     }
 
     @Given("^user adds to cart \"([^\"]*)\" products from Saatva$")
@@ -34,9 +32,6 @@ public class SAATVAPageSteps extends BaseSteps {
         for (int i = 0; i < count; i++) {
             this.addProduct();
         }
-
-        saatvaCartPage.processToCheckout();
-        waitForCheckout();
     }
 
     @And("^user should be on Saatva cart page$")
@@ -77,5 +72,23 @@ public class SAATVAPageSteps extends BaseSteps {
     private void openProduct() {
         saatvaProductPage.openPage(DataProvider.getRandomItem());
         CommonFunctions.attachScreenshot("Product Page");
+    }
+
+    @And("^chooses \"([^\"]*)\" method on Saatva cart page$")
+    public void choosesMethodOnSaatvaCartPage(String method) {
+        switch (method) {
+            case "Checkout":
+                saatvaCartPage.processToCheckout();
+                waitForCheckout();
+                break;
+            case "PayPal":
+                saatvaCartPage.checkOutWithPayPal();
+                break;
+            case "PayPal Credit":
+                saatvaCartPage.checkOutWithPayPalCredit();
+                break;
+            default:
+                fail("Error in code. Framework doesn't support this Payment Method: " + method);
+        }
     }
 }
