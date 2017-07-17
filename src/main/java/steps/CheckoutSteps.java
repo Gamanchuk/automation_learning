@@ -35,6 +35,7 @@ public class CheckoutSteps {
     private ThankYouPage thankYouPage = new ThankYouPage();
     private PaymentAndReviewCheckoutPage paymentAndReviewPage = new PaymentAndReviewCheckoutPage();
 
+    private TabComponent tabComponent = new TabComponent();
     private NoteComponent noteComponent = new NoteComponent();
     private EmailComponent emailComponent = new EmailComponent();
     private TitleComponent titleComponent = new TitleComponent();
@@ -48,6 +49,7 @@ public class CheckoutSteps {
     private BreadcrumbComponent breadcrumbWidget = new BreadcrumbComponent();
     private SignInFormComponent signInFormComponent = new SignInFormComponent();
     private PayPalWellComponent payPalWellComponent = new PayPalWellComponent();
+    private ShipToStoreComponent shipToStoreComponent = new ShipToStoreComponent();
     private CheckboxRowComponent checkboxRowComponent = new CheckboxRowComponent();
     private ProductListComponent productListComponent = new ProductListComponent();
     private AddressFormComponent addressFormComponent = new AddressFormComponent();
@@ -126,21 +128,40 @@ public class CheckoutSteps {
             checkboxRowComponent.check(checkBox, false);
         }
 
-        fillShippingAddress(userName, true);
+        fillShippingAddress(userName, true, false, false);
         CommonFunctions.attachScreenshot("Shipping address form");
     }
 
     @And("^user types manually shipping address for \"([^\"]*)\"$")
     public void userTypesManuallyShippingInfoForWithoutPhone(String userName) {
         checkboxRowComponent.check("Yes, shipping address and billing address are the same", false);
-        fillShippingAddress(userName, false);
+        fillShippingAddress(userName, false, false, false);
         CommonFunctions.attachScreenshot("Shipping address form");
     }
 
     @Given("^user types manually shipping info for \"([^\"]*)\"$")
     public void userTypesManuallyShippingInfoFor(String userName) {
-        checkboxRowComponent.check("Yes, shipping address and billing address are the same", false);
+        String checkBox = "Yes, shipping address and billing address are the same";
+
+        if (checkboxRowComponent.exists(checkBox, 5)) {
+            checkboxRowComponent.check(checkBox, false);
+        }
+
         fillShippingAddress(userName, false);
+
+        CommonFunctions.attachScreenshot("Shipping address form");
+    }
+
+    @Given("^user types manually shipping info for \"([^\"]*)\" without email, phone$")
+    public void userTypesManuallyShippingInfoForWithoutEmailPhone(String userName) {
+        String checkBox = "Yes, shipping address and billing address are the same";
+
+        if (checkboxRowComponent.exists(checkBox, 5)) {
+            checkboxRowComponent.check(checkBox, false);
+        }
+
+        fillShippingAddress(userName, false, false, false);
+
         CommonFunctions.attachScreenshot("Shipping address form");
     }
 
@@ -325,6 +346,19 @@ public class CheckoutSteps {
         TestGlobalsManager.setTestGlobal("CARDINFO", card.getName() + " - " + card.getNumber());
     }
 
+    @And("^user fills \"([^\"]*)\" field from \"([^\"]*)\" card$")
+    public void userFillsFieldFrom(String field, String cardName) {
+        CreditCard card = DataProvider.getCard(cardName);
+
+        String cardValue = card.getValueByName(field);
+        creditCardFormComponent.inputValueIntoField(cardValue, field);
+
+        // Need sleep for screenshot created
+        CommonFunctions.sleep(500);
+        CommonFunctions.attachScreenshot(String.format("Input '%s' into '%s'", cardValue, field));
+    }
+
+
     @And("^uses saved \"([^\"]*)\" card for payment$")
     public void usesSavedCardForPayment(String cardName) {
         CreditCard card = DataProvider.getCard(cardName);
@@ -469,6 +503,31 @@ public class CheckoutSteps {
         CommonFunctions.attachScreenshot("Click Breadcrumb: " + breadcrumb);
     }
 
+    @Given("^user presses \"([^\"]*)\" tab$")
+    public void userPressesTab(String tabName) {
+        tabComponent.clickTab(tabName);
+        CommonFunctions.attachScreenshot("Click Tab: " + tabName);
+    }
+
+    @Given("^user navigates to \"([^\"]*)\" tab$")
+    public void userNavigatesToTab(String tabName) {
+        this.userPressesTab(tabName);
+        assertTrue(tabComponent.active(tabName), "Tab " + tabName + " is not an active");
+        CommonFunctions.attachScreenshot("Tab: " + tabName);
+    }
+
+    @And("^user fills find store field with \"([^\"]*)\"$")
+    public void userFillsFindStoreFieldWith(String value) {
+        shipToStoreComponent.fillField(value);
+        CommonFunctions.attachScreenshot("Zip");
+    }
+
+    @Then("^user should be see Store results$")
+    public void userShouldBeSeeStoreResults() {
+        assertTrue(shipToStoreComponent.storeResultPresent(), "Looks like store results not present on page.");
+        CommonFunctions.attachScreenshot("Store results");
+    }
+
     @Then("^user checks \"([^\"]*)\" with value \"([^\"]*)\" on \"([^\"]*)\" tab$")
     public void userChecksWithValueOnTab(String field, String value, String breadcrumb) throws Throwable {
         assertTrue(breadcrumbWidget.isBreadcrumbActive(breadcrumb), breadcrumb + " is not present on page.");
@@ -570,8 +629,26 @@ public class CheckoutSteps {
 
     @Given("^user types shipping info for \"([^\"]*)\"$")
     public void userTypesShippingInfoFor(String userName) {
-        checkboxRowComponent.check("Yes, shipping address and billing address are the same", false);
-        fillShippingInfo(userName, true);
+        String checkBox = "Yes, shipping address and billing address are the same";
+
+        if (checkboxRowComponent.exists(checkBox, 5)) {
+            checkboxRowComponent.check(checkBox, false);
+        }
+
+        fillShippingAddress(userName, true);
+
+        CommonFunctions.attachScreenshot("Shipping address form");
+    }
+
+    @Given("^user types shipping info for \"([^\"]*)\" without email, phone$")
+    public void userTypesShippingInfoForWithoutEmailPhone(String userName) {
+        String checkBox = "Yes, shipping address and billing address are the same";
+
+        if (checkboxRowComponent.exists(checkBox, 5)) {
+            checkboxRowComponent.check(checkBox, false);
+        }
+
+        fillShippingAddress(userName, true, false, false);
     }
 
     @And("^user types domestics shipping info for \"([^\"]*)\" without phone$")
@@ -623,7 +700,14 @@ public class CheckoutSteps {
         CommonFunctions.attachScreenshot("Shipping info");
     }
 
-    private void fillShippingAddress(String userName, boolean autoFill) {
+    private void fillShippingInfo(String userName, boolean autoFill, boolean email, boolean password) {
+        BillingUser user = DataProvider.getUser(userName);
+        addressFormComponent.setRoot(BaseComponent.getContainerByTitle("Shipping Address"));
+        fillAddressForm(user, autoFill, false);
+        CommonFunctions.attachScreenshot("Shipping info");
+    }
+
+    private void fillShippingAddress(String userName, boolean autoFill, boolean email, boolean phone) {
         BillingUser user = DataProvider.getUser(userName);
         addressDisplayComponent.javascriptScroll(300);
         addressFormComponent.setRoot(BaseComponent.getContainerByTitle("Shipping Address"));
@@ -637,6 +721,26 @@ public class CheckoutSteps {
                 user.getZipCode(),
                 autoFill
         );
+    }
+
+    private void fillShippingAddress(String userName, boolean autoFill) {
+        BillingUser user = DataProvider.getUser(userName);
+        addressDisplayComponent.javascriptScroll(300);
+        addressFormComponent.setRoot(BaseComponent.getContainerByTitle("Shipping Address"));
+        addressFormComponent.fillAddressForm(
+                user.getFullName(),
+                user.getFullAddress(),
+                user.getCityInfo(),
+                user.getCity(),
+                user.getApartment(),
+                user.getPhone(),
+                user.getState(),
+                user.getZipCode(),
+                autoFill,
+                false
+        );
+
+        emailComponent.fillEmailField(user.getEmail());
     }
 
 

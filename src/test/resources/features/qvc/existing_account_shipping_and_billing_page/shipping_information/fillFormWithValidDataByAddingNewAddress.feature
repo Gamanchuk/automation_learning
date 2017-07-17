@@ -14,7 +14,7 @@ Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE - SHIPPING INFO
   Scenario: Test with correct shipping information and fill in all required fields
 
     Given selects "Enter a New Address" for shipping address
-    And user types shipping address for "user at Spear street"
+    And user types shipping info for "user at Spear street" without email, phone
     And unset checkbox "Save this address to my address book"
     And presses the "Continue" button
 

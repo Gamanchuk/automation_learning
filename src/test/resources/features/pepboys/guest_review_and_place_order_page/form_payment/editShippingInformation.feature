@@ -12,14 +12,14 @@ Feature: GUEST - REVIEW & PLACE ORDER PAGE
   @TestCaseId("15412")
   Scenario: Edit Shipping info
     Given user types billing info for "qa user"
-    And user types shipping info for "qa user"
+    And user types shipping info for "qa user" without email, phone
     And presses the "Continue" button
 
     And chooses "Ground: 5-7 Days" shipping method
     And presses the "Continue" button
 
     And user clicks arrow for "Shipping Address"
-    And user types manually shipping info for "qa user2"
+    And user types manually shipping info for "qa user2" without email, phone
     And presses the "Continue" button
 
     And chooses "Ground: 5-7 Days" shipping method
