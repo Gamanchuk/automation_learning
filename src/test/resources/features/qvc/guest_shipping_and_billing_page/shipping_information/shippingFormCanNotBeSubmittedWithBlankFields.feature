@@ -11,7 +11,7 @@ Feature: GUEST - SHIPPING & BILLING PAGE - SHIPPING INFO
   @TestCaseId("102320")
   @TestCaseId("102321")
   Scenario: Test with correct shipping information and do not fill in all required fields (error message should be displayed)
-    Given user types billing info for "qa user"
+    Given user types billing info for "qa user" without email
     And unset checkbox "Yes, shipping address and billing address are the same"
     And presses the "Continue" button
     Then user should stay at "Address" tab

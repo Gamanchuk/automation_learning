@@ -1,36 +1,32 @@
-@qvc
+@shoe
 
-Feature: GUEST - SHIPPING & BILLING PAGE - SHIPPING INFO
+Feature: GUEST - SHIPPING PAGE - SHIPPING ADDRESS
 
-  Background:
-    Given user adds to cart product
-    And user continue checkout as guest
-    And presses the "Continue" button
-    Then user should be on "Address" tab
+  Background: Add product to card and process to checkout
+    Given user adds product to cart from Shoe
 
-  @TestCaseId("102326")
+  @TestCaseId("16285")
   Scenario: Test field 'Street Address'
-    Given user types manually billing info for "qa user" without email
-    And user types shipping info for "qa user" without email, phone
+    Given user types shipping info for "qa user"
 
     And user types "" into the "Street Address" field of "Shipping Address" address form
     And presses the "Continue" button
-    Then user should stay at "Address" tab
+    Then user should stay at "Shipping" tab
     And sees "FORM ERRORS" error message with text "Please review all inputs."
 
     And user types "Mission Street" into the "Street Address" field of "Shipping Address" address form
     And presses the "Continue" button
     And chooses "Use Entered Address"
-    Then user should be on "Delivery" tab
+    Then user should be on "Payment" tab
 
-    And user navigates to "Address" breadcrumb
+    And user navigates to "Shipping" breadcrumb
     And user types "123456" into the "Street Address" field of "Shipping Address" address form
     And presses the "Continue" button
     And chooses "Use Entered Address"
-    Then user should be on "Delivery" tab
+    Then user should be on "Payment" tab
 
-    And user navigates to "Address" breadcrumb
+    And user navigates to "Shipping" breadcrumb
     And user types "!@$%^&*():_+" into the "Street Address" field of "Shipping Address" address form
     And presses the "Continue" button
     And chooses "Use Entered Address"
-    Then user should be on "Delivery" tab
+    Then user should be on "Payment" tab

@@ -16,7 +16,7 @@ Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE - SHIPPING INFO
     And user should be on "Billing & Shipping" tab
     And selects "Enter a New Address" for shipping address
 
-    And user types manually shipping info for "user at Spear street"
+    And user types manually shipping info for "user at Spear street" without email, phone
     And presses the "Continue" button
 
     And chooses "Use Recommended Address"

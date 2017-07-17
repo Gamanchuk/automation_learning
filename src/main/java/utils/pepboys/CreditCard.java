@@ -43,6 +43,36 @@ public class CreditCard {
         return cardholderName;
     }
 
+    public String getFourLastNumbers() {
+        String number = StringUtils.right(this.number, 4);
+        log.info("Card: " + this.getName() + " with numbers: " + number);
+        return number;
+    }
+
+    public String getValueByName(String name) {
+        switch (name) {
+            case "Card Number":
+                return this.number;
+            case "Expiration":
+                return this.expDate;
+            case "CVV":
+                return this.cvv;
+            case "Cardholder Name":
+                return this.cardholderName;
+            default:
+                throw new Error("Unknown field name: " + name);
+        }
+    }
+
+    private String firstUpperCase(String word) {
+        if (word == null || word.isEmpty()) {
+            log.error("Word is empty.");
+            return null;
+        }
+        return word.substring(0, 1).toUpperCase() + word.substring(1);
+    }
+
+    @Deprecated
     public String getSecureCardData() {
         String secureCardNumber = null;
         int cardNumberLength = this.number.length();
@@ -77,23 +107,5 @@ public class CreditCard {
 
         // return **** **** **** 4657 (02/12)
         return secureCardNumber;
-    }
-
-    public String getFourLastNumbers() {
-        String number = StringUtils.right(this.number, 4);
-        log.info("Card: " + this.getName() + " with numbers: " + number);
-        return number;
-    }
-
-    private void printCard() {
-
-    }
-
-    private String firstUpperCase(String word) {
-        if (word == null || word.isEmpty()) {
-            log.error("Word is empty.");
-            return null;
-        }
-        return word.substring(0, 1).toUpperCase() + word.substring(1);
     }
 }

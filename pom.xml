@@ -582,7 +582,6 @@
             </properties>
         </profile>
 
-
         <!--SHOE Suite-->
 
         <profile>
@@ -814,8 +813,6 @@
                 <site.cookies>_mwexperienceid=7c7e252e-ec74-400d-abe5-47a43d0fbbba</site.cookies>
             </properties>
         </profile>
-
-
     </profiles>
 
 

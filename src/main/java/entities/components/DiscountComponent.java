@@ -17,4 +17,5 @@ public class DiscountComponent extends BaseComponent {
         pinCodeEl.clear();
         pinCodeEl.sendKeys(pin);
     }
+
 }
