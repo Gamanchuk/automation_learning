@@ -4,7 +4,7 @@ Feature: EXPRESS CHECKOUT
 
   Background: Add product to card and process to checkout
     Given user adds to cart product
-    And user fills email field with "qa67890@moovweb.com"
+    And user fills email field with "yelena.poghosyan@moovweb.com"
     And presses the "Continue" button
     And user checks "Using your default shipping and payment information?" checkbox
     And user fills password field with "Spear160!"
@@ -26,7 +26,7 @@ Feature: EXPRESS CHECKOUT
 
     And user should be on "Payment" tab
     And user selects "1 payment" Payment Option
-    And uses saved "visa" card for payment
+    And uses saved "mastercard" card for payment
     And presses the "Continue" button
 
     And user should be on "Review" tab

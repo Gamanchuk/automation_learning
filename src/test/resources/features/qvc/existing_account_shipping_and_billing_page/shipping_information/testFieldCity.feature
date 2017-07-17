@@ -12,7 +12,7 @@ Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE - SHIPPING INFO
   @TestCaseId("")
   Scenario: Test field 'City'
     Given selects "Enter a New Address" for shipping address
-    And user types shipping address for "qa user"
+    And user types shipping info for "qa user" without email, phone
     And unset checkbox "Save this address to my address book"
 
     And user types "" into the "City" field of "Shipping Address" address form

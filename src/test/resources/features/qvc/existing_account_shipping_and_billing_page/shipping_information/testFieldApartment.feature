@@ -12,7 +12,7 @@ Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE - SHIPPING INFO
   Scenario: Test field 'Apartment'
 
     Given selects "Enter a New Address" for shipping address
-    And user types shipping address for "qa user"
+    And user types shipping info for "qa user" without email, phone
     And unset checkbox "Save this address to my address book"
 
     And user types "" into the "Apt, Bldg." field of "Shipping Address" address form

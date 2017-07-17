@@ -16,7 +16,7 @@ Feature: GUEST - SHIPPING & BILLING PAGE - BILLING INFO
   @TestCaseId("15385")
   Scenario: Test field 'Phone'
     Given user types billing info for "qa user"
-    And user types shipping info for "qa user"
+    And user types shipping info for "qa user" without email, phone
     And user types "" into the "Phone Number" field of "Shipping Address" address form
     And presses the "Continue" button
     Then user should stay at "Billing & Shipping" tab

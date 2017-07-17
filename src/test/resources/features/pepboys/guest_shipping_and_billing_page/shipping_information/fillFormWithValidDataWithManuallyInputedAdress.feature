@@ -13,7 +13,7 @@ Feature: GUEST - SHIPPING & BILLING PAGE - SHIPPING INFO
   Scenario: Test with correct shipping information and fill in all required fields (Address input manually)
 
     Given user types manually billing info for "qa user"
-    And user types manually shipping info for "qa user"
+    And user types manually shipping info for "qa user" without email, phone
     And presses the "Continue" button
 
     Then user should be on "Delivery Method" tab

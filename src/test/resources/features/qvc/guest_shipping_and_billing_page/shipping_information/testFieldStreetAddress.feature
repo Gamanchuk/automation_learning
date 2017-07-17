@@ -11,7 +11,7 @@ Feature: GUEST - SHIPPING & BILLING PAGE - SHIPPING INFO
   @TestCaseId("102326")
   Scenario: Test field 'Street Address'
     Given user types manually billing info for "qa user" without email
-    And user types shipping address for "qa user"
+    And user types shipping info for "qa user" without email, phone
 
     And user types "" into the "Street Address" field of "Shipping Address" address form
     And presses the "Continue" button
