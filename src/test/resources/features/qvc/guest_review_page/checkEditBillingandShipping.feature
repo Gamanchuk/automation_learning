@@ -1,4 +1,4 @@
-@qvc
+@qvc @debug
 
 Feature: GUEST - REVIEW PAGE
 
@@ -15,7 +15,7 @@ Feature: GUEST - REVIEW PAGE
 
     And user types billing info for "qa user" without email
     And presses the "Continue" button
-
+    And chooses "Use Entered Address"
     And user should be on "Delivery" tab
     And presses the "Continue" button
 

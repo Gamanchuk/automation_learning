@@ -9,6 +9,7 @@ Feature: GUEST - REVIEW & PLACE ORDER PAGE - THANK YOU PAGE
     And user should be on "Address" tab
     And user types billing info for "qa user" without email
     And presses the "Continue" button
+    And chooses "Use Entered Address"
     And user should be on "Delivery" tab
     And presses the "Continue" button
     And uses "Pay with Check / Money Order" for payment
