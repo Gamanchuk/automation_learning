@@ -20,16 +20,16 @@ Feature: GUEST - PAYMENT PAGE
     And uses "amex" card for payment
 
     And user types "01" into "Expiration" field of Card Form
-    And presses the "Place Order" button
+    And presses the "Continue" button
     Then user should stay at "Payment" tab
     And sees "FORM ERRORS" error message with text "Please review all inputs."
 
     And user types "01255" into "Expiration" field of Card Form
-    And presses the "Place Order" button
+    And presses the "Continue" button
     Then user should stay at "Payment" tab
     And sees "FORM ERRORS" error message with text "Please review all inputs."
 
     And user types "" into "Expiration" field of Card Form
-    And presses the "Place Order" button
+    And presses the "Continue" button
     Then user should stay at "Payment" tab
     And sees "FORM ERRORS" error message with text "Please review all inputs."
