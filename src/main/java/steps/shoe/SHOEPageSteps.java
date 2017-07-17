@@ -81,6 +81,7 @@ public class SHOEPageSteps extends BaseSteps {
     }
 
     private void openProduct() {
+
         shoeProductPage.openPage(DataProvider.getRandomItem());
         CommonFunctions.attachScreenshot("Product Page");
     }
