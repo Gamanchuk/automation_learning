@@ -48,6 +48,13 @@ public class PayPalComponent extends BaseComponent {
         getDriver().findElement(By.id("confirmButtonTop")).click();
     }
 
+    public void clickLogin() {
+        CommonFunctions.sleep(20000);
+        By login = By.xpath("//a[contains(@class, 'btn') and text()='Log In']");
+        assertTrue(isElementClickable(login), "PayPal login button doesn't present on page.");
+        getDriver().findElement(login).click();
+    }
+
     public void logOut() {
         getDriver().navigate().to("https://sandbox.paypal.com/myaccount/logout");
     }
