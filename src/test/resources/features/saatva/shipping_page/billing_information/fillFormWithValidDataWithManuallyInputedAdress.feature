@@ -20,6 +20,7 @@ Feature: SHIPPING PAGE - Billing Info
     #And user types manually shipping address for "qa user"
     And presses the "Continue" button
     And chooses "Use Entered Address"
+    And chooses "Use Entered Address"
     Then user should be on "Payment & Review" tab
 
 

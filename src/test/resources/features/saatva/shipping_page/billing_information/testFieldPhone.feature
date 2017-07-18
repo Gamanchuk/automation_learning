@@ -25,4 +25,5 @@ Feature: SHIPPING PAGE - Shipping Info
     When user types "4152011234" into the "Phone Number" field of "Billing Address" address form
     And presses the "Continue" button
     And chooses "Use Entered Address"
+    And chooses "Use Entered Address"
     Then user should be on "Payment & Review" tab

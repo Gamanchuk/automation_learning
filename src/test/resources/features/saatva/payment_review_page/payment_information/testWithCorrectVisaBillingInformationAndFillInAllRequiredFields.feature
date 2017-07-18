@@ -1,6 +1,6 @@
-@saatva @debug
+@saatva
 
-Feature: GUEST - REVIEW PAGE
+Feature: PAYMENT & REVIEW - PAYMENT INFO
 
   Background: Add product to card and process to checkout
     Given user adds product to cart from Saatva
@@ -9,14 +9,16 @@ Feature: GUEST - REVIEW PAGE
     And user fill contact details as "qa user"
     Then presses the "Continue" button
 
-  @TestCaseId("")
-  Scenario: Check Edit Billing and Shipping Address
 
+  @TestCaseId("")
+  Scenario: Test with correct Visa billing information
     Given user types shipping address for "qa user" with phone number
+    And unset checkbox "Yes, billing address and shipping address are the same"
+    And user types billing info for "qa user" without email
     And presses the "Continue" button
+    And chooses "Use Entered Address"
     And chooses "Use Entered Address"
     And user should be on "Payment & Review" tab
 
-    Then user should see "Billing Address" form
-    And user clicks arrow for "Billing Address"
-    Then user should be on "Shipping" tab
+    And uses "visa" card for payment
+    And user should be on "Payment & Review" tab

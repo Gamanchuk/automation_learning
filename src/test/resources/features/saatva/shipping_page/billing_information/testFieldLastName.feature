@@ -25,6 +25,7 @@ Feature: SHIPPING PAGE - Billing Info
     And user types "Moovweb !@#&::!@#()" into the "Full Name" field of "Billing Address" address form
     And presses the "Continue" button
     And chooses "Use Entered Address"
+    And chooses "Use Entered Address"
     Then user should be on "Payment & Review" tab
 
 

@@ -25,17 +25,20 @@ Feature: SHIPPING PAGE - Billing Info
     And user types "SanFrancisco" into the "City" field of "Billing Address" address form
     And presses the "Continue" button
     And chooses "Use Entered Address"
+    And chooses "Use Entered Address"
     Then user should be on "Payment & Review" tab
 
     And user navigates to "Shipping" breadcrumb
     And user types "123456" into the "City" field of "Billing Address" address form
     And presses the "Continue" button
     And chooses "Use Entered Address"
+    And chooses "Use Entered Address"
     Then user should be on "Payment & Review" tab
 
     And user navigates to "Shipping" breadcrumb
     And user types "!@$%^&*():_+" into the "City" field of "Billing Address" address form
     And presses the "Continue" button
+    And chooses "Use Entered Address"
     And chooses "Use Entered Address"
     Then user should be on "Payment & Review" tab
 
