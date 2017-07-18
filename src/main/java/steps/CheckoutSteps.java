@@ -638,6 +638,7 @@ public class CheckoutSteps {
     @And("^unset checkbox \"([^\"]*)\"$")
     public void unsetCheckbox(String label) {
         checkboxRowComponent.check(label, false);
+        CommonFunctions.attachScreenshot("CheckBox");
     }
 
     @Given("^user types shipping info for \"([^\"]*)\"$")
