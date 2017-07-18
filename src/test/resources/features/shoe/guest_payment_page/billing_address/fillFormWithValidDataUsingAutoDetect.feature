@@ -8,8 +8,7 @@ Feature: GUEST - SHIPPING PAGE - BILLING ADDRESS
     And presses the "Continue" button
     And user should be on "Payment" tab
     Then uses "mastercard" card for payment
-
-
+    
   @TestCaseId("16417")
   @TestCaseId("16341")
   Scenario: Test with correct billing information and fill in all required fields

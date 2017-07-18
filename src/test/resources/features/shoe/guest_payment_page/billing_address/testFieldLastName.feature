@@ -1,6 +1,6 @@
 @shoe
 
-Feature: GUEST - SHIPPING PAGE - SHIPPING ADDRESS
+Feature: GUEST - SHIPPING PAGE - BILLING ADDRESS
 
   Background: Add product to card and process to checkout
     Given user adds product to cart from Shoe
