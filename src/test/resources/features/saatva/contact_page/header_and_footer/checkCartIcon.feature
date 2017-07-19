@@ -1,4 +1,4 @@
-@saatva
+@saatva @debug
 
 Feature: CONTACT PAGE - HEADER & FOOTER
 
