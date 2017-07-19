@@ -90,7 +90,7 @@ public class DriverFactory {
                     if (Config.PLATFORM_NAME.equals(IOS)) {
                         desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, XCUITEST);
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.WDA_LOCAL_PORT, Integer.parseInt(iproxyPort));
-                        desiredCapabilities.setCapability(IOSMobileCapabilityType.USE_NEW_WDA, true);
+                        // desiredCapabilities.setCapability(IOSMobileCapabilityType.USE_NEW_WDA, true);
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.LAUNCH_TIMEOUT, 500000);
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.SHOW_IOS_LOG, Config.XCODE_LOGS);
 
@@ -98,6 +98,8 @@ public class DriverFactory {
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.XCODE_ORG_ID, "Y95G5M3Q84");
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.XCODE_SIGNING_ID, "iPhone Developer");
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.UPDATE_WDA_BUNDLEID, "com.moovweb.WebDriverAgentRunner");
+                        desiredCapabilities.setCapability("webDriverAgentUrl", WDAServer.SERVER_URL);
+
 
                         desiredCapabilities.setCapability("webkitResponseTimeout", 50000);
 
@@ -114,6 +116,11 @@ public class DriverFactory {
                         desiredCapabilities.setCapability(AndroidMobileCapabilityType.UNICODE_KEYBOARD, true);
                         desiredCapabilities.setCapability(AndroidMobileCapabilityType.RESET_KEYBOARD, true);
                     }
+
+                    if (!WDAServer.getInstance().isRunning()) {
+                        WDAServer.getInstance().restart();
+                    }
+
 
                     eventListener = new MyWebDriverEventListener();
 
