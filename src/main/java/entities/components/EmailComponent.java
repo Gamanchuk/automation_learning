@@ -4,10 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 public class EmailComponent extends BaseComponent {
-    //    private By emailField = By.id("billing-email");
-    private By emailField = By.xpath("//input[@id='billing-email' or @id='shipping-email']");
-    private By emailDisplay = By.cssSelector("div.email-display");
+
+    // private By emailDisplay = By.cssSelector("div.email-display");
     private By emailDisplayValue = By.cssSelector("span.email-display-value");
+    private By emailField = By.xpath("//input[@id='billing-email' or @id='shipping-email']");
 
     public void fillEmailField(String email) {
         WebElement emailEl = findElement(emailField);
