@@ -11,7 +11,6 @@ Feature: GUEST - REVIEW PAGE
 
   @TestCaseId("")
   Scenario: Check Edit Billing and Shipping Address
-
     Given user types shipping address for "qa user" with phone number
     And presses the "Continue" button
     And chooses "Use Entered Address"

@@ -34,7 +34,7 @@ public class CheckoutSteps {
 
     private ThankYouPage thankYouPage = new ThankYouPage();
     private PaymentAndReviewCheckoutPage paymentAndReviewPage = new PaymentAndReviewCheckoutPage();
-
+    private PayPalComponent payPalComponent = new PayPalComponent();
     private TabComponent tabComponent = new TabComponent();
     private NoteComponent noteComponent = new NoteComponent();
     private EmailComponent emailComponent = new EmailComponent();
@@ -1027,5 +1027,20 @@ public class CheckoutSteps {
         // Write code here that turns the phrase above into concrete actions
         //throw new PendingException();
         fillShippingInfo(userName, true);
+    }
+
+    @And("^user \"([^\"]*)\" logIn to PayPal$")
+    public void userLogInToPayPal(String userName) {
+        // Write code here that turns the phrase above into concrete actions
+        BillingUser user = DataProvider.getUser(userName);
+        //driver.switchTo().frame("injectedUl");
+        CommonFunctions.sleep(1000);
+       // payPalComponent.doLogin(user);
+       // payPalComponent.confirmationPay();
+        payPalComponent.switchToFrame();
+        payPalComponent.existsPayPalEmail();
+        payPalComponent.existsPayPalPassword();
+        payPalComponent.signIn(user.getPaypalEmail(), user.getPaypalPassword());
+
     }
 }
