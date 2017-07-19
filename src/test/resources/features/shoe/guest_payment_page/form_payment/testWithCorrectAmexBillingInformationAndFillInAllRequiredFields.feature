@@ -12,6 +12,6 @@ Feature: GUEST - PAYMENT PAGE
   @TestCaseId("16324")
   Scenario: Test with correct Amex billing information
 
-    Given uses "amex" card for payment
+    Given uses "american express" card for payment
     And presses the "Continue" button
     Then user should be on "Review" tab
