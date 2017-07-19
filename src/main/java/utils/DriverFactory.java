@@ -90,9 +90,9 @@ public class DriverFactory {
                     if (Config.PLATFORM_NAME.equals(IOS)) {
                         desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, XCUITEST);
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.WDA_LOCAL_PORT, Integer.parseInt(iproxyPort));
-                        // desiredCapabilities.setCapability(IOSMobileCapabilityType.USE_NEW_WDA, true);
+                        desiredCapabilities.setCapability(IOSMobileCapabilityType.USE_NEW_WDA, true);
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.LAUNCH_TIMEOUT, 500000);
-                        desiredCapabilities.setCapability(IOSMobileCapabilityType.SHOW_IOS_LOG, Config.XCODE_LOGS);
+                        desiredCapabilities.setCapability(IOSMobileCapabilityType.SHOW_IOS_LOG, true);
 
                         /* Capabilities for automatically sinning WebDriverAgentRunner */
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.XCODE_ORG_ID, "Y95G5M3Q84");
@@ -117,9 +117,9 @@ public class DriverFactory {
                         desiredCapabilities.setCapability(AndroidMobileCapabilityType.RESET_KEYBOARD, true);
                     }
 
-                    if (!WDAServer.getInstance().isRunning()) {
+//                    if (!WDAServer.getInstance().isRunning()) {
                         WDAServer.getInstance().restart();
-                    }
+                    //                  }
 
 
                     eventListener = new MyWebDriverEventListener();

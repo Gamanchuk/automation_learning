@@ -16,6 +16,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
+import static utils.UnixProcessHelpers.isProcessRunning;
+
 
 public class WDAServer {
 
@@ -166,7 +168,7 @@ public class WDAServer {
                 scriptContent.add(String.join(" ", IPROXY_CMDLINE));
             }
             final String wdaBuildCmdline = String.join(" ", generateXcodebuildCmdline());
-            log.debug(String.format("Building WDA with command line:\n%s\n", wdaBuildCmdline));
+            log.info(String.format("Building WDA with command line:\n%s\n", wdaBuildCmdline));
             scriptContent.add(wdaBuildCmdline);
             try (Writer output = new BufferedWriter(new FileWriter(scriptFile))) {
                 output.write(String.join("\n", scriptContent));

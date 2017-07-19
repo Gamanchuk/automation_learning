@@ -30,4 +30,10 @@ class Timedelta {
     double diff(Timedelta started) {
         return (timeout - started.asMillis()) / 1000.0;
     }
+
+
+    @Override
+    public String toString() {
+        return String.valueOf(this.asSeconds());
+    }
 }
