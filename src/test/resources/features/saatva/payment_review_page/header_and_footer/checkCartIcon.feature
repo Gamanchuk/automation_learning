@@ -11,7 +11,7 @@ Feature: PAYMENT & REVIEW - HEADER & FOOTER
     Then user should be on "Shipping" tab
 
 
-  @TestCaseId("")
+  @TestCaseId("101071")
   Scenario: Check Cart Icon
     Given user types shipping address for "qa user" with phone number
 

@@ -9,7 +9,8 @@ Feature: PAYMENT & REVIEW - PAYMENT INFO
     And user fill contact details as "qa user"
     Then presses the "Continue" button
 
-  @TestCaseId("")
+  @TestCaseId("101000")
+  @TestCaseId("100997")
   Scenario: Test field "CVV"
     Given user types shipping address for "qa user" with phone number
     And unset checkbox "Yes, billing address and shipping address are the same"

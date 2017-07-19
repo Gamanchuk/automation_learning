@@ -11,10 +11,9 @@ Feature: PAYMENT & REVIEW - HEADER & FOOTER
     Then user should be on "Shipping" tab
 
 
-  @TestCaseId("")
-  @TestCaseId("")
-  @TestCaseId("")
-  @TestCaseId("")
+  @TestCaseId("101070")
+  @TestCaseId("101072")
+  @TestCaseId("101073")
   Scenario: Check footer and Logo Icon
     Given user types shipping address for "qa user" with phone number
     And presses the "Continue" button

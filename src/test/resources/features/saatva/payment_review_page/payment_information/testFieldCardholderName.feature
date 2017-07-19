@@ -9,10 +9,10 @@ Feature: PAYMENT & REVIEW - PAYMENT INFO
     And user fill contact details as "qa user"
     Then presses the "Continue" button
 
-  @TestCaseId("100999")
-  @TestCaseId("101001")
+  @TestCaseId("101002")
+  @TestCaseId("101003")
   @TestCaseId("100997")
-  Scenario: Test field "Expiration"
+  Scenario: Test field "Cardholder Name"
     Given user types shipping address for "qa user" with phone number
     And unset checkbox "Yes, billing address and shipping address are the same"
     And user types billing info for "qa user" without email
@@ -20,19 +20,19 @@ Feature: PAYMENT & REVIEW - PAYMENT INFO
     And chooses "Use Entered Address"
     And chooses "Use Entered Address"
     And user should be on "Payment & Review" tab
-    And uses "visa" card for payment
+    And uses "mastercard" card for payment
 
-    And user types "01" into "Expiration" field of Card Form
+    And user types "1" into "Cardholder Name" field of Card Form
     And presses the "Place Order" button
     Then user should stay at "Payment & Review" tab
     And sees "FORM ERRORS" error message with text "Please review all inputs."
 
-    And user types "01255" into "Expiration" field of Card Form
+    And user types "moovweb" into "Cardholder Name" field of Card Form
     And presses the "Place Order" button
     Then user should stay at "Payment & Review" tab
     And sees "FORM ERRORS" error message with text "Please review all inputs."
 
-    And user types "" into "Expiration" field of Card Form
+    And user types "" into "Cardholder Name" field of Card Form
     And presses the "Place Order" button
     Then user should stay at "Payment & Review" tab
     And sees "FORM ERRORS" error message with text "Please review all inputs."
