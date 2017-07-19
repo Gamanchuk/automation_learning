@@ -1,6 +1,5 @@
 package steps;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -1027,20 +1026,5 @@ public class CheckoutSteps {
         // Write code here that turns the phrase above into concrete actions
         //throw new PendingException();
         fillShippingInfo(userName, true);
-    }
-
-    @And("^user \"([^\"]*)\" logIn to PayPal$")
-    public void userLogInToPayPal(String userName) {
-        // Write code here that turns the phrase above into concrete actions
-        BillingUser user = DataProvider.getUser(userName);
-        //driver.switchTo().frame("injectedUl");
-        CommonFunctions.sleep(1000);
-       // payPalComponent.doLogin(user);
-       // payPalComponent.confirmationPay();
-        payPalComponent.switchToFrame();
-        payPalComponent.existsPayPalEmail();
-        payPalComponent.existsPayPalPassword();
-        payPalComponent.signIn(user.getPaypalEmail(), user.getPaypalPassword());
-
     }
 }

@@ -9,62 +9,8 @@ import static org.testng.Assert.assertTrue;
 
 public class PayPalComponent extends BaseComponent {
 
-
-
-
     private By payPalEmail = By.xpath("//input[@id='email']");
     private By payPalPassword = By.xpath("//input[@id='password']");
-    private By iframeName = By.xpath("//div[@id='injectedUnifiedLogin']/frame[@name='injectedUl']");
-
-
-    //private WebElement payPalFrame =
-
-     //       driver.switchTo().frame("injectedUl");
-
-
-    //driver.switchTo().frame("injectedUl");
-    //WebElement we = m_driver.findElement(By.xpath(".//*[@id='email']"));
-
-    public void switchToFrame() {
-        WebElement iframePayPal = getDriver().findElement(iframeName);
-        getDriver().switchTo().frame("injectedUl");
-        assertTrue(isElementVisible(iframeName), "Looks like iframe with checkout button doesn't present.");
-    }
-
-    public boolean existsPayPalEmail() {
-        return isElementVisible(payPalEmail);
-    }
-
-    public boolean existsPayPalPassword() {
-        return isElementVisible(payPalPassword);
-    }
-
-    public void fillPayPalEmail(String value) {
-        fillField(payPalEmail, value);
-    }
-
-    public void fillPayPalPassword(String value) {
-        fillField(payPalPassword, value);
-    }
-
-    private void fillField(By field, String value) {
-
-        //Need sleep because sometimes we catch element longer not attached
-        CommonFunctions.sleep(5000);
-
-        waitForDocumentReady();
-        assertTrue(isElementVisible(field), "Field " + field.toString() + " doesn't present on page.");
-        CommonFunctions.sleep(500);
-        getDriver().findElement(field).clear();
-        CommonFunctions.sleep(500);
-        getDriver().findElement(field).sendKeys(value);
-
-//        WebElement element = getDriver().findElement(field);
-//        CommonFunctions.sleep(500);
-//        element.clear();
-//        CommonFunctions.sleep(500);
-//        element.sendKeys(value);
-    }
 
     public void signIn(String email, String password) {
 
@@ -74,28 +20,14 @@ public class PayPalComponent extends BaseComponent {
         CommonFunctions.attachScreenshot("Login page");
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public void doLogin(BillingUser user) {
-        //boolean isNewPayPal = isIframeExist("injectedUl");
-        boolean isNewPayPal = isElementVisible(By.id("btnLogin"));
+
+        boolean isNewPayPal = isIframeExist("injectedUl");
         By logInButton = isNewPayPal ? By.id("btnLogin") : By.id("login");
 
-//        if (isNewPayPal) {
-//            switchToIframe("injectedUl");
-//        }
+        if (isNewPayPal) {
+            switchToIframe("injectedUl");
+        }
 
         assertTrue(isElementVisible(logInButton) && isElementClickable(logInButton),
                 "PayPal Login button doesn't present on page or not clickable.");
@@ -130,4 +62,34 @@ public class PayPalComponent extends BaseComponent {
     public void logOut() {
         getDriver().navigate().to("https://sandbox.paypal.com/myaccount/logout");
     }
+
+    public boolean existsPayPalEmail() {
+        return isElementVisible(payPalEmail);
+    }
+
+    public boolean existsPayPalPassword() {
+        return isElementVisible(payPalPassword);
+    }
+
+    private void fillPayPalEmail(String value) {
+        fillField(payPalEmail, value);
+    }
+
+    private void fillPayPalPassword(String value) {
+        fillField(payPalPassword, value);
+    }
+
+    private void fillField(By field, String value) {
+        //Need sleep because sometimes we catch element longer not attached
+        CommonFunctions.sleep(5000);
+
+        waitForDocumentReady();
+        assertTrue(isElementVisible(field), "Field " + field.toString() + " doesn't present on page.");
+        CommonFunctions.sleep(500);
+        getDriver().findElement(field).clear();
+        CommonFunctions.sleep(500);
+        getDriver().findElement(field).sendKeys(value);
+    }
+
+
 }
