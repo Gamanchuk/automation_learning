@@ -1,4 +1,4 @@
-@saatva
+@saatva @debug
 
 Feature: GUEST - REVIEW PAGE
 
@@ -9,13 +9,16 @@ Feature: GUEST - REVIEW PAGE
     And user fill contact details as "qa user"
     Then presses the "Continue" button
 
-  @TestCaseId("")
+  @TestCaseId("101061")
+  @TestCaseId("101027")
   Scenario: Check Edit Customer Information
     Given user types shipping address for "qa user" with phone number
     And presses the "Continue" button
     And chooses "Use Entered Address"
     And user should be on "Payment & Review" tab
+    And user can expand and collapse Order summary
 
     Then user should see "Billing Address" form
     And user clicks arrow for "Customer Information"
     Then user should be on "Contact" tab
+    And user can expand and collapse Order summary

@@ -1023,8 +1023,6 @@ public class CheckoutSteps {
 
     @And("^user types shipping address for \"([^\"]*)\" with phone number$")
     public void userTypesShippingAddressForWithPhoneNumber(String userName) {
-        // Write code here that turns the phrase above into concrete actions
-        //throw new PendingException();
         fillShippingInfo(userName, true);
     }
 }
