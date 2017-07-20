@@ -288,7 +288,12 @@ public class CheckoutSteps {
 
     @And("^chooses \"([^\"]*)\"$")
     public void chooses(String addressType) {
-        addressVerificationComponent.chooseAddressType(addressType);
+        //addressVerificationComponent.chooseAddressType(addressType);
+
+       do {
+           addressVerificationComponent.chooseAddressType(addressType);
+       } while (addressVerificationComponent.exists());
+
     }
 
     @And("^chooses \"([^\"]*)\" shipping method$")
