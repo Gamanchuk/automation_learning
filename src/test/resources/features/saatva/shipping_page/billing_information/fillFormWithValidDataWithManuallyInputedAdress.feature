@@ -17,9 +17,7 @@ Feature: SHIPPING PAGE - Billing Info
     And unset checkbox "Yes, billing address and shipping address are the same"
     
     And user types manually billing info for "qa user" without email
-    #And user types manually shipping address for "qa user"
     And presses the "Continue" button
-    And chooses "Use Entered Address"
     And chooses "Use Entered Address"
     Then user should be on "Payment & Review" tab
 

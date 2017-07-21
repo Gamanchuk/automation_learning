@@ -27,6 +27,10 @@ public class AddressVerificationComponent extends BaseComponent {
         return isElementVisible(addressVerification);
     }
 
+    public boolean exists(int timeout) {
+        return isElementVisible(addressVerification, timeout);
+    }
+
     private By getComponent(String addressType) {
         return By.xpath("//label[@class='radio-list-option' and contains(., '" + addressType + "')]");
     }
