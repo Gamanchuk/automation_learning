@@ -1,6 +1,6 @@
 @saatva
 
-Feature: HAPPY PATH - INTERNATIONAL SHIPPING
+Feature: HAPPY PATH
 
 
   Background: Add product to card and process to checkout
