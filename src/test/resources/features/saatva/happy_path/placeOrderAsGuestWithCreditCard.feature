@@ -1,6 +1,6 @@
 @saatva
 
-Feature: HAPPY PATH - ORDER AS GUEST WITH CREDIT CARD
+Feature: HAPPY PATH
 
   Background: Add product to card and process to checkout
     Given user adds product to cart from Saatva
