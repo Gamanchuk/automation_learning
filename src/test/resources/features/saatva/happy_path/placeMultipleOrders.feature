@@ -1,6 +1,6 @@
 @saatva
 
-Feature: HAPPY PATH - MULTIPLE ITEMS
+Feature: HAPPY PATH
 
   Background: Add product to card and process to checkout
     Given user adds to cart "3" products from Saatva
