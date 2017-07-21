@@ -16,7 +16,6 @@ Feature: SHIPPING PAGE - Shipping Info
 
     And user types "" into the "Apt, Bldg." field of "Shipping Address" address form
     And presses the "Continue" button
-    #And chooses "Use Entered Address"
     Then user should be on "Payment & Review" tab
 
     And user navigates to "Shipping" breadcrumb

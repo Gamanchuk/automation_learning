@@ -1,6 +1,6 @@
 @saatva
 
-Feature: SHIPPING PAGE - Billing Info
+Feature: PAYMENT & REVIEW - REVIEW INFO
 
   Background: Add product to card and process to checkout
     Given user adds product to cart from Saatva
@@ -9,16 +9,16 @@ Feature: SHIPPING PAGE - Billing Info
     And user fill contact details as "qa user"
     Then presses the "Continue" button
 
-  @Issues("MCCAT-6309")
-  @TestCaseId("100978")
-  @TestCaseId("101015")
-  Scenario: Test with correct shipping information and fill in all required fields (Address input manually)
+  @TestCaseId("101027")
+  Scenario: Check Edit Billing and Shipping Address
     Given user types shipping address for "qa user" with phone number
-    And unset checkbox "Yes, billing address and shipping address are the same"
-    
-    And user types manually billing info for "qa user" without email
     And presses the "Continue" button
     And chooses "Use Entered Address"
-    Then user should be on "Payment & Review" tab
+    And user should be on "Payment & Review" tab
+    And user can expand and collapse Order summary
 
+    Then user should see "Billing Address" form
+    And user clicks arrow for "Billing Address"
+    Then user should be on "Shipping" tab
+    And user can expand and collapse Order summary
 

@@ -34,7 +34,7 @@ public class CheckoutSteps {
 
     private ThankYouPage thankYouPage = new ThankYouPage();
     private PaymentAndReviewCheckoutPage paymentAndReviewPage = new PaymentAndReviewCheckoutPage();
-
+    private PayPalComponent payPalComponent = new PayPalComponent();
     private TabComponent tabComponent = new TabComponent();
     private NoteComponent noteComponent = new NoteComponent();
     private EmailComponent emailComponent = new EmailComponent();
@@ -96,27 +96,27 @@ public class CheckoutSteps {
 
     @And("^user types billing info for \"([^\"]*)\"$")
     public void typesBillingInfoFor(String userName) {
-        fillBillingInfo(userName, true, true, false, false);
+        fillBillingInfo(userName, true, true, false, false, false);
     }
 
     @And("^user types billing info for \"([^\"]*)\" without email$")
     public void userTypesBillingInfoForWithoutEmail(String userName) {
-        fillBillingInfo(userName, true, false, false, false);
+        fillBillingInfo(userName, true, false, false, false, false);
     }
 
     @And("^user types Canadian billing address for \"([^\"]*)\" without email$")
     public void userTypesCanadianBillingAddressForWithoutEmail(String userName) throws Throwable {
-        fillBillingInfo(userName, true, false, false, true);
+        fillBillingInfo(userName, true, false, false, true, true);
     }
 
     @And("^user types manually Canadian billing address for \"([^\"]*)\" without email$")
     public void userTypesManuallyCanadianBillingAddressForWithoutEmail(String userName) {
-        fillBillingInfo(userName, false, false, false, true);
+        fillBillingInfo(userName, false, false, false, true, true);
     }
 
     @And("^user types manually billing info for \"([^\"]*)\" without email$")
     public void userTypesManuallyBillingInfoForWithoutEmail(String userName) {
-        fillBillingInfo(userName, false, false, false, false);
+        fillBillingInfo(userName, false, false, false, false, false);
     }
 
     @And("^user types shipping address for \"([^\"]*)\"$")
@@ -167,7 +167,7 @@ public class CheckoutSteps {
 
     @And("^user types manually international billing info for \"([^\"]*)\" without email$")
     public void userTypesManuallyInternationalBillingInfoForWithoutEmail(String userName) {
-        fillBillingInfo(userName, false, false, false, false);
+        fillBillingInfo(userName, false, false, false, false, true);
     }
 
     @And("^user types customer info for \"([^\"]*)\"$")
@@ -182,7 +182,7 @@ public class CheckoutSteps {
 
     @And("^user types billing info for \"([^\"]*)\" and checks email$")
     public void typesBillingInfoForUserAndChecksEmail(String userName) {
-        fillBillingInfo(userName, true, false, true, false);
+        fillBillingInfo(userName, true, false, true, false, false);
     }
 
     @And("^user types сustomer info for \"([^\"]*)\" and checks email$")
@@ -192,12 +192,12 @@ public class CheckoutSteps {
 
     @And("^user types manually billing info for \"([^\"]*)\" and checks email$")
     public void userTypesManuallyBillingInfoForAndChecksEmail(String userName) {
-        fillBillingInfo(userName, false, false, true, false);
+        fillBillingInfo(userName, false, false, true, false, false);
     }
 
     @Given("^user types manually billing info for \"([^\"]*)\"$")
     public void userTypesManuallyBillingInfoFor(String userName) {
-        fillBillingInfo(userName, false, true, false, false);
+        fillBillingInfo(userName, false, true, false, false, false);
     }
 
     @Given("^user types manually customer info for \"([^\"]*)\"$")
@@ -290,6 +290,12 @@ public class CheckoutSteps {
     @And("^chooses \"([^\"]*)\"$")
     public void chooses(String addressType) {
         addressVerificationComponent.chooseAddressType(addressType);
+
+        if (addressVerificationComponent.exists(5)) {
+            addressVerificationComponent.chooseAddressType(addressType);
+        }
+
+        CommonFunctions.attachScreenshot("Address Verification pop-up selection");
     }
 
     @And("^chooses \"([^\"]*)\" shipping method$")
@@ -661,7 +667,7 @@ public class CheckoutSteps {
         fillShippingInfo(userName, true);
     }
 
-    private void fillBillingInfo(String userName, boolean autoFill, boolean fillEmail, boolean checkEmail, boolean canadian) {
+    private void fillBillingInfo(String userName, boolean autoFill, boolean fillEmail, boolean checkEmail, boolean fillPhone, boolean canadian) {
         BillingUser user = DataProvider.getUser(userName);
 
         addressFormComponent.setRoot(BaseComponent.getContainerByTitle("Billing Address"));
@@ -673,6 +679,10 @@ public class CheckoutSteps {
 
         if (checkEmail) {
             assertEquals(user.getEmail(), emailComponent.getEmailDisplayValue(), "Unexpected email was used");
+        }
+
+        if (fillPhone) {
+            addressFormComponent.fillPhone(user.getPhone());
         }
 
         CommonFunctions.attachScreenshot("Billing info");
@@ -1024,8 +1034,17 @@ public class CheckoutSteps {
 
     @And("^user types shipping address for \"([^\"]*)\" with phone number$")
     public void userTypesShippingAddressForWithPhoneNumber(String userName) {
-        // Write code here that turns the phrase above into concrete actions
-        //throw new PendingException();
         fillShippingInfo(userName, true);
+    }
+
+
+    @And("^user types manually billing info for \"([^\"]*)\" with phone number$")
+    public void userTypesManuallyBillingInfoForWithPhoneNumber(String userName) {
+        fillBillingInfo(userName, false, false, false, true, false);
+    }
+
+    @And("^user types manually shipping info for \"([^\"]*)\" with phone number$")
+    public void userTypesManuallyShippingInfoForWithPhoneNumber(String userName) {
+        fillShippingAddress(userName, false, false, true);
     }
 }
