@@ -1,6 +1,6 @@
 @saatva
 
-Feature: GUEST - REVIEW PAGE
+Feature: PAYMENT & REVIEW - REVIEW INFO
 
   Background: Add product to card and process to checkout
     Given user adds product to cart from Saatva
