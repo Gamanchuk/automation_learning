@@ -35,24 +35,22 @@ import java.util.concurrent.TimeoutException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static io.appium.java_client.remote.MobilePlatform.IOS;
+
 public class DriverFactory {
     private static EventFiringWebDriver driver;
     private static AppiumDriverLocalService service;
     private static WebDriverEventListener eventListener;
     private static Log log = LogFactory.getLog(DriverFactory.class.getSimpleName());
 
-    private static final String IOS = "iOS";
     private static final String ANDROID = "Android";
     private static final String XCUITEST = "XCUITest";
 
 
     public static WebDriver getDriver() {
 
-        if (!Boolean.valueOf(System.getProperty("use.desktop.browser"))) {
-            startAppiumService();
-        }
-
         if (driver == null) {
+            startAppiumService();
 
             String browserName = Config.DEVICE_BROWSER;
             String platformVersion = Config.PLATFORM_VERSION;
@@ -135,6 +133,7 @@ public class DriverFactory {
      * Function for creating appium service
      */
     private static void startAppiumService() {
+
         if (service == null) {
 
             int appiumPort = Integer.parseInt(Config.APPIUM_PORT);
@@ -287,16 +286,26 @@ public class DriverFactory {
     }
 
     static void quitDriver() {
-        log.info("DELETE DRIVER");
-        driver.close();
-        driver.quit();
-        driver = null;
+        try {
+            log.info("DELETE DRIVER");
+            driver.close();
+            driver.quit();
+        } finally {
+            driver = null;
+        }
     }
 
     static void killAppium() {
-        if (service != null) {
-            log.info("DELETE APPIUM");
-            service.stop();
+        if (Config.PLATFORM_NAME.equals(IOS)) {
+            iOSProxyRunner(Integer.parseInt(Config.PROXY_PORT));
+        }
+
+        try {
+            if (service != null) {
+                log.info("DELETE APPIUM");
+                service.stop();
+            }
+        } finally {
             service = null;
         }
     }

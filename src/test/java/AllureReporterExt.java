@@ -2,9 +2,10 @@ import gherkin.formatter.model.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import ru.yandex.qatools.allure.cucumberjvm.AllureReporter;
-import utils.*;
+import utils.Config;
+import utils.DriverFactory;
+import utils.TestGlobalsManager;
 
-import java.io.File;
 import java.util.ArrayList;
 
 import static utils.CommonFunctions.attachScreenshot;
@@ -22,7 +23,7 @@ public class AllureReporterExt extends AllureReporter {
     @Override
     public void scenario(Scenario scenario) {
         this.scenario = scenario;
-        if(scenario != null) {
+        if (scenario != null) {
             if (Config.PROJECT_TRACKING) {
                 getTestCaseIDs();
             }
@@ -32,24 +33,20 @@ public class AllureReporterExt extends AllureReporter {
 
     @Override
     public void before(Match match, Result result) {
-
     }
 
     @Override
     public void result(Result result) {
         if (scenario != null) {
+
             if (result.getStatus().equals("failed")) {
+
+                // Attach failed screenshot in to Allure
                 attachScreenshot("Failed screenshot: " + scenario.getName());
 
                 // CommonFunctions.executeJavaScript("mcux.showSideBySide()");
                 // CommonFunctions.sleep(2000);
                 // CommonFunctions.attachScreenshot("mcux");
-
-                CommonFunctions.attachDomThree(DriverFactory.getDriver().getPageSource());
-
-                BrowserConsoleLogAggregator.stopCapturing();
-                File androidLog = new File("android_browser.log");
-                CommonFunctions.attachFile("Browser console log", androidLog);
             }
         }
         super.result(result);
@@ -71,4 +68,18 @@ public class AllureReporterExt extends AllureReporter {
         TestGlobalsManager.setTestGlobal("testCaseIds", ids);
         return ids;
     }
+
+//    private boolean checkIgnored() {
+//
+//        boolean isIgnored = false;
+//        for (Tag tag : feature.getTags()) {
+//            if (tag.getName().contains("@Ignored"))
+//                isIgnored = true;
+//        }
+//
+//        log.info("Tag @Ignored found in case: " + scenario);
+//
+//        TestGlobalsManager.setTestGlobal("Ignored", isIgnored);
+//        return isIgnored;
+//    }
 }
