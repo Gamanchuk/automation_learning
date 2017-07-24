@@ -54,9 +54,13 @@ public class PayPalComponent extends BaseComponent {
     }
 
     public void confirmationPay() {
-        assertTrue(isElementClickable(By.id("confirmButtonTop")),
-                "PayPal confirmation button doesn't present on page or not clickable.");
-        getDriver().findElement(By.id("confirmButtonTop")).click();
+
+        if (isElementVisible(By.id("confirmButtonTop"))) {
+            assertTrue(isElementClickable(By.id("confirmButtonTop")),
+                    "PayPal confirmation button doesn't present on page or not clickable.");
+            getDriver().findElement(By.id("confirmButtonTop")).click();
+        }
+
     }
 
     public void logOut() {
