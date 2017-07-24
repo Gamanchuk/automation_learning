@@ -1,10 +1,9 @@
-@saatva @debug
+@saatva
 
 Feature: CONTACT PAGE
 
   Background: Add product to card and process to checkout
     Given user adds product to cart from Saatva
-    And failed step
     And chooses "Checkout" method on Saatva cart page
 
   @TestCaseId("101241")
