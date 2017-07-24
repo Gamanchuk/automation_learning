@@ -287,9 +287,11 @@ public class DriverFactory {
 
     static void quitDriver() {
         try {
-            log.info("DELETE DRIVER");
-            driver.close();
-            driver.quit();
+            if (driver != null) {
+                log.info("DELETE DRIVER");
+                driver.close();
+                driver.quit();
+            }
         } finally {
             driver = null;
         }

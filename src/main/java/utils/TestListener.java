@@ -67,8 +67,8 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
         } catch (WebDriverException e) {
             log.error("looks like we have problem with WebDriver/Appium/WDAServer/ios-webkit. Restart services and test");
             log.error(e.getMessage());
-            DriverFactory.killAppium();
             DriverFactory.quitDriver();
+            DriverFactory.killAppium();
         }
     }
 
@@ -103,8 +103,8 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
         } catch (WebDriverException e) {
             log.info("looks like we have problem with WebDriver/Appium/WDAServer/ios-webkit. Restart services and test");
         } finally {
-            DriverFactory.killAppium();
             DriverFactory.quitDriver();
+            DriverFactory.killAppium();
             fireRetryTest("The test has been failed then retried.", iTestResult);
         }
     }
