@@ -18,6 +18,6 @@ Feature: SHIPPING PAGE - HEADER & FOOTER
   Scenario: Check footer and Logo Icon
 
     When user checks support number with label "1-877-672-2882" and number "18776722882"
-    And user checks text "© Copyright 2017 - Saatva" in footer
+    And user checks text "Copyright © 2010-2017 Saatva, Inc." in footer
     And user presses the logo
     Then user should be on Saatva main page
