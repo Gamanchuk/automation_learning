@@ -41,6 +41,7 @@ public class TestRailRunHelper {
 
         int suite_id = Integer.parseInt(System.getProperty("suite.id"));
         PROJECT_ID = Config.TESTRAIL_PROJECT_ID;
+        log.info("Suite id");
 
 
         JSONObject data = new JSONObject();
@@ -64,7 +65,7 @@ public class TestRailRunHelper {
         JSONObject resp = new JSONObject(response.body().string());
         testRunId = resp.getInt("id");
 
-        log.info("Created run in TestRail: [ " + title + " ]");
+        log.info(String.format("TestRail run created. TestRun id: %d", testRunId));
     }
 
     public void setTestResult(String caseId, TestRailStatus status, String comment, String defects) throws JSONException, IOException {
@@ -87,5 +88,7 @@ public class TestRailRunHelper {
 
         Response response = client.newCall(request).execute();
         if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+
+        log.info("TestCase updated.");
     }
 }
