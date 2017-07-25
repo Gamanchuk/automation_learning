@@ -8,7 +8,7 @@ Feature: CONTACT PAGE - HEADER & FOOTER
 
   @TestCaseId("101047")
   Scenario: Check Cart Icon
-
+    And failed step
     Given user presses the Shopping Cart icon
     Then user should be on Saatva cart page
 
