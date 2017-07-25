@@ -77,6 +77,6 @@ public class Config {
         SITE_NAME = System.getProperty("site.name");
         STORE_ID = System.getProperty("store.key");
 
-        TESTRAIL_PROJECT_ID = Integer.parseInt(System.getProperty("testrail.project.id"));
+        TESTRAIL_PROJECT_ID = Integer.parseInt(System.getProperty("testrail.id"));
     }
 }

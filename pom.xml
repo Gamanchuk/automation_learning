@@ -20,7 +20,7 @@
         <environment.name>${testing.env}</environment.name>
         <properties.file.name>${props.file.name}</properties.file.name>
         <base.url>${site.url}</base.url>
-        <testrail.project.id>${testrail.project.id}</testrail.project.id>
+        <testrail.id>${testrail.project.id}</testrail.id>
         <cookies>${site.cookies}</cookies>
         <site.name>${site.base.name}</site.name>
         <mw.pr.number></mw.pr.number>
