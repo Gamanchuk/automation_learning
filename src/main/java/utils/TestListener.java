@@ -80,8 +80,6 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
             log.error(e.getMessage());
             DriverFactory.killAppium();
             DriverFactory.quitDriver();
-
-            fireRetryTest("The test has been failed then retried.", iTestResult);
         }
     }
 
