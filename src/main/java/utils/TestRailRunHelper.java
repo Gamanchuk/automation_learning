@@ -41,7 +41,7 @@ public class TestRailRunHelper {
 
         int suite_id = Integer.parseInt(System.getProperty("suite.id"));
         PROJECT_ID = Config.TESTRAIL_PROJECT_ID;
-        log.info("Suite id");
+        log.info("Suite id: " + PROJECT_ID);
 
 
         JSONObject data = new JSONObject();

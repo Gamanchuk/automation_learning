@@ -15,9 +15,9 @@ public class SuiteListener implements ISuiteListener {
     @Override
     public void onStart(ISuite iSuite) {
         log.info("\n\n");
-        log.info(String.format("********************* Starting suite: %s ********************", iSuite.getName().toUpperCase()));
+        log.info(String.format("**************************** Starting suite: %s ***************************", iSuite.getName().toUpperCase()));
         runNewTesRailRun();
-        log.info("***********************************************************************************");
+        log.info("****************************************************************************************");
     }
 
     @Override
@@ -28,7 +28,7 @@ public class SuiteListener implements ISuiteListener {
     private void runNewTesRailRun() {
         if (Config.PROJECT_TRACKING) {
             String runName = "Run on " + Config.DEVICE_NAME + " - " + new Date().toString();
-            log.info(String.format("Running TestRail run with name: %s", runName));
+            log.info(String.format("Running TestRail run with name: \"%s\"", runName));
             try {
                 TestRailRunHelper.getInstance().startRun(runName);
             } catch (IOException e) {
