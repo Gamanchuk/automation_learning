@@ -72,6 +72,7 @@ public class Config {
         PR_NUMBER = System.getProperty("mw.pr.number");
         PR_LOADER = System.getProperty("mw.pr.loader");
 
+
         BASE_URL = System.getProperty("base.url");
         COOKIES = System.getProperty("cookies");
         SITE_NAME = System.getProperty("site.name");

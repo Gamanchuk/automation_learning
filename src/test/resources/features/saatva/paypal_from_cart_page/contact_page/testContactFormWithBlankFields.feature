@@ -6,7 +6,7 @@ Feature: EXPRESS PAYPAL CHECKOUT - CONTACT PAGE
     Given user adds product to cart from Saatva
     And chooses "PayPal" method on Saatva cart page
     And user confirms purchase as "qa user" with PayPal
-    And user confirms purchase with PayPal
+   # And user confirms purchase with PayPal
     And user should be on "Shipping" tab
 
   @TestCaseId("101937")

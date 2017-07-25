@@ -38,7 +38,6 @@ public class AllureReporterExt extends AllureReporter {
     @Override
     public void result(Result result) {
         if (scenario != null) {
-            log.info("RESULT MAM" + result.getStatus());
             if (result.getStatus().equals("failed")) {
                 // Attach failed screenshot in to Allure
                 attachScreenshot("Failed screenshot: " + scenario.getName());

@@ -1,13 +1,14 @@
 package utils;
 
 import okhttp3.*;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.StringWriter;
+import java.io.*;
+import java.util.List;
 
 
 public class TestRailRunHelper {
@@ -38,34 +39,49 @@ public class TestRailRunHelper {
 
 
     public void startRun(String title) throws JSONException, IOException {
+        if (new File("target/testRailId").exists()) {
+            List<String> lines = FileUtils.readLines(new File("target/testRailId"), "UTF-8");
+            testRunId = Integer.parseInt(lines.get(0));
+            log.info("Get suite id from cache: " + testRunId);
+        } else {
+            int suite_id = Integer.parseInt(System.getProperty("suite.id"));
+            PROJECT_ID = Config.TESTRAIL_PROJECT_ID;
+            log.info("Suite id: " + PROJECT_ID);
 
-        int suite_id = Integer.parseInt(System.getProperty("suite.id"));
-        PROJECT_ID = Config.TESTRAIL_PROJECT_ID;
-        log.info("Suite id: " + PROJECT_ID);
+            JSONObject data = new JSONObject();
+            data.put("name", title);
+            data.put("include_all", true);
+            data.put("suite_id", suite_id);
+
+            StringWriter out = new StringWriter();
+            data.write(out);
+
+            Request request = new Request.Builder()
+                    .url(TESTRAIL_URL + "add_run/" + PROJECT_ID)
+                    .header("Authorization", CREDENTIALS)
+                    .post(RequestBody.create(MEDIA_TYPE_MARKDOWN, out.toString()))
+                    .build();
+
+            Response response = client.newCall(request).execute();
+            if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
 
 
-        JSONObject data = new JSONObject();
-        data.put("name", title);
-        data.put("include_all", true);
-        data.put("suite_id", suite_id);
+            JSONObject resp = new JSONObject(response.body().string());
+            testRunId = resp.getInt("id");
 
-        StringWriter out = new StringWriter();
-        data.write(out);
+            createFileWithRunID(testRunId);
+            log.info(String.format("TestRail run created. TestRun id: %d", testRunId));
+        }
+    }
 
-        Request request = new Request.Builder()
-                .url(TESTRAIL_URL + "add_run/" + PROJECT_ID)
-                .header("Authorization", CREDENTIALS)
-                .post(RequestBody.create(MEDIA_TYPE_MARKDOWN, out.toString()))
-                .build();
-
-        Response response = client.newCall(request).execute();
-        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-
-
-        JSONObject resp = new JSONObject(response.body().string());
-        testRunId = resp.getInt("id");
-
-        log.info(String.format("TestRail run created. TestRun id: %d", testRunId));
+    private void createFileWithRunID(int testRunId) {
+        try {
+            PrintWriter writer = new PrintWriter("target/testRailId", "UTF-8");
+            writer.println(testRunId);
+            writer.close();
+        } catch (FileNotFoundException | UnsupportedEncodingException e) {
+            log.error("Can`t create file with testRun id");
+        }
     }
 
     public void setTestResult(String caseId, TestRailStatus status, String comment, String defects) throws JSONException, IOException {
