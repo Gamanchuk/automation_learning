@@ -79,6 +79,8 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
             log.error("[SKIPPED] looks like we have problem with WebDriver/Appium/WDAServer/ios-webkit. Restart services and test");
             log.error(e.getMessage());
             DriverFactory.killAppium();
+
+        } finally {
             DriverFactory.quitDriver();
         }
     }
