@@ -40,13 +40,8 @@ public class AllureReporterExt extends AllureReporter {
         if (scenario != null) {
 
             if (result.getStatus().equals("failed")) {
-
                 // Attach failed screenshot in to Allure
                 attachScreenshot("Failed screenshot: " + scenario.getName());
-
-                // CommonFunctions.executeJavaScript("mcux.showSideBySide()");
-                // CommonFunctions.sleep(2000);
-                // CommonFunctions.attachScreenshot("mcux");
             }
         }
         super.result(result);

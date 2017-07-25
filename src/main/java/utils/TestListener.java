@@ -59,7 +59,7 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
     @Override
     public void onTestSkipped(ITestResult iTestResult) {
 
-        log.info(String.format("Test %s skipped", TestGlobalsManager.getTestGlobal("caseName")));
+        log.info(String.format("Looks like Test %s failed and skipped for retry", TestGlobalsManager.getTestGlobal("caseName")));
 
         try {
             BrowserConsoleLogAggregator.stopCapturing();
@@ -217,6 +217,7 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
 
     @Override
     public void onTestFailedButWithinSuccessPercentage(ITestResult iTestResult) {
+        log.info("onTestFailedButWithinSuccessPercentage");
         fireRetryTest("The test has been failed (within success percentage) then retried.", iTestResult);
         BrowserConsoleLogAggregator.stopCapturing();
         DriverFactory.quitDriver();
