@@ -243,6 +243,7 @@
                         <site.name>${site.base.name}</site.name>
                         <base.url>${site.url}</base.url>
                         <cookies>${site.cookies}</cookies>
+                        <testrail.id>${testrail.project.id}</testrail.id>
                         <store.key>${store.key}</store.key>
                     </systemPropertyVariables>
                 </configuration>
