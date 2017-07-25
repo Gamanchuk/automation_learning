@@ -8,14 +8,6 @@
     <artifactId>automation-framework</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <repositories>
-        <repository>
-            <id>bintray</id>
-            <url>https://dl.bintray.com/qameta/maven/io/qameta/allure/</url>
-        </repository>
-    </repositories>
-
-
     <properties>
         <selenium.version>3.2.0</selenium.version>
         <selendroid.version>0.17.0</selendroid.version>
@@ -106,14 +98,6 @@
         </dependency>
 
         <!--https://dl.bintray.com/qameta/maven/io/qameta/allure/allure-cucumber-jvm/2.0-BETA16/-->
-
-        <!--<dependency>-->
-
-        <!--<groupId>io.qameta.allure</groupId>-->
-        <!--<artifactId>allure-cucumber-jvm</artifactId>-->
-        <!--<version>2.0-BETA16</version>-->
-        <!--</dependency>-->
-
         <dependency>
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-testng</artifactId>
@@ -901,9 +885,14 @@
         <excludeDefaults>true</excludeDefaults>
         <plugins>
             <plugin>
-                <groupId>io.qameta.allure</groupId>
-                <artifactId>allure-maven</artifactId>
-                <version>2.8</version>
+                <!--<groupId>io.qameta.allure</groupId>-->
+                <!--<artifactId>allure-maven</artifactId>-->
+                <!--<version>2.8</version>-->
+
+
+                <groupId>ru.yandex.qatools.allure</groupId>
+                <artifactId>allure-maven-plugin</artifactId>
+                <version>2.6</version>
                 <configuration>
                     <properties>
                         <allure.issues.tracker.pattern>https://moovweb.atlassian.net/browse/%s
