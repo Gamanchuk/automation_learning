@@ -9,7 +9,6 @@ import org.openqa.selenium.WebDriverException;
 import org.testng.*;
 import org.testng.annotations.ITestAnnotation;
 import ru.yandex.qatools.allure.Allure;
-import ru.yandex.qatools.allure.events.TestCaseCanceledEvent;
 import ru.yandex.qatools.allure.events.TestCaseFinishedEvent;
 import ru.yandex.qatools.allure.events.TestCasePendingEvent;
 import utils.retries.IAllureRetryAnalyzer;
@@ -67,7 +66,6 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
 
         String caseName = (String) TestGlobalsManager.getTestGlobal("caseName");
         log.info(String.format("Looks like Test \"%s\" failed and skipped for retry", caseName));
-        getLifecycle().fire(new TestCaseCanceledEvent());
 
         try {
             BrowserConsoleLogAggregator.stopCapturing();
@@ -76,11 +74,11 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
 
             // Checking driver state.
             CommonFunctions.attachDomThree(DriverFactory.getDriver().getPageSource());
-            DriverFactory.quitDriver();
 
         } catch (WebDriverException e) {
             log.error("looks like we have problem with WebDriver/Appium/WDAServer/ios-webkit. Restart services and test");
             log.error(e.getMessage());
+            DriverFactory.quitDriver();
             DriverFactory.killAppium();
         }
     }

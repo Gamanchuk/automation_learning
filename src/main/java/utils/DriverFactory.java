@@ -291,8 +291,9 @@ public class DriverFactory {
                 log.info("DELETE DRIVER");
                 driver.close();
                 driver.quit();
+                driver = null;
             }
-        } finally {
+        } catch (Exception e) {
             driver = null;
         }
     }
@@ -306,8 +307,9 @@ public class DriverFactory {
             if (service != null) {
                 log.info("DELETE APPIUM");
                 service.stop();
+                service = null;
             }
-        } finally {
+        } catch (Exception e) {
             service = null;
         }
     }
