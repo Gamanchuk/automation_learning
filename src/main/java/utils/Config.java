@@ -35,9 +35,11 @@ public class Config {
     public static final String PR_NUMBER;
     public static final String PR_LOADER;
 
+    static final int TESTRAIL_PROJECT_ID;
 
 
     public static final String ANALYTICS_URL = "http://mc-events.moovweb.net";
+
 
     private static Log log = LogFactory.getLog(Config.class.getSimpleName());
 
@@ -74,5 +76,7 @@ public class Config {
         COOKIES = System.getProperty("cookies");
         SITE_NAME = System.getProperty("site.name");
         STORE_ID = System.getProperty("store.key");
+
+        TESTRAIL_PROJECT_ID = Integer.parseInt(System.getProperty("testrail.project.id"));
     }
 }

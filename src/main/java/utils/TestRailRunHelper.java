@@ -15,7 +15,7 @@ public class TestRailRunHelper {
     private final static String PASSWORD = "Tester1234";
     private final static String CREDENTIALS = Credentials.basic(LOGIN, PASSWORD);
     private final static String TESTRAIL_URL = "https://moovweb.testrail.net/index.php?/api/v2/";
-    private final static int PROJECT_ID = 45; // Saatva
+    private static int PROJECT_ID;
 
     private final static MediaType MEDIA_TYPE_MARKDOWN = MediaType.parse("application/json");
     private final static OkHttpClient client = new OkHttpClient();
@@ -40,6 +40,8 @@ public class TestRailRunHelper {
     public void startRun(String title) throws JSONException, IOException {
 
         int suite_id = Integer.parseInt(System.getProperty("suite.id"));
+        PROJECT_ID = Config.TESTRAIL_PROJECT_ID;
+
 
         JSONObject data = new JSONObject();
         data.put("name", title);

@@ -36,6 +36,9 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
 
     @Override
     public void onTestStart(ITestResult iTestResult) {
+        log.info("\n\n");
+        log.info(String.format("Starting TestCase: %s", TestGlobalsManager.getTestGlobal("caseName")));
+
         if (Config.DEVICE_NAME.equals("Android")) {
             BrowserConsoleLogAggregator.startCapturing();
         }
@@ -55,11 +58,13 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
 
     @Override
     public void onTestSkipped(ITestResult iTestResult) {
+
+        log.info(String.format("Test %s skipped", TestGlobalsManager.getTestGlobal("caseName")));
+
         try {
             BrowserConsoleLogAggregator.stopCapturing();
             File androidLog = new File("android_browser.log");
             CommonFunctions.attachFile("Browser console log", androidLog);
-            log.info(String.format("Test %s skipped", TestGlobalsManager.getTestGlobal("caseName")));
 
             // Checking driver state.
             CommonFunctions.attachDomThree(DriverFactory.getDriver().getPageSource());

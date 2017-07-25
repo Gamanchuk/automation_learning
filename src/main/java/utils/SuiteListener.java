@@ -14,25 +14,26 @@ public class SuiteListener implements ISuiteListener {
 
     @Override
     public void onStart(ISuite iSuite) {
-        log.info(iSuite.getName());
-        if (Config.PROJECT_TRACKING) {
-
-            String runName = "Run on " + Config.DEVICE_NAME + " - " + new Date().toString();
-            try {
-                TestRailRunHelper.getInstance().startRun(runName);
-            } catch (IOException e) {
-                e.printStackTrace();
-                log.error("Cannot create TestRail Run [" + runName + "]: " + e.getLocalizedMessage());
-            }
-        }
+        log.info("\n\n");
+        log.info(String.format("********************* Starting suite: %s ********************", iSuite.getName().toUpperCase()));
+        runNewTesRailRun();
+        log.info("***********************************************************************************");
     }
 
     @Override
     public void onFinish(ISuite iSuite) {
-//        DriverFactory.quitDriver();
-//        DriverFactory.killAppium();
-//        if (Config.PLATFORM_NAME.equals("iOS")) {
-//            DriverFactory.killiOSProxy(Integer.parseInt(Config.PROXY_PORT));
-//        }
+
+    }
+
+    private void runNewTesRailRun() {
+        if (Config.PROJECT_TRACKING) {
+            String runName = "Run on " + Config.DEVICE_NAME + " - " + new Date().toString();
+            log.info(String.format("Running TestRail run with name: %s", runName));
+            try {
+                TestRailRunHelper.getInstance().startRun(runName);
+            } catch (IOException e) {
+                log.error("Cannot create TestRail Run [" + runName + "]: " + e.getLocalizedMessage());
+            }
+        }
     }
 }
