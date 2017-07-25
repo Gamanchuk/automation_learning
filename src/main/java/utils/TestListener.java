@@ -76,7 +76,7 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
             CommonFunctions.attachDomThree(DriverFactory.getDriver().getPageSource());
 
         } catch (WebDriverException e) {
-            log.error("looks like we have problem with WebDriver/Appium/WDAServer/ios-webkit. Restart services and test");
+            log.error("[SKIPPED] looks like we have problem with WebDriver/Appium/WDAServer/ios-webkit. Restart services and test");
             log.error(e.getMessage());
             DriverFactory.quitDriver();
             DriverFactory.killAppium();
@@ -112,7 +112,7 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
             }
 
         } catch (WebDriverException e) {
-            log.info("looks like we have problem with WebDriver/Appium/WDAServer/ios-webkit. Restart services and test");
+            log.info("[FAILED] looks like we have problem with WebDriver/Appium/WDAServer/ios-webkit. Restart services and test");
         } finally {
             DriverFactory.quitDriver();
             DriverFactory.killAppium();
