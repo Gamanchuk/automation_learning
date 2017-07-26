@@ -27,3 +27,4 @@ public class SAATVACartPage extends BasePage {
         getDriver().findElement(paypalCredit).submit();
     }
 }
+

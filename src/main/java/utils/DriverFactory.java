@@ -100,8 +100,6 @@ public class DriverFactory {
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.XCODE_SIGNING_ID, "iPhone Developer");
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.UPDATE_WDA_BUNDLEID, "com.moovweb.WebDriverAgentRunner");
 
-
-
                         desiredCapabilities.setCapability("webkitResponseTimeout", 50000);
 
                         desiredCapabilities.setCapability("simpleIsVisibleCheck", true);
