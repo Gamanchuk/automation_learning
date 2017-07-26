@@ -92,10 +92,14 @@ public class DriverFactory {
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.LAUNCH_TIMEOUT, 500000);
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.SHOW_IOS_LOG, Config.XCODE_LOGS);
 
+                        desiredCapabilities.setCapability(IOSMobileCapabilityType.SIMPLE_ISVISIBLE_CHECK, true);
+                        desiredCapabilities.setCapability(IOSMobileCapabilityType.AUTO_DISMISS_ALERTS, true);
+
                         /* Capabilities for automatically sinning WebDriverAgentRunner */
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.XCODE_ORG_ID, "Y95G5M3Q84");
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.XCODE_SIGNING_ID, "iPhone Developer");
                         desiredCapabilities.setCapability(IOSMobileCapabilityType.UPDATE_WDA_BUNDLEID, "com.moovweb.WebDriverAgentRunner");
+
 
 
                         desiredCapabilities.setCapability("webkitResponseTimeout", 50000);
@@ -105,6 +109,7 @@ public class DriverFactory {
                         //desiredCapabilities.setCapability(IOSMobileCapabilityType.PREVENT_WDAATTACHMENTS, true);
                     }
 
+
                     if (Config.PLATFORM_NAME.equals(ANDROID)) {
                         ChromeOptions options = new ChromeOptions();
                         options.addArguments("disable-translate");
@@ -112,6 +117,8 @@ public class DriverFactory {
 
                         desiredCapabilities.setCapability(AndroidMobileCapabilityType.UNICODE_KEYBOARD, true);
                         desiredCapabilities.setCapability(AndroidMobileCapabilityType.RESET_KEYBOARD, true);
+                        desiredCapabilities.setCapability(AndroidMobileCapabilityType.DISABLE_ANDROID_WATCHERS, true);
+                        desiredCapabilities.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, true);
                     }
 
                     eventListener = new MyWebDriverEventListener();
