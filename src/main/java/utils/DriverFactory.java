@@ -91,7 +91,7 @@ public class DriverFactory {
                     /* Capabilities for WebDriverAgentRunner (WDAServer) */
                     desiredCapabilities.setCapability(IOSMobileCapabilityType.USE_NEW_WDA, true);
                     desiredCapabilities.setCapability(IOSMobileCapabilityType.WDA_LOCAL_PORT, Integer.parseInt(iproxy));
-                    desiredCapabilities.setCapability(IOSMobileCapabilityType.SIMPLE_ISVISIBLE_CHECK, true);
+                    //desiredCapabilities.setCapability(IOSMobileCapabilityType.SIMPLE_ISVISIBLE_CHECK, true);
 
                     /* Capabilities for timouts */
                     desiredCapabilities.setCapability("webkitResponseTimeout", 50000);
