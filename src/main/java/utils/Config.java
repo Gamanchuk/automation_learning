@@ -65,6 +65,7 @@ public class Config {
         log.info(props.getProperty("appium.port"));
         APPIUM_PORT = Integer.parseInt(props.getProperty("appium.port"));
         PROXY_PORT = Integer.parseInt(props.getProperty("proxy.port"));
+        log.info(props.getProperty("iproxy.port"));
         IPROXY_PORT = Integer.parseInt(props.getProperty("iproxy.port"));
         BOOTSTRAP_PORT = props.getProperty("bootstrap.port");
         CHROMEDRIVER_PORT = props.getProperty("chromedriver.port");
