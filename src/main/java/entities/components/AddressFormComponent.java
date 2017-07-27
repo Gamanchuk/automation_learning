@@ -30,7 +30,7 @@ public class AddressFormComponent extends BaseComponent {
 
         if (!apartmentPresent) {
             // Waiting for dropdown
-            assertTrue(isElementVisible(By.cssSelector("a.manual")), "Input address manually link was not displayed");
+            assertTrue(isElementPresent(By.cssSelector("a.manual"), 30), "Input address manually link was not displayed");
             CommonFunctions.attachScreenshot("drop Down");
 
             // Need wait. Sometimes we have NoSuchElement

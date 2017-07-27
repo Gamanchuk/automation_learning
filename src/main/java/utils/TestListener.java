@@ -5,6 +5,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jetbrains.annotations.NotNull;
+import org.openqa.selenium.WebDriverException;
 import org.testng.*;
 import org.testng.annotations.ITestAnnotation;
 import ru.yandex.qatools.allure.Allure;
@@ -17,7 +18,8 @@ import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Iterator;
+
+import static io.appium.java_client.remote.MobilePlatform.ANDROID;
 
 public class TestListener implements ITestListener, IAnnotationTransformer {
     private static Log log = LogFactory.getLog(TestListener.class.getSimpleName());
@@ -34,6 +36,8 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
 
     @Override
     public void onTestStart(ITestResult iTestResult) {
+        log.info("\n\n");
+        log.info(String.format("Starting TestCase: %s", iTestResult.getTestName()));
 
         if (Config.DEVICE_NAME.equals("Android")) {
             BrowserConsoleLogAggregator.startCapturing();
@@ -42,14 +46,104 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
 
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
-        BrowserConsoleLogAggregator.stopCapturing();
         String caseName = (String) TestGlobalsManager.getTestGlobal("caseName");
-        log.info("Test \"" + caseName + "\" completed in "
-                + countDuration(iTestResult.getEndMillis() - iTestResult.getStartMillis()));
+        String duration = countDuration(iTestResult.getEndMillis() - iTestResult.getStartMillis());
+
+        // If test success we don't need console logs
+        BrowserConsoleLogAggregator.stopCapturing();
+
+        log.info(String.format("Test \"%s\" completed in %s", caseName, duration));
+
         if (Config.PROJECT_TRACKING) {
             setTestResults(TestRailStatus.PASSED, "", "");
         }
+
         DriverFactory.quitDriver();
+    }
+
+    @Override
+    public void onTestSkipped(ITestResult iTestResult) {
+
+        String caseName = (String) TestGlobalsManager.getTestGlobal("caseName");
+        log.info(String.format("Looks like Test \"%s\" failed and skipped for retry", caseName));
+
+        try {
+            BrowserConsoleLogAggregator.stopCapturing();
+            File androidLog = new File("android_browser.log");
+            CommonFunctions.attachFile("Browser console log", androidLog);
+
+            // Checking driver state.
+            CommonFunctions.attachDomThree(DriverFactory.getDriver().getPageSource());
+
+        } catch (WebDriverException e) {
+            log.error("[SKIPPED] looks like we have problem with WebDriver/Appium/WDAServer/ios-webkit. Restart services and test");
+            log.error(e.getMessage());
+            DriverFactory.killAppium();
+
+        } finally {
+            DriverFactory.quitDriver();
+        }
+    }
+
+    @Override
+    public void onTestFailure(ITestResult iTestResult) {
+        try {
+            String ticketId;
+            String caseName = (String) TestGlobalsManager.getTestGlobal("caseName");
+            String duration = countDuration(iTestResult.getEndMillis() - iTestResult.getStartMillis());
+            log.error(String.format("Test \"%s\" failed in %s", caseName, duration));
+
+
+            String errorMessage = String.valueOf(iTestResult.getThrowable().getMessage());
+
+            // Create Jira issue and sets TestRail status
+            if (Config.PROJECT_TRACKING) {
+
+                //Create Jira issue and get ticket id
+                ticketId = setJiraIssues(caseName, errorMessage);
+
+                // Set result in TestRail
+                setTestResults(TestRailStatus.FAILED, errorMessage, JiraHelper.doLinkToIssue(ticketId));
+
+                // Attache in to issue: logs , video
+                attachIssueData(ticketId, caseName, errorMessage);
+
+                // Attache Dom Xml
+                String dom = CommonFunctions.attachDomThree(DriverFactory.getDriver().getPageSource());
+                sendDomXml(ticketId, dom);
+            }
+
+        } catch (WebDriverException e) {
+            log.info("[FAILED] looks like we have problem with WebDriver/Appium/WDAServer/ios-webkit. Restart services and test");
+            DriverFactory.killAppium();
+        } finally {
+            DriverFactory.quitDriver();
+            fireRetryTest("The test has been failed then retried.", iTestResult);
+        }
+    }
+
+    /**
+     * Fires Retry test if it allowed by <code>RetryAnalyzer</code>
+     * and set 'Pending' status for test result.
+     *
+     * @param message <code>String</code> message which will thrown like explanation
+     * @param result  <code>ITestResult</code> containing information about the run test
+     */
+    protected void fireRetryTest(String message, ITestResult result) {
+        if (((IAllureRetryAnalyzer) result.getMethod().getRetryAnalyzer()).retry(result, true)) {
+            getLifecycle().fire(new TestCasePendingEvent().withMessage(message));
+            getLifecycle().fire(new TestCaseFinishedEvent());
+        }
+    }
+
+
+    /**
+     * Get current Allure lifecycle
+     *
+     * @return current Allure lifecycle
+     */
+    protected Allure getLifecycle() {
+        return lifecycle;
     }
 
     @NotNull
@@ -58,53 +152,6 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
         int minutes = Math.round(durationInSeconds / 60);
         int seconds = durationInSeconds % 60;
         return minutes + ":" + seconds;
-    }
-
-    @Override
-    public void onTestFailure(ITestResult iTestResult) {
-        BrowserConsoleLogAggregator.stopCapturing();
-        File androidLog = new File("android_browser.log");
-
-        String caseName = (String) TestGlobalsManager.getTestGlobal("caseName");
-        String dom = CommonFunctions.attachDomThree(DriverFactory.getDriver().getPageSource());
-        String errorMessage = String.valueOf(iTestResult.getThrowable().getMessage());
-
-        log.error("Test \"" + caseName + "\" failed in "
-                + countDuration(iTestResult.getEndMillis() - iTestResult.getStartMillis()));
-
-        if (Config.PROJECT_TRACKING) {
-            String ticketId = setJiraIssues(caseName, errorMessage);
-
-            // Attaching video
-            try {
-                File video = new File(System.getProperty("user.dir") + "/target/" + Config.DEVICE_UID + ".mp4");
-                JiraHelper.addAttachment(ticketId, video);
-            } catch (IOException e) {
-                log.error(e.getMessage());
-            }
-
-            // Attaching DOM tree
-            try {
-                File attachment = File.createTempFile("attachment", ".html");
-                FileUtils.writeStringToFile(attachment, dom, "UTF-8");
-                JiraHelper.addAttachment(ticketId, attachment);
-            } catch (IOException e) {
-                log.error(e.getMessage());
-            }
-
-            // Attaching browser log
-            try {
-                JiraHelper.addAttachment(ticketId, androidLog);
-            } catch (IOException e) {
-                log.error(e.getMessage());
-            }
-
-
-            setTestResults(TestRailStatus.FAILED, errorMessage, JiraHelper.doLinkToIssue(ticketId));
-        }
-
-        DriverFactory.quitDriver();
-        fireRetryTest("The test has been failed then retried.", iTestResult);
     }
 
     @SuppressWarnings(value = "unchecked")
@@ -139,15 +186,45 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
         return ticketId;
     }
 
-    @Override
-    public void onTestSkipped(ITestResult iTestResult) {
+    private void attachIssueData(String ticketId, String caseName, String errorMessage) {
         BrowserConsoleLogAggregator.stopCapturing();
-        log.info("Test \"" + iTestResult.getTestName() + "\" skipped");
-        DriverFactory.quitDriver();
+        File androidLog = new File("android_browser.log");
+        CommonFunctions.attachFile("Browser console log", androidLog);
+
+        if (Config.PROJECT_TRACKING) {
+
+            // Attach test video
+            File video = new File(System.getProperty("user.dir") + "/target/" + Config.DEVICE_UID + ".mp4");
+            JiraHelper.addAttachment(ticketId, video);
+
+            // Attach android logs
+            if (Config.PLATFORM_NAME.equals(ANDROID)) {
+                JiraHelper.addAttachment(ticketId, androidLog);
+            }
+        }
+    }
+
+    private void sendDomXml(String ticketId, String domXml) {
+        if (Config.PROJECT_TRACKING) {
+            // Attach page DOM XML
+            JiraHelper.addAttachment(ticketId, createTempDomXML(domXml));
+        }
+    }
+
+    private File createTempDomXML(String dom) {
+        File attachment = null;
+        try {
+            attachment = File.createTempFile("attachment", ".html");
+            FileUtils.writeStringToFile(attachment, dom, "UTF-8");
+        } catch (IOException e) {
+            log.error("Problems with creating temp .html file.");
+        }
+        return attachment;
     }
 
     @Override
     public void onTestFailedButWithinSuccessPercentage(ITestResult iTestResult) {
+        log.info("onTestFailedButWithinSuccessPercentage");
         fireRetryTest("The test has been failed (within success percentage) then retried.", iTestResult);
         BrowserConsoleLogAggregator.stopCapturing();
         DriverFactory.quitDriver();
@@ -160,37 +237,7 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
 
     @Override
     public void onFinish(ITestContext iTestContext) {
-        Iterator<ITestResult> listOfFailedTests = iTestContext.getFailedTests().getAllResults().iterator();
-        while (listOfFailedTests.hasNext()) {
-            ITestResult failedTest = listOfFailedTests.next();
-            ITestNGMethod method = failedTest.getMethod();
-            if (iTestContext.getPassedTests().getResults(method).size() > 0) {
-                listOfFailedTests.remove();
-            }
-        }
 
-    }
-
-    /**
-     * Fires Retry test if it allowed by <code>RetryAnalyzer</code>
-     * and set 'Pending' status for test result.
-     *
-     * @param message <code>String</code> message which will thrown like explanation
-     * @param result  <code>ITestResult</code> containing information about the run test
-     */
-    protected void fireRetryTest(String message, ITestResult result) {
-        if (((IAllureRetryAnalyzer) result.getMethod().getRetryAnalyzer()).retry(result, true)) {
-            getLifecycle().fire(new TestCasePendingEvent().withMessage(message));
-            getLifecycle().fire(new TestCaseFinishedEvent());
-        }
-    }
-
-    /**
-     * Get current Allure lifecycle
-     *
-     * @return current Allure lifecycle
-     */
-    protected Allure getLifecycle() {
-        return lifecycle;
     }
 }
+

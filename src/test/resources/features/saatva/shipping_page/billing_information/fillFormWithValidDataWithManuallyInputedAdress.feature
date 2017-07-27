@@ -1,6 +1,6 @@
 @saatva
 
-Feature: SHIPPING PAGE - Billing Info
+Feature: SHIPPING PAGE - BILLING INFO
 
   Background: Add product to card and process to checkout
     Given user adds product to cart from Saatva
@@ -13,6 +13,7 @@ Feature: SHIPPING PAGE - Billing Info
   @TestCaseId("100978")
   @TestCaseId("101015")
   Scenario: Test with correct shipping information and fill in all required fields (Address input manually)
+
     Given user types shipping address for "qa user" with phone number
     And unset checkbox "Yes, billing address and shipping address are the same"
     

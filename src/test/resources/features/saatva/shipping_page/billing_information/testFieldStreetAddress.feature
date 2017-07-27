@@ -1,6 +1,6 @@
 @saatva
 
-Feature: SHIPPING PAGE - Billing Info
+Feature: SHIPPING PAGE - BILLING INFO
 
   Background: Add product to card and process to checkout
     Given user adds product to cart from Saatva

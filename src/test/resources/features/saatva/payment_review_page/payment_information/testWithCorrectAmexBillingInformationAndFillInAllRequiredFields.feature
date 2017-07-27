@@ -20,7 +20,4 @@ Feature: PAYMENT & REVIEW - PAYMENT INFO
     And user should be on "Payment & Review" tab
 
     And uses "american express" card for payment
-    And presses the "Continue" button
-
-    And user should be on "Payment & Review" tab
     And presses the "Place Order" button

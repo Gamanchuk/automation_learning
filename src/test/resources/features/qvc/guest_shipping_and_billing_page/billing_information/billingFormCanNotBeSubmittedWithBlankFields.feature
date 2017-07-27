@@ -14,4 +14,3 @@ Feature: GUEST - SHIPPING & BILLING PAGE - BILLING INFO - DOMESTIC
     When presses the "Continue" button
     Then user should stay at "Address" tab
     And sees "FORM ERRORS" error message with text "Please review all inputs."
-

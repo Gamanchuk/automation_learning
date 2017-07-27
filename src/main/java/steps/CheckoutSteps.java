@@ -1,6 +1,5 @@
 package steps;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -12,6 +11,7 @@ import entities.pages.pepboys.PepBoysMainPage;
 import entities.pages.pepboys.PepBoysMyAccountPage;
 import entities.pages.pepboys.PepBoysTrackingPage;
 import org.apache.commons.lang.RandomStringUtils;
+import org.openqa.selenium.By;
 import utils.CommonFunctions;
 import utils.Config;
 import utils.GoogleSheetsHelper;
@@ -26,7 +26,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 import static utils.CommonFunctions.attachScreenVideo;
 import static utils.CommonFunctions.stopScreenVideo;
 
@@ -771,7 +772,8 @@ public class CheckoutSteps {
 
     @Given("^failed step$")
     public void failedStep() {
-        fail("Fail for debug");
+        footerComponent.getDriver().findElement(By.id("hu2312313123123123123123123123123123i"));
+        //fail("Fail for debug");
     }
 
     @Given("^user presses the logo$")

@@ -71,24 +71,32 @@ public class JiraHelper {
         return JIRA_BASE_URL + "browse/" + ticketId;
     }
 
-    public static void addAttachment(String issueKey, File file) throws IOException {
+    public static void addAttachment(String issueKey, File file) {
         RequestBody requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("file", file.getAbsolutePath(), RequestBody.create(MEDIA_MULTIPART, file))
                 .build();
 
         Request request = new Request.Builder()
-                .url(JIRA_URL + "/issue/"+ issueKey +"/attachments")
+                .url(JIRA_URL + "/issue/" + issueKey + "/attachments")
                 .header("X-Atlassian-Token", "nocheck")
                 .header("Authorization", "Basic " + AUTH_HEADER)
                 .post(requestBody)
                 .build();
 
-        Response response = client.newCall(request).execute();
-        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-        log.info("Attached html source to " + issueKey);
-        log.info(response.body().string());
+        Response response;
 
-}
+        try {
+            response = client.newCall(request).execute();
+            if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+
+            log.info("Attached html source to " + issueKey);
+            log.info(response.body().string());
+        } catch (IOException e) {
+            log.error(String.format("Attached html source to %s. Error: %s", issueKey, e.getMessage()));
+        }
+
+
+    }
 
 }

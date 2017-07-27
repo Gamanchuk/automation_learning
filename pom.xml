@@ -20,6 +20,7 @@
         <environment.name>${testing.env}</environment.name>
         <properties.file.name>${props.file.name}</properties.file.name>
         <base.url>${site.url}</base.url>
+        <testrail.id>${testrail.project.id}</testrail.id>
         <cookies>${site.cookies}</cookies>
         <site.name>${site.base.name}</site.name>
         <mw.pr.number></mw.pr.number>
@@ -93,9 +94,10 @@
         <dependency>
             <groupId>ru.yandex.qatools.allure</groupId>
             <artifactId>allure-cucumber-jvm-adaptor</artifactId>
-            <version>1.6.2</version>
+            <version>1.6.3</version>
         </dependency>
 
+        <!--https://dl.bintray.com/qameta/maven/io/qameta/allure/allure-cucumber-jvm/2.0-BETA16/-->
         <dependency>
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-testng</artifactId>
@@ -130,7 +132,7 @@
         <dependency>
             <groupId>io.appium</groupId>
             <artifactId>java-client</artifactId>
-            <version>5.0.0-BETA8</version>
+            <version>5.0.0-BETA9</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
         <dependency>
@@ -203,6 +205,11 @@
             <artifactId>google-api-services-sheets</artifactId>
             <version>v4-rev473-1.22.0</version>
         </dependency>
+        <dependency>
+            <groupId>ru.yandex.qatools.allure</groupId>
+            <artifactId>allure-java-adaptor-api</artifactId>
+            <version>1.5.2</version>
+        </dependency>
 
 
     </dependencies>
@@ -242,6 +249,7 @@
                         <site.name>${site.base.name}</site.name>
                         <base.url>${site.url}</base.url>
                         <cookies>${site.cookies}</cookies>
+                        <testrail.id>${testrail.project.id}</testrail.id>
                         <store.key>${store.key}</store.key>
                     </systemPropertyVariables>
                 </configuration>
@@ -802,6 +810,7 @@
                 <site.url>https://mstage.stage.pepboys.com/</site.url>
                 <site.cookies>?var=b&amp;utm_expid=95483662-2.I0S4ga4uSlCoEu3KU2QnNw.1&amp;_mwexperienceid=75b123b0-6444-4893-9825-1303473bc59f</site.cookies>
                 <store.key>07923</store.key>
+                <testrail.project.id>30</testrail.project.id>
             </properties>
         </profile>
 
@@ -812,6 +821,7 @@
                 <site.url>https://mstage.pepboys.com/</site.url>
                 <site.cookies>?_mwexperienceid=75b123b0-6444-4893-9825-1303473bc59f</site.cookies>
                 <store.key>00847</store.key>
+                <testrail.project.id>30</testrail.project.id>
             </properties>
         </profile>
 
@@ -822,6 +832,7 @@
                 <site.url>http://m.pepboys.com/</site.url>
                 <site.cookies>?_mwexperienceid=eeba14c5-b4f0-4563-946a-07af28d2648e</site.cookies>
                 <store.key>00847</store.key>
+                <testrail.project.id>30</testrail.project.id>
             </properties>
         </profile>
 
@@ -832,6 +843,7 @@
                 <site.base.name>qvc-stage</site.base.name>
                 <site.url>https://qa.qvc.com/</site.url>
                 <site.cookies>?_mwexperienceid=cfc47413-d158-4114-a4b2-f5cf32d253fd</site.cookies>
+                <testrail.project.id>30</testrail.project.id>
             </properties>
         </profile>
 
@@ -841,6 +853,7 @@
                 <site.base.name>qvc-prod</site.base.name>
                 <site.url>http://qvc.com/</site.url>
                 <site.cookies>?_mwexperienceid=2ff5947d-47f4-46cf-ae88-4e6b0b661967</site.cookies>
+                <testrail.project.id>30</testrail.project.id>
             </properties>
         </profile>
 
@@ -851,6 +864,7 @@
                 <site.base.name>saatva-stage</site.base.name>
                 <site.url>http://moov.saatvadev.com/</site.url>
                 <site.cookies>?_mwexperienceid=f1d7959b-90e5-4ab6-a903-a864759bfb6f</site.cookies>
+                <testrail.project.id>45</testrail.project.id>
             </properties>
         </profile>
 
@@ -861,6 +875,7 @@
                 <site.base.name>shoe-prod</site.base.name>
                 <site.url>http://shoecarnival.com/</site.url>
                 <site.cookies>_mwexperienceid=7c7e252e-ec74-400d-abe5-47a43d0fbbba</site.cookies>
+                <testrail.project.id>34</testrail.project.id>
             </properties>
         </profile>
     </profiles>
@@ -870,9 +885,14 @@
         <excludeDefaults>true</excludeDefaults>
         <plugins>
             <plugin>
-                <groupId>ru.yandex.qatools.allure</groupId>
-                <artifactId>allure-maven-plugin</artifactId>
-                <version>2.5</version>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>2.8</version>
+
+
+                <!--<groupId>ru.yandex.qatools.allure</groupId>-->
+                <!--<artifactId>allure-maven-plugin</artifactId>-->
+                <!--<version>2.6</version>-->
                 <configuration>
                     <properties>
                         <allure.issues.tracker.pattern>https://moovweb.atlassian.net/browse/%s
