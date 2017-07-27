@@ -54,25 +54,29 @@ public class Config {
         }
 
 
+        /* Device property */
         PLATFORM_NAME = props.getProperty("platform.name");
         PLATFORM_VERSION = props.getProperty("platform.version");
         DEVICE_NAME = props.getProperty("device.name");
         DEVICE_UID = props.getProperty("device.uid");
         DEVICE_BROWSER = props.getProperty("device.browser");
+
+        /* Appium property */
+        log.info(props.getProperty("appium.port"));
         APPIUM_PORT = Integer.parseInt(props.getProperty("appium.port"));
         PROXY_PORT = Integer.parseInt(props.getProperty("proxy.port"));
         IPROXY_PORT = Integer.parseInt(props.getProperty("iproxy.port"));
         BOOTSTRAP_PORT = props.getProperty("bootstrap.port");
         CHROMEDRIVER_PORT = props.getProperty("chromedriver.port");
-
         XCODE_LOGS = Boolean.parseBoolean(System.getProperty("xcode.logs"));
         APPIUM_LOGS = Boolean.parseBoolean(System.getProperty("appium.logs"));
         PROJECT_TRACKING = Boolean.parseBoolean(System.getProperty("project.tracking"));
 
+        /* Site (Dev) property */
         PR_NUMBER = System.getProperty("mw.pr.number");
         PR_LOADER = Boolean.parseBoolean(System.getProperty("mw.pr.loader"));
 
-
+        /* Site property */
         BASE_URL = System.getProperty("base.url");
         COOKIES = System.getProperty("cookies");
         SITE_NAME = System.getProperty("site.name");
