@@ -171,7 +171,7 @@ public abstract class Entity {
                     return true;
                 }
             } catch (Exception e) {
-                driver.manage().timeouts().implicitlyWait(delay, TimeUnit.MILLISECONDS);
+                driver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS);
             }
         }
         return false;
@@ -202,7 +202,7 @@ public abstract class Entity {
                 parent.findElement(element);
                 return true;
             } catch (Exception e) {
-                driver.manage().timeouts().implicitlyWait(delay, TimeUnit.MILLISECONDS);
+                driver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS);
             }
         }
         return false;

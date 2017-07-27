@@ -23,7 +23,7 @@ public class SHOECheckoutPage extends BasePage {
             url += String.format("%s", Config.PR_NUMBER);
         }
 
-        if (Config.PR_NUMBER != null && !Config.PR_LOADER.isEmpty()) {
+        if (Config.PR_NUMBER != null && Config.PR_LOADER) {
             url += String.format("%s", Config.PR_LOADER);
         }
 
