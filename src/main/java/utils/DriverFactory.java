@@ -166,17 +166,27 @@ public class DriverFactory {
             log.info(String.format("PROJECT TRACKING: %s", project_tracking));
 
             AppiumServiceBuilder serviceBuilder = new AppiumServiceBuilder();
-            serviceBuilder.usingPort(appiumPort).withArgument(GeneralServerFlag.SESSION_OVERRIDE).withArgument(GeneralServerFlag.LOG_TIMESTAMP);
+
+            /* Default flags */
+            serviceBuilder.usingPort(appiumPort);
+            serviceBuilder.withArgument(GeneralServerFlag.SESSION_OVERRIDE);
+            serviceBuilder.withArgument(GeneralServerFlag.LOG_TIMESTAMP);
 
             if (!Config.APPIUM_LOGS) {
+
+                /* Flag for disabled appium server logs  */
                 serviceBuilder.withArgument(GeneralServerFlag.LOG_LEVEL, "warn");
             }
 
             if (Config.PLATFORM_NAME.equals(IOS)) {
+
+                /* Flag for bind ios_webkit_debug_proxy to appium server */
                 serviceBuilder.withArgument(IOSServerFlag.WEBKIT_DEBUG_PROXY_PORT, String.valueOf(proxyPort));
             }
 
             if (Config.PLATFORM_NAME.equals(ANDROID)) {
+
+                /* Flag for bind ios_webkit_debug_proxy to appium server */
                 serviceBuilder.withArgument(AndroidServerFlag.CHROME_DRIVER_PORT, Config.CHROMEDRIVER_PORT);
                 serviceBuilder.withArgument(AndroidServerFlag.BOOTSTRAP_PORT_NUMBER, Config.BOOTSTRAP_PORT);
             }
