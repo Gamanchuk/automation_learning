@@ -17,9 +17,9 @@ public class Config {
     public static final String DEVICE_NAME;
     public static final String DEVICE_UID;
     public static final String DEVICE_BROWSER;
-    public static final String APPIUM_PORT;
-    public static final String PROXY_PORT;
-    public static final String IPROXY_PORT;
+    public static final int APPIUM_PORT;
+    public static final int PROXY_PORT;
+    public static final int IPROXY_PORT;
     public static final String BOOTSTRAP_PORT;
     public static final String CHROMEDRIVER_PORT;
 
@@ -33,7 +33,7 @@ public class Config {
     public static final boolean PROJECT_TRACKING;
 
     public static final String PR_NUMBER;
-    public static final String PR_LOADER;
+    public static final boolean PR_LOADER;
 
     static final int TESTRAIL_PROJECT_ID;
 
@@ -59,9 +59,9 @@ public class Config {
         DEVICE_NAME = props.getProperty("device.name");
         DEVICE_UID = props.getProperty("device.uid");
         DEVICE_BROWSER = props.getProperty("device.browser");
-        APPIUM_PORT = props.getProperty("appium.port");
-        PROXY_PORT = props.getProperty("proxy.port");
-        IPROXY_PORT = props.getProperty("iproxy.port");
+        APPIUM_PORT = Integer.parseInt(props.getProperty("appium.port"));
+        PROXY_PORT = Integer.parseInt(props.getProperty("proxy.port"));
+        IPROXY_PORT = Integer.parseInt(props.getProperty("iproxy.port"));
         BOOTSTRAP_PORT = props.getProperty("bootstrap.port");
         CHROMEDRIVER_PORT = props.getProperty("chromedriver.port");
 
@@ -70,7 +70,7 @@ public class Config {
         PROJECT_TRACKING = Boolean.parseBoolean(System.getProperty("project.tracking"));
 
         PR_NUMBER = System.getProperty("mw.pr.number");
-        PR_LOADER = System.getProperty("mw.pr.loader");
+        PR_LOADER = Boolean.parseBoolean(System.getProperty("mw.pr.loader"));
 
 
         BASE_URL = System.getProperty("base.url");
