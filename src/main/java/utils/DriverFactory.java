@@ -54,7 +54,7 @@ public class DriverFactory {
             String deviceName = Config.DEVICE_NAME;
             String deviceUdid = Config.DEVICE_UID;
 
-            int iproxy = Config.IPROXY_PORT;
+            int iproxy = Integer.parseInt(Config.IPROXY_PORT);
             boolean xcode_logs = Config.XCODE_LOGS;
 
 

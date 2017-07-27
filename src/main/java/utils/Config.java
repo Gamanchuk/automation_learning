@@ -9,8 +9,6 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.util.Properties;
 
-import static io.appium.java_client.remote.MobilePlatform.IOS;
-
 @Component
 public class Config {
 
@@ -21,7 +19,7 @@ public class Config {
     public static final String DEVICE_BROWSER;
     public static final int APPIUM_PORT;
     public static final int PROXY_PORT;
-    public static final int IPROXY_PORT;
+    public static final String IPROXY_PORT;
     public static final String BOOTSTRAP_PORT;
     public static final String CHROMEDRIVER_PORT;
 
@@ -68,8 +66,7 @@ public class Config {
         PROXY_PORT = Integer.parseInt(props.getProperty("proxy.port"));
         BOOTSTRAP_PORT = props.getProperty("bootstrap.port");
         CHROMEDRIVER_PORT = props.getProperty("chromedriver.port");
-
-        if (PLATFORM_NAME.equals(IOS)) IPROXY_PORT = Integer.parseInt(props.getProperty("iproxy.port"));
+        IPROXY_PORT = props.getProperty("iproxy.port");
 
         XCODE_LOGS = Boolean.parseBoolean(System.getProperty("xcode.logs"));
         APPIUM_LOGS = Boolean.parseBoolean(System.getProperty("appium.logs"));
