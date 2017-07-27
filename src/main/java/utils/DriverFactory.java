@@ -44,10 +44,10 @@ public class DriverFactory {
 
 
     public static WebDriver getDriver() {
-
+        log.info("Driver1");
         if (driver == null) {
             startAppiumService();
-
+            log.info("Driver2");
             String browserName = Config.DEVICE_BROWSER;
             String platformVersion = Config.PLATFORM_VERSION;
             String platformName = Config.PLATFORM_NAME;
@@ -141,7 +141,7 @@ public class DriverFactory {
      * Function for creating appium service
      */
     private static void startAppiumService() {
-
+        log.info("Driver3");
         if (service == null) {
 
             int appiumPort = Config.APPIUM_PORT;
@@ -150,7 +150,7 @@ public class DriverFactory {
             boolean xcode_logs = Config.XCODE_LOGS;
             boolean appium_logs = Config.APPIUM_LOGS;
             boolean project_tracking = Config.PROJECT_TRACKING;
-
+            log.info("Driver4");
             if (Config.PLATFORM_NAME.equals(IOS)) {
                 iOSProxyRunner(proxyPort);
             }
