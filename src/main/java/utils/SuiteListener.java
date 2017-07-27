@@ -15,6 +15,8 @@ public class SuiteListener implements ISuiteListener {
     @Override
     public void onStart(ISuite iSuite) {
         log.info(String.format("Suite \"%s\" started", iSuite.getName().toUpperCase()));
+        log.info("PR pront");
+        log.info(Config.PROJECT_TRACKING);
         runNewTesRailRun();
         log.info("PR");
     }
