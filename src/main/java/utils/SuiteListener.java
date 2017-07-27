@@ -14,14 +14,13 @@ public class SuiteListener implements ISuiteListener {
 
     @Override
     public void onStart(ISuite iSuite) {
-        log.info("\n");
         log.info(String.format("Suite \"%s\" started", iSuite.getName().toUpperCase()));
         runNewTesRailRun();
+        log.info("PR");
     }
 
     @Override
     public void onFinish(ISuite iSuite) {
-        log.info("\n");
         log.info(String.format("Suite \"%s\" finished", iSuite.getName().toUpperCase()));
         DriverFactory.killAppium();
         DriverFactory.quitDriver();
