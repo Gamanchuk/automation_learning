@@ -44,17 +44,15 @@ public class DriverFactory {
 
 
     public static WebDriver getDriver() {
-        log.info("Driver1");
+
         if (driver == null) {
             startAppiumService();
-            log.info("Driver2");
             String browserName = Config.DEVICE_BROWSER;
             String platformVersion = Config.PLATFORM_VERSION;
             String platformName = Config.PLATFORM_NAME;
             String deviceName = Config.DEVICE_NAME;
             String deviceUdid = Config.DEVICE_UID;
-
-            int iproxy = Integer.parseInt(Config.IPROXY_PORT);
+            String iproxy = Config.IPROXY_PORT;
             boolean xcode_logs = Config.XCODE_LOGS;
 
 
@@ -66,7 +64,7 @@ public class DriverFactory {
                 log.info(String.format("DEVICE NAME: %s", deviceName));
                 log.info(String.format("DEVICE BROWSER: %s", browserName));
                 log.info(String.format("DEVICE UDID: %s", deviceUdid));
-                log.info(String.format("DEVICE USB PORT: %d", iproxy));
+                log.info(String.format("DEVICE USB PORT: %s", iproxy));
                 log.info("***********************************************************************************");
                 log.info("\n");
 
@@ -92,7 +90,7 @@ public class DriverFactory {
 
                     /* Capabilities for WebDriverAgentRunner (WDAServer) */
                     desiredCapabilities.setCapability(IOSMobileCapabilityType.USE_NEW_WDA, true);
-                    desiredCapabilities.setCapability(IOSMobileCapabilityType.WDA_LOCAL_PORT, iproxy);
+                    desiredCapabilities.setCapability(IOSMobileCapabilityType.WDA_LOCAL_PORT, Integer.parseInt(iproxy));
                     desiredCapabilities.setCapability(IOSMobileCapabilityType.SIMPLE_ISVISIBLE_CHECK, true);
 
                     /* Capabilities for timouts */
@@ -141,7 +139,7 @@ public class DriverFactory {
      * Function for creating appium service
      */
     private static void startAppiumService() {
-        log.info("Driver3");
+
         if (service == null) {
 
             int appiumPort = Config.APPIUM_PORT;
@@ -150,7 +148,7 @@ public class DriverFactory {
             boolean xcode_logs = Config.XCODE_LOGS;
             boolean appium_logs = Config.APPIUM_LOGS;
             boolean project_tracking = Config.PROJECT_TRACKING;
-            log.info("Driver4");
+
             if (Config.PLATFORM_NAME.equals(IOS)) {
                 iOSProxyRunner(proxyPort);
             }

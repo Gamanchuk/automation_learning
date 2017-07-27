@@ -36,7 +36,7 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
 
     @Override
     public void onTestStart(ITestResult iTestResult) {
-        log.info("\n\n");
+        log.info("\n");
         log.info(String.format("Starting TestCase: %s", iTestResult.getTestName()));
 
         if (Config.DEVICE_NAME.equals("Android")) {
