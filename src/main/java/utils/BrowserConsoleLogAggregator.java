@@ -14,21 +14,27 @@ public class BrowserConsoleLogAggregator {
     private static Process adbLogcatProcess = null;
 
     public static void startCapturing() {
-        startAdbLogcat();
+        if (Config.DEVICE_NAME.equals("Android")) {
+            startAdbLogcat();
+        }
     }
 
     public static void stopCapturing() {
-        String pid = (String) TestGlobalsManager.getTestGlobal("AGGREGATOR_PID");
-        if(adbLogcatProcess != null) {
-            adbLogcatProcess.destroy();
-        }
-        if(pid != null) {
-            ProcessBuilder builder = new ProcessBuilder("kill", "-9", pid);
-            try {
-                builder.start();
-            } catch (IOException e) {
-                log.error("adb logcat doesn't stopped. Error message: ");
-                log.error(e.getMessage());
+
+        if (Config.DEVICE_NAME.equals("Android")) {
+
+            String pid = (String) TestGlobalsManager.getTestGlobal("AGGREGATOR_PID");
+            if (adbLogcatProcess != null) {
+                adbLogcatProcess.destroy();
+            }
+            if (pid != null) {
+                ProcessBuilder builder = new ProcessBuilder("kill", "-9", pid);
+                try {
+                    builder.start();
+                } catch (IOException e) {
+                    log.error("adb logcat doesn't stopped. Error message: ");
+                    log.error(e.getMessage());
+                }
             }
         }
     }
@@ -49,6 +55,6 @@ public class BrowserConsoleLogAggregator {
             log.error("adb logcat doesn't started. Error message: ");
             log.error(e.getMessage());
         }
-
     }
 }
+

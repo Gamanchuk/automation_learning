@@ -16,8 +16,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
 
-public class MyWebDriverEventListener extends AbstractWebDriverEventListener {
+import java.util.Arrays;
 
+public class MyWebDriverEventListener extends AbstractWebDriverEventListener {
     private Log log = LogFactory.getLog("WebDriverEvent");
 
     @Override
@@ -40,14 +41,15 @@ public class MyWebDriverEventListener extends AbstractWebDriverEventListener {
     }
 
     @Override
-    public void onException(Throwable throwable, WebDriver webDriver) {
-        log.info("\n");
-        log.info("Exception occurred: \n" + throwable);
-        log.info("\n");
+    public void afterChangeValueOf(WebElement element, WebDriver driver, CharSequence[] keysToSend) {
+        String idField = element.getAttribute("id");
+
+        if (keysToSend == null) {
+            log.info(String.format("Clear %s filed", idField));
+        } else {
+            log.info(String.format("Fill: %s value in to %s field.", Arrays.toString(keysToSend), idField));
+        }
     }
 
-//    @Override
-//    public void afterFindBy(By by, WebElement webElement, WebDriver webDriver) {
-//        log.info("Found Element By: " + webElement.toString());
-//    }
+
 }

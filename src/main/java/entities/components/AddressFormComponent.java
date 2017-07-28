@@ -60,7 +60,7 @@ public class AddressFormComponent extends BaseComponent {
         fillField(apartmentField, apartment);
 
         // Need to send phone number digit by digit
-        if(isElementPresent(phoneField, 1)) {
+        if (isElementPresent(phoneField, 2)) {
             fillPhone(phone);
             focusOut(findElement(phoneField));
         }
@@ -122,10 +122,10 @@ public class AddressFormComponent extends BaseComponent {
 //            scroll(stateEl);
 //            stateEl.sendKeys(state);
 //        } else {
-            stateEl = findElement(stateSelect);
+        stateEl = findElement(stateSelect);
         scroll(stateEl);
-            Select selectState = new Select(stateEl);
-            selectState.selectByValue(state);
+        Select selectState = new Select(stateEl);
+        selectState.selectByValue(state);
         // }
     }
 
@@ -155,8 +155,16 @@ public class AddressFormComponent extends BaseComponent {
         scroll(element);
         CommonFunctions.sleep(500);
         element.clear();
-        CommonFunctions.sleep(500);
+        CommonFunctions.sleep(1000);
         element.sendKeys(value);
+
+
+//        CommonFunctions.sleep(1000);
+//        findElement(field).clear();
+//        waitForAjax();
+//        findElement(field).sendKeys(value);
+
+
     }
 
     public void selectTitle(String value) {

@@ -36,12 +36,22 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
 
     @Override
     public void onTestStart(ITestResult iTestResult) {
+
+        File webDriverEventLog = new File("logfile.log");
+        long fileSizeOld = webDriverEventLog.length();
+
+        CommonFunctions.writeFile(webDriverEventLog, "");
+        long fileSizeNew = webDriverEventLog.length();
+        log.info(String.format("WebDriverEventLog file size: %d bytes", fileSizeOld));
+        log.info(String.format("WebDriverEventLog cleaned. File size: %d bytes", fileSizeNew));
+
+
         log.info("\n");
         log.info(String.format("Starting TestCase: %s", iTestResult.getTestName()));
 
-        if (Config.DEVICE_NAME.equals("Android")) {
-            BrowserConsoleLogAggregator.startCapturing();
-        }
+
+        BrowserConsoleLogAggregator.startCapturing();
+
     }
 
     @Override
@@ -51,6 +61,10 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
 
         // If test success we don't need console logs
         BrowserConsoleLogAggregator.stopCapturing();
+
+
+        File webDriverEventLog = new File("logfile.log");
+        CommonFunctions.attachFile("webDriverEventLog", webDriverEventLog);
 
         log.info(String.format("Test \"%s\" completed in %s", caseName, duration));
 
@@ -72,6 +86,9 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
             File androidLog = new File("android_browser.log");
             CommonFunctions.attachFile("Browser console log", androidLog);
 
+            File webDriverEventLog = new File("logfile.log");
+            CommonFunctions.attachFile("webDriverEventLog", webDriverEventLog);
+
             // Checking driver state.
             CommonFunctions.attachDomThree(DriverFactory.getDriver().getPageSource());
 
@@ -87,6 +104,10 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
 
     @Override
     public void onTestFailure(ITestResult iTestResult) {
+
+        File webDriverEventLog = new File("logfile.log");
+        CommonFunctions.attachFile("webDriverEventLog", webDriverEventLog);
+
         try {
             String ticketId;
             String caseName = (String) TestGlobalsManager.getTestGlobal("caseName");

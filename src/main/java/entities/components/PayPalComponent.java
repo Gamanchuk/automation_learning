@@ -40,6 +40,8 @@ public class PayPalComponent extends BaseComponent {
         passwordField.clear();
         passwordField.sendKeys(user.getPaypalPassword());
 
+        emailField.click();
+
         CommonFunctions.attachScreenshot("Login PayPal Page");
         getDriver().findElement(logInButton).click();
 

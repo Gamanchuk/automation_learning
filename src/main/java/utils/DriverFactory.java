@@ -150,7 +150,7 @@ public class DriverFactory {
             boolean project_tracking = Config.PROJECT_TRACKING;
 
             if (Config.PLATFORM_NAME.equals(IOS)) {
-                iOSProxyRunner(proxyPort);
+                iOSProxyRunner();
             }
 
             killAppiumServer(appiumPort);
@@ -238,17 +238,15 @@ public class DriverFactory {
      * <p>
      * The ios_webkit_debug_proxy (aka iwdp) proxies requests from usbmuxd daemon over a websocket connection,
      * allowing developers to send commands to MobileSafari and UIWebViews on real and simulated iOS devices.
-     *
-     * @param port for communication with "proxy"
      */
-    private static void iOSProxyRunner(int port) {
+    private static void iOSProxyRunner() {
         if (Config.PLATFORM_NAME.equals("iOS")) {
-
-            killiOSProxy(port);
+            int iproxy = Config.PROXY_PORT;
+            killiOSProxy();
 
             CommandLine iOSProxyCommand = new CommandLine("ios_webkit_debug_proxy");
             iOSProxyCommand.addArgument("-c");
-            iOSProxyCommand.addArgument(Config.DEVICE_UID + ":" + port);
+            iOSProxyCommand.addArgument(String.format("%s:%d", Config.DEVICE_UID, iproxy));
             iOSProxyCommand.addArgument("-F");
 
             DefaultExecuteResultHandler executeResultHandler = new DefaultExecuteResultHandler();
@@ -268,13 +266,14 @@ public class DriverFactory {
 
     /**
      * Function serves for deleting process ios_webkit_debug_proxy
-     *
-     * @param port for communication with "proxy"
      */
-    static void killiOSProxy(int port) {
-        log.info("Look for the launched iOS proxy on port: " + port);
+    static void killiOSProxy() {
+
+        int iproxy = Config.PROXY_PORT;
+
+        log.info("Look for the launched iOS proxy on port: " + iproxy);
         try {
-            ProcessResult processResult = new ProcessExecutor().command("lsof", "-ti", "tcp:" + port)
+            ProcessResult processResult = new ProcessExecutor().command("lsof", "-ti", "tcp:" + iproxy)
                     .readOutput(true).execute();
 
             if (processResult.getExitValue() == 0) {
@@ -293,7 +292,7 @@ public class DriverFactory {
 
                 log.info("iOS Proxy killed");
             } else {
-                log.info("Port: " + port + " is free");
+                log.info(String.format("Port: %d is free", iproxy));
             }
 
         } catch (IOException | InterruptedException | TimeoutException e) {
@@ -316,7 +315,7 @@ public class DriverFactory {
 
     static void killAppium() {
         if (Config.PLATFORM_NAME.equals(IOS)) {
-            iOSProxyRunner(Config.PROXY_PORT);
+            killiOSProxy();
         }
 
         try {

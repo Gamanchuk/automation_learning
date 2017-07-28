@@ -17,6 +17,7 @@ import org.testng.Reporter;
 import ru.yandex.qatools.allure.annotations.Attachment;
 
 import java.io.*;
+import java.nio.charset.Charset;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -95,7 +96,7 @@ public class CommonFunctions {
         return readFile(file);
     }
 
-    private static byte [] readFile(File file) {
+    private static byte[] readFile(File file) {
         byte[] byteVideo = new byte[(int) file.length()];
         try {
             FileInputStream fileInputStream = new FileInputStream(file);
@@ -108,6 +109,19 @@ public class CommonFunctions {
 
         log.info(byteVideo);
         return byteVideo;
+    }
+
+    public static void writeFile(File file, String data) {
+        if (file.exists()) {
+            try {
+                FileUtils.write(file, data, Charset.forName("UTF-8"));
+            } catch (IOException e) {
+                log.error("We have problem with write data in to file.");
+                log.error(e.getMessage());
+            }
+        } else {
+            log.error("Looks like we cant write data in file because file doesn't.");
+        }
     }
 
     public static float getCurrency(String str) {

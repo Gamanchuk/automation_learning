@@ -20,7 +20,6 @@ import utils.pepboys.BillingUser;
 import utils.pepboys.CreditCard;
 import utils.pepboys.DataProvider;
 
-import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -964,10 +963,13 @@ public class CheckoutSteps {
 
     @Given("^user fill contact details as \"([^\"]*)\"$")
     public void userFillContactDetails(String userName) {
-
         BillingUser user = DataProvider.getUser(userName);
-        addressFormComponent.inputValueIntoField(user.getFullName(), "Full Name");
-        emailComponent.fillEmailField(user.getEmail());
+
+        String name = user.getFullName();
+        String email = user.getEmail();
+
+        addressFormComponent.inputValueIntoField(name, "Full Name");
+        emailComponent.fillEmailField(email);
         CommonFunctions.attachScreenshot("Contact information");
     }
 
@@ -1012,9 +1014,6 @@ public class CheckoutSteps {
     public void after() {
         stopScreenVideo();
         attachScreenVideo("data");
-
-        File webDriverEventLog = new File("logfile.log");
-        CommonFunctions.attachFile("webDriverEventLog", webDriverEventLog);
     }
 
     @Then("^user should see \"([^\"]*)\" products$")

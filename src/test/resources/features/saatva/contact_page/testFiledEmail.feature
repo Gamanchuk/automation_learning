@@ -37,7 +37,3 @@ Feature: CONTACT PAGE
     Then user should be on "Shipping" tab
     And user navigates to "Contact" breadcrumb
 
-    And user fills email field with "12345@gmail.com"
-    And presses the "Continue" button
-    Then user should be on "Shipping" tab
-
