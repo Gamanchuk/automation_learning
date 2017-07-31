@@ -20,7 +20,7 @@ public class SignInFormComponent extends BaseComponent {
     final static String PASSWORD = "password";
 
     public boolean exists() {
-        return isElementVisible(emailField);
+        return isElementVisible(forgotPassword);
     }
 
     public void signIn(String email, String password) {
