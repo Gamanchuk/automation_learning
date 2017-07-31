@@ -18,7 +18,10 @@ public class CreditCardFormComponent extends BaseComponent {
         assertTrue(isElementVisible(ccNumber), "Card number field doesn't present on page.");
         // fillField(ccNumber, number);
         sendKeysOneByOne(ccNumber, number);
-        assertTrue(findElement(By.cssSelector("div.credit-card-number-input")).getAttribute("class").contains(name.toLowerCase()), "Card icon was not displayed or incorrect");
+
+        // Need sleep
+        CommonFunctions.sleep(800);
+        assertTrue(findElement(By.cssSelector("div.credit-card-number-input")).getAttribute("class").contains(name.toLowerCase().replace(" ", "")), "Card icon was not displayed or incorrect");
 
 
         if (!name.toLowerCase().equals("qcard")) {

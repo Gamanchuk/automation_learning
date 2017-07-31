@@ -24,7 +24,7 @@ public class PayPalLoginPageSteps {
         TestGlobalsManager.setTestGlobal("CARDHOLDER", user.getFullName());
         TestGlobalsManager.setTestGlobal("CARDINFO", "PayPal - " + user.getPaypalEmail());
 
-        if (Config.SITE_NAME.equals("site-pepboys-prod")) {
+        if (Config.SITE_NAME.equals("pepboys-prod")) {
             checkoutPage.waitForPepBoysPage();
             checkoutPage.checkURL();
         }

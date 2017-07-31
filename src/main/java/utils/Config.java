@@ -17,8 +17,8 @@ public class Config {
     public static final String DEVICE_NAME;
     public static final String DEVICE_UID;
     public static final String DEVICE_BROWSER;
-    public static final String APPIUM_PORT;
-    public static final String PROXY_PORT;
+    public static final int APPIUM_PORT;
+    public static final int PROXY_PORT;
     public static final String IPROXY_PORT;
     public static final String BOOTSTRAP_PORT;
     public static final String CHROMEDRIVER_PORT;
@@ -33,11 +33,13 @@ public class Config {
     public static final boolean PROJECT_TRACKING;
 
     public static final String PR_NUMBER;
-    public static final String PR_LOADER;
+    public static final boolean PR_LOADER;
 
+    static final int TESTRAIL_PROJECT_ID;
 
 
     public static final String ANALYTICS_URL = "http://mc-events.moovweb.net";
+
 
     private static Log log = LogFactory.getLog(Config.class.getSimpleName());
 
@@ -52,27 +54,34 @@ public class Config {
         }
 
 
+        /* Device property */
         PLATFORM_NAME = props.getProperty("platform.name");
         PLATFORM_VERSION = props.getProperty("platform.version");
         DEVICE_NAME = props.getProperty("device.name");
         DEVICE_UID = props.getProperty("device.uid");
         DEVICE_BROWSER = props.getProperty("device.browser");
-        APPIUM_PORT = props.getProperty("appium.port");
-        PROXY_PORT = props.getProperty("proxy.port");
-        IPROXY_PORT = props.getProperty("iproxy.port");
+
+        /* Appium property */
+        APPIUM_PORT = Integer.parseInt(props.getProperty("appium.port"));
+        PROXY_PORT = Integer.parseInt(props.getProperty("proxy.port"));
         BOOTSTRAP_PORT = props.getProperty("bootstrap.port");
         CHROMEDRIVER_PORT = props.getProperty("chromedriver.port");
+        IPROXY_PORT = props.getProperty("iproxy.port");
 
         XCODE_LOGS = Boolean.parseBoolean(System.getProperty("xcode.logs"));
         APPIUM_LOGS = Boolean.parseBoolean(System.getProperty("appium.logs"));
         PROJECT_TRACKING = Boolean.parseBoolean(System.getProperty("project.tracking"));
 
+        /* Site (Dev) property */
         PR_NUMBER = System.getProperty("mw.pr.number");
-        PR_LOADER = System.getProperty("mw.pr.loader");
+        PR_LOADER = Boolean.parseBoolean(System.getProperty("mw.pr.loader"));
 
+        /* Site property */
         BASE_URL = System.getProperty("base.url");
         COOKIES = System.getProperty("cookies");
         SITE_NAME = System.getProperty("site.name");
         STORE_ID = System.getProperty("store.key");
+
+        TESTRAIL_PROJECT_ID = Integer.parseInt(System.getProperty("testrail.id"));
     }
 }

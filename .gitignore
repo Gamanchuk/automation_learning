@@ -37,6 +37,7 @@ target/
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
+/.allure/
 
 # JIRA plugin
 atlassian-ide-plugin.xml
@@ -53,4 +54,5 @@ fabric.properties
 orders.txt
 android_browser.log
 /.credentials/
+
 

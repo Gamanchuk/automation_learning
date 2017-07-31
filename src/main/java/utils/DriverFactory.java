@@ -14,7 +14,6 @@ import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -28,12 +27,14 @@ import org.zeroturnaround.process.Processes;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static io.appium.java_client.remote.AutomationName.IOS_XCUI_TEST;
+import static io.appium.java_client.remote.MobilePlatform.ANDROID;
+import static io.appium.java_client.remote.MobilePlatform.IOS;
 
 public class DriverFactory {
     private static EventFiringWebDriver driver;
@@ -41,87 +42,91 @@ public class DriverFactory {
     private static WebDriverEventListener eventListener;
     private static Log log = LogFactory.getLog(DriverFactory.class.getSimpleName());
 
-    private static final String IOS = "iOS";
-    private static final String ANDROID = "Android";
-    private static final String XCUITEST = "XCUITest";
-
 
     public static WebDriver getDriver() {
 
-        if (!Boolean.valueOf(System.getProperty("use.desktop.browser"))) {
-            startAppiumService();
-        }
-
         if (driver == null) {
-
+            startAppiumService();
             String browserName = Config.DEVICE_BROWSER;
             String platformVersion = Config.PLATFORM_VERSION;
             String platformName = Config.PLATFORM_NAME;
             String deviceName = Config.DEVICE_NAME;
             String deviceUdid = Config.DEVICE_UID;
-            String iproxyPort = Config.IPROXY_PORT;
+            String iproxy = Config.IPROXY_PORT;
+            boolean xcode_logs = Config.XCODE_LOGS;
 
 
             try {
-                if (Boolean.valueOf(System.getProperty("use.desktop.browser"))) {
-                    initChromeDriver();
-                } else {
+                log.info("\n");
+                log.info("**************************** CREATING REMOTE WEB DRIVER ***************************");
+                log.info(String.format("PLATFORM NAME: %s", platformName));
+                log.info(String.format("PLATFORM VERSION: %s", platformVersion));
+                log.info(String.format("DEVICE NAME: %s", deviceName));
+                log.info(String.format("DEVICE BROWSER: %s", browserName));
+                log.info(String.format("DEVICE UDID: %s", deviceUdid));
+                log.info(String.format("DEVICE USB PORT: %s", iproxy));
+                log.info("***********************************************************************************");
+                log.info("\n");
 
-                    log.info("");
-                    log.info("**************************** CREATING REMOTE WEB DRIVER ***************************");
-                    log.info("PLATFORM NAME: " + platformName);
-                    log.info("PLATFORM VERSION: " + platformVersion);
-                    log.info("DEVICE NAME: " + deviceName);
-                    log.info("DEVICE BROWSER: " + browserName);
-                    log.info("DEVICE UDID: " + deviceUdid);
-                    log.info("DEVICE USB PORT: " + iproxyPort);
-                    log.info("APPIUM URL: " + service.getUrl());
-                    log.info("***********************************************************************************");
-                    log.info("");
+                DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
 
-                    DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-                    desiredCapabilities.setCapability(MobileCapabilityType.BROWSER_NAME, browserName);
-                    desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, platformVersion);
-                    desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, platformName);
-                    desiredCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, deviceName);
-                    desiredCapabilities.setCapability(MobileCapabilityType.UDID, deviceUdid);
-                    desiredCapabilities.setCapability("clearSystemFiles", true);
+                /* Default сapabilities for Android and iOS */
+                desiredCapabilities.setCapability(MobileCapabilityType.UDID, deviceUdid);
+                desiredCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, deviceName);
+                desiredCapabilities.setCapability(MobileCapabilityType.BROWSER_NAME, browserName);
+                desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, platformName);
+                desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, platformVersion);
 
-                    if (Config.PLATFORM_NAME.equals(IOS)) {
-                        desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, XCUITEST);
-                        desiredCapabilities.setCapability(IOSMobileCapabilityType.WDA_LOCAL_PORT, Integer.parseInt(iproxyPort));
-                        desiredCapabilities.setCapability(IOSMobileCapabilityType.USE_NEW_WDA, true);
-                        desiredCapabilities.setCapability(IOSMobileCapabilityType.LAUNCH_TIMEOUT, 500000);
-                        desiredCapabilities.setCapability(IOSMobileCapabilityType.SHOW_IOS_LOG, Config.XCODE_LOGS);
 
-                        /* Capabilities for automatically sinning WebDriverAgentRunner */
-                        desiredCapabilities.setCapability(IOSMobileCapabilityType.XCODE_ORG_ID, "Y95G5M3Q84");
-                        desiredCapabilities.setCapability(IOSMobileCapabilityType.XCODE_SIGNING_ID, "iPhone Developer");
-                        desiredCapabilities.setCapability(IOSMobileCapabilityType.UPDATE_WDA_BUNDLEID, "com.moovweb.WebDriverAgentRunner");
+                if (Config.PLATFORM_NAME.equals(IOS)) {
 
-                        desiredCapabilities.setCapability("webkitResponseTimeout", 50000);
+                    /* Capabilities for use new XCUITest framework */
+                    desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, IOS_XCUI_TEST);
 
-                        desiredCapabilities.setCapability("simpleIsVisibleCheck", true);
-                        //desiredCapabilities.setCapability(IOSMobileCapabilityType.START_IWDP, true);
-                        //desiredCapabilities.setCapability(IOSMobileCapabilityType.PREVENT_WDAATTACHMENTS, true);
-                    }
+                    /* Capabilities for clear and disabled cache/logs */
+                    desiredCapabilities.setCapability(IOSMobileCapabilityType.SHOW_IOS_LOG, xcode_logs);
+                    desiredCapabilities.setCapability(MobileCapabilityType.CLEAR_SYSTEM_FILES, true);
+                    desiredCapabilities.setCapability(IOSMobileCapabilityType.PREVENT_WDAATTACHMENTS, true);
 
-                    if (Config.PLATFORM_NAME.equals(ANDROID)) {
-                        ChromeOptions options = new ChromeOptions();
-                        options.addArguments("disable-translate");
-                        desiredCapabilities.setCapability(ChromeOptions.CAPABILITY, options);
+                    /* Capabilities for WebDriverAgentRunner (WDAServer) */
+                    desiredCapabilities.setCapability(IOSMobileCapabilityType.USE_NEW_WDA, true);
+                    desiredCapabilities.setCapability(IOSMobileCapabilityType.WDA_LOCAL_PORT, Integer.parseInt(iproxy));
+                    //desiredCapabilities.setCapability(IOSMobileCapabilityType.SIMPLE_ISVISIBLE_CHECK, true);
 
-                        desiredCapabilities.setCapability(AndroidMobileCapabilityType.UNICODE_KEYBOARD, true);
-                        desiredCapabilities.setCapability(AndroidMobileCapabilityType.RESET_KEYBOARD, true);
-                    }
+                    /* Capabilities for timouts */
+                    desiredCapabilities.setCapability("webkitResponseTimeout", 50000);
+                    desiredCapabilities.setCapability(IOSMobileCapabilityType.LAUNCH_TIMEOUT, 500000);
 
-                    eventListener = new MyWebDriverEventListener();
-
-                    driver = new EventFiringWebDriver(new RemoteWebDriver(new URL(String.valueOf(service.getUrl())), desiredCapabilities)).register(eventListener);
-                    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-                    CommonFunctions.startVideoRecording();
-                    TestGlobalsManager.setTestGlobal("authorised", null);
+                    /* Capabilities for automatically sinning WebDriverAgentRunner */
+                    desiredCapabilities.setCapability(IOSMobileCapabilityType.XCODE_ORG_ID, "Y95G5M3Q84");
+                    desiredCapabilities.setCapability(IOSMobileCapabilityType.XCODE_SIGNING_ID, "iPhone Developer");
+                    desiredCapabilities.setCapability(IOSMobileCapabilityType.UPDATE_WDA_BUNDLEID, "com.moovweb.WebDriverAgentRunner");
                 }
+
+                if (Config.PLATFORM_NAME.equals(ANDROID)) {
+
+                    /* Chrome Capabilities for disable google translate */
+                    ChromeOptions options = new ChromeOptions();
+                    options.addArguments("disable-translate");
+                    desiredCapabilities.setCapability(ChromeOptions.CAPABILITY, options);
+
+                    /* Capabilities for android keyboard */
+                    desiredCapabilities.setCapability(AndroidMobileCapabilityType.UNICODE_KEYBOARD, true);
+                    desiredCapabilities.setCapability(AndroidMobileCapabilityType.RESET_KEYBOARD, true);
+
+                    /* Capabilities for disables android watchers */
+                    desiredCapabilities.setCapability(AndroidMobileCapabilityType.DISABLE_ANDROID_WATCHERS, true);
+                    desiredCapabilities.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, true);
+                }
+
+                eventListener = new MyWebDriverEventListener();
+                driver = new EventFiringWebDriver(new RemoteWebDriver(new URL(String.valueOf(service.getUrl())), desiredCapabilities)).register(eventListener);
+                driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+
+                CommonFunctions.startVideoRecording();
+
+                /* Clean before test started */
+                TestGlobalsManager.setTestGlobal("authorised", null);
 
             } catch (Exception e) {
                 throw new AssertionError("Can't create driver: " + e.getMessage());
@@ -134,51 +139,62 @@ public class DriverFactory {
      * Function for creating appium service
      */
     private static void startAppiumService() {
+
         if (service == null) {
 
-            int appiumPort = Integer.parseInt(Config.APPIUM_PORT);
-            int proxyPort = Integer.parseInt(Config.PROXY_PORT);
+            int appiumPort = Config.APPIUM_PORT;
+            int proxyPort = Config.PROXY_PORT;
+
+            boolean xcode_logs = Config.XCODE_LOGS;
+            boolean appium_logs = Config.APPIUM_LOGS;
+            boolean project_tracking = Config.PROJECT_TRACKING;
 
             if (Config.PLATFORM_NAME.equals(IOS)) {
-                iOSProxyRunner(proxyPort);
+                iOSProxyRunner();
             }
 
             killAppiumServer(appiumPort);
 
-            log.info("");
+            log.info("\n");
             log.info("******************************* STARTING APPIUM SERVICE ****************************");
-            log.info("APPIUM PORT: " + appiumPort);
-            log.info("IOS WEB PROXY PORT: " + proxyPort);
-            log.info("XCODE LOGS: " + Config.XCODE_LOGS);
-            log.info("APPIUM LOGS: " + Config.APPIUM_LOGS);
-            log.info("PROJECT TRACKING: " + Config.PROJECT_TRACKING);
+            log.info(String.format("APPIUM PORT: %d", appiumPort));
+            log.info(String.format("IOS WEB PROXY PORT: %d", proxyPort));
+            log.info(String.format("XCODE LOGS: %s", xcode_logs));
+            log.info(String.format("APPIUM LOGS: %s", appium_logs));
+            log.info(String.format("PROJECT TRACKING: %s", project_tracking));
 
             AppiumServiceBuilder serviceBuilder = new AppiumServiceBuilder();
-            serviceBuilder.usingPort(appiumPort);
 
+            /* Default flags */
+            serviceBuilder.usingPort(appiumPort);
             serviceBuilder.withArgument(GeneralServerFlag.SESSION_OVERRIDE);
             serviceBuilder.withArgument(GeneralServerFlag.LOG_TIMESTAMP);
 
             if (!Config.APPIUM_LOGS) {
+
+                /* Flag for disabled appium server logs  */
                 serviceBuilder.withArgument(GeneralServerFlag.LOG_LEVEL, "warn");
             }
 
             if (Config.PLATFORM_NAME.equals(IOS)) {
+
+                /* Flag for bind ios_webkit_debug_proxy to appium server */
                 serviceBuilder.withArgument(IOSServerFlag.WEBKIT_DEBUG_PROXY_PORT, String.valueOf(proxyPort));
             }
 
             if (Config.PLATFORM_NAME.equals(ANDROID)) {
+
+                /* Flag for bind ios_webkit_debug_proxy to appium server */
                 serviceBuilder.withArgument(AndroidServerFlag.CHROME_DRIVER_PORT, Config.CHROMEDRIVER_PORT);
                 serviceBuilder.withArgument(AndroidServerFlag.BOOTSTRAP_PORT_NUMBER, Config.BOOTSTRAP_PORT);
-
             }
 
             service = AppiumDriverLocalService.buildService(serviceBuilder);
             service.start();
 
-            log.info("APPIUM URL: " + service.getUrl());
+            log.info(String.format("APPIUM URL: %s", service.getUrl()));
             log.info("***********************************************************************************");
-            log.info("");
+            log.info("\n");
         }
     }
 
@@ -222,17 +238,15 @@ public class DriverFactory {
      * <p>
      * The ios_webkit_debug_proxy (aka iwdp) proxies requests from usbmuxd daemon over a websocket connection,
      * allowing developers to send commands to MobileSafari and UIWebViews on real and simulated iOS devices.
-     *
-     * @param port for communication with "proxy"
      */
-    private static void iOSProxyRunner(int port) {
+    private static void iOSProxyRunner() {
         if (Config.PLATFORM_NAME.equals("iOS")) {
-
-            killiOSProxy(port);
+            int iproxy = Config.PROXY_PORT;
+            killiOSProxy();
 
             CommandLine iOSProxyCommand = new CommandLine("ios_webkit_debug_proxy");
             iOSProxyCommand.addArgument("-c");
-            iOSProxyCommand.addArgument(Config.DEVICE_UID + ":" + port);
+            iOSProxyCommand.addArgument(String.format("%s:%d", Config.DEVICE_UID, iproxy));
             iOSProxyCommand.addArgument("-F");
 
             DefaultExecuteResultHandler executeResultHandler = new DefaultExecuteResultHandler();
@@ -252,13 +266,14 @@ public class DriverFactory {
 
     /**
      * Function serves for deleting process ios_webkit_debug_proxy
-     *
-     * @param port for communication with "proxy"
      */
-    static void killiOSProxy(int port) {
-        log.info("Look for the launched iOS proxy on port: " + port);
+    static void killiOSProxy() {
+
+        int iproxy = Config.PROXY_PORT;
+
+        log.info("Look for the launched iOS proxy on port: " + iproxy);
         try {
-            ProcessResult processResult = new ProcessExecutor().command("lsof", "-ti", "tcp:" + port)
+            ProcessResult processResult = new ProcessExecutor().command("lsof", "-ti", "tcp:" + iproxy)
                     .readOutput(true).execute();
 
             if (processResult.getExitValue() == 0) {
@@ -277,7 +292,7 @@ public class DriverFactory {
 
                 log.info("iOS Proxy killed");
             } else {
-                log.info("Port: " + port + " is free");
+                log.info(String.format("Port: %d is free", iproxy));
             }
 
         } catch (IOException | InterruptedException | TimeoutException e) {
@@ -286,32 +301,32 @@ public class DriverFactory {
     }
 
     static void quitDriver() {
-        log.info("DELETE DRIVER");
-        driver.close();
-        driver.quit();
-        driver = null;
-    }
-
-    static void killAppium() {
-        if (service != null) {
-            log.info("DELETE APPIUM");
-            service.stop();
-            service = null;
+        try {
+            if (driver != null) {
+                log.info("DELETE DRIVER");
+                driver.close();
+                driver.quit();
+                driver = null;
+            }
+        } catch (Exception e) {
+            driver = null;
         }
     }
 
-    private static void initChromeDriver() {
-        System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver");
-        HashMap<String, String> mobileEmulation = new HashMap<>();
-        mobileEmulation.put("deviceName", "Google Nexus 5");
+    static void killAppium() {
+        if (Config.PLATFORM_NAME.equals(IOS)) {
+            killiOSProxy();
+        }
 
-        Map<String, Object> chromeOptions = new HashMap<>();
-        chromeOptions.put("mobileEmulation", mobileEmulation);
-        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-        capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-        eventListener = new MyWebDriverEventListener();
-
-        driver = new EventFiringWebDriver(new ChromeDriver(capabilities)).register(eventListener);
+        try {
+            if (service != null) {
+                log.info("DELETE APPIUM");
+                service.stop();
+                service = null;
+            }
+        } catch (Exception e) {
+            service = null;
+        }
     }
 }
 

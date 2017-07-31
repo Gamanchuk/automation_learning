@@ -2,6 +2,7 @@ package entities.components;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import utils.CommonFunctions;
 
 public class EmailComponent extends BaseComponent {
 
@@ -13,8 +14,13 @@ public class EmailComponent extends BaseComponent {
         WebElement emailEl = findElement(emailField);
         scroll(emailEl);
         emailEl.clear();
+        CommonFunctions.sleep(500);
         emailEl.sendKeys(email);
         focusOut(emailEl);
+
+//        CommonFunctions.sleep(1000);
+//        findElement(emailField).clear();
+//        findElement(emailField).sendKeys(email);
     }
 
     public String getEmailDisplayValue() {

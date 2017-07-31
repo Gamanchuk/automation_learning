@@ -171,7 +171,7 @@ public abstract class Entity {
                     return true;
                 }
             } catch (Exception e) {
-                driver.manage().timeouts().implicitlyWait(delay, TimeUnit.MILLISECONDS);
+                driver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS);
             }
         }
         return false;
@@ -202,7 +202,7 @@ public abstract class Entity {
                 parent.findElement(element);
                 return true;
             } catch (Exception e) {
-                driver.manage().timeouts().implicitlyWait(delay, TimeUnit.MILLISECONDS);
+                driver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS);
             }
         }
         return false;
@@ -257,9 +257,17 @@ public abstract class Entity {
     public void sendKeysOneByOne(By selector, String str) {
         WebElement el = findElement(selector);
         scroll(el);
-        for (char ch : str.toCharArray()) {
+        char[] arrayChar = str.toCharArray();
+        for (char ch : arrayChar) {
+            CommonFunctions.sleep(200);
             el.sendKeys(ch + "");
         }
+
+//        if(el.getAttribute("value").length() != arrayChar.length){
+//            for (char ch : arrayChar) {
+//                el.sendKeys(ch + "");
+//            }
+//        }
     }
 
     public void scrollToElement(WebElement el) {

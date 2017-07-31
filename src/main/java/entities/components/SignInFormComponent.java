@@ -75,11 +75,5 @@ public class SignInFormComponent extends BaseComponent {
         getDriver().findElement(field).clear();
         CommonFunctions.sleep(500);
         getDriver().findElement(field).sendKeys(value);
-
-//        WebElement element = getDriver().findElement(field);
-//        CommonFunctions.sleep(500);
-//        element.clear();
-//        CommonFunctions.sleep(500);
-//        element.sendKeys(value);
     }
 }
