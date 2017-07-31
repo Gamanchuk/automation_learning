@@ -15,6 +15,7 @@ public class SuiteListener implements ISuiteListener {
     @Override
     public void onStart(ISuite iSuite) {
         log.info(String.format("Suite \"%s\" started", iSuite.getName().toUpperCase()));
+        DriverFactory.killAppiumServer(Config.APPIUM_PORT);
         runNewTesRailRun();
     }
 

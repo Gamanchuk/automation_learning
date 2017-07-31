@@ -15,6 +15,7 @@ public class Retry extends AbstractAllureRetryAnalyzer {
         if (CURRENT_RETRY_COUNT < MAX_RETRY_COUNT) {
             if (!getRetryAbilityOnly)
             CURRENT_RETRY_COUNT++;
+
             log.info(String.format("Going to retry test case: \"%s\", %d out of %d", TestGlobalsManager.getTestGlobal("caseName"),
                     CURRENT_RETRY_COUNT, MAX_RETRY_COUNT));
             return true;

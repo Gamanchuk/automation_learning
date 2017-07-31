@@ -1,4 +1,4 @@
-@saatva @debug
+@saatva
 
 Feature: EXPRESS PAYPAL CHECKOUT - REVIEW PAGE
 

@@ -1,4 +1,4 @@
-@shoe @debug1
+@shoe @debug
 
 Feature: GUEST - PAYMENT PAGE
 

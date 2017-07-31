@@ -1,4 +1,4 @@
-@shoe @debug
+@shoe
 
 Feature: GUEST - SHIPPING PAGE - BILLING ADDRESS
 
