@@ -433,8 +433,8 @@ public class CheckoutSteps {
     @Given("^user makes authorisation for \"([^\"]*)\"$")
     public void userMakesAuthorisationFor(String userName) {
         BillingUser user = DataProvider.getUser(userName);
-        headerComponent.pressSignInButton();
-        assertTrue(signInFormComponent.exists(), "Sign In form component doesn't present");
+
+        userPressesTheSignInButton();
         signInFormComponent.signIn(user.getEmail(), user.getPassword());
         CommonFunctions.attachScreenshot("Set [" + user.getEmail() + "] email and [" + user.getPassword() + "] password");
         buttonComponent.clickButtonWithSendKeys();
@@ -839,7 +839,7 @@ public class CheckoutSteps {
     @And("^user presses the signIn button$")
     public void userPressesTheSignInButton() {
         headerComponent.pressSignInButton();
-        assertTrue(signInFormComponent.exists(), "SignIn form component doesn't present");
+        assertTrue(signInFormComponent.exists(), "Sign In form component doesn't present");
     }
 
     @And("^user presses the Forgot Password link$")
