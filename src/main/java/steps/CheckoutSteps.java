@@ -1048,4 +1048,11 @@ public class CheckoutSteps {
     public void userTypesManuallyShippingInfoForWithPhoneNumber(String userName) {
         fillShippingAddress(userName, false, false, true);
     }
+
+    @And("^selects \"([^\"]*)\" state$")
+    public void selectState(String state) {
+        addressFormComponent.setRoot(null);
+        addressFormComponent.fillState(state);
+        CommonFunctions.attachScreenshot("State selected: " + state);
+    }
 }

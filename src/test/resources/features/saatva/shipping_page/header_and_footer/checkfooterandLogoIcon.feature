@@ -14,6 +14,7 @@ Feature: SHIPPING PAGE - HEADER & FOOTER
   @TestCaseId("101062")
   @TestCaseId("101064")
   @TestCaseId("101065")
+  @TestCaseId("102564")
   @TestCaseId("102565")
   Scenario: Check footer and Logo Icon
 

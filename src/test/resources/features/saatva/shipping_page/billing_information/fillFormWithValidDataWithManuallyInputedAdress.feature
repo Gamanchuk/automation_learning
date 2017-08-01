@@ -1,4 +1,4 @@
-@saatva
+@saatva @debug
 
 Feature: SHIPPING PAGE - BILLING INFO
 
@@ -12,12 +12,17 @@ Feature: SHIPPING PAGE - BILLING INFO
   @Issues("MCCAT-6309")
   @TestCaseId("100978")
   @TestCaseId("101015")
+  @TestCaseId("100987")
   Scenario: Test with correct shipping information and fill in all required fields (Address input manually)
 
     Given user types shipping address for "qa user" with phone number
     And unset checkbox "Yes, billing address and shipping address are the same"
     
     And user types manually billing info for "qa user" without email
+    And selects "" state
+    And presses the "Continue" button
+    Then sees "FORM ERRORS" error message with text "Please review all inputs."
+    And selects "CA" state
     And presses the "Continue" button
     And chooses "Use Entered Address"
     Then user should be on "Payment & Review" tab
