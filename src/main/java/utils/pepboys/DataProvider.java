@@ -13,48 +13,6 @@ import java.util.concurrent.ThreadLocalRandom;
 
 @Component
 public class DataProvider {
-    private static String[] items = {
-            "787226",
-            "787233",
-            "785244",
-            "9011450",
-            "8322906",
-            "1231825",
-            "627470",
-            "627487",
-            "627494",
-            "627463",
-            "832661",
-            "9983690",
-            "9046614",
-            "9654183",
-            "9856226",
-            "9983676",
-            "9663165",
-            "9663189",
-            "9046571",
-            "9856240",
-            "47407",
-            "9856507",
-            "46866",
-            "9046557",
-            "800282",
-            "936477",
-            "619277",
-            "619284",
-            "619303",
-            "619310",
-            "9307698",
-            "9655155",
-            "9423853",
-            "9655162",
-            "401582",
-            "617219",
-            "9654826",
-            "186838",
-            "186821",
-            "186845"
-    };
 
     public static BillingUser getUser(String userName) {
         String propsPath = "./profiles/sites/" + Config.SITE_NAME + "/users/" + userName + ".properties";

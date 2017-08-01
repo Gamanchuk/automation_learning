@@ -62,7 +62,6 @@ public class AddressFormComponent extends BaseComponent {
         // Need to send phone number digit by digit
         if (isElementPresent(phoneField, 2)) {
             fillPhone(phone);
-            focusOut(findElement(phoneField));
         }
     }
 

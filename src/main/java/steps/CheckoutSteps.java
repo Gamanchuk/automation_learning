@@ -287,6 +287,14 @@ public class CheckoutSteps {
         CommonFunctions.sleep(500);
     }
 
+
+    @And("^presses the OK, I'll Try Again button$")
+    public void pressesTheOKILlTryAgainButton() {
+        buttonComponent.clickButton();
+        // Experiment. Trying to fix the problem with "Element is no longer attached to DOM"
+        CommonFunctions.sleep(500);
+    }
+
     @And("^chooses \"([^\"]*)\"$")
     public void chooses(String addressType) {
         addressVerificationComponent.chooseAddressType(addressType);
@@ -425,11 +433,11 @@ public class CheckoutSteps {
     @Given("^user makes authorisation for \"([^\"]*)\"$")
     public void userMakesAuthorisationFor(String userName) {
         BillingUser user = DataProvider.getUser(userName);
-        headerComponent.pressSignInButton();
-        assertTrue(signInFormComponent.exists(), "Sign In form component doesn't present");
+
+        userPressesTheSignInButton();
         signInFormComponent.signIn(user.getEmail(), user.getPassword());
         CommonFunctions.attachScreenshot("Set [" + user.getEmail() + "] email and [" + user.getPassword() + "] password");
-        buttonComponent.clickButton();
+        buttonComponent.clickButtonWithSendKeys();
         TestGlobalsManager.setTestGlobal("authorised", true);
     }
 
@@ -478,10 +486,16 @@ public class CheckoutSteps {
 
     @And("^uses \"([^\"]*)\" for payment$")
     public void usesForPayment(String type) {
-        paymentTypesComponent.purchasePayment();
-        CommonFunctions.attachScreenshot("Payment types");
+        this.userChoosesForPayment(type);
         paymentTypesComponent.choicePaymentType(type);
     }
+
+    @Given("^user chooses \"([^\"]*)\" for payment$")
+    public void userChoosesForPayment(String arg0) {
+        paymentTypesComponent.purchasePayment();
+        CommonFunctions.attachScreenshot("Payment types");
+    }
+
 
     @Given("^user types \"([^\"]*)\" into the \"([^\"]*)\" field of \"([^\"]*)\" address form$")
     public void userTypesValueIntoField(String value, String field, String formTitle) {
@@ -631,6 +645,7 @@ public class CheckoutSteps {
     @And("^unset checkbox \"([^\"]*)\"$")
     public void unsetCheckbox(String label) {
         checkboxRowComponent.check(label, false);
+        CommonFunctions.attachScreenshot("CheckBox");
     }
 
     @Given("^user types shipping info for \"([^\"]*)\"$")
@@ -818,13 +833,13 @@ public class CheckoutSteps {
     public void userMakesAuthorisationWithEmailAndPassword(String email, String password) {
         signInFormComponent.signIn(email, password);
         CommonFunctions.attachScreenshot("Set [" + email + "] email and [" + password + "] password");
-        buttonComponent.clickButton();
+        buttonComponent.clickButtonWithSendKeys();
     }
 
     @And("^user presses the signIn button$")
     public void userPressesTheSignInButton() {
         headerComponent.pressSignInButton();
-        assertTrue(signInFormComponent.exists(), "SignIn form component doesn't present");
+        assertTrue(signInFormComponent.exists(), "Sign In form component doesn't present");
     }
 
     @And("^user presses the Forgot Password link$")
@@ -874,6 +889,7 @@ public class CheckoutSteps {
     public void seesErrorTooltipWithText(String error) {
         assertTrue(creditCardFormComponent.hasErrorTooltipWithMessage(error),
                 "Tooltip with message \"" + error + "\" not found");
+        CommonFunctions.attachScreenshot("Tooltip");
     }
 
     @And("^sees modal error with text \"([^\"]*)\"$")
@@ -881,6 +897,19 @@ public class CheckoutSteps {
         assertTrue(modalComponent.isModalOpen(), "Modal error doesn't present on page.");
         assertTrue(modalComponent.hasMessageWithText(text), "Unexpected text was displayed");
         CommonFunctions.attachScreenshot("Error Modal opened");
+    }
+
+    @And("^sees modal with title \"([^\"]*)\"$")
+    public void seesModalWithTitle(String text) {
+        assertTrue(modalComponent.isModalOpen(), "Modal error doesn't present on page.");
+        assertEquals(titleComponent.getTitleText().toLowerCase(), text.toLowerCase());
+        CommonFunctions.attachScreenshot("Error Modal opened");
+    }
+
+    @And("^user close modal$")
+    public void userCloseModal() {
+        assertTrue(modalComponent.isModalOpen(), "Modal error doesn't present on page.");
+        assertTrue(modalComponent.isCloseButtonPresent(), "Modal doesn't have close button.");
     }
 
     @And("^user clicks Terms link$")
@@ -912,6 +941,7 @@ public class CheckoutSteps {
         collapserComponent.setRoot(ModalComponent.getComponentByTitle("Order Summary"));
         collapserComponent.openCollapser();
         assertTrue(new OrderSummaryComponent().isVisible(), "Order Summary in invisible");
+        CommonFunctions.attachScreenshot("Collapser");
     }
 
     @And("^checks Pick Up in Store info$")
@@ -955,7 +985,7 @@ public class CheckoutSteps {
         assertTrue(signInFormComponent.exists(), "Sign In form component doesn't present");
 
         signInFormComponent.fillEmail(user.getEmail());
-        buttonComponent.clickButton();
+        buttonComponent.clickButtonWithSendKeys();
         signInFormComponent.fillPassword(user.getPassword());
         CommonFunctions.attachScreenshot("Checkout as existing user");
 

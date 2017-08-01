@@ -12,6 +12,7 @@ public class PaymentTypesComponent extends BaseComponent {
     public void purchaseWithPayPal() {
         By payPalLink = By.xpath("//a[@data-analytics-name='Paypal']");
         waitForElementVisible(payPalLink);
+        assertTrue(isElementVisible(payPalLink), "Looks like PayPal links is missing.");
         getDriver().findElement(payPalLink).click();
     }
 

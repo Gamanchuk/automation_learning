@@ -40,4 +40,10 @@ public class PayPalLoginPageSteps {
         payPalComponent.confirmationPay();
     }
 
+
+    @And("^user presses Log In PayPal button$")
+    public void userPressesLogInPayPalButton() {
+        payPalComponent.clickLogin();
+    }
+
 }

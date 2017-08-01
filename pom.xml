@@ -662,6 +662,16 @@
             </properties>
         </profile>
 
+        <profile>
+            <id>suite-shoe-paymentPage</id>
+            <properties>
+                <testng.suite>
+                    ${basedir}/src/test/resources/testsuites/shoe/shoe_payment_page.xml
+                </testng.suite>
+                <suite.id>100</suite.id>
+            </properties>
+        </profile>
+
 
         <!--environments-->
         <profile>
