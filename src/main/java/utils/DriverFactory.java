@@ -97,6 +97,7 @@ public class DriverFactory {
 
                     /* Capabilities for timouts */
                     desiredCapabilities.setCapability("webkitResponseTimeout", 50000);
+                    desiredCapabilities.setCapability("sendKeyStrategy", "setValue");
                     desiredCapabilities.setCapability(IOSMobileCapabilityType.LAUNCH_TIMEOUT, 500000);
 
                     /* Capabilities for automatically sinning WebDriverAgentRunner */

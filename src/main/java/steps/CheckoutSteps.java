@@ -941,6 +941,7 @@ public class CheckoutSteps {
         collapserComponent.setRoot(ModalComponent.getComponentByTitle("Order Summary"));
         collapserComponent.openCollapser();
         assertTrue(new OrderSummaryComponent().isVisible(), "Order Summary in invisible");
+        CommonFunctions.attachScreenshot("Collapser");
     }
 
     @And("^checks Pick Up in Store info$")

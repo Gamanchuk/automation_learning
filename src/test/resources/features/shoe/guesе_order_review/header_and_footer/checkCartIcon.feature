@@ -1,6 +1,6 @@
 @shoe
 
-Feature: GUEST - PAYMENT PAGE
+Feature: GUEST - ORDER REVIEW PAGE - HEADER & FOOTER
 
   Background: Add product to card and process to checkout
     Given user adds product to cart from Shoe
@@ -8,10 +8,8 @@ Feature: GUEST - PAYMENT PAGE
     And presses the "Continue" button
     Then user should be on "Payment" tab
 
+  @TestCaseId("16395")
+  Scenario: Check Cart icon
 
-  @TestCaseId("16324")
-  Scenario: Test with correct Amex billing information
-
-    Given uses "american express" card for payment
-    And presses the "Continue" button
-    Then user should be on "Review" tab
+    Given user presses the Shopping Cart icon
+    Then user should be on Shoe cart page

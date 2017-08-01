@@ -17,6 +17,7 @@ public class CreditCardFormComponent extends BaseComponent {
     public void inputPaymentDetails(String name, String number, String expDate, String cvv, String cardholderName) {
         assertTrue(isElementVisible(ccNumber), "Card number field doesn't present on page.");
         // fillField(ccNumber, number);
+        findElement(ccNumber).clear();
         sendKeysOneByOne(ccNumber, number);
 
         // Need sleep
@@ -26,6 +27,7 @@ public class CreditCardFormComponent extends BaseComponent {
 
         if (!name.toLowerCase().equals("qcard")) {
             fillField(exp, expDate);
+            CommonFunctions.sleep(500);
             fillField(csc, cvv);
         }
 
