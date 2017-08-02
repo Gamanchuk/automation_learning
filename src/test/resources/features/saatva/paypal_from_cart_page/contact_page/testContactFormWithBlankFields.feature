@@ -15,6 +15,5 @@ Feature: EXPRESS PAYPAL CHECKOUT - CONTACT PAGE
     And user should be on "Contact" tab
     
     And user types "" into the "Full Name" field
-    And user fills email field with ""
     And presses the "Continue" button
     And sees "FORM ERRORS" error message with text "Please review all inputs."
