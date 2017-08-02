@@ -93,7 +93,7 @@ public class DriverFactory {
                     /* Capabilities for WebDriverAgentRunner (WDAServer) */
                     desiredCapabilities.setCapability(IOSMobileCapabilityType.USE_NEW_WDA, true);
                     desiredCapabilities.setCapability(IOSMobileCapabilityType.WDA_LOCAL_PORT, Integer.parseInt(iproxy));
-                    //desiredCapabilities.setCapability(IOSMobileCapabilityType.SIMPLE_ISVISIBLE_CHECK, true);
+                    desiredCapabilities.setCapability(IOSMobileCapabilityType.SIMPLE_ISVISIBLE_CHECK, true);
 
                     /* Capabilities for timouts */
                     desiredCapabilities.setCapability("webkitResponseTimeout", 50000);
@@ -133,13 +133,14 @@ public class DriverFactory {
 
                 retryCount = 0;
             } catch (Exception e) {
-                retryCount++;
 
                 if (retryCount < maxRetryCount) {
+                    retryCount++;
                     log.info("Looks like we have problem with creating driver. Try restart all servers.");
                     killAppium();
                     quitDriver();
                     getDriver();
+
                 } else {
                     log.info("We cant fix problem with driver. Throw new assertion.");
                     throw new AssertionError("Can't create driver: " + e.getMessage());
