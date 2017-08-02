@@ -1,6 +1,7 @@
 package entities.components;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import utils.CommonFunctions;
 
 import static org.testng.Assert.assertTrue;
@@ -68,12 +69,11 @@ public class SignInFormComponent extends BaseComponent {
 
         //Need sleep because sometimes we catch element longer not attached
         CommonFunctions.sleep(5000);
-
-        waitForDocumentReady();
+        WebElement el = getDriver().findElement(field);
         assertTrue(isElementVisible(field), "Field " + field.toString() + " doesn't present on page.");
         CommonFunctions.sleep(500);
-        getDriver().findElement(field).clear();
+        el.clear();
         CommonFunctions.sleep(500);
-        getDriver().findElement(field).sendKeys(value);
+        el.sendKeys(value);
     }
 }

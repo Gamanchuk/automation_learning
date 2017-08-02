@@ -1,11 +1,12 @@
-@shoe
+@shoe @debug
 
-Feature: GUEST - SHIPPING PAGE
+Feature: EXISTING ACCOUNT - SHIPPING PAGE
 
   Background: Add product to card and process to checkout
     Given user adds product to cart from Shoe
+    And user makes authorisation for "qa user"
 
-  @TestCaseId("16273")
+  @TestCaseId("16740")
   Scenario: Breadcrumb links redirect user to correct page
 
     Given user should be on "Shipping" tab
