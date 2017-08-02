@@ -67,6 +67,7 @@ public class CreditCardFormComponent extends BaseComponent {
         WebElement element = findElement(field);
         focusOut(element);
         element.clear();
+        CommonFunctions.sleep(200);
         element.sendKeys(value);
 //        focusOut(element);
     }
