@@ -8,7 +8,7 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
         glue = "steps",
         tags = {"@shoe", "~@Ignored"}
 )
-class SHOESignInPageCukesRunnerTest extends AbstractTestNGCucumberTests {
+class SHOEGuestSignInPageCukesRunnerTest extends AbstractTestNGCucumberTests {
 
 }
 

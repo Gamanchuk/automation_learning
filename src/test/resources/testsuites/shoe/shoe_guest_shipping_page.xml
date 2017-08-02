@@ -5,7 +5,7 @@
 <suite name="SHOE GUEST - SHIPPING PAGE">
     <test name="Tests for shipping page">
         <classes>
-            <class name="tests.shoe.SHOEShippingPageCukesRunnerTest"/>
+            <class name="tests.shoe.SHOEGuestShippingPageCukesRunnerTest"/>
         </classes>
     </test>
 </suite> <!-- Suite -->
