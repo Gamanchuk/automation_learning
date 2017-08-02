@@ -1,6 +1,6 @@
 @shoe
 
-Feature: PAYMENT & REVIEW - REVIEW INFO
+Feature: GUEST - ORDER REVIEW PAGE
 
   Background: Add product to card and process to checkout
     Given user adds product to cart from Shoe
@@ -12,7 +12,6 @@ Feature: PAYMENT & REVIEW - REVIEW INFO
     Then user should be on "Review" tab
 
   @TestCaseId("16368")
-
   Scenario: Change shipping address
 
     Given user clicks arrow for "Shipping Address"

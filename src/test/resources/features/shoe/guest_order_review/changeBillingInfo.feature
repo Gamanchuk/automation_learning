@@ -13,7 +13,7 @@ Feature: GUEST - ORDER REVIEW PAGE
     And presses the "Continue" button
     Then user should be on "Review" tab
 
-  @TestCaseId("16368")
+  @TestCaseId("16367")
   Scenario: Change billing address
 
     Given user clicks arrow for "Billing Address"
