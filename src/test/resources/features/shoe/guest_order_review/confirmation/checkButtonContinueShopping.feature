@@ -13,9 +13,9 @@ Feature: GUEST - ORDER REVIEW PAGE - THANK YOU PAGE
     And presses the "Place Order" button
     Then user should be on thank you page
 
-
-  @TestCaseId("16375")
+  @TestCaseId("16372")
   @TestCaseId("16374")
+  @TestCaseId("16375")
   Scenario: Check button Continue Shopping
 
     Given presses the "Continue Shopping" button
