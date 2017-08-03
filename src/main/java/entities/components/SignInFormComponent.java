@@ -27,6 +27,7 @@ public class SignInFormComponent extends BaseComponent {
     public void signIn(String email, String password) {
 
         fillEmail(email);
+        CommonFunctions.sleep(1000);
         fillPassword(password);
 
         CommonFunctions.attachScreenshot("Login page");
@@ -75,5 +76,6 @@ public class SignInFormComponent extends BaseComponent {
         el.clear();
         CommonFunctions.sleep(500);
         el.sendKeys(value);
+        focusOut(el);
     }
 }
