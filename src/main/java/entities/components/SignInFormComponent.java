@@ -1,6 +1,7 @@
 package entities.components;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import utils.CommonFunctions;
 
 import static org.testng.Assert.assertTrue;
@@ -26,7 +27,9 @@ public class SignInFormComponent extends BaseComponent {
     public void signIn(String email, String password) {
 
         fillEmail(email);
+        CommonFunctions.sleep(1000);
         fillPassword(password);
+        CommonFunctions.sleep(1000);
 
         CommonFunctions.attachScreenshot("Login page");
     }
@@ -67,13 +70,21 @@ public class SignInFormComponent extends BaseComponent {
     private void fillField(By field, String value) {
 
         //Need sleep because sometimes we catch element longer not attached
-        CommonFunctions.sleep(5000);
+//        CommonFunctions.sleep(1000);
+//        WebElement el = getDriver().findElement(field);
+//        assertTrue(isElementVisible(field), "Field " + field.toString() + " doesn't present on page.");
+//        CommonFunctions.sleep(500);
+//        el.clear();
+//        CommonFunctions.sleep(500);
+//        el.sendKeys(value);
+//        focusOut(el);
+//
 
-        waitForDocumentReady();
-        assertTrue(isElementVisible(field), "Field " + field.toString() + " doesn't present on page.");
+        WebElement element = findElement(field);
+        scroll(element);
         CommonFunctions.sleep(500);
-        getDriver().findElement(field).clear();
-        CommonFunctions.sleep(500);
-        getDriver().findElement(field).sendKeys(value);
+        element.clear();
+        CommonFunctions.sleep(1000);
+        element.sendKeys(value);
     }
 }

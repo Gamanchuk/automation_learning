@@ -27,8 +27,9 @@ public class CreditCardFormComponent extends BaseComponent {
 
         if (!name.toLowerCase().equals("qcard")) {
             fillField(exp, expDate);
-            CommonFunctions.sleep(500);
+            CommonFunctions.sleep(1000);
             fillField(csc, cvv);
+            CommonFunctions.sleep(1000);
         }
 
         // Element must be displayed if you pay as registered user
@@ -69,7 +70,7 @@ public class CreditCardFormComponent extends BaseComponent {
         element.clear();
         CommonFunctions.sleep(200);
         element.sendKeys(value);
-//        focusOut(element);
+        //focusOut(element);
     }
 
 

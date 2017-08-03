@@ -19,7 +19,7 @@ Feature: GUEST - ORDER REVIEW PAGE
     And user types manually shipping info for "qa user2"
     And presses the "Continue" button
     And chooses "Use Entered Address"
-    Then user should be on "Payment" tab
+    Then user should be on "Review" tab
 
 
 

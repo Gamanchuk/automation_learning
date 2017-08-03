@@ -104,6 +104,7 @@ public class AddressFormComponent extends BaseComponent {
     public void inputValueIntoField(String value, String field) {
         By fieldEl = getFieldByName(field);
         fillField(fieldEl, value);
+        CommonFunctions.sleep(1000);
         focusOut(findElement(fieldEl));
     }
 
@@ -156,14 +157,6 @@ public class AddressFormComponent extends BaseComponent {
         element.clear();
         CommonFunctions.sleep(1000);
         element.sendKeys(value);
-
-
-//        CommonFunctions.sleep(1000);
-//        findElement(field).clear();
-//        waitForAjax();
-//        findElement(field).sendKeys(value);
-
-
     }
 
     public void selectTitle(String value) {

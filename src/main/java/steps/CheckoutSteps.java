@@ -437,7 +437,7 @@ public class CheckoutSteps {
         userPressesTheSignInButton();
         signInFormComponent.signIn(user.getEmail(), user.getPassword());
         CommonFunctions.attachScreenshot("Set [" + user.getEmail() + "] email and [" + user.getPassword() + "] password");
-        buttonComponent.clickButtonWithSendKeys();
+        buttonComponent.clickButton();
         TestGlobalsManager.setTestGlobal("authorised", true);
     }
 
@@ -672,6 +672,29 @@ public class CheckoutSteps {
         fillShippingAddress(userName, true, false, false);
     }
 
+    @Given("^user types shipping info for \"([^\"]*)\" without email$")
+    public void userTypesShippingInfoForWithoutEmail(String userName) {
+        String checkBox = "Yes, shipping address and billing address are the same";
+
+        if (checkboxRowComponent.exists(checkBox, 5)) {
+            checkboxRowComponent.check(checkBox, false);
+        }
+
+        fillShippingInfo(userName, true, false, true);
+    }
+
+
+    @Given("^user types manually shipping info for \"([^\"]*)\" without email$")
+    public void userTypesManuallyShippingInfoForWithoutEmail(String userName) {
+        String checkBox = "Yes, shipping address and billing address are the same";
+
+        if (checkboxRowComponent.exists(checkBox, 5)) {
+            checkboxRowComponent.check(checkBox, false);
+        }
+
+        fillShippingInfo(userName, false, false, true);
+    }
+
     @And("^user types domestics shipping info for \"([^\"]*)\" without phone$")
     public void userTypesDomesticsShippingInfoFor(String userName) {
         fillShippingInfo(userName, true);
@@ -725,7 +748,7 @@ public class CheckoutSteps {
         CommonFunctions.attachScreenshot("Shipping info");
     }
 
-    private void fillShippingInfo(String userName, boolean autoFill, boolean email, boolean password) {
+    private void fillShippingInfo(String userName, boolean autoFill, boolean email, boolean phone) {
         BillingUser user = DataProvider.getUser(userName);
         addressFormComponent.setRoot(BaseComponent.getContainerByTitle("Shipping Address"));
         fillAddressForm(user, autoFill, false);
