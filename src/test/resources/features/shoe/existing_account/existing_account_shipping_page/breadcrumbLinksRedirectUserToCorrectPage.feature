@@ -1,4 +1,4 @@
-@shoe @debug
+@shoe
 
 Feature: EXISTING ACCOUNT - SHIPPING PAGE
 

@@ -71,6 +71,7 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
         if (Config.PROJECT_TRACKING) {
             setTestResults(TestRailStatus.PASSED, "", "");
         }
+
         DriverFactory.killAppium();
         DriverFactory.quitDriver();
     }

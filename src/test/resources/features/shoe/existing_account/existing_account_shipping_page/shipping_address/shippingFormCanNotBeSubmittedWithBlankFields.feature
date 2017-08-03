@@ -1,4 +1,4 @@
-@shoe @debug
+@shoe
 
 Feature: EXISTING ACCOUNT - SHIPPING PAGE - SHIPPING INFO
 
@@ -7,11 +7,11 @@ Feature: EXISTING ACCOUNT - SHIPPING PAGE - SHIPPING INFO
     And user makes authorisation for "qa user"
     Then user should be on "Shipping" tab
 
-  @TestCaseId("")
+  @TestCaseId("16748")
   Scenario: Test with correct shipping information and do not fill in all required fields
 
     Given unset checkbox "Save this address to my address book"
     And presses the "Continue" button
-    Then user should stay at "Address" tab
+    Then user should stay at "Shipping" tab
     And sees "FORM ERRORS" error message with text "Please review all inputs."
 
