@@ -437,7 +437,7 @@ public class CheckoutSteps {
         userPressesTheSignInButton();
         signInFormComponent.signIn(user.getEmail(), user.getPassword());
         CommonFunctions.attachScreenshot("Set [" + user.getEmail() + "] email and [" + user.getPassword() + "] password");
-        buttonComponent.clickButtonWithSendKeys();
+        buttonComponent.clickButton();
         TestGlobalsManager.setTestGlobal("authorised", true);
     }
 

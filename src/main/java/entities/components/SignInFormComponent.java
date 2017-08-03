@@ -29,6 +29,7 @@ public class SignInFormComponent extends BaseComponent {
         fillEmail(email);
         CommonFunctions.sleep(1000);
         fillPassword(password);
+        CommonFunctions.sleep(1000);
 
         CommonFunctions.attachScreenshot("Login page");
     }
@@ -69,13 +70,21 @@ public class SignInFormComponent extends BaseComponent {
     private void fillField(By field, String value) {
 
         //Need sleep because sometimes we catch element longer not attached
-        CommonFunctions.sleep(5000);
-        WebElement el = getDriver().findElement(field);
-        assertTrue(isElementVisible(field), "Field " + field.toString() + " doesn't present on page.");
+//        CommonFunctions.sleep(1000);
+//        WebElement el = getDriver().findElement(field);
+//        assertTrue(isElementVisible(field), "Field " + field.toString() + " doesn't present on page.");
+//        CommonFunctions.sleep(500);
+//        el.clear();
+//        CommonFunctions.sleep(500);
+//        el.sendKeys(value);
+//        focusOut(el);
+//
+
+        WebElement element = findElement(field);
+        scroll(element);
         CommonFunctions.sleep(500);
-        el.clear();
-        CommonFunctions.sleep(500);
-        el.sendKeys(value);
-        focusOut(el);
+        element.clear();
+        CommonFunctions.sleep(1000);
+        element.sendKeys(value);
     }
 }
