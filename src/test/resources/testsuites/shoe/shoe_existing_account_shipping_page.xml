@@ -3,9 +3,9 @@
 
 
 <suite name="SHOE EXISTING ACCOUNT - SHIPPING PAGE">
-    <test name="Tests for existing account payment page">
+    <test name="Tests for existing account shipping page">
         <classes>
-            <class name="tests.shoe.SHOEExistingAccountPaymentPageCukesRunnerTest"/>
+            <class name="tests.shoe.SHOEExistingAccountShippingPageCukesRunnerTest"/>
         </classes>
     </test>
 </suite> <!-- Suite -->
