@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+
+<suite name="SHOE EXISTING ACCOUNT - PAYMENT PAGE">
+    <test name="Tests for existing account payment page">
+        <classes>
+            <class name="tests.shoe.SHOEExistingAccountPaymentPageCukesRunnerTest"/>
+        </classes>
+    </test>
+</suite> <!-- Suite -->
