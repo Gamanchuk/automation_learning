@@ -1,4 +1,4 @@
-@shoe
+@shoe @Ignored
 
 Feature: EXISTING ACCOUNT - PAYMENT PAGE - GIFT CARD
 
@@ -10,15 +10,14 @@ Feature: EXISTING ACCOUNT - PAYMENT PAGE - GIFT CARD
     And unset checkbox "Save this address to my address book"
     And presses the "Continue" button
     Then user should be on "Payment" tab
-    And uses "visa" card for payment
+    And uses saved "visa" card for payment
 
 
   @TestCaseId("16826")
   Scenario: Test field "Gift Card" when user enter Invalid Gift Card
 
-    Given uses "mastercard" card for payment
 
-    And user types gift card with ":?%:%:%;№%;№)(*" number and "0285" pin code
+    Given user types gift card with ":?%:%:%;№%;№)(*" number and "0285" pin code
     And presses the "Apply" button
     Then sees "ERROR" error message with text "Your gift card cannot be validated, missing or invaild account number/pin"
     And presses the OK, I'll Try Again button

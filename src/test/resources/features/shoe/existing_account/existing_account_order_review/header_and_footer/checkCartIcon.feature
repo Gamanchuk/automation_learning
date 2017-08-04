@@ -1,6 +1,6 @@
 @shoe
 
-Feature: EXISTING ACCOUNT - PAYMENT PAGE
+Feature: EXISTING ACCOUNT - ORDER REVIEW PAGE - HEADER & FOOTER
 
   Background: Add product to card and process to checkout
     Given user adds product to cart from Shoe
@@ -8,12 +8,13 @@ Feature: EXISTING ACCOUNT - PAYMENT PAGE
     Then user should be on "Shipping" tab
     And presses the "Continue" button
     Then user should be on "Payment" tab
-    And selects "Enter a New Card"
-
-
-  @TestCaseId("16796")
-  Scenario: Test with correct Visa billing information
-
-    Given uses "visa" card for payment
+    And uses saved "visa" card for payment
+    And user fills "CVV" field from "visa" card
     And presses the "Continue" button
     Then user should be on "Review" tab
+
+  @TestCaseId("16836")
+  Scenario: Check Cart icon
+
+    Given user presses the Shopping Cart icon
+    Then user should be on Shoe cart page
