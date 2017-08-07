@@ -11,6 +11,7 @@ public class CollapserComponent extends BaseComponent {
     public void openCollapser() {
 
         WebElement collapser = findElement(By.cssSelector("a.collapser-link"));
+        scrollToElement(collapser);
 
         if (collapser.getAttribute("class").contains("collapsed")) {
             scroll(collapser);

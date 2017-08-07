@@ -2,10 +2,10 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 
-<suite name="SHOE GUEST - SHIPPING PAGE">
-    <test name="Tests for shipping page">
+<suite name="SHOE GUEST - REVIEW PAGE">
+    <test name="Tests for review page">
         <classes>
-            <class name="tests.shoe.SHOEShippingPageCukesRunnerTest"/>
+            <class name="tests.shoe.SHOEGuestReviewPageCukesRunnerTest"/>
         </classes>
     </test>
 </suite> <!-- Suite -->

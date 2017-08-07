@@ -4,11 +4,11 @@ import cucumber.api.CucumberOptions;
 import cucumber.api.testng.AbstractTestNGCucumberTests;
 
 @CucumberOptions(
-        features = "src/test/resources/features/shoe/sign_in_page/",
+        features = "src/test/resources/features/shoe/existing_account/existing_account_shipping_page/",
         glue = "steps",
         tags = {"@shoe", "~@Ignored"}
 )
-class SHOESignInPageCukesRunnerTest extends AbstractTestNGCucumberTests {
+class SHOEExistingAccountShippingPageCukesRunnerTest extends AbstractTestNGCucumberTests {
 
 }
 

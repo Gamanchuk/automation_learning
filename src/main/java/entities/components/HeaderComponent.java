@@ -21,6 +21,7 @@ public class HeaderComponent extends BaseComponent {
     }
 
     public boolean signinExists() {
-        return isElementClickable(By.xpath(HEADER_PATH + "//button[text()='Sign In']"));
+        return isElementVisible(By.xpath(HEADER_PATH + "//button[text()='Sign In']"))
+                || isElementClickable(By.xpath(HEADER_PATH + "//button[text()='Sign In']"));
     }
 }

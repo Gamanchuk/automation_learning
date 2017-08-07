@@ -6,7 +6,7 @@ import utils.Config;
 
 public class PepBoysCheckoutPage extends BasePage {
     public void waitForPepBoysPage() {
-        waitForElementVisible(By.xpath("//*[contains(text(), 'The Pep Boys')]"));
+        waitForElementVisible(By.xpath("//*[contains(text(), 'The Pep Boys')]"), 10);
     }
 
     public void checkURL() {

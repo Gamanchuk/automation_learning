@@ -653,10 +653,58 @@
         </profile>
 
         <profile>
-            <id>suite-shoe-shippingPage</id>
+            <id>suite-shoe-guestShippingPage</id>
             <properties>
                 <testng.suite>
-                    ${basedir}/src/test/resources/testsuites/shoe/shoe_shipping_page.xml
+                    ${basedir}/src/test/resources/testsuites/shoe/shoe_guest_shipping_page.xml
+                </testng.suite>
+                <suite.id>100</suite.id>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>suite-shoe-guestPaymentPage</id>
+            <properties>
+                <testng.suite>
+                    ${basedir}/src/test/resources/testsuites/shoe/shoe_guest_payment_page.xml
+                </testng.suite>
+                <suite.id>100</suite.id>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>suite-shoe-guestReviewPage</id>
+            <properties>
+                <testng.suite>
+                    ${basedir}/src/test/resources/testsuites/shoe/shoe_guest_review_page.xml
+                </testng.suite>
+                <suite.id>100</suite.id>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>suite-shoe-existingAccountShippingPage</id>
+            <properties>
+                <testng.suite>
+                    ${basedir}/src/test/resources/testsuites/shoe/shoe_existing_account_shipping_page.xml
+                </testng.suite>
+                <suite.id>100</suite.id>
+            </properties>
+        </profile>
+        <profile>
+            <id>suite-shoe-existingAccountPaymentPage</id>
+            <properties>
+                <testng.suite>
+                    ${basedir}/src/test/resources/testsuites/shoe/shoe_existing_account_payment_page.xml
+                </testng.suite>
+                <suite.id>100</suite.id>
+            </properties>
+        </profile>
+        <profile>
+            <id>suite-shoe-existingAccountOrderPage</id>
+            <properties>
+                <testng.suite>
+                    ${basedir}/src/test/resources/testsuites/shoe/shoe_existing_account_order_page.xml
                 </testng.suite>
                 <suite.id>100</suite.id>
             </properties>

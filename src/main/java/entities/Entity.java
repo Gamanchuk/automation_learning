@@ -259,15 +259,11 @@ public abstract class Entity {
         scroll(el);
         char[] arrayChar = str.toCharArray();
         for (char ch : arrayChar) {
-            CommonFunctions.sleep(200);
+            CommonFunctions.sleep(300);
             el.sendKeys(ch + "");
         }
-
-//        if(el.getAttribute("value").length() != arrayChar.length){
-//            for (char ch : arrayChar) {
-//                el.sendKeys(ch + "");
-//            }
-//        }
+        CommonFunctions.sleep(500);
+        el.click();
     }
 
     public void scrollToElement(WebElement el) {
