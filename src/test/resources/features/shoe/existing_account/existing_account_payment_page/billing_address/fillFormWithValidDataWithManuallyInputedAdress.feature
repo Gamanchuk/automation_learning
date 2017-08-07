@@ -6,16 +6,14 @@ Feature: EXISTING ACCOUNT - PAYMENT PAGE - BILLING ADDRESS
     Given user adds product to cart from Shoe
     And user makes authorisation for "qa user"
     Then user should be on "Shipping" tab
-    And user types shipping info for "qa user" without email
-    And unset checkbox "Save this address to my address book"
     And presses the "Continue" button
     Then user should be on "Payment" tab
-    And uses "visa" card for payment
+    And uses saved "visa" card for payment
 
   @TestCaseId("16811")
   Scenario: Test with correct billing information and fill in all required fields (Address inputted manually)
 
-    Given unset checkbox "Yes, billing address and shipping address are the same"
+    Given selects "Enter a New Address" for billing address
     And user types manually billing info for "qa user" without email
     And presses the "Continue" button
     Then user should be on "Payment" tab

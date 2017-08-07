@@ -381,7 +381,7 @@ public class CheckoutSteps {
         //Select card uses 4 last symbols
         //radioListComponent.setRoot(null);
         assertTrue(savedOptionPickerComponent.exists(), "Looks like drop-down with saved cards doesn't present");
-        savedOptionPickerComponent.selectCard(card.getFourLastNumbers());
+        savedOptionPickerComponent.select(card.getFourLastNumbers());
 
         if (!card.getName().equals("qCard")) {
             creditCardFormComponent.inputValueIntoField(card.getCvv(), "CVV");
@@ -402,7 +402,7 @@ public class CheckoutSteps {
         String project = Config.SITE_NAME;
 
 
-        if (project.equals("pepboys-stage") || project.equals("pepboys-prod") || project.equals("qvc-prod") || project.equals("qvc-stage")) {
+        if (project.equals("pepboys-prod") || project.equals("qvc-prod") || project.equals("shoe-prod")) {
 
             String orderNumber = thankYouPage.getOrder();
 
@@ -443,6 +443,13 @@ public class CheckoutSteps {
 
     @And("^applies billing info for address \"([^\"]*)\"$")
     public void appliesBillingInfo(String address) {
+
+        String checkBox = "Yes, billing address and shipping address are the same";
+
+        if (checkboxRowComponent.exists(checkBox, 5)) {
+            checkboxRowComponent.check(checkBox, false);
+        }
+
         assertTrue(radioListComponent.exists(), "Billing Address Drop-Down doesn't exists");
         radioListComponent.setRoot(BaseComponent.getContainerByTitle("Billing Address"));
         assertTrue(radioListComponent.select(address), "'" + address + "' doesn't present in list");
@@ -459,8 +466,11 @@ public class CheckoutSteps {
 
     @And("^applies shipping info for address \"([^\"]*)\"$")
     public void appliesShippingInfoForAddress(String address) {
-        //assertTrue(radioListComponent.exists(), "Billing Address Drop-Down doesn't exists");
-        checkboxRowComponent.check("Yes, shipping address and billing address are the same", false);
+        String checkBox = "Yes, shipping address and billing address are the same";
+
+        if (checkboxRowComponent.exists(checkBox, 5)) {
+            checkboxRowComponent.check(checkBox, false);
+        }
         radioListComponent.setRoot(BaseComponent.getContainerByTitle("Shipping Address"));
         assertTrue(radioListComponent.select(address), "'" + address + "' doesn't present in list");
         CommonFunctions.attachScreenshot("Shipping info");
@@ -476,6 +486,11 @@ public class CheckoutSteps {
     @And("^selects \"Enter a New Address\" for shipping address$")
     public void entersNewShippingAddress() {
         appliesShippingInfoForAddress("Enter a New Address");
+    }
+
+    @And("^selects \"Enter a New Address\" for billing address$")
+    public void selectsForBillingAddress() {
+        appliesBillingInfo("Enter a New Address");
     }
 
     @And("^uses PayPal for payment$")
@@ -1047,7 +1062,7 @@ public class CheckoutSteps {
 
     @And("^selects \"Enter a New Card\"$")
     public void selectsEnterANewCard() {
-        savedOptionPickerComponent.selectCard("Enter a New Card");
+        savedOptionPickerComponent.select("Enter a New Card");
     }
 
     @And("^user selects \"([^\"]*)\" Payment Option$")
@@ -1101,4 +1116,6 @@ public class CheckoutSteps {
     public void userTypesManuallyShippingInfoForWithPhoneNumber(String userName) {
         fillShippingAddress(userName, false, false, true);
     }
+
+
 }

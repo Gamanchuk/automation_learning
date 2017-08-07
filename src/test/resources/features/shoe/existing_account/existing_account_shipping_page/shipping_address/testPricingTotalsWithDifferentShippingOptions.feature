@@ -6,8 +6,6 @@ Feature: EXISTING ACCOUNT - SHIPPING PAGE - SHIPPING INFO
     Given user adds product to cart from Shoe
     And user makes authorisation for "qa user"
     Then user should be on "Shipping" tab
-    And user types shipping info for "qa user" without email
-    Then unset checkbox "Save this address to my address book"
 
   @TestCaseId("16760")
   Scenario: Test Pricing Totals with different shipping options
@@ -15,7 +13,8 @@ Feature: EXISTING ACCOUNT - SHIPPING PAGE - SHIPPING INFO
     Given chooses "4-7 Business Days" shipping method
     And presses the "Continue" button
     And user should be on "Payment" tab
-    And uses "visa" card for payment
+    And uses saved "visa" card for payment
+    And user fills "CVV" field from "visa" card
     And presses the "Continue" button
     Then user should be on "Review" tab
     And user checks "4-7 Business Days" shipping method

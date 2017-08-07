@@ -1,6 +1,6 @@
 @shoe
 
-Feature: EXISTING ACCOUNT - PAYMENT PAGE - BILLING ADDRESS
+Feature: EXISTING ACCOUNT - ORDER REVIEW PAGE
 
   Background: Add product to card and process to checkout
     Given user adds product to cart from Shoe
@@ -9,14 +9,10 @@ Feature: EXISTING ACCOUNT - PAYMENT PAGE - BILLING ADDRESS
     And presses the "Continue" button
     Then user should be on "Payment" tab
     And uses saved "visa" card for payment
-
-  @TestCaseId("16812")
-  @TestCaseId("16810")
-  Scenario: Test with correct billing information and fill in all required fields
-
-    Given selects "Enter a New Address" for billing address
-    And user types billing info for "qa user" without email
     And presses the "Continue" button
-    Then user should be on "Review" tab
 
 
+  @TestCaseId("16831")
+  Scenario: Order summary has functionality to expand and collapse
+    Given user should be on "Review" tab
+    Then user can expand and collapse Order summary
