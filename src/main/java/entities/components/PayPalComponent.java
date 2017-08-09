@@ -9,19 +9,42 @@ import static org.testng.Assert.assertTrue;
 
 public class PayPalComponent extends BaseComponent {
 
-    private By payPalEmail = By.xpath("//input[@id='email']");
-    private By payPalPassword = By.xpath("//input[@id='password']");
+    private By email = By.id("email");
+    private By password = By.id("password");
 
-    public void signIn(String email, String password) {
+    /**
+     * Function to go to the sign in page.
+     */
+    public void clickLogin() {
+        String frame = "automation-frame";
+        By login = By.xpath("//a[text()='Log In']");
+        boolean iframe = isIframeExist(frame);
 
-        fillPayPalEmail(email);
-        fillPayPalPassword(password);
+        if (iframe) {
+            assertTrue(isIframeExist(frame), "PayPal iframe doesn't exist.");
+            getDriver().switchTo().frame("automation-frame");
+        } else {
 
-        CommonFunctions.attachScreenshot("Login page");
+            assertTrue(isElementVisible(login), "PayPal login button doesn't present on page.");
+            assertTrue(isElementClickable(login), "PayPal login button doesn't present on page.");
+
+            getDriver().findElement(login).click();
+        }
+
+        if (iframe) {
+            getDriver().switchTo().defaultContent();
+        }
     }
 
+    /**
+     * Function for PayPal sing in.
+     *
+     * @param user
+     */
     public void doLogin(BillingUser user) {
 
+        // Sometimes PayPay load old site version
+        // Old site version work without iframe
         boolean isNewPayPal = isIframeExist("injectedUl");
         By logInButton = isNewPayPal ? By.id("btnLogin") : By.id("login");
 
@@ -30,19 +53,18 @@ public class PayPalComponent extends BaseComponent {
         }
 
         assertTrue(isElementVisible(logInButton) && isElementClickable(logInButton),
-                "PayPal Login button doesn't present on page or not clickable.");
+                "PayPal Login button doesn't present on page.");
 
-        WebElement emailField = getDriver().findElement(By.id("email"));
-        emailField.clear();
-        emailField.sendKeys(user.getPaypalEmail());
+        fillField(email, user.getPaypalEmail());
+        fillField(password, user.getPaypalPassword());
 
-        WebElement passwordField = getDriver().findElement(By.id("password"));
-        passwordField.clear();
-        passwordField.sendKeys(user.getPaypalPassword());
+        // Disable focus from password field
+        // Sometimes if we don't change focus get error 'Incorrect password'
+        findElement(email).click();
 
-        emailField.click();
-
+        // Attache screenshot with filled data
         CommonFunctions.attachScreenshot("Login PayPal Page");
+
         getDriver().findElement(logInButton).click();
 
         if (isNewPayPal) {
@@ -55,6 +77,9 @@ public class PayPalComponent extends BaseComponent {
         CommonFunctions.attachScreenshot("Login PayPal Page after SignIn");
     }
 
+    /**
+     * Function for confirmation pay after sign in.
+     */
     public void confirmationPay() {
 
         if (isElementVisible(By.id("confirmButtonTop"))) {
@@ -66,44 +91,16 @@ public class PayPalComponent extends BaseComponent {
 
     }
 
-    public void clickLogin() {
-        CommonFunctions.sleep(20000);
-        By login = By.xpath("//a[contains(@class, 'btn') and text()='Log In']");
-        assertTrue(isElementClickable(login), "PayPal login button doesn't present on page.");
-        getDriver().findElement(login).click();
-    }
-
+    /**
+     * Log out from PayPal
+     */
     public void logOut() {
         getDriver().navigate().to("https://sandbox.paypal.com/myaccount/logout");
     }
 
-    public boolean existsPayPalEmail() {
-        return isElementVisible(payPalEmail);
-    }
-
-    public boolean existsPayPalPassword() {
-        return isElementVisible(payPalPassword);
-    }
-
-    private void fillPayPalEmail(String value) {
-        fillField(payPalEmail, value);
-    }
-
-    private void fillPayPalPassword(String value) {
-        fillField(payPalPassword, value);
-    }
-
     private void fillField(By field, String value) {
-        //Need sleep because sometimes we catch element longer not attached
-        CommonFunctions.sleep(5000);
-
-        waitForDocumentReady();
-        assertTrue(isElementVisible(field), "Field " + field.toString() + " doesn't present on page.");
-        CommonFunctions.sleep(500);
-        getDriver().findElement(field).clear();
-        CommonFunctions.sleep(500);
-        getDriver().findElement(field).sendKeys(value);
+        WebElement emailField = getDriver().findElement(field);
+        emailField.clear();
+        emailField.sendKeys(value);
     }
-
-
 }

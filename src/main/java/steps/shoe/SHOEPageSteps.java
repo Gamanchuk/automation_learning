@@ -20,7 +20,7 @@ public class SHOEPageSteps extends BaseSteps {
 
 
     @Given("^user adds product to cart from Shoe")
-    public void userAddsToCartProductFromSaatva() {
+    public void userAddsToCartProductFromShoe() {
         this.addProduct();
         CommonFunctions.attachScreenshot("Cart with product");
 
@@ -28,6 +28,30 @@ public class SHOEPageSteps extends BaseSteps {
         assertTrue(shoeCheckoutPage.isPage(), "Looks like Shoe checkout page was not opened.");
         shoeCheckoutPage.processToCheckout();
         waitForSignIn();
+    }
+
+    @Given("^user adds product to cart with PayPal checkout from Shoe$")
+    public void userAddsProductToCartWithPayPalCheckoutFromShoe() {
+        this.userAddsToCartProductFromShoe();
+        shoeCartPage.navigate();
+        this.userShouldBeOnCartPage();
+        shoeCartPage.processToPayPal();
+    }
+
+    @Given("^user adds product to cart with Pick up in store from Shoe$")
+    public void userAddsProductToCartWithPickUpInStoreFromShoe() {
+        this.addProduct("womens-converse-chuck-taylor-shoreline/white/78494.scp");
+        CommonFunctions.attachScreenshot("Cart with product");
+
+        shoeCartPage.processToShoeCheckout();
+        assertTrue(shoeCheckoutPage.isPage(), "Looks like Shoe checkout page was not opened.");
+        shoeCheckoutPage.processToCheckout();
+        waitForSignIn();
+    }
+
+    @Then("^user should be on Shoe Forgot Password page$")
+    public void userShouldBeOnShoeForgotPasswordPage() {
+        assertTrue(shoeForgotPasswordPage.isPage(), "Looks like Forgot Password page was not opened.");
     }
 
     @Given("^user adds products to cart \"([^\"]*)\" from Shoe")
@@ -53,11 +77,7 @@ public class SHOEPageSteps extends BaseSteps {
         CommonFunctions.attachScreenshot("Main page opened");
     }
 
-
-    private void addProduct() {
-
-        this.openProduct();
-
+    private void addToBag() {
         shoeProductPage.addToCart();
         shoeModalCart.switchToFrame();
 
@@ -80,14 +100,23 @@ public class SHOEPageSteps extends BaseSteps {
         assertTrue(shoeCartPage.isPage(), "Bag modal window doesn't present.");
     }
 
-    private void openProduct() {
+    private void addProduct() {
+        this.openProduct();
+        this.addToBag();
+    }
 
+    private void addProduct(String url) {
+        this.openProduct(url);
+        this.addToBag();
+    }
+
+    private void openProduct() {
         shoeProductPage.openPage(DataProvider.getRandomItem());
         CommonFunctions.attachScreenshot("Product Page");
     }
 
-    @Then("^user should be on Shoe Forgot Password page$")
-    public void userShouldBeOnShoeForgotPasswordPage() {
-        assertTrue(shoeForgotPasswordPage.isPage(), "Looks like Forgot Password page was not opened.");
+    private void openProduct(String url) {
+        shoeProductPage.openPage(url);
+        CommonFunctions.attachScreenshot("Product Page");
     }
 }

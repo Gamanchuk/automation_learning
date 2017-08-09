@@ -8,7 +8,8 @@ public class EmailComponent extends BaseComponent {
 
     // private By emailDisplay = By.cssSelector("div.email-display");
     private By emailDisplayValue = By.cssSelector("span.email-display-value");
-    private By emailField = By.xpath("//input[@id='billing-email' or @id='shipping-email']");
+    //private By emailField = By.xpath("//input[@id='billing-email' or @id='shipping-email']");
+    private By emailField = By.cssSelector(".email-input input");
 
     public void fillEmailField(String email) {
         WebElement emailEl = findElement(emailField);
