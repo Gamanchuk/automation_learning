@@ -9,7 +9,7 @@ Feature: EXISTING ACCOUNT - SHIPPING PAGE - PICK UP IN STORE
 
 
   @TestCaseId("16772")
-  Scenario: Place order that must be Pick up in store as guest
+  Scenario: Choose store
 
     Given user navigates to "Pick up in Store" tab
 
