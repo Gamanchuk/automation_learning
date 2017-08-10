@@ -3,6 +3,7 @@ package entities.pages.shoe;
 
 import entities.pages.BasePage;
 import org.openqa.selenium.By;
+import utils.CommonFunctions;
 import utils.Config;
 
 public class SHOECheckoutPage extends BasePage {
@@ -16,6 +17,9 @@ public class SHOECheckoutPage extends BasePage {
     }
 
     public void processToCheckout() {
+
+        CommonFunctions.sleep(3000);
+
         String currentUrl = getDriver().getCurrentUrl();
         String url = String.format("%s&%s", currentUrl, COOKIES);
 

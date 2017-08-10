@@ -25,8 +25,8 @@ public class SHOEPageSteps extends BaseSteps {
         CommonFunctions.attachScreenshot("Cart with product");
 
         shoeCartPage.processToShoeCheckout();
-        assertTrue(shoeCheckoutPage.isPage(), "Looks like Shoe checkout page was not opened.");
         shoeCheckoutPage.processToCheckout();
+        
         waitForSignIn();
     }
 
@@ -44,8 +44,11 @@ public class SHOEPageSteps extends BaseSteps {
         CommonFunctions.attachScreenshot("Cart with product");
 
         shoeCartPage.processToShoeCheckout();
-        assertTrue(shoeCheckoutPage.isPage(), "Looks like Shoe checkout page was not opened.");
-        shoeCheckoutPage.processToCheckout();
+
+        if (shoeCheckoutPage.isPage()) {
+            shoeCheckoutPage.processToCheckout();
+        }
+
         waitForSignIn();
     }
 
