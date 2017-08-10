@@ -14,8 +14,9 @@ public class EmailComponent extends BaseComponent {
         WebElement emailEl = findElement(emailField);
         scroll(emailEl);
         emailEl.clear();
-        CommonFunctions.sleep(4000);
+        CommonFunctions.sleep(500);
         emailEl.sendKeys(email);
+        CommonFunctions.sleep(500);
         focusOut(emailEl);
 
 //        CommonFunctions.sleep(1000);

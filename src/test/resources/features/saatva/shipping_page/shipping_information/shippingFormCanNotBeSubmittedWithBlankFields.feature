@@ -11,6 +11,7 @@ Feature: SHIPPING PAGE - SHIPPING INFO
     Then user should be on "Shipping" tab
 
   @TestCaseId("101031")
+  @TestCaseId("101042")
   Scenario: Test with correct shipping information and do not fill in all required fields (error message should be displayed)
 
     Given presses the "Continue" button
