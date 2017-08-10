@@ -12,10 +12,15 @@ Feature: SHIPPING PAGE - SHIPPING INFO
 
   @TestCaseId("101030")
   @TestCaseId("101015")
+  @TestCaseId("101067")
   Scenario: Test with correct shipping information and fill in all required fields (US Only)
 
     Given user types shipping address for "qa user" with phone number
+    And user should see "United States" shipping country
+    And chooses "Canada" country
+    And user should see "Canada" shipping country
+    And chooses "United States" country
+    And user should see "United States" shipping country
     And presses the "Continue" button
-    And chooses "Use Entered Address"
     Then user should be on "Payment & Review" tab
 

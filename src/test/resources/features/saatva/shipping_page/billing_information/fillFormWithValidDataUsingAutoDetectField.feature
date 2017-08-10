@@ -19,8 +19,15 @@ Feature: SHIPPING PAGE - BILLING INFO - DOMESTIC
     And presses the "Continue" button
 
     And user should stay at "Shipping" tab
+    And user should see "United States" shipping country
+    And chooses "Canada" country
+    And user should see "Canada" shipping country
+    And chooses "United States" country
+    And user should see "United States" shipping country
     Then sees "FORM ERRORS" error message with text "Please review all inputs."
-    
+
+    #TODO: add country drop down selection for billing address form as well
+
     And user types billing info for "qa user" without email
     And presses the "Continue" button
     And chooses "Use Entered Address"

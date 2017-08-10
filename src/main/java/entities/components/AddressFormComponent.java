@@ -104,13 +104,14 @@ public class AddressFormComponent extends BaseComponent {
     public void inputValueIntoField(String value, String field) {
         By fieldEl = getFieldByName(field);
         fillField(fieldEl, value);
-        CommonFunctions.sleep(1000);
+        CommonFunctions.sleep(500);
         focusOut(findElement(fieldEl));
     }
 
     public void fillPhone(String phone) {
         findElement(phoneField).clear();
         sendKeysOneByOne(phoneField, phone);
+        CommonFunctions.sleep(500);
         focusOut(findElement(phoneField));
     }
 

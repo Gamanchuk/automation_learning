@@ -1,4 +1,4 @@
-@saatva
+@saatva @debug
 
 Feature: SHIPPING PAGE - SHIPPING INFO
 
@@ -21,8 +21,14 @@ Feature: SHIPPING PAGE - SHIPPING INFO
 
     And user types "!@#&( !@#()" into the "Full Name" field of "Shipping Address" address form
     And presses the "Continue" button
-    Then user should stay at "Shipping" tab
-    And sees "FORM ERRORS" error message with text "Please review all inputs."
+    And chooses "Use Entered Address"
+    Then user should be on "Payment & Review" tab
+    And user presses "Shipping" breadcrumb tab
+    Then user should be on "Shipping" tab
+
+
+    #Then user should stay at "Shipping" tab
+    #And sees "FORM ERRORS" error message with text "Please review all inputs."
 
     And user types "Mr Donal Trump III" into the "Full Name" field of "Shipping Address" address form
     And presses the "Continue" button
