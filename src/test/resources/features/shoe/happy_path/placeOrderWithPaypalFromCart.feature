@@ -6,7 +6,7 @@ Feature: HAPPY PATH
     Given user adds product to cart with PayPal checkout from Shoe
 
 
-  @TestCaseId("16268")
+  @TestCaseId("16270")
   Scenario: Place order with Paypal from payment as Guest
 
     #Given user presses Log In PayPal button
