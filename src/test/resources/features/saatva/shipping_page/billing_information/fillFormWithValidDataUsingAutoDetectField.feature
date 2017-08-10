@@ -12,7 +12,7 @@ Feature: SHIPPING PAGE - BILLING INFO - DOMESTIC
   @Issues("MCCAT-6309")
   @TestCaseId("100979")
   @TestCaseId("101015")
-  Scenario: Test with correct shipping information and do not fill in all required fields (error message should be displayed)
+  Scenario: Test with correct shipping information
 
     Given user types shipping address for "qa user" with phone number
     And unset checkbox "Yes, billing address and shipping address are the same"

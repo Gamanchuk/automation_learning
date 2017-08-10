@@ -62,7 +62,6 @@ public class AddressFormComponent extends BaseComponent {
         // Need to send phone number digit by digit
         if (isElementPresent(phoneField, 2)) {
             fillPhone(phone);
-            focusOut(findElement(phoneField));
         }
     }
 
@@ -159,14 +158,6 @@ public class AddressFormComponent extends BaseComponent {
         element.clear();
         CommonFunctions.sleep(1000);
         element.sendKeys(value);
-
-
-//        CommonFunctions.sleep(1000);
-//        findElement(field).clear();
-//        waitForAjax();
-//        findElement(field).sendKeys(value);
-
-
     }
 
     public void selectTitle(String value) {

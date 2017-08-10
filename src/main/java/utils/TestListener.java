@@ -72,6 +72,7 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
             setTestResults(TestRailStatus.PASSED, "", "");
         }
 
+        DriverFactory.killAppium();
         DriverFactory.quitDriver();
     }
 
@@ -151,7 +152,7 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
      * @param result  <code>ITestResult</code> containing information about the run test
      */
     protected void fireRetryTest(String message, ITestResult result) {
-        if (((IAllureRetryAnalyzer) result.getMethod().getRetryAnalyzer()).retry(result, true)) {
+        if (((IAllureRetryAnalyzer) result.getMethod().getRetryAnalyzer()).retry(result, false)) {
             getLifecycle().fire(new TestCasePendingEvent().withMessage(message));
             getLifecycle().fire(new TestCaseFinishedEvent());
         }

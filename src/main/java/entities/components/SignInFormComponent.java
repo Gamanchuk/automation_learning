@@ -1,34 +1,34 @@
 package entities.components;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import utils.CommonFunctions;
 
 import static org.testng.Assert.assertTrue;
 
 public class SignInFormComponent extends BaseComponent {
-    //private By forgotPassword = By.xpath("//div[contains(@class,'login-buttons')]//a");
     private By forgotPassword = By.cssSelector("a.forgot-password-link");
     private By whereMyPassword = By.xpath("//div[@class='message-button']");
     private By whereMyPasswordContent = By.xpath("//div[@class='message-content']");
 
     private By emailField = By.id("shipping-email");
-    //private By passwordField = By.id("password");
     private By passwordField = By.xpath("//input[@id='password' or @id='current-password']");
     private By toGuestCheckoutLink = By.xpath("//a[text()='Proceed to Guest Checkout']");
 
-    final static String EMAIL = "email";
-    final static String PASSWORD = "password";
+
 
     public boolean exists() {
-        return isElementVisible(emailField);
+        return isElementVisible(forgotPassword) || isElementVisible(emailField, 5);
     }
 
     public void signIn(String email, String password) {
 
         fillEmail(email);
+        CommonFunctions.sleep(1000);
         fillPassword(password);
+        CommonFunctions.sleep(1000);
 
-        CommonFunctions.attachScreenshot("Login page");
+        CommonFunctions.attachScreenshot("Login page with filled fields");
     }
 
     public void proceedToGuestCheckout() {
@@ -65,15 +65,11 @@ public class SignInFormComponent extends BaseComponent {
     }
 
     private void fillField(By field, String value) {
-
-        //Need sleep because sometimes we catch element longer not attached
-        CommonFunctions.sleep(5000);
-
-        waitForDocumentReady();
-        assertTrue(isElementVisible(field), "Field " + field.toString() + " doesn't present on page.");
+        WebElement element = findElement(field);
+        scroll(element);
         CommonFunctions.sleep(500);
-        getDriver().findElement(field).clear();
-        CommonFunctions.sleep(500);
-        getDriver().findElement(field).sendKeys(value);
+        element.clear();
+        CommonFunctions.sleep(1000);
+        element.sendKeys(value);
     }
 }

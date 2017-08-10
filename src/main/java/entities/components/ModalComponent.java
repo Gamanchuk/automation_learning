@@ -7,9 +7,18 @@ import utils.CommonFunctions;
 public class ModalComponent extends BaseComponent {
 
     private By modal = By.cssSelector("div.component.modal");
+    private By modalClose = By.className("modal-close");
 
     public boolean isModalOpen() {
         return isElementPresent(modal);
+    }
+
+    public boolean isCloseButtonPresent() {
+        return isElementVisible(modalClose);
+    }
+
+    public void closeModal() {
+        getDriver().findElement(modalClose).click();
     }
 
     public boolean hasMessageWithText(String text) {

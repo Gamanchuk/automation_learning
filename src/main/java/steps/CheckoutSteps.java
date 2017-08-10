@@ -287,6 +287,14 @@ public class CheckoutSteps {
         CommonFunctions.sleep(500);
     }
 
+
+    @And("^presses the OK, I'll Try Again button$")
+    public void pressesTheOKILlTryAgainButton() {
+        buttonComponent.clickButton();
+        // Experiment. Trying to fix the problem with "Element is no longer attached to DOM"
+        CommonFunctions.sleep(500);
+    }
+
     @And("^chooses \"([^\"]*)\"$")
     public void chooses(String addressType) {
         addressVerificationComponent.chooseAddressType(addressType);
@@ -373,7 +381,7 @@ public class CheckoutSteps {
         //Select card uses 4 last symbols
         //radioListComponent.setRoot(null);
         assertTrue(savedOptionPickerComponent.exists(), "Looks like drop-down with saved cards doesn't present");
-        savedOptionPickerComponent.selectCard(card.getFourLastNumbers());
+        savedOptionPickerComponent.select(card.getFourLastNumbers());
 
         if (!card.getName().equals("qCard")) {
             creditCardFormComponent.inputValueIntoField(card.getCvv(), "CVV");
@@ -394,7 +402,7 @@ public class CheckoutSteps {
         String project = Config.SITE_NAME;
 
 
-        if (project.equals("pepboys-stage") || project.equals("pepboys-prod") || project.equals("qvc-prod") || project.equals("qvc-stage")) {
+        if (project.equals("pepboys-prod") || project.equals("qvc-prod") || project.equals("shoe-prod")) {
 
             String orderNumber = thankYouPage.getOrder();
 
@@ -425,8 +433,8 @@ public class CheckoutSteps {
     @Given("^user makes authorisation for \"([^\"]*)\"$")
     public void userMakesAuthorisationFor(String userName) {
         BillingUser user = DataProvider.getUser(userName);
-        headerComponent.pressSignInButton();
-        assertTrue(signInFormComponent.exists(), "Sign In form component doesn't present");
+
+        userPressesTheSignInButton();
         signInFormComponent.signIn(user.getEmail(), user.getPassword());
         CommonFunctions.attachScreenshot("Set [" + user.getEmail() + "] email and [" + user.getPassword() + "] password");
         buttonComponent.clickButton();
@@ -435,6 +443,13 @@ public class CheckoutSteps {
 
     @And("^applies billing info for address \"([^\"]*)\"$")
     public void appliesBillingInfo(String address) {
+
+        String checkBox = "Yes, billing address and shipping address are the same";
+
+        if (checkboxRowComponent.exists(checkBox, 5)) {
+            checkboxRowComponent.check(checkBox, false);
+        }
+
         assertTrue(radioListComponent.exists(), "Billing Address Drop-Down doesn't exists");
         radioListComponent.setRoot(BaseComponent.getContainerByTitle("Billing Address"));
         assertTrue(radioListComponent.select(address), "'" + address + "' doesn't present in list");
@@ -451,8 +466,11 @@ public class CheckoutSteps {
 
     @And("^applies shipping info for address \"([^\"]*)\"$")
     public void appliesShippingInfoForAddress(String address) {
-        //assertTrue(radioListComponent.exists(), "Billing Address Drop-Down doesn't exists");
-        checkboxRowComponent.check("Yes, shipping address and billing address are the same", false);
+        String checkBox = "Yes, shipping address and billing address are the same";
+
+        if (checkboxRowComponent.exists(checkBox, 5)) {
+            checkboxRowComponent.check(checkBox, false);
+        }
         radioListComponent.setRoot(BaseComponent.getContainerByTitle("Shipping Address"));
         assertTrue(radioListComponent.select(address), "'" + address + "' doesn't present in list");
         CommonFunctions.attachScreenshot("Shipping info");
@@ -470,6 +488,11 @@ public class CheckoutSteps {
         appliesShippingInfoForAddress("Enter a New Address");
     }
 
+    @And("^selects \"Enter a New Address\" for billing address$")
+    public void selectsForBillingAddress() {
+        appliesBillingInfo("Enter a New Address");
+    }
+
     @And("^uses PayPal for payment$")
     public void usesPayPalForPayment() {
         paymentTypesComponent.purchaseWithPayPal();
@@ -478,10 +501,16 @@ public class CheckoutSteps {
 
     @And("^uses \"([^\"]*)\" for payment$")
     public void usesForPayment(String type) {
-        paymentTypesComponent.purchasePayment();
-        CommonFunctions.attachScreenshot("Payment types");
+        this.userChoosesForPayment(type);
         paymentTypesComponent.choicePaymentType(type);
     }
+
+    @Given("^user chooses \"([^\"]*)\" for payment$")
+    public void userChoosesForPayment(String arg0) {
+        paymentTypesComponent.purchasePayment();
+        CommonFunctions.attachScreenshot("Payment types");
+    }
+
 
     @Given("^user types \"([^\"]*)\" into the \"([^\"]*)\" field of \"([^\"]*)\" address form$")
     public void userTypesValueIntoField(String value, String field, String formTitle) {
@@ -631,6 +660,7 @@ public class CheckoutSteps {
     @And("^unset checkbox \"([^\"]*)\"$")
     public void unsetCheckbox(String label) {
         checkboxRowComponent.check(label, false);
+        CommonFunctions.attachScreenshot("CheckBox");
     }
 
     @Given("^user types shipping info for \"([^\"]*)\"$")
@@ -655,6 +685,29 @@ public class CheckoutSteps {
         }
 
         fillShippingAddress(userName, true, false, false);
+    }
+
+    @Given("^user types shipping info for \"([^\"]*)\" without email$")
+    public void userTypesShippingInfoForWithoutEmail(String userName) {
+        String checkBox = "Yes, shipping address and billing address are the same";
+
+        if (checkboxRowComponent.exists(checkBox, 5)) {
+            checkboxRowComponent.check(checkBox, false);
+        }
+
+        fillShippingInfo(userName, true, false, true);
+    }
+
+
+    @Given("^user types manually shipping info for \"([^\"]*)\" without email$")
+    public void userTypesManuallyShippingInfoForWithoutEmail(String userName) {
+        String checkBox = "Yes, shipping address and billing address are the same";
+
+        if (checkboxRowComponent.exists(checkBox, 5)) {
+            checkboxRowComponent.check(checkBox, false);
+        }
+
+        fillShippingInfo(userName, false, false, true);
     }
 
     @And("^user types domestics shipping info for \"([^\"]*)\" without phone$")
@@ -710,7 +763,7 @@ public class CheckoutSteps {
         CommonFunctions.attachScreenshot("Shipping info");
     }
 
-    private void fillShippingInfo(String userName, boolean autoFill, boolean email, boolean password) {
+    private void fillShippingInfo(String userName, boolean autoFill, boolean email, boolean phone) {
         BillingUser user = DataProvider.getUser(userName);
         addressFormComponent.setRoot(BaseComponent.getContainerByTitle("Shipping Address"));
         fillAddressForm(user, autoFill, false);
@@ -818,13 +871,13 @@ public class CheckoutSteps {
     public void userMakesAuthorisationWithEmailAndPassword(String email, String password) {
         signInFormComponent.signIn(email, password);
         CommonFunctions.attachScreenshot("Set [" + email + "] email and [" + password + "] password");
-        buttonComponent.clickButton();
+        buttonComponent.clickButtonWithSendKeys();
     }
 
     @And("^user presses the signIn button$")
     public void userPressesTheSignInButton() {
         headerComponent.pressSignInButton();
-        assertTrue(signInFormComponent.exists(), "SignIn form component doesn't present");
+        assertTrue(signInFormComponent.exists(), "Sign In form component doesn't present");
     }
 
     @And("^user presses the Forgot Password link$")
@@ -874,6 +927,7 @@ public class CheckoutSteps {
     public void seesErrorTooltipWithText(String error) {
         assertTrue(creditCardFormComponent.hasErrorTooltipWithMessage(error),
                 "Tooltip with message \"" + error + "\" not found");
+        CommonFunctions.attachScreenshot("Tooltip");
     }
 
     @And("^sees modal error with text \"([^\"]*)\"$")
@@ -881,6 +935,19 @@ public class CheckoutSteps {
         assertTrue(modalComponent.isModalOpen(), "Modal error doesn't present on page.");
         assertTrue(modalComponent.hasMessageWithText(text), "Unexpected text was displayed");
         CommonFunctions.attachScreenshot("Error Modal opened");
+    }
+
+    @And("^sees modal with title \"([^\"]*)\"$")
+    public void seesModalWithTitle(String text) {
+        assertTrue(modalComponent.isModalOpen(), "Modal error doesn't present on page.");
+        assertEquals(titleComponent.getTitleText().toLowerCase(), text.toLowerCase());
+        CommonFunctions.attachScreenshot("Error Modal opened");
+    }
+
+    @And("^user close modal$")
+    public void userCloseModal() {
+        assertTrue(modalComponent.isModalOpen(), "Modal error doesn't present on page.");
+        assertTrue(modalComponent.isCloseButtonPresent(), "Modal doesn't have close button.");
     }
 
     @And("^user clicks Terms link$")
@@ -912,6 +979,7 @@ public class CheckoutSteps {
         collapserComponent.setRoot(ModalComponent.getComponentByTitle("Order Summary"));
         collapserComponent.openCollapser();
         assertTrue(new OrderSummaryComponent().isVisible(), "Order Summary in invisible");
+        CommonFunctions.attachScreenshot("Collapser");
     }
 
     @And("^checks Pick Up in Store info$")
@@ -955,7 +1023,7 @@ public class CheckoutSteps {
         assertTrue(signInFormComponent.exists(), "Sign In form component doesn't present");
 
         signInFormComponent.fillEmail(user.getEmail());
-        buttonComponent.clickButton();
+        buttonComponent.clickButtonWithSendKeys();
         signInFormComponent.fillPassword(user.getPassword());
         CommonFunctions.attachScreenshot("Checkout as existing user");
 
@@ -994,7 +1062,7 @@ public class CheckoutSteps {
 
     @And("^selects \"Enter a New Card\"$")
     public void selectsEnterANewCard() {
-        savedOptionPickerComponent.selectCard("Enter a New Card");
+        savedOptionPickerComponent.select("Enter a New Card");
     }
 
     @And("^user selects \"([^\"]*)\" Payment Option$")
@@ -1048,7 +1116,7 @@ public class CheckoutSteps {
     public void userTypesManuallyShippingInfoForWithPhoneNumber(String userName) {
         fillShippingAddress(userName, false, false, true);
     }
-
+  
     @And("^selects \"([^\"]*)\" state$")
     public void selectState(String state) {
         addressFormComponent.setRoot(null);

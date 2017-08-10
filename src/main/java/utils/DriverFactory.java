@@ -41,6 +41,8 @@ public class DriverFactory {
     private static AppiumDriverLocalService service;
     private static WebDriverEventListener eventListener;
     private static Log log = LogFactory.getLog(DriverFactory.class.getSimpleName());
+    private static final int maxRetryCount = 1;
+    private static int retryCount = 0;
 
 
     public static WebDriver getDriver() {
@@ -89,12 +91,13 @@ public class DriverFactory {
                     desiredCapabilities.setCapability(IOSMobileCapabilityType.PREVENT_WDAATTACHMENTS, true);
 
                     /* Capabilities for WebDriverAgentRunner (WDAServer) */
-                    desiredCapabilities.setCapability(IOSMobileCapabilityType.USE_NEW_WDA, true);
+                    //desiredCapabilities.setCapability(IOSMobileCapabilityType.USE_NEW_WDA, true);
                     desiredCapabilities.setCapability(IOSMobileCapabilityType.WDA_LOCAL_PORT, Integer.parseInt(iproxy));
-                    //desiredCapabilities.setCapability(IOSMobileCapabilityType.SIMPLE_ISVISIBLE_CHECK, true);
+                    desiredCapabilities.setCapability(IOSMobileCapabilityType.SIMPLE_ISVISIBLE_CHECK, true);
 
                     /* Capabilities for timouts */
                     desiredCapabilities.setCapability("webkitResponseTimeout", 50000);
+                    desiredCapabilities.setCapability("sendKeyStrategy", "setValue");
                     desiredCapabilities.setCapability(IOSMobileCapabilityType.LAUNCH_TIMEOUT, 500000);
 
                     /* Capabilities for automatically sinning WebDriverAgentRunner */
@@ -128,8 +131,21 @@ public class DriverFactory {
                 /* Clean before test started */
                 TestGlobalsManager.setTestGlobal("authorised", null);
 
+                retryCount = 0;
             } catch (Exception e) {
-                throw new AssertionError("Can't create driver: " + e.getMessage());
+
+                if (retryCount < maxRetryCount) {
+                    retryCount++;
+                    log.info("Looks like we have problem with creating driver. Try restart all servers.");
+                    killAppium();
+                    quitDriver();
+                    getDriver();
+
+                } else {
+                    log.info("We cant fix problem with driver. Throw new assertion.");
+                    throw new AssertionError("Can't create driver: " + e.getMessage());
+                }
+
             }
         }
         return driver;
@@ -152,8 +168,6 @@ public class DriverFactory {
             if (Config.PLATFORM_NAME.equals(IOS)) {
                 iOSProxyRunner();
             }
-
-            killAppiumServer(appiumPort);
 
             log.info("\n");
             log.info("******************************* STARTING APPIUM SERVICE ****************************");
@@ -203,7 +217,7 @@ public class DriverFactory {
      *
      * @param port for communication with device
      */
-    private static void killAppiumServer(int port) {
+    public static void killAppiumServer(int port) {
         try {
             log.info("Look for the launched appium server on port: " + port);
             ProcessResult processResult = new ProcessExecutor().command("lsof", "-ti", "tcp:" + port)

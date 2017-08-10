@@ -17,6 +17,7 @@ public class CreditCardFormComponent extends BaseComponent {
     public void inputPaymentDetails(String name, String number, String expDate, String cvv, String cardholderName) {
         assertTrue(isElementVisible(ccNumber), "Card number field doesn't present on page.");
         // fillField(ccNumber, number);
+        findElement(ccNumber).clear();
         sendKeysOneByOne(ccNumber, number);
 
         // Need sleep
@@ -26,7 +27,9 @@ public class CreditCardFormComponent extends BaseComponent {
 
         if (!name.toLowerCase().equals("qcard")) {
             fillField(exp, expDate);
+            CommonFunctions.sleep(1000);
             fillField(csc, cvv);
+            CommonFunctions.sleep(1000);
         }
 
         // Element must be displayed if you pay as registered user
@@ -65,8 +68,9 @@ public class CreditCardFormComponent extends BaseComponent {
         WebElement element = findElement(field);
         focusOut(element);
         element.clear();
+        CommonFunctions.sleep(200);
         element.sendKeys(value);
-//        focusOut(element);
+        //focusOut(element);
     }
 
 
