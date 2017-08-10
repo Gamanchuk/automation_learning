@@ -31,7 +31,7 @@ public class CreditCardFormComponent extends BaseComponent {
             CommonFunctions.sleep(1000);
         }
 
-        if (isElementVisible(ccName, 2000)) {
+        if (isElementVisible(ccName, 2)) {
             fillField(ccName, cardholderName);
         }
         
