@@ -1,6 +1,6 @@
 @shoe
 
-Feature: SIGN IN PAGE - HEADER & FOOTER
+Feature: GUEST - SHIPPING PAGE - HEADER & FOOTER
 
   Background: Add product to card and process to checkout
     Given user adds product to cart from Shoe

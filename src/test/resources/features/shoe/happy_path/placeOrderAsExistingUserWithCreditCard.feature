@@ -1,4 +1,4 @@
-@shoe @debug
+@shoe
 
 Feature: HAPPY PATH
 

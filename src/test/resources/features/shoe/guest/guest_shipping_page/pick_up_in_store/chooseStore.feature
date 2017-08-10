@@ -1,14 +1,14 @@
 @shoe
 
-Feature: HAPPY PATH
+Feature: GUEST - SHIPPING PAGE - PICK UP IN STORE
 
   Background: Add product to card and process to checkout
     Given user adds product to cart with Pick up in store from Shoe
-    Then user should be on "Shipping" tab
 
-  @TestCaseId("16271")
+
+  @TestCaseId("16297")
+  @TestCaseId("17457")
   Scenario: Place order that must be Pick up in store as guest
-
 
     Given user navigates to "Pick up in Store" tab
 
@@ -20,9 +20,3 @@ Feature: HAPPY PATH
 
     And presses the "Continue" button
     Then user should be on "Payment" tab
-    And uses "mastercard" card for payment
-    And user types billing info for "qa user" without email
-    And presses the "Continue" button
-    Then user should be on "Review" tab
-    And presses the "Place Order" button
-    Then user should be on thank you page

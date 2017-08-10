@@ -28,8 +28,9 @@ public class SHOEProductPage extends BasePage {
         By sizeSelector = By.id("select_size_width");
 
         if (isElementVisible(sizeSelector)) {
+
             Select size = new Select(findElement(sizeSelector));
-            size.selectByVisibleText("5M");
+            size.selectByIndex(05);
             CommonFunctions.sleep(6000);
         }
 

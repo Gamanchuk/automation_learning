@@ -1,4 +1,4 @@
-@shoe @debug
+@shoe
 
 Feature: HAPPY PATH
 
@@ -7,7 +7,7 @@ Feature: HAPPY PATH
 
 
   @TestCaseId("16272")
-  Scenario: Place order that must be Pick up in store as guest
+  Scenario: Place order that must be Pick up in store as existing user
 
     Given user makes authorisation for "qa user"
     Then user should be on "Shipping" tab
