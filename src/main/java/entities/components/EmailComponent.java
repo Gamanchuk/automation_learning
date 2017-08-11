@@ -17,6 +17,7 @@ public class EmailComponent extends BaseComponent {
         emailEl.clear();
         CommonFunctions.sleep(500);
         emailEl.sendKeys(email);
+        CommonFunctions.sleep(500);
         focusOut(emailEl);
 
 //        CommonFunctions.sleep(1000);

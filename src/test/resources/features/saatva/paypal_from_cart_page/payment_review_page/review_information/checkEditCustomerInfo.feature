@@ -14,7 +14,7 @@ Feature: EXPRESS PAYPAL CHECKOUT - REVIEW PAGE
   Scenario: Check Edit Customer Information
     Given user types shipping address for "qa user" with phone number
     And presses the "Continue" button
-    And chooses "Use Entered Address"
+
     And user should be on "Payment & Review" tab
     And user can expand and collapse Order summary
 
