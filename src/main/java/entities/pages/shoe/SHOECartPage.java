@@ -8,6 +8,7 @@ public class SHOECartPage extends BasePage {
 
     private By signIn = By.className("cart-item");
     private By checkout = By.id("atg_store_checkout");
+    private By payPalcheckout = By.id("pp_checkout");
 
     @Override
     public boolean isPage() {
@@ -16,5 +17,13 @@ public class SHOECartPage extends BasePage {
 
     public void processToShoeCheckout() {
         getDriver().findElement(checkout).click();
+    }
+
+    public void navigate() {
+        getDriver().navigate().to(BASE_URL + "cart/cart.jsp");
+    }
+
+    public void processToPayPal() {
+        getDriver().findElement(payPalcheckout).click();
     }
 }

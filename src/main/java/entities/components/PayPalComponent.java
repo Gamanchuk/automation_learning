@@ -9,41 +9,75 @@ import static org.testng.Assert.assertTrue;
 
 public class PayPalComponent extends BaseComponent {
 
-    private By payPalEmail = By.xpath("//input[@id='email']");
-    private By payPalPassword = By.xpath("//input[@id='password']");
+    private By email = By.id("email");
+    private By password = By.id("password");
+    private By btnNext = By.id("btnNext");
+    private By logInButton = By.xpath("//button[@id='login' or @id='btnLogin']");
 
-    public void signIn(String email, String password) {
+    private By smartPayPal = By.linkText("Switch to old login");
 
-        fillPayPalEmail(email);
-        fillPayPalPassword(password);
+    /**
+     * Function to go to the sign in page.
+     */
+    public void clickLogin() {
+        String frame = "automation-frame";
+        By login = By.xpath("//div[contains(@class, 'baslLoginButtonContainer')]");
+        boolean iframe = isIframeExist(frame);
 
-        CommonFunctions.attachScreenshot("Login page");
-    }
-
-    public void doLogin(BillingUser user) {
-
-        boolean isNewPayPal = isIframeExist("injectedUl");
-        By logInButton = isNewPayPal ? By.id("btnLogin") : By.id("login");
-
-        if (isNewPayPal) {
-            switchToIframe("injectedUl");
+        if (iframe) {
+            assertTrue(isIframeExist(frame), "PayPal iframe doesn't exist.");
+            getDriver().switchTo().frame("automation-frame");
         }
 
-        assertTrue(isElementVisible(logInButton) && isElementClickable(logInButton),
-                "PayPal Login button doesn't present on page or not clickable.");
+        if (isElementVisible(login)) {
+            getDriver().findElement(login).click();
+        }
 
-        WebElement emailField = getDriver().findElement(By.id("email"));
-        emailField.clear();
-        emailField.sendKeys(user.getPaypalEmail());
+        if (iframe) {
+            getDriver().switchTo().defaultContent();
+        }
+    }
 
-        WebElement passwordField = getDriver().findElement(By.id("password"));
-        passwordField.clear();
-        passwordField.sendKeys(user.getPaypalPassword());
+    /**
+     * Function for PayPal sing in.
+     *
+     * @param user
+     */
+    public void doLogin(BillingUser user) {
 
-        emailField.click();
+        // Sometimes PayPay load old site version
+        // Old site version work without iframe
+        boolean isNewPayPal = isIframeExist("injectedUl");
 
-        CommonFunctions.attachScreenshot("Login PayPal Page");
-        getDriver().findElement(logInButton).click();
+        if (isElementVisible(smartPayPal, 5)) {
+            fillField(email, user.getPaypalEmail());
+            getDriver().findElement(btnNext).click();
+            fillField(password, user.getPaypalPassword());
+            getDriver().findElement(logInButton).click();
+        } else {
+
+            // By logInButton = isNewPayPal ? By.id("btnLogin") : By.id("login");
+
+
+            if (isNewPayPal) {
+                switchToIframe("injectedUl");
+            }
+
+            assertTrue(isElementVisible(logInButton) && isElementClickable(logInButton),
+                    "PayPal Login button doesn't present on page.");
+
+            fillField(email, user.getPaypalEmail());
+            fillField(password, user.getPaypalPassword());
+
+            // Disable focus from password field
+            // Sometimes if we don't change focus get error 'Incorrect password'
+            findElement(email).click();
+
+            // Attache screenshot with filled data
+            CommonFunctions.attachScreenshot("Login PayPal Page");
+
+            getDriver().findElement(logInButton).click();
+        }
 
         if (isNewPayPal) {
             // waiting for spinner
@@ -55,6 +89,9 @@ public class PayPalComponent extends BaseComponent {
         CommonFunctions.attachScreenshot("Login PayPal Page after SignIn");
     }
 
+    /**
+     * Function for confirmation pay after sign in.
+     */
     public void confirmationPay() {
 
         if (isElementVisible(By.id("confirmButtonTop"))) {
@@ -66,44 +103,16 @@ public class PayPalComponent extends BaseComponent {
 
     }
 
-    public void clickLogin() {
-        CommonFunctions.sleep(20000);
-        By login = By.xpath("//a[contains(@class, 'btn') and text()='Log In']");
-        assertTrue(isElementClickable(login), "PayPal login button doesn't present on page.");
-        getDriver().findElement(login).click();
-    }
-
+    /**
+     * Log out from PayPal
+     */
     public void logOut() {
         getDriver().navigate().to("https://sandbox.paypal.com/myaccount/logout");
     }
 
-    public boolean existsPayPalEmail() {
-        return isElementVisible(payPalEmail);
-    }
-
-    public boolean existsPayPalPassword() {
-        return isElementVisible(payPalPassword);
-    }
-
-    private void fillPayPalEmail(String value) {
-        fillField(payPalEmail, value);
-    }
-
-    private void fillPayPalPassword(String value) {
-        fillField(payPalPassword, value);
-    }
-
     private void fillField(By field, String value) {
-        //Need sleep because sometimes we catch element longer not attached
-        CommonFunctions.sleep(5000);
-
-        waitForDocumentReady();
-        assertTrue(isElementVisible(field), "Field " + field.toString() + " doesn't present on page.");
-        CommonFunctions.sleep(500);
-        getDriver().findElement(field).clear();
-        CommonFunctions.sleep(500);
-        getDriver().findElement(field).sendKeys(value);
+        WebElement emailField = getDriver().findElement(field);
+        emailField.clear();
+        emailField.sendKeys(value);
     }
-
-
 }

@@ -398,7 +398,8 @@ public abstract class Entity {
     }
 
     public boolean isIframeExist(String iframeName) {
-        return isElementVisible(By.name(iframeName), 120);
+        By iframe = By.xpath("//iframe[@name='" + iframeName + "' or @id='" + iframeName + "']");
+        return isElementVisible(iframe, 15) || isElementPresent(iframe, 15);
     }
 
     public void switchToDefaultIframe() {

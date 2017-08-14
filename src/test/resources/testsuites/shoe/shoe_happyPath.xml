@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+
+<suite name="SHOE HAPPY PATH">
+    <test name="Tests for happy path">
+        <classes>
+            <class name="tests.shoe.SHOEHappyPathCukesRunnerTest"/>
+        </classes>
+    </test>
+</suite> <!-- Suite -->

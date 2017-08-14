@@ -3,7 +3,6 @@ package entities.components;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import utils.CommonFunctions;
-import utils.TestGlobalsManager;
 
 import static org.testng.Assert.assertTrue;
 
@@ -32,9 +31,7 @@ public class CreditCardFormComponent extends BaseComponent {
             CommonFunctions.sleep(1000);
         }
 
-        // Element must be displayed if you pay as registered user
-        Object authorised = TestGlobalsManager.getTestGlobal("authorised");
-        if (authorised != null && (boolean) authorised) {
+        if (isElementVisible(ccName, 2)) {
             fillField(ccName, cardholderName);
         }
         
@@ -46,7 +43,6 @@ public class CreditCardFormComponent extends BaseComponent {
         focusOut(findElement(fieldEl));
         waitForElementVisible(fieldEl);
         fillField(fieldEl, value);
-//
     }
 
     private By getFieldByName(String name) {

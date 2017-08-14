@@ -563,6 +563,13 @@ public class CheckoutSteps {
         CommonFunctions.attachScreenshot("Store results");
     }
 
+
+    @And("^user selects random store$")
+    public void userSelectsRandomStore() {
+        this.userShouldBeSeeStoreResults();
+        shipToStoreComponent.shipTo();
+    }
+
     @Then("^user checks \"([^\"]*)\" with value \"([^\"]*)\" on \"([^\"]*)\" tab$")
     public void userChecksWithValueOnTab(String field, String value, String breadcrumb) throws Throwable {
         assertTrue(breadcrumbWidget.isBreadcrumbActive(breadcrumb), breadcrumb + " is not present on page.");
@@ -1031,6 +1038,10 @@ public class CheckoutSteps {
 
     @Given("^user fill contact details as \"([^\"]*)\"$")
     public void userFillContactDetails(String userName) {
+
+        addressFormComponent.setRoot(BaseComponent.getComponentByTitle("Contact Details"));
+        emailComponent.setRoot(BaseComponent.getNextComponentByTitle("Contact Details"));
+
         BillingUser user = DataProvider.getUser(userName);
 
         String name = user.getFullName();
@@ -1039,6 +1050,9 @@ public class CheckoutSteps {
         addressFormComponent.inputValueIntoField(name, "Full Name");
         emailComponent.fillEmailField(email);
         CommonFunctions.attachScreenshot("Contact information");
+
+        addressFormComponent.setRoot(null);
+        emailComponent.setRoot(null);
     }
 
     @And("^user presses the Where do I enter my password link$")
@@ -1116,7 +1130,7 @@ public class CheckoutSteps {
     public void userTypesManuallyShippingInfoForWithPhoneNumber(String userName) {
         fillShippingAddress(userName, false, false, true);
     }
-  
+
     @And("^selects \"([^\"]*)\" state$")
     public void selectState(String state) {
         addressFormComponent.setRoot(null);

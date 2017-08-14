@@ -10,6 +10,7 @@ import static org.testng.Assert.assertTrue;
 public class AddressFormComponent extends BaseComponent {
 
     private By nameField = By.cssSelector(".name-input input");
+    private By emailField = By.cssSelector(".email-input input");
     private By addressField = By.cssSelector(".address-line1 input");
     private By apartmentField = By.cssSelector(".address-line2 input");
     private By phoneField = By.cssSelector(".phone-input input");
@@ -146,6 +147,8 @@ public class AddressFormComponent extends BaseComponent {
                 return zipField;
             case "Phone Number":
                 return phoneField;
+            case "Email":
+                return emailField;
             default:
                 throw new Error("Unknown field name: " + name);
         }
