@@ -43,7 +43,6 @@ public class CreditCardFormComponent extends BaseComponent {
         focusOut(findElement(fieldEl));
         waitForElementVisible(fieldEl);
         fillField(fieldEl, value);
-//
     }
 
     private By getFieldByName(String name) {

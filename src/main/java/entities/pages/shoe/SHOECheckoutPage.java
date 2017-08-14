@@ -18,7 +18,7 @@ public class SHOECheckoutPage extends BasePage {
 
     public void processToCheckout() {
 
-        CommonFunctions.sleep(3000);
+        CommonFunctions.sleep(5000);
 
         String currentUrl = getDriver().getCurrentUrl();
         String url = String.format("%s&%s", currentUrl, COOKIES);
