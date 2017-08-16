@@ -9,8 +9,10 @@ import entities.pages.philosophy.PHILOSOPHYProductPage;
 import entities.pages.philosophy.PHILOSOPHYWarningPage;
 import steps.BaseSteps;
 import utils.CommonFunctions;
+import utils.Config;
 import utils.pepboys.DataProvider;
 
+import static io.appium.java_client.remote.MobilePlatform.IOS;
 import static org.testng.Assert.assertTrue;
 
 public class PHILOSOPHYPageSteps extends BaseSteps {
@@ -23,9 +25,12 @@ public class PHILOSOPHYPageSteps extends BaseSteps {
     @Given("^user adds product to cart from Philosophy")
     public void userAddsToCartProductFromPhilosophy() {
         philosophyMainPage.navigate();
-        assertTrue(philosophyWarningPage.isPage(), "Warning does not present.");
 
-        philosophyWarningPage.ignoreWarning();
+        if (Config.PLATFORM_NAME.equals(IOS)) {
+            assertTrue(philosophyWarningPage.isPage(), "Warning does not present.");
+            philosophyWarningPage.ignoreWarning();
+        }
+
         assertTrue(philosophyMainPage.isPage(), "Looks like Main page was not opened.");
 
         this.addProduct();
@@ -55,9 +60,12 @@ public class PHILOSOPHYPageSteps extends BaseSteps {
     @Given("^user adds products to cart \"([^\"]*)\" from Philosophy")
     public void userAddsToCartProductsFromPhilosophy(int count) {
         philosophyMainPage.navigate();
-        assertTrue(philosophyWarningPage.isPage(), "Warning does not present.");
 
-        philosophyWarningPage.ignoreWarning();
+        if (Config.PLATFORM_NAME.equals(IOS)) {
+            assertTrue(philosophyWarningPage.isPage(), "Warning does not present.");
+            philosophyWarningPage.ignoreWarning();
+        }
+
         assertTrue(philosophyMainPage.isPage(), "Looks like Main page was not opened.");
 
         for (int i = 0; i < count; i++) {
