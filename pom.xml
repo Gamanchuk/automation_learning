@@ -720,6 +720,19 @@
         </profile>
 
 
+        <!--Philosophy Suite-->
+
+        <profile>
+            <id>suite-philosophy-debug</id>
+            <properties>
+                <testng.suite>
+                    ${basedir}/src/test/resources/testsuites/philosophy/philosophy_debug.xml
+                </testng.suite>
+                <suite.id>100</suite.id>
+            </properties>
+        </profile>
+
+
         <!--environments-->
         <profile>
             <id>env-jenkins-sf</id>
@@ -935,8 +948,29 @@
                 <testrail.project.id>34</testrail.project.id>
             </properties>
         </profile>
-    </profiles>
 
+
+        <!--Philosophy-->
+        <profile>
+            <id>site-philosophy-prod</id>
+            <properties>
+                <site.base.name>philosophy-prod</site.base.name>
+                <site.url>https://www.philosophy.com/</site.url>
+                <site.cookies>?_mwexperienceid=daba5fa8-f655-4ff8-b0d9-0e6f6cca31a4</site.cookies>
+                <testrail.project.id>34</testrail.project.id>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>site-philosophy-stage</id>
+            <properties>
+                <site.base.name>philosophy-stage</site.base.name>
+                <site.url>https://storefront:phil123@staging-store-coty.demandware.net/</site.url>
+                <site.cookies>?_mwexperienceid=28af2d38-a2a6-49fe-aa39-2a6750c39bf5</site.cookies>
+                <testrail.project.id>34</testrail.project.id>
+            </properties>
+        </profile>
+    </profiles>
 
     <reporting>
         <excludeDefaults>true</excludeDefaults>
