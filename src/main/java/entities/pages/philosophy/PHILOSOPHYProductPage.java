@@ -8,7 +8,9 @@ import utils.CommonFunctions;
 import static org.testng.Assert.assertTrue;
 
 public class PHILOSOPHYProductPage extends BasePage {
+
     private By addToCart = By.id("add-to-cart");
+    private PHILOSOPHYWarningPage philosophyWarningPage = new PHILOSOPHYWarningPage();
 
     @Override
     public boolean isPage() {
@@ -20,6 +22,11 @@ public class PHILOSOPHYProductPage extends BasePage {
         log.info("Full path: " + fullPath);
         getDriver().navigate().to(fullPath);
         CommonFunctions.sleep(2000);
+
+        if (philosophyWarningPage.isPage(3)) {
+            philosophyWarningPage.ignoreWarning();
+        }
+
         assertTrue(isPage(), "Looks like product page was not opened.");
     }
 
