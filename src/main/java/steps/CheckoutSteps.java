@@ -435,7 +435,13 @@ public class CheckoutSteps {
     public void userMakesAuthorisationFor(String userName) {
         BillingUser user = DataProvider.getUser(userName);
 
-        userPressesTheSignInButton();
+        if (checkoutMethodsComponent.exists(2)) {
+            checkoutMethodsComponent.checkoutAs("Existing Account");
+        } else {
+            userPressesTheSignInButton();
+        }
+
+
         signInFormComponent.signIn(user.getEmail(), user.getPassword());
         CommonFunctions.attachScreenshot("Set [" + user.getEmail() + "] email and [" + user.getPassword() + "] password");
         buttonComponent.clickButton();

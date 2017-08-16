@@ -37,13 +37,14 @@ public class PHILOSOPHYPageSteps extends BaseSteps {
         switch (method) {
             case "PayPal":
                 philosophyCartPage.processToPayPal();
+                philosophyCartPage.skipSample();
                 break;
             case "Checkout":
                 philosophyCartPage.processToCheckout();
+                philosophyCartPage.skipSample();
+                waitForCheckoutMethodsComponent();
                 break;
         }
-
-        waitForCheckoutMethodsComponent();
     }
 
     @Then("^user should be on Philosophy Forgot Password page$")
@@ -53,13 +54,17 @@ public class PHILOSOPHYPageSteps extends BaseSteps {
 
     @Given("^user adds products to cart \"([^\"]*)\" from Philosophy")
     public void userAddsToCartProductsFromPhilosophy(int count) {
+        philosophyMainPage.navigate();
+        assertTrue(philosophyWarningPage.isPage(), "Warning does not present.");
+
+        philosophyWarningPage.ignoreWarning();
+        assertTrue(philosophyMainPage.isPage(), "Looks like Main page was not opened.");
 
         for (int i = 0; i < count; i++) {
             this.addProduct();
         }
 
-        philosophyCartPage.processToCheckout();
-        waitForCheckout();
+        CommonFunctions.attachScreenshot("Cart with products");
     }
 
     @And("^user should be on Philosophy cart page$")
@@ -76,15 +81,20 @@ public class PHILOSOPHYPageSteps extends BaseSteps {
 
     private void addToBag() {
         philosophyProductPage.addToCart();
-        assertTrue(philosophyWarningPage.isPage(), "Warning does not present.");
-        philosophyWarningPage.ignoreWarning();
-
-        assertTrue(philosophyCartPage.isPage(), "Bag modal window doesn't present.");
     }
 
     private void addProduct() {
         this.openProduct();
         this.addToBag();
+
+        if (philosophyWarningPage.isPage(30)) {
+            philosophyWarningPage.ignoreWarning();
+        } else {
+            this.openProduct();
+            this.addToBag();
+        }
+
+        assertTrue(philosophyCartPage.isPage(), "Bag modal window doesn't present.");
     }
 
     private void addProduct(String url) {
