@@ -95,11 +95,8 @@ public class PHILOSOPHYPageSteps extends BaseSteps {
         this.openProduct();
         this.addToBag();
 
-        if (philosophyWarningPage.isPage(30)) {
+        if (Config.PLATFORM_NAME.equals(IOS) && philosophyWarningPage.isPage(30)) {
             philosophyWarningPage.ignoreWarning();
-        } else {
-            this.openProduct();
-            this.addToBag();
         }
 
         assertTrue(philosophyCartPage.isPage(), "Bag modal window doesn't present.");

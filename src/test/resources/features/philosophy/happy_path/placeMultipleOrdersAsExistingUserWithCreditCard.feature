@@ -1,4 +1,4 @@
-@philosophy
+@philosophy @debug
 
 Feature: HAPPY PATH
 

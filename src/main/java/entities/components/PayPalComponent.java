@@ -98,6 +98,9 @@ public class PayPalComponent extends BaseComponent {
             waitForAjax();
             assertTrue(isElementClickable(By.id("confirmButtonTop")),
                     "PayPal confirmation button doesn't present on page or not clickable.");
+
+            // experimental sleep  
+            CommonFunctions.sleep(1000);
             getDriver().findElement(By.id("confirmButtonTop")).click();
         }
 

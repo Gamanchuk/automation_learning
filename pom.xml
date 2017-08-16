@@ -976,7 +976,7 @@
             <id>site-philosophy-stage</id>
             <properties>
                 <site.base.name>philosophy-stage</site.base.name>
-                <site.url>https://storefront:phil123@staging-store-coty.demandware.net/</site.url>
+                <site.url>https://staging-store-coty.demandware.net/</site.url>
                 <site.cookies>?_mwexperienceid=28af2d38-a2a6-49fe-aa39-2a6750c39bf5</site.cookies>
                 <testrail.project.id>36</testrail.project.id>
             </properties>
