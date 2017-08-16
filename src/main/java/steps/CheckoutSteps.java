@@ -35,6 +35,7 @@ public class CheckoutSteps {
     private ThankYouPage thankYouPage = new ThankYouPage();
     private PaymentAndReviewCheckoutPage paymentAndReviewPage = new PaymentAndReviewCheckoutPage();
     private PayPalComponent payPalComponent = new PayPalComponent();
+    private CheckoutMethodsComponent checkoutMethodsComponent = new CheckoutMethodsComponent();
     private TabComponent tabComponent = new TabComponent();
     private NoteComponent noteComponent = new NoteComponent();
     private EmailComponent emailComponent = new EmailComponent();
@@ -1020,7 +1021,13 @@ public class CheckoutSteps {
 
     @And("^user continue checkout as guest$")
     public void userContinueCheckoutAsGuest() {
-        signInFormComponent.fillEmail(RandomStringUtils.randomAlphabetic(10) + "@automationQA.com");
+
+        if (checkoutMethodsComponent.exists(2)) {
+            checkoutMethodsComponent.checkoutAs("Guest");
+        } else {
+            signInFormComponent.fillEmail(RandomStringUtils.randomAlphabetic(10) + "@automationQA.com");
+        }
+
         CommonFunctions.attachScreenshot("Checkout as guest");
     }
 
