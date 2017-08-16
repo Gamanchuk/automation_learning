@@ -7,9 +7,9 @@ import static org.testng.Assert.assertTrue;
 
 
 public class CheckoutMethodsComponent extends BaseComponent {
-    By guestAccount = By.xpath("//div[contains(@class, 'guest-login-accordion')]");
+    By guestAccount = By.xpath("//div[contains(@class, 'guest-login-accordion')]//button");
     By checkoutMethods = By.xpath("//div[contains(@class, 'checkout-methods')]");
-    By existingAccount = By.xpath("//div[contains(@class, 'returning-user-accordion')]");
+    By existingAccount = By.xpath("//div[contains(@class, 'returning-user-accordion')]//button");
 
     public void checkoutAs(String type) {
         assertTrue(exists(), "Looks like checkout methods does not present.");
