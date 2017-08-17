@@ -13,6 +13,7 @@ Feature: HAPPY PATH
     Given user should be on "Shipping" tab
     And presses the "Continue" button
 
+
     Then user should be on "Delivery" tab
     And presses the "Continue" button
 
