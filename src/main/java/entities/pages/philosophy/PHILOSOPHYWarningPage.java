@@ -9,7 +9,11 @@ public class PHILOSOPHYWarningPage extends BasePage {
 
     @Override
     public boolean isPage() {
-        return isElementPresent(warning);
+        return isElementVisible(warning);
+    }
+
+    public boolean isPage(int timeout) {
+        return isElementPresent(warning, timeout);
     }
 
     public void ignoreWarning() {

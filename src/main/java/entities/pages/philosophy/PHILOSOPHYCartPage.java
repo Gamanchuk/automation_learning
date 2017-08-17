@@ -22,13 +22,6 @@ public class PHILOSOPHYCartPage extends BasePage {
 
     public void processToCheckout() {
         getDriver().findElement(checkout).click();
-
-        assertTrue(isElementVisible(sampleForm, 5), "Looks like Modal with Samples was not opened.");
-        javascriptScroll(400);
-
-        CommonFunctions.sleep(500);
-        JavascriptExecutor js = (JavascriptExecutor) getDriver();
-        js.executeScript("document.getElementsByName(\"dwfrm_cart_nosamples\")[0].click();");
     }
 
     public void navigate() {
@@ -37,5 +30,14 @@ public class PHILOSOPHYCartPage extends BasePage {
 
     public void processToPayPal() {
         getDriver().findElement(payPalcheckout).click();
+    }
+
+    public void skipSample() {
+        assertTrue(isElementVisible(sampleForm, 5), "Looks like Modal with Samples was not opened.");
+        javascriptScroll(400);
+
+        CommonFunctions.sleep(500);
+        JavascriptExecutor js = (JavascriptExecutor) getDriver();
+        js.executeScript("document.getElementsByClassName(\"nothanks\")[0].click();");
     }
 }
