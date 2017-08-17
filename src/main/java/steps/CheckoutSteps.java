@@ -893,6 +893,10 @@ public class CheckoutSteps {
 
     @Given("^user makes authorisation with \"([^\"]*)\" email and \"([^\"]*)\" password$")
     public void userMakesAuthorisationWithEmailAndPassword(String email, String password) {
+        if (checkoutMethodsComponent.exists(2) && !checkoutMethodsComponent.isOpen()) {
+            checkoutMethodsComponent.checkoutAs("Existing Account");
+        }
+
         signInFormComponent.signIn(email, password);
         CommonFunctions.attachScreenshot("Set [" + email + "] email and [" + password + "] password");
         buttonComponent.clickButtonWithSendKeys();
