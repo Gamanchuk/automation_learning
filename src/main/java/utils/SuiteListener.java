@@ -22,8 +22,9 @@ public class SuiteListener implements ISuiteListener {
     @Override
     public void onFinish(ISuite iSuite) {
         log.info(String.format("Suite \"%s\" finished", iSuite.getName().toUpperCase()));
-        DriverFactory.killAppium();
         DriverFactory.quitDriver();
+        DriverFactory.killAppium();
+
     }
 
     private void runNewTesRailRun() {

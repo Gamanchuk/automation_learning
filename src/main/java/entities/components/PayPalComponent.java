@@ -55,9 +55,7 @@ public class PayPalComponent extends BaseComponent {
             fillField(password, user.getPaypalPassword());
             getDriver().findElement(logInButton).click();
         } else {
-
             // By logInButton = isNewPayPal ? By.id("btnLogin") : By.id("login");
-
 
             if (isNewPayPal) {
                 switchToIframe("injectedUl");
