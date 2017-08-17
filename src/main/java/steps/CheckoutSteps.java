@@ -1,5 +1,6 @@
 package steps;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -1136,5 +1137,13 @@ public class CheckoutSteps {
         addressFormComponent.setRoot(null);
         addressFormComponent.fillState(state);
         CommonFunctions.attachScreenshot("State selected: " + state);
+    }
+
+    @And("^user can expand and collapse Order summary on Thank You page$")
+    public void userCanExpandAndCollapseOrderSummaryOnThankYouPage() {
+        collapserComponent.setRoot(ModalComponent.getComponentByTitle("Order"));
+        collapserComponent.openCollapser();
+        assertTrue(new OrderSummaryComponent().isVisible(), "Order Summary in invisible");
+        CommonFunctions.attachScreenshot("Collapser");
     }
 }

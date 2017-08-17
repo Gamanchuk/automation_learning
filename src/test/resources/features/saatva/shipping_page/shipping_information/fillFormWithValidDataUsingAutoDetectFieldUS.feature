@@ -22,5 +22,6 @@ Feature: SHIPPING PAGE - SHIPPING INFO
     And chooses "United States" country
     And user should see "United States" shipping country
     And presses the "Continue" button
+    And chooses "Use Entered Address"
     Then user should be on "Payment & Review" tab
 
