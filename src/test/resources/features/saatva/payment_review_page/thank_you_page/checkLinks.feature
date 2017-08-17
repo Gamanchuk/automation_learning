@@ -1,4 +1,4 @@
-@saatva @debug
+@saatva
 
 Feature: PAYMENT & REVIEW - THANK YOU PAGE
 
