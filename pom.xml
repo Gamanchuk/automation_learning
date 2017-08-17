@@ -743,6 +743,16 @@
             </properties>
         </profile>
 
+        <profile>
+            <id>suite-philosophy-getStartedPage</id>
+            <properties>
+                <testng.suite>
+                    ${basedir}/src/test/resources/testsuites/philosophy/philosophy_getStartedPage.xml
+                </testng.suite>
+                <suite.id>102</suite.id>
+            </properties>
+        </profile>
+
 
         <!--environments-->
         <profile>
