@@ -1,6 +1,7 @@
 package entities.components;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import utils.CommonFunctions;
 
 import static org.testng.Assert.assertEquals;
@@ -28,5 +29,14 @@ public class ErrorMessageComponent extends BaseComponent {
         assertEquals(errorMessageText, message, "Unexpected error message");
 
         javascriptScroll(300);
+    }
+
+    public boolean hasErrorTooltipWithMessage(String error) {
+        assertTrue(isElementVisible(By.cssSelector("div.tooltip.error")), "Error tooltip doesn't present.");
+
+        // Have to use complex selector, because label can be either on span or on div
+        String selector = "div.tooltip.error div.tooltip-contents span, div.tooltip.error div.tooltip-contents div";
+        WebElement messageEl = findElementWithTextBy(error, By.cssSelector(selector));
+        return messageEl != null;
     }
 }

@@ -72,8 +72,9 @@ public class TestListener implements ITestListener, IAnnotationTransformer {
             setTestResults(TestRailStatus.PASSED, "", "");
         }
 
-        DriverFactory.killAppium();
         DriverFactory.quitDriver();
+        DriverFactory.killAppium();
+
     }
 
     @Override

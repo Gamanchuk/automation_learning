@@ -59,6 +59,7 @@ public class CheckoutSteps {
     private AddressDisplayComponent addressDisplayComponent = new AddressDisplayComponent();
     private CreditCardFormComponent creditCardFormComponent = new CreditCardFormComponent();
     private RewardsAccountComponent rewardsAccountComponent = new RewardsAccountComponent();
+    private ForgotPasswordComponent forgotPasswordComponent = new ForgotPasswordComponent();
     private CheckoutMethodsComponent checkoutMethodsComponent = new CheckoutMethodsComponent();
     private ShippingOptionsComponent shippingOptionsComponent = new ShippingOptionsComponent();
     private CountrySelectorComponent countrySelectorComponent = new CountrySelectorComponent();
@@ -445,10 +446,12 @@ public class CheckoutSteps {
     public void userMakesAuthorisationFor(String userName) {
         BillingUser user = DataProvider.getUser(userName);
 
-        if (checkoutMethodsComponent.exists(2)) {
-            checkoutMethodsComponent.checkoutAs("Existing Account");
-        } else {
+        boolean checkoutMethodsPresent = checkoutMethodsComponent.exists(3);
+
+        if (!checkoutMethodsPresent) {
             userPressesTheSignInButton();
+        } else if (!checkoutMethodsComponent.isOpen()) {
+            checkoutMethodsComponent.checkoutAs("Existing Account");
         }
 
 
@@ -953,7 +956,7 @@ public class CheckoutSteps {
 
     @And("^sees error tooltip with text \"([^\"]*)\"$")
     public void seesErrorTooltipWithText(String error) {
-        assertTrue(creditCardFormComponent.hasErrorTooltipWithMessage(error),
+        assertTrue(errorMessageComponent.hasErrorTooltipWithMessage(error),
                 "Tooltip with message \"" + error + "\" not found");
         CommonFunctions.attachScreenshot("Tooltip");
     }
@@ -1163,5 +1166,11 @@ public class CheckoutSteps {
         addressFormComponent.setRoot(null);
         addressFormComponent.fillState(state);
         CommonFunctions.attachScreenshot("State selected: " + state);
+    }
+
+    @And("^user should be see Password Assistance$")
+    public void userShouldBeSeePasswordAssistance() {
+        assertTrue(forgotPasswordComponent.exists(), "Password Assistance modal doesn't opened.");
+        CommonFunctions.attachScreenshot("Password Assistance modal");
     }
 }
