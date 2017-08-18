@@ -959,6 +959,16 @@
             </properties>
         </profile>
 
+        <profile>
+            <id>site-saatva-prod</id>
+            <properties>
+                <site.base.name>saatva-prod</site.base.name>
+                <site.url>https://www.saatvamattress.com/</site.url>
+                <site.cookies>?_mwexperienceid=0941d66b-5f33-4734-9fc9-4a64d534857e</site.cookies>
+                <testrail.project.id>45</testrail.project.id>
+            </properties>
+        </profile>
+
         <!--SHOE-->
         <profile>
             <id>site-shoe-prod</id>

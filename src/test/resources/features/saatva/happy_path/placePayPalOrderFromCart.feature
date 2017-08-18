@@ -17,3 +17,4 @@ Feature: HAPPY PATH
     Given user should be on "Payment & Review" tab
 
     Then presses the "Place Order" button
+    Then user should be on thank you page

@@ -22,3 +22,4 @@ Feature: PAYMENT & REVIEW - PAYMENT INFO
 
     And uses "mastercard" card for payment
     And presses the "Place Order" button
+    Then user should be on thank you page

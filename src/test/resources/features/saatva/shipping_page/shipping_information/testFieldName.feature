@@ -1,4 +1,4 @@
-@saatva @debug
+@saatva
 
 Feature: SHIPPING PAGE - SHIPPING INFO
 
