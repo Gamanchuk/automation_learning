@@ -12,6 +12,8 @@ import entities.pages.pepboys.PepBoysMainPage;
 import entities.pages.pepboys.PepBoysMyAccountPage;
 import entities.pages.pepboys.PepBoysTrackingPage;
 import org.apache.commons.lang.RandomStringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
 import utils.CommonFunctions;
 import utils.Config;
@@ -34,8 +36,6 @@ import static utils.CommonFunctions.stopScreenVideo;
 public class CheckoutSteps {
 
     private ThankYouPage thankYouPage = new ThankYouPage();
-    private PaymentAndReviewCheckoutPage paymentAndReviewPage = new PaymentAndReviewCheckoutPage();
-    private PayPalComponent payPalComponent = new PayPalComponent();
     private TabComponent tabComponent = new TabComponent();
     private NoteComponent noteComponent = new NoteComponent();
     private EmailComponent emailComponent = new EmailComponent();
@@ -60,10 +60,16 @@ public class CheckoutSteps {
     private AddressDisplayComponent addressDisplayComponent = new AddressDisplayComponent();
     private CreditCardFormComponent creditCardFormComponent = new CreditCardFormComponent();
     private RewardsAccountComponent rewardsAccountComponent = new RewardsAccountComponent();
+    private ForgotPasswordComponent forgotPasswordComponent = new ForgotPasswordComponent();
+    private CheckoutMethodsComponent checkoutMethodsComponent = new CheckoutMethodsComponent();
     private ShippingOptionsComponent shippingOptionsComponent = new ShippingOptionsComponent();
     private CountrySelectorComponent countrySelectorComponent = new CountrySelectorComponent();
+    private PaymentAndReviewCheckoutPage paymentAndReviewPage = new PaymentAndReviewCheckoutPage();
     private SavedOptionPickerComponent savedOptionPickerComponent = new SavedOptionPickerComponent();
     private AddressVerificationComponent addressVerificationComponent = new AddressVerificationComponent();
+
+
+    private static Log log = LogFactory.getLog(CheckoutSteps.class.getSimpleName());
 
 
     @Given("^user fills email field with \"([^\"]*)\"$")
@@ -282,7 +288,13 @@ public class CheckoutSteps {
     @And("^presses the \"([^\"]*)\" button$")
     public void pressesTheButton(String confirmationMethod) {
         buttonComponent.javascriptScroll(200);
-        buttonComponent.clickButton(confirmationMethod);
+
+        try {
+            buttonComponent.clickButton(confirmationMethod);
+        } catch (Exception elementHasDisappeared) {
+            log.error(String.format("Catch StaleElementReferenceException after click button \"%s\".", confirmationMethod));
+            log.debug(String.format("Error: \"%s\".", elementHasDisappeared.getLocalizedMessage()));
+        }
 
         // Experiment. Trying to fix the problem with "Element is no longer attached to DOM"
         CommonFunctions.sleep(500);
@@ -435,7 +447,15 @@ public class CheckoutSteps {
     public void userMakesAuthorisationFor(String userName) {
         BillingUser user = DataProvider.getUser(userName);
 
-        userPressesTheSignInButton();
+        boolean checkoutMethodsPresent = checkoutMethodsComponent.exists(3);
+
+        if (!checkoutMethodsPresent) {
+            userPressesTheSignInButton();
+        } else if (!checkoutMethodsComponent.isOpen()) {
+            checkoutMethodsComponent.checkoutAs("Existing Account");
+        }
+
+
         signInFormComponent.signIn(user.getEmail(), user.getPassword());
         CommonFunctions.attachScreenshot("Set [" + user.getEmail() + "] email and [" + user.getPassword() + "] password");
         buttonComponent.clickButton();
@@ -877,6 +897,10 @@ public class CheckoutSteps {
 
     @Given("^user makes authorisation with \"([^\"]*)\" email and \"([^\"]*)\" password$")
     public void userMakesAuthorisationWithEmailAndPassword(String email, String password) {
+        if (checkoutMethodsComponent.exists(2) && !checkoutMethodsComponent.isOpen()) {
+            checkoutMethodsComponent.checkoutAs("Existing Account");
+        }
+
         signInFormComponent.signIn(email, password);
         CommonFunctions.attachScreenshot("Set [" + email + "] email and [" + password + "] password");
         buttonComponent.clickButtonWithSendKeys();
@@ -933,7 +957,7 @@ public class CheckoutSteps {
 
     @And("^sees error tooltip with text \"([^\"]*)\"$")
     public void seesErrorTooltipWithText(String error) {
-        assertTrue(creditCardFormComponent.hasErrorTooltipWithMessage(error),
+        assertTrue(errorMessageComponent.hasErrorTooltipWithMessage(error),
                 "Tooltip with message \"" + error + "\" not found");
         CommonFunctions.attachScreenshot("Tooltip");
     }
@@ -1021,7 +1045,13 @@ public class CheckoutSteps {
 
     @And("^user continue checkout as guest$")
     public void userContinueCheckoutAsGuest() {
-        signInFormComponent.fillEmail(RandomStringUtils.randomAlphabetic(10) + "@automationQA.com");
+
+        if (checkoutMethodsComponent.exists(2)) {
+            checkoutMethodsComponent.checkoutAs("Guest");
+        } else {
+            signInFormComponent.fillEmail(RandomStringUtils.randomAlphabetic(10) + "@automationQA.com");
+        }
+
         CommonFunctions.attachScreenshot("Checkout as guest");
     }
 
@@ -1145,5 +1175,11 @@ public class CheckoutSteps {
         collapserComponent.openCollapser();
         assertTrue(new OrderSummaryComponent().isVisible(), "Order Summary in invisible");
         CommonFunctions.attachScreenshot("Collapser");
+    }
+  
+    @And("^user should be see Password Assistance$")
+    public void userShouldBeSeePasswordAssistance() {
+        assertTrue(forgotPasswordComponent.exists(), "Password Assistance modal doesn't opened.");
+        CommonFunctions.attachScreenshot("Password Assistance modal");
     }
 }

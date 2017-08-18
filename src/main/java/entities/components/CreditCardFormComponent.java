@@ -34,7 +34,7 @@ public class CreditCardFormComponent extends BaseComponent {
         if (isElementVisible(ccName, 2)) {
             fillField(ccName, cardholderName);
         }
-        
+
         CommonFunctions.attachScreenshot("Payment details");
     }
 
@@ -67,15 +67,5 @@ public class CreditCardFormComponent extends BaseComponent {
         CommonFunctions.sleep(200);
         element.sendKeys(value);
         //focusOut(element);
-    }
-
-
-    public boolean hasErrorTooltipWithMessage(String error) {
-        waitForElementVisible(By.cssSelector("div.tooltip.error"));
-
-        // Have to use complex selector, because label can be either on span or on div
-        String selector = "div.tooltip.error div.tooltip-contents span, div.tooltip.error div.tooltip-contents div";
-        WebElement messageEl = findElementWithTextBy(error, By.cssSelector(selector));
-        return messageEl != null;
     }
 }
