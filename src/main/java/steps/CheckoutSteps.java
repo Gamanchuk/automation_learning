@@ -1,5 +1,6 @@
 package steps;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -1172,5 +1173,11 @@ public class CheckoutSteps {
     public void userShouldBeSeePasswordAssistance() {
         assertTrue(forgotPasswordComponent.exists(), "Password Assistance modal doesn't opened.");
         CommonFunctions.attachScreenshot("Password Assistance modal");
+    }
+
+    @And("^user types manually shipping address for \"([^\"]*)\" without same as billing checkbox$")
+    public void userTypesManuallyShippingAddressForWithoutSameAsBillingCheckbox(String userName) {
+        fillShippingAddress(userName, false, false, false);
+        CommonFunctions.attachScreenshot("Shipping address form");
     }
 }

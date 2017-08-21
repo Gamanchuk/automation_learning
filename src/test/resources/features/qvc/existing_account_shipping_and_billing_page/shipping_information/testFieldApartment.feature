@@ -12,7 +12,7 @@ Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE - SHIPPING INFO
   Scenario: Test field 'Apartment'
 
     Given selects "Enter a New Address" for shipping address
-    And user types shipping info for "qa user" without email, phone
+    And user types manually shipping info for "qa user" without email, phone
     And unset checkbox "Save this address to my address book"
 
     And user types "" into the "Apt, Bldg." field of "Shipping Address" address form
@@ -22,7 +22,6 @@ Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE - SHIPPING INFO
 
     And user types "12345" into the "Apt, Bldg." field of "Shipping Address" address form
     And presses the "Continue" button
-    And chooses "Use Entered Address"
     Then user should be on "Delivery" tab
     And user navigates to "Address" breadcrumb
 

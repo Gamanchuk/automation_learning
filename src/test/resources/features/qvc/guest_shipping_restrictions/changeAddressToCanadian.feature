@@ -12,9 +12,8 @@ Feature: GUEST - SHIPPING RESTRICTIONS
   Scenario: Canadian billing address to Canadian
 
     Given user should be on "Address" tab
-    And user types billing info for "qa user" without email
+    And user types manually billing info for "qa user" without email
     And presses the "Continue" button
-    And chooses "Use Entered Address"
 
     Then user should be on "Delivery" tab
     And presses the "Continue" button
@@ -31,5 +30,4 @@ Feature: GUEST - SHIPPING RESTRICTIONS
     And chooses "Canada" country
     And user types manually Canadian billing address for "qa canada" without email
     And presses the "Continue" button
-    And chooses "Use Entered Address"
     Then user should be on "Delivery" tab

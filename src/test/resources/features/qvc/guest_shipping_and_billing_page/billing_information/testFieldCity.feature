@@ -7,7 +7,7 @@ Feature: GUEST - SHIPPING & BILLING PAGE - BILLING INFO - DOMESTIC
     And user continue checkout as guest
     And presses the "Continue" button
     And user should be on "Address" tab
-    Then user types billing info for "qa user" without email
+    Then user types manually billing info for "qa user" without email
 
   @TestCaseId("102398")
   Scenario: Test field 'City'
@@ -19,18 +19,15 @@ Feature: GUEST - SHIPPING & BILLING PAGE - BILLING INFO - DOMESTIC
 
     When user types "SanFrancisco" into the "City" field of "Billing Address" address form
     And presses the "Continue" button
-    And chooses "Use Entered Address"
     Then user should be on "Delivery" tab
     And user navigates to "Address" breadcrumb
 
     When user types "123456" into the "City" field of "Billing Address" address form
     And presses the "Continue" button
-    And chooses "Use Entered Address"
     Then user should be on "Delivery" tab
     And user navigates to "Address" breadcrumb
 
     When user types "!@$%^&*():_+" into the "City" field of "Billing Address" address form
     And presses the "Continue" button
-    And chooses "Use Entered Address"
     Then user should be on "Delivery" tab
 

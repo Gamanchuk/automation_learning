@@ -12,7 +12,7 @@ Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE - SHIPPING INFO
   @TestCaseId("")
   Scenario: Test field 'Zip Code'
     Given selects "Enter a New Address" for shipping address
-    And user types shipping info for "qa user" without email, phone
+    And user types manually shipping info for "qa user" without email, phone
     And unset checkbox "Save this address to my address book"
 
     And user types "" into the "Zip Code" field of "Shipping Address" address form
@@ -22,5 +22,4 @@ Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE - SHIPPING INFO
 
     And user types "94105" into the "Zip Code" field of "Shipping Address" address form
     And presses the "Continue" button
-    And chooses "Use Entered Address"
     Then user should be on "Delivery" tab

@@ -12,20 +12,18 @@ Feature: GUEST - BREADCRUMB
   @TestCaseId("102039")
   Scenario: Breadcrumb links redirect user to correct page
 
-    When user types billing info for "qa user" without email
+    When user types manually billing info for "qa user" without email
 
     # Check from Address tab
     And user presses "Delivery" breadcrumb tab
     And user presses "Payment" breadcrumb tab
     And user presses "Review" breadcrumb tab
     And presses the "Continue" button
-    And chooses "Use Entered Address"
     Then user should be on "Delivery" tab
 
     # Check return back From Delivery to Address
     And user navigates to "Address" breadcrumb
     And presses the "Continue" button
-    And chooses "Use Entered Address"
     And user should be on "Delivery" tab
 
     # Check from Delivery tab

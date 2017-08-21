@@ -1,4 +1,4 @@
-@qvc
+@qvc @Ignored
 
 Feature: GUEST - SHIPPING & BILLING PAGE - SHIPPING INFO
 

@@ -16,7 +16,8 @@ Feature: EXISTING ACCOUNT - SHIPPING RESTRICTIONS
     And selects "Enter a New Address" for shipping address
     And user types Canadian billing address for "qa canada" without email
     Then user should be see country note with text "We're sorry, shipping to Canada is not available."
-    And user types shipping address for "qa user"
+    And user types manually shipping address for "qa user" without same as billing checkbox
     And presses the "Continue" button
-    And chooses "Use Entered Address"
     Then user should be on "Delivery" tab
+
+
