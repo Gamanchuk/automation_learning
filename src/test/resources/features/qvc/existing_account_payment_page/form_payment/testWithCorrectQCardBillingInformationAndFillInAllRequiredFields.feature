@@ -1,4 +1,4 @@
-@qvc @Ignored
+@qvc
 
 Feature: EXISTING ACCOUNT - PAYMENT PAGE
 
