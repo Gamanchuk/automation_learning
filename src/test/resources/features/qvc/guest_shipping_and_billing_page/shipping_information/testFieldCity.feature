@@ -20,14 +20,17 @@ Feature: GUEST - SHIPPING & BILLING PAGE - SHIPPING INFO
 
     And user types "SanFrancisco" into the "City" field of "Shipping Address" address form
     And presses the "Continue" button
+    And chooses "Use Entered Address"
     Then user should be on "Delivery" tab
 
     And user navigates to "Address" breadcrumb
     And user types "123456" into the "City" field of "Shipping Address" address form
     And presses the "Continue" button
+    And chooses "Use Entered Address"
     Then user should be on "Delivery" tab
 
     And user navigates to "Address" breadcrumb
     And user types "!@$%^&*():_+" into the "City" field of "Shipping Address" address form
     And presses the "Continue" button
+    And chooses "Use Entered Address"
     Then user should be on "Delivery" tab

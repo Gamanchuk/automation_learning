@@ -15,21 +15,25 @@ Feature: GUEST - SHIPPING & BILLING PAGE - SHIPPING INFO
 
     And user types "" into the "Apt, Bldg." field of "Shipping Address" address form
     And presses the "Continue" button
+    And chooses "Use Entered Address"
     Then user should be on "Delivery" tab
 
     And user navigates to "Address" breadcrumb
     And user types "12345" into the "Apt, Bldg." field of "Shipping Address" address form
     And presses the "Continue" button
+    And chooses "Use Entered Address"
     Then user should be on "Delivery" tab
 
     And user navigates to "Address" breadcrumb
     And user types "Some Apartment" into the "Apt, Bldg." field of "Shipping Address" address form
     And presses the "Continue" button
+    And chooses "Use Entered Address"
     Then user should be on "Delivery" tab
 
     And user navigates to "Address" breadcrumb
     And user types "!#&@()" into the "Apt, Bldg." field of "Shipping Address" address form
     And presses the "Continue" button
+    And chooses "Use Entered Address"
     Then user should be on "Delivery" tab
 
 

@@ -16,6 +16,7 @@ Feature: GUEST - SHIPPING DETAILS PAGE - HEADER & FOOTER
 
     And user types manually billing info for "qa user"
     And presses the "Continue" button
+    And chooses "Use Entered Address"
     And user should be on "Delivery" tab
 
     And user checks support number with label "1-888-345-5788" and number "1-888-345-5788"

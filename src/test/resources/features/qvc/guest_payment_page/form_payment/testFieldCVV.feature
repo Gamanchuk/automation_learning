@@ -13,6 +13,7 @@ Feature: GUEST - PAYMENT PAGE
 
     And user types manually billing info for "qa user" without email
     And presses the "Continue" button
+    And chooses "Use Entered Address"
 
     And user should be on "Delivery" tab
     And presses the "Continue" button

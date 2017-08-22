@@ -14,6 +14,7 @@ Feature: GUEST - SHIPPING & BILLING PAGE - SHIPPING INFO
     Given user types manually billing info for "qa user" without email
     And user types manually shipping info for "qa user" without email, phone
     And presses the "Continue" button
+    And chooses "Use Entered Address"
     Then user should be on "Delivery" tab
 
 

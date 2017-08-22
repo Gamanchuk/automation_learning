@@ -9,6 +9,7 @@ Feature: GUEST - PAYMENT PAGE - QCARD
     And user should be on "Address" tab
     And user types manually billing info for "qa user" without email
     And presses the "Continue" button
+    And chooses "Use Entered Address"
     Then user should be on "Delivery" tab
     And presses the "Continue" button
 

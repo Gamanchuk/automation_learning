@@ -19,4 +19,5 @@ Feature: GUEST - SHIPPING & BILLING PAGE - BILLING INFO - DOMESTIC
 
     When user types "94105" into the "Zip Code" field of "Billing Address" address form
     And presses the "Continue" button
+    And chooses "Use Entered Address"
     Then user should be on "Delivery" tab
