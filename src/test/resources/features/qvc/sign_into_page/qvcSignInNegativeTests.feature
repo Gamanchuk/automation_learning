@@ -22,7 +22,7 @@ Feature: SIGN IN PAGE
     And presses the "Continue" button
     Then sees "FORM ERRORS" error message with text "Please review all inputs."
 
-    Given user fills email field with "qateam@moovweb.com"
+    Given user fills email field with "yelena.poghosyan@moovweb.com"
     And presses the "Continue" button
     Then user should see password field
     
@@ -32,11 +32,11 @@ Feature: SIGN IN PAGE
     Then sees "FORM ERRORS" error message with text "Please review all inputs."
 
     Given user fills email field with ""
-    And user fills password field with "Spear201!"
+    And user fills password field with "Spear160!"
     And presses the "Continue" button
     Then sees "FORM ERRORS" error message with text "Please review all inputs."
 
-    Given user fills email field with "qateam@moovweb.com"
+    Given user fills email field with "yelena.poghosyan@moovweb.com"
     And user fills password field with ""
     Then sees "FORM ERRORS" error message with text "Please review all inputs."
 
