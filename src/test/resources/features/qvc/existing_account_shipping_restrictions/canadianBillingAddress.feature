@@ -1,4 +1,4 @@
-@qvc @debug
+@qvc
 
 Feature: EXISTING ACCOUNT - SHIPPING RESTRICTIONS
 
