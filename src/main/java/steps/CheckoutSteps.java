@@ -1062,13 +1062,21 @@ public class CheckoutSteps {
 
         signInFormComponent.fillEmail(user.getEmail());
         buttonComponent.clickButtonWithSendKeys();
-        if (user.getPassword() == null) {
-            BillingUser user1 = DataProvider.getUser(userName);
-            signInFormComponent.fillPassword(user1.getPassword());
-        } else {
+
+        try {
             signInFormComponent.fillPassword(user.getPassword());
             CommonFunctions.attachScreenshot("Checkout as existing user");
+        } catch (Exception elementHasDisappeared) {
+            log.error(String.format("Catch StaleElementReferenceException after entering password \"%s\".", userName));
+            log.debug(String.format("Error: \"%s\".", elementHasDisappeared.getLocalizedMessage()));
+            BillingUser user1 = DataProvider.getUser(userName);
+            signInFormComponent.fillPassword(user1.getPassword());
+            CommonFunctions.attachScreenshot("Checkout as existing user");
         }
+
+       //     signInFormComponent.fillPassword(user.getPassword());
+       //     CommonFunctions.attachScreenshot("Checkout as existing user");
+       //
     }
 
     @Given("^user fill contact details as \"([^\"]*)\"$")
