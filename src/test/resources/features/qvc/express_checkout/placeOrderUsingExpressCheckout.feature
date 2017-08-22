@@ -17,7 +17,7 @@ Feature: EXPRESS CHECKOUT
     Given user clicks arrow for "Payment Method"
     And user should be on "Payment" tab
     And user selects "1 payment" Payment Option
-    And uses saved "mastercard" card for payment
+    And uses saved "visa" card for payment
     And presses the "Continue" button
     
     And user should be on "Review" tab

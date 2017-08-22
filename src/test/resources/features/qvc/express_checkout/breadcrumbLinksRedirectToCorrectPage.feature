@@ -41,7 +41,7 @@ Feature: EXPRESS CHECKOUT - BREADCRUMB
     # Check from Payment tab
     And user presses "Review" breadcrumb tab
     And user selects "1 payment" Payment Option
-    And uses saved "mastercard" card for payment
+    And uses saved "visa" card for payment
     And presses the "Continue" button
 
     Then user should be on "Review" tab

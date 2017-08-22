@@ -1062,9 +1062,13 @@ public class CheckoutSteps {
 
         signInFormComponent.fillEmail(user.getEmail());
         buttonComponent.clickButtonWithSendKeys();
-        signInFormComponent.fillPassword(user.getPassword());
-        CommonFunctions.attachScreenshot("Checkout as existing user");
-
+        if (user.getPassword() == null) {
+            BillingUser user1 = DataProvider.getUser(userName);
+            signInFormComponent.fillPassword(user1.getPassword());
+        } else {
+            signInFormComponent.fillPassword(user.getPassword());
+            CommonFunctions.attachScreenshot("Checkout as existing user");
+        }
     }
 
     @Given("^user fill contact details as \"([^\"]*)\"$")
