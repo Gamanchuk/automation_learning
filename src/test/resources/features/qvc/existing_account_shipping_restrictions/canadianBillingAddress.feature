@@ -27,6 +27,7 @@ Feature: EXISTING ACCOUNT - SHIPPING RESTRICTIONS
     And presses the "Continue" button
     Then user should be on "Review" tab
     And user clicks arrow for "Billing Address"
+    And chooses "Canada" country
     And user types manually Canadian billing address for "qa canada" without email
     And presses the "Continue" button
     And chooses "Use Entered Address"
