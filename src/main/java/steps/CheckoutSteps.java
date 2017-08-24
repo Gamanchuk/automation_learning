@@ -91,8 +91,16 @@ public class CheckoutSteps {
 
     @And("^user checks \"([^\"]*)\" checkbox$")
     public void userChecksCheckbox(String label) {
-        checkboxRowComponent.check(label, true);
-        CommonFunctions.attachScreenshot("Checkbox");
+        try {
+            checkboxRowComponent.check(label, true);
+            CommonFunctions.attachScreenshot("Checkbox");
+        } catch (Exception elementHasDisappeared) {
+            log.error(String.format("Catch StaleElementReferenceException after checking checkbox \"%s\".", label));
+            log.debug(String.format("Error: \"%s\".", elementHasDisappeared.getLocalizedMessage()));
+            // try to check the checkbox again
+            checkboxRowComponent.check(label, true);
+            CommonFunctions.attachScreenshot("Checkbox");
+        }
     }
 
     @And("^user chooses \"([^\"]*)\" title$")
@@ -330,6 +338,7 @@ public class CheckoutSteps {
     public void userRemoveProduct() {
         assertTrue(radioListComponent.exists(), "Looks like delivery Method Drop-Down doesn't exists");
         productListComponent.removeProduct();
+        CommonFunctions.sleep(3000);
         CommonFunctions.attachScreenshot("Remove product");
     }
 
@@ -397,7 +406,11 @@ public class CheckoutSteps {
         savedOptionPickerComponent.select(card.getFourLastNumbers());
 
         if (!card.getName().equals("qCard")) {
-            creditCardFormComponent.inputValueIntoField(card.getCvv(), "CVV");
+            //create some condition if cvv field is loaded only then input CVV
+            //For QVC sometimes for existing user no CVV is required, conditions for this are unknown
+            if (creditCardFormComponent.existsCvv()) {
+                creditCardFormComponent.inputValueIntoField(card.getCvv(), "CVV");
+            }
         }
 
         CommonFunctions.attachScreenshot("Card selected");

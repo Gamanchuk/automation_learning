@@ -60,6 +60,10 @@ public class CreditCardFormComponent extends BaseComponent {
         }
     }
 
+    public boolean existsCvv() {
+        return isElementVisible(csc);
+    }
+
     private void fillField(By field, String value) {
         WebElement element = findElement(field);
         focusOut(element);

@@ -1,4 +1,4 @@
-@qvc
+@qvc @Ignored
 
 Feature: EXISTING ACCOUNT - SHIPPING RESTRICTIONS
 
