@@ -302,6 +302,7 @@ public class CheckoutSteps {
         } catch (Exception elementHasDisappeared) {
             log.error(String.format("Catch StaleElementReferenceException after click button \"%s\".", confirmationMethod));
             log.debug(String.format("Error: \"%s\".", elementHasDisappeared.getLocalizedMessage()));
+            buttonComponent.clickButton(confirmationMethod);
         }
 
         // Experiment. Trying to fix the problem with "Element is no longer attached to DOM"
@@ -917,6 +918,7 @@ public class CheckoutSteps {
         signInFormComponent.signIn(email, password);
         CommonFunctions.attachScreenshot("Set [" + email + "] email and [" + password + "] password");
         buttonComponent.clickButtonWithSendKeys();
+        CommonFunctions.sleep(3000);
     }
 
     @And("^user presses the signIn button$")
@@ -970,6 +972,7 @@ public class CheckoutSteps {
 
     @And("^sees error tooltip with text \"([^\"]*)\"$")
     public void seesErrorTooltipWithText(String error) {
+        CommonFunctions.sleep(500);
         assertTrue(errorMessageComponent.hasErrorTooltipWithMessage(error),
                 "Tooltip with message \"" + error + "\" not found");
         CommonFunctions.attachScreenshot("Tooltip");

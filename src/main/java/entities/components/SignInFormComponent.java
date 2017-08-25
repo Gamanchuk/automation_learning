@@ -47,7 +47,9 @@ public class SignInFormComponent extends BaseComponent {
     }
 
     public void fillPassword(String value) {
+        WebElement passEl = findElement(passwordField);
         fillField(passwordField, value);
+        focusOut(passEl);
     }
 
     public void pressWhereDoIEnterMyPassword() {
