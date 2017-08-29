@@ -1,6 +1,5 @@
 package steps;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -1176,10 +1175,47 @@ public class CheckoutSteps {
         assertTrue(new OrderSummaryComponent().isVisible(), "Order Summary in invisible");
         CommonFunctions.attachScreenshot("Collapser");
     }
-  
+
     @And("^user should be see Password Assistance$")
     public void userShouldBeSeePasswordAssistance() {
         assertTrue(forgotPasswordComponent.exists(), "Password Assistance modal doesn't opened.");
         CommonFunctions.attachScreenshot("Password Assistance modal");
+    }
+
+    @And("^user remembered shipping info on \"([^\"]*)\" tab$")
+    public void userRememberShippingInfoOnTab(String tab) {
+        userShouldBeOnTab(tab);
+        String shippingInfoText = addressDisplayComponent.getAddressDisplayData();
+        log.info("Remember shipping info: " + shippingInfoText);
+        TestGlobalsManager.setTestGlobal("Shipping info", shippingInfoText);
+    }
+
+    @And("^user remembered delivery method on \"([^\"]*)\" tab$")
+    public void userRememberDeliveryMethodOnTab(String tab) {
+        userShouldBeOnTab(tab);
+        String deliveryMethodText = shippingOptionsComponent.getCurrentShippingOptions();
+        log.info("Remember delivery method: " + deliveryMethodText);
+        TestGlobalsManager.setTestGlobal("Delivery method", deliveryMethodText);
+    }
+
+
+    @And("^user checks shipping info on \"([^\"]*)\" tab$")
+    public void userChecksShippingInfoOnTab(String tab) {
+        userShouldBeOnTab(tab);
+
+        String actualShippingInfo = addressDisplayComponent.getAddressDisplayData();
+        String expectedShippingInfo = (String) TestGlobalsManager.getTestGlobal("Shipping info");
+
+        assertEquals(actualShippingInfo, expectedShippingInfo);
+    }
+
+    @And("^user checks delivery method on \"([^\"]*)\" tab$")
+    public void userChecksDeliveryMethodOnTab(String tab) {
+        userShouldBeOnTab(tab);
+
+        String actualDeliveryMethod = shippingOptionsComponent.getCurrentShippingOptionDisplay();
+        String expectedDeliveryMethod = (String) TestGlobalsManager.getTestGlobal("Delivery method");
+
+        assertEquals(actualDeliveryMethod, expectedDeliveryMethod);
     }
 }

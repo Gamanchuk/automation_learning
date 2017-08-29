@@ -4,6 +4,7 @@ package steps.pepboys;
 import cucumber.api.java.en.And;
 import entities.components.PayPalComponent;
 import entities.pages.pepboys.PepBoysCheckoutPage;
+import utils.CommonFunctions;
 import utils.Config;
 import utils.TestGlobalsManager;
 import utils.pepboys.BillingUser;
@@ -44,6 +45,7 @@ public class PayPalLoginPageSteps {
     @And("^user presses Log In PayPal button$")
     public void userPressesLogInPayPalButton() {
         payPalComponent.clickLogin();
+        CommonFunctions.attachScreenshot("User presses Log In PayPal button");
     }
 
 }

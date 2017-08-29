@@ -129,7 +129,7 @@ public class DriverFactory {
                 CommonFunctions.startVideoRecording();
 
                 /* Clean before test started */
-                TestGlobalsManager.setTestGlobal("authorised", null);
+                TestGlobalsManager.clearTestGlobal();
 
                 retryCount = 0;
             } catch (Exception e) {

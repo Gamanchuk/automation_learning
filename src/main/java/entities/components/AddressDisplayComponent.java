@@ -11,6 +11,7 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class AddressDisplayComponent extends BaseComponent {
+    private By addressDisplay = By.cssSelector("div.address-display");
     private By deliveryApt = By.cssSelector("div.address-line2");
     private By deliveryName = By.cssSelector("div.address-recipient");
     private By deliveryStreetAddress = By.cssSelector("div.address-line1");
@@ -99,6 +100,10 @@ public class AddressDisplayComponent extends BaseComponent {
         }
 
         assertEquals(phone, result, "Incorrect phone number was saved");
+    }
+
+    public String getAddressDisplayData() {
+        return findElement(addressDisplay).getText();
     }
 
     private By getFieldByName(String fieldName) {
