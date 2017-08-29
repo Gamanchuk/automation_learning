@@ -20,3 +20,6 @@ Feature: HAPPY PATH
 
     And uses "mastercard" card for payment
     And presses the "Place Order" button
+    Then user should be on thank you page
+
+

@@ -1,4 +1,4 @@
-@qvc @Ignored
+@qvc
 
 Feature: EXISTING ACCOUNT - PAYMENT PAGE
 
@@ -17,5 +17,7 @@ Feature: EXISTING ACCOUNT - PAYMENT PAGE
     Given user should be on "Payment" tab
     And user selects "1 payment" Payment Option
     And uses saved "qcard" card for payment
+    And presses the "Continue" button
+    Then user should be on "Review" tab
     And presses the "Place Order" button
     Then user should be on thank you page

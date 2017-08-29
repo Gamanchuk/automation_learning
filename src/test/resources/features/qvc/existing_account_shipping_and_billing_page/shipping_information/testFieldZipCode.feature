@@ -22,4 +22,5 @@ Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE - SHIPPING INFO
 
     And user types "94105" into the "Zip Code" field of "Shipping Address" address form
     And presses the "Continue" button
+    And chooses "Use Entered Address"
     Then user should be on "Delivery" tab

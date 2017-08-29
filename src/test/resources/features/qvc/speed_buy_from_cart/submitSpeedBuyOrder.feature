@@ -7,7 +7,7 @@ Feature: SPEED BUY FROM CART
 
   @TestCaseId("")
   Scenario: Submit speed buy order
-    Given user makes authorisation with "gamanchuk.aleksey@moovweb.com" email and "asdffdsA1" password
+    Given user makes authorisation with "yelena.poghosyan@moovweb.com" email and "Spear160!" password
     Then user should be on thank you page
 
     

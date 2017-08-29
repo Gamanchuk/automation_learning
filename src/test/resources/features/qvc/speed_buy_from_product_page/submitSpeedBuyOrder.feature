@@ -7,6 +7,6 @@ Feature: SPEED BUY FROM PRODUCT PAGE
 
   @TestCaseId("")
   Scenario: Submit speed buy order
-    Given user makes authorisation with "manytu3@i.ua" email and "q1q1w1w1" password
+    Given user makes authorisation with "yelena.poghosyan@moovweb.com" email and "Spear160!" password
     Then user should be on thank you page
     

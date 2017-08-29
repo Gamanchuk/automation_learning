@@ -2,7 +2,6 @@
 
 Feature: HAPPY PATH
 
-
   Background: Add product to card and process to checkout
     Given user adds product to cart from Saatva
     And chooses "Checkout" method on Saatva cart page
@@ -20,4 +19,4 @@ Feature: HAPPY PATH
 
     And uses "mastercard" card for payment
     And presses the "Place Order" button
-
+    Then user should be on thank you page

@@ -22,10 +22,11 @@ Feature: SHIPPING PAGE - BILLING INFO
     Then user should stay at "Shipping" tab
     And sees "FORM ERRORS" error message with text "Please review all inputs."
 
-    And user types "!@#&( !@#()" into the "Full Name" field of "Billing Address" address form
-    And presses the "Continue" button
-    Then user should stay at "Shipping" tab
-    And sees "FORM ERRORS" error message with text "Please review all inputs."
+    #This scenario is no longer valid test scenario due to how Name field is handled in Saatva
+    #And user types "!@#&( !@#()" into the "Full Name" field of "Billing Address" address form
+    #And presses the "Continue" button
+    #Then user should stay at "Shipping" tab
+    #And sees "FORM ERRORS" error message with text "Please review all inputs."
 
     And user types "Mr Donal Trump III" into the "Full Name" field of "Billing Address" address form
     And presses the "Continue" button

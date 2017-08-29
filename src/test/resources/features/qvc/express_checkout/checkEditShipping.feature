@@ -17,8 +17,7 @@ Feature: EXPRESS CHECKOUT
 
     And user clicks arrow for "Shipping Address"
     And user should be on "Address" tab
-    And unset checkbox "Yes, shipping address and billing address are the same"
-    And applies shipping info for address "SECOND HOME"
+    And applies shipping info for address "S1499443153421"
     And presses the "Continue" button
 
     And user should be on "Delivery" tab
@@ -26,7 +25,7 @@ Feature: EXPRESS CHECKOUT
 
     And user should be on "Payment" tab
     And user selects "1 payment" Payment Option
-    And uses saved "mastercard" card for payment
+    And uses saved "visa-saved" card for payment
     And presses the "Continue" button
 
     And user should be on "Review" tab
