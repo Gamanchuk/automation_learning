@@ -11,7 +11,7 @@ Feature: EXPRESS PAYPAL CHECKOUT - SHIPPING PAGE - BILLING INFO
 
   @Issues("MCCAT-6309")
   @TestCaseId("101907")
-  @TestCaseId("")
+  @TestCaseId("101914")
   Scenario: Test field 'Last name'
     Given user types "4154154156" into the "Phone Number" field of "Shipping Address" address form
     And unset checkbox "Yes, billing address and shipping address are the same"
@@ -21,6 +21,13 @@ Feature: EXPRESS PAYPAL CHECKOUT - SHIPPING PAGE - BILLING INFO
     And presses the "Continue" button
     Then user should stay at "Shipping" tab
     And sees "FORM ERRORS" error message with text "Please review all inputs."
+
+    And user types "qa qwertyuioplkjhgfdsazxcvbnm" into the "Full Name" field of "Shipping Address" address form
+    And presses the "Continue" button
+    And chooses "Use Entered Address"
+    Then user should be on "Payment & Review" tab
+    And user presses "Shipping" breadcrumb tab
+    Then user should be on "Shipping" tab
 
     And user types "Moovweb !@#&::!@#()" into the "Full Name" field of "Billing Address" address form
     And presses the "Continue" button

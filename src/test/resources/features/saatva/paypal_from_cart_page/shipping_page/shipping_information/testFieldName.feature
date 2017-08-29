@@ -10,7 +10,7 @@ Feature: EXPRESS PAYPAL CHECKOUT - SHIPPING PAGE - SHIPPING INFO
     And user should be on "Shipping" tab
 
   @TestCaseId("101874")
-  @TestCaseId("")
+  @TestCaseId("101883")
   Scenario: Test field 'Name'
 
     Given user types "" into the "Full Name" field of "Shipping Address" address form
@@ -22,6 +22,13 @@ Feature: EXPRESS PAYPAL CHECKOUT - SHIPPING PAGE - SHIPPING INFO
     And presses the "Continue" button
     Then user should stay at "Shipping" tab
     And sees "FORM ERRORS" error message with text "Please review all inputs."
+
+    And user types "qwertyuioplkjhgfdsazxcvbnm qa" into the "Full Name" field of "Shipping Address" address form
+    And presses the "Continue" button
+    And chooses "Use Entered Address"
+    Then user should be on "Payment & Review" tab
+    And user presses "Shipping" breadcrumb tab
+    Then user should be on "Shipping" tab
 
     And user types "Mr Donal Trump III" into the "Full Name" field of "Shipping Address" address form
     And user types "4154154156" into the "Phone Number" field of "Shipping Address" address form
