@@ -19,7 +19,6 @@ Feature: EXISTING ACCOUNT - SHIPPING & BILLING PAGE - SHIPPING INFO
     And unset checkbox "Save this address to my address book"
     And presses the "Continue" button
 
-    And chooses "Use Recommended Address"
     Then user should be on "Delivery" tab
 
 

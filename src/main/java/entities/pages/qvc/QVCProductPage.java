@@ -11,7 +11,7 @@ import static org.testng.Assert.assertTrue;
 public class QVCProductPage extends BasePage {
 
     private By addToCart = By.xpath("//button[contains(@class, 'btnAddToCart')]");
-    private By colorList = By.cssSelector("li.selectColor");
+    private By colorList = By.cssSelector("div.selectColor");
     private By age = By.id("cbAge");
 
     public void openPage(String productUrl) {

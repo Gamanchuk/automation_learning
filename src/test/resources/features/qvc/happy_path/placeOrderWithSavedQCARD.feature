@@ -1,4 +1,4 @@
-@qvc @Ignored
+@qvc
 
 Feature: HAPPY PATH
 
@@ -18,7 +18,8 @@ Feature: HAPPY PATH
     And presses the "Continue" button
 
     And user should be on "Payment" tab
-    And uses saved "qcard" card for payment
+    # **** No need to select since QCard is first saved option ****
+    #And uses saved "qcard" card for payment
     And presses the "Continue" button
 
     And user should be on "Review" tab

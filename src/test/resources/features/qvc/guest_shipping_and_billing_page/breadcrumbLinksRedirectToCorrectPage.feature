@@ -12,7 +12,7 @@ Feature: GUEST - BREADCRUMB
   @TestCaseId("102039")
   Scenario: Breadcrumb links redirect user to correct page
 
-    When user types billing info for "qa user" without email
+    When user types manually billing info for "qa user" without email
 
     # Check from Address tab
     And user presses "Delivery" breadcrumb tab

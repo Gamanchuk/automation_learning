@@ -1,4 +1,4 @@
-@qvc
+@qvc @Ignored
 
 Feature: GUEST - SHIPPING & BILLING PAGE - BILLING INFO - DOMESTIC
 
@@ -14,7 +14,7 @@ Feature: GUEST - SHIPPING & BILLING PAGE - BILLING INFO - DOMESTIC
   Scenario: Test with correct billing information and fill in all existing fields (Address chosen from dropdown of auto-detect)
 
     When user chooses "Miss" title
-    And user types billing info for "qa user" without email
+    And user types manually billing info for "qa user" without email
     And presses the "Continue" button
     And chooses "Use Entered Address"
     Then user should be on "Delivery" tab

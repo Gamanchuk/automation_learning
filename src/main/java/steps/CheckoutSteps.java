@@ -91,8 +91,16 @@ public class CheckoutSteps {
 
     @And("^user checks \"([^\"]*)\" checkbox$")
     public void userChecksCheckbox(String label) {
-        checkboxRowComponent.check(label, true);
-        CommonFunctions.attachScreenshot("Checkbox");
+        try {
+            checkboxRowComponent.check(label, true);
+            CommonFunctions.attachScreenshot("Checkbox");
+        } catch (Exception elementHasDisappeared) {
+            log.error(String.format("Catch StaleElementReferenceException after checking checkbox \"%s\".", label));
+            log.debug(String.format("Error: \"%s\".", elementHasDisappeared.getLocalizedMessage()));
+            // try to check the checkbox again
+            checkboxRowComponent.check(label, true);
+            CommonFunctions.attachScreenshot("Checkbox");
+        }
     }
 
     @And("^user chooses \"([^\"]*)\" title$")
@@ -294,6 +302,7 @@ public class CheckoutSteps {
         } catch (Exception elementHasDisappeared) {
             log.error(String.format("Catch StaleElementReferenceException after click button \"%s\".", confirmationMethod));
             log.debug(String.format("Error: \"%s\".", elementHasDisappeared.getLocalizedMessage()));
+            buttonComponent.clickButton(confirmationMethod);
         }
 
         // Experiment. Trying to fix the problem with "Element is no longer attached to DOM"
@@ -330,6 +339,7 @@ public class CheckoutSteps {
     public void userRemoveProduct() {
         assertTrue(radioListComponent.exists(), "Looks like delivery Method Drop-Down doesn't exists");
         productListComponent.removeProduct();
+        CommonFunctions.sleep(3000);
         CommonFunctions.attachScreenshot("Remove product");
     }
 
@@ -397,7 +407,11 @@ public class CheckoutSteps {
         savedOptionPickerComponent.select(card.getFourLastNumbers());
 
         if (!card.getName().equals("qCard")) {
-            creditCardFormComponent.inputValueIntoField(card.getCvv(), "CVV");
+            //create some condition if cvv field is loaded only then input CVV
+            //For QVC sometimes for existing user no CVV is required, conditions for this are unknown
+            if (creditCardFormComponent.existsCvv()) {
+                creditCardFormComponent.inputValueIntoField(card.getCvv(), "CVV");
+            }
         }
 
         CommonFunctions.attachScreenshot("Card selected");
@@ -904,6 +918,7 @@ public class CheckoutSteps {
         signInFormComponent.signIn(email, password);
         CommonFunctions.attachScreenshot("Set [" + email + "] email and [" + password + "] password");
         buttonComponent.clickButtonWithSendKeys();
+        CommonFunctions.sleep(3000);
     }
 
     @And("^user presses the signIn button$")
@@ -957,6 +972,7 @@ public class CheckoutSteps {
 
     @And("^sees error tooltip with text \"([^\"]*)\"$")
     public void seesErrorTooltipWithText(String error) {
+        CommonFunctions.sleep(500);
         assertTrue(errorMessageComponent.hasErrorTooltipWithMessage(error),
                 "Tooltip with message \"" + error + "\" not found");
         CommonFunctions.attachScreenshot("Tooltip");
@@ -1062,9 +1078,21 @@ public class CheckoutSteps {
 
         signInFormComponent.fillEmail(user.getEmail());
         buttonComponent.clickButtonWithSendKeys();
-        signInFormComponent.fillPassword(user.getPassword());
-        CommonFunctions.attachScreenshot("Checkout as existing user");
 
+        try {
+            signInFormComponent.fillPassword(user.getPassword());
+            CommonFunctions.attachScreenshot("Checkout as existing user");
+        } catch (Exception elementHasDisappeared) {
+            log.error(String.format("Catch StaleElementReferenceException after entering password \"%s\".", userName));
+            log.debug(String.format("Error: \"%s\".", elementHasDisappeared.getLocalizedMessage()));
+            BillingUser user1 = DataProvider.getUser(userName);
+            signInFormComponent.fillPassword(user1.getPassword());
+            CommonFunctions.attachScreenshot("Checkout as existing user");
+        }
+
+       //     signInFormComponent.fillPassword(user.getPassword());
+       //     CommonFunctions.attachScreenshot("Checkout as existing user");
+       //
     }
 
     @Given("^user fill contact details as \"([^\"]*)\"$")
@@ -1181,5 +1209,11 @@ public class CheckoutSteps {
     public void userShouldBeSeePasswordAssistance() {
         assertTrue(forgotPasswordComponent.exists(), "Password Assistance modal doesn't opened.");
         CommonFunctions.attachScreenshot("Password Assistance modal");
+    }
+
+    @And("^user types manually shipping address for \"([^\"]*)\" without same as billing checkbox$")
+    public void userTypesManuallyShippingAddressForWithoutSameAsBillingCheckbox(String userName) {
+        fillShippingAddress(userName, false, false, false);
+        CommonFunctions.attachScreenshot("Shipping address form");
     }
 }
