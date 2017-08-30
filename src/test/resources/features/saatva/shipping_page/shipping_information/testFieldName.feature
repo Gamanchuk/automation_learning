@@ -11,6 +11,7 @@ Feature: SHIPPING PAGE - SHIPPING INFO
 
   @TestCaseId("101032")
   @TestCaseId("101015")
+  @TestCaseId("101041")
   Scenario: Test field 'Name'
     Given user types shipping address for "qa user" with phone number
 
@@ -19,13 +20,19 @@ Feature: SHIPPING PAGE - SHIPPING INFO
     Then user should stay at "Shipping" tab
     And sees "FORM ERRORS" error message with text "Please review all inputs."
 
-    And user types "!@#&( !@#()" into the "Full Name" field of "Shipping Address" address form
+    And user types "qwertyuioplkjhgfdsazxcvbnm qa" into the "Full Name" field of "Shipping Address" address form
     And presses the "Continue" button
     And chooses "Use Entered Address"
     Then user should be on "Payment & Review" tab
     And user presses "Shipping" breadcrumb tab
     Then user should be on "Shipping" tab
 
+    And user types "!@#&( !@#()" into the "Full Name" field of "Shipping Address" address form
+    And presses the "Continue" button
+    And chooses "Use Entered Address"
+    Then user should be on "Payment & Review" tab
+    And user presses "Shipping" breadcrumb tab
+    Then user should be on "Shipping" tab
 
     #Then user should stay at "Shipping" tab
     #And sees "FORM ERRORS" error message with text "Please review all inputs."

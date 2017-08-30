@@ -161,6 +161,7 @@ public class AddressFormComponent extends BaseComponent {
         element.clear();
         CommonFunctions.sleep(1000);
         element.sendKeys(value);
+        CommonFunctions.sleep(500);
     }
 
     public void selectTitle(String value) {
