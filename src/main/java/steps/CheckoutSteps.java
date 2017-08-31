@@ -1,6 +1,5 @@
 package steps;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -302,7 +301,6 @@ public class CheckoutSteps {
         } catch (Exception elementHasDisappeared) {
             log.error(String.format("Catch StaleElementReferenceException after click button \"%s\".", confirmationMethod));
             log.debug(String.format("Error: \"%s\".", elementHasDisappeared.getLocalizedMessage()));
-            buttonComponent.clickButton(confirmationMethod);
         }
 
         // Experiment. Trying to fix the problem with "Element is no longer attached to DOM"
@@ -1085,8 +1083,7 @@ public class CheckoutSteps {
         } catch (Exception elementHasDisappeared) {
             log.error(String.format("Catch StaleElementReferenceException after entering password \"%s\".", userName));
             log.debug(String.format("Error: \"%s\".", elementHasDisappeared.getLocalizedMessage()));
-            BillingUser user1 = DataProvider.getUser(userName);
-            signInFormComponent.fillPassword(user1.getPassword());
+            signInFormComponent.fillPassword(user.getPassword());
             CommonFunctions.attachScreenshot("Checkout as existing user");
         }
 
@@ -1204,7 +1201,7 @@ public class CheckoutSteps {
         assertTrue(new OrderSummaryComponent().isVisible(), "Order Summary in invisible");
         CommonFunctions.attachScreenshot("Collapser");
     }
-  
+
     @And("^user should be see Password Assistance$")
     public void userShouldBeSeePasswordAssistance() {
         assertTrue(forgotPasswordComponent.exists(), "Password Assistance modal doesn't opened.");
@@ -1215,5 +1212,42 @@ public class CheckoutSteps {
     public void userTypesManuallyShippingAddressForWithoutSameAsBillingCheckbox(String userName) {
         fillShippingAddress(userName, false, false, false);
         CommonFunctions.attachScreenshot("Shipping address form");
+    }
+
+    @And("^user remembered shipping info on \"([^\"]*)\" tab$")
+    public void userRememberShippingInfoOnTab(String tab) {
+        userShouldBeOnTab(tab);
+        String shippingInfoText = addressDisplayComponent.getAddressDisplayData();
+        log.info("Remember shipping info: " + shippingInfoText);
+        TestGlobalsManager.setTestGlobal("Shipping info", shippingInfoText);
+    }
+
+    @And("^user remembered delivery method on \"([^\"]*)\" tab$")
+    public void userRememberDeliveryMethodOnTab(String tab) {
+        userShouldBeOnTab(tab);
+        String deliveryMethodText = shippingOptionsComponent.getCurrentShippingOptions();
+        log.info("Remember delivery method: " + deliveryMethodText);
+        TestGlobalsManager.setTestGlobal("Delivery method", deliveryMethodText);
+    }
+
+
+    @And("^user checks shipping info on \"([^\"]*)\" tab$")
+    public void userChecksShippingInfoOnTab(String tab) {
+        userShouldBeOnTab(tab);
+
+        String actualShippingInfo = addressDisplayComponent.getAddressDisplayData();
+        String expectedShippingInfo = (String) TestGlobalsManager.getTestGlobal("Shipping info");
+
+        assertEquals(actualShippingInfo, expectedShippingInfo);
+    }
+
+    @And("^user checks delivery method on \"([^\"]*)\" tab$")
+    public void userChecksDeliveryMethodOnTab(String tab) {
+        userShouldBeOnTab(tab);
+
+        String actualDeliveryMethod = shippingOptionsComponent.getCurrentShippingOptionDisplay();
+        String expectedDeliveryMethod = (String) TestGlobalsManager.getTestGlobal("Delivery method");
+
+        assertEquals(actualDeliveryMethod, expectedDeliveryMethod);
     }
 }

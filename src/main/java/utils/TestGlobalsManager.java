@@ -10,7 +10,7 @@ public class TestGlobalsManager {
     }
 
     public static Object getTestGlobal(String name) {
-        if(getGlobals() != null) {
+        if (getGlobals() != null) {
             return getGlobals().get(name);
         } else {
             return null;
@@ -25,5 +25,9 @@ public class TestGlobalsManager {
         getGlobals().put(name, value);
     }
 
-
+    public static void clearTestGlobal() {
+        if (getGlobals() != null) {
+            getGlobals().clear();
+        }
+    }
 }
