@@ -10,7 +10,7 @@ Feature: EXPRESS PAYPAL - REVIEW PAGE - HEADER & FOOTER
     And presses the "Continue" button
     Then user should be on "Review" tab
 
-  @TestCaseId("16534")
+  @TestCaseId("16539")
   Scenario: Check Cart icon
 
     Given user presses the Shopping Cart icon

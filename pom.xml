@@ -719,6 +719,16 @@
             </properties>
         </profile>
 
+        <profile>
+            <id>suite-shoe-expressPayPal</id>
+            <properties>
+                <testng.suite>
+                    ${basedir}/src/test/resources/testsuites/shoe/shoe_express_paypal_page.xml
+                </testng.suite>
+                <suite.id>100</suite.id>
+            </properties>
+        </profile>
+
 
         <!--Philosophy Suite-->
 
