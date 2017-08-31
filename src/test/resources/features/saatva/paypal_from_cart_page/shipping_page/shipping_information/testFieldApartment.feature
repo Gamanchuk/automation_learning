@@ -5,6 +5,7 @@ Feature: EXPRESS PAYPAL CHECKOUT - SHIPPING PAGE - SHIPPING INFO
   Background: Add product to card and process to checkout
     Given user adds product to cart from Saatva
     And chooses "PayPal" method on Saatva cart page
+    And user presses Log In PayPal button
     And user confirms purchase as "qa user" with PayPal
 
     And user should be on "Shipping" tab

@@ -1,4 +1,4 @@
-@shoe @debug
+@shoe
 
 Feature: EXPRESS PAYPAL - REVIEW PAGE - HEADER & FOOTER
 
