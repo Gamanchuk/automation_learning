@@ -1,6 +1,7 @@
 package entities.components;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import utils.CommonFunctions;
 import utils.pepboys.BillingUser;
@@ -21,16 +22,19 @@ public class PayPalComponent extends BaseComponent {
      */
     public void clickLogin() {
         String frame = "automation-frame";
-        By login = By.xpath("//div[contains(@class, 'baslLoginButtonContainer')]");
+        By loginSection = By.className("loginRedirect");
+
         boolean iframe = isIframeExist(frame);
 
         if (iframe) {
             assertTrue(isIframeExist(frame), "PayPal iframe doesn't exist.");
-            getDriver().switchTo().frame("automation-frame");
+            getDriver().switchTo().frame(frame);
         }
 
-        if (isElementVisible(login)) {
-            getDriver().findElement(login).click();
+        if (isElementVisible(loginSection, 10)) {
+            CommonFunctions.sleep(500);
+            JavascriptExecutor js = (JavascriptExecutor) getDriver();
+            js.executeScript("document.getElementsByClassName(\"btn full ng-binding\")[0].click();");
         }
 
         if (iframe) {

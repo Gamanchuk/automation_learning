@@ -8,11 +8,11 @@ import static org.testng.Assert.fail;
 
 public class RadioListComponent extends BaseComponent {
     private By currentItem = By.cssSelector(".radio-list-option-selected");
+    private By currentItemDetails = By.cssSelector(".radio-list-option-selected .radio-list-details");
 
     public boolean select(String option) {
 
-        By currentItemDetails = By.cssSelector(".radio-list-option-selected .radio-list-details");
-        String currentItemText = findElement(currentItemDetails).getText();
+        String currentItemText = getCurrent();
 
         log.info("Actual item: " + currentItemText + ". Expected item: " + option);
 
@@ -45,5 +45,9 @@ public class RadioListComponent extends BaseComponent {
 
     public boolean exists() {
         return isElementVisible(currentItem) && isElementPresent(currentItem);
+    }
+
+    public String getCurrent() {
+        return findElement(currentItemDetails).getText();
     }
 }
