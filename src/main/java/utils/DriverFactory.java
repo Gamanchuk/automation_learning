@@ -1,6 +1,7 @@
 package utils;
 
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
+import io.appium.java_client.remote.AutomationName;
 import io.appium.java_client.remote.IOSMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
@@ -32,7 +33,6 @@ import java.util.concurrent.TimeoutException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static io.appium.java_client.remote.AutomationName.IOS_XCUI_TEST;
 import static io.appium.java_client.remote.MobilePlatform.ANDROID;
 import static io.appium.java_client.remote.MobilePlatform.IOS;
 
@@ -83,7 +83,7 @@ public class DriverFactory {
                 if (Config.PLATFORM_NAME.equals(IOS)) {
 
                     /* Capabilities for use new XCUITest framework */
-                    desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, IOS_XCUI_TEST);
+                    desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.IOS_XCUI_TEST);
 
                     /* Capabilities for clear and disabled cache/logs */
                     desiredCapabilities.setCapability(IOSMobileCapabilityType.SHOW_IOS_LOG, xcode_logs);
@@ -107,6 +107,8 @@ public class DriverFactory {
                 }
 
                 if (Config.PLATFORM_NAME.equals(ANDROID)) {
+
+                    desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.ANDROID_UIAUTOMATOR2);
 
                     /* Chrome Capabilities for disable google translate */
                     ChromeOptions options = new ChromeOptions();
