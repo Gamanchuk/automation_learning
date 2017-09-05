@@ -108,7 +108,7 @@ public class DriverFactory {
 
                 if (Config.PLATFORM_NAME.equals(ANDROID)) {
 
-                    desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.ANDROID_UIAUTOMATOR2);
+                    //desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.ANDROID_UIAUTOMATOR2);
 
                     /* Chrome Capabilities for disable google translate */
                     ChromeOptions options = new ChromeOptions();
