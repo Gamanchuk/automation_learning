@@ -26,7 +26,7 @@ public class BreadcrumbComponent extends BaseComponent {
     }
 
     public boolean isTabActive(String tabName) {
-        return findElement(getBreadcrumbByName(tabName)).getAttribute("class").contains("isActive");
+        return findElement(getBreadcrumbByName(tabName)).getAttribute("class").contains("active");
     }
 
     public boolean isTabDisabled(String tabName) {
