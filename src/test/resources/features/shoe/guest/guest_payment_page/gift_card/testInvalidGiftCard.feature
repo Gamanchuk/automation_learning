@@ -1,4 +1,4 @@
-@shoe @Ignored
+@shoe
 
 Feature: GUEST - PAYMENT PAGE - GIFT CARD
 

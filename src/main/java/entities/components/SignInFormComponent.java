@@ -64,7 +64,7 @@ public class SignInFormComponent extends BaseComponent {
 
     @Override
     public boolean isExist() {
-        return isElementVisible(forgotPassword) || emailComponent.isExist();
+        return isElementVisible(forgotPassword) || emailComponent.isExist(5);
     }
 
     public boolean isPasswordFieldVisible() {

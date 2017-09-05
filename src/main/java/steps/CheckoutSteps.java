@@ -709,7 +709,7 @@ public class CheckoutSteps {
     public void userTypesShippingInfoFor(String userName) {
         String checkBox = "Yes, shipping address and billing address are the same";
 
-        if (checkboxRowComponent.isExist(checkBox, 5)) {
+        if (checkboxRowComponent.isExist(checkBox, 2)) {
             checkboxRowComponent.check(checkBox, false);
         }
 
