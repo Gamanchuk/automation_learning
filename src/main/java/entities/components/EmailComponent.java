@@ -8,7 +8,6 @@ public class EmailComponent extends BaseComponent {
 
     // private By emailDisplay = By.cssSelector("div.email-display");
     private By emailDisplayValue = By.cssSelector("span.email-display-value");
-    //private By emailField = By.xpath("//input[@id='billing-email' or @id='shipping-email']");
     private By emailField = By.cssSelector(".email-input input");
 
     public void fillEmailField(String email) {
@@ -19,13 +18,23 @@ public class EmailComponent extends BaseComponent {
         emailEl.sendKeys(email);
         CommonFunctions.sleep(500);
         focusOut(emailEl);
-
-//        CommonFunctions.sleep(1000);
-//        findElement(emailField).clear();
-//        findElement(emailField).sendKeys(email);
     }
 
     public String getEmailDisplayValue() {
         return findElement(emailDisplayValue).getText();
+    }
+
+    @Override
+    public boolean isExist() {
+        return isElementVisible(emailField);
+    }
+
+    @Override
+    public boolean isExist(int timeout) {
+        return isElementVisible(emailField, timeout);
+    }
+
+    public By getEmailField() {
+        return emailField;
     }
 }

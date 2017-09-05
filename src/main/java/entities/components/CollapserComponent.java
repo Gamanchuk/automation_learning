@@ -7,10 +7,12 @@ import utils.CommonFunctions;
 
 public class CollapserComponent extends BaseComponent {
 
+    private By collapserLink = By.cssSelector("a.collapser-link");
+
     // TODO: update this method to use collapser name
     public void openCollapser() {
 
-        WebElement collapser = findElement(By.cssSelector("a.collapser-link"));
+        WebElement collapser = findElement(collapserLink);
         scrollToElement(collapser);
 
         if (collapser.getAttribute("class").contains("collapsed")) {
@@ -20,17 +22,25 @@ public class CollapserComponent extends BaseComponent {
             // Need sleep for check collapser again
             CommonFunctions.sleep(500);
 
-            collapser = findElement(By.cssSelector("a.collapser-link"));
+            collapser = findElement(collapserLink);
             if (collapser.getAttribute("class").contains("collapsed")) {
                 collapser.click();
             }
-            //click(By.cssSelector("a.collapser-link"));
         }
     }
 
     public String getCollapserLinkText() {
         javascriptScroll(300);
-        return findElement(By.cssSelector("div.collapser-link")).getText();
+        return findElement(collapserLink).getText();
+    }
 
+    @Override
+    public boolean isExist() {
+        return isElementVisible(collapserLink);
+    }
+
+    @Override
+    public boolean isExist(int timeout) {
+        return isElementVisible(collapserLink, timeout);
     }
 }

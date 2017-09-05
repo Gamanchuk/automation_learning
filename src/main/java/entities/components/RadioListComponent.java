@@ -12,7 +12,7 @@ public class RadioListComponent extends BaseComponent {
 
     public boolean select(String option) {
 
-        String currentItemText = getCurrent();
+        String currentItemText = getCurrentItemText();
 
         log.info("Actual item: " + currentItemText + ". Expected item: " + option);
 
@@ -42,12 +42,17 @@ public class RadioListComponent extends BaseComponent {
         return false;
     }
 
-
-    public boolean exists() {
-        return isElementVisible(currentItem) && isElementPresent(currentItem);
+    public String getCurrentItemText() {
+        return findElement(currentItemDetails).getText();
     }
 
-    public String getCurrent() {
-        return findElement(currentItemDetails).getText();
+    @Override
+    public boolean isExist() {
+        return isElementVisible(currentItem) || isElementPresent(currentItem);
+    }
+
+    @Override
+    public boolean isExist(int timeout) {
+        return isElementVisible(currentItem, timeout) || isElementPresent(currentItem, timeout);
     }
 }

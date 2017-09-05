@@ -170,4 +170,14 @@ public class AddressFormComponent extends BaseComponent {
         Select selectState = new Select(titleEl);
         selectState.selectByVisibleText(value);
     }
+
+    @Override
+    public boolean isExist() {
+        return false;
+    }
+
+    @Override
+    public boolean isExist(int timeout) {
+        return false;
+    }
 }

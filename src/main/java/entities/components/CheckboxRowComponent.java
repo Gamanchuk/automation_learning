@@ -6,20 +6,33 @@ import utils.CommonFunctions;
 
 public class CheckboxRowComponent extends BaseComponent {
 
+    private By checkbox = By.xpath("//label[contains(@class, 'checkbox-row')]");
+
     public void check(String title, boolean shouldBeChecked) {
         focusOut();
         WebElement checkBox = findElement(By.xpath(getCheckBoxXpath(title)));
-        //scroll(checkBox);
         // Logic of this checkbox is inverted
+
         // TODO: update condition after checkbox update
         if (checkBox.getAttribute("data-analytics-name").contains("_uncheck") != shouldBeChecked) {
             checkBox.click();
         }
+
         CommonFunctions.sleep(1000);
     }
 
-    public boolean exists(String title, int timeout) {
+    public boolean isExist(String title, int timeout) {
         return isElementVisible(By.xpath(getCheckBoxXpath(title)), timeout);
+    }
+
+    @Override
+    public boolean isExist() {
+        return isElementVisible(checkbox);
+    }
+
+    @Override
+    public boolean isExist(int timeout) {
+        return isElementVisible(checkbox, timeout);
     }
 
     private String getCheckBoxXpath(String title) {

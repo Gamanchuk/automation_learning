@@ -18,15 +18,11 @@ public class ErrorMessageComponent extends BaseComponent {
 
         CommonFunctions.sleep(2500);
 
-        assertTrue(isElementVisible(By.xpath(ERROR_MESSAGE)), "Error message was not displayed");
-
-        String errorTitleText = getDriver().findElement(errorTitleEl).getText();
-        String errorMessageText = getDriver().findElement(errorMessageEl).getText();
-
+        assertTrue(isExist(), "Error message was not displayed");
         CommonFunctions.attachScreenshot("Check error alert");
 
-        assertEquals(errorTitleText, title, "Unexpected error title");
-        assertEquals(errorMessageText, message, "Unexpected error message");
+        assertEquals(getDriver().findElement(errorTitleEl).getText(), title, "Unexpected error title");
+        assertEquals(getDriver().findElement(errorMessageEl).getText(), message, "Unexpected error message");
 
         javascriptScroll(300);
     }
@@ -38,5 +34,15 @@ public class ErrorMessageComponent extends BaseComponent {
         String selector = "div.tooltip.error div.tooltip-contents span, div.tooltip.error div.tooltip-contents div";
         WebElement messageEl = findElementWithTextBy(error, By.cssSelector(selector));
         return messageEl != null;
+    }
+
+    @Override
+    public boolean isExist() {
+        return isElementVisible(By.xpath(ERROR_MESSAGE));
+    }
+
+    @Override
+    public boolean isExist(int timeout) {
+        return isElementVisible(By.xpath(ERROR_MESSAGE), timeout);
     }
 }

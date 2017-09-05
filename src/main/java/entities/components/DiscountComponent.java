@@ -18,4 +18,13 @@ public class DiscountComponent extends BaseComponent {
         pinCodeEl.sendKeys(pin);
     }
 
+    @Override
+    public boolean isExist() {
+        return false;
+    }
+
+    @Override
+    public boolean isExist(int timeout) {
+        return false;
+    }
 }

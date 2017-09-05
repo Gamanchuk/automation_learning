@@ -7,17 +7,21 @@ import utils.CommonFunctions;
 import java.util.List;
 
 public class ProductListComponent extends BaseComponent {
+
+    private By removeButton = By.xpath("//a[text()='Remove']");
+    private By product = By.xpath("//div[@class='product']");
+
     private ButtonComponent buttonComponent = new ButtonComponent();
 
     public void removeProduct() {
-        getDriver().findElement(By.xpath("//a[text()='Remove']")).click();
+        getDriver().findElement(removeButton).click();
         waitForAjax();
         buttonComponent.clickButton("Yes");
         waitForAjax();
     }
 
     public int getCountProducts() {
-        List<WebElement> productsListEl = getDriver().findElements(By.xpath("//div[@class='product']"));
+        List<WebElement> productsListEl = getDriver().findElements(product);
 
         for (int i = 0; i < productsListEl.size(); i++) {
             scroll(productsListEl.get(i));
@@ -25,5 +29,15 @@ public class ProductListComponent extends BaseComponent {
         }
 
         return productsListEl.size();
+    }
+
+    @Override
+    public boolean isExist() {
+        return isElementVisible(product);
+    }
+
+    @Override
+    public boolean isExist(int timeout) {
+        return isElementVisible(product, timeout);
     }
 }
