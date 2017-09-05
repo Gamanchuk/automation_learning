@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 
 import static org.testng.Assert.assertEquals;
 
+
 public class FooterComponent extends BaseComponent {
     private final String FOOTER_PATH = "//div[contains(@class, 'footer')]";
     private final String PHONE_PATH = FOOTER_PATH + "//div[@class='footer-phone']/a";
@@ -26,5 +27,13 @@ public class FooterComponent extends BaseComponent {
                 "Unexpected footer phone number (hyper link)");
     }
 
+    @Override
+    public boolean isExist() {
+        return isElementVisible(By.xpath(FOOTER_PATH));
+    }
 
+    @Override
+    public boolean isExist(int timeout) {
+        return isElementVisible(By.xpath(FOOTER_PATH), timeout);
+    }
 }

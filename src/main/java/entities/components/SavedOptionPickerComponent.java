@@ -2,7 +2,6 @@ package entities.components;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import utils.CommonFunctions;
 
 import static org.testng.Assert.assertTrue;
 
@@ -14,14 +13,21 @@ public class SavedOptionPickerComponent extends BaseComponent {
     public void select(String payment) {
         radioListComponent.setRoot(null);
         WebElement savedPickerEl = getDriver().findElement(savedPicker);
-        assertTrue(isElementVisible(savedPicker), "Radio list with saved data doesn't present");
+
+        assertTrue(isExist(), "Radio list with saved data doesn't present");
         radioListComponent.setRoot(savedPickerEl);
+
         scroll(savedPickerEl);
         radioListComponent.select(payment);
-        CommonFunctions.attachScreenshot("Selected");
     }
 
-    public boolean exists() {
+    @Override
+    public boolean isExist() {
         return isElementVisible(savedPicker);
+    }
+
+    @Override
+    public boolean isExist(int timeout) {
+        return isElementVisible(savedPicker, timeout);
     }
 }

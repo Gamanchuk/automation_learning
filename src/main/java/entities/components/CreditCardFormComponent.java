@@ -6,6 +6,8 @@ import utils.CommonFunctions;
 
 import static org.testng.Assert.assertTrue;
 
+
+// TODO: Check if we have some base element like "CreditCardForm"
 public class CreditCardFormComponent extends BaseComponent {
 
     private By ccNumber = By.id("cc-number");
@@ -15,7 +17,7 @@ public class CreditCardFormComponent extends BaseComponent {
 
     public void inputPaymentDetails(String name, String number, String expDate, String cvv, String cardholderName) {
         assertTrue(isElementVisible(ccNumber), "Card number field doesn't present on page.");
-        // fillField(ccNumber, number);
+
         findElement(ccNumber).clear();
         sendKeysOneByOne(ccNumber, number);
 
@@ -38,11 +40,33 @@ public class CreditCardFormComponent extends BaseComponent {
         CommonFunctions.attachScreenshot("Payment details");
     }
 
+    public boolean isCvvExist() {
+        return isElementVisible(csc, 3);
+    }
+
     public void inputValueIntoField(String value, String field) {
         By fieldEl = getFieldByName(field);
         focusOut(findElement(fieldEl));
-        waitForElementVisible(fieldEl);
+        assertTrue(isElementVisible(fieldEl), "Field is missing. ");
         fillField(fieldEl, value);
+    }
+
+    private void fillField(By field, String value) {
+        WebElement element = findElement(field);
+        focusOut(element);
+        element.clear();
+        CommonFunctions.sleep(200);
+        element.sendKeys(value);
+    }
+
+    @Override
+    public boolean isExist() {
+        return false;
+    }
+
+    @Override
+    public boolean isExist(int timeout) {
+        return false;
     }
 
     private By getFieldByName(String name) {
@@ -56,20 +80,7 @@ public class CreditCardFormComponent extends BaseComponent {
             case "Cardholder Name":
                 return ccName;
             default:
-                throw new Error("Unknown field name: " + name);
+                throw new Error("[CreditCardFormComponent] Unknown field name: " + name);
         }
-    }
-
-    public boolean existsCvv() {
-        return isElementVisible(csc, 3);
-    }
-
-    private void fillField(By field, String value) {
-        WebElement element = findElement(field);
-        focusOut(element);
-        element.clear();
-        CommonFunctions.sleep(200);
-        element.sendKeys(value);
-        //focusOut(element);
     }
 }

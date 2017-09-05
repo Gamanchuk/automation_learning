@@ -7,7 +7,7 @@ import utils.DriverFactory;
 
 import static org.testng.Assert.assertTrue;
 
-public class BaseComponent extends Entity {
+public abstract class BaseComponent extends Entity {
     public static WebElement getContainerByTitle(String title) {
         return DriverFactory.getDriver().findElement(By.xpath("//div[contains(@class, 'title-component') and contains(.,'" + title + "')]/ancestor::div[contains(@class, 'container') and not(contains(@class, 'header'))]"));
     }
@@ -27,4 +27,8 @@ public class BaseComponent extends Entity {
     public void exists(By titleComponent, String title) {
         assertTrue(isElementVisible(titleComponent), "Looks like title component with \"" + title + "\" text doesn't present on page.");
     }
+
+    public abstract boolean isExist();
+
+    public abstract boolean isExist(int timeout);
 }

@@ -20,7 +20,6 @@ public class AddressDisplayComponent extends BaseComponent {
     private By deliveryEmail = By.cssSelector("div.address-email");
 
     public void checkInfo(String name, String apt, String streetAddress, String cityInfo, String zip, String phone) {
-//        waitForElementClickable(By.xpath("//div[contains(@class, 'radio-list') and contains(@class, 'radio-collapsed')]"));
         getDriver().manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 
         checkFieldValue("Full Name", name);
@@ -64,6 +63,7 @@ public class AddressDisplayComponent extends BaseComponent {
     public void checkFieldValue(String fieldName, String expectedValue) {
         By field = getFieldByName(fieldName);
         assertTrue(isElementPresent(field, 1), "Field: " + fieldName + " doesn't present on page.");
+
         String fieldValue = findElement(field).getText();
         assertEquals(fieldValue, expectedValue, "Unexpected " + fieldName);
 
@@ -72,14 +72,14 @@ public class AddressDisplayComponent extends BaseComponent {
 
     public void checkCityInfo(String expectedCityInfo) {
         assertTrue(isElementVisible(deliveryCityInfo, 1), "Field: City info doesn't present on page.");
-//        String cityInfo = getDriver().findElement(deliveryCityInfo).getText().split(" ");
+
         String cityInfo = findElement(deliveryCityInfo).getText();
         assertEquals(cityInfo.split(",")[0], expectedCityInfo, "Unexpected city");
     }
 
     public void checkZip(String expectedZip) {
         assertTrue(isElementVisible(deliveryCityInfo, 1), "Field: City info doesn't present on page.");
-//        String cityInfo = getDriver().findElement(deliveryCityInfo).getText().split(" ");
+
         String cityInfo = findElement(deliveryCityInfo).getText();
         String[] split = cityInfo.split(",")[1].trim().split(" ");
         String zip = split[split.length - 1];
@@ -104,6 +104,16 @@ public class AddressDisplayComponent extends BaseComponent {
 
     public String getAddressDisplayData() {
         return findElement(addressDisplay).getText();
+    }
+
+    @Override
+    public boolean isExist() {
+        return isElementVisible(addressDisplay);
+    }
+
+    @Override
+    public boolean isExist(int timeout) {
+        return isElementVisible(addressDisplay, timeout);
     }
 
     private By getFieldByName(String fieldName) {

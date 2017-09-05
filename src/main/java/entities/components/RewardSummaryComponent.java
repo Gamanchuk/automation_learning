@@ -10,7 +10,13 @@ public class RewardSummaryComponent extends BaseComponent {
         findElement(findOut).click();
     }
 
-    public boolean exists() {
+    @Override
+    public boolean isExist() {
         return isElementVisible(findOut);
+    }
+
+    @Override
+    public boolean isExist(int timeout) {
+        return isElementVisible(findOut, timeout);
     }
 }

@@ -16,7 +16,7 @@ public class PaymentAndReviewCheckoutPage extends BasePage {
 
     public void clickArrowFor(String componentName) {
         javascriptScroll(500);
-        assertTrue(titleComponent.exists(componentName), String.format("Looks like \"%s\" arrow doesn't present on page.", componentName));
+        assertTrue(titleComponent.isExist(componentName), String.format("Looks like \"%s\" arrow doesn't present on page.", componentName));
         BaseComponent.getComponentByTitle(componentName).findElement(By.cssSelector("div.display-well-arrow")).click();
     }
 

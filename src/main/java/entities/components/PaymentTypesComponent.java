@@ -7,12 +7,10 @@ import static org.testng.Assert.assertTrue;
 
 public class PaymentTypesComponent extends BaseComponent {
 
-    By payment = By.xpath("//div[contains(@class, 'payment-types')]//span//a");
+    private By payment = By.xpath("//div[contains(@class, 'payment-types')]//span//a");
+    private By payPalLink = By.xpath("//a[@data-analytics-name='Paypal']");
 
     public void purchaseWithPayPal() {
-        By payPalLink = By.xpath("//a[@data-analytics-name='Paypal']");
-        waitForElementVisible(payPalLink);
-        assertTrue(isElementVisible(payPalLink), "Looks like PayPal links is missing.");
         getDriver().findElement(payPalLink).click();
     }
 
@@ -29,4 +27,13 @@ public class PaymentTypesComponent extends BaseComponent {
         getDriver().findElement(paymentType).click();
     }
 
+    @Override
+    public boolean isExist() {
+        return isElementVisible(payPalLink);
+    }
+
+    @Override
+    public boolean isExist(int timeout) {
+        return isElementVisible(payPalLink, timeout);
+    }
 }

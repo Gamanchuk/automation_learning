@@ -33,4 +33,14 @@ public class ModalComponent extends BaseComponent {
     public boolean hasText(String text) {
         return isElementVisible(By.xpath("//div[@class='modal-inner' and contains(., '" + text + "')]"));
     }
+
+    @Override
+    public boolean isExist() {
+        return isElementVisible(modal);
+    }
+
+    @Override
+    public boolean isExist(int timeout) {
+        return isElementVisible(modal, timeout);
+    }
 }

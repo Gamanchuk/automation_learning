@@ -9,17 +9,12 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class ShipToStoreComponent extends BaseComponent {
-    By storeResult = By.xpath("//div[contains(@class, 'store-result')]");
+    private By storeResult = By.xpath("//div[contains(@class, 'store-result')]");
 
     public void fillField(String value) {
         WebElement zipForm = getNextComponentByTitle("Find a Store");
         zipForm.findElement(By.cssSelector("input")).sendKeys(value);
     }
-
-    public boolean storeResultPresent() {
-        return isElementVisible(storeResult);
-    }
-
 
     /**
      * Select random element from elements list and click
@@ -37,4 +32,17 @@ public class ShipToStoreComponent extends BaseComponent {
         CommonFunctions.sleep(2000);
     }
 
+    public boolean isStoreResultPresent() {
+        return isElementVisible(storeResult);
+    }
+
+    @Override
+    public boolean isExist() {
+        return isElementVisible(storeResult);
+    }
+
+    @Override
+    public boolean isExist(int timeout) {
+        return isElementVisible(storeResult, timeout);
+    }
 }

@@ -16,6 +16,7 @@ public class CountrySelectorComponent extends BaseComponent {
         WebElement selectedCountryEl = getDriver().findElement(selectedCountry);
         String actualItem = selectedCountryEl.getText();
         log.info("Actual item: " + actualItem + ". Expected item: " + itemName);
+
         if (!itemName.equals(actualItem)) {
             selectedCountryEl.click();
             CommonFunctions.sleep(1000);
@@ -26,10 +27,6 @@ public class CountrySelectorComponent extends BaseComponent {
         }
     }
 
-    public boolean exists() {
-        return isElementVisible(selectedCountry);
-    }
-
     public String getSelectedCountry() {
         return getDriver().findElement(selectedCountry).getText();
     }
@@ -37,5 +34,15 @@ public class CountrySelectorComponent extends BaseComponent {
     public String getCountryNote() {
         assertTrue(isElementVisible(countryNote), "Looks like country note doesn't present on page");
         return getDriver().findElement(countryNote).getText();
+    }
+
+    @Override
+    public boolean isExist() {
+        return isElementVisible(selectedCountry);
+    }
+
+    @Override
+    public boolean isExist(int timeout) {
+        return isElementVisible(selectedCountry, timeout);
     }
 }

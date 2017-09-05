@@ -138,7 +138,7 @@ public class CheckoutSteps {
 
         String checkBox = "Yes, shipping address and billing address are the same";
 
-        if (checkboxRowComponent.exists(checkBox, 5)) {
+        if (checkboxRowComponent.isExist(checkBox, 5)) {
             checkboxRowComponent.check(checkBox, false);
         }
 
@@ -157,7 +157,7 @@ public class CheckoutSteps {
     public void userTypesManuallyShippingInfoFor(String userName) {
         String checkBox = "Yes, shipping address and billing address are the same";
 
-        if (checkboxRowComponent.exists(checkBox, 5)) {
+        if (checkboxRowComponent.isExist(checkBox, 5)) {
             checkboxRowComponent.check(checkBox, false);
         }
 
@@ -170,7 +170,7 @@ public class CheckoutSteps {
     public void userTypesManuallyShippingInfoForWithoutEmailPhone(String userName) {
         String checkBox = "Yes, shipping address and billing address are the same";
 
-        if (checkboxRowComponent.exists(checkBox, 5)) {
+        if (checkboxRowComponent.isExist(checkBox, 5)) {
             checkboxRowComponent.check(checkBox, false);
         }
 
@@ -319,7 +319,7 @@ public class CheckoutSteps {
     public void chooses(String addressType) {
         addressVerificationComponent.chooseAddressType(addressType);
 
-        if (addressVerificationComponent.exists(5)) {
+        if (addressVerificationComponent.isExist(5)) {
             addressVerificationComponent.chooseAddressType(addressType);
         }
 
@@ -335,7 +335,7 @@ public class CheckoutSteps {
 
     @And("^user remove product$")
     public void userRemoveProduct() {
-        assertTrue(radioListComponent.exists(), "Looks like delivery Method Drop-Down doesn't exists");
+        assertTrue(radioListComponent.isExist(), "Looks like delivery Method Drop-Down doesn't isExist");
         productListComponent.removeProduct();
         CommonFunctions.sleep(3000);
         CommonFunctions.attachScreenshot("Remove product");
@@ -343,7 +343,7 @@ public class CheckoutSteps {
 
     @And("^chooses \"([^\"]*)\" item quantity$")
     public void choosesItemQuantity(String quantity) {
-        assertTrue(radioListComponent.exists(), "Item quantity Drop-Down doesn't exists");
+        assertTrue(radioListComponent.isExist(), "Item quantity Drop-Down doesn't isExist");
         radioListComponent.select(quantity);
         CommonFunctions.attachScreenshot("Change item quantity: " + quantity);
     }
@@ -357,7 +357,7 @@ public class CheckoutSteps {
 
     @And("^user should see \"([^\"]*)\" shipping country$")
     public void userShouldSeeShippingCountry(String countryTitle) {
-        assertTrue(countrySelectorComponent.exists(), "Looks like shipping country drop-down doesn't present on page");
+        assertTrue(countrySelectorComponent.isExist(), "Looks like shipping country drop-down doesn't present on page");
         assertEquals(countrySelectorComponent.getSelectedCountry(), countryTitle, "Default shipping country incorrect.");
     }
 
@@ -400,19 +400,19 @@ public class CheckoutSteps {
         CommonFunctions.sleep(2000);
 
         //Select card uses 4 last symbols
-        //radioListComponent.setRoot(null);
-        assertTrue(savedOptionPickerComponent.exists(), "Looks like drop-down with saved cards doesn't present");
         savedOptionPickerComponent.select(card.getFourLastNumbers());
+        CommonFunctions.attachScreenshot("Selected");
 
         if (!card.getName().equals("qCard")) {
             //create some condition if cvv field is loaded only then input CVV
             //For QVC sometimes for existing user no CVV is required, conditions for this are unknown
-            if (creditCardFormComponent.existsCvv()) {
+            if (creditCardFormComponent.isCvvExist()) {
                 creditCardFormComponent.inputValueIntoField(card.getCvv(), "CVV");
             }
+
+            CommonFunctions.attachScreenshot("CVV with code");
         }
 
-        CommonFunctions.attachScreenshot("Card selected");
         TestGlobalsManager.setTestGlobal("CARDHOLDER", card.getCardholderName());
         TestGlobalsManager.setTestGlobal("CARDINFO", card.getName() + " - " + card.getNumber());
     }
@@ -459,7 +459,7 @@ public class CheckoutSteps {
     public void userMakesAuthorisationFor(String userName) {
         BillingUser user = DataProvider.getUser(userName);
 
-        boolean checkoutMethodsPresent = checkoutMethodsComponent.exists(3);
+        boolean checkoutMethodsPresent = checkoutMethodsComponent.isExist(3);
 
         if (!checkoutMethodsPresent) {
             userPressesTheSignInButton();
@@ -479,11 +479,11 @@ public class CheckoutSteps {
 
         String checkBox = "Yes, billing address and shipping address are the same";
 
-        if (checkboxRowComponent.exists(checkBox, 5)) {
+        if (checkboxRowComponent.isExist(checkBox, 5)) {
             checkboxRowComponent.check(checkBox, false);
         }
 
-        assertTrue(radioListComponent.exists(), "Billing Address Drop-Down doesn't exists");
+        assertTrue(radioListComponent.isExist(), "Billing Address Drop-Down doesn't isExist");
         radioListComponent.setRoot(BaseComponent.getContainerByTitle("Billing Address"));
         assertTrue(radioListComponent.select(address), "'" + address + "' doesn't present in list");
         CommonFunctions.attachScreenshot("Billing info");
@@ -491,7 +491,7 @@ public class CheckoutSteps {
 
     @And("^applies customer info for address \"([^\"]*)\"$")
     public void appliesCustomerInfo(String address) {
-        assertTrue(radioListComponent.exists(), "Customer Information Drop-Down doesn't exists");
+        assertTrue(radioListComponent.isExist(), "Customer Information Drop-Down doesn't isExist");
         radioListComponent.setRoot(BaseComponent.getContainerByTitle("Customer Information"));
         assertTrue(radioListComponent.select(address), "'" + address + "' doesn't present in list");
         CommonFunctions.attachScreenshot("Customer info");
@@ -501,7 +501,7 @@ public class CheckoutSteps {
     public void appliesShippingInfoForAddress(String address) {
         String checkBox = "Yes, shipping address and billing address are the same";
 
-        if (checkboxRowComponent.exists(checkBox, 5)) {
+        if (checkboxRowComponent.isExist(checkBox, 5)) {
             checkboxRowComponent.check(checkBox, false);
         }
         radioListComponent.setRoot(BaseComponent.getContainerByTitle("Shipping Address"));
@@ -511,7 +511,7 @@ public class CheckoutSteps {
 
     @And("^selects \"Enter a New Address\"$")
     public void entersNewAddress() {
-        assertTrue(radioListComponent.exists(), "Billing Address Drop-Down doesn't exists");
+        assertTrue(radioListComponent.isExist(), "Billing Address Drop-Down doesn't isExist");
         assertTrue(radioListComponent.select("Enter a New Address"), "Item 'Enter a New Address' doesn't present in list");
         CommonFunctions.attachScreenshot("Entering new address");
     }
@@ -528,6 +528,7 @@ public class CheckoutSteps {
 
     @And("^uses PayPal for payment$")
     public void usesPayPalForPayment() {
+        assertTrue(paymentTypesComponent.isExist(), "Looks like PayPal links is missing.");
         paymentTypesComponent.purchaseWithPayPal();
         CommonFunctions.attachScreenshot("Purchase with PayPal");
     }
@@ -539,9 +540,9 @@ public class CheckoutSteps {
     }
 
     @Given("^user chooses \"([^\"]*)\" for payment$")
-    public void userChoosesForPayment(String arg0) {
+    public void userChoosesForPayment(String value) {
         paymentTypesComponent.purchasePayment();
-        CommonFunctions.attachScreenshot("Payment types");
+        CommonFunctions.attachScreenshot("Payment types: " + value);
     }
 
 
@@ -573,14 +574,14 @@ public class CheckoutSteps {
 
     @Given("^user presses \"([^\"]*)\" tab$")
     public void userPressesTab(String tabName) {
-        tabComponent.clickTab(tabName);
+        tabComponent.clickOnTab(tabName);
         CommonFunctions.attachScreenshot("Click Tab: " + tabName);
     }
 
     @Given("^user navigates to \"([^\"]*)\" tab$")
     public void userNavigatesToTab(String tabName) {
         this.userPressesTab(tabName);
-        assertTrue(tabComponent.active(tabName), "Tab " + tabName + " is not an active");
+        assertTrue(tabComponent.isActive(tabName), "Tab " + tabName + " is not an isActive");
         CommonFunctions.attachScreenshot("Tab: " + tabName);
     }
 
@@ -592,7 +593,7 @@ public class CheckoutSteps {
 
     @Then("^user should be see Store results$")
     public void userShouldBeSeeStoreResults() {
-        assertTrue(shipToStoreComponent.storeResultPresent(), "Looks like store results not present on page.");
+        assertTrue(shipToStoreComponent.isStoreResultPresent(), "Looks like store results not present on page.");
         CommonFunctions.attachScreenshot("Store results");
     }
 
@@ -663,7 +664,7 @@ public class CheckoutSteps {
 
     @Then("^user should stay at \"([^\"]*)\" tab$")
     public void userStaysAtTab(String tabName) {
-        assertTrue(breadcrumbWidget.isTabActive(tabName), "Tab " + tabName + " is not an active");
+        assertTrue(breadcrumbWidget.isTabActive(tabName), "Tab " + tabName + " is not an isActive");
     }
 
     @And("^sees \"([^\"]*)\" error message with text \"([^\"]*)\"$")
@@ -694,7 +695,8 @@ public class CheckoutSteps {
 
     @And("^checks payment details for \"([^\"]*)\"$")
     public void checksPaymentDetails(String userName) {
-        payPalWellComponent.checkPayPalAccount(DataProvider.getUser(userName).getPaypalEmail());
+        assertTrue(payPalWellComponent.isExist(), "Payment details doesn't present for PayPal");
+        assertEquals(payPalWellComponent.getPayPalAccountText(), DataProvider.getUser(userName).getPaypalEmail(), "Unexpected account used");
     }
 
     @And("^unset checkbox \"([^\"]*)\"$")
@@ -707,7 +709,7 @@ public class CheckoutSteps {
     public void userTypesShippingInfoFor(String userName) {
         String checkBox = "Yes, shipping address and billing address are the same";
 
-        if (checkboxRowComponent.exists(checkBox, 5)) {
+        if (checkboxRowComponent.isExist(checkBox, 2)) {
             checkboxRowComponent.check(checkBox, false);
         }
 
@@ -720,7 +722,7 @@ public class CheckoutSteps {
     public void userTypesShippingInfoForWithoutEmailPhone(String userName) {
         String checkBox = "Yes, shipping address and billing address are the same";
 
-        if (checkboxRowComponent.exists(checkBox, 5)) {
+        if (checkboxRowComponent.isExist(checkBox, 5)) {
             checkboxRowComponent.check(checkBox, false);
         }
 
@@ -731,7 +733,7 @@ public class CheckoutSteps {
     public void userTypesShippingInfoForWithoutEmail(String userName) {
         String checkBox = "Yes, shipping address and billing address are the same";
 
-        if (checkboxRowComponent.exists(checkBox, 5)) {
+        if (checkboxRowComponent.isExist(checkBox, 5)) {
             checkboxRowComponent.check(checkBox, false);
         }
 
@@ -743,7 +745,7 @@ public class CheckoutSteps {
     public void userTypesManuallyShippingInfoForWithoutEmail(String userName) {
         String checkBox = "Yes, shipping address and billing address are the same";
 
-        if (checkboxRowComponent.exists(checkBox, 5)) {
+        if (checkboxRowComponent.isExist(checkBox, 5)) {
             checkboxRowComponent.check(checkBox, false);
         }
 
@@ -902,14 +904,14 @@ public class CheckoutSteps {
 
     @Then("^user presses the Find out more link$")
     public void userPressesTheFindOutMoreLink() {
-        assertTrue(rewardSummaryComponent.exists(), "Find out more link doesn't present");
+        assertTrue(rewardSummaryComponent.isExist(), "Find out more link doesn't present");
         rewardSummaryComponent.clickFindOutMore();
         CommonFunctions.attachScreenshot("Find Out More");
     }
 
     @Given("^user makes authorisation with \"([^\"]*)\" email and \"([^\"]*)\" password$")
     public void userMakesAuthorisationWithEmailAndPassword(String email, String password) {
-        if (checkoutMethodsComponent.exists(2) && !checkoutMethodsComponent.isOpen()) {
+        if (checkoutMethodsComponent.isExist(2) && !checkoutMethodsComponent.isOpen()) {
             checkoutMethodsComponent.checkoutAs("Existing Account");
         }
 
@@ -922,7 +924,7 @@ public class CheckoutSteps {
     @And("^user presses the signIn button$")
     public void userPressesTheSignInButton() {
         headerComponent.pressSignInButton();
-        assertTrue(signInFormComponent.exists(), "Sign In form component doesn't present");
+        assertTrue(signInFormComponent.isExist(), "Sign In form component doesn't present");
     }
 
     @And("^user presses the Forgot Password link$")
@@ -939,19 +941,25 @@ public class CheckoutSteps {
 
     @Then("^user should be on \"([^\"]*)\" tab$")
     public void userShouldBeOnTab(String tabName) {
-        assertTrue(breadcrumbWidget.active(tabName), "Tab " + tabName + " is not an active");
+        assertTrue(breadcrumbWidget.active(tabName), "Tab " + tabName + " is not an isActive");
         CommonFunctions.attachScreenshot("User on [" + tabName + "] tab");
     }
 
     @And("^user checks \"([^\"]*)\" shipping method$")
     public void userChecksShippingMethod(String method) {
-        shippingOptionsComponent.checkShippingOptions(method);
+
+        String actual = shippingOptionsComponent.getShippingOptionDisplayText();
+
+        assertTrue(actual.contains(method), "Expected option: " + method +
+                ". doesn't contains Actual option: " + actual + ".");
+
+        CommonFunctions.attachScreenshot("Delivery Method");
 
     }
 
     @Then("^user should be on \"([^\"]*)\" page$")
     public void userShouldBeOnPage(String pageName) {
-        assertTrue(titleComponent.exists(pageName),
+        assertTrue(titleComponent.isExist(pageName),
                 "Unexpected Page Title. User should be on "
                         + pageName + ". It looks like the page has not loaded");
     }
@@ -1024,7 +1032,7 @@ public class CheckoutSteps {
     public void userCanExpandAndCollapseOrderSummary() {
         collapserComponent.setRoot(ModalComponent.getComponentByTitle("Order Summary"));
         collapserComponent.openCollapser();
-        assertTrue(new OrderSummaryComponent().isVisible(), "Order Summary in invisible");
+        assertTrue(new OrderSummaryComponent().isExist(), "Order Summary in invisible");
         CommonFunctions.attachScreenshot("Collapser");
     }
 
@@ -1060,7 +1068,7 @@ public class CheckoutSteps {
     @And("^user continue checkout as guest$")
     public void userContinueCheckoutAsGuest() {
 
-        if (checkoutMethodsComponent.exists(2)) {
+        if (checkoutMethodsComponent.isExist(2)) {
             checkoutMethodsComponent.checkoutAs("Guest");
         } else {
             signInFormComponent.fillEmail(RandomStringUtils.randomAlphabetic(10) + "@automationQA.com");
@@ -1072,7 +1080,7 @@ public class CheckoutSteps {
     @And("^user continue checkout as \"([^\"]*)\"$")
     public void userContinueCheckoutAs(String userName) {
         BillingUser user = DataProvider.getUser(userName);
-        assertTrue(signInFormComponent.exists(), "Sign In form component doesn't present");
+        assertTrue(signInFormComponent.isExist(), "Sign In form component doesn't present");
 
         signInFormComponent.fillEmail(user.getEmail());
         buttonComponent.clickButtonWithSendKeys();
@@ -1087,9 +1095,9 @@ public class CheckoutSteps {
             CommonFunctions.attachScreenshot("Checkout as existing user");
         }
 
-       //     signInFormComponent.fillPassword(user.getPassword());
-       //     CommonFunctions.attachScreenshot("Checkout as existing user");
-       //
+        //     signInFormComponent.fillPassword(user.getPassword());
+        //     CommonFunctions.attachScreenshot("Checkout as existing user");
+        //
     }
 
     @Given("^user fill contact details as \"([^\"]*)\"$")
@@ -1133,6 +1141,7 @@ public class CheckoutSteps {
     @And("^selects \"Enter a New Card\"$")
     public void selectsEnterANewCard() {
         savedOptionPickerComponent.select("Enter a New Card");
+        CommonFunctions.attachScreenshot("Selected: Enter a New Card");
     }
 
     @And("^user selects \"([^\"]*)\" Payment Option$")
@@ -1145,7 +1154,7 @@ public class CheckoutSteps {
     @And("^user should be see Payment Option$")
     public void userShouldBeSeePaymentOption() {
         radioListComponent.setRoot(BaseComponent.getNextElementByTitle("Payment Options"));
-        assertTrue(radioListComponent.exists(), "Payment Options radio list doesn't present on page");
+        assertTrue(radioListComponent.isExist(), "Payment Options radio list doesn't present on page");
     }
 
     @After
@@ -1168,7 +1177,7 @@ public class CheckoutSteps {
 
     @And("^user should see payment option component$")
     public void userShouldSeePaymentOptionComponent() {
-        assertTrue(radioListComponent.exists(), "Radio List Does Not Present On Page");
+        assertTrue(radioListComponent.isExist(), "Radio List Does Not Present On Page");
     }
 
     @And("^user types shipping address for \"([^\"]*)\" with phone number$")
@@ -1198,13 +1207,13 @@ public class CheckoutSteps {
     public void userCanExpandAndCollapseOrderSummaryOnThankYouPage() {
         collapserComponent.setRoot(ModalComponent.getComponentByTitle("Order"));
         collapserComponent.openCollapser();
-        assertTrue(new OrderSummaryComponent().isVisible(), "Order Summary in invisible");
+        assertTrue(new OrderSummaryComponent().isExist(), "Order Summary in invisible");
         CommonFunctions.attachScreenshot("Collapser");
     }
 
     @And("^user should be see Password Assistance$")
     public void userShouldBeSeePasswordAssistance() {
-        assertTrue(forgotPasswordComponent.exists(), "Password Assistance modal doesn't opened.");
+        assertTrue(forgotPasswordComponent.isExist(), "Password Assistance modal doesn't opened.");
         CommonFunctions.attachScreenshot("Password Assistance modal");
     }
 
@@ -1225,7 +1234,7 @@ public class CheckoutSteps {
     @And("^user remembered delivery method on \"([^\"]*)\" tab$")
     public void userRememberDeliveryMethodOnTab(String tab) {
         userShouldBeOnTab(tab);
-        String deliveryMethodText = shippingOptionsComponent.getCurrentShippingOptions();
+        String deliveryMethodText = shippingOptionsComponent.getCurrentShippingOptionText();
         log.info("Remember delivery method: " + deliveryMethodText);
         TestGlobalsManager.setTestGlobal("Delivery method", deliveryMethodText);
     }
@@ -1245,7 +1254,7 @@ public class CheckoutSteps {
     public void userChecksDeliveryMethodOnTab(String tab) {
         userShouldBeOnTab(tab);
 
-        String actualDeliveryMethod = shippingOptionsComponent.getCurrentShippingOptionDisplay();
+        String actualDeliveryMethod = shippingOptionsComponent.getShippingOptionDisplayText();
         String expectedDeliveryMethod = (String) TestGlobalsManager.getTestGlobal("Delivery method");
 
         assertEquals(actualDeliveryMethod, expectedDeliveryMethod);

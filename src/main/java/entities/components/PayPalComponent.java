@@ -122,4 +122,14 @@ public class PayPalComponent extends BaseComponent {
         emailField.clear();
         emailField.sendKeys(value);
     }
+
+    @Override
+    public boolean isExist() {
+        return false;
+    }
+
+    @Override
+    public boolean isExist(int timeout) {
+        return false;
+    }
 }
