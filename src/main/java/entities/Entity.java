@@ -28,6 +28,7 @@ public abstract class Entity {
 
     }
 
+
     public Entity(WebElement root) {
         this.root = root;
     }
@@ -293,12 +294,12 @@ public abstract class Entity {
                         JavascriptExecutor js = (JavascriptExecutor) driver;
                         boolean hasJquery = (Boolean) js.executeScript("return typeof jQuery !== 'undefined'");
                         if (hasJquery) {
-                            result = (Boolean) js.executeScript("return jQuery.active === 0 && jQuery.isReady && document.readyState == 'complete'");
+                            result = (Boolean) js.executeScript("return jQuery.isActive === 0 && jQuery.isReady && document.readyState == 'complete'");
                         } else {
                             result = (Boolean) js.executeScript("return document.readyState == 'complete'");
                             log.info("readyState complete: " + result);
                         }
-                        log.info("jQuery not active: " + result);
+                        log.info("jQuery not isActive: " + result);
                     } catch (JavascriptException js) {
                         log.error("JavascriptException: " + js.getMessage());
                         return false;

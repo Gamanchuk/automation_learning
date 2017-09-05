@@ -21,17 +21,17 @@ public class BaseSteps {
     private static Log log = LogFactory.getLog(BaseSteps.class.getSimpleName());
 
     public void waitForCheckout() {
-        assertTrue(buttonComponent.exists(), "Button component doesn't present on page. " +
+        assertTrue(buttonComponent.isExist(), "Button component doesn't present on page. " +
                 "It seems that the checkout did not boot for " + TIMEOUT_SECONDS + " seconds");
     }
 
     public void waitForSignIn() {
-        assertTrue(headerComponent.signinExists(), "Button component doesn't present on page. " +
+        assertTrue(headerComponent.isSignInButtonExists(), "Button component doesn't present on page. " +
                 "It seems that the checkout did not boot for " + TIMEOUT_SECONDS + " seconds");
     }
 
     public void waitForCheckoutMethodsComponent() {
-        assertTrue(checkoutMethodsComponent.exists(), "Checkout Methods component doesn't present on page. " +
+        assertTrue(checkoutMethodsComponent.isExist(), "Checkout Methods component doesn't present on page. " +
                 "It seems that the checkout did not boot for " + TIMEOUT_SECONDS + " seconds");
     }
 

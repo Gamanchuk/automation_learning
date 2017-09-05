@@ -33,7 +33,7 @@ public class QVCPageSteps {
         this.addProduct();
 
         qvcCartPage.processToCheckout();
-        assertTrue(buttonComponent.exists(), "Button component doesn't present on page. " +
+        assertTrue(buttonComponent.isExist(), "Button component doesn't present on page. " +
                 "It seems that the checkout did not boot for " + TIMEOUT_SECONDS + " seconds");
     }
 
@@ -46,7 +46,7 @@ public class QVCPageSteps {
         }
 
         qvcCartPage.processToCheckout();
-        assertTrue(buttonComponent.exists(), "Button component doesn't present on page. " +
+        assertTrue(buttonComponent.isExist(), "Button component doesn't present on page. " +
                 "It seems that the checkout did not boot for " + TIMEOUT_SECONDS + " seconds");
     }
 
@@ -55,7 +55,7 @@ public class QVCPageSteps {
         this.setCookies();
 
         this.speedBuyProduct();
-        assertTrue(buttonComponent.exists(), "Button component doesn't present on page. " +
+        assertTrue(buttonComponent.isExist(), "Button component doesn't present on page. " +
                 "It seems that the checkout did not boot for " + TIMEOUT_SECONDS + " seconds");
     }
 
@@ -65,7 +65,7 @@ public class QVCPageSteps {
         this.addProduct();
 
         qvcCartPage.processToSpeedBuy();
-        assertTrue(buttonComponent.exists(), "Button component doesn't present on page. " +
+        assertTrue(buttonComponent.isExist(), "Button component doesn't present on page. " +
                 "It seems that the checkout did not boot for " + TIMEOUT_SECONDS + " seconds");
     }
 

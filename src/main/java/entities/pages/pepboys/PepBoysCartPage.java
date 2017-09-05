@@ -36,7 +36,7 @@ public class PepBoysCartPage extends BasePage {
                 assertTrue(isElementVisible(payOnline), "Pay Online button doesn't present on page.");
                 CommonFunctions.attachScreenshot("Payment method");
                 getDriver().findElement(payOnline).click();
-                assertTrue(buttonComponent.exists(), "Button component doesn't present on page. " +
+                assertTrue(buttonComponent.isExist(), "Button component doesn't present on page. " +
                         "It seems that the checkout did not boot for " + TIMEOUT_SECONDS + " seconds");
                 break;
             case "Pay in Store":
@@ -51,7 +51,7 @@ public class PepBoysCartPage extends BasePage {
                     CommonFunctions.attachScreenshot("Payment method");
                     getDriver().findElement(payInStore).click();
                     RETRY_COUNT = 1;
-                    assertTrue(buttonComponent.exists(), "Button component doesn't present on page. " +
+                    assertTrue(buttonComponent.isExist(), "Button component doesn't present on page. " +
                             "It seems that the checkout did not boot for " + TIMEOUT_SECONDS + " seconds");
                     return true;
                 }
