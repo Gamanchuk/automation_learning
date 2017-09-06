@@ -1,4 +1,4 @@
-@philosophy @debug
+@philosophy
 
 Feature: GUEST - SHIPPING PAGE - SHIPPING ADDRESS
 
@@ -18,8 +18,8 @@ Feature: GUEST - SHIPPING PAGE - SHIPPING ADDRESS
 
     And user types "!@#&( !@#()" into the "Full Name" field of "Shipping Address" address form
     And presses the "Continue" button
-    Then user should stay at "Shipping" tab
-    And sees "FORM ERRORS" error message with text "Please review all inputs."
+    Then user should be on "Delivery" tab
+    And user navigates to "Shipping" breadcrumb
 
     And user types "Mr Donal Trump III" into the "Full Name" field of "Shipping Address" address form
     And presses the "Continue" button
