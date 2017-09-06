@@ -19,6 +19,7 @@ public class AddressFormComponent extends BaseComponent {
     private By stateField = By.cssSelector(".state-input input");
     private By zipField = By.cssSelector(".zip-input input");
     private By title = By.xpath("//div[contains(@class, 'component-input')]//select");
+    private By manualLink = By.cssSelector("a.manual");
 
     public void fillAddressForm(String fullName, String address, String cityInfo, String city, String apartment, String phone, String state, String zip, boolean autoFill, boolean canadian) {
 
@@ -31,7 +32,7 @@ public class AddressFormComponent extends BaseComponent {
 
         if (!apartmentPresent) {
             // Waiting for dropdown
-            assertTrue(isElementPresent(By.cssSelector("a.manual"), 30), "Input address manually link was not displayed");
+            assertTrue(isElementPresent(manualLink, 30), "Input address manually link was not displayed");
             CommonFunctions.attachScreenshot("drop Down");
 
             // Need wait. Sometimes we have NoSuchElement
@@ -42,9 +43,11 @@ public class AddressFormComponent extends BaseComponent {
             findElementWithTextBy(city, By.cssSelector("div.radio-list-details p.subtext")).click();
         } else {
             if (!apartmentPresent) {
-                click(By.cssSelector("a.manual"));
+                WebElement manualLinkEl = findElement(manualLink);
+                scroll(manualLinkEl);
+                manualLinkEl.click();
             }
-            //findElementWithTextBy("enter city", By.cssSelector("div.zip-message a")).click();
+
             fillField(cityField, city);
             fillField(zipField, zip);
 
@@ -77,7 +80,7 @@ public class AddressFormComponent extends BaseComponent {
 
         if (!apartmentPresent) {
             // Waiting for dropdown
-            assertTrue(isElementVisible(By.cssSelector("a.manual")), "Input address manually link was not displayed");
+            assertTrue(isElementVisible(manualLink), "Input address manually link was not displayed");
             CommonFunctions.attachScreenshot("drop Down");
 
             // Need wait. Sometimes we have NoSuchElement
@@ -88,7 +91,7 @@ public class AddressFormComponent extends BaseComponent {
             findElementWithTextBy(cityInfo, By.cssSelector("div.radio-list-details p.subtext")).click();
         } else {
             if (!apartmentPresent) {
-                click(By.cssSelector("a.manual"));
+                click(manualLink);
             }
 
             fillField(cityField, city);

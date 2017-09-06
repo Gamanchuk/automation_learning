@@ -157,7 +157,7 @@ public class CheckoutSteps {
     public void userTypesManuallyShippingInfoFor(String userName) {
         String checkBox = "Yes, shipping address and billing address are the same";
 
-        if (checkboxRowComponent.isExist(checkBox, 5)) {
+        if (checkboxRowComponent.isExist(checkBox, 2)) {
             checkboxRowComponent.check(checkBox, false);
         }
 
@@ -733,7 +733,7 @@ public class CheckoutSteps {
     public void userTypesShippingInfoForWithoutEmail(String userName) {
         String checkBox = "Yes, shipping address and billing address are the same";
 
-        if (checkboxRowComponent.isExist(checkBox, 5)) {
+        if (checkboxRowComponent.isExist(checkBox, 2)) {
             checkboxRowComponent.check(checkBox, false);
         }
 
@@ -745,7 +745,7 @@ public class CheckoutSteps {
     public void userTypesManuallyShippingInfoForWithoutEmail(String userName) {
         String checkBox = "Yes, shipping address and billing address are the same";
 
-        if (checkboxRowComponent.isExist(checkBox, 5)) {
+        if (checkboxRowComponent.isExist(checkBox, 2)) {
             checkboxRowComponent.check(checkBox, false);
         }
 
@@ -941,7 +941,7 @@ public class CheckoutSteps {
 
     @Then("^user should be on \"([^\"]*)\" tab$")
     public void userShouldBeOnTab(String tabName) {
-        assertTrue(breadcrumbWidget.active(tabName), "Tab " + tabName + " is not an isActive");
+        assertTrue(breadcrumbWidget.active(tabName), "Tab " + tabName + " is not an Active");
         CommonFunctions.attachScreenshot("User on [" + tabName + "] tab");
     }
 
