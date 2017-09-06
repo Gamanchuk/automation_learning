@@ -42,7 +42,7 @@ public class BreadcrumbComponent extends BaseComponent {
         waitForAjax();
 
         return isElementPresent(By.xpath(
-                "//a[contains(@class, 'breadcrumb') and contains(@class, 'isActive') and text()='" + breadcrumb + "']"));
+                "//a[contains(@class, 'breadcrumb') and contains(@class, 'active') and text()='" + breadcrumb + "']"));
     }
 
     public String getActiveTab() {
