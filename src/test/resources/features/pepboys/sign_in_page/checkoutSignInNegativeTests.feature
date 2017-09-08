@@ -33,7 +33,7 @@ Feature: SIGN IN PAGE
     Then sees "FORM ERRORS" error message with text "Please review all inputs."
 
     Given user makes authorisation with "notqa@moovweb.com" email and "Spear201!" password
-    Then sees "FORM ERRORS" error message with text "Your login attempt was not successful, try again."
+    Then sees "FORM ERRORS" error message with text "email and password do not match our records."
 
     Given user makes authorisation with "qa@moovweb.com" email and "" password
     Then sees "FORM ERRORS" error message with text "Please review all inputs."

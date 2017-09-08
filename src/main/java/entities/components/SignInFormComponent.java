@@ -42,6 +42,8 @@ public class SignInFormComponent extends BaseComponent {
 
     public void fillPassword(String value) {
         WebElement passEl = findElement(passwordField);
+        passEl.clear();
+        CommonFunctions.sleep(1000);
         passEl.sendKeys(value);
         focusOut(passEl);
         CommonFunctions.sleep(1000);

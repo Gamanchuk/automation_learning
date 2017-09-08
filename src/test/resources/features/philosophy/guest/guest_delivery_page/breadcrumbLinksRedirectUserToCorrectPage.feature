@@ -1,4 +1,4 @@
-@philosophy @debug
+@philosophy
 
 Feature: GUEST - DELIVERY PAGE
 
