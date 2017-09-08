@@ -16,7 +16,6 @@ Feature: GUEST - SHIPPING PAGE
     And chooses "Edit Address"
     Then user should stay at "Shipping" tab
 
-
     And user types "11111" into the "Apt, Bldg." field of "Shipping Address" address form
     And presses the "Continue" button
     And chooses "Use Entered Address"
