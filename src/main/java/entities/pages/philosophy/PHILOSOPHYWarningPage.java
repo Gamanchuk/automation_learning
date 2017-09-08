@@ -5,7 +5,7 @@ import entities.pages.BasePage;
 import org.openqa.selenium.By;
 
 public class PHILOSOPHYWarningPage extends BasePage {
-    private By warning = By.id("ignore_this_warning");
+    private By warning = By.id("ignoreWarning");
 
     @Override
     public boolean isPage() {

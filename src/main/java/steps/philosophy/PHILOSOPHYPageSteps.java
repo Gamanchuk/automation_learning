@@ -95,7 +95,7 @@ public class PHILOSOPHYPageSteps extends BaseSteps {
         this.openProduct();
         this.addToBag();
 
-        if (Config.PLATFORM_NAME.equals(IOS) && philosophyWarningPage.isPage(30)) {
+        if (Config.PLATFORM_NAME.equals(IOS) && philosophyWarningPage.isPage(10)) {
             philosophyWarningPage.ignoreWarning();
         }
 

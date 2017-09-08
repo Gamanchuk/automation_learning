@@ -9,6 +9,7 @@ Feature: GET STARTED PAGE - SIGN IN
 
 
   @TestCaseId("82867")
+  @TestCaseId("82849")
   @TestCaseId("82829")
   @TestCaseId("82869")
   @TestCaseId("82870")
@@ -29,8 +30,10 @@ Feature: GET STARTED PAGE - SIGN IN
     Then sees "ERROR" error message with text "email address does not exist."
 
     Then user presses the "Cancel Request" link
-
-    Given user makes authorisation for "qa user"
+    And user fills password field with "Spear201!"
+    And user checks "Show Password" checkbox
+    And user fills email field with "qa@moovweb.com"
+    And presses the "Sign In & Checkout" button
     Then user should be on "Shipping" tab
 
     

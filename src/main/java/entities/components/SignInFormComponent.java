@@ -43,6 +43,7 @@ public class SignInFormComponent extends BaseComponent {
     public void fillPassword(String value) {
         WebElement passEl = findElement(passwordField);
         passEl.sendKeys(value);
+        CommonFunctions.sleep(1000);
         focusOut(passEl);
         CommonFunctions.sleep(1000);
     }

@@ -8,6 +8,7 @@ Feature: GUEST - SHIPPING PAGE - SHIPPING ADDRESS
     And user continue checkout as guest
 
   @TestCaseId("17232")
+  @TestCaseId("17240")
   Scenario: Test field 'Street Address'
     Given user types shipping info for "qa user" without email
 
@@ -15,6 +16,10 @@ Feature: GUEST - SHIPPING PAGE - SHIPPING ADDRESS
     And presses the "Continue" button
     Then user should stay at "Shipping" tab
     And sees "FORM ERRORS" error message with text "Please review all inputs."
+
+    And user types "123 W Mission Stskldhffghdfghdtyhrtyhrtyhrtyhrtybgksjhdbghjksdbfghjsdfbgsdfjkhg" into the "Street Address" field of "Shipping Address" address form
+    And presses the "Continue" button
+    And sees "FORM ERRORS" error message with text "Please enter no more than 35 characters for Address 1"
 
     And user types "Mission Street" into the "Street Address" field of "Shipping Address" address form
     And presses the "Continue" button
