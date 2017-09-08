@@ -18,7 +18,7 @@ Feature: HAPPY PATH
     And presses the "Continue" button
 
     Then user should be on "Payment" tab
-    And uses saved "visa" card for payment
+    And uses saved "mastercard" card for payment
     And presses the "Continue" button
 
     Then user should be on "Review" tab

@@ -17,7 +17,7 @@ Feature: HAPPY PATH
     And presses the "Continue" button
 
     Then user should be on "Payment" tab
-    And uses "visa" card for payment
+    And uses "mastercard" card for payment
     And user fills email field with "qamoovwem@automation.com"
     And unset checkbox "Please send me philosophy emails for inspiration, exclusive offers and product information."
     And presses the "Continue" button
