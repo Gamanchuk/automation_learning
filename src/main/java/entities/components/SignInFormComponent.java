@@ -45,8 +45,7 @@ public class SignInFormComponent extends BaseComponent {
         passEl.clear();
         CommonFunctions.sleep(1000);
         passEl.sendKeys(value);
-        focusOut(passEl);
-        CommonFunctions.sleep(1000);
+        //focusOut(passEl);
     }
 
     public void pressWhereDoIEnterMyPassword() {
