@@ -77,6 +77,13 @@ public class CheckoutSteps {
         CommonFunctions.attachScreenshot("Fill email");
     }
 
+    @And("^user continue checkout as existing user$")
+    public void userContinueCheckoutAsExistingUser() {
+        if (checkoutMethodsComponent.isExist(2) && !checkoutMethodsComponent.isOpen()) {
+            checkoutMethodsComponent.checkoutAs("Existing Account");
+        }
+    }
+
     @Then("^user should see password field$")
     public void userShouldSeePasswordField() {
         assertTrue(signInFormComponent.isPasswordFieldVisible(), "Password field was not displayed");

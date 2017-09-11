@@ -764,6 +764,17 @@
         </profile>
 
 
+        <profile>
+            <id>suite-philosophy-guestShippingPage</id>
+            <properties>
+                <testng.suite>
+                    ${basedir}/src/test/resources/testsuites/philosophy/philosophy_guestShippingPage.xml
+                </testng.suite>
+                <suite.id>102</suite.id>
+            </properties>
+        </profile>
+
+
         <!--environments-->
         <profile>
             <id>env-jenkins-sf</id>

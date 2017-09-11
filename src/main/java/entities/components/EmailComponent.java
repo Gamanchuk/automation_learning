@@ -17,7 +17,7 @@ public class EmailComponent extends BaseComponent {
         CommonFunctions.sleep(500);
         emailEl.sendKeys(email);
         CommonFunctions.sleep(500);
-        focusOut(emailEl);
+        //focusOut(emailEl);
     }
 
     public String getEmailDisplayValue() {
