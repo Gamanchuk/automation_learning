@@ -7,13 +7,19 @@ Feature: GUEST - DELIVERY PAGE
     And chooses "Checkout" method from Philosophy
     And user continue checkout as guest
     Then user should be on "Shipping" tab
-
-  @TestCaseId("17221")
-  Scenario: Check cart icon
-
     Given user types shipping info for "qa user" without email
     And presses the "Continue" button
     Then user should be on "Delivery" tab
+    And user can expand and collapse Order summary
 
-    Given user presses the Shopping Cart icon
-    Then user should be on Philosophy cart page
+  @TestCaseId("17224")
+  @TestCaseId("82888")
+  Scenario: Test delivery method page and delivery options
+
+    And chooses "Ground" shipping method
+    And chooses "Express" shipping method
+    And chooses "Rush Delivery" shipping method
+    
+    And presses the "Continue" button
+    Then user should be on "Payment" tab
+

@@ -1,6 +1,6 @@
 @philosophy
 
-Feature: GUEST - SHIPPING PAGE
+Feature: GUEST - DELIVERY PAGE
 
   Background: Add product to card and process to checkout
     Given user adds product to cart from Philosophy
