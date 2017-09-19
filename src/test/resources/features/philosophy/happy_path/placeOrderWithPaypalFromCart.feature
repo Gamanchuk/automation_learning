@@ -1,4 +1,4 @@
-@philosophy`
+@philosophy
 
 Feature: HAPPY PATH
 
