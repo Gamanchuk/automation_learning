@@ -4,7 +4,7 @@ import cucumber.api.CucumberOptions;
 import cucumber.api.testng.AbstractTestNGCucumberTests;
 
 @CucumberOptions(
-        features = "src/test/resources/features/philosophy/happy_path",
+        features = "src/test/resources/features/philosophy/get_started_page",
         glue = "steps",
         tags = {"@philosophy", "~@Ignored"}
 )
