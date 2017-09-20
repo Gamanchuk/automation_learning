@@ -11,10 +11,14 @@ Feature: GUEST - PAYMENT & BILLING ADDRESS PAGE - BILLING ADDRESS
     And presses the "Continue" button
     Then user should be on "Delivery" tab
     And presses the "Continue" button
-    Then user should be on "Payment" tab
+    And user should be on "Payment" tab
+    Then user can expand and collapse Order summary
+
 
   @TestCaseId("17115")
   @TestCaseId("17116")
+  @TestCaseId("82887")
+  @TestCaseId("17126")
   Scenario: Test with correct shipping information and do not fill in all required fields (error message should be displayed)
 
     Given unset checkbox "Yes, billing address and shipping address are the same"

@@ -1,4 +1,4 @@
-@philosophy @debug
+@philosophy
 
 Feature: GUEST - PAYMENT & BILLING ADDRESS PAGE - BILLING ADDRESS
 
@@ -33,12 +33,14 @@ Feature: GUEST - PAYMENT & BILLING ADDRESS PAGE - BILLING ADDRESS
 
     And user navigates to "Payment" breadcrumb
     And user types "123456" into the "City" field of "Billing Address" address form
+    And uses "mastercard" card for payment
     And presses the "Continue" button
     And chooses "Use Entered Address"
     Then user should be on "Review" tab
 
     And user navigates to "Payment" breadcrumb
     And user types "!@$%^&*():_+" into the "City" field of "Billing Address" address form
+    And uses "mastercard" card for payment
     And presses the "Continue" button
     And chooses "Use Entered Address"
     Then user should be on "Review" tab

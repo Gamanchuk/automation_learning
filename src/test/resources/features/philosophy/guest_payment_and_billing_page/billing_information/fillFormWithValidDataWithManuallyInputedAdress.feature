@@ -14,6 +14,7 @@ Feature: GUEST - PAYMENT & BILLING ADDRESS PAGE - BILLING ADDRESS
     Then user should be on "Payment" tab
 
   @TestCaseId("17113")
+  @TestCaseId("17122")
   Scenario: Test with correct billing information and fill in all required fields (Address input manually)
 
     Given uses "mastercard" card for payment
@@ -22,6 +23,8 @@ Feature: GUEST - PAYMENT & BILLING ADDRESS PAGE - BILLING ADDRESS
     
     And unset checkbox "Yes, billing address and shipping address are the same"
     And user types manually billing info for "qa user" without email
+    And selects "" state
+    And selects "CA" state
     And presses the "Continue" button
 
     Then user should be on "Review" tab

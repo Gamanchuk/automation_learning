@@ -1,6 +1,6 @@
 @philosophy
 
-Feature: GUEST - PAYMENT & BILLING ADDRESS PAGE - BILLING ADDRESS
+Feature: GUEST - PAYMENT & BILLING ADDRESS PAGE - PAYMENT INFORMATION
 
   Background: Add product to card and process to checkout
     Given user adds product to cart from Philosophy
@@ -13,19 +13,22 @@ Feature: GUEST - PAYMENT & BILLING ADDRESS PAGE - BILLING ADDRESS
     And presses the "Continue" button
     Then user should be on "Payment" tab
 
-  @TestCaseId("17124")
-  Scenario: Test field 'Phone'
+  @TestCaseId("17142")
+  Scenario: Test field "Card Number"
     Given uses "mastercard" card for payment
-    And user fills email field with "qa@moovweb.com"
-    And unset checkbox "Please send me philosophy emails for inspiration, exclusive offers and product information."
-    And unset checkbox "Yes, billing address and shipping address are the same"
-    And user types billing info for "qa user" without email
+    And user fills email field with "qamoovweb@automation.com"
 
-    When user types "" into the "Phone Number" field of "Billing Address" address form
+    And user types "1" into "Card Number" field of Card Form
     And presses the "Continue" button
     Then user should stay at "Payment" tab
     And sees "FORM ERRORS" error message with text "Please review all inputs."
 
-    When user types "4152011234" into the "Phone Number" field of "Billing Address" address form
+    And user types "11111111111111111" into "Card Number" field of Card Form
     And presses the "Continue" button
-    Then user should be on "Review" tab
+    Then user should stay at "Payment" tab
+    And sees "FORM ERRORS" error message with text "Please review all inputs."
+
+    And user types "" into "Card Number" field of Card Form
+    And presses the "Continue" button
+    Then user should stay at "Payment" tab
+    And sees "FORM ERRORS" error message with text "Please review all inputs."

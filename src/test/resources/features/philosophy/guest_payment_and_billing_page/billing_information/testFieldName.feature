@@ -13,28 +13,27 @@ Feature: GUEST - PAYMENT & BILLING ADDRESS PAGE - BILLING ADDRESS
     And presses the "Continue" button
     Then user should be on "Payment" tab
 
-  @Issues("MCCAT-6309")
-  @TestCaseId("100982")
-  @TestCaseId("101015")
-  @TestCaseId("100991")
+  @TestCaseId("17117")
+  @TestCaseId("17125")
   Scenario: Test field 'Name'
-    Given user types shipping address for "qa user" with phone number
+    Given uses "mastercard" card for payment
+    And user fills email field with "qa@moovweb.com"
+    And unset checkbox "Please send me philosophy emails for inspiration, exclusive offers and product information."
     And unset checkbox "Yes, billing address and shipping address are the same"
     And user types billing info for "qa user" without email
 
     And user types "" into the "Full Name" field of "Billing Address" address form
     And presses the "Continue" button
-    Then user should stay at "Shipping" tab
+    Then user should stay at "Payment" tab
     And sees "FORM ERRORS" error message with text "Please review all inputs."
 
     And user types "qwertyuioplkjhgfdsazxcvbnm qa" into the "Full Name" field of "Billing Address" address form
     And presses the "Continue" button
-    And chooses "Use Entered Address"
-    Then user should be on "Payment & Review" tab
-    And user presses "Shipping" breadcrumb tab
-    Then user should be on "Shipping" tab
+    Then user should be on "Review" tab
+    And user presses "Payment" breadcrumb tab
+    Then user should be on "Payment" tab
 
     And user types "Mr Donal Trump III" into the "Full Name" field of "Billing Address" address form
+    And uses "mastercard" card for payment
     And presses the "Continue" button
-    And chooses "Use Entered Address"
-    Then user should be on "Payment & Review" tab
+    Then user should be on "Review" tab

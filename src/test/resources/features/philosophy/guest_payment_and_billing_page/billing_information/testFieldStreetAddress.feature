@@ -13,32 +13,35 @@ Feature: GUEST - PAYMENT & BILLING ADDRESS PAGE - BILLING ADDRESS
     And presses the "Continue" button
     Then user should be on "Payment" tab
 
-  @Issues("MCCAT-6309")
-  @TestCaseId("100984")
-  @TestCaseId("101015")
+  @TestCaseId("17119")
+  @TestCaseId("")
   Scenario: Test field 'Address Street'
-    Given user types shipping address for "qa user" with phone number
+    Given uses "mastercard" card for payment
+    And user fills email field with "qa@moovweb.com"
+    And unset checkbox "Please send me philosophy emails for inspiration, exclusive offers and product information."
     And unset checkbox "Yes, billing address and shipping address are the same"
     And user types billing info for "qa user" without email
 
     And user types "" into the "Street Address" field of "Billing Address" address form
     And presses the "Continue" button
-    Then user should stay at "Shipping" tab
+    Then user should stay at "Payment" tab
     And sees "FORM ERRORS" error message with text "Please review all inputs."
 
     And user types "Mission Street" into the "Street Address" field of "Billing Address" address form
     And presses the "Continue" button
     And chooses "Use Entered Address"
-    Then user should be on "Payment & Review" tab
+    Then user should be on "Review" tab
 
-    And user navigates to "Shipping" breadcrumb
+    And user navigates to "Payment" breadcrumb
     And user types "123456" into the "Street Address" field of "Billing Address" address form
+    And uses "mastercard" card for payment
     And presses the "Continue" button
     And chooses "Use Entered Address"
-    Then user should be on "Payment & Review" tab
+    Then user should be on "Review" tab
 
-    And user navigates to "Shipping" breadcrumb
+    And user navigates to "Payment" breadcrumb
     And user types "!@$%^&*():_+" into the "Street Address" field of "Billing Address" address form
+    And uses "mastercard" card for payment
     And presses the "Continue" button
     And chooses "Use Entered Address"
-    Then user should be on "Payment & Review" tab
+    Then user should be on "Review" tab

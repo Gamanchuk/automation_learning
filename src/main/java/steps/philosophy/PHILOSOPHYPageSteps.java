@@ -27,7 +27,7 @@ public class PHILOSOPHYPageSteps extends BaseSteps {
         philosophyMainPage.navigate();
 
 
-        if (Config.PLATFORM_NAME.equals(IOS)) {
+        if (Config.PLATFORM_NAME.equals(IOS) & Config.SITE_NAME.equals("site-philosophy-stage")) {
             assertTrue(philosophyWarningPage.isPage(), "Warning does not present.");
             philosophyWarningPage.ignoreWarning();
         }
