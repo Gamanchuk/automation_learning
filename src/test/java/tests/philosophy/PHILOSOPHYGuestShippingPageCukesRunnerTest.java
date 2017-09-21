@@ -4,11 +4,11 @@ import cucumber.api.CucumberOptions;
 import cucumber.api.testng.AbstractTestNGCucumberTests;
 
 @CucumberOptions(
-        features = "src/test/resources/features/philosophy/get_started_page",
+        features = "src/test/resources/features/philosophy/guest/guest_shipping_page",
         glue = "steps",
         tags = {"@philosophy", "~@Ignored"}
 )
-class PHILOSOPHYGetStartedPageCukesRunnerTest extends AbstractTestNGCucumberTests {
+class PHILOSOPHYGuestShippingPageCukesRunnerTest extends AbstractTestNGCucumberTests {
 
 }
 
