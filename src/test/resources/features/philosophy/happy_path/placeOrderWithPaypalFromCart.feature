@@ -5,6 +5,7 @@ Feature: HAPPY PATH
   Background: Add product to card and process to checkout
     Given user adds product to cart from Philosophy
     And chooses "PayPal" method from Philosophy
+    And user presses Log In PayPal button
 
 
   @TestCaseId("104633")

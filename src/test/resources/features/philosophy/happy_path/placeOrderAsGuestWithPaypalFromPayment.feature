@@ -25,5 +25,6 @@ Feature: HAPPY PATH
 
     Then user should be on "Review" tab
     And presses the "Place Order" button
+    And user presses Log In PayPal button
     And user confirms purchase as "qa user" with PayPal
     Then user should be on thank you page
