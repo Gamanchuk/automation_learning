@@ -5,7 +5,7 @@ function run {
     mvn clean install -P $1,$DEVICE,$ENV,$SITE,$PROJECT_TRACKING_PARAM,$VERBOSE_LOGGING_PARAM
 }
 
-#DEVICE="device-GalaxyS6"
+#DEVICE="device-GalaxyS6"2
 #ENV="env-eugene-local"
 #SITE="site-pepboys-stage"
 #SHA="origin/testCase_refactoring"

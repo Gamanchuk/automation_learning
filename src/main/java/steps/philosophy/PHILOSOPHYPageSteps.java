@@ -26,7 +26,8 @@ public class PHILOSOPHYPageSteps extends BaseSteps {
     public void userAddsToCartProductFromPhilosophy() {
         philosophyMainPage.navigate();
 
-        if (Config.PLATFORM_NAME.equals(IOS)) {
+
+        if (Config.PLATFORM_NAME.equals(IOS) & Config.SITE_NAME.equals("site-philosophy-stage")) {
             assertTrue(philosophyWarningPage.isPage(), "Warning does not present.");
             philosophyWarningPage.ignoreWarning();
         }
@@ -61,7 +62,7 @@ public class PHILOSOPHYPageSteps extends BaseSteps {
     public void userAddsToCartProductsFromPhilosophy(int count) {
         philosophyMainPage.navigate();
 
-        if (Config.PLATFORM_NAME.equals(IOS)) {
+        if (philosophyWarningPage.isPage(5)) {
             assertTrue(philosophyWarningPage.isPage(), "Warning does not present.");
             philosophyWarningPage.ignoreWarning();
         }
@@ -95,7 +96,7 @@ public class PHILOSOPHYPageSteps extends BaseSteps {
         this.openProduct();
         this.addToBag();
 
-        if (Config.PLATFORM_NAME.equals(IOS) && philosophyWarningPage.isPage(30)) {
+        if (Config.PLATFORM_NAME.equals(IOS) && philosophyWarningPage.isPage(10)) {
             philosophyWarningPage.ignoreWarning();
         }
 

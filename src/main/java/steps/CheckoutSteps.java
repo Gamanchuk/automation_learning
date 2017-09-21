@@ -186,6 +186,20 @@ public class CheckoutSteps {
         CommonFunctions.attachScreenshot("Shipping address form");
     }
 
+    @Given("^user types manually billing info for \"([^\"]*)\" without email, phone$")
+    public void userTypesManuallyBillingInfoForWithoutEmailPhone(String userName) {
+        String checkBox = "Yes, billing address and shipping address are the same";
+
+        if (checkboxRowComponent.isExist(checkBox, 5)) {
+            checkboxRowComponent.check(checkBox, false);
+        }
+
+        fillBillingInfo(userName, false, false, false, false, false);
+
+        CommonFunctions.attachScreenshot("Billing address form");
+    }
+
+
     @And("^user types manually international billing info for \"([^\"]*)\" without email$")
     public void userTypesManuallyInternationalBillingInfoForWithoutEmail(String userName) {
         fillBillingInfo(userName, false, false, false, false, true);

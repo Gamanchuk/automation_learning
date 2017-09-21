@@ -8,9 +8,14 @@ Feature: GUEST - SHIPPING PAGE - SHIPPING ADDRESS
     And user continue checkout as guest
 
   @TestCaseId("17227")
+  @TestCaseId("17225")
   Scenario: Test with correct billing information and fill in all required fields (Address inputted manually)
 
     Given user types manually shipping info for "qa user" without email
+    And selects "" state
+    And presses the "Continue" button
+    And sees "FORM ERRORS" error message with text "Please review all inputs."
+    And selects "CA" state
     And presses the "Continue" button
     Then user should be on "Delivery" tab
 

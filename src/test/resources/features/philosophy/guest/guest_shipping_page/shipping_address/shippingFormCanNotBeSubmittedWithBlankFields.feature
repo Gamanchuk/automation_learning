@@ -8,6 +8,7 @@ Feature: GUEST - SHIPPING PAGE - SHIPPING ADDRESS
     And user continue checkout as guest
 
   @TestCaseId("17229")
+  @TestCaseId("17241")
   Scenario: Test with correct shipping information and do not fill in all required fields (error message should be displayed)
     Given user should be on "Shipping" tab
     And presses the "Continue" button
