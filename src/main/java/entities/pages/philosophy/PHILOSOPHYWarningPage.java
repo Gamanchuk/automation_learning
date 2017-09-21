@@ -7,6 +7,7 @@ import utils.CommonFunctions;
 import utils.Config;
 
 public class PHILOSOPHYWarningPage extends BasePage {
+
     private By warningOldIOS = By.id("ignore_this_warning");
     private By warningNewIOS = By.id("ignoreWarning");
 

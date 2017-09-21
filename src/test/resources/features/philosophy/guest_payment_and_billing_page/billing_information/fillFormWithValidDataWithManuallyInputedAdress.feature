@@ -1,27 +1,33 @@
 @philosophy
 
-Feature: HAPPY PATH
+Feature: GUEST - PAYMENT & BILLING ADDRESS PAGE - BILLING ADDRESS
 
   Background: Add product to card and process to checkout
     Given user adds product to cart from Philosophy
     And chooses "Checkout" method from Philosophy
     And user continue checkout as guest
-
-  @TestCaseId("17092")
-  Scenario: Place order as guest with Credit Card
-
-    Given user types shipping info for "qa user" without email
+    Then user should be on "Shipping" tab
+    And user types shipping info for "qa user" without email
     And presses the "Continue" button
-
     Then user should be on "Delivery" tab
     And presses the "Continue" button
-
     Then user should be on "Payment" tab
-    And uses "mastercard" card for payment
+
+  @TestCaseId("17113")
+  @TestCaseId("17122")
+  Scenario: Test with correct billing information and fill in all required fields (Address input manually)
+
+    Given uses "mastercard" card for payment
     And user fills email field with "qa@moovweb.com"
     And unset checkbox "Please send me philosophy emails for inspiration, exclusive offers and product information."
+    
+    And unset checkbox "Yes, billing address and shipping address are the same"
+    And user types manually billing info for "qa user" without email
+    And selects "" state
+    And selects "CA" state
     And presses the "Continue" button
 
     Then user should be on "Review" tab
-    And presses the "Place Order" button
-    Then user should be on thank you page
+
+
+
